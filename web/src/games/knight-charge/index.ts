@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KnightChargeState, KnightChargeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KnightCharge } from "./KnightCharge.js";
+const KnightCharge = /* @__PURE__ */ lazy(() => import("./KnightCharge.js").then((mod) => ({ default: mod.KnightCharge as unknown as React.ComponentType<unknown> })));
 export const knightChargeSettings = { rounds:{kind:"enum" as const,label:"Rounds",options:["5","10","15"] as const,default:"10" as const} } as const;
 type S=SettingsOf<typeof knightChargeSettings>;
 export const knightChargePlugin:GamePlugin<KnightChargeState,KnightChargeAction,typeof knightChargeSettings> = {

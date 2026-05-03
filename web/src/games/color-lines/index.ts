@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorLinesState, ColorLinesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColorLines } from "./ColorLines.js";
-
+const ColorLines = /* @__PURE__ */ lazy(() => import("./ColorLines.js").then((mod) => ({ default: mod.ColorLines as unknown as React.ComponentType<unknown> })));
 export const colorLinesSettings = {
   size: {
     kind: "enum" as const,

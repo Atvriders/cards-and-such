@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CartographersDesertState, CartographersDesertAction, CartographersDesertSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CartographersDesertGame } from "./Game.js";
-
+const CartographersDesertGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CartographersDesertGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

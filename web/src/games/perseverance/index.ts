@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PerseveranceState, PerseveranceAction } from "./state.js";
 import { initialState, reducer, isTerminal, perseveranceRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Perseverance } from "./Perseverance.js";
-
+const Perseverance = /* @__PURE__ */ lazy(() => import("./Perseverance.js").then((mod) => ({ default: mod.Perseverance as unknown as React.ComponentType<unknown> })));
 export const perseveranceSettings = {} as const;
 
 type PerseveranceSettings = SettingsOf<typeof perseveranceSettings>;

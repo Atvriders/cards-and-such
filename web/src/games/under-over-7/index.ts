@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UnderOver7State, UnderOver7Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { UnderOver7 } from "./UnderOver7.js";
-
+const UnderOver7 = /* @__PURE__ */ lazy(() => import("./UnderOver7.js").then((mod) => ({ default: mod.UnderOver7 as unknown as React.ComponentType<unknown> })));
 export const underOver7Settings = {
   rounds: {
     kind: "enum" as const,

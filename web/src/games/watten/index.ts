@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WattenState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Watten } from "./Watten.js";
-
+const Watten = /* @__PURE__ */ lazy(() => import("./Watten.js").then((mod) => ({ default: mod.Watten as unknown as React.ComponentType<unknown> })));
 const wattenSettings = {} as const;
 type WattenSettings = SettingsOf<typeof wattenSettings>;
 type WattenAction = { type: "play"; cardId: string };

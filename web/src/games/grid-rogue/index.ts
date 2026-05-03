@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { GridRogueState, GridRogueAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GridRogue } from "./Game.js";
-
+const GridRogue = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GridRogue as unknown as React.ComponentType<unknown> })));
 export const gridRoguePlugin = {
   id: "grid-rogue",
   title: "Grid Rogue",

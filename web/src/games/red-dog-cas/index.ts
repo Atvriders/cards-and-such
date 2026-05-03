@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RedDogCasState, RedDogCasAction, RedDogCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RedDogCasGame } from "./Game.js";
+const RedDogCasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RedDogCasGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 const hint = (state: RedDogCasState): HintTarget | null => {

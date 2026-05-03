@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TournamentState, TournamentAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tournament } from "./Tournament.js";
-
+const Tournament = /* @__PURE__ */ lazy(() => import("./Tournament.js").then((mod) => ({ default: mod.Tournament as unknown as React.ComponentType<unknown> })));
 export const tournamentPlugin: GamePlugin<TournamentState, TournamentAction, Record<string, never>> = {
   id: "tournament",
   title: "Tournament",

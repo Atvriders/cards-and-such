@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NailHammerState, NailHammerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NailHammer } from "./NailHammer.js";
+const NailHammer = /* @__PURE__ */ lazy(() => import("./NailHammer.js").then((mod) => ({ default: mod.NailHammer as unknown as React.ComponentType<unknown> })));
 export const nailHammerSettings = { rounds:{kind:"enum" as const,label:"Rounds",options:["5","10","15"] as const,default:"10" as const} } as const;
 type S=SettingsOf<typeof nailHammerSettings>;
 export const nailHammerPlugin:GamePlugin<NailHammerState,NailHammerAction,typeof nailHammerSettings> = {

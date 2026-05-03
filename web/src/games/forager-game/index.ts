@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ForagerState, ForagerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ForagerGame } from "./Game.js";
-
+const ForagerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ForagerGame as unknown as React.ComponentType<unknown> })));
 export const foragerGamePlugin = {
   id: "forager-game",
   title: "Forager",

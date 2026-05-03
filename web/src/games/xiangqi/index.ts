@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { XqState, XqAction, XqSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Xiangqi } from "./Game.js";
-
+const Xiangqi = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Xiangqi as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const xiangqiPlugin: GamePlugin<XqState, XqAction, typeof settings> = {

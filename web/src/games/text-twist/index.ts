@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TextTwistState, TextTwistAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TextTwist } from "./TextTwist.js";
-
+const TextTwist = /* @__PURE__ */ lazy(() => import("./TextTwist.js").then((mod) => ({ default: mod.TextTwist as unknown as React.ComponentType<unknown> })));
 export const textTwistSettings = {
   duration: {
     kind: "enum" as const,

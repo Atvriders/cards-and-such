@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { AlgerianPatienceState, AlgerianPatienceAction, AlgerianPatienceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AlgerianPatience } from "./AlgerianPatience.js";
-
+const AlgerianPatience = /* @__PURE__ */ lazy(() => import("./AlgerianPatience.js").then((mod) => ({ default: mod.AlgerianPatience as unknown as React.ComponentType<unknown> })));
 export const algerianPatienceSettings = {} as const;
 
 export const algerianPatiencePlugin: GamePlugin<AlgerianPatienceState, AlgerianPatienceAction, typeof algerianPatienceSettings> = {

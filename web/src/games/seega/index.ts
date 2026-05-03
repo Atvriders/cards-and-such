@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SeegaState, SeegaAction, SeegaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Seega } from "./Game.js";
-
+const Seega = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Seega as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const seegaPlugin: GamePlugin<SeegaState, SeegaAction, typeof settings> = {

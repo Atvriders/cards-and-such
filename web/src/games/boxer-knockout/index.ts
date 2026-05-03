@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoxerState, BoxerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BoxerKnockout } from "./BoxerKnockout.js";
-
+const BoxerKnockout = /* @__PURE__ */ lazy(() => import("./BoxerKnockout.js").then((mod) => ({ default: mod.BoxerKnockout as unknown as React.ComponentType<unknown> })));
 export const boxerKnockoutSettings = {
   difficulty: {
     kind: "enum" as const,

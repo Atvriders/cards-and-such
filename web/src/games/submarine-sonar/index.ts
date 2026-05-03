@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SubmarineSonarState, SubmarineSonarAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SubmarineSonar } from "./SubmarineSonar.js";
-
+const SubmarineSonar = /* @__PURE__ */ lazy(() => import("./SubmarineSonar.js").then((mod) => ({ default: mod.SubmarineSonar as unknown as React.ComponentType<unknown> })));
 export const submarineSonarSettings = {
   gridSize: {
     kind: "enum" as const,

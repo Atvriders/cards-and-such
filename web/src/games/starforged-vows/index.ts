@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { StarforgedVowsState, StarforgedVowsAction, StarforgedVowsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StarforgedVowsGame } from "./Game.js";
+const StarforgedVowsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.StarforgedVowsGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const starforgedVowsPlugin: GamePlugin<StarforgedVowsState, StarforgedVowsAction, typeof settings> = {

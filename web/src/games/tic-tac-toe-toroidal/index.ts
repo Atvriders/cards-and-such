@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ToroidalTTTState, ToroidalTTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TicTacToeToroidal } from "./TicTacToeToroidal.js";
-
+const TicTacToeToroidal = /* @__PURE__ */ lazy(() => import("./TicTacToeToroidal.js").then((mod) => ({ default: mod.TicTacToeToroidal as unknown as React.ComponentType<unknown> })));
 export const ticTacToeToroidalPlugin = {
   id: "tic-tac-toe-toroidal",
   title: "Toroidal TTT",

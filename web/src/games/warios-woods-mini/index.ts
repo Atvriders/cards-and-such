@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WariosWoodsMiniState, WariosWoodsMiniAction, WariosWoodsMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WariosWoodsMiniGame } from "./Game.js";
+const WariosWoodsMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WariosWoodsMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const wariosWoodsMiniPlugin: GamePlugin<WariosWoodsMiniState, WariosWoodsMiniAction, typeof settings> = {

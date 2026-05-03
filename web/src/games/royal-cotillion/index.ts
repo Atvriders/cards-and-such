@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RoyalCotillionState, RoyalCotillionAction, RoyalCotillionSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RoyalCotillion } from "./RoyalCotillion.js";
-
+const RoyalCotillion = /* @__PURE__ */ lazy(() => import("./RoyalCotillion.js").then((mod) => ({ default: mod.RoyalCotillion as unknown as React.ComponentType<unknown> })));
 export const royalCotillionSettings = {} as const;
 
 export const royalCotillionPlugin: GamePlugin<RoyalCotillionState, RoyalCotillionAction, typeof royalCotillionSettings> = {

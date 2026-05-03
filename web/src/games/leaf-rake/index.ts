@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LeafRakeState, LeafRakeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LeafRake } from "./LeafRake.js";
+const LeafRake = /* @__PURE__ */ lazy(() => import("./LeafRake.js").then((mod) => ({ default: mod.LeafRake as unknown as React.ComponentType<unknown> })));
 export const leafRakeSettings = { rounds:{kind:"enum" as const,label:"Rounds",options:["5","10","15"] as const,default:"10" as const} } as const;
 type S=SettingsOf<typeof leafRakeSettings>;
 export const leafRakePlugin:GamePlugin<LeafRakeState,LeafRakeAction,typeof leafRakeSettings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NurimisakiState, NurimisakiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Nurimisaki } from "./Nurimisaki.js";
-
+const Nurimisaki = /* @__PURE__ */ lazy(() => import("./Nurimisaki.js").then((mod) => ({ default: mod.Nurimisaki as unknown as React.ComponentType<unknown> })));
 const nurimisakiSettings = {
   difficulty: {
     kind: "enum" as const,

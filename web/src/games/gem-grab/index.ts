@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GemGrabState, GemGrabAction, GemGrabSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GemGrab } from "./Game.js";
-
+const GemGrab = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GemGrab as unknown as React.ComponentType<unknown> })));
 const gemGrabPluginSettings = {
   duration: { kind: "enum" as const, label: "Duration (seconds)", options: ["20", "30", "45"] as const, default: "30" as const },
 } as const;

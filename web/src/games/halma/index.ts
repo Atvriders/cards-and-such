@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HalmaState, HalmaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Halma } from "./Halma.js";
-
+const Halma = /* @__PURE__ */ lazy(() => import("./Halma.js").then((mod) => ({ default: mod.Halma as unknown as React.ComponentType<unknown> })));
 export const halmaSettings = {
   opponent: {
     kind: "enum" as const,

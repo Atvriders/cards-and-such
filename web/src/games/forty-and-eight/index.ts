@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FortyAndEightState, FortyAndEightAction } from "./state.js";
 import { initialState, reducer, isTerminal, fortyAndEightRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { FortyAndEight } from "./FortyAndEight.js";
-
+const FortyAndEight = /* @__PURE__ */ lazy(() => import("./FortyAndEight.js").then((mod) => ({ default: mod.FortyAndEight as unknown as React.ComponentType<unknown> })));
 export const fortyAndEightSettings = {} as const;
 
 type FortyAndEightSettings = SettingsOf<typeof fortyAndEightSettings>;

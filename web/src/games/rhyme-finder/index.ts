@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RhymeFinderState, RhymeFinderAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RhymeFinder } from "./RhymeFinder.js";
-
+const RhymeFinder = /* @__PURE__ */ lazy(() => import("./RhymeFinder.js").then((mod) => ({ default: mod.RhymeFinder as unknown as React.ComponentType<unknown> })));
 export const rhymeFinderSettings = {
   questionCount: {
     kind: "enum" as const,

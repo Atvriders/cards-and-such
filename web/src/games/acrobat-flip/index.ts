@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AcrobatFlipState, AcrobatFlipAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AcrobatFlip } from "./AcrobatFlip.js";
-
+const AcrobatFlip = /* @__PURE__ */ lazy(() => import("./AcrobatFlip.js").then((mod) => ({ default: mod.AcrobatFlip as unknown as React.ComponentType<unknown> })));
 export const acrobatFlipSettings = {
   flips: {
     kind: "enum" as const,

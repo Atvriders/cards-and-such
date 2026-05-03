@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TypingWordsState, TypingWordsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TypingWords } from "./TypingWords.js";
-
+const TypingWords = /* @__PURE__ */ lazy(() => import("./TypingWords.js").then((mod) => ({ default: mod.TypingWords as unknown as React.ComponentType<unknown> })));
 export const typingWordsSettings = {
   duration: {
     kind: "enum" as const,

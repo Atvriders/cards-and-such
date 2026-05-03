@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DigitState, DigitAction, DigitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DigitDeduceGame } from "./Game.js";
-
+const DigitDeduceGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DigitDeduceGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const digitDeducePlugin: GamePlugin<DigitState, DigitAction, typeof settings> = {

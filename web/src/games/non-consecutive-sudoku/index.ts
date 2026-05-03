@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { NonConsecutiveSudokuState, NonConsecutiveSudokuAction, NonConsecutiveSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NonConsecutiveSudokuGame } from "./Game.js";
+const NonConsecutiveSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NonConsecutiveSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const nonConsecutiveSudokuPlugin: GamePlugin<NonConsecutiveSudokuState, NonConsecutiveSudokuAction, typeof settings> = {
   id: "non-consecutive-sudoku",

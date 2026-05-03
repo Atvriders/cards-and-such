@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type CardLineupState, type CardLineupAction } from "./state.js";
-import { CardLineup } from "./CardLineup.js";
-
+const CardLineup = /* @__PURE__ */ lazy(() => import("./CardLineup.js").then((mod) => ({ default: mod.CardLineup as unknown as React.ComponentType<unknown> })));
 export const cardLineupSettings = {} as const;
 
 export const cardLineupPlugin: GamePlugin<CardLineupState, CardLineupAction, typeof cardLineupSettings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardShuffleProState, CardShuffleProAction, CardShuffleProSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardShuffleProGame } from "./Game.js";
-
+const CardShuffleProGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardShuffleProGame as unknown as React.ComponentType<unknown> })));
 export const cardShuffleProSettings = {
   difficulty: {
     kind: "enum" as const,

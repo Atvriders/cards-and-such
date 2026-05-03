@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type PingPongRallyState, type PingPongRallyAction } from "./state.js";
-import { PingPongRally } from "./Game.js";
-
+const PingPongRally = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PingPongRally as unknown as React.ComponentType<unknown> })));
 export const pingPongRallySettings = {
   target: { kind: "enum" as const, label: "Rally target", options: ["20", "50"] as const, default: "20" as const },
 } as const;

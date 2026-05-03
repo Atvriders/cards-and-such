@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AceOfThePileState, AceOfThePileAction } from "./state.js";
 import { initialState, reducer, isTerminal, aotpRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { AceOfThePile } from "./AceOfThePile.js";
-
+const AceOfThePile = /* @__PURE__ */ lazy(() => import("./AceOfThePile.js").then((mod) => ({ default: mod.AceOfThePile as unknown as React.ComponentType<unknown> })));
 export const aceOfThePileSettings = {} as const;
 
 type AceOfThePileSettings = SettingsOf<typeof aceOfThePileSettings>;

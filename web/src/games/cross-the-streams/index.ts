@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CTSState, CTSAction, CTSSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrossTheStreams } from "./CrossTheStreams.js";
-
+const CrossTheStreams = /* @__PURE__ */ lazy(() => import("./CrossTheStreams.js").then((mod) => ({ default: mod.CrossTheStreams as unknown as React.ComponentType<unknown> })));
 export const ctsSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColumnsState, ColumnsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Columns } from "./Columns.js";
-
+const Columns = /* @__PURE__ */ lazy(() => import("./Columns.js").then((mod) => ({ default: mod.Columns as unknown as React.ComponentType<unknown> })));
 export const columnsSettings = {
   startLevel: {
     kind: "enum" as const,

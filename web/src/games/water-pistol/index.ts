@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WaterPistolState, WaterPistolAction, WaterPistolSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WaterPistol } from "./Game.js";
+const WaterPistol = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WaterPistol as unknown as React.ComponentType<unknown> })));
 const settings = { duration: { kind:"enum" as const, label:"Time", options:["30","60"] as const, default:"30" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const waterPistolPlugin: GamePlugin<WaterPistolState, WaterPistolAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AddictionSolitaireState, AddictionSolitaireAction, AddictionSolitaireSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AddictionSolitaireGame } from "./Game.js";
-
+const AddictionSolitaireGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AddictionSolitaireGame as unknown as React.ComponentType<unknown> })));
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const addictionSolPlugin: GamePlugin<AddictionSolitaireState, AddictionSolitaireAction, typeof settings> = {

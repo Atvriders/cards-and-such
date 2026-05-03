@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicBaseState, PandemicBaseAction, PandemicBaseSettings } from "./state.js";
 import { PandemicBase_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { coopHintSelector } from "../_shared/coop-engine.js";
-import { PandemicBaseGame } from "./Game.js";
-
+const PandemicBaseGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PandemicBaseGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["Intro", "Standard", "Heroic"] as const, default: "Standard" as const },
 } as const;

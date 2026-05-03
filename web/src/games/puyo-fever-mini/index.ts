@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PuyoFeverMiniState, PuyoFeverMiniAction, PuyoFeverMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PuyoFeverMiniGame } from "./Game.js";
+const PuyoFeverMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PuyoFeverMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const puyoFeverMiniPlugin: GamePlugin<PuyoFeverMiniState, PuyoFeverMiniAction, typeof settings> = {

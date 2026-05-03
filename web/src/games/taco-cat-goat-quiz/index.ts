@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TacoCatGoatQuizState, TacoCatGoatQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TacoCatGoatQuiz } from "./Game.js";
-
+const TacoCatGoatQuiz = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TacoCatGoatQuiz as unknown as React.ComponentType<unknown> })));
 const settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
 } as const;

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordConstructionState, WordConstructionAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordConstruction } from "./WordConstruction.js";
-
+const WordConstruction = /* @__PURE__ */ lazy(() => import("./WordConstruction.js").then((mod) => ({ default: mod.WordConstruction as unknown as React.ComponentType<unknown> })));
 export const wordConstructionSettings = {
   duration: {
     kind: "enum" as const,

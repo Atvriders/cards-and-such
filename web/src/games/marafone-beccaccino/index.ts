@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MarafoneState, MarafoneAction, MarafoneSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { defaultRankOrder, legalPlays } from "../_shared/trick-engine.js";
-import { MarafoneGame } from "./Game.js";
-
+const MarafoneGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MarafoneGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

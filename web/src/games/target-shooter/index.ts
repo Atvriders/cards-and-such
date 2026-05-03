@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TargetShooterState, TargetShooterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TargetShooter } from "./TargetShooter.js";
-
+const TargetShooter = /* @__PURE__ */ lazy(() => import("./TargetShooter.js").then((mod) => ({ default: mod.TargetShooter as unknown as React.ComponentType<unknown> })));
 export const targetShooterSettings = {} as const;
 
 type TSSettingsType = SettingsOf<typeof targetShooterSettings>;

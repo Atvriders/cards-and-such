@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FrogSolitaireState, FrogSolitaireAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FrogSolitaire } from "./FrogSolitaire.js";
-
+const FrogSolitaire = /* @__PURE__ */ lazy(() => import("./FrogSolitaire.js").then((mod) => ({ default: mod.FrogSolitaire as unknown as React.ComponentType<unknown> })));
 export const frogSolitairePlugin: GamePlugin<FrogSolitaireState, FrogSolitaireAction, Record<string, never>> = {
   id: "frog-solitaire",
   title: "Frog",

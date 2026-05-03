@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SwarmDefenseState, SwarmDefenseAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SwarmDefense } from "./SwarmDefense.js";
-
+const SwarmDefense = /* @__PURE__ */ lazy(() => import("./SwarmDefense.js").then((mod) => ({ default: mod.SwarmDefense as unknown as React.ComponentType<unknown> })));
 export const swarmDefenseSettings = {
   difficulty: {
     kind: "enum" as const,

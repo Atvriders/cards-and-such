@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CathedralState, CathedralAction, CathedralSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CathedralGame } from "./Game.js";
-
+const CathedralGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CathedralGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const cathedralGamePlugin: GamePlugin<CathedralState, CathedralAction, typeof settings> = {

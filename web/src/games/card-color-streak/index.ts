@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardColorStreakState, CardColorStreakAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardColorStreak } from "./CardColorStreak.js";
-
+const CardColorStreak = /* @__PURE__ */ lazy(() => import("./CardColorStreak.js").then((mod) => ({ default: mod.CardColorStreak as unknown as React.ComponentType<unknown> })));
 export const cardColorStreakSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["5", "10", "15"] as const, default: "10" as const },
 } as const;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DotGridPuzzleState, DotGridPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DotGridPuzzle } from "./DotGridPuzzle.js";
-
+const DotGridPuzzle = /* @__PURE__ */ lazy(() => import("./DotGridPuzzle.js").then((mod) => ({ default: mod.DotGridPuzzle as unknown as React.ComponentType<unknown> })));
 export const dotGridPuzzleSettings = {
   size: {
     kind: "enum" as const,

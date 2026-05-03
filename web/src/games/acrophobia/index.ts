@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AcrophobiaState, AcrophobiaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Acrophobia } from "./Acrophobia.js";
-
+const Acrophobia = /* @__PURE__ */ lazy(() => import("./Acrophobia.js").then((mod) => ({ default: mod.Acrophobia as unknown as React.ComponentType<unknown> })));
 export const acrophobiaSettings = {
   difficulty: {
     kind: "enum" as const,

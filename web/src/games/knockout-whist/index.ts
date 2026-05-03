@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KnockoutWhistState, KnockoutWhistAction, KnockoutWhistSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { defaultRankOrder, legalPlays } from "../_shared/trick-engine.js";
-import { KnockoutWhistGame } from "./Game.js";
-
+const KnockoutWhistGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KnockoutWhistGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveCardDrawState, DrawAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { rankHand, type HandClass } from "../../engines/deck/ranking.js";
-import { FiveCardDraw } from "./FiveCardDraw.js";
-
+const FiveCardDraw = /* @__PURE__ */ lazy(() => import("./FiveCardDraw.js").then((mod) => ({ default: mod.FiveCardDraw as unknown as React.ComponentType<unknown> })));
 const FCD_CLASS_ORDER: HandClass[] = [
   "high-card", "one-pair", "two-pair", "three-of-a-kind",
   "straight", "flush", "full-house", "four-of-a-kind", "straight-flush",

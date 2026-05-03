@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoliviaState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Bolivia } from "./Bolivia.js";
-
+const Bolivia = /* @__PURE__ */ lazy(() => import("./Bolivia.js").then((mod) => ({ default: mod.Bolivia as unknown as React.ComponentType<unknown> })));
 export const boliviaSettings = {
   botCount: {
     kind: "number" as const,

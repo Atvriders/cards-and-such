@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ColoradoState, ColoradoAction, ColoradoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Colorado } from "./Colorado.js";
-
+const Colorado = /* @__PURE__ */ lazy(() => import("./Colorado.js").then((mod) => ({ default: mod.Colorado as unknown as React.ComponentType<unknown> })));
 export const coloradoSettings = {} as const;
 
 export const coloradoPlugin: GamePlugin<ColoradoState, ColoradoAction, typeof coloradoSettings> = {

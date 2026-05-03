@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConnectFiveState, ConnectFiveAction, ConnectFiveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ConnectFiveGame } from "./Game.js";
-
+const ConnectFiveGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ConnectFiveGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
 } as const;

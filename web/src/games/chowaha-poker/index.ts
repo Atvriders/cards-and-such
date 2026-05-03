@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChowahaPokerState, ChowahaPokerAction, ChowahaPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChowahaPokerGame } from "./Game.js";
+const ChowahaPokerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ChowahaPokerGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const chowahaPokerPlugin: GamePlugin<ChowahaPokerState, ChowahaPokerAction, typeof settings> = {

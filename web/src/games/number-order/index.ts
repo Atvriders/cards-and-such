@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NumberOrderState, NumberOrderAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NumberOrder } from "./Game.js";
-
+const NumberOrder = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NumberOrder as unknown as React.ComponentType<unknown> })));
 export const numberOrderSettings = {
   count: {
     kind: "enum" as const,

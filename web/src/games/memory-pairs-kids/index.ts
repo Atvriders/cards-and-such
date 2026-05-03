@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MemoryState, MemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MemoryPairsKids } from "./Game.js";
-
+const MemoryPairsKids = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MemoryPairsKids as unknown as React.ComponentType<unknown> })));
 export const memoryPairsKidsSettings = {
   pairs: {
     kind: "enum" as const,

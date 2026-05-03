@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SynonymMatchState, SynonymMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SynonymMatch } from "./SynonymMatch.js";
-
+const SynonymMatch = /* @__PURE__ */ lazy(() => import("./SynonymMatch.js").then((mod) => ({ default: mod.SynonymMatch as unknown as React.ComponentType<unknown> })));
 export const synonymMatchSettings = {
   pairCount: {
     kind: "enum" as const,

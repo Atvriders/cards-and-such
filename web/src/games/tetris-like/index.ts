@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TetrisState, TetrisAction } from "./state.js";
 import { initialState, reducer, isTerminal, COLS, ROWS } from "./state.js";
-import { Tetris } from "./Tetris.js";
-
+const Tetris = /* @__PURE__ */ lazy(() => import("./Tetris.js").then((mod) => ({ default: mod.Tetris as unknown as React.ComponentType<unknown> })));
 export const tetrisSettings = {
   startLevel: {
     kind: "enum" as const,

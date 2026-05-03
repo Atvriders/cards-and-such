@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { StockTickerState, StockAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StockTicker } from "./Game.js";
-
+const StockTicker = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.StockTicker as unknown as React.ComponentType<unknown> })));
 export const stockTickerPlugin = {
   id: "stock-ticker",
   title: "Stock Ticker",

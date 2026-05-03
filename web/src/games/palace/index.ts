@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, canPlay, activeZone, type PalaceState, type PalaceAction } from "./state.js";
-import { PalaceGame } from "./Game.js";
-
+const PalaceGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PalaceGame as unknown as React.ComponentType<unknown> })));
 export const palaceSettings = {
   opponents: { kind: "enum" as const, label: "Opponents", options: ["1", "2", "3"] as const, default: "1" as const },
 } as const;

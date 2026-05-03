@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AmazonsState, AmazonsAction, AmazonsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Amazons } from "./Game.js";
-
+const Amazons = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Amazons as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const amazonsPlugin: GamePlugin<AmazonsState, AmazonsAction, typeof settings> = {

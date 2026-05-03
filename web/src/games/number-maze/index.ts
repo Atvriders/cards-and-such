@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type NumberMazeState, type NumberMazeAction } from "./state.js";
-import { NumberMaze } from "./NumberMaze.js";
-
+const NumberMaze = /* @__PURE__ */ lazy(() => import("./NumberMaze.js").then((mod) => ({ default: mod.NumberMaze as unknown as React.ComponentType<unknown> })));
 export const numberMazeSettings = {
   puzzle: {
     kind: "enum" as const,

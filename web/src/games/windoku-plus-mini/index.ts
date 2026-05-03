@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { WindokuPlusMiniState, WindokuPlusMiniStateAction, WindokuPlusMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WindokuPlusMiniGame } from "./Game.js";
+const WindokuPlusMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WindokuPlusMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const windokuPlusMiniPlugin: GamePlugin<WindokuPlusMiniState, WindokuPlusMiniStateAction, typeof settings> = {
   id: "windoku-plus-mini",

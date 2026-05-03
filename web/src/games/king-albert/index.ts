@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { KingAlbertState, KingAlbertAction } from "./state.js";
 import { initialState, reducer, isTerminal, kingAlbertRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { KingAlbert } from "./KingAlbert.js";
-
+const KingAlbert = /* @__PURE__ */ lazy(() => import("./KingAlbert.js").then((mod) => ({ default: mod.KingAlbert as unknown as React.ComponentType<unknown> })));
 export const kingAlbertSettings = {} as const;
 
 export const kingAlbertPlugin: GamePlugin<KingAlbertState, KingAlbertAction, typeof kingAlbertSettings> = {

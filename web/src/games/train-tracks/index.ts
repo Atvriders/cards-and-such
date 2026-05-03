@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TTState, TTAction, TTSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TrainTracks } from "./TrainTracks.js";
-
+const TrainTracks = /* @__PURE__ */ lazy(() => import("./TrainTracks.js").then((mod) => ({ default: mod.TrainTracks as unknown as React.ComponentType<unknown> })));
 export const ttSettings = {
   difficulty: {
     kind: "enum" as const,

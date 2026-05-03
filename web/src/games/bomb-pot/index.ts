@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BombPotState, BombPotAction, BombPotSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BombPotGame } from "./Game.js";
+const BombPotGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BombPotGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const bombPotPlugin: GamePlugin<BombPotState, BombPotAction, typeof settings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DoodleJumpState, DoodleJumpAction, DoodleJumpSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DoodleJumpGame } from "./Game.js";
-
+const DoodleJumpGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DoodleJumpGame as unknown as React.ComponentType<unknown> })));
 export const doodleJumpSettings = {} as const;
 
 export const doodleJumpPlugin: GamePlugin<

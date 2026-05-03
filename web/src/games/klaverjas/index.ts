@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KlaverjasState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Klaverjas } from "./Klaverjas.js";
-
+const Klaverjas = /* @__PURE__ */ lazy(() => import("./Klaverjas.js").then((mod) => ({ default: mod.Klaverjas as unknown as React.ComponentType<unknown> })));
 export const klaverjasSettings = {} as const;
 type KlaverjasSettings = SettingsOf<typeof klaverjasSettings>;
 type KlaverjasAction = { type: "play"; cardId: string };

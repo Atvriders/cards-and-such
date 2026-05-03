@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { MissMilliganState, MissMilliganAction } from "./state.js";
 import { initialState, reducer, isTerminal, missMilliganRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { MissMilligan } from "./MissMilligan.js";
-
+const MissMilligan = /* @__PURE__ */ lazy(() => import("./MissMilligan.js").then((mod) => ({ default: mod.MissMilligan as unknown as React.ComponentType<unknown> })));
 export const missMilliganSettings = {} as const;
 
 export const missMilliganPlugin: GamePlugin<MissMilliganState, MissMilliganAction, typeof missMilliganSettings> = {

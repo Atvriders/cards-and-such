@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SixCardStudCasState, SixCardStudCasAction, SixCardStudCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SixCardStudCasGame } from "./Game.js";
+const SixCardStudCasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SixCardStudCasGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 const hint = (state: SixCardStudCasState): HintTarget | null => {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RollAndAddState, RollAndAddAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RollAndAdd } from "./RollAndAdd.js";
-
+const RollAndAdd = /* @__PURE__ */ lazy(() => import("./RollAndAdd.js").then((mod) => ({ default: mod.RollAndAdd as unknown as React.ComponentType<unknown> })));
 export const rollAndAddSettings = {
   target: {
     kind: "enum" as const,

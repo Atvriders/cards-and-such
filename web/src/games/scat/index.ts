@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScatState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Scat } from "./Scat.js";
-
+const Scat = /* @__PURE__ */ lazy(() => import("./Scat.js").then((mod) => ({ default: mod.Scat as unknown as React.ComponentType<unknown> })));
 export const scatSettings = {} as const;
 
 type ScatSettingsType = SettingsOf<typeof scatSettings>;

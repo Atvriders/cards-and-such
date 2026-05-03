@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoomerangThrowState, BoomerangThrowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BoomerangThrow } from "./BoomerangThrow.js";
-
+const BoomerangThrow = /* @__PURE__ */ lazy(() => import("./BoomerangThrow.js").then((mod) => ({ default: mod.BoomerangThrow as unknown as React.ComponentType<unknown> })));
 export const boomerangThrowSettings = {} as const;
 
 type BTSettingsType = SettingsOf<typeof boomerangThrowSettings>;

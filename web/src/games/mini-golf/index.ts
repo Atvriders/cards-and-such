@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type MiniGolfState, type MiniGolfAction } from "./state.js";
-import { MiniGolf } from "./Game.js";
-
+const MiniGolf = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MiniGolf as unknown as React.ComponentType<unknown> })));
 export const miniGolfSettings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["easy", "medium", "hard"] as const, default: "medium" as const },
 } as const;

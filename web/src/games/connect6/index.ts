@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Connect6State, Connect6Action, Connect6Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Connect6 } from "./Game.js";
-
+const Connect6 = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Connect6 as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const connect6Plugin: GamePlugin<Connect6State, Connect6Action, typeof settings> = {

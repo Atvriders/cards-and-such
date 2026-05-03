@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MythicEmulatorOracleState, MythicEmulatorOracleAction, MythicEmulatorOracleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MythicEmulatorOracleGame } from "./Game.js";
+const MythicEmulatorOracleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MythicEmulatorOracleGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const mythicEmulatorOraclePlugin: GamePlugin<MythicEmulatorOracleState, MythicEmulatorOracleAction, typeof settings> = {

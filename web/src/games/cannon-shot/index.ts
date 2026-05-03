@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CannonShotState, CannonShotAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CannonShot } from "./CannonShot.js";
-
+const CannonShot = /* @__PURE__ */ lazy(() => import("./CannonShot.js").then((mod) => ({ default: mod.CannonShot as unknown as React.ComponentType<unknown> })));
 export const cannonShotSettings = {
   rounds: {
     kind: "enum" as const,

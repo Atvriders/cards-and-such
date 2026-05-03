@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { GameState, GameAction, ThreeMorrisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ThreeMensMorrisGame } from "./Game.js";
-
+const ThreeMensMorrisGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ThreeMensMorrisGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
 } as const;

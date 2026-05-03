@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { BinairoMiniState, BinairoMiniAction, BinairoMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BinairoMiniGame } from "./Game.js";
+const BinairoMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BinairoMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const binairoMiniPlugin: GamePlugin<BinairoMiniState, BinairoMiniAction, typeof settings> = {
   id: "binairo-mini",

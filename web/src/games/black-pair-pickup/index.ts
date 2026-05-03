@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlackPairPickupState, BlackPairPickupAction, BlackPairPickupSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BlackPairPickupGame } from "./Game.js";
+const BlackPairPickupGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BlackPairPickupGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const blackPairPickupPlugin: GamePlugin<BlackPairPickupState, BlackPairPickupAction, typeof settings> = {

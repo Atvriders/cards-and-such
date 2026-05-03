@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DivisionDrillState, DivisionDrillAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DivisionDrillGame } from "./Game.js";
-
+const DivisionDrillGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DivisionDrillGame as unknown as React.ComponentType<unknown> })));
 export const divisionDrillSettings = {
   tables: {
     kind: "enum" as const,

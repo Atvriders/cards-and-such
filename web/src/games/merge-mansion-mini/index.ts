@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MergeMansionMiniState, MergeMansionMiniAction, MergeMansionMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MergeMansionMiniGame } from "./Game.js";
+const MergeMansionMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MergeMansionMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const mergeMansionMiniPlugin: GamePlugin<MergeMansionMiniState, MergeMansionMiniAction, typeof settings> = {

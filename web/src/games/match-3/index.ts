@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Match3State, Match3Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Match3 } from "./Match3.js";
-
+const Match3 = /* @__PURE__ */ lazy(() => import("./Match3.js").then((mod) => ({ default: mod.Match3 as unknown as React.ComponentType<unknown> })));
 export const match3Settings = {
   moves: {
     kind: "enum" as const,

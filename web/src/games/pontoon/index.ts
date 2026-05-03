@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PontoonState, PontoonAction } from "./state.js";
 import { initialState, reducer, isTerminal, handValue } from "./state.js";
-import { PontoonGame } from "./Game.js";
-
+const PontoonGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PontoonGame as unknown as React.ComponentType<unknown> })));
 export const pontoonSettings = {
   handsPerSession: {
     kind: "number" as const,

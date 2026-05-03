@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { BarrelJumperState, BarrelJumperAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BarrelJumper } from "./BarrelJumper.js";
-
+const BarrelJumper = /* @__PURE__ */ lazy(() => import("./BarrelJumper.js").then((mod) => ({ default: mod.BarrelJumper as unknown as React.ComponentType<unknown> })));
 export const barrelJumperPlugin: GamePlugin<BarrelJumperState, BarrelJumperAction, Record<never, never>> = {
   id: "donkey-kong-like",
   title: "Barrel Jumper",

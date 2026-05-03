@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TapRunnerState, TapRunnerAction, TapRunnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TapRunnerGame } from "./Game.js";
-
+const TapRunnerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TapRunnerGame as unknown as React.ComponentType<unknown> })));
 export const tapRunnerSettings = {} as const;
 
 export const tapRunnerPlugin: GamePlugin<

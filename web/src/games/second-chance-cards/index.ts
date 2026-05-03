@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SecondChanceCardsState, SecondChanceCardsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SecondChanceCards } from "./Game.js";
-
+const SecondChanceCards = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SecondChanceCards as unknown as React.ComponentType<unknown> })));
 const settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
 } as const;

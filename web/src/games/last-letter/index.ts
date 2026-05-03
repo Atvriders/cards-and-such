@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LastLetterState, LastLetterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LastLetter } from "./Game.js";
-
+const LastLetter = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LastLetter as unknown as React.ComponentType<unknown> })));
 export const lastLetterSettings = {
   duration: {
     kind: "enum" as const,

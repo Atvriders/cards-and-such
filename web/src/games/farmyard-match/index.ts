@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FarmState, FarmAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FarmyardMatch } from "./Game.js";
-
+const FarmyardMatch = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FarmyardMatch as unknown as React.ComponentType<unknown> })));
 export const farmyardMatchSettings = {
   count: {
     kind: "enum" as const,

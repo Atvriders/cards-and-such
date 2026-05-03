@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RainbowState, RainbowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RainbowSort } from "./Game.js";
-
+const RainbowSort = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RainbowSort as unknown as React.ComponentType<unknown> })));
 export const rainbowSortSettings = {
   rounds: {
     kind: "enum" as const,

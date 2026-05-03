@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceBingoMiniState, DiceBingoMiniAction, DiceBingoMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceBingoMini } from "./Game.js";
-
+const DiceBingoMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceBingoMini as unknown as React.ComponentType<unknown> })));
 const diceBingoMiniSettings = {
   rolls: { kind: "enum" as const, label: "Max Rolls", options: ["15", "20"] as const, default: "15" as const },
 } as const;

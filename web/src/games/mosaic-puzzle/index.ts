@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MosaicState, MosaicAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Mosaic } from "./Mosaic.js";
-
+const Mosaic = /* @__PURE__ */ lazy(() => import("./Mosaic.js").then((mod) => ({ default: mod.Mosaic as unknown as React.ComponentType<unknown> })));
 const mosaicSettings = {
   difficulty: {
     kind: "enum" as const,

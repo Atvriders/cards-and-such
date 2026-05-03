@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { FortressState, FortressAction } from "./state.js";
 import { initialState, reducer, isTerminal, fortressRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { FortressSolitaire } from "./FortressSolitaire.js";
-
+const FortressSolitaire = /* @__PURE__ */ lazy(() => import("./FortressSolitaire.js").then((mod) => ({ default: mod.FortressSolitaire as unknown as React.ComponentType<unknown> })));
 export const fortressSolitaireSettings = {} as const;
 
 export const fortressSolitairePlugin: GamePlugin<FortressState, FortressAction, typeof fortressSolitaireSettings> = {

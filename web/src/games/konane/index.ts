@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { KonaneState, KonaneAction, KonaneSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Konane } from "./Game.js";
-
+const Konane = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Konane as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const konanePlugin: GamePlugin<KonaneState, KonaneAction, typeof settings> = {

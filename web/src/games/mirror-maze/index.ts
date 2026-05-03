@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MirrorMazeState, MirrorMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MirrorMaze } from "./MirrorMaze.js";
-
+const MirrorMaze = /* @__PURE__ */ lazy(() => import("./MirrorMaze.js").then((mod) => ({ default: mod.MirrorMaze as unknown as React.ComponentType<unknown> })));
 const mirrorMazeSettings = {
   difficulty: {
     kind: "enum" as const,

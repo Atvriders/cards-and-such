@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BeggarMyNeighbourState, BeggarMyNeighbourAction, BeggarMyNeighbourSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BeggarMyNeighbourGame } from "./Game.js";
+const BeggarMyNeighbourGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BeggarMyNeighbourGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const beggarMyNeighbourPlugin: GamePlugin<BeggarMyNeighbourState, BeggarMyNeighbourAction, typeof settings> = {

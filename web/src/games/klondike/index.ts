@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KlondikeState, KlondikeAction } from "./state.js";
 import { initialState, reducer, isTerminal, klondikeRuleset } from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Klondike } from "./Klondike.js";
-
+const Klondike = /* @__PURE__ */ lazy(() => import("./Klondike.js").then((mod) => ({ default: mod.Klondike as unknown as React.ComponentType<unknown> })));
 export const klondikeSettings = {
   drawMode: { kind: "enum", label: "Draw", options: ["1", "3"] as const, default: "1" },
   scoringMode: {

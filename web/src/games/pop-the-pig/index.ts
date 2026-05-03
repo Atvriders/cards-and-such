@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PopPigState, PopPigAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PopThePig } from "./Game.js";
-
+const PopThePig = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PopThePig as unknown as React.ComponentType<unknown> })));
 export const popPigSettings = {
   opponents: {
     kind: "enum" as const,

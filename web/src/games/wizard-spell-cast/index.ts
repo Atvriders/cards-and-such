@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type WizardSpellCastState, type WizardSpellCastAction } from "./state.js";
-import { WizardSpellCastGame } from "./Game.js";
-
+const WizardSpellCastGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WizardSpellCastGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   length: {
     kind: "enum" as const,

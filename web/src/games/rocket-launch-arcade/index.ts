@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RocketLaunchState, RocketLaunchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RocketLaunchGame } from "./Game.js";
-
+const RocketLaunchGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RocketLaunchGame as unknown as React.ComponentType<unknown> })));
 export const rocketLaunchArcadeSettings = {
   difficulty: {
     kind: "enum" as const,

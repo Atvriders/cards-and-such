@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SlayTheDeckState, SlayTheDeckAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SlayTheDeck } from "./Game.js";
-
+const SlayTheDeck = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SlayTheDeck as unknown as React.ComponentType<unknown> })));
 export const slayTheDeckPlugin = {
   id: "slay-the-deck",
   title: "Slay the Deck",

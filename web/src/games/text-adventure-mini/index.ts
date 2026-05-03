@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TextAdventureState, TextAdventureAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TextAdventureMini } from "./Game.js";
-
+const TextAdventureMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TextAdventureMini as unknown as React.ComponentType<unknown> })));
 export const textAdventureMiniPlugin = {
   id: "text-adventure-mini",
   title: "Text Adventure",

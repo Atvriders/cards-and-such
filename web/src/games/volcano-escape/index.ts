@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VolcanoEscapeState, VolcanoEscapeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { VolcanoEscape } from "./VolcanoEscape.js";
-
+const VolcanoEscape = /* @__PURE__ */ lazy(() => import("./VolcanoEscape.js").then((mod) => ({ default: mod.VolcanoEscape as unknown as React.ComponentType<unknown> })));
 export const volcanoEscapeSettings = {
   speed: {
     kind: "enum" as const,

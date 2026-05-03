@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BubblePopState, BubblePopAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BubblePopChain } from "./Game.js";
-
+const BubblePopChain = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BubblePopChain as unknown as React.ComponentType<unknown> })));
 const bubblePopSettings = {
   colors: {
     kind: "enum" as const,

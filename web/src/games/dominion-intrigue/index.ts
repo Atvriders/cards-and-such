@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DominionIntrigueState, DominionIntrigueAction, DominionIntrigueSettings } from "./state.js";
 import { DominionIntrigue_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { coopHintSelector } from "../_shared/coop-engine.js";
-import { DominionIntrigueGame } from "./Game.js";
-
+const DominionIntrigueGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DominionIntrigueGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["Easy", "Standard", "Hard"] as const, default: "Standard" as const },
 } as const;

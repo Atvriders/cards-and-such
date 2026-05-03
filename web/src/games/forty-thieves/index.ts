@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FortyThievesState, FortyThievesAction } from "./state.js";
 import { initialState, reducer, isTerminal, fortyThievesRuleset } from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { FortyThieves } from "./FortyThieves.js";
-
+const FortyThieves = /* @__PURE__ */ lazy(() => import("./FortyThieves.js").then((mod) => ({ default: mod.FortyThieves as unknown as React.ComponentType<unknown> })));
 export const fortyThievesSettings = {} as const;
 
 type FortyThievesSettings = SettingsOf<typeof fortyThievesSettings>;

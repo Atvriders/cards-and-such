@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { DoubleKlondikeState, DoubleKlondikeAction } from "./state.js";
 import { initialState, reducer, isTerminal, doubleKlondikeRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { DoubleKlondikeGame } from "./Game.js";
-
+const DoubleKlondikeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DoubleKlondikeGame as unknown as React.ComponentType<unknown> })));
 export const doubleKlondikePlugin: GamePlugin<DoubleKlondikeState, DoubleKlondikeAction, Record<string, never>> = {
   id: "double-klondike",
   title: "Double Klondike",

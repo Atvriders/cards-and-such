@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PretzelPluckState, PretzelPluckAction, PretzelPluckSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PretzelPluckGame } from "./Game.js";
+const PretzelPluckGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PretzelPluckGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const pretzelPluckPlugin: GamePlugin<PretzelPluckState, PretzelPluckAction, typeof settings> = {

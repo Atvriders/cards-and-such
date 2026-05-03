@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Nonogram5x5State, Nonogram5x5Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Nonogram5x5Game } from "./Game.js";
-
+const Nonogram5x5Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Nonogram5x5Game as unknown as React.ComponentType<unknown> })));
 const nonogram5x5Settings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SkyscrapersState, SkyscrapersAction, SkyscrapersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Skyscrapers } from "./Game.js";
-
+const Skyscrapers = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Skyscrapers as unknown as React.ComponentType<unknown> })));
 export const skyscrapersSettings = {
   size: {
     kind: "enum" as const,

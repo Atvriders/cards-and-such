@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ReversiTimedState, ReversiTimedAction, ReversiTimedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ReversiTimedGame } from "./Game.js";
-
+const ReversiTimedGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ReversiTimedGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   clockSeconds: { kind: "enum" as const, label: "Move clock", options: ["10", "15", "30"] as const, default: "15" as const },
   botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },

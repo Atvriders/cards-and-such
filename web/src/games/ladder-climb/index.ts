@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LadderClimbState, LadderClimbAction, LadderClimbSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LadderClimb } from "./Game.js";
-
+const LadderClimb = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LadderClimb as unknown as React.ComponentType<unknown> })));
 const ladderClimbSettings = {
   rungs: { kind: "enum" as const, label: "Rungs", options: ["5", "10"] as const, default: "5" as const },
 } as const;

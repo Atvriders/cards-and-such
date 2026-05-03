@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EverdellWoodlandState, EverdellWoodlandAction, EverdellWoodlandSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EverdellWoodlandGame } from "./Game.js";
+const EverdellWoodlandGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.EverdellWoodlandGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const everdellWoodlandPlugin: GamePlugin<EverdellWoodlandState, EverdellWoodlandAction, typeof settings> = {

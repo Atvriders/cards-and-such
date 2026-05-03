@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { BabetteState, BabetteAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Babette } from "./Babette.js";
-
+const Babette = /* @__PURE__ */ lazy(() => import("./Babette.js").then((mod) => ({ default: mod.Babette as unknown as React.ComponentType<unknown> })));
 export const babettePlugin: GamePlugin<BabetteState, BabetteAction, Record<string, never>> = {
   id: "babette",
   title: "Babette",

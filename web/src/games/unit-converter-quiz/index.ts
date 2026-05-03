@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UnitConverterState, UnitConverterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { UnitConverterQuizGame } from "./Game.js";
-
+const UnitConverterQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.UnitConverterQuizGame as unknown as React.ComponentType<unknown> })));
 export const unitConverterSettings = {
   rounds: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ShobuState, ShobuAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ShobuGame } from "./Game.js";
-
+const ShobuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ShobuGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const shobuPlugin: GamePlugin<ShobuState, ShobuAction, typeof settings> = {

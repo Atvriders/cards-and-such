@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Go13QuizState, Go13QuizAction, Go13QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Go13QuizGame } from "./Game.js";
+const Go13QuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Go13QuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind: "enum" as const, label: "Questions", options: ["10"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const go13QuizPlugin: GamePlugin<Go13QuizState, Go13QuizAction, typeof settings> = {

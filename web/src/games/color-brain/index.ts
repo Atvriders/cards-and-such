@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorBrainState, ColorBrainAction, ColorBrainSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColorBrainGame } from "./Game.js";
+const ColorBrainGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ColorBrainGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const colorBrainPlugin: GamePlugin<ColorBrainState, ColorBrainAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MathChallengeState, MathChallengeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MathChallenge } from "./MathChallenge.js";
-
+const MathChallenge = /* @__PURE__ */ lazy(() => import("./MathChallenge.js").then((mod) => ({ default: mod.MathChallenge as unknown as React.ComponentType<unknown> })));
 export const mathChallengeSettings = {
   duration: {
     kind: "enum" as const,

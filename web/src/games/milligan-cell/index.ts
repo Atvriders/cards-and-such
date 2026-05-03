@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { MilliganCellState, MilliganCellAction } from "./state.js";
 import { initialState, reducer, isTerminal, milliganCellRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { MilliganCell } from "./Game.js";
-
+const MilliganCell = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MilliganCell as unknown as React.ComponentType<unknown> })));
 export const milliganCellPlugin: GamePlugin<MilliganCellState, MilliganCellAction, Record<string, never>> = {
   id: "milligan-cell",
   title: "Milligan Cell",

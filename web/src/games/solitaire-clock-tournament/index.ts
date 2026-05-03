@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SolitaireClockState, SolitaireClockAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SolitaireClockTournament } from "./SolitaireClockTournament.js";
-
+const SolitaireClockTournament = /* @__PURE__ */ lazy(() => import("./SolitaireClockTournament.js").then((mod) => ({ default: mod.SolitaireClockTournament as unknown as React.ComponentType<unknown> })));
 export const solitaireClockTournamentPlugin = {
   id: "solitaire-clock-tournament",
   title: "Clock Tournament",

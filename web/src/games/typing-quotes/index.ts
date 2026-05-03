@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TypingQuotesState, TypingQuotesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TypingQuotes } from "./TypingQuotes.js";
-
+const TypingQuotes = /* @__PURE__ */ lazy(() => import("./TypingQuotes.js").then((mod) => ({ default: mod.TypingQuotes as unknown as React.ComponentType<unknown> })));
 export const typingQuotesSettings = {
   difficulty: {
     kind: "enum" as const,

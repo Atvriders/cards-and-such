@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TetrominoSudokuState, TetrominoSudokuStateAction, TetrominoSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TetrominoSudokuGame } from "./Game.js";
+const TetrominoSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TetrominoSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const tetrominoSudokuPlugin: GamePlugin<TetrominoSudokuState, TetrominoSudokuStateAction, typeof settings> = {
   id: "tetromino-sudoku",

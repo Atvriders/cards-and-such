@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordSearchState, WordSearchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordSearch } from "./WordSearch.js";
-
+const WordSearch = /* @__PURE__ */ lazy(() => import("./WordSearch.js").then((mod) => ({ default: mod.WordSearch as unknown as React.ComponentType<unknown> })));
 export const wordSearchSettings = {
   size: {
     kind: "enum" as const,

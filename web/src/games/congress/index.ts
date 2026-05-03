@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CongressState, CongressAction } from "./state.js";
 import { initialState, reducer, isTerminal, congressRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Congress } from "./Congress.js";
-
+const Congress = /* @__PURE__ */ lazy(() => import("./Congress.js").then((mod) => ({ default: mod.Congress as unknown as React.ComponentType<unknown> })));
 export const congressSettings = {} as const;
 
 type CongressSettings = SettingsOf<typeof congressSettings>;

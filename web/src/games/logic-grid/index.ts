@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LogicGridState, LogicGridAction, LogicGridSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LogicGrid } from "./LogicGrid.js";
-
+const LogicGrid = /* @__PURE__ */ lazy(() => import("./LogicGrid.js").then((mod) => ({ default: mod.LogicGrid as unknown as React.ComponentType<unknown> })));
 export const logicGridSettings = {
   difficulty: {
     kind: "enum" as const,

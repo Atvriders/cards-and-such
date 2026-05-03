@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ArchwayState, ArchwayAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Archway } from "./Archway.js";
-
+const Archway = /* @__PURE__ */ lazy(() => import("./Archway.js").then((mod) => ({ default: mod.Archway as unknown as React.ComponentType<unknown> })));
 export const archwayPlugin: GamePlugin<ArchwayState, ArchwayAction, Record<string, never>> = {
   id: "archway",
   title: "Archway",

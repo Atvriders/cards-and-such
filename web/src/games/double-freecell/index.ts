@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { DoubleFreeState, DoubleFreeAction } from "./state.js";
 import { initialState, reducer, isTerminal, doubleFreeCellRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { DoubleFreeCell } from "./Game.js";
-
+const DoubleFreeCell = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DoubleFreeCell as unknown as React.ComponentType<unknown> })));
 export const doubleFreeCellPlugin: GamePlugin<DoubleFreeState, DoubleFreeAction, Record<string, never>> = {
   id: "double-freecell",
   title: "Double FreeCell",

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WonderfulWorldDraftState, WonderfulWorldDraftAction, WonderfulWorldDraftSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WonderfulWorldDraftGame } from "./Game.js";
-
+const WonderfulWorldDraftGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WonderfulWorldDraftGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

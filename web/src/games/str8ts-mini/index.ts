@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Str8tsMiniState, Str8tsMiniAction, Str8tsMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Str8tsMiniGame } from "./Game.js";
+const Str8tsMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Str8tsMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const str8tsMiniPlugin: GamePlugin<Str8tsMiniState, Str8tsMiniAction, typeof settings> = {
   id: "str8ts-mini",

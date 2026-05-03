@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LunarDescentState, LunarDescentAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LunarDescent } from "./LunarDescent.js";
-
+const LunarDescent = /* @__PURE__ */ lazy(() => import("./LunarDescent.js").then((mod) => ({ default: mod.LunarDescent as unknown as React.ComponentType<unknown> })));
 export const lunarDescentPlugin: GamePlugin<LunarDescentState, LunarDescentAction, Record<never, never>> = {
   id: "lunar-lander-like",
   title: "Lunar Descent",

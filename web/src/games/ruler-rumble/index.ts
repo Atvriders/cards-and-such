@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RulerRumbleState, RulerRumbleAction, RulerRumbleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RulerRumbleGame } from "./Game.js";
+const RulerRumbleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RulerRumbleGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const rulerRumblePlugin: GamePlugin<RulerRumbleState, RulerRumbleAction, typeof settings> = {

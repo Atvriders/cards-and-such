@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Drop7State, Drop7Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Drop7 } from "./Drop7.js";
-
+const Drop7 = /* @__PURE__ */ lazy(() => import("./Drop7.js").then((mod) => ({ default: mod.Drop7 as unknown as React.ComponentType<unknown> })));
 export const drop7Settings = {
   speed: {
     kind: "enum" as const,

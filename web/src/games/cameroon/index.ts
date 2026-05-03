@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CameroonState, CameroonAction, Category } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_CATEGORIES, computeCategoryScore } from "./state.js";
-import { Cameroon } from "./Cameroon.js";
-
+const Cameroon = /* @__PURE__ */ lazy(() => import("./Cameroon.js").then((mod) => ({ default: mod.Cameroon as unknown as React.ComponentType<unknown> })));
 export const cameroonSettings = {
   cameroonBonus: {
     kind: "boolean" as const,

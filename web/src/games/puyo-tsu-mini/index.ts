@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PuyoTsuMiniState, PuyoTsuMiniAction, PuyoTsuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PuyoTsuMiniGame } from "./Game.js";
+const PuyoTsuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PuyoTsuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const puyoTsuMiniPlugin: GamePlugin<PuyoTsuMiniState, PuyoTsuMiniAction, typeof settings> = {

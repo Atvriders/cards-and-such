@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardBlastState, CardBlastAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardBlast } from "./CardBlast.js";
-
+const CardBlast = /* @__PURE__ */ lazy(() => import("./CardBlast.js").then((mod) => ({ default: mod.CardBlast as unknown as React.ComponentType<unknown> })));
 export const cardBlastSettings = {
   rounds: {
     kind: "enum" as const,

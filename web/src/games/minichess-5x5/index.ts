@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Minichess5x5State, Minichess5x5Action, Minichess5x5Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Minichess5x5Game } from "./Game.js";
+const Minichess5x5Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Minichess5x5Game as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const minichess5x5Plugin: GamePlugin<Minichess5x5State, Minichess5x5Action, typeof settings> = {

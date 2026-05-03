@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { OddEvenSudokuState, OddEvenSudokuAction, OddEvenSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OddEvenSudokuGame } from "./Game.js";
+const OddEvenSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OddEvenSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const oddEvenSudokuPlugin: GamePlugin<OddEvenSudokuState, OddEvenSudokuAction, typeof settings> = {
   id: "odd-even-sudoku",

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PCState, PCAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PrimeClimb } from "./PrimeClimb.js";
-
+const PrimeClimb = /* @__PURE__ */ lazy(() => import("./PrimeClimb.js").then((mod) => ({ default: mod.PrimeClimb as unknown as React.ComponentType<unknown> })));
 export const primeClimbSettings = {
   botSpeed: {
     kind: "enum" as const,

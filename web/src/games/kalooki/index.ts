@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KalookiState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Kalooki } from "./Kalooki.js";
-
+const Kalooki = /* @__PURE__ */ lazy(() => import("./Kalooki.js").then((mod) => ({ default: mod.Kalooki as unknown as React.ComponentType<unknown> })));
 export const kalookiSettings = {
   botCount: {
     kind: "number" as const,

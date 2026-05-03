@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DiceLadderState, DiceLadderAction, DiceLadderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceLadder } from "./Game.js";
-
+const DiceLadder = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceLadder as unknown as React.ComponentType<unknown> })));
 const settings = {
   rungs: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MariageState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Mariage } from "./Mariage.js";
-
+const Mariage = /* @__PURE__ */ lazy(() => import("./Mariage.js").then((mod) => ({ default: mod.Mariage as unknown as React.ComponentType<unknown> })));
 export const mariageSettings = {} as const;
 type MariageSettings = SettingsOf<typeof mariageSettings>;
 type MariageAction = { type: "play"; cardId: string };

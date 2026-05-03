@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardLowHigh3State, CardLowHigh3Action, CardLowHigh3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardLowHigh3 } from "./Game.js";
-
+const CardLowHigh3 = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardLowHigh3 as unknown as React.ComponentType<unknown> })));
 const cardLowHigh3Settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["8", "10", "12"] as const, default: "10" as const },
 } as const;

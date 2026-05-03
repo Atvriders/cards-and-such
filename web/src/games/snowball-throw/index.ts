@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SnowballThrowState, SnowballThrowAction, SnowballThrowSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SnowballThrow } from "./Game.js";
-
+const SnowballThrow = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SnowballThrow as unknown as React.ComponentType<unknown> })));
 const snowballThrowSettings = {
   throws: { kind: "enum" as const, label: "Throws", options: ["8", "12"] as const, default: "8" as const },
 } as const;

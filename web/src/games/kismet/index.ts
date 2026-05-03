@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KismetState, KismetAction, Category } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_CATEGORIES, computeCategoryScore } from "./state.js";
-import { Kismet } from "./Kismet.js";
-
+const Kismet = /* @__PURE__ */ lazy(() => import("./Kismet.js").then((mod) => ({ default: mod.Kismet as unknown as React.ComponentType<unknown> })));
 export const kismetSettings = {
   flushBonus: {
     kind: "boolean" as const,

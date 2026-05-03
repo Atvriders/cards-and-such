@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type RollASixState, type RollASixAction } from "./state.js";
-import { RollASix } from "./RollASix.js";
-
+const RollASix = /* @__PURE__ */ lazy(() => import("./RollASix.js").then((mod) => ({ default: mod.RollASix as unknown as React.ComponentType<unknown> })));
 export const rollASixSettings = {} as const;
 
 export const rollASixPlugin: GamePlugin<RollASixState, RollASixAction, typeof rollASixSettings> = {

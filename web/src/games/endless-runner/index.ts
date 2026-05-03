@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { EndlessRunnerState, EndlessRunnerAction, EndlessRunnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EndlessRunner } from "./EndlessRunner.js";
-
+const EndlessRunner = /* @__PURE__ */ lazy(() => import("./EndlessRunner.js").then((mod) => ({ default: mod.EndlessRunner as unknown as React.ComponentType<unknown> })));
 export const endlessRunnerSettings = {} as const;
 
 export const endlessRunnerPlugin: GamePlugin<

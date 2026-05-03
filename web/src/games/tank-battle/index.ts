@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TankState, TankAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TankBattle } from "./TankBattle.js";
-
+const TankBattle = /* @__PURE__ */ lazy(() => import("./TankBattle.js").then((mod) => ({ default: mod.TankBattle as unknown as React.ComponentType<unknown> })));
 export const tankBattleSettings = {
   gridSize: {
     kind: "enum" as const,

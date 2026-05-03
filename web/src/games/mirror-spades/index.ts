@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MirrorSpadesState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MirrorSpades } from "./MirrorSpades.js";
-
+const MirrorSpades = /* @__PURE__ */ lazy(() => import("./MirrorSpades.js").then((mod) => ({ default: mod.MirrorSpades as unknown as React.ComponentType<unknown> })));
 const mirrorSpadesSettings = {} as const;
 type MirrorSpadesSettings = SettingsOf<typeof mirrorSpadesSettings>;
 type MirrorSpadesAction = { type: "play"; cardId: string };

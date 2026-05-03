@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type CookieClickerState, type CookieClickerAction } from "./state.js";
-import { CookieClickerMini } from "./CookieClickerMini.js";
-
+const CookieClickerMini = /* @__PURE__ */ lazy(() => import("./CookieClickerMini.js").then((mod) => ({ default: mod.CookieClickerMini as unknown as React.ComponentType<unknown> })));
 export const cookieClickerSettings = {
   goal: { kind: "enum" as const, label: "Cookie Goal", options: ["100", "500", "2000"] as const, default: "100" as const },
 } as const;

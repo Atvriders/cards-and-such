@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AirlineState, AirlineAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AirlineSim } from "./Game.js";
-
+const AirlineSim = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AirlineSim as unknown as React.ComponentType<unknown> })));
 export const airlineSimPlugin = {
   id: "airline-sim",
   title: "Airline Sim",

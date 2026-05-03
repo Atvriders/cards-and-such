@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MontyPythonQuizState, MontyPythonQuizAction, MontyPythonQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MontyPythonQuizGame } from "./Game.js";
+const MontyPythonQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MontyPythonQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10","20","30"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const montyPythonQuizPlugin: GamePlugin<MontyPythonQuizState, MontyPythonQuizAction, typeof settings> = {

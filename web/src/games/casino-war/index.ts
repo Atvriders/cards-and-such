@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CasinoWarState, CasinoWarAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CasinoWar } from "./Game.js";
-
+const CasinoWar = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CasinoWar as unknown as React.ComponentType<unknown> })));
 export const casinoWarSettings = {
   startingBankroll: {
     kind: "number" as const,

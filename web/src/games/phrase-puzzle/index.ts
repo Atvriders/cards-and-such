@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PhrasePuzzleState, PhrasePuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PhrasePuzzle } from "./Game.js";
-
+const PhrasePuzzle = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PhrasePuzzle as unknown as React.ComponentType<unknown> })));
 export const phrasePuzzleSettings = {} as const;
 
 export const phrasePuzzlePlugin: GamePlugin<PhrasePuzzleState, PhrasePuzzleAction, typeof phrasePuzzleSettings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TwentyNineState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TwentyNine } from "./TwentyNine.js";
-
+const TwentyNine = /* @__PURE__ */ lazy(() => import("./TwentyNine.js").then((mod) => ({ default: mod.TwentyNine as unknown as React.ComponentType<unknown> })));
 export const twentyNineSettings = {} as const;
 
 type TwentyNineSettingsType = SettingsOf<typeof twentyNineSettings>;

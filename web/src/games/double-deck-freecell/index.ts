@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DoubleDeckFreecellState, DoubleDeckFreecellAction, DoubleDeckFreecellSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DoubleDeckFreecellGame } from "./Game.js";
+const DoubleDeckFreecellGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DoubleDeckFreecellGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const doubleDeckFreecellPlugin: GamePlugin<DoubleDeckFreecellState, DoubleDeckFreecellAction, typeof settings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { NumberMemoryState, NumberMemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NumberMemory } from "./Game.js";
-
+const NumberMemory = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NumberMemory as unknown as React.ComponentType<unknown> })));
 export const numberMemorySettings = {
   difficulty: {
     kind: "enum" as const,

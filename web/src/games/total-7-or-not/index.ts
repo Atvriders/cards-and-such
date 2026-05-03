@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Total7OrNotState, Total7OrNotAction, Total7OrNotSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Total7OrNot } from "./Game.js";
+const Total7OrNot = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Total7OrNot as unknown as React.ComponentType<unknown> })));
 const settings = { rounds: { kind:"enum" as const, label:"Rounds", options:["10","20"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const total7OrNotPlugin: GamePlugin<Total7OrNotState, Total7OrNotAction, typeof settings> = {

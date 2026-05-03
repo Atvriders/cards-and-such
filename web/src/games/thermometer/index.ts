@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ThermometerState, ThermometerAction, ThermometerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Thermometer } from "./Thermometer.js";
-
+const Thermometer = /* @__PURE__ */ lazy(() => import("./Thermometer.js").then((mod) => ({ default: mod.Thermometer as unknown as React.ComponentType<unknown> })));
 export const thermometerSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClobberState, ClobberAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Clobber } from "./Clobber.js";
-
+const Clobber = /* @__PURE__ */ lazy(() => import("./Clobber.js").then((mod) => ({ default: mod.Clobber as unknown as React.ComponentType<unknown> })));
 export const clobberSettings = {
   opponent: {
     kind: "enum" as const,

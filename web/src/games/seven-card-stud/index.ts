@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SevenCardStudState, StudAction } from "./state.js";
 import { initialState, reducer, isTerminal, bestFiveOf } from "./state.js";
 import { rankHand, type HandClass } from "../../engines/deck/ranking.js";
-import { SevenCardStud } from "./SevenCardStud.js";
-
+const SevenCardStud = /* @__PURE__ */ lazy(() => import("./SevenCardStud.js").then((mod) => ({ default: mod.SevenCardStud as unknown as React.ComponentType<unknown> })));
 const STUD_CLASS_ORDER: HandClass[] = [
   "high-card", "one-pair", "two-pair", "three-of-a-kind",
   "straight", "flush", "full-house", "four-of-a-kind", "straight-flush",

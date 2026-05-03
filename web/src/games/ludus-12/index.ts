@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Ludus12State, Ludus12Action, Ludus12Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Ludus12Game } from "./Game.js";
+const Ludus12Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Ludus12Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const ludus12Plugin: GamePlugin<Ludus12State, Ludus12Action, typeof settings> = {

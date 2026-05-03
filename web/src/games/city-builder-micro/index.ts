@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CityBuilderState, CityBuilderAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CityBuilderMicro } from "./Game.js";
-
+const CityBuilderMicro = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CityBuilderMicro as unknown as React.ComponentType<unknown> })));
 export const cityBuilderMicroPlugin = {
   id: "city-builder-micro",
   title: "City Builder Micro",

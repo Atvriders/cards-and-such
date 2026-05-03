@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DrMarioState, DrMarioAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DrMario } from "./DrMario.js";
-
+const DrMario = /* @__PURE__ */ lazy(() => import("./DrMario.js").then((mod) => ({ default: mod.DrMario as unknown as React.ComponentType<unknown> })));
 export const drMarioSettings = {
   difficulty: {
     kind: "enum" as const,

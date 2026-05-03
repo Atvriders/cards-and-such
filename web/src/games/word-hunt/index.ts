@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordHuntState, WordHuntAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordHunt } from "./Game.js";
-
+const WordHunt = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WordHunt as unknown as React.ComponentType<unknown> })));
 export const wordHuntSettings = {} as const;
 
 export const wordHuntPlugin: GamePlugin<WordHuntState, WordHuntAction, typeof wordHuntSettings> = {

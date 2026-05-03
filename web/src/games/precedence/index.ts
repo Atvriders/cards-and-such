@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { PrecedenceState, PrecedenceAction } from "./state.js";
-import { PrecedenceGame } from "./Game.js";
-
+const PrecedenceGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PrecedenceGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const precedencePlugin: GamePlugin<PrecedenceState, PrecedenceAction, typeof settings> = {

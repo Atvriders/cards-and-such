@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShortDeckHoldemState, ShortDeckHoldemAction, ShortDeckHoldemSettings } from "./state.js";
 import { initialState, reducer, isTerminal, bestFiveSD } from "./state.js";
 import { handStrength } from "../_shared/poker.js";
-import { ShortDeckHoldemGame } from "./Game.js";
-
+const ShortDeckHoldemGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ShortDeckHoldemGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   startingBankroll: { kind: "enum" as const, label: "Starting Stack", options: ["500", "1000", "5000"] as const, default: "1000" },
   smallBlind: { kind: "enum" as const, label: "Small Blind", options: ["5", "10", "25"] as const, default: "10" },

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BouncerState, BouncerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Bouncer } from "./Bouncer.js";
-
+const Bouncer = /* @__PURE__ */ lazy(() => import("./Bouncer.js").then((mod) => ({ default: mod.Bouncer as unknown as React.ComponentType<unknown> })));
 export const bouncerSettings = {
   difficulty: {
     kind: "enum" as const,

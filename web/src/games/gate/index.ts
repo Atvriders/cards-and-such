@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { GateState, GateAction } from "./state.js";
 import { initialState, reducer, isTerminal, gateRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Gate } from "./Gate.js";
-
+const Gate = /* @__PURE__ */ lazy(() => import("./Gate.js").then((mod) => ({ default: mod.Gate as unknown as React.ComponentType<unknown> })));
 export const gateSettings = {} as const;
 
 export const gatePlugin: GamePlugin<GateState, GateAction, typeof gateSettings> = {

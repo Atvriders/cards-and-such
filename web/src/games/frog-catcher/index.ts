@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FrogCatcherState, FrogCatcherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FrogCatcher } from "./FrogCatcher.js";
-
+const FrogCatcher = /* @__PURE__ */ lazy(() => import("./FrogCatcher.js").then((mod) => ({ default: mod.FrogCatcher as unknown as React.ComponentType<unknown> })));
 export const frogCatcherSettings = {
   duration: {
     kind: "enum" as const,

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BreathGaugeState, type BreathGaugeAction } from "./state.js";
-import { BreathGauge } from "./BreathGauge.js";
-
+const BreathGauge = /* @__PURE__ */ lazy(() => import("./BreathGauge.js").then((mod) => ({ default: mod.BreathGauge as unknown as React.ComponentType<unknown> })));
 export const breathGaugeSettings = {
   target: { kind: "enum" as const, label: "Target Fill", options: ["50", "75", "90"] as const, default: "50" as const },
 } as const;

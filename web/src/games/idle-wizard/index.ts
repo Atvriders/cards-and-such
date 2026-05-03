@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type IdleWizardState, type IdleWizardAction } from "./state.js";
-import { IdleWizard } from "./IdleWizard.js";
-
+const IdleWizard = /* @__PURE__ */ lazy(() => import("./IdleWizard.js").then((mod) => ({ default: mod.IdleWizard as unknown as React.ComponentType<unknown> })));
 export const idleWizardSettings = {
   spells: { kind: "enum" as const, label: "Spells to Cast", options: ["10", "25", "50"] as const, default: "10" as const },
 } as const;

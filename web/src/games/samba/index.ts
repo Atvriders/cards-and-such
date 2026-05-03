@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SambaState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Samba } from "./Samba.js";
-
+const Samba = /* @__PURE__ */ lazy(() => import("./Samba.js").then((mod) => ({ default: mod.Samba as unknown as React.ComponentType<unknown> })));
 export const sambaSettings = {
   botCount: {
     kind: "number" as const,

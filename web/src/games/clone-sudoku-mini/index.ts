@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CloneSudokuMiniState, CloneSudokuMiniAction, CloneSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CloneSudokuMiniGame } from "./Game.js";
-
+const CloneSudokuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CloneSudokuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   puzzles: { kind: "enum" as const, label: "Puzzles", options: ["8"] as const, default: "8" as const },
 } as const;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BuncoState, BuncoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Bunco } from "./Bunco.js";
-
+const Bunco = /* @__PURE__ */ lazy(() => import("./Bunco.js").then((mod) => ({ default: mod.Bunco as unknown as React.ComponentType<unknown> })));
 export const buncoSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

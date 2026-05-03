@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MountainClimbState, MountainClimbAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MountainClimb } from "./MountainClimb.js";
-
+const MountainClimb = /* @__PURE__ */ lazy(() => import("./MountainClimb.js").then((mod) => ({ default: mod.MountainClimb as unknown as React.ComponentType<unknown> })));
 export const mountainClimbSettings = {
   difficulty: {
     kind: "enum" as const,

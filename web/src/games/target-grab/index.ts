@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TargetGrabState, TargetGrabAction, TargetGrabSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TargetGrab } from "./Game.js";
+const TargetGrab = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TargetGrab as unknown as React.ComponentType<unknown> })));
 const settings = { difficulty: { kind:"enum" as const, label:"Difficulty", options:["easy","hard"] as const, default:"easy" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const targetGrabPlugin: GamePlugin<TargetGrabState, TargetGrabAction, typeof settings> = {

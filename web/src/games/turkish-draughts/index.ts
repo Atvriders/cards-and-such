@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TurkishDraughtsState, TurkishDraughtsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TurkishDraughts } from "./Game.js";
-
+const TurkishDraughts = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TurkishDraughts as unknown as React.ComponentType<unknown> })));
 export const turkishDraughtsSettings = {
   opponent: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PinochleState, PinochleAction, PinochleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { defaultRankOrder, legalPlays } from "../_shared/trick-engine.js";
-import { PinochleGame } from "./Game.js";
-
+const PinochleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PinochleGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

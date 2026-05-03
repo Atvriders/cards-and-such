@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StackTowerState, StackTowerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StackTower } from "./Game.js";
-
+const StackTower = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.StackTower as unknown as React.ComponentType<unknown> })));
 const stackTowerSettings = {
   speed: {
     kind: "enum" as const,

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BpmTapState, type BpmTapAction } from "./state.js";
-import { BpmTap } from "./BpmTap.js";
-
+const BpmTap = /* @__PURE__ */ lazy(() => import("./BpmTap.js").then((mod) => ({ default: mod.BpmTap as unknown as React.ComponentType<unknown> })));
 export const bpmTapSettings = {
   target: { kind: "enum" as const, label: "Target BPM", options: ["60", "120", "180"] as const, default: "60" as const },
 } as const;

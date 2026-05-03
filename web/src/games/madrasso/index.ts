@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MadrassoState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Madrasso } from "./Madrasso.js";
-
+const Madrasso = /* @__PURE__ */ lazy(() => import("./Madrasso.js").then((mod) => ({ default: mod.Madrasso as unknown as React.ComponentType<unknown> })));
 const madrassoSettings = {} as const;
 type MadrassoSettings = SettingsOf<typeof madrassoSettings>;
 type MadrassoAction = { type: "play"; cardId: string };

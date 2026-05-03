@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { OperationState, OperationAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OperationGame } from "./Game.js";
-
+const OperationGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OperationGame as unknown as React.ComponentType<unknown> })));
 export const operationSettings = {
   difficulty: {
     kind: "enum" as const,

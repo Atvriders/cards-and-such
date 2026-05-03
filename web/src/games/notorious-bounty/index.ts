@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NotoriousBountyState, NotoriousBountyAction, NotoriousBountySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NotoriousBountyGame } from "./Game.js";
+const NotoriousBountyGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NotoriousBountyGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const notoriousBountyPlugin: GamePlugin<NotoriousBountyState, NotoriousBountyAction, typeof settings> = {

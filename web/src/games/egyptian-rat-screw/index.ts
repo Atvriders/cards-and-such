@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EgyptianRatScrewState, EgyptianRatScrewAction, EgyptianRatScrewSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EgyptianRatScrewGame } from "./Game.js";
-
+const EgyptianRatScrewGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.EgyptianRatScrewGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

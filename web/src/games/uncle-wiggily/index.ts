@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UncleWiggilyState, UncleWiggilyAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { UncleWiggily } from "./UncleWiggily.js";
-
+const UncleWiggily = /* @__PURE__ */ lazy(() => import("./UncleWiggily.js").then((mod) => ({ default: mod.UncleWiggily as unknown as React.ComponentType<unknown> })));
 export const uncleWiggilySettings = {
   opponents: {
     kind: "enum" as const,

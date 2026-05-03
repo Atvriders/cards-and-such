@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StitchState, StitchAction, StitchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Stitches } from "./Stitches.js";
-
+const Stitches = /* @__PURE__ */ lazy(() => import("./Stitches.js").then((mod) => ({ default: mod.Stitches as unknown as React.ComponentType<unknown> })));
 export const stitchesSettings = {
   difficulty: {
     kind: "enum" as const,

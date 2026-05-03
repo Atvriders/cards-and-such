@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SameGameState, SameGameAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SameGame } from "./SameGame.js";
-
+const SameGame = /* @__PURE__ */ lazy(() => import("./SameGame.js").then((mod) => ({ default: mod.SameGame as unknown as React.ComponentType<unknown> })));
 export const sameGameSettings = {
   colors: {
     kind: "enum" as const,

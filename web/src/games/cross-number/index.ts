@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrossNumberState, CrossNumberAction, CrossNumberSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrossNumberGame } from "./Game.js";
+const CrossNumberGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CrossNumberGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const crossNumberPlugin: GamePlugin<CrossNumberState, CrossNumberAction, typeof settings> = {
   id: "cross-number",

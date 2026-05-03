@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { JackboxPack1QuizState, JackboxPack1QuizAction, JackboxPack1QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { JackboxPack1QuizGame } from "./Game.js";
-
+const JackboxPack1QuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.JackboxPack1QuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

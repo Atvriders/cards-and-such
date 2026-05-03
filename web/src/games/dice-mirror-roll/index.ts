@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceMirrorRollState, DiceMirrorRollAction, DiceMirrorRollSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceMirrorRoll } from "./Game.js";
-
+const DiceMirrorRoll = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceMirrorRoll as unknown as React.ComponentType<unknown> })));
 const diceMirrorRollSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["8", "10", "12"] as const, default: "10" as const },
 } as const;

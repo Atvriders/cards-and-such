@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SimonSwipeState, SimonSwipeAction, SimonSwipeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SimonSwipeGame } from "./Game.js";
-
+const SimonSwipeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SimonSwipeGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

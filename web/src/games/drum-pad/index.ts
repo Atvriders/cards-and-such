@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DrumPadState, DrumPadAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DrumPad } from "./DrumPad.js";
-
+const DrumPad = /* @__PURE__ */ lazy(() => import("./DrumPad.js").then((mod) => ({ default: mod.DrumPad as unknown as React.ComponentType<unknown> })));
 export const drumPadSettings = {} as const;
 
 export const drumPadPlugin: GamePlugin<DrumPadState, DrumPadAction, typeof drumPadSettings> = {

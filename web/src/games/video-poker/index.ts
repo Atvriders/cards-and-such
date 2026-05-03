@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VideoPokerState, VideoPokerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { VideoPoker } from "./VideoPoker.js";
-
+const VideoPoker = /* @__PURE__ */ lazy(() => import("./VideoPoker.js").then((mod) => ({ default: mod.VideoPoker as unknown as React.ComponentType<unknown> })));
 export const videoPokerSettings = {
   betSize: {
     kind: "enum" as const,

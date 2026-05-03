@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChineseCheckers2pState, ChineseCheckers2pAction, ChineseCheckers2pSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChineseCheckers2pGame } from "./Game.js";
+const ChineseCheckers2pGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ChineseCheckers2pGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const chineseCheckers2pPlugin: GamePlugin<ChineseCheckers2pState, ChineseCheckers2pAction, typeof settings> = {

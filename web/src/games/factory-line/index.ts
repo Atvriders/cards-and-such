@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FactoryState, FactoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FactoryLine } from "./Game.js";
-
+const FactoryLine = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FactoryLine as unknown as React.ComponentType<unknown> })));
 export const factoryLinePlugin = {
   id: "factory-line",
   title: "Factory Line",

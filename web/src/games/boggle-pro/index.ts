@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BoggleProState, BoggleProAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BoggleProGame } from "./Game.js";
-
+const BoggleProGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BoggleProGame as unknown as React.ComponentType<unknown> })));
 export const boggleProPlugin = {
   id: "boggle-pro",
   title: "Boggle Pro",

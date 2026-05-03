@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LaserMazeState, LaserMazeAction, LaserMazeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LaserMaze } from "./LaserMaze.js";
-
+const LaserMaze = /* @__PURE__ */ lazy(() => import("./LaserMaze.js").then((mod) => ({ default: mod.LaserMaze as unknown as React.ComponentType<unknown> })));
 export const laserMazeSettings = {
   difficulty: {
     kind: "enum" as const,

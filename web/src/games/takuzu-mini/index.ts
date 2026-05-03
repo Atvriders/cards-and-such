@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TakuzuMiniState, TakuzuMiniAction, TakuzuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TakuzuMiniGame } from "./Game.js";
+const TakuzuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TakuzuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const takuzuMiniPlugin: GamePlugin<TakuzuMiniState, TakuzuMiniAction, typeof settings> = {
   id: "takuzu-mini",

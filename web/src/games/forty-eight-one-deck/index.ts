@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { FortyEightOneDeckState, FortyEightOneDeckAction, FortyEightOneDeckSettings } from "./state.js";
-import { FortyEightOneDeck } from "./FortyEightOneDeck.js";
-
+const FortyEightOneDeck = /* @__PURE__ */ lazy(() => import("./FortyEightOneDeck.js").then((mod) => ({ default: mod.FortyEightOneDeck as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const fortyEightOneDeckPlugin: GamePlugin<FortyEightOneDeckState, FortyEightOneDeckAction, typeof settings> = {

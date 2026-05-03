@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CCState, CCAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChineseCheckers } from "./ChineseCheckers.js";
-
+const ChineseCheckers = /* @__PURE__ */ lazy(() => import("./ChineseCheckers.js").then((mod) => ({ default: mod.ChineseCheckers as unknown as React.ComponentType<unknown> })));
 export const chineseCheckersSettings = {
   opponent: {
     kind: "enum" as const,

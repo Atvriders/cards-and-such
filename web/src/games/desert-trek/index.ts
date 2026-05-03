@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DesertTrekState, DesertTrekAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DesertTrek } from "./DesertTrek.js";
-
+const DesertTrek = /* @__PURE__ */ lazy(() => import("./DesertTrek.js").then((mod) => ({ default: mod.DesertTrek as unknown as React.ComponentType<unknown> })));
 export const desertTrekSettings = {
   size: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DotsCaptureState, DotsCaptureAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DotsCapture } from "./DotsCapture.js";
-
+const DotsCapture = /* @__PURE__ */ lazy(() => import("./DotsCapture.js").then((mod) => ({ default: mod.DotsCapture as unknown as React.ComponentType<unknown> })));
 export const dotsCaptureSettings = {
   opponent: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CrescentState, CrescentAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Crescent } from "./Crescent.js";
-
+const Crescent = /* @__PURE__ */ lazy(() => import("./Crescent.js").then((mod) => ({ default: mod.Crescent as unknown as React.ComponentType<unknown> })));
 export const crescentSettings = {} as const;
 
 export const crescentPlugin: GamePlugin<CrescentState, CrescentAction, typeof crescentSettings> = {

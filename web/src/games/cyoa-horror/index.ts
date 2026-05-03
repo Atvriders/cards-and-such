@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CyoaHorrorState, CyoaHorrorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CyoaHorror } from "./Game.js";
-
+const CyoaHorror = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CyoaHorror as unknown as React.ComponentType<unknown> })));
 export const cyoaHorrorPlugin = {
   id: "cyoa-horror",
   title: "Choose Your Path: Horror",

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type CurlingState, type CurlingAction } from "./state.js";
-import { Curling } from "./Game.js";
-
+const Curling = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Curling as unknown as React.ComponentType<unknown> })));
 export const curlingSettings = {
   ends: { kind: "enum" as const, label: "Ends", options: ["4", "8"] as const, default: "4" as const },
 } as const;

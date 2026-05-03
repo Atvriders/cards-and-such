@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MissingLettersState, MissingLettersAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MissingLetters } from "./MissingLetters.js";
-
+const MissingLetters = /* @__PURE__ */ lazy(() => import("./MissingLetters.js").then((mod) => ({ default: mod.MissingLetters as unknown as React.ComponentType<unknown> })));
 export const missingLettersSettings = {
   blanks: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SamuraiDiceState, SamuraiDiceAction, SamuraiCategory } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_SAMURAI_CATEGORIES, computeSamuraiScore } from "./state.js";
-import { SamuraiDice } from "./SamuraiDice.js";
-
+const SamuraiDice = /* @__PURE__ */ lazy(() => import("./SamuraiDice.js").then((mod) => ({ default: mod.SamuraiDice as unknown as React.ComponentType<unknown> })));
 export const samuraiDiceSettings = {
   rounds: {
     kind: "enum" as const,

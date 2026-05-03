@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { NestorState, NestorAction, NestorSettings } from "./state.js";
-import { Nestor } from "./Nestor.js";
-
+const Nestor = /* @__PURE__ */ lazy(() => import("./Nestor.js").then((mod) => ({ default: mod.Nestor as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const nestorPlugin: GamePlugin<NestorState, NestorAction, typeof settings> = {

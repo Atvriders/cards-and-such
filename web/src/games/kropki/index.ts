@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KropkiState, KropkiAction, KropkiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Kropki } from "./Kropki.js";
-
+const Kropki = /* @__PURE__ */ lazy(() => import("./Kropki.js").then((mod) => ({ default: mod.Kropki as unknown as React.ComponentType<unknown> })));
 export const kropkiSettings = {
   difficulty: {
     kind: "enum" as const,

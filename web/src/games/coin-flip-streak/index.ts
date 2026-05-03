@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type CoinFlipState, type CoinFlipAction } from "./state.js";
-import { CoinFlipStreak } from "./CoinFlipStreak.js";
-
+const CoinFlipStreak = /* @__PURE__ */ lazy(() => import("./CoinFlipStreak.js").then((mod) => ({ default: mod.CoinFlipStreak as unknown as React.ComponentType<unknown> })));
 export const coinFlipSettings = {
   maxFlips: { kind: "enum" as const, label: "Streak Goal", options: ["5", "10", "20"] as const, default: "5" as const },
 } as const;

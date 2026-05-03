@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CarpetState, CarpetAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Carpet } from "./Carpet.js";
-
+const Carpet = /* @__PURE__ */ lazy(() => import("./Carpet.js").then((mod) => ({ default: mod.Carpet as unknown as React.ComponentType<unknown> })));
 export const carpetSettings = {} as const;
 
 type CarpetSettings = SettingsOf<typeof carpetSettings>;

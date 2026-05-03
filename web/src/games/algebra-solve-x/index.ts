@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlgebraSolveXState, AlgebraSolveXAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AlgebraSolveXGame } from "./Game.js";
-
+const AlgebraSolveXGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AlgebraSolveXGame as unknown as React.ComponentType<unknown> })));
 export const algebraSolveXSettings = {
   difficulty: {
     kind: "enum" as const,

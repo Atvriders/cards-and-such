@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FallingCatcherState, FallingCatcherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FallingCatcher } from "./FallingCatcher.js";
-
+const FallingCatcher = /* @__PURE__ */ lazy(() => import("./FallingCatcher.js").then((mod) => ({ default: mod.FallingCatcher as unknown as React.ComponentType<unknown> })));
 export const fallingCatcherSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CosmicDiceState, CosmicDiceAction, CosmicCategory } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_COSMIC_CATEGORIES, computeCosmicScore } from "./state.js";
-import { CosmicDice } from "./CosmicDice.js";
-
+const CosmicDice = /* @__PURE__ */ lazy(() => import("./CosmicDice.js").then((mod) => ({ default: mod.CosmicDice as unknown as React.ComponentType<unknown> })));
 export const cosmicDiceSettings = {
   rounds: {
     kind: "enum" as const,

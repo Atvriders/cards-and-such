@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlquerqueState, AlquerqueAction, AlquerqueSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Alquerque } from "./Game.js";
-
+const Alquerque = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Alquerque as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const alquerquePlugin: GamePlugin<AlquerqueState, AlquerqueAction, typeof settings> = {

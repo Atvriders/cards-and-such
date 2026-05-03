@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TopSpinState, TopSpinAction, TopSpinSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TopSpinGame } from "./Game.js";
+const TopSpinGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TopSpinGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const topSpinPlugin: GamePlugin<TopSpinState, TopSpinAction, typeof settings> = {

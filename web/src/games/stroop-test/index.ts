@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StroopTestState, StroopTestAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StroopTest } from "./StroopTest.js";
-
+const StroopTest = /* @__PURE__ */ lazy(() => import("./StroopTest.js").then((mod) => ({ default: mod.StroopTest as unknown as React.ComponentType<unknown> })));
 export const stroopTestSettings = {
   rounds: {
     kind: "enum" as const,

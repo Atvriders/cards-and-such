@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CodewordsState, CodewordsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Codewords } from "./Codewords.js";
-
+const Codewords = /* @__PURE__ */ lazy(() => import("./Codewords.js").then((mod) => ({ default: mod.Codewords as unknown as React.ComponentType<unknown> })));
 export const codewordsSettings = {
   difficulty: {
     kind: "enum" as const,

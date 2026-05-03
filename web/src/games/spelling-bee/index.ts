@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpellingBeeState, SpellingBeeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpellingBee } from "./SpellingBee.js";
-
+const SpellingBee = /* @__PURE__ */ lazy(() => import("./SpellingBee.js").then((mod) => ({ default: mod.SpellingBee as unknown as React.ComponentType<unknown> })));
 export const spellingBeeSettings = {
   duration: {
     kind: "enum" as const,

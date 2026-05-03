@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveStudPokerState, FiveStudPokerAction, FiveStudPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal, bestFiveStud } from "./state.js";
 import { handStrength } from "../_shared/poker.js";
-import { FiveStudPokerGame } from "./Game.js";
-
+const FiveStudPokerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FiveStudPokerGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   startingBankroll: { kind: "enum" as const, label: "Starting Stack", options: ["500", "1000", "5000"] as const, default: "1000" },
   ante: { kind: "enum" as const, label: "Ante", options: ["5", "10", "25"] as const, default: "10" },

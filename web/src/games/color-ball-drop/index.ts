@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorBallDropState, ColorBallDropAction, ColorBallDropSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColorBallDropGame } from "./Game.js";
+const ColorBallDropGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ColorBallDropGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const colorBallDropPlugin: GamePlugin<ColorBallDropState, ColorBallDropAction, typeof settings> = {

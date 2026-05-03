@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlackjackState, BlackjackAction } from "./state.js";
 import { initialState, reducer, isTerminal, handValue } from "./state.js";
-import { Blackjack } from "./Blackjack.js";
-
+const Blackjack = /* @__PURE__ */ lazy(() => import("./Blackjack.js").then((mod) => ({ default: mod.Blackjack as unknown as React.ComponentType<unknown> })));
 export const blackjackSettings = {
   handsPerSession: {
     kind: "number" as const,

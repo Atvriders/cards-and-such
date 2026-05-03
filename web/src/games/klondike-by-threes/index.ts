@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KlondikeByThreesState, KlondikeByThreesAction } from "./state.js";
 import { initialState, reducer, isTerminal, kbt3Ruleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { KlondikeByThrees } from "./KlondikeByThrees.js";
-
+const KlondikeByThrees = /* @__PURE__ */ lazy(() => import("./KlondikeByThrees.js").then((mod) => ({ default: mod.KlondikeByThrees as unknown as React.ComponentType<unknown> })));
 export const kbt3Settings = {
   redeals: {
     kind: "enum" as const,

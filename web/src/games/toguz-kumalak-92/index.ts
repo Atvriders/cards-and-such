@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ToguzKumalak92State, ToguzKumalak92Action, ToguzKumalak92Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ToguzKumalak92Game } from "./Game.js";
+const ToguzKumalak92Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ToguzKumalak92Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const toguzKumalak92Plugin: GamePlugin<ToguzKumalak92State, ToguzKumalak92Action, typeof settings> = {

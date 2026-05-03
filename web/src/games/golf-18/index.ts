@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type Golf18State, type Golf18Action } from "./state.js";
-import { Golf18 } from "./Game.js";
-
+const Golf18 = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Golf18 as unknown as React.ComponentType<unknown> })));
 export const golf18Settings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["easy", "medium", "hard"] as const, default: "medium" as const },
 } as const;

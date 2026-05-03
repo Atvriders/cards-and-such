@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RadishRushState, RadishRushAction, RadishRushSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RadishRushGame } from "./Game.js";
+const RadishRushGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RadishRushGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const radishRushPlugin: GamePlugin<RadishRushState, RadishRushAction, typeof settings> = {

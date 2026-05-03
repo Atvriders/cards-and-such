@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TawlbwrddState, TawlbwrddAction, TawlbwrddSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tawlbwrdd } from "./Game.js";
-
+const Tawlbwrdd = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Tawlbwrdd as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const tawlbwrddPlugin: GamePlugin<TawlbwrddState, TawlbwrddAction, typeof settings> = {

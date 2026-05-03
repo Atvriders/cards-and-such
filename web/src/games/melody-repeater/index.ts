@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MelodyRepeaterState, MelodyRepeaterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MelodyRepeater } from "./MelodyRepeater.js";
-
+const MelodyRepeater = /* @__PURE__ */ lazy(() => import("./MelodyRepeater.js").then((mod) => ({ default: mod.MelodyRepeater as unknown as React.ComponentType<unknown> })));
 export const melodyRepeaterSettings = {} as const;
 
 export const melodyRepeaterPlugin: GamePlugin<MelodyRepeaterState, MelodyRepeaterAction, typeof melodyRepeaterSettings> = {

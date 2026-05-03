@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ReversiState, ReversiAction } from "./state.js";
 import { initialState, reducer, isTerminal, legalMoves, flipsFor } from "./state.js";
-import { Reversi } from "./Reversi.js";
-
+const Reversi = /* @__PURE__ */ lazy(() => import("./Reversi.js").then((mod) => ({ default: mod.Reversi as unknown as React.ComponentType<unknown> })));
 export const reversiSettings = {
   botDifficulty: {
     kind: "enum" as const,

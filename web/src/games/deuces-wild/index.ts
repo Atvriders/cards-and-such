@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DeucesWildState, DeucesWildAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DeucesWild } from "./Game.js";
-
+const DeucesWild = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DeucesWild as unknown as React.ComponentType<unknown> })));
 export const deucesWildSettings = {
   handsPerSession: {
     kind: "number" as const,

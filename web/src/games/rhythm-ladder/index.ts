@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { RhythmLadderState, RhythmLadderAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RhythmLadder } from "./RhythmLadder.js";
-
+const RhythmLadder = /* @__PURE__ */ lazy(() => import("./RhythmLadder.js").then((mod) => ({ default: mod.RhythmLadder as unknown as React.ComponentType<unknown> })));
 export const rhythmLadderSettings = {} as const;
 
 export const rhythmLadderPlugin: GamePlugin<RhythmLadderState, RhythmLadderAction, typeof rhythmLadderSettings> = {

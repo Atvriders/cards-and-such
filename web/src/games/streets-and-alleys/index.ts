@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { StreetsAndAlleysState, StreetsAndAlleysAction } from "./state.js";
 import { initialState, reducer, isTerminal, streetsRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { StreetsAndAlleys } from "./StreetsAndAlleys.js";
-
+const StreetsAndAlleys = /* @__PURE__ */ lazy(() => import("./StreetsAndAlleys.js").then((mod) => ({ default: mod.StreetsAndAlleys as unknown as React.ComponentType<unknown> })));
 export const streetsAndAlleysSettings = {} as const;
 
 export const streetsAndAlleysPlugin: GamePlugin<StreetsAndAlleysState, StreetsAndAlleysAction, typeof streetsAndAlleysSettings> = {

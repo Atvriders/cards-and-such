@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HelanGarState, HelanGarAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HelanGar } from "./HelanGar.js";
-
+const HelanGar = /* @__PURE__ */ lazy(() => import("./HelanGar.js").then((mod) => ({ default: mod.HelanGar as unknown as React.ComponentType<unknown> })));
 const helanGarSettings = {
   stages: {
     kind: "enum" as const,

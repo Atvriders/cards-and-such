@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpotHeartsState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpotHearts } from "./SpotHearts.js";
-
+const SpotHearts = /* @__PURE__ */ lazy(() => import("./SpotHearts.js").then((mod) => ({ default: mod.SpotHearts as unknown as React.ComponentType<unknown> })));
 const spotHeartsSettings = {} as const;
 type SpotHeartsSettings = SettingsOf<typeof spotHeartsSettings>;
 type SpotHeartsAction = { type: "play"; cardId: string };

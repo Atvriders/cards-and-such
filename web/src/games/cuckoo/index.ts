@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CuckooState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Cuckoo } from "./Cuckoo.js";
-
+const Cuckoo = /* @__PURE__ */ lazy(() => import("./Cuckoo.js").then((mod) => ({ default: mod.Cuckoo as unknown as React.ComponentType<unknown> })));
 export const cuckooSettings = {} as const;
 
 type CuckooSettingsType = SettingsOf<typeof cuckooSettings>;

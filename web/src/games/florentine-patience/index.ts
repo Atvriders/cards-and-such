@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { FlorentineState, FlorentineAction } from "./state.js";
-import { FlorentineGame } from "./Game.js";
-
+const FlorentineGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FlorentineGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const florentinePlugin: GamePlugin<FlorentineState, FlorentineAction, typeof settings> = {

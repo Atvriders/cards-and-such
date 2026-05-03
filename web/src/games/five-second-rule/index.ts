@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveSecState, FiveSecAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FiveSecondRule } from "./Game.js";
-
+const FiveSecondRule = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FiveSecondRule as unknown as React.ComponentType<unknown> })));
 export const fiveSecondRuleSettings = {
   rounds: {
     kind: "enum" as const,

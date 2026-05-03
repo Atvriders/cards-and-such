@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StalactitesState, StalactitesAction, StalactitesSettings } from "./state.js";
 import { initialState, reducer, isTerminal, ruleset } from "./state.js";
-import { StalactitesGame } from "./Game.js";
-
+const StalactitesGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.StalactitesGame as unknown as React.ComponentType<unknown> })));
 import { canMove } from "../../engines/tableau/moves.js";
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;

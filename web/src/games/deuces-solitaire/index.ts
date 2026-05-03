@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { DeucesSolitaireState, DeucesSolitaireAction } from "./state.js";
 import { initialState, reducer, isTerminal, deucesRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { DeucesSolitaire } from "./DeucesSolitaire.js";
-
+const DeucesSolitaire = /* @__PURE__ */ lazy(() => import("./DeucesSolitaire.js").then((mod) => ({ default: mod.DeucesSolitaire as unknown as React.ComponentType<unknown> })));
 export const deucesSolitaireSettings = {} as const;
 
 export const deucesSolitairePlugin: GamePlugin<DeucesSolitaireState, DeucesSolitaireAction, typeof deucesSolitaireSettings> = {

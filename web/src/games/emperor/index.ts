@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EmperorState, EmperorAction } from "./state.js";
 import { initialState, reducer, isTerminal, emperorRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Emperor } from "./Emperor.js";
-
+const Emperor = /* @__PURE__ */ lazy(() => import("./Emperor.js").then((mod) => ({ default: mod.Emperor as unknown as React.ComponentType<unknown> })));
 export const emperorSettings = {} as const;
 
 type EmperorSettings = SettingsOf<typeof emperorSettings>;

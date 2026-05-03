@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ExponentDrillState, ExponentDrillAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ExponentDrillGame } from "./Game.js";
-
+const ExponentDrillGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ExponentDrillGame as unknown as React.ComponentType<unknown> })));
 export const exponentDrillSettings = {
   difficulty: {
     kind: "enum" as const,

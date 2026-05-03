@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RollAndWriteProState, RollAndWriteProAction, Category } from "./state.js";
 import { initialState, reducer, isTerminal, scoreCategory } from "./state.js";
-import { RollAndWritePro } from "./RollAndWritePro.js";
-
+const RollAndWritePro = /* @__PURE__ */ lazy(() => import("./RollAndWritePro.js").then((mod) => ({ default: mod.RollAndWritePro as unknown as React.ComponentType<unknown> })));
 const RAW_PRO_CATS: Category[] = [
   "ones", "twos", "threes", "fours", "fives", "sixes",
   "threeOfAKind", "fourOfAKind", "fullHouse", "smallStraight", "largeStraight", "yahtzee", "chance",

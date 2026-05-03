@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CanastaState } from "./state.js";
 import { initialState, reducer, isTerminal, isWild, isValidMeld, cardPoints } from "./state.js";
-import { Canasta } from "./Canasta.js";
-
+const Canasta = /* @__PURE__ */ lazy(() => import("./Canasta.js").then((mod) => ({ default: mod.Canasta as unknown as React.ComponentType<unknown> })));
 export const canastaSettings = {
   botCount: {
     kind: "number" as const,

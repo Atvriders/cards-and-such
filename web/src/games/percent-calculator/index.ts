@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PercentCalculatorState, PercentCalculatorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PercentCalculatorGame } from "./Game.js";
-
+const PercentCalculatorGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PercentCalculatorGame as unknown as React.ComponentType<unknown> })));
 export const percentCalculatorSettings = {
   rounds: {
     kind: "enum" as const,

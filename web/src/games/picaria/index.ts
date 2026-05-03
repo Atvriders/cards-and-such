@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PicariaState, PicariaAction, PicariaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Picaria } from "./Game.js";
-
+const Picaria = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Picaria as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const picariaPlugin: GamePlugin<PicariaState, PicariaAction, typeof settings> = {

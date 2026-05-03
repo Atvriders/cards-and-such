@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SimpleSimonState, SimpleSimonAction } from "./state.js";
 import { initialState, reducer, isTerminal, simpleSimonRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { SimpleSimon } from "./SimpleSimon.js";
-
+const SimpleSimon = /* @__PURE__ */ lazy(() => import("./SimpleSimon.js").then((mod) => ({ default: mod.SimpleSimon as unknown as React.ComponentType<unknown> })));
 export const simpleSimonSettings = {} as const;
 
 type SimpleSimonSettings = SettingsOf<typeof simpleSimonSettings>;

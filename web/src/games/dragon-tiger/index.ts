@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DragonTigerState, DragonTigerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DragonTiger } from "./Game.js";
-
+const DragonTiger = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DragonTiger as unknown as React.ComponentType<unknown> })));
 export const dragonTigerSettings = {
   handsPerSession: {
     kind: "number" as const,

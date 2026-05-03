@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrapsLightState, CrapsLightAction, CrapsLightSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrapsLightGame } from "./Game.js";
+const CrapsLightGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CrapsLightGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const crapsLightPlugin: GamePlugin<CrapsLightState, CrapsLightAction, typeof settings> = {

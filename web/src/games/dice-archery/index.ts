@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DiceArcheryState, DiceArcheryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceArchery } from "./DiceArchery.js";
-
+const DiceArchery = /* @__PURE__ */ lazy(() => import("./DiceArchery.js").then((mod) => ({ default: mod.DiceArchery as unknown as React.ComponentType<unknown> })));
 export const diceArcheryPlugin = {
   id: "dice-archery",
   title: "Dice Archery",

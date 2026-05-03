@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TTLState, TTLAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TwoTruthsLie } from "./Game.js";
-
+const TwoTruthsLie = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TwoTruthsLie as unknown as React.ComponentType<unknown> })));
 export const twoTruthsLieSettings = {
   rounds: {
     kind: "enum" as const,

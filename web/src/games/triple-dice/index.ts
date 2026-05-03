@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TripleDiceState, TripleDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TripleDice } from "./TripleDice.js";
-
+const TripleDice = /* @__PURE__ */ lazy(() => import("./TripleDice.js").then((mod) => ({ default: mod.TripleDice as unknown as React.ComponentType<unknown> })));
 export const tripleDiceSettings = {
   rounds: {
     kind: "enum" as const,

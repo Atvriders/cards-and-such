@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TrampolineBounceState, TrampolineBounceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TrampolineBounce } from "./TrampolineBounce.js";
-
+const TrampolineBounce = /* @__PURE__ */ lazy(() => import("./TrampolineBounce.js").then((mod) => ({ default: mod.TrampolineBounce as unknown as React.ComponentType<unknown> })));
 export const trampolineBounceSettings = {
   difficulty: {
     kind: "enum" as const,

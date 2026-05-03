@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TomatoTossState, TomatoTossAction, TomatoTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TomatoTossGame } from "./Game.js";
+const TomatoTossGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TomatoTossGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const tomatoTossPlugin: GamePlugin<TomatoTossState, TomatoTossAction, typeof settings> = {

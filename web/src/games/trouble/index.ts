@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TroubleState, TroubleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Trouble } from "./Game.js";
-
+const Trouble = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Trouble as unknown as React.ComponentType<unknown> })));
 export const troubleSettings = {
   opponents: {
     kind: "enum" as const,

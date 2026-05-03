@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardSharkState, CardSharkAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardShark } from "./CardShark.js";
-
+const CardShark = /* @__PURE__ */ lazy(() => import("./CardShark.js").then((mod) => ({ default: mod.CardShark as unknown as React.ComponentType<unknown> })));
 export const cardSharkSettings = {
   decks: {
     kind: "enum" as const,

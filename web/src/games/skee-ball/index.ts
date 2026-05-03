@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SkeeBallState, SkeeBallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SkeeBall } from "./SkeeBall.js";
-
+const SkeeBall = /* @__PURE__ */ lazy(() => import("./SkeeBall.js").then((mod) => ({ default: mod.SkeeBall as unknown as React.ComponentType<unknown> })));
 export const skeeBallSettings = {
   balls: {
     kind: "enum" as const,

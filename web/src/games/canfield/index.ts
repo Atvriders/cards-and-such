@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CanfieldState, CanfieldAction } from "./state.js";
 import { initialState, reducer, isTerminal, makeRulesetPublic } from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Canfield } from "./Canfield.js";
-
+const Canfield = /* @__PURE__ */ lazy(() => import("./Canfield.js").then((mod) => ({ default: mod.Canfield as unknown as React.ComponentType<unknown> })));
 export const canfieldSettings = {} as const;
 
 type CanfieldSettings = SettingsOf<typeof canfieldSettings>;

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FourCardPokerCasState, FourCardPokerCasAction, FourCardPokerCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FourCardPokerCasGame } from "./Game.js";
+const FourCardPokerCasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FourCardPokerCasGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 const hint = (state: FourCardPokerCasState): HintTarget | null => {

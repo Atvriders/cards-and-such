@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type SevensState, type SevensAction } from "./state.js";
-import { Sevens } from "./Sevens.js";
-
+const Sevens = /* @__PURE__ */ lazy(() => import("./Sevens.js").then((mod) => ({ default: mod.Sevens as unknown as React.ComponentType<unknown> })));
 export const sevensSettings = {
   opponents: { kind: "enum" as const, label: "Opponents", options: ["1", "2", "3"] as const, default: "2" as const },
 } as const;

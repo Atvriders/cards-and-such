@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Lotto90State, Lotto90Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Lotto90 } from "./Lotto90.js";
-
+const Lotto90 = /* @__PURE__ */ lazy(() => import("./Lotto90.js").then((mod) => ({ default: mod.Lotto90 as unknown as React.ComponentType<unknown> })));
 export const lotto90Settings = {
   speed: {
     kind: "enum" as const,

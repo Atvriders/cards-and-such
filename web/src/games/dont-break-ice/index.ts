@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { DontBreakState, DontBreakAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DontBreakIce } from "./Game.js";
-
+const DontBreakIce = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DontBreakIce as unknown as React.ComponentType<unknown> })));
 export const dontBreakIceSettings = {
   dummy: {
     kind: "enum" as const,

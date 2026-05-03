@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { weddleNflState, weddleNflAction, weddleNflSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { weddleNflGame } from "./Game.js";
+const weddleNflGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.weddleNflGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const weddleNflPlugin: GamePlugin<weddleNflState, weddleNflAction, typeof settings> = {

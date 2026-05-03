@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CoralReefState, CoralReefAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CoralReef } from "./CoralReef.js";
-
+const CoralReef = /* @__PURE__ */ lazy(() => import("./CoralReef.js").then((mod) => ({ default: mod.CoralReef as unknown as React.ComponentType<unknown> })));
 export const coralReefSettings = {
   size: {
     kind: "enum" as const,

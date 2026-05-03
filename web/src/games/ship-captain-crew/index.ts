@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShipCaptainCrewState, SCCAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ShipCaptainCrew } from "./ShipCaptainCrew.js";
-
+const ShipCaptainCrew = /* @__PURE__ */ lazy(() => import("./ShipCaptainCrew.js").then((mod) => ({ default: mod.ShipCaptainCrew as unknown as React.ComponentType<unknown> })));
 export const sccSettings = {
   rounds: {
     kind: "enum" as const,

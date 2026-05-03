@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type RgbMixerState, type RgbMixerAction } from "./state.js";
-import { RgbMixer } from "./RgbMixer.js";
-
+const RgbMixer = /* @__PURE__ */ lazy(() => import("./RgbMixer.js").then((mod) => ({ default: mod.RgbMixer as unknown as React.ComponentType<unknown> })));
 export const rgbMixerSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["3", "5", "8"] as const, default: "3" as const },
 } as const;

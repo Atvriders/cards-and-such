@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { EightOffState, EightOffAction } from "./state.js";
 import { initialState, reducer, isTerminal, eightOffRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { EightOff } from "./EightOff.js";
-
+const EightOff = /* @__PURE__ */ lazy(() => import("./EightOff.js").then((mod) => ({ default: mod.EightOff as unknown as React.ComponentType<unknown> })));
 export const eightOffSettings = {} as const;
 
 export const eightOffPlugin: GamePlugin<EightOffState, EightOffAction, typeof eightOffSettings> = {

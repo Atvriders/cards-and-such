@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type PrestigeClickerState, type PrestigeClickerAction } from "./state.js";
-import { PrestigeClicker } from "./PrestigeClicker.js";
-
+const PrestigeClicker = /* @__PURE__ */ lazy(() => import("./PrestigeClicker.js").then((mod) => ({ default: mod.PrestigeClicker as unknown as React.ComponentType<unknown> })));
 export const prestigeClickerSettings = {
   prestigeGoal: { kind: "enum" as const, label: "Points to Prestige", options: ["1000", "5000", "25000"] as const, default: "1000" as const },
 } as const;

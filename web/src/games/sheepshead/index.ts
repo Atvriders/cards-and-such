@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SheepsheadState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Sheepshead } from "./Sheepshead.js";
-
+const Sheepshead = /* @__PURE__ */ lazy(() => import("./Sheepshead.js").then((mod) => ({ default: mod.Sheepshead as unknown as React.ComponentType<unknown> })));
 export const sheepsheadSettings = {
   botDifficulty: {
     kind: "enum" as const,

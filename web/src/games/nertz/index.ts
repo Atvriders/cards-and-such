@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { NertzState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Nertz } from "./Nertz.js";
-
+const Nertz = /* @__PURE__ */ lazy(() => import("./Nertz.js").then((mod) => ({ default: mod.Nertz as unknown as React.ComponentType<unknown> })));
 export const nertzSettings = {
   botSpeed: {
     kind: "enum" as const,

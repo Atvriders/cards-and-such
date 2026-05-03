@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WizardCardDuelState, WizardCardDuelAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WizardCardDuel } from "./WizardCardDuel.js";
-
+const WizardCardDuel = /* @__PURE__ */ lazy(() => import("./WizardCardDuel.js").then((mod) => ({ default: mod.WizardCardDuel as unknown as React.ComponentType<unknown> })));
 export const wizardCardDuelSettings = {
   handSize: {
     kind: "enum" as const,

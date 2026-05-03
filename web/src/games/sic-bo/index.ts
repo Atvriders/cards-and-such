@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SicBoState, SicBoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SicBo } from "./Game.js";
-
+const SicBo = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SicBo as unknown as React.ComponentType<unknown> })));
 export const sicBoSettings = {
   startingBankroll: {
     kind: "number" as const,

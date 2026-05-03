@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RushHourState, RushHourAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RushHour } from "./RushHour.js";
-
+const RushHour = /* @__PURE__ */ lazy(() => import("./RushHour.js").then((mod) => ({ default: mod.RushHour as unknown as React.ComponentType<unknown> })));
 export const rushHourSettings = {
   difficulty: {
     kind: "enum" as const,

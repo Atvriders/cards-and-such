@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LCRState, LCRAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LCRGame } from "./Game.js";
-
+const LCRGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LCRGame as unknown as React.ComponentType<unknown> })));
 export const lcrSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

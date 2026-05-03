@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AtomicState, AtomicAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AtomicChess } from "./AtomicChess.js";
-
+const AtomicChess = /* @__PURE__ */ lazy(() => import("./AtomicChess.js").then((mod) => ({ default: mod.AtomicChess as unknown as React.ComponentType<unknown> })));
 export const atomicChessSettings = {
   opponent: {
     kind: "enum" as const,

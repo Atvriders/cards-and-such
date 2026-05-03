@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GravityMazeState, GravityMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GravityMazeGame } from "./Game.js";
-
+const GravityMazeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GravityMazeGame as unknown as React.ComponentType<unknown> })));
 export const gravityMazeSettings = {
   puzzle: {
     kind: "enum" as const,

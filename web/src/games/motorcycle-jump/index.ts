@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MotoState, MotoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MotorcycleJump } from "./MotorcycleJump.js";
-
+const MotorcycleJump = /* @__PURE__ */ lazy(() => import("./MotorcycleJump.js").then((mod) => ({ default: mod.MotorcycleJump as unknown as React.ComponentType<unknown> })));
 export const motorcycleJumpSettings = {
   ramps: {
     kind: "enum" as const,

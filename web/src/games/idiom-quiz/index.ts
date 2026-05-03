@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IdiomQuizState, IdiomQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { IdiomQuiz } from "./IdiomQuiz.js";
-
+const IdiomQuiz = /* @__PURE__ */ lazy(() => import("./IdiomQuiz.js").then((mod) => ({ default: mod.IdiomQuiz as unknown as React.ComponentType<unknown> })));
 export const idiomQuizSettings = {
   questionCount: {
     kind: "enum" as const,

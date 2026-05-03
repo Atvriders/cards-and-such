@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GoldfishGrabState, GoldfishGrabAction, GoldfishGrabSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GoldfishGrabGame } from "./Game.js";
+const GoldfishGrabGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GoldfishGrabGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const goldfishGrabPlugin: GamePlugin<GoldfishGrabState, GoldfishGrabAction, typeof settings> = {

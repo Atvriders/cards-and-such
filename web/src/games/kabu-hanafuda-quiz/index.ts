@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KabuHanafudaState, KabuHanafudaAction, KabuHanafudaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KabuHanafudaGame } from "./Game.js";
+const KabuHanafudaGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KabuHanafudaGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const kabuHanafudaPlugin: GamePlugin<KabuHanafudaState, KabuHanafudaAction, typeof settings> = {

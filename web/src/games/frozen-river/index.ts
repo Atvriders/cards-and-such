@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FrozenRiverState, FrozenRiverAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FrozenRiver } from "./FrozenRiver.js";
-
+const FrozenRiver = /* @__PURE__ */ lazy(() => import("./FrozenRiver.js").then((mod) => ({ default: mod.FrozenRiver as unknown as React.ComponentType<unknown> })));
 export const frozenRiverSettings = {
   width: {
     kind: "enum" as const,

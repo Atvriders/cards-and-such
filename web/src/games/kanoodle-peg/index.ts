@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { kanoodlePegState, kanoodlePegAction, kanoodlePegSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { kanoodlePegGame } from "./Game.js";
+const kanoodlePegGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.kanoodlePegGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const kanoodlePegPlugin: GamePlugin<kanoodlePegState, kanoodlePegAction, typeof settings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WelcomeToWinterState, WelcomeToWinterAction, WelcomeToWinterSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WelcomeToWinterGame } from "./Game.js";
-
+const WelcomeToWinterGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WelcomeToWinterGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

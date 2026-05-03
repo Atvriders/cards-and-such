@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SoliState, SoliAction } from "./state.js";
 import { initialState, reducer, isTerminal, vegasKlondikeRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { SoliGame } from "./Game.js";
-
+const SoliGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SoliGame as unknown as React.ComponentType<unknown> })));
 export const vegasKlondikePlugin: GamePlugin<SoliState, SoliAction, Record<string, never>> = {
   id: "vegas-klondike",
   title: "Vegas Klondike",

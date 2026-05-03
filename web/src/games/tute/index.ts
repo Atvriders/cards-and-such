@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TuteState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tute } from "./Tute.js";
-
+const Tute = /* @__PURE__ */ lazy(() => import("./Tute.js").then((mod) => ({ default: mod.Tute as unknown as React.ComponentType<unknown> })));
 export const tuteSettings = {} as const;
 type TuteSettings = SettingsOf<typeof tuteSettings>;
 type TuteAction = { type: "play"; cardId: string };

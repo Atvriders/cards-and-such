@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TiltMazeState, TiltMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TiltMaze } from "./TiltMaze.js";
-
+const TiltMaze = /* @__PURE__ */ lazy(() => import("./TiltMaze.js").then((mod) => ({ default: mod.TiltMaze as unknown as React.ComponentType<unknown> })));
 const tiltMazeSettings = {
   difficulty: {
     kind: "enum" as const,

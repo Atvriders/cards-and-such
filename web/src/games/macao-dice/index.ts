@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MacaoDiceState, MacaoDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MacaoDice } from "./MacaoDice.js";
-
+const MacaoDice = /* @__PURE__ */ lazy(() => import("./MacaoDice.js").then((mod) => ({ default: mod.MacaoDice as unknown as React.ComponentType<unknown> })));
 const macaoDiceSettings = {
   startChips: {
     kind: "enum" as const,

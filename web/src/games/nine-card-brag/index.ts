@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NineCardBragState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NineCardBragGame } from "./Game.js";
-
+const NineCardBragGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NineCardBragGame as unknown as React.ComponentType<unknown> })));
 export const nineCardBragSettings = {
   rounds: { kind: "enum" as const, label: "First to", options: ["3", "5", "7"] as const, default: "3" as const },
 } as const;

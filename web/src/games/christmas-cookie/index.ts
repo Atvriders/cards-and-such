@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type ChristmasCookieState, type ChristmasCookieAction } from "./state.js";
-import { ChristmasCookieGame } from "./Game.js";
-
+const ChristmasCookieGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ChristmasCookieGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   pairs: {
     kind: "enum" as const,

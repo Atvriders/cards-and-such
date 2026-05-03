@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DominionDeckState, DominionDeckAction, DominionDeckSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DominionDeckGame } from "./Game.js";
+const DominionDeckGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DominionDeckGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const dominionDeckPlugin: GamePlugin<DominionDeckState, DominionDeckAction, typeof settings> = {

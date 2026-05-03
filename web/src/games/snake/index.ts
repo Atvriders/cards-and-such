@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SnakeState, SnakeAction, Dir } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Snake } from "./Snake.js";
-
+const Snake = /* @__PURE__ */ lazy(() => import("./Snake.js").then((mod) => ({ default: mod.Snake as unknown as React.ComponentType<unknown> })));
 export const snakeSettings = {
   gridSize: {
     kind: "enum" as const,

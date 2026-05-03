@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { IceCreamState, IceCreamAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { IceCreamStand } from "./Game.js";
-
+const IceCreamStand = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.IceCreamStand as unknown as React.ComponentType<unknown> })));
 export const iceCreamStandPlugin = {
   id: "ice-cream-stand",
   title: "Ice Cream Stand",

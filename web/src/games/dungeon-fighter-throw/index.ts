@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DungeonFighterThrowState, DungeonFighterThrowAction, DungeonFighterThrowSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DungeonFighterThrowGame } from "./Game.js";
+const DungeonFighterThrowGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DungeonFighterThrowGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const dungeonFighterThrowPlugin: GamePlugin<DungeonFighterThrowState, DungeonFighterThrowAction, typeof settings> = {

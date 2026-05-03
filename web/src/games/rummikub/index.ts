@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RummikubState, RummikubAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Rummikub } from "./Rummikub.js";
-
+const Rummikub = /* @__PURE__ */ lazy(() => import("./Rummikub.js").then((mod) => ({ default: mod.Rummikub as unknown as React.ComponentType<unknown> })));
 export const rummikubSettings = {
   botCount: {
     kind: "enum" as const,

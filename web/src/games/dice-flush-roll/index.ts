@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceFlushRollState, DiceFlushRollAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceFlushRoll } from "./DiceFlushRoll.js";
+const DiceFlushRoll = /* @__PURE__ */ lazy(() => import("./DiceFlushRoll.js").then((mod) => ({ default: mod.DiceFlushRoll as unknown as React.ComponentType<unknown> })));
 export const diceFlushRollSettings = { rounds: { kind: "enum" as const, label: "Rounds", options: ["5","10","15"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof diceFlushRollSettings>;
 export const diceFlushRollPlugin: GamePlugin<DiceFlushRollState, DiceFlushRollAction, typeof diceFlushRollSettings> = {

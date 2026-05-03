@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CowboyDiceState, CowboyDiceAction, CowboyCategory } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_COWBOY_CATEGORIES, computeCowboyScore } from "./state.js";
-import { CowboyDice } from "./CowboyDice.js";
-
+const CowboyDice = /* @__PURE__ */ lazy(() => import("./CowboyDice.js").then((mod) => ({ default: mod.CowboyDice as unknown as React.ComponentType<unknown> })));
 export const cowboyDiceSettings = {
   bonusThreshold: {
     kind: "enum" as const,

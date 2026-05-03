@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Countdown321State, Countdown321Action, Countdown321Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Countdown321Game } from "./Game.js";
+const Countdown321Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Countdown321Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const countdown321Plugin: GamePlugin<Countdown321State, Countdown321Action, typeof settings> = {

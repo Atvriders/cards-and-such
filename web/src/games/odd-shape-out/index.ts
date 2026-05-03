@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OSOState, OSOAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OddShapeOut } from "./Game.js";
-
+const OddShapeOut = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OddShapeOut as unknown as React.ComponentType<unknown> })));
 export const oddShapeOutSettings = {
   difficulty: {
     kind: "enum" as const,

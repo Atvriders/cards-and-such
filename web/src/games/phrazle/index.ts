@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PhrazleState, PhrazleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Phrazle } from "./Game.js";
-
+const Phrazle = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Phrazle as unknown as React.ComponentType<unknown> })));
 export const phrazleSettings = {} as const;
 
 export const phrazlePlugin: GamePlugin<PhrazleState, PhrazleAction, typeof phrazleSettings> = {

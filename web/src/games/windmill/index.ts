@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WindmillState, WindmillAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Windmill } from "./Windmill.js";
-
+const Windmill = /* @__PURE__ */ lazy(() => import("./Windmill.js").then((mod) => ({ default: mod.Windmill as unknown as React.ComponentType<unknown> })));
 export const windmillSettings = {} as const;
 
 type WindmillSettings = SettingsOf<typeof windmillSettings>;

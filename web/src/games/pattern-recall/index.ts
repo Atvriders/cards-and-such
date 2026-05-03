@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { PatternRecallState, PatternRecallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PatternRecall } from "./Game.js";
-
+const PatternRecall = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PatternRecall as unknown as React.ComponentType<unknown> })));
 export const patternRecallSettings = {
   difficulty: {
     kind: "enum" as const,

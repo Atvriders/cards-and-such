@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FroggerState, FroggerAction, Obstacle } from "./state.js";
 import { initialState, reducer, isTerminal, COLS, HOME_ROW } from "./state.js";
-import { Frogger } from "./Frogger.js";
-
+const Frogger = /* @__PURE__ */ lazy(() => import("./Frogger.js").then((mod) => ({ default: mod.Frogger as unknown as React.ComponentType<unknown> })));
 export const froggerSettings = {
   lives: {
     kind: "enum" as const,

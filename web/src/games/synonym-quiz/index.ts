@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SynonymQuizState, SynonymQuizAction, SynonymQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SynonymQuizGame } from "./Game.js";
+const SynonymQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SynonymQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind: "enum" as const, label: "Questions", options: ["8", "12"] as const, default: "8" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const synonymQuizPlugin: GamePlugin<SynonymQuizState, SynonymQuizAction, typeof settings> = {

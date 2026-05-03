@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type KeyboardWarriorState, type KeyboardWarriorAction } from "./state.js";
-import { KeyboardWarrior } from "./KeyboardWarrior.js";
-
+const KeyboardWarrior = /* @__PURE__ */ lazy(() => import("./KeyboardWarrior.js").then((mod) => ({ default: mod.KeyboardWarrior as unknown as React.ComponentType<unknown> })));
 export const keyboardWarriorSettings = {
   length: { kind: "enum" as const, label: "Sequence Length", options: ["5", "10", "20"] as const, default: "5" as const },
 } as const;

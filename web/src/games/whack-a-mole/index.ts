@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WhackAMoleState, WhackAMoleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WhackAMole } from "./WhackAMole.js";
-
+const WhackAMole = /* @__PURE__ */ lazy(() => import("./WhackAMole.js").then((mod) => ({ default: mod.WhackAMole as unknown as React.ComponentType<unknown> })));
 export const whackAMoleSettings = {
   duration: {
     kind: "enum" as const,

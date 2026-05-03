@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TavliPortState, TavliPortAction, TavliPortSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TavliPortGame } from "./Game.js";
-
+const TavliPortGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TavliPortGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

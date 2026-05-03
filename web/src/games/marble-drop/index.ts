@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MarbleDropState, MarbleDropAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MarbleDrop } from "./MarbleDrop.js";
-
+const MarbleDrop = /* @__PURE__ */ lazy(() => import("./MarbleDrop.js").then((mod) => ({ default: mod.MarbleDrop as unknown as React.ComponentType<unknown> })));
 export const marbleDropSettings = {
   marbles: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NurikabeState, NurikabeAction, NurikabeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Nurikabe } from "./Game.js";
-
+const Nurikabe = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Nurikabe as unknown as React.ComponentType<unknown> })));
 export const nurikabeSettings = {
   difficulty: {
     kind: "enum" as const,

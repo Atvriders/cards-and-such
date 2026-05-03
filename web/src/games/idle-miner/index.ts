@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type IdleMinerState, type IdleMinerAction } from "./state.js";
-import { IdleMiner } from "./IdleMiner.js";
-
+const IdleMiner = /* @__PURE__ */ lazy(() => import("./IdleMiner.js").then((mod) => ({ default: mod.IdleMiner as unknown as React.ComponentType<unknown> })));
 export const idleMinerSettings = {
   depth: { kind: "enum" as const, label: "Mine Depth", options: ["10", "25", "50"] as const, default: "10" as const },
 } as const;

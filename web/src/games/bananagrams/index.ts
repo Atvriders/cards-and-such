@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BananagramsState, BananagramsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Bananagrams } from "./Bananagrams.js";
-
+const Bananagrams = /* @__PURE__ */ lazy(() => import("./Bananagrams.js").then((mod) => ({ default: mod.Bananagrams as unknown as React.ComponentType<unknown> })));
 export const bananagramsSettings = {
   tileCount: {
     kind: "enum" as const,

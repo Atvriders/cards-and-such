@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceGolfState, DiceGolfAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceGolf } from "./DiceGolf.js";
-
+const DiceGolf = /* @__PURE__ */ lazy(() => import("./DiceGolf.js").then((mod) => ({ default: mod.DiceGolf as unknown as React.ComponentType<unknown> })));
 export const diceGolfSettings = {
   holes: {
     kind: "enum" as const,

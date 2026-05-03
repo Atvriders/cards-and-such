@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { Magic8BallState, Magic8BallAction, Magic8BallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Magic8Ball } from "./Game.js";
-
+const Magic8Ball = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Magic8Ball as unknown as React.ComponentType<unknown> })));
 const settings = {
   shakeCount: {
     kind: "enum" as const,

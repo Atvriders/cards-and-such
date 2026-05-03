@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SlotsState, SlotsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Slots } from "./Slots.js";
-
+const Slots = /* @__PURE__ */ lazy(() => import("./Slots.js").then((mod) => ({ default: mod.Slots as unknown as React.ComponentType<unknown> })));
 export const slotsSettings = {
   betSize: {
     kind: "enum" as const,

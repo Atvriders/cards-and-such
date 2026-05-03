@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BSState, BSAction, BSSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BattleshipSolitaire } from "./BattleshipSolitaire.js";
-
+const BattleshipSolitaire = /* @__PURE__ */ lazy(() => import("./BattleshipSolitaire.js").then((mod) => ({ default: mod.BattleshipSolitaire as unknown as React.ComponentType<unknown> })));
 export const bsSettings = {
   difficulty: {
     kind: "enum" as const,

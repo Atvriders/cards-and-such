@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FourSeasonsState, FourSeasonsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FourSeasons } from "./FourSeasons.js";
-
+const FourSeasons = /* @__PURE__ */ lazy(() => import("./FourSeasons.js").then((mod) => ({ default: mod.FourSeasons as unknown as React.ComponentType<unknown> })));
 export const fourSeasonsSettings = {} as const;
 
 export const fourSeasonsPlugin: GamePlugin<FourSeasonsState, FourSeasonsAction, typeof fourSeasonsSettings> = {

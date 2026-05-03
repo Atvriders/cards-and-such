@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ValeriaCardKingdomsState, ValeriaCardKingdomsAction, ValeriaCardKingdomsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ValeriaCardKingdomsGame } from "./Game.js";
+const ValeriaCardKingdomsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ValeriaCardKingdomsGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const valeriaCardKingdomsPlugin: GamePlugin<ValeriaCardKingdomsState, ValeriaCardKingdomsAction, typeof settings> = {

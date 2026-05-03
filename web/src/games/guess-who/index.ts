@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GuessWhoState, GuessWhoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GuessWhoGame } from "./Game.js";
-
+const GuessWhoGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GuessWhoGame as unknown as React.ComponentType<unknown> })));
 export const guessWhoSettings = {
   dummy: {
     kind: "enum" as const,

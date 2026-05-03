@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShutTheBoxState, ShutTheBoxAction } from "./state.js";
 import { initialState, reducer, isTerminal, validCombinations } from "./state.js";
-import { ShutTheBox } from "./ShutTheBox.js";
-
+const ShutTheBox = /* @__PURE__ */ lazy(() => import("./ShutTheBox.js").then((mod) => ({ default: mod.ShutTheBox as unknown as React.ComponentType<unknown> })));
 export const shutTheBoxSettings = {
   targetScore: {
     kind: "enum" as const,

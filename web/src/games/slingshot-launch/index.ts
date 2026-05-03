@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SlingshotLaunchState, SlingshotLaunchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SlingshotLaunch } from "./SlingshotLaunch.js";
-
+const SlingshotLaunch = /* @__PURE__ */ lazy(() => import("./SlingshotLaunch.js").then((mod) => ({ default: mod.SlingshotLaunch as unknown as React.ComponentType<unknown> })));
 export const slingshotLaunchSettings = {} as const;
 
 type SLSettingsType = SettingsOf<typeof slingshotLaunchSettings>;

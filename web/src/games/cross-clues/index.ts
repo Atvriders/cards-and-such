@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrossCluesState, CrossCluesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrossClues } from "./CrossClues.js";
-
+const CrossClues = /* @__PURE__ */ lazy(() => import("./CrossClues.js").then((mod) => ({ default: mod.CrossClues as unknown as React.ComponentType<unknown> })));
 export const crossCluesSettings = {
   difficulty: {
     kind: "enum" as const,

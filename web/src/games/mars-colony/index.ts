@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type MarsColonyState, type MarsColonyAction } from "./state.js";
-import { MarsColonyGame } from "./Game.js";
-
+const MarsColonyGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MarsColonyGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: {
     kind: "enum" as const,

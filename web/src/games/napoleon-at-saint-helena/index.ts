@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { NapoleonState, NapoleonAction } from "./state.js";
 import { initialState, reducer, isTerminal, napoleonRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { NapoleonAtSaintHelena } from "./NapoleonAtSaintHelena.js";
-
+const NapoleonAtSaintHelena = /* @__PURE__ */ lazy(() => import("./NapoleonAtSaintHelena.js").then((mod) => ({ default: mod.NapoleonAtSaintHelena as unknown as React.ComponentType<unknown> })));
 export const napoleonAtSaintHelenaSettings = {} as const;
 
 export const napoleonAtSaintHelenaPlugin: GamePlugin<NapoleonState, NapoleonAction, typeof napoleonAtSaintHelenaSettings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { AzulSintraState, AzulSintraAction, AzulSintraSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { tileHintSelector } from "../_shared/tile-engine.js";
-import { AzulSintraGame } from "./Game.js";
-
+const AzulSintraGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AzulSintraGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

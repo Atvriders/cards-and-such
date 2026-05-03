@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HeyawakeState, HeyawakeAction, HeyawakeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Heyawake } from "./Heyawake.js";
-
+const Heyawake = /* @__PURE__ */ lazy(() => import("./Heyawake.js").then((mod) => ({ default: mod.Heyawake as unknown as React.ComponentType<unknown> })));
 export const heyawakeSettings = {
   difficulty: {
     kind: "enum" as const,

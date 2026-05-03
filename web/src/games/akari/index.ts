@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AkariState, AkariAction, AkariSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Akari } from "./Akari.js";
-
+const Akari = /* @__PURE__ */ lazy(() => import("./Akari.js").then((mod) => ({ default: mod.Akari as unknown as React.ComponentType<unknown> })));
 export const akariSettings = {
   difficulty: {
     kind: "enum" as const,

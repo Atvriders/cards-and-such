@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AcronymQuizState, AcronymQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AcronymQuiz } from "./AcronymQuiz.js";
-
+const AcronymQuiz = /* @__PURE__ */ lazy(() => import("./AcronymQuiz.js").then((mod) => ({ default: mod.AcronymQuiz as unknown as React.ComponentType<unknown> })));
 export const acronymQuizSettings = {
   questionCount: {
     kind: "enum" as const,

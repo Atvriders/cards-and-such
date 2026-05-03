@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PerudoState, PerudoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Perudo } from "./Perudo.js";
-
+const Perudo = /* @__PURE__ */ lazy(() => import("./Perudo.js").then((mod) => ({ default: mod.Perudo as unknown as React.ComponentType<unknown> })));
 export const perudoSettings = {
   opponents: {
     kind: "enum" as const,

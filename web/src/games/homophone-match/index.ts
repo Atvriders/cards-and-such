@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HomophoneMatchState, HomophoneMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HomophoneMatch } from "./HomophoneMatch.js";
-
+const HomophoneMatch = /* @__PURE__ */ lazy(() => import("./HomophoneMatch.js").then((mod) => ({ default: mod.HomophoneMatch as unknown as React.ComponentType<unknown> })));
 export const homophoneMatchSettings = {
   pairCount: {
     kind: "enum" as const,

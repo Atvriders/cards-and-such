@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KakurasuState, KakurasuAction, KakurasuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Kakurasu } from "./Kakurasu.js";
-
+const Kakurasu = /* @__PURE__ */ lazy(() => import("./Kakurasu.js").then((mod) => ({ default: mod.Kakurasu as unknown as React.ComponentType<unknown> })));
 export const kakurasuSettings = {
   difficulty: {
     kind: "enum" as const,

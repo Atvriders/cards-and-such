@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { KakuroState, KakuroAction, KakuroSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Kakuro } from "./Game.js";
-
+const Kakuro = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Kakuro as unknown as React.ComponentType<unknown> })));
 export const kakuroSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GomokuTacticState, GomokuTacticAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GomokuTactic } from "./GomokuTactic.js";
-
+const GomokuTactic = /* @__PURE__ */ lazy(() => import("./GomokuTactic.js").then((mod) => ({ default: mod.GomokuTactic as unknown as React.ComponentType<unknown> })));
 export const gomokuTacticPlugin = {
   id: "gomoku-tactic",
   title: "Gomoku Tactic",

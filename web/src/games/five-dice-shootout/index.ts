@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveDiceState, FiveDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FiveDiceShootout } from "./FiveDiceShootout.js";
-
+const FiveDiceShootout = /* @__PURE__ */ lazy(() => import("./FiveDiceShootout.js").then((mod) => ({ default: mod.FiveDiceShootout as unknown as React.ComponentType<unknown> })));
 export const fiveDiceSettings = {
   bestOf: {
     kind: "enum" as const,

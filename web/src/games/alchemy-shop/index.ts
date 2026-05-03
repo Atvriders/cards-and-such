@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { AlchemyShopState, AlchemyShopAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AlchemyShop } from "./Game.js";
-
+const AlchemyShop = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AlchemyShop as unknown as React.ComponentType<unknown> })));
 export const alchemyShopPlugin = {
   id: "alchemy-shop",
   title: "Alchemy Shop",

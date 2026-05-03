@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GoStopState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GoStop } from "./GoStop.js";
-
+const GoStop = /* @__PURE__ */ lazy(() => import("./GoStop.js").then((mod) => ({ default: mod.GoStop as unknown as React.ComponentType<unknown> })));
 const goStopSettings = {} as const;
 type GoStopSettings = SettingsOf<typeof goStopSettings>;
 type GoStopAction = { type: "play"; cardId: string };

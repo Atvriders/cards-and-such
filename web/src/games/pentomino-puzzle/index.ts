@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PentominoPuzzleState, PentominoPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PentominoPuzzle } from "./PentominoPuzzle.js";
-
+const PentominoPuzzle = /* @__PURE__ */ lazy(() => import("./PentominoPuzzle.js").then((mod) => ({ default: mod.PentominoPuzzle as unknown as React.ComponentType<unknown> })));
 const pentominoPuzzleSettings = {
   difficulty: {
     kind: "enum" as const,

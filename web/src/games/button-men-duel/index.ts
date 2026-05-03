@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ButtonMenDuelState, ButtonMenDuelAction, ButtonMenDuelSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ButtonMenDuelGame } from "./Game.js";
+const ButtonMenDuelGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ButtonMenDuelGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const buttonMenDuelPlugin: GamePlugin<ButtonMenDuelState, ButtonMenDuelAction, typeof settings> = {

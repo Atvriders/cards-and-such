@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CastleState, CastleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CastleDefender } from "./CastleDefender.js";
-
+const CastleDefender = /* @__PURE__ */ lazy(() => import("./CastleDefender.js").then((mod) => ({ default: mod.CastleDefender as unknown as React.ComponentType<unknown> })));
 export const castleDefenderSettings = {
   waves: {
     kind: "enum" as const,

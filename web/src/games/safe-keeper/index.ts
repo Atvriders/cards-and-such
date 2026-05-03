@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SafeKeeperState, SafeKeeperAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SafeKeeper } from "./SafeKeeper.js";
-
+const SafeKeeper = /* @__PURE__ */ lazy(() => import("./SafeKeeper.js").then((mod) => ({ default: mod.SafeKeeper as unknown as React.ComponentType<unknown> })));
 export const safeKeeperSettings = {
   marksToLose: {
     kind: "enum" as const,

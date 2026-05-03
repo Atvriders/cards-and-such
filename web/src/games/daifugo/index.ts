@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DaifugoState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DaifugoGame } from "./Game.js";
-
+const DaifugoGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DaifugoGame as unknown as React.ComponentType<unknown> })));
 export const daifugoSettings = {
   dummy: { kind: "enum" as const, label: "Mode", options: ["off"] as const, default: "off" as const },
 } as const;

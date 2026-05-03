@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PrimeFactorState, PrimeFactorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PrimeFactorGame } from "./Game.js";
-
+const PrimeFactorGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PrimeFactorGame as unknown as React.ComponentType<unknown> })));
 export const primeFactorSettings = {
   difficulty: {
     kind: "enum" as const,

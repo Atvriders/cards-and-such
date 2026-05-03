@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OnomatopoeiaQuizState, OnomatopoeiaQuizAction, OnomatopoeiaQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OnomatopoeiaQuizGame } from "./Game.js";
+const OnomatopoeiaQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OnomatopoeiaQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind: "enum" as const, label: "Questions", options: ["8", "12"] as const, default: "8" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const onomatopoeiaQuizPlugin: GamePlugin<OnomatopoeiaQuizState, OnomatopoeiaQuizAction, typeof settings> = {

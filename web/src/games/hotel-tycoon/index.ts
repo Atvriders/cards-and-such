@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { HotelState, HotelAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HotelTycoon } from "./Game.js";
-
+const HotelTycoon = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HotelTycoon as unknown as React.ComponentType<unknown> })));
 export const hotelTycoonPlugin = {
   id: "hotel-tycoon",
   title: "Hotel Tycoon",

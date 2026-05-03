@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CandySodaMiniState, CandySodaMiniAction, CandySodaMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CandySodaMiniGame } from "./Game.js";
+const CandySodaMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CandySodaMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const candySodaMiniPlugin: GamePlugin<CandySodaMiniState, CandySodaMiniAction, typeof settings> = {

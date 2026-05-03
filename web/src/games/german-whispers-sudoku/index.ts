@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { GermanWhispersSudokuState, GermanWhispersSudokuAction, GermanWhispersSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GermanWhispersSudokuGame } from "./Game.js";
+const GermanWhispersSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GermanWhispersSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const germanWhispersSudokuPlugin: GamePlugin<GermanWhispersSudokuState, GermanWhispersSudokuAction, typeof settings> = {
   id: "german-whispers-sudoku",

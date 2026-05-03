@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { WestcliffEasyState, WestcliffEasyAction } from "./state.js";
 import { initialState, reducer, isTerminal, westcliffEasyRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { WestcliffEasy } from "./Game.js";
-
+const WestcliffEasy = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WestcliffEasy as unknown as React.ComponentType<unknown> })));
 export const westcliffEasyPlugin: GamePlugin<WestcliffEasyState, WestcliffEasyAction, Record<string, never>> = {
   id: "westcliff-easy",
   title: "Westcliff Easy",

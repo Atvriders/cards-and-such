@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { WallBounceState, WallBounceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WallBounce } from "./WallBounce.js";
-
+const WallBounce = /* @__PURE__ */ lazy(() => import("./WallBounce.js").then((mod) => ({ default: mod.WallBounce as unknown as React.ComponentType<unknown> })));
 export const wallBouncePlugin = {
   id: "wall-bounce",
   title: "Wall Bounce",

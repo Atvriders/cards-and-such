@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MonsterSlayerState, MonsterSlayerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MonsterSlayer } from "./Game.js";
-
+const MonsterSlayer = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MonsterSlayer as unknown as React.ComponentType<unknown> })));
 export const monsterSlayerPlugin = {
   id: "monster-slayer",
   title: "Monster Slayer",

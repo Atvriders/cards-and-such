@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CardFlipPuzzleState, CardFlipPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardFlipPuzzle } from "./CardFlipPuzzle.js";
-
+const CardFlipPuzzle = /* @__PURE__ */ lazy(() => import("./CardFlipPuzzle.js").then((mod) => ({ default: mod.CardFlipPuzzle as unknown as React.ComponentType<unknown> })));
 export const cardFlipPuzzlePlugin = {
   id: "card-flip-puzzle",
   title: "Card Flip Puzzle",

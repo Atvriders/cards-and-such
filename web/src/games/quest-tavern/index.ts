@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { QuestTavernState, QuestTavernAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { QuestTavern } from "./Game.js";
-
+const QuestTavern = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.QuestTavern as unknown as React.ComponentType<unknown> })));
 export const questTavernPlugin = {
   id: "quest-tavern",
   title: "Quest Tavern",

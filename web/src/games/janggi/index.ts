@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { JanggiState, JanggiAction, JanggiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Janggi } from "./Game.js";
-
+const Janggi = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Janggi as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const janggiPlugin: GamePlugin<JanggiState, JanggiAction, typeof settings> = {

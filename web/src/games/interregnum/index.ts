@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { InterregnumState, InterregnumAction, InterregnumSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Interregnum } from "./Interregnum.js";
-
+const Interregnum = /* @__PURE__ */ lazy(() => import("./Interregnum.js").then((mod) => ({ default: mod.Interregnum as unknown as React.ComponentType<unknown> })));
 export const interregnumSettings = {} as const;
 
 export const interregnumPlugin: GamePlugin<InterregnumState, InterregnumAction, typeof interregnumSettings> = {

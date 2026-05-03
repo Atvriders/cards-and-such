@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LastMonarchState, LastMonarchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LastMonarch } from "./LastMonarch.js";
-
+const LastMonarch = /* @__PURE__ */ lazy(() => import("./LastMonarch.js").then((mod) => ({ default: mod.LastMonarch as unknown as React.ComponentType<unknown> })));
 export const lastMonarchPlugin: GamePlugin<LastMonarchState, LastMonarchAction, Record<string, never>> = {
   id: "last-monarch",
   title: "Last Monarch",

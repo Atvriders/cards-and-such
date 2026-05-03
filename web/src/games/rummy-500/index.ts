@@ -1,3 +1,5 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Rummy500State } from "./state.js";
@@ -5,8 +7,7 @@ import {
   initialState, reducer, isTerminal,
   isValidMeld, canLayOffCard, cardDeadwoodValue,
 } from "./state.js";
-import { Rummy500 } from "./Rummy500.js";
-
+const Rummy500 = /* @__PURE__ */ lazy(() => import("./Rummy500.js").then((mod) => ({ default: mod.Rummy500 as unknown as React.ComponentType<unknown> })));
 export const rummy500Settings = {
   numBots: {
     kind: "number" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DungeonDelveState, DungeonDelveAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DungeonDelve } from "./Game.js";
-
+const DungeonDelve = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DungeonDelve as unknown as React.ComponentType<unknown> })));
 export const dungeonDelvePlugin = {
   id: "dungeon-delve",
   title: "Dungeon Delve",

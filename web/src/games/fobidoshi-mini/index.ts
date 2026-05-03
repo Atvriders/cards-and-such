@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FobidoshiMiniState, FobidoshiMiniAction, FobidoshiMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FobidoshiMiniGame } from "./Game.js";
+const FobidoshiMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FobidoshiMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const fobidoshiMiniPlugin: GamePlugin<FobidoshiMiniState, FobidoshiMiniAction, typeof settings> = {
   id: "fobidoshi-mini",

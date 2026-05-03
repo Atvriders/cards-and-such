@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PineconePopState, PineconePopAction, PineconePopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PineconePopGame } from "./Game.js";
+const PineconePopGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PineconePopGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const pineconePopPlugin: GamePlugin<PineconePopState, PineconePopAction, typeof settings> = {

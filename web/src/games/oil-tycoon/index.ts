@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { OilState, OilAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OilTycoon } from "./Game.js";
-
+const OilTycoon = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OilTycoon as unknown as React.ComponentType<unknown> })));
 export const oilTycoonPlugin = {
   id: "oil-tycoon",
   title: "Oil Tycoon",

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CareersState, CareersAction, CareersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CareersMiniGame } from "./Game.js";
-
+const CareersMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CareersMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   path: { kind: "enum" as const, label: "Career Path", options: ["business", "sports", "hollywood"] as const, default: "business" as const },
 } as const;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CantStopState, CantStopAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CantStop } from "./CantStop.js";
-
+const CantStop = /* @__PURE__ */ lazy(() => import("./CantStop.js").then((mod) => ({ default: mod.CantStop as unknown as React.ComponentType<unknown> })));
 export const cantStopSettings = {
   opponents: {
     kind: "enum" as const,

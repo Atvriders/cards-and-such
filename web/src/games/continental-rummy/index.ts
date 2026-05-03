@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ContinentalRummyState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ContinentalRummy } from "./ContinentalRummy.js";
-
+const ContinentalRummy = /* @__PURE__ */ lazy(() => import("./ContinentalRummy.js").then((mod) => ({ default: mod.ContinentalRummy as unknown as React.ComponentType<unknown> })));
 export const continentalRummySettings = {
   numBots: {
     kind: "number" as const,

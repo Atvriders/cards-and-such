@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ReactionTimeState, ReactionTimeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ReactionTime } from "./ReactionTime.js";
-
+const ReactionTime = /* @__PURE__ */ lazy(() => import("./ReactionTime.js").then((mod) => ({ default: mod.ReactionTime as unknown as React.ComponentType<unknown> })));
 export const reactionTimeSettings = {
   rounds: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LittleSpiderState, LittleSpiderAction, LittleSpiderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LittleSpider } from "./LittleSpider.js";
-
+const LittleSpider = /* @__PURE__ */ lazy(() => import("./LittleSpider.js").then((mod) => ({ default: mod.LittleSpider as unknown as React.ComponentType<unknown> })));
 export const littleSpiderSettings = {} as const;
 
 export const littleSpiderPlugin: GamePlugin<LittleSpiderState, LittleSpiderAction, typeof littleSpiderSettings> = {

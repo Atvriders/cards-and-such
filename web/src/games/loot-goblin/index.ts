@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LootGoblinState, LootGoblinAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LootGoblin } from "./Game.js";
-
+const LootGoblin = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LootGoblin as unknown as React.ComponentType<unknown> })));
 export const lootGoblinPlugin = {
   id: "loot-goblin",
   title: "Loot Goblin",

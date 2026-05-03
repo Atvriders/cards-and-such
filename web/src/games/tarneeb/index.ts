@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TarneebState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Game } from "./Game.js";
+const Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Game as unknown as React.ComponentType<unknown> })));
 import type { Suit } from "../../engines/deck/index.js";
 
 export const tarneebSettings = {} as const;

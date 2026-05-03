@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveCrownsState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FiveCrowns } from "./FiveCrowns.js";
-
+const FiveCrowns = /* @__PURE__ */ lazy(() => import("./FiveCrowns.js").then((mod) => ({ default: mod.FiveCrowns as unknown as React.ComponentType<unknown> })));
 export const fiveCrownsSettings = {
   botCount: {
     kind: "number" as const,

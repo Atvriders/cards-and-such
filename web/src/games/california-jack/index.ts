@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CaliforniaJackState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CaliforniaJackGame } from "./Game.js";
-
+const CaliforniaJackGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CaliforniaJackGame as unknown as React.ComponentType<unknown> })));
 export const californiaJackSettings = {
   target: { kind: "enum" as const, label: "Points to win", options: ["5", "7", "10"] as const, default: "7" as const },
 } as const;

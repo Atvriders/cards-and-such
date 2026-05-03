@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HordeState, HordeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HordeGame } from "./Game.js";
-
+const HordeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HordeGame as unknown as React.ComponentType<unknown> })));
 export const hordeSettings = {
   opponent: {
     kind: "enum" as const,

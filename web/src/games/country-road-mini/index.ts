@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CountryRoadMiniState, CountryRoadMiniAction, CountryRoadMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CountryRoadMiniGame } from "./Game.js";
+const CountryRoadMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CountryRoadMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const countryRoadMiniPlugin: GamePlugin<CountryRoadMiniState, CountryRoadMiniAction, typeof settings> = {
   id: "country-road-mini",

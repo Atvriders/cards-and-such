@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TriPeaksState, TriPeaksAction } from "./state.js";
 import { initialState, reducer, isTerminal, triPeaksSettings, isUncovered } from "./state.js";
-import { TriPeaks } from "./TriPeaks.js";
-
+const TriPeaks = /* @__PURE__ */ lazy(() => import("./TriPeaks.js").then((mod) => ({ default: mod.TriPeaks as unknown as React.ComponentType<unknown> })));
 type TriPeaksSettings = SettingsOf<typeof triPeaksSettings>;
 
 export const triPeaksPlugin: GamePlugin<TriPeaksState, TriPeaksAction, typeof triPeaksSettings> = {

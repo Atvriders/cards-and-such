@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPickBetState, CardPickBetAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardPickBet } from "./CardPickBet.js";
-
+const CardPickBet = /* @__PURE__ */ lazy(() => import("./CardPickBet.js").then((mod) => ({ default: mod.CardPickBet as unknown as React.ComponentType<unknown> })));
 export const cardPickBetSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["5", "10", "15"] as const, default: "10" as const },
 } as const;

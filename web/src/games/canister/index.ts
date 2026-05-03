@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CanisterState, CanisterAction } from "./state.js";
 import { initialState, reducer, isTerminal, canisterRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Canister } from "./Canister.js";
-
+const Canister = /* @__PURE__ */ lazy(() => import("./Canister.js").then((mod) => ({ default: mod.Canister as unknown as React.ComponentType<unknown> })));
 export const canisterSettings = {} as const;
 
 type CanisterSettings = SettingsOf<typeof canisterSettings>;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MexicoState, MexicoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MexicoDice } from "./MexicoDice.js";
-
+const MexicoDice = /* @__PURE__ */ lazy(() => import("./MexicoDice.js").then((mod) => ({ default: mod.MexicoDice as unknown as React.ComponentType<unknown> })));
 function mexicoRank(d1: number, d2: number): number {
   if (d1 === 0) return 0;
   const hi = Math.max(d1, d2);

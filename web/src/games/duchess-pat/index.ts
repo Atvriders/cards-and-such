@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DuchessPatState, DuchessPatAction, DuchessPatSettings } from "./state.js";
 import { initialState, reducer, isTerminal, ruleset } from "./state.js";
-import { DuchessPatGame } from "./Game.js";
-
+const DuchessPatGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DuchessPatGame as unknown as React.ComponentType<unknown> })));
 import { canMove } from "../../engines/tableau/moves.js";
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;

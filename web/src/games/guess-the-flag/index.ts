@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GuessFlagState, GuessFlagAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GuessTheFlag } from "./GuessTheFlag.js";
-
+const GuessTheFlag = /* @__PURE__ */ lazy(() => import("./GuessTheFlag.js").then((mod) => ({ default: mod.GuessTheFlag as unknown as React.ComponentType<unknown> })));
 export const guessFlagSettings = {
   rounds: {
     kind: "enum" as const,

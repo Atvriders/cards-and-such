@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ZooState, ZooAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ZooKeeper } from "./Game.js";
-
+const ZooKeeper = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ZooKeeper as unknown as React.ComponentType<unknown> })));
 export const zooKeeperPlugin = {
   id: "zoo-keeper",
   title: "Zoo Keeper",

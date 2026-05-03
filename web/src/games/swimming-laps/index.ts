@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SwimState, SwimAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SwimmingLaps } from "./Game.js";
-
+const SwimmingLaps = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SwimmingLaps as unknown as React.ComponentType<unknown> })));
 export const swimmingLapsPlugin = {
   id: "swimming-laps",
   title: "Swimming Laps",

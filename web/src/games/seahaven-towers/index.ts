@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SeahavenTowersState, SeahavenTowersAction } from "./state.js";
 import { initialState, reducer, isTerminal, seahavenTowersRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { SeahavenTowersGame } from "./Game.js";
-
+const SeahavenTowersGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SeahavenTowersGame as unknown as React.ComponentType<unknown> })));
 export const seahavenTowersPlugin: GamePlugin<SeahavenTowersState, SeahavenTowersAction, Record<string, never>> = {
   id: "seahaven-towers",
   title: "Seahaven Towers",

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShuffleboardTableState, ShuffleboardTableAction, ShuffleboardTableSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ShuffleboardTableGame } from "./Game.js";
-
+const ShuffleboardTableGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ShuffleboardTableGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 

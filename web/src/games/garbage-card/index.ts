@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type GarbageState, type GarbageAction } from "./state.js";
-import { GarbageGame } from "./Game.js";
-
+const GarbageGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GarbageGame as unknown as React.ComponentType<unknown> })));
 export const garbageCardSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["3", "5", "7"] as const, default: "3" as const },
 } as const;

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpiderFourSuitsState, SpiderFourSuitsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpiderFourSuitsGame } from "./Game.js";
-
+const SpiderFourSuitsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpiderFourSuitsGame as unknown as React.ComponentType<unknown> })));
 export const spiderFourSuitsPlugin: GamePlugin<SpiderFourSuitsState, SpiderFourSuitsAction, Record<string, never>> = {
   id: "spider-four-suits",
   title: "Spider (Four Suits)",

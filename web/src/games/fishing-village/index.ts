@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FishingVillageState, FishingVillageAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FishingVillage } from "./Game.js";
-
+const FishingVillage = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FishingVillage as unknown as React.ComponentType<unknown> })));
 export const fishingVillagePlugin = {
   id: "fishing-village",
   title: "Fishing Village",

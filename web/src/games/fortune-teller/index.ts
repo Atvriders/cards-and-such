@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FortuneTellerState, FortuneTellerAction, FortuneTellerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FortuneTeller } from "./Game.js";
-
+const FortuneTeller = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FortuneTeller as unknown as React.ComponentType<unknown> })));
 const settings = {
   deckSize: {
     kind: "enum" as const,

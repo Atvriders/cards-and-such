@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StraightOrBustState, StraightOrBustAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StraightOrBust } from "./StraightOrBust.js";
-
+const StraightOrBust = /* @__PURE__ */ lazy(() => import("./StraightOrBust.js").then((mod) => ({ default: mod.StraightOrBust as unknown as React.ComponentType<unknown> })));
 export const straightOrBustSettings = {
   rounds: {
     kind: "enum" as const,

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type NumberGuesserState, type NumberGuesserAction } from "./state.js";
-import { NumberGuesser } from "./NumberGuesser.js";
-
+const NumberGuesser = /* @__PURE__ */ lazy(() => import("./NumberGuesser.js").then((mod) => ({ default: mod.NumberGuesser as unknown as React.ComponentType<unknown> })));
 export const numberGuesserSettings = {
   range: { kind: "enum" as const, label: "Range", options: ["100", "1000", "10000"] as const, default: "100" as const },
   maxAttempts: { kind: "enum" as const, label: "Max Attempts", options: ["5", "7", "10", "14"] as const, default: "7" as const },

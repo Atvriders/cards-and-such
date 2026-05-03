@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SharikiState, SharikiAction, SharikiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SharikiGame } from "./Game.js";
+const SharikiGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SharikiGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const sharikiPlugin: GamePlugin<SharikiState, SharikiAction, typeof settings> = {

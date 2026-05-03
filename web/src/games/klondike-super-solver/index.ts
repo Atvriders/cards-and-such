@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { KlondikeSuperSolverState, KlondikeSuperSolverAction, KlondikeSuperSolverSettings } from "./state.js";
-import { KlondikeSuperSolver } from "./KlondikeSuperSolver.js";
-
+const KlondikeSuperSolver = /* @__PURE__ */ lazy(() => import("./KlondikeSuperSolver.js").then((mod) => ({ default: mod.KlondikeSuperSolver as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const klondikeSuperSolverPlugin: GamePlugin<KlondikeSuperSolverState, KlondikeSuperSolverAction, typeof settings> = {

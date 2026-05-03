@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColoredTileMazeState, ColoredTileMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColoredTileMazeGame } from "./Game.js";
-
+const ColoredTileMazeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ColoredTileMazeGame as unknown as React.ComponentType<unknown> })));
 export const coloredTileMazeSettings = {
   size: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PanagramState, PanagramAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Panagram } from "./Game.js";
-
+const Panagram = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Panagram as unknown as React.ComponentType<unknown> })));
 export const panagramSettings = {} as const;
 
 export const panagramPlugin: GamePlugin<PanagramState, PanagramAction, typeof panagramSettings> = {

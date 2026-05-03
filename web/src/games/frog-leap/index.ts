@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FrogLeapState, FrogLeapAction, FrogLeapSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FrogLeap } from "./Game.js";
-
+const FrogLeap = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FrogLeap as unknown as React.ComponentType<unknown> })));
 const settings = {
   jumps: { kind: "enum" as const, label: "Jumps", options: ["8", "12", "16"] as const, default: "12" as const },
 } as const;

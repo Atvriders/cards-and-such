@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrosswordMiniState, CrosswordMiniAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrosswordMini } from "./CrosswordMini.js";
-
+const CrosswordMini = /* @__PURE__ */ lazy(() => import("./CrosswordMini.js").then((mod) => ({ default: mod.CrosswordMini as unknown as React.ComponentType<unknown> })));
 export const crosswordMiniSettings = {} as const;
 
 type CrosswordMiniSettingsType = SettingsOf<typeof crosswordMiniSettings>;

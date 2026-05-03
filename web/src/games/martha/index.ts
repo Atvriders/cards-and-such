@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MarthaState, MarthaAction, MarthaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Martha } from "./Martha.js";
-
+const Martha = /* @__PURE__ */ lazy(() => import("./Martha.js").then((mod) => ({ default: mod.Martha as unknown as React.ComponentType<unknown> })));
 export const marthaSettings = {} as const;
 
 export const marthaPlugin: GamePlugin<MarthaState, MarthaAction, typeof marthaSettings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NumericTTTState, NumericTTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NumericTicTacToe } from "./NumericTicTacToe.js";
-
+const NumericTicTacToe = /* @__PURE__ */ lazy(() => import("./NumericTicTacToe.js").then((mod) => ({ default: mod.NumericTicTacToe as unknown as React.ComponentType<unknown> })));
 export const numericTicTacToePlugin = {
   id: "numeric-tic-tac-toe",
   title: "Numeric TTT",

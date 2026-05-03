@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DictatorsQuizState, DictatorsQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DictatorsQuiz } from "./DictatorsQuiz.js";
+const DictatorsQuiz = /* @__PURE__ */ lazy(() => import("./DictatorsQuiz.js").then((mod) => ({ default: mod.DictatorsQuiz as unknown as React.ComponentType<unknown> })));
 export const dictatorsQuizSettings = { questionCount: { kind: "enum" as const, label: "Questions", options: ["5", "10", "15"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof dictatorsQuizSettings>;
 export const dictatorsQuizPlugin: GamePlugin<DictatorsQuizState, DictatorsQuizAction, typeof dictatorsQuizSettings> = {

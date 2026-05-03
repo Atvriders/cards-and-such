@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SpaceColonyState, SpaceColonyAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpaceColony } from "./Game.js";
-
+const SpaceColony = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpaceColony as unknown as React.ComponentType<unknown> })));
 export const spaceColonyPlugin = {
   id: "space-colony",
   title: "Space Colony",

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FibbageQuizState, FibbageQuizAction, FibbageQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FibbageQuizGame } from "./Game.js";
-
+const FibbageQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FibbageQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

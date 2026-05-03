@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScoponeState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Scopone } from "./Scopone.js";
-
+const Scopone = /* @__PURE__ */ lazy(() => import("./Scopone.js").then((mod) => ({ default: mod.Scopone as unknown as React.ComponentType<unknown> })));
 const scoponeSettings = {} as const;
 type ScoponeSettings = SettingsOf<typeof scoponeSettings>;
 type ScoponeAction = { type: "play"; cardId: string };

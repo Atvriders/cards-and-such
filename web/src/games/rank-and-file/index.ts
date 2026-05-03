@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { RankAndFileState, RankAndFileAction, RankAndFileSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RankAndFile } from "./RankAndFile.js";
-
+const RankAndFile = /* @__PURE__ */ lazy(() => import("./RankAndFile.js").then((mod) => ({ default: mod.RankAndFile as unknown as React.ComponentType<unknown> })));
 export const rankAndFileSettings = {} as const;
 
 export const rankAndFilePlugin: GamePlugin<RankAndFileState, RankAndFileAction, typeof rankAndFileSettings> = {

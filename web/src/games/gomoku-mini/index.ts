@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GomokuMiniState, GomokuMiniAction, GomokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GomokuMini } from "./Game.js";
+const GomokuMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GomokuMini as unknown as React.ComponentType<unknown> })));
 const settings = { aiStrength: { kind:"enum" as const, label:"AI", options:["easy","hard"] as const, default:"easy" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const gomokuMiniPlugin: GamePlugin<GomokuMiniState, GomokuMiniAction, typeof settings> = {

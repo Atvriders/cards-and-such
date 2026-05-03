@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type SoccerPenaltyState, type SoccerPenaltyAction } from "./state.js";
-import { SoccerPenalty } from "./Game.js";
-
+const SoccerPenalty = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SoccerPenalty as unknown as React.ComponentType<unknown> })));
 export const soccerPenaltySettings = {
   kicks: { kind: "enum" as const, label: "Kicks", options: ["5", "10"] as const, default: "5" as const },
 } as const;

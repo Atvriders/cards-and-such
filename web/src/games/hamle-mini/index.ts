@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HamleMiniState, HamleMiniAction, HamleMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HamleMiniGame } from "./Game.js";
+const HamleMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HamleMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const hamleMiniPlugin: GamePlugin<HamleMiniState, HamleMiniAction, typeof settings> = {
   id: "hamle-mini",

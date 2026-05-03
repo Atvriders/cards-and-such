@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { CanfieldStorehouseState, CanfieldStorehouseAction } from "./state.js";
 import { initialState, reducer, isTerminal, storehouseRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { CanfieldStorehouse } from "./CanfieldStorehouse.js";
-
+const CanfieldStorehouse = /* @__PURE__ */ lazy(() => import("./CanfieldStorehouse.js").then((mod) => ({ default: mod.CanfieldStorehouse as unknown as React.ComponentType<unknown> })));
 export const canfieldStorehouseSettings = {} as const;
 
 export const canfieldStorehousePlugin: GamePlugin<CanfieldStorehouseState, CanfieldStorehouseAction, typeof canfieldStorehouseSettings> = {

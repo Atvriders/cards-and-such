@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PresidentState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { President } from "./President.js";
-
+const President = /* @__PURE__ */ lazy(() => import("./President.js").then((mod) => ({ default: mod.President as unknown as React.ComponentType<unknown> })));
 export const presidentSettings = {
   dummy: {
     kind: "enum" as const,

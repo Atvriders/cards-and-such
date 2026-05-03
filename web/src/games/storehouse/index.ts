@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { StorehouseState, StorehouseAction } from "./state.js";
 import { initialState, reducer, isTerminal, storehouseRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Storehouse } from "./Game.js";
-
+const Storehouse = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Storehouse as unknown as React.ComponentType<unknown> })));
 export const storehousePlugin: GamePlugin<StorehouseState, StorehouseAction, Record<string, never>> = {
   id: "storehouse",
   title: "Storehouse",

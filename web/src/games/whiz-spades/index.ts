@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WhizSpadesState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WhizSpades } from "./WhizSpades.js";
-
+const WhizSpades = /* @__PURE__ */ lazy(() => import("./WhizSpades.js").then((mod) => ({ default: mod.WhizSpades as unknown as React.ComponentType<unknown> })));
 const whizSpadesSettings = {} as const;
 type WhizSpadesSettings = SettingsOf<typeof whizSpadesSettings>;
 type WhizSpadesAction = { type: "play"; cardId: string };

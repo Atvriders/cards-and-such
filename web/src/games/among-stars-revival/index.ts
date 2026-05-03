@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AmongStarsRevivalState, AmongStarsRevivalAction, AmongStarsRevivalSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AmongStarsRevivalGame } from "./Game.js";
-
+const AmongStarsRevivalGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AmongStarsRevivalGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

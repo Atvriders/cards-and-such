@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type IdleBlacksmithState, type IdleBlacksmithAction } from "./state.js";
-import { IdleBlacksmith } from "./IdleBlacksmith.js";
-
+const IdleBlacksmith = /* @__PURE__ */ lazy(() => import("./IdleBlacksmith.js").then((mod) => ({ default: mod.IdleBlacksmith as unknown as React.ComponentType<unknown> })));
 export const idleBlacksmithSettings = {
   goal: { kind: "enum" as const, label: "Iron Goal", options: ["200", "1000", "5000"] as const, default: "200" as const },
 } as const;

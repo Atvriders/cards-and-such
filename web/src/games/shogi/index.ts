@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ShogiState, ShogiAction, ShogiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Shogi } from "./Game.js";
-
+const Shogi = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Shogi as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const shogiPlugin: GamePlugin<ShogiState, ShogiAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordScrambleState, WordScrambleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordScramble } from "./WordScramble.js";
-
+const WordScramble = /* @__PURE__ */ lazy(() => import("./WordScramble.js").then((mod) => ({ default: mod.WordScramble as unknown as React.ComponentType<unknown> })));
 export const wordScrambleSettings = {
   difficulty: {
     kind: "enum" as const,

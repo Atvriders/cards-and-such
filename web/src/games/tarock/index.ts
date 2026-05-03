@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TarockState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tarock } from "./Tarock.js";
-
+const Tarock = /* @__PURE__ */ lazy(() => import("./Tarock.js").then((mod) => ({ default: mod.Tarock as unknown as React.ComponentType<unknown> })));
 const tarockSettings = {
   botDifficulty: {
     kind: "enum" as const,

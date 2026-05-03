@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QuizState, QuizAction, QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpaceQuiz } from "./Game.js";
-
+const SpaceQuiz = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpaceQuiz as unknown as React.ComponentType<unknown> })));
 const spaceQuizSettings = {
   questions: {
     kind: "enum" as const,

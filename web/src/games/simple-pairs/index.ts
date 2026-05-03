@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SimplePairsState, SimplePairsAction, SimplePairsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SimplePairsGame } from "./Game.js";
-
+const SimplePairsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SimplePairsGame as unknown as React.ComponentType<unknown> })));
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const simplePairsPlugin: GamePlugin<SimplePairsState, SimplePairsAction, typeof settings> = {

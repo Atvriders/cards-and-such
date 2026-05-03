@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type SpoonsState, type SpoonsAction } from "./state.js";
-import { SpoonsGame } from "./Game.js";
-
+const SpoonsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpoonsGame as unknown as React.ComponentType<unknown> })));
 export const spoonsSettings = {
   opponents: { kind: "enum" as const, label: "Opponents", options: ["1", "2", "3"] as const, default: "2" as const },
 } as const;

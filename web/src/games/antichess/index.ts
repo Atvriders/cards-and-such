@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AntichessState, AntichessAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AntichessGame } from "./Game.js";
-
+const AntichessGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AntichessGame as unknown as React.ComponentType<unknown> })));
 export const antichessSettings = {
   opponent: {
     kind: "enum" as const,

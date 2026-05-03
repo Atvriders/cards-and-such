@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { KingdominoOriginsState, KingdominoOriginsAction, KingdominoOriginsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { tileHintSelector } from "../_shared/tile-engine.js";
-import { KingdominoOriginsGame } from "./Game.js";
-
+const KingdominoOriginsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KingdominoOriginsGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

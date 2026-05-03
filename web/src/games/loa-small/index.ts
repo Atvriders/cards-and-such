@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LoaSmallState, LoaSmallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LoaSmallGame } from "./Game.js";
-
+const LoaSmallGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LoaSmallGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const loaSmallPlugin: GamePlugin<LoaSmallState, LoaSmallAction, typeof settings> = {

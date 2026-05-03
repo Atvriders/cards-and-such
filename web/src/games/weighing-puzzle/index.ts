@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { WeighingState, WeighingAction, WeighingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WeighingPuzzleGame } from "./Game.js";
-
+const WeighingPuzzleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WeighingPuzzleGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const weighingPuzzlePlugin: GamePlugin<WeighingState, WeighingAction, typeof settings> = {

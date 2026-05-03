@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { BeleagueredCastleState, BeleagueredCastleAction } from "./state.js";
 import { initialState, reducer, isTerminal, beleagueredRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { BeleagueredCastle } from "./BeleagueredCastle.js";
-
+const BeleagueredCastle = /* @__PURE__ */ lazy(() => import("./BeleagueredCastle.js").then((mod) => ({ default: mod.BeleagueredCastle as unknown as React.ComponentType<unknown> })));
 export const beleagueredCastleSettings = {} as const;
 
 export const beleagueredCastlePlugin: GamePlugin<BeleagueredCastleState, BeleagueredCastleAction, typeof beleagueredCastleSettings> = {

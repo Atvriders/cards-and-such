@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HareState, HareAction, HareSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HareAndHounds } from "./Game.js";
-
+const HareAndHounds = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HareAndHounds as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const hareAndHoundsPlugin: GamePlugin<HareState, HareAction, typeof settings> = {

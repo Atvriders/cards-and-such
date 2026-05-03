@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LightsOut5x5State, LightsOut5x5Action, LightsOut5x5Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LightsOut5x5Game } from "./Game.js";
-
+const LightsOut5x5Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LightsOut5x5Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

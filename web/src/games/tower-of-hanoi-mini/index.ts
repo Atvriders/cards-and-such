@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TowerOfHanoiMiniState, TowerOfHanoiMiniAction, TowerOfHanoiMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TowerOfHanoiMiniGame } from "./Game.js";
-
+const TowerOfHanoiMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TowerOfHanoiMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   discs: { kind: "enum" as const, label: "Discs", options: ["3", "4", "5"] as const, default: "4" as const },
 } as const;

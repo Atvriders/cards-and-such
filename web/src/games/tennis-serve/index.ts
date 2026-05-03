@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type TennisServeState, type TennisServeAction } from "./state.js";
-import { TennisServe } from "./Game.js";
-
+const TennisServe = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TennisServe as unknown as React.ComponentType<unknown> })));
 export const tennisServeSettings = {
   serves: { kind: "enum" as const, label: "Service Points", options: ["10", "20"] as const, default: "10" as const },
 } as const;

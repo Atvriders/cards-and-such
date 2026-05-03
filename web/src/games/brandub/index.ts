@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BrandubState, BrandubAction, BrandubSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Brandub } from "./Game.js";
-
+const Brandub = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Brandub as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const brandubPlugin: GamePlugin<BrandubState, BrandubAction, typeof settings> = {

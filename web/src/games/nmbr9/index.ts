@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { Nmbr9State, Nmbr9Action, Nmbr9Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { tileHintSelector } from "../_shared/tile-engine.js";
-import { Nmbr9Game } from "./Game.js";
-
+const Nmbr9Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Nmbr9Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

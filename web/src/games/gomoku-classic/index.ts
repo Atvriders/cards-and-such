@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { ConnectState, ConnectAction, ConnectSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GomokuClassicGame } from "./Game.js";
-
+const GomokuClassicGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GomokuClassicGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
 } as const;

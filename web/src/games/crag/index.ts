@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CragState, CragAction, CragCategory } from "./state.js";
 import { initialState, reducer, isTerminal, CRAG_CATEGORIES, scoreCategory } from "./state.js";
-import { Crag } from "./Crag.js";
-
+const Crag = /* @__PURE__ */ lazy(() => import("./Crag.js").then((mod) => ({ default: mod.Crag as unknown as React.ComponentType<unknown> })));
 export const cragSettings = {} as const;
 
 type CragSettingsType = SettingsOf<typeof cragSettings>;

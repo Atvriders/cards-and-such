@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CatapultCastleState, CatapultCastleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CatapultCastle } from "./CatapultCastle.js";
-
+const CatapultCastle = /* @__PURE__ */ lazy(() => import("./CatapultCastle.js").then((mod) => ({ default: mod.CatapultCastle as unknown as React.ComponentType<unknown> })));
 export const catapultCastleSettings = {
   boulders: {
     kind: "enum" as const,

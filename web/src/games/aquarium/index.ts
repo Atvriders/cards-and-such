@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AquariumState, AquariumAction, AquariumSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Aquarium } from "./Aquarium.js";
-
+const Aquarium = /* @__PURE__ */ lazy(() => import("./Aquarium.js").then((mod) => ({ default: mod.Aquarium as unknown as React.ComponentType<unknown> })));
 export const aquariumSettings = {
   difficulty: {
     kind: "enum" as const,

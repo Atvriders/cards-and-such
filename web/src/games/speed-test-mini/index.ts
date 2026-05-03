@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SpeedTestState, SpeedTestAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpeedTestGame } from "./Game.js";
-
+const SpeedTestGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpeedTestGame as unknown as React.ComponentType<unknown> })));
 export const speedTestMiniSettings = {} as const;
 
 export const speedTestMiniPlugin: GamePlugin<

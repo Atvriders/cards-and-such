@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TunnelDigState, TunnelDigAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TunnelDig } from "./TunnelDig.js";
-
+const TunnelDig = /* @__PURE__ */ lazy(() => import("./TunnelDig.js").then((mod) => ({ default: mod.TunnelDig as unknown as React.ComponentType<unknown> })));
 export const tunnelDigPlugin: GamePlugin<TunnelDigState, TunnelDigAction, Record<never, never>> = {
   id: "dig-dug-like",
   title: "Tunnel Dig",

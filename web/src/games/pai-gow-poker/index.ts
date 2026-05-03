@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PaiGowPokerState, PaiGowPokerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PaiGowPoker } from "./Game.js";
-
+const PaiGowPoker = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PaiGowPoker as unknown as React.ComponentType<unknown> })));
 export const paiGowPokerSettings = {
   startingBankroll: {
     kind: "number" as const,

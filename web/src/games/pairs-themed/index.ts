@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { PairsThemedState, PairsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PairsThemed } from "./PairsThemed.js";
-
+const PairsThemed = /* @__PURE__ */ lazy(() => import("./PairsThemed.js").then((mod) => ({ default: mod.PairsThemed as unknown as React.ComponentType<unknown> })));
 export const pairsThemedSettings = {
   theme: {
     kind: "enum" as const,

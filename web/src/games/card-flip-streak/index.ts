@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardFlipStreakState, CardFlipStreakAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardFlipStreak } from "./Game.js";
-
+const CardFlipStreak = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardFlipStreak as unknown as React.ComponentType<unknown> })));
 export const cardFlipStreakSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["10", "20"] as const, default: "10" as const },
 } as const;

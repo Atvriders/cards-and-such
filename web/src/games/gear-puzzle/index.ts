@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GearPuzzleState, GearPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GearPuzzle } from "./GearPuzzle.js";
-
+const GearPuzzle = /* @__PURE__ */ lazy(() => import("./GearPuzzle.js").then((mod) => ({ default: mod.GearPuzzle as unknown as React.ComponentType<unknown> })));
 const gearPuzzleSettings = {
   difficulty: {
     kind: "enum" as const,

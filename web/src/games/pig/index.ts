@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PigState, PigAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Pig } from "./Pig.js";
-
+const Pig = /* @__PURE__ */ lazy(() => import("./Pig.js").then((mod) => ({ default: mod.Pig as unknown as React.ComponentType<unknown> })));
 export const pigSettings = {
   target: {
     kind: "enum" as const,

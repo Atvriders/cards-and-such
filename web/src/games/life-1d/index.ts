@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Life1dState, Life1dAction, Life1dSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Life1dGame } from "./Game.js";
-
+const Life1dGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Life1dGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   rule: { kind: "enum" as const, label: "Rule", options: ["30", "90", "110"] as const, default: "30" as const },
 } as const;

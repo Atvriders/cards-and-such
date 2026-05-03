@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AsteroidsState, AsteroidsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Asteroids } from "./Asteroids.js";
-
+const Asteroids = /* @__PURE__ */ lazy(() => import("./Asteroids.js").then((mod) => ({ default: mod.Asteroids as unknown as React.ComponentType<unknown> })));
 export const asteroidsSettings = {
   startingAsteroids: {
     kind: "enum" as const,

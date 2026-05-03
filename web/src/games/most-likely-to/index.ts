@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MLTState, MLTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MostLikelyTo } from "./Game.js";
-
+const MostLikelyTo = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MostLikelyTo as unknown as React.ComponentType<unknown> })));
 export const mostLikelyToSettings = {
   rounds: {
     kind: "enum" as const,

@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FusionPokerState, FusionPokerAction, FusionPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FusionPokerGame } from "./Game.js";
+const FusionPokerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FusionPokerGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const fusionPokerPlugin: GamePlugin<FusionPokerState, FusionPokerAction, typeof settings> = {

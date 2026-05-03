@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ParachuteDropState, ParachuteDropAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ParachuteDrop } from "./ParachuteDrop.js";
-
+const ParachuteDrop = /* @__PURE__ */ lazy(() => import("./ParachuteDrop.js").then((mod) => ({ default: mod.ParachuteDrop as unknown as React.ComponentType<unknown> })));
 export const parachuteDropSettings = {
   wind: {
     kind: "enum" as const,

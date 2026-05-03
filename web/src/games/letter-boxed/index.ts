@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LetterBoxedState, LetterBoxedAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LetterBoxed } from "./LetterBoxed.js";
-
+const LetterBoxed = /* @__PURE__ */ lazy(() => import("./LetterBoxed.js").then((mod) => ({ default: mod.LetterBoxed as unknown as React.ComponentType<unknown> })));
 export const letterBoxedSettings = {
   difficulty: {
     kind: "enum" as const,

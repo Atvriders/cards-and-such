@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FortyFivesState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FortyFives } from "./FortyFives.js";
-
+const FortyFives = /* @__PURE__ */ lazy(() => import("./FortyFives.js").then((mod) => ({ default: mod.FortyFives as unknown as React.ComponentType<unknown> })));
 const fortyFivesSettings = {
   botDifficulty: {
     kind: "enum" as const,

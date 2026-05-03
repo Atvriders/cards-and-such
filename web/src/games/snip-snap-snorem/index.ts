@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type SnipSnapState, type SnipSnapAction } from "./state.js";
-import { SnipSnapGame } from "./Game.js";
-
+const SnipSnapGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SnipSnapGame as unknown as React.ComponentType<unknown> })));
 export const snipSnapSettings = {
   opponents: { kind: "enum" as const, label: "Opponents", options: ["1", "2", "3"] as const, default: "2" as const },
 } as const;

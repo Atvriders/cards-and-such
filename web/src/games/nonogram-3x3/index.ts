@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Nonogram3x3State, Nonogram3x3Action, Nonogram3x3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Nonogram3x3Game } from "./Game.js";
+const Nonogram3x3Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Nonogram3x3Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const nonogram3x3Plugin: GamePlugin<Nonogram3x3State, Nonogram3x3Action, typeof settings> = {

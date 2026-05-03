@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SlimeDefenseState, SlimeDefenseAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SlimeDefense } from "./SlimeDefense.js";
-
+const SlimeDefense = /* @__PURE__ */ lazy(() => import("./SlimeDefense.js").then((mod) => ({ default: mod.SlimeDefense as unknown as React.ComponentType<unknown> })));
 export const slimeDefenseSettings = {
   difficulty: {
     kind: "enum" as const,

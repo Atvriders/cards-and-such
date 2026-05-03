@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FutoshikiState, FutoshikiAction, FutoshikiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Futoshiki } from "./Game.js";
-
+const Futoshiki = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Futoshiki as unknown as React.ComponentType<unknown> })));
 export const futoshikiSettings = {
   size: {
     kind: "enum" as const,

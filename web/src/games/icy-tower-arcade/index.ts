@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IcyTowerArcadeState, IcyTowerArcadeAction, IcyTowerArcadeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { IcyTowerArcadeGame } from "./Game.js";
+const IcyTowerArcadeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.IcyTowerArcadeGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const icyTowerArcadePlugin: GamePlugin<IcyTowerArcadeState, IcyTowerArcadeAction, typeof settings> = {

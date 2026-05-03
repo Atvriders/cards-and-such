@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Match3HexMiniState, Match3HexMiniAction, Match3HexMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Match3HexMiniGame } from "./Game.js";
+const Match3HexMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Match3HexMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const match3HexMiniPlugin: GamePlugin<Match3HexMiniState, Match3HexMiniAction, typeof settings> = {

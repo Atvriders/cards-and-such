@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { JubileeState, JubileeAction, JubileeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Jubilee } from "./Jubilee.js";
-
+const Jubilee = /* @__PURE__ */ lazy(() => import("./Jubilee.js").then((mod) => ({ default: mod.Jubilee as unknown as React.ComponentType<unknown> })));
 export const jubileeSettings = {} as const;
 
 export const jubileePlugin: GamePlugin<JubileeState, JubileeAction, typeof jubileeSettings> = {

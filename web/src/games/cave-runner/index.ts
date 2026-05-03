@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CaveRunnerState, CaveRunnerAction, CaveRunnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CaveRunnerGame } from "./Game.js";
+const CaveRunnerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CaveRunnerGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const caveRunnerPlugin: GamePlugin<CaveRunnerState, CaveRunnerAction, typeof settings> = {

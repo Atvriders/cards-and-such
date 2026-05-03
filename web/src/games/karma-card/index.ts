@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type KarmaState, type KarmaAction } from "./state.js";
-import { KarmaGame } from "./Game.js";
-
+const KarmaGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KarmaGame as unknown as React.ComponentType<unknown> })));
 export const karmaCardSettings = {
   opponents: { kind: "enum" as const, label: "Opponents", options: ["1", "2", "3"] as const, default: "1" as const },
 } as const;

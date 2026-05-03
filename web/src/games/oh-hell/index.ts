@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OhHellState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OhHell } from "./OhHell.js";
-
+const OhHell = /* @__PURE__ */ lazy(() => import("./OhHell.js").then((mod) => ({ default: mod.OhHell as unknown as React.ComponentType<unknown> })));
 const ohHellSettings = {
   botDifficulty: {
     kind: "enum" as const,

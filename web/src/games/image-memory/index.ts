@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { ImageMemoryState, ImageMemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ImageMemory } from "./Game.js";
-
+const ImageMemory = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ImageMemory as unknown as React.ComponentType<unknown> })));
 export const imageMemorySettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MagicWandCastState, MagicWandCastAction, MagicWandCastSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MagicWandCast } from "./Game.js";
-
+const MagicWandCast = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MagicWandCast as unknown as React.ComponentType<unknown> })));
 const settings = {
   spells: { kind: "enum" as const, label: "Spells", options: ["5", "8", "12"] as const, default: "8" as const },
 } as const;

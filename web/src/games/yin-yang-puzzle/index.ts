@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { YinYangPuzzleState, YinYangPuzzleAction, YinYangPuzzleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { YinYangPuzzleGame } from "./Game.js";
+const YinYangPuzzleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.YinYangPuzzleGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const yinYangPuzzlePlugin: GamePlugin<YinYangPuzzleState, YinYangPuzzleAction, typeof settings> = {
   id: "yin-yang-puzzle",

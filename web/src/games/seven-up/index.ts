@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SevenUpState, SevenUpAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SevenUp } from "./SevenUp.js";
-
+const SevenUp = /* @__PURE__ */ lazy(() => import("./SevenUp.js").then((mod) => ({ default: mod.SevenUp as unknown as React.ComponentType<unknown> })));
 export const sevenUpPlugin: GamePlugin<SevenUpState, SevenUpAction, Record<string, never>> = {
   id: "seven-up",
   title: "Seven Up",

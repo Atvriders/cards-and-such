@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DutchBlitzState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DutchBlitz } from "./DutchBlitz.js";
-
+const DutchBlitz = /* @__PURE__ */ lazy(() => import("./DutchBlitz.js").then((mod) => ({ default: mod.DutchBlitz as unknown as React.ComponentType<unknown> })));
 export const dutchBlitzSettings = {
   botSpeed: {
     kind: "enum" as const,

@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OklahomaGinRState, OklahomaGinRAction, OklahomaGinRSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { detectMelds } from "../_shared/rummy-engine.js";
-import { OklahomaGinRGame } from "./Game.js";
-
+const OklahomaGinRGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OklahomaGinRGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "hard" as const },
 } as const;

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LigrettoState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Ligretto } from "./Ligretto.js";
-
+const Ligretto = /* @__PURE__ */ lazy(() => import("./Ligretto.js").then((mod) => ({ default: mod.Ligretto as unknown as React.ComponentType<unknown> })));
 export const ligrettoSettings = {
   botSpeed: {
     kind: "enum" as const,

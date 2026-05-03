@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { YahtzeeState, YahtzeeAction, Category } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_CATEGORIES, computeCategoryScore } from "./state.js";
-import { Yahtzee } from "./Yahtzee.js";
-
+const Yahtzee = /* @__PURE__ */ lazy(() => import("./Yahtzee.js").then((mod) => ({ default: mod.Yahtzee as unknown as React.ComponentType<unknown> })));
 export const yahtzeeSettings = {
   strictYahtzeeBonus: {
     kind: "boolean" as const,

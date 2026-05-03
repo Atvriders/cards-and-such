@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EuroPegSolitaireState, EuroPegAction } from "./state.js";
 import { initialState, reducer, isTerminal, getLegalJumps } from "./state.js";
-import { EuroPegSolitaire } from "./EuroPegSolitaire.js";
-
+const EuroPegSolitaire = /* @__PURE__ */ lazy(() => import("./EuroPegSolitaire.js").then((mod) => ({ default: mod.EuroPegSolitaire as unknown as React.ComponentType<unknown> })));
 export const euroPegSettings = {
   variant: {
     kind: "enum" as const,

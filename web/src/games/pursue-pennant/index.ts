@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PursuePennantState, PursuePennantAction, PursuePennantSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PursuePennantGame } from "./Game.js";
-
+const PursuePennantGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PursuePennantGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 

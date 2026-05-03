@@ -1,3 +1,5 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import {
   connect4Initial,
@@ -8,8 +10,7 @@ import {
   COLS,
   ROWS,
 } from "@cards/shared";
-import { Connect4 } from "./Connect4.js";
-
+const Connect4 = /* @__PURE__ */ lazy(() => import("./Connect4.js").then((mod) => ({ default: mod.Connect4 as unknown as React.ComponentType<unknown> })));
 const settings = {
   opponent: { kind: "enum" as const, label: "Opponent", options: ["bot", "hot-seat"] as const, default: "bot" as const },
   botDepth: { kind: "enum" as const, label: "Bot depth", options: ["2", "4"] as const, default: "4" as const },

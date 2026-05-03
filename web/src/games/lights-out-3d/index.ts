@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LightsOut3DState, LightsOut3DAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LightsOut3D } from "./LightsOut3D.js";
-
+const LightsOut3D = /* @__PURE__ */ lazy(() => import("./LightsOut3D.js").then((mod) => ({ default: mod.LightsOut3D as unknown as React.ComponentType<unknown> })));
 export const lightsOut3DSettings = {
   difficulty: {
     kind: "enum" as const,

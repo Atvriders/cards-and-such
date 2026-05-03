@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SlyFoxState, SlyFoxAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SlyFox } from "./SlyFox.js";
-
+const SlyFox = /* @__PURE__ */ lazy(() => import("./SlyFox.js").then((mod) => ({ default: mod.SlyFox as unknown as React.ComponentType<unknown> })));
 export const slyFoxSettings = {} as const;
 
 export const slyFoxPlugin: GamePlugin<SlyFoxState, SlyFoxAction, typeof slyFoxSettings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { EinsteinState, EinsteinAction, EinsteinSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EinsteinPuzzleGame } from "./Game.js";
-
+const EinsteinPuzzleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.EinsteinPuzzleGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const einsteinPuzzlePlugin: GamePlugin<EinsteinState, EinsteinAction, typeof settings> = {

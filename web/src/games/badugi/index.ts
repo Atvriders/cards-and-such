@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BadugiState, BadugiAction } from "./state.js";
 import { initialState, reducer, isTerminal, evaluateBadugi } from "./state.js";
-import { Badugi } from "./Badugi.js";
-
+const Badugi = /* @__PURE__ */ lazy(() => import("./Badugi.js").then((mod) => ({ default: mod.Badugi as unknown as React.ComponentType<unknown> })));
 export const badugiSettings = {
   startingBankroll: {
     kind: "enum" as const,

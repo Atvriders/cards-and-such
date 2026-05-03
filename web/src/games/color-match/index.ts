@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorMatchState, ColorMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColorMatch } from "./ColorMatch.js";
-
+const ColorMatch = /* @__PURE__ */ lazy(() => import("./ColorMatch.js").then((mod) => ({ default: mod.ColorMatch as unknown as React.ComponentType<unknown> })));
 export const colorMatchSettings = {
   duration: {
     kind: "enum" as const,

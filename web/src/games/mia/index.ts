@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiaState, MiaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Mia } from "./Mia.js";
-
+const Mia = /* @__PURE__ */ lazy(() => import("./Mia.js").then((mod) => ({ default: mod.Mia as unknown as React.ComponentType<unknown> })));
 export const miaSettings = {
   startingLives: {
     kind: "enum" as const,

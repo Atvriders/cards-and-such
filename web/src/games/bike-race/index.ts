@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BikeRaceState, BikeRaceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BikeRaceGame } from "./Game.js";
-
+const BikeRaceGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BikeRaceGame as unknown as React.ComponentType<unknown> })));
 export const bikeRaceSettings = {
   distance: {
     kind: "enum" as const,

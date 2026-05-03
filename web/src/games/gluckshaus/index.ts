@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GluckshausState, GAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Gluckshaus } from "./Gluckshaus.js";
-
+const Gluckshaus = /* @__PURE__ */ lazy(() => import("./Gluckshaus.js").then((mod) => ({ default: mod.Gluckshaus as unknown as React.ComponentType<unknown> })));
 export const gluckshausSettings = {
   startingPennies: {
     kind: "enum" as const,

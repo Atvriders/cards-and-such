@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TypingSpeedState, TypingSpeedAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TypingSpeed } from "./TypingSpeed.js";
-
+const TypingSpeed = /* @__PURE__ */ lazy(() => import("./TypingSpeed.js").then((mod) => ({ default: mod.TypingSpeed as unknown as React.ComponentType<unknown> })));
 export const typingSpeedSettings = {
   duration: {
     kind: "enum" as const,

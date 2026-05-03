@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SnapState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Snap } from "./Snap.js";
-
+const Snap = /* @__PURE__ */ lazy(() => import("./Snap.js").then((mod) => ({ default: mod.Snap as unknown as React.ComponentType<unknown> })));
 export const snapSettings = {
   botSpeed: {
     kind: "enum" as const,

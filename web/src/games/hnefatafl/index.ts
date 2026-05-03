@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HnefataflState, HnefataflAction, HnefataflSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Hnefatafl } from "./Game.js";
-
+const Hnefatafl = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Hnefatafl as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const hnefataflPlugin: GamePlugin<HnefataflState, HnefataflAction, typeof settings> = {

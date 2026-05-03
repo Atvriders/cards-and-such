@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CentennialState, CentennialAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Centennial } from "./Centennial.js";
-
+const Centennial = /* @__PURE__ */ lazy(() => import("./Centennial.js").then((mod) => ({ default: mod.Centennial as unknown as React.ComponentType<unknown> })));
 export const centennialSettings = {
   mode: {
     kind: "enum" as const,

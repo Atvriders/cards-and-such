@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CornersSolitaireState, CornersSolitaireAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CornersSolitaire } from "./CornersSolitaire.js";
-
+const CornersSolitaire = /* @__PURE__ */ lazy(() => import("./CornersSolitaire.js").then((mod) => ({ default: mod.CornersSolitaire as unknown as React.ComponentType<unknown> })));
 export const cornersSolitaireSettings = {} as const;
 
 export const cornersSolitairePlugin: GamePlugin<CornersSolitaireState, CornersSolitaireAction, typeof cornersSolitaireSettings> = {

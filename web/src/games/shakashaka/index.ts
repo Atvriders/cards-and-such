@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShakaState, ShakaAction, ShakaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Shakashaka } from "./Shakashaka.js";
-
+const Shakashaka = /* @__PURE__ */ lazy(() => import("./Shakashaka.js").then((mod) => ({ default: mod.Shakashaka as unknown as React.ComponentType<unknown> })));
 export const shakaSettings = {
   difficulty: {
     kind: "enum" as const,

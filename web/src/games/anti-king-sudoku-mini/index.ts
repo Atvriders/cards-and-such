@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AntiKingSudokuMiniState, AntiKingSudokuMiniAction, AntiKingSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AntiKingSudokuMiniGame } from "./Game.js";
+const AntiKingSudokuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AntiKingSudokuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const antiKingSudokuMiniPlugin: GamePlugin<AntiKingSudokuMiniState, AntiKingSudokuMiniAction, typeof settings> = {
   id: "anti-king-sudoku-mini",

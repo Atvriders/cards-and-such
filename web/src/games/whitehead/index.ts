@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { WhiteheadState, WhiteheadAction } from "./state.js";
 import { initialState, reducer, isTerminal, whiteheadRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Whitehead } from "./Whitehead.js";
-
+const Whitehead = /* @__PURE__ */ lazy(() => import("./Whitehead.js").then((mod) => ({ default: mod.Whitehead as unknown as React.ComponentType<unknown> })));
 export const whiteheadSettings = {} as const;
 
 export const whiteheadPlugin: GamePlugin<WhiteheadState, WhiteheadAction, typeof whiteheadSettings> = {

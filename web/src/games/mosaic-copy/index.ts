@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MosaicCopyState, MosaicCopyAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MosaicCopy } from "./MosaicCopy.js";
-
+const MosaicCopy = /* @__PURE__ */ lazy(() => import("./MosaicCopy.js").then((mod) => ({ default: mod.MosaicCopy as unknown as React.ComponentType<unknown> })));
 export const mosaicCopySettings = {} as const;
 
 export const mosaicCopyPlugin: GamePlugin<MosaicCopyState, MosaicCopyAction, typeof mosaicCopySettings> = {

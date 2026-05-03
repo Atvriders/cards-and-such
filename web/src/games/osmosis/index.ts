@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { OsmosisState, OsmosisAction, OsmosisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Osmosis } from "./Osmosis.js";
-
+const Osmosis = /* @__PURE__ */ lazy(() => import("./Osmosis.js").then((mod) => ({ default: mod.Osmosis as unknown as React.ComponentType<unknown> })));
 export const osmosisSettings = {} as const;
 
 export const osmosisPlugin: GamePlugin<OsmosisState, OsmosisAction, typeof osmosisSettings> = {

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HighCardDrawState, type HighCardDrawAction } from "./state.js";
-import { HighCardDraw } from "./HighCardDraw.js";
-
+const HighCardDraw = /* @__PURE__ */ lazy(() => import("./HighCardDraw.js").then((mod) => ({ default: mod.HighCardDraw as unknown as React.ComponentType<unknown> })));
 export const highCardDrawSettings = {
   roundsToWin: {
     kind: "enum" as const,

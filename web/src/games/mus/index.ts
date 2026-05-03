@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MusState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Mus } from "./Mus.js";
-
+const Mus = /* @__PURE__ */ lazy(() => import("./Mus.js").then((mod) => ({ default: mod.Mus as unknown as React.ComponentType<unknown> })));
 export const musSettings = {} as const;
 type MusSettings = SettingsOf<typeof musSettings>;
 type MusAction = { type: "bid"; amount: number };

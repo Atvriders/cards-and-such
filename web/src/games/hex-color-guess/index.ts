@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HexColorGuessState, type HexColorGuessAction } from "./state.js";
-import { HexColorGuess } from "./HexColorGuess.js";
-
+const HexColorGuess = /* @__PURE__ */ lazy(() => import("./HexColorGuess.js").then((mod) => ({ default: mod.HexColorGuess as unknown as React.ComponentType<unknown> })));
 export const hexColorGuessSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["5", "10", "15"] as const, default: "5" as const },
 } as const;

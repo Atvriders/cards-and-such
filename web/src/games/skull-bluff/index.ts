@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SkullBluffState, SkullBluffAction, SkullBluffSettings } from "./state.js";
 import { SkullBluff_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { SkullBluffGame } from "./Game.js";
-
+const SkullBluffGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SkullBluffGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

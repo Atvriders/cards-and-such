@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ScarletHeroesQuestState, ScarletHeroesQuestAction, ScarletHeroesQuestSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ScarletHeroesQuestGame } from "./Game.js";
+const ScarletHeroesQuestGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ScarletHeroesQuestGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const scarletHeroesQuestPlugin: GamePlugin<ScarletHeroesQuestState, ScarletHeroesQuestAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CountryRoadState, CountryRoadAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CountryRoad } from "./CountryRoad.js";
-
+const CountryRoad = /* @__PURE__ */ lazy(() => import("./CountryRoad.js").then((mod) => ({ default: mod.CountryRoad as unknown as React.ComponentType<unknown> })));
 const countryRoadSettings = {
   difficulty: {
     kind: "enum" as const,

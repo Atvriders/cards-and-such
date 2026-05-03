@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PaperTossState, PaperTossAction, PaperTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PaperTossGame } from "./Game.js";
-
+const PaperTossGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PaperTossGame as unknown as React.ComponentType<unknown> })));
 export const paperTossSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

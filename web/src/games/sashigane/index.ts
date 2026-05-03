@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SashiganeState, SashiganeAction, SashiganeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SashiganeGame } from "./Game.js";
+const SashiganeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SashiganeGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const sashiganePlugin: GamePlugin<SashiganeState, SashiganeAction, typeof settings> = {
   id: "sashigane",

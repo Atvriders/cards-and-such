@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PendulumDropState, PendulumDropAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PendulumDrop } from "./PendulumDrop.js";
-
+const PendulumDrop = /* @__PURE__ */ lazy(() => import("./PendulumDrop.js").then((mod) => ({ default: mod.PendulumDrop as unknown as React.ComponentType<unknown> })));
 export const pendulumDropSettings = {
   swings: {
     kind: "enum" as const,

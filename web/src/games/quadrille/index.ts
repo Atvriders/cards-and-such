@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QuadrilleState, QuadrilleAction, QuadrilleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Quadrille } from "./Quadrille.js";
-
+const Quadrille = /* @__PURE__ */ lazy(() => import("./Quadrille.js").then((mod) => ({ default: mod.Quadrille as unknown as React.ComponentType<unknown> })));
 export const quadrilleSettings = {} as const;
 
 export const quadrillePlugin: GamePlugin<QuadrilleState, QuadrilleAction, typeof quadrilleSettings> = {

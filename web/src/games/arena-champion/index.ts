@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ArenaChampionState, ArenaChampionAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ArenaChampion } from "./Game.js";
-
+const ArenaChampion = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ArenaChampion as unknown as React.ComponentType<unknown> })));
 export const arenaChampionPlugin = {
   id: "arena-champion",
   title: "Arena Champion",

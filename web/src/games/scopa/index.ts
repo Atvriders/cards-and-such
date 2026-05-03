@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScopaState } from "./state.js";
 import { initialState, reducer, isTerminal, findCaptureSets, faceValue, COINS_SUIT, SETTEBELLO_RANK } from "./state.js";
-import { Scopa } from "./Scopa.js";
-
+const Scopa = /* @__PURE__ */ lazy(() => import("./Scopa.js").then((mod) => ({ default: mod.Scopa as unknown as React.ComponentType<unknown> })));
 export const scopaSettings = {} as const;
 type ScopaSettings = SettingsOf<typeof scopaSettings>;
 

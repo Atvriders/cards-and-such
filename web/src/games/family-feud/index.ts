@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FamilyFeudState, FamilyFeudAction, FamilyFeudSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FamilyFeud } from "./Game.js";
-
+const FamilyFeud = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FamilyFeud as unknown as React.ComponentType<unknown> })));
 const settings = {
   questions: {
     kind: "enum" as const,

@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MtvMusicAwardsQuizState, MtvMusicAwardsQuizAction, MtvMusicAwardsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MtvMusicAwardsQuizGame } from "./Game.js";
+const MtvMusicAwardsQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MtvMusicAwardsQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10","20","30"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const mtvMusicAwardsQuizPlugin: GamePlugin<MtvMusicAwardsQuizState, MtvMusicAwardsQuizAction, typeof settings> = {

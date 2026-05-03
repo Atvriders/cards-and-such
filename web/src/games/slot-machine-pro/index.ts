@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SlotMachineProState, SlotAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SlotMachineProGame } from "./Game.js";
-
+const SlotMachineProGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SlotMachineProGame as unknown as React.ComponentType<unknown> })));
 export const slotMachineProPlugin = {
   id: "slot-machine-pro",
   title: "Slot Machine Pro",

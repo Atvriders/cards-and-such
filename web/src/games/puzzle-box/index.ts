@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PuzzleBoxState, PuzzleBoxAction, PuzzleBoxSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PuzzleBox } from "./Game.js";
-
+const PuzzleBox = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PuzzleBox as unknown as React.ComponentType<unknown> })));
 const settings = {
   shuffleMoves: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SeepState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Seep } from "./Seep.js";
-
+const Seep = /* @__PURE__ */ lazy(() => import("./Seep.js").then((mod) => ({ default: mod.Seep as unknown as React.ComponentType<unknown> })));
 const seepSettings = {} as const;
 type SeepSettings = SettingsOf<typeof seepSettings>;
 type SeepAction = { type: "play"; cardId: string };

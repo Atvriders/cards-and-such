@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { PokerSolitaireState, PokerSolitaireAction, PokerSolitaireSettings } from "./state.js";
-import { PokerSolitaire } from "./PokerSolitaire.js";
-
+const PokerSolitaire = /* @__PURE__ */ lazy(() => import("./PokerSolitaire.js").then((mod) => ({ default: mod.PokerSolitaire as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const pokerSolitairePlugin: GamePlugin<PokerSolitaireState, PokerSolitaireAction, typeof settings> = {

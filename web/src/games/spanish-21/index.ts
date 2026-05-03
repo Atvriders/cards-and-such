@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Spanish21State, Spanish21Action } from "./state.js";
 import { initialState, reducer, isTerminal, handValue } from "./state.js";
-import { Spanish21Game } from "./Game.js";
-
+const Spanish21Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Spanish21Game as unknown as React.ComponentType<unknown> })));
 export const spanish21Settings = {
   handsPerSession: {
     kind: "number" as const,

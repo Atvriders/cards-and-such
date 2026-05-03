@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ReversiRandomStartState, ReversiRandomStartAction, ReversiRandomStartSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ReversiRandomStartGame } from "./Game.js";
-
+const ReversiRandomStartGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ReversiRandomStartGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
 } as const;

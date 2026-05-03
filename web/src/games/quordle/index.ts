@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QuordleState, QuordleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Quordle } from "./Quordle.js";
-
+const Quordle = /* @__PURE__ */ lazy(() => import("./Quordle.js").then((mod) => ({ default: mod.Quordle as unknown as React.ComponentType<unknown> })));
 export const quordleSettings = {} as const;
 
 type QuordleSettingsType = SettingsOf<typeof quordleSettings>;

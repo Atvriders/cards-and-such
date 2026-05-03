@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ArcticSurvivalState, ArcticSurvivalAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ArcticSurvival } from "./ArcticSurvival.js";
-
+const ArcticSurvival = /* @__PURE__ */ lazy(() => import("./ArcticSurvival.js").then((mod) => ({ default: mod.ArcticSurvival as unknown as React.ComponentType<unknown> })));
 export const arcticSurvivalSettings = {
   days: {
     kind: "enum" as const,

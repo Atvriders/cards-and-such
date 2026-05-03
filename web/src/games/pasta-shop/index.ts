@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PastaState, PastaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PastaShop } from "./Game.js";
-
+const PastaShop = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PastaShop as unknown as React.ComponentType<unknown> })));
 export const pastaShopPlugin = {
   id: "pasta-shop",
   title: "Pasta Shop",

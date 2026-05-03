@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OddOneOutState, OddOneOutAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OddOneOut } from "./OddOneOut.js";
-
+const OddOneOut = /* @__PURE__ */ lazy(() => import("./OddOneOut.js").then((mod) => ({ default: mod.OddOneOut as unknown as React.ComponentType<unknown> })));
 export const oddOneOutSettings = {
   rounds: {
     kind: "enum" as const,

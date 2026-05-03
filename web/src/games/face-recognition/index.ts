@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { FaceRecognitionState, FRAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FaceRecognition } from "./Game.js";
-
+const FaceRecognition = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FaceRecognition as unknown as React.ComponentType<unknown> })));
 export const faceRecognitionSettings = {
   difficulty: {
     kind: "enum" as const,

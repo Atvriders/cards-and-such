@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TapaMiniState, TapaMiniAction, TapaMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TapaMiniGame } from "./Game.js";
+const TapaMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TapaMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const tapaMiniPlugin: GamePlugin<TapaMiniState, TapaMiniAction, typeof settings> = {
   id: "tapa-mini",

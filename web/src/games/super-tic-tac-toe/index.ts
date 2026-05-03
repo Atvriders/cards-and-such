@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SuperTTTState, SuperAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SuperTicTacToe } from "./Game.js";
-
+const SuperTicTacToe = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SuperTicTacToe as unknown as React.ComponentType<unknown> })));
 export const superTicTacToePlugin = {
   id: "super-tic-tac-toe",
   title: "Super TTT",

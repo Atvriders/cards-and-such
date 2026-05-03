@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Chess960CrazyhouseQuizState, Chess960CrazyhouseQuizAction, Chess960CrazyhouseQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Chess960CrazyhouseQuizGame } from "./Game.js";
+const Chess960CrazyhouseQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Chess960CrazyhouseQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind: "enum" as const, label: "Questions", options: ["10"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const chess960CrazyhouseQuizPlugin: GamePlugin<Chess960CrazyhouseQuizState, Chess960CrazyhouseQuizAction, typeof settings> = {

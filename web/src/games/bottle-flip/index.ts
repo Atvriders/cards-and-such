@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BottleFlipState, BottleFlipAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BottleFlip } from "./BottleFlip.js";
-
+const BottleFlip = /* @__PURE__ */ lazy(() => import("./BottleFlip.js").then((mod) => ({ default: mod.BottleFlip as unknown as React.ComponentType<unknown> })));
 export const bottleFlipSettings = {} as const;
 
 type BottleFlipSettingsType = SettingsOf<typeof bottleFlipSettings>;

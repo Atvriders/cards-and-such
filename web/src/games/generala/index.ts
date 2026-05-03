@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GeneralaState, GeneralaAction, GeneralaCategory } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_GENERALA_CATEGORIES, computeGeneralaScore } from "./state.js";
-import { Generala } from "./Generala.js";
-
+const Generala = /* @__PURE__ */ lazy(() => import("./Generala.js").then((mod) => ({ default: mod.Generala as unknown as React.ComponentType<unknown> })));
 export const generalaSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

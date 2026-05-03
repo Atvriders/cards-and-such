@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { WheelSpinState, WheelSpinAction, WheelSpinSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WheelSpin } from "./Game.js";
-
+const WheelSpin = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WheelSpin as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: {
     kind: "enum" as const,

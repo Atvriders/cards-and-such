@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type IdleWarriorState, type IdleWarriorAction } from "./state.js";
-import { IdleWarrior } from "./IdleWarrior.js";
-
+const IdleWarrior = /* @__PURE__ */ lazy(() => import("./IdleWarrior.js").then((mod) => ({ default: mod.IdleWarrior as unknown as React.ComponentType<unknown> })));
 export const idleWarriorSettings = {
   enemies: { kind: "enum" as const, label: "Enemies to Defeat", options: ["20", "50", "100"] as const, default: "20" as const },
 } as const;

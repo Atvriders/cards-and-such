@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NumberLinkMiniState, NumberLinkMiniAction, NumberLinkMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NumberLinkMiniGame } from "./Game.js";
+const NumberLinkMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NumberLinkMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const numberLinkMiniPlugin: GamePlugin<NumberLinkMiniState, NumberLinkMiniAction, typeof settings> = {
   id: "number-link-mini",

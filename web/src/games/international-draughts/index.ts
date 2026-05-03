@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IDState, IDAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { InternationalDraughts } from "./InternationalDraughts.js";
-
+const InternationalDraughts = /* @__PURE__ */ lazy(() => import("./InternationalDraughts.js").then((mod) => ({ default: mod.InternationalDraughts as unknown as React.ComponentType<unknown> })));
 export const internationalDraughtsSettings = {
   opponent: {
     kind: "enum" as const,

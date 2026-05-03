@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { IntelligenceState, IntelligenceAction, IntelligenceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Intelligence } from "./Intelligence.js";
-
+const Intelligence = /* @__PURE__ */ lazy(() => import("./Intelligence.js").then((mod) => ({ default: mod.Intelligence as unknown as React.ComponentType<unknown> })));
 export const intelligenceSettings = {} as const;
 
 export const intelligencePlugin: GamePlugin<IntelligenceState, IntelligenceAction, typeof intelligenceSettings> = {

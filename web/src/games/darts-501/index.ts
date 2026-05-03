@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type Darts501State, type Darts501Action } from "./state.js";
-import { Darts501 } from "./Game.js";
-
+const Darts501 = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Darts501 as unknown as React.ComponentType<unknown> })));
 export const darts501Settings = {
   startScore: { kind: "enum" as const, label: "Start score", options: ["301", "501"] as const, default: "501" as const },
 } as const;

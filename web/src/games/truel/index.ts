@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TruelState, TruelAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Truel } from "./Truel.js";
-
+const Truel = /* @__PURE__ */ lazy(() => import("./Truel.js").then((mod) => ({ default: mod.Truel as unknown as React.ComponentType<unknown> })));
 export const truelSettings = {
   rounds: {
     kind: "enum" as const,

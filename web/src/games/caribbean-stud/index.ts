@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CaribbeanStudState, CaribbeanStudAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { rankHand } from "../../engines/deck/ranking.js";
-import { CaribbeanStud } from "./CaribbeanStud.js";
-
+const CaribbeanStud = /* @__PURE__ */ lazy(() => import("./CaribbeanStud.js").then((mod) => ({ default: mod.CaribbeanStud as unknown as React.ComponentType<unknown> })));
 export const caribbeanStudSettings = {
   anteSize: {
     kind: "enum" as const,

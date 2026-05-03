@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SedmaState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Sedma } from "./Sedma.js";
-
+const Sedma = /* @__PURE__ */ lazy(() => import("./Sedma.js").then((mod) => ({ default: mod.Sedma as unknown as React.ComponentType<unknown> })));
 const sedmaSettings = {} as const;
 type SedmaSettings = SettingsOf<typeof sedmaSettings>;
 type SedmaAction = { type: "play"; cardId: string };

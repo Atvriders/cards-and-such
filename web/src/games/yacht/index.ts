@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { YachtState, YachtAction, YachtCategory } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_YACHT_CATEGORIES, computeYachtScore } from "./state.js";
-import { Yacht } from "./Yacht.js";
-
+const Yacht = /* @__PURE__ */ lazy(() => import("./Yacht.js").then((mod) => ({ default: mod.Yacht as unknown as React.ComponentType<unknown> })));
 export const yachtSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

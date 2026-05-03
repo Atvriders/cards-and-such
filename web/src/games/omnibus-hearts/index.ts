@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OmnibusHeartsState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OmnibusHearts } from "./OmnibusHearts.js";
-
+const OmnibusHearts = /* @__PURE__ */ lazy(() => import("./OmnibusHearts.js").then((mod) => ({ default: mod.OmnibusHearts as unknown as React.ComponentType<unknown> })));
 const omnibusHeartsSettings = {} as const;
 type OmnibusHeartsSettings = SettingsOf<typeof omnibusHeartsSettings>;
 type OmnibusHeartsAction = { type: "play"; cardId: string };

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { KurodokoState, KurodokoAction, KurodokoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KurodokoGame } from "./Game.js";
+const KurodokoGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KurodokoGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const kurodokoPlugin: GamePlugin<KurodokoState, KurodokoAction, typeof settings> = {
   id: "kurodoko",

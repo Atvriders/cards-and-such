@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { FreecellClassicState, FreecellClassicAction } from "./state.js";
 import { initialState, reducer, isTerminal, freecellClassicRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { FreecellClassicGame } from "./Game.js";
-
+const FreecellClassicGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FreecellClassicGame as unknown as React.ComponentType<unknown> })));
 export const freecellClassicPlugin: GamePlugin<FreecellClassicState, FreecellClassicAction, Record<string, never>> = {
   id: "freecell-classic",
   title: "FreeCell (Classic)",

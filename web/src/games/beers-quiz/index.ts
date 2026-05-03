@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BeersQuizState, BeersQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BeersQuiz } from "./Game.js";
-
+const BeersQuiz = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BeersQuiz as unknown as React.ComponentType<unknown> })));
 export const beersQuizSettings = {
   questionCount: { kind: "enum" as const, label: "Questions", options: ["5", "10", "15"] as const, default: "10" as const },
 } as const;

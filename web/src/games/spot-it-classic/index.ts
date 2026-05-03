@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpotItClassicState, SpotItClassicAction, SpotItClassicSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpotItClassicGame } from "./Game.js";
+const SpotItClassicGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpotItClassicGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const spotItClassicPlugin: GamePlugin<SpotItClassicState, SpotItClassicAction, typeof settings> = {

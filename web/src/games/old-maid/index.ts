@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { OldMaidState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OldMaid } from "./OldMaid.js";
-
+const OldMaid = /* @__PURE__ */ lazy(() => import("./OldMaid.js").then((mod) => ({ default: mod.OldMaid as unknown as React.ComponentType<unknown> })));
 export const oldMaidSettings = {
   players: {
     kind: "enum" as const,

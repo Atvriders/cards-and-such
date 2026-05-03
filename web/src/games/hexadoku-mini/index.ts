@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HexadokuMiniState, HexadokuMiniStateAction, HexadokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HexadokuMiniGame } from "./Game.js";
+const HexadokuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HexadokuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const hexadokuMiniPlugin: GamePlugin<HexadokuMiniState, HexadokuMiniStateAction, typeof settings> = {
   id: "hexadoku-mini",

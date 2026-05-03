@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RobinsonIslandState, RobinsonIslandAction, RobinsonIslandSettings } from "./state.js";
 import { RobinsonIsland_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { coopHintSelector } from "../_shared/coop-engine.js";
-import { RobinsonIslandGame } from "./Game.js";
-
+const RobinsonIslandGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RobinsonIslandGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["Easy", "Standard", "Hard"] as const, default: "Standard" as const },
 } as const;

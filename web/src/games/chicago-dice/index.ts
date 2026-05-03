@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChicagoState, ChicagoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChicagoDice } from "./ChicagoDice.js";
-
+const ChicagoDice = /* @__PURE__ */ lazy(() => import("./ChicagoDice.js").then((mod) => ({ default: mod.ChicagoDice as unknown as React.ComponentType<unknown> })));
 export const chicagoDiceSettings = {
   rounds: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HotTakeState, HotTakeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HotTake } from "./Game.js";
-
+const HotTake = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HotTake as unknown as React.ComponentType<unknown> })));
 export const hotTakeSettings = {
   rounds: {
     kind: "enum" as const,

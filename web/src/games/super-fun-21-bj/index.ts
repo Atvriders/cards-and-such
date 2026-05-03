@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SuperFun21BjState, SuperFun21BjAction, SuperFun21BjSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SuperFun21BjGame } from "./Game.js";
+const SuperFun21BjGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SuperFun21BjGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const superFun21BjPlugin: GamePlugin<SuperFun21BjState, SuperFun21BjAction, typeof settings> = {

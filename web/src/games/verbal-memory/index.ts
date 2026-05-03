@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VerbalMemoryState, VerbalMemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { VerbalMemory } from "./VerbalMemory.js";
-
+const VerbalMemory = /* @__PURE__ */ lazy(() => import("./VerbalMemory.js").then((mod) => ({ default: mod.VerbalMemory as unknown as React.ComponentType<unknown> })));
 export const verbalMemorySettings = {
   lives: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TacoState, TacoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TacoTruck } from "./Game.js";
-
+const TacoTruck = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TacoTruck as unknown as React.ComponentType<unknown> })));
 export const tacoTruckPlugin = {
   id: "taco-truck",
   title: "Taco Truck",

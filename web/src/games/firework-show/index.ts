@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FireworkState, FireworkAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FireworkShow } from "./Game.js";
-
+const FireworkShow = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FireworkShow as unknown as React.ComponentType<unknown> })));
 export const fireworkShowPlugin = {
   id: "firework-show",
   title: "Firework Show",

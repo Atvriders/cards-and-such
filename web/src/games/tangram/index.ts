@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TangramState, TangramAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TangramGame } from "./Game.js";
-
+const TangramGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TangramGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const tangramPlugin: GamePlugin<TangramState, TangramAction, typeof settings> = {

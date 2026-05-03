@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DanceArrowsState, DanceArrowsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DanceArrows } from "./DanceArrows.js";
-
+const DanceArrows = /* @__PURE__ */ lazy(() => import("./DanceArrows.js").then((mod) => ({ default: mod.DanceArrows as unknown as React.ComponentType<unknown> })));
 export const danceArrowsSettings = {} as const;
 
 export const danceArrowsPlugin: GamePlugin<DanceArrowsState, DanceArrowsAction, typeof danceArrowsSettings> = {

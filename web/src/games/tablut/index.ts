@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TablutState, TablutAction, TablutSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tablut } from "./Game.js";
-
+const Tablut = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Tablut as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const tablutPlugin: GamePlugin<TablutState, TablutAction, typeof settings> = {

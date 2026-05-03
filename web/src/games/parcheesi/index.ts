@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ParcheesiState, ParcheesiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Parcheesi } from "./Game.js";
-
+const Parcheesi = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Parcheesi as unknown as React.ComponentType<unknown> })));
 export const parcheesiSettings = {
   opponents: {
     kind: "enum" as const,

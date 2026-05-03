@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PiquetState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Piquet } from "./Piquet.js";
-
+const Piquet = /* @__PURE__ */ lazy(() => import("./Piquet.js").then((mod) => ({ default: mod.Piquet as unknown as React.ComponentType<unknown> })));
 const piquetSettings = {
   botDifficulty: {
     kind: "enum" as const,

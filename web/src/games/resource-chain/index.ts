@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ResourceChainState, ResourceChainAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ResourceChain } from "./Game.js";
-
+const ResourceChain = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ResourceChain as unknown as React.ComponentType<unknown> })));
 export const resourceChainPlugin = {
   id: "resource-chain",
   title: "Resource Chain",

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PusoyDosState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PusoyDosGame } from "./Game.js";
-
+const PusoyDosGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PusoyDosGame as unknown as React.ComponentType<unknown> })));
 export const pusoyDosSettings = {
   dummy: { kind: "enum" as const, label: "Mode", options: ["off"] as const, default: "off" as const },
 } as const;

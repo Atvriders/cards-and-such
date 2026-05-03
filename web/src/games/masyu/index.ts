@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MasyuState, MasyuAction, MasyuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Masyu } from "./Game.js";
-
+const Masyu = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Masyu as unknown as React.ComponentType<unknown> })));
 export const masyuSettings = {
   difficulty: {
     kind: "enum" as const,

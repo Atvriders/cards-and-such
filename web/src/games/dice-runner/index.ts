@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceRunnerState, DiceRunnerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceRunner } from "./DiceRunner.js";
-
+const DiceRunner = /* @__PURE__ */ lazy(() => import("./DiceRunner.js").then((mod) => ({ default: mod.DiceRunner as unknown as React.ComponentType<unknown> })));
 export const diceRunnerSettings = {
   trackLength: {
     kind: "enum" as const,

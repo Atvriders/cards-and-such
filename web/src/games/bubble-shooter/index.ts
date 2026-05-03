@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BubbleShooterState, BubbleShooterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BubbleShooter } from "./BubbleShooter.js";
-
+const BubbleShooter = /* @__PURE__ */ lazy(() => import("./BubbleShooter.js").then((mod) => ({ default: mod.BubbleShooter as unknown as React.ComponentType<unknown> })));
 export const bubbleShooterSettings = {
   colors: {
     kind: "enum" as const,

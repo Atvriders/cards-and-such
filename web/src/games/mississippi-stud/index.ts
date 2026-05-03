@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MississippiStudState, MississippiStudAction } from "./state.js";
 import { initialState, reducer, isTerminal, visibleCommunity } from "./state.js";
-import { MississippiStudGame } from "./Game.js";
-
+const MississippiStudGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MississippiStudGame as unknown as React.ComponentType<unknown> })));
 export const mississippiStudSettings = {
   anteSize: {
     kind: "enum" as const,

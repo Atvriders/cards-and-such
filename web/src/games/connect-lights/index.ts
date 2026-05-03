@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { ConnectLightsState, ConnectLightsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ConnectLights } from "./Game.js";
-
+const ConnectLights = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ConnectLights as unknown as React.ComponentType<unknown> })));
 export const connectLightsSettings = {
   moves: {
     kind: "enum" as const,

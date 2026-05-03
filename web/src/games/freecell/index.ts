@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FreeCellState, FreeCellAction } from "./state.js";
 import { initialState, reducer, isTerminal, freecellRuleset } from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { FreeCell } from "./FreeCell.js";
-
+const FreeCell = /* @__PURE__ */ lazy(() => import("./FreeCell.js").then((mod) => ({ default: mod.FreeCell as unknown as React.ComponentType<unknown> })));
 export const freecellSettings = {
   freeCells: {
     kind: "number" as const,

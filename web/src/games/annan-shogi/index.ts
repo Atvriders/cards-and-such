@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnnanShogiState, AnnanShogiAction, AnnanShogiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AnnanShogiGame } from "./Game.js";
+const AnnanShogiGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AnnanShogiGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const annanShogiPlugin: GamePlugin<AnnanShogiState, AnnanShogiAction, typeof settings> = {

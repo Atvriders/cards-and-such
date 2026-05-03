@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { BountyHunterState, BountyHunterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BountyHunterGame } from "./Game.js";
-
+const BountyHunterGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BountyHunterGame as unknown as React.ComponentType<unknown> })));
 export const bountyHunterPlugin = {
   id: "bounty-hunter",
   title: "Bounty Hunter",

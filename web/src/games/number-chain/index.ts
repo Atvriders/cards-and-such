@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NumberChainState, NumberChainAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NumberChainGame } from "./Game.js";
-
+const NumberChainGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NumberChainGame as unknown as React.ComponentType<unknown> })));
 const numberChainSettings = {
   size: {
     kind: "number" as const,

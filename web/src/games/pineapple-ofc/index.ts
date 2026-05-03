@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PineappleOfcState, PineappleOfcAction, PineappleOfcSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PineappleOfcGame } from "./Game.js";
-
+const PineappleOfcGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PineappleOfcGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["1", "3", "5"] as const, default: "3" },
 } as const;

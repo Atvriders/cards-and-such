@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Pool9ballState, Pool9ballAction, Pool9ballSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Pool9ballGame } from "./Game.js";
-
+const Pool9ballGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Pool9ballGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 

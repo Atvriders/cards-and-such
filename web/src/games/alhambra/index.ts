@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { AlhambraState, AlhambraAction } from "./state.js";
 import { initialState, reducer, isTerminal, alhambraRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Game } from "./Game.js";
-
+const Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Game as unknown as React.ComponentType<unknown> })));
 export const alhambraSettings = {} as const;
 
 export const alhambraPlugin: GamePlugin<AlhambraState, AlhambraAction, typeof alhambraSettings> = {

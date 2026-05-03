@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DraftosaurusMiniState, DraftosaurusMiniAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DraftosaurusMini } from "./Game.js";
-
+const DraftosaurusMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DraftosaurusMini as unknown as React.ComponentType<unknown> })));
 const settings = {
   mode: { kind: "enum" as const, label: "Mode", options: ["easy"] as const, default: "easy" as const },
 } as const;

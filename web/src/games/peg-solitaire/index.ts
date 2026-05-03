@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PegSolitaireState, PegSolitaireAction } from "./state.js";
 import { initialState, reducer, isTerminal, getLegalJumps } from "./state.js";
-import { PegSolitaire } from "./PegSolitaire.js";
-
+const PegSolitaire = /* @__PURE__ */ lazy(() => import("./PegSolitaire.js").then((mod) => ({ default: mod.PegSolitaire as unknown as React.ComponentType<unknown> })));
 export const pegSolitaireSettings = {
   variant: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RDState, RDAction, RDSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RussianDraughts } from "./Game.js";
-
+const RussianDraughts = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RussianDraughts as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const russianDraughtsPlugin: GamePlugin<RDState, RDAction, typeof settings> = {

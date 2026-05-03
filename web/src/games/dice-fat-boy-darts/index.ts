@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiceFatBoyDartsState, DiceFatBoyDartsAction, DiceFatBoyDartsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceFatBoyDartsGame } from "./Game.js";
-
+const DiceFatBoyDartsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceFatBoyDartsGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 

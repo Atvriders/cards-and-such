@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TunnelRunnerState, TunnelRunnerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TunnelRunner } from "./Game.js";
-
+const TunnelRunner = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TunnelRunner as unknown as React.ComponentType<unknown> })));
 const tunnelRunnerSettings = {
   difficulty: {
     kind: "enum" as const,

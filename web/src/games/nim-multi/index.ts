@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NimMultiState, NimMultiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NimMulti } from "./NimMulti.js";
-
+const NimMulti = /* @__PURE__ */ lazy(() => import("./NimMulti.js").then((mod) => ({ default: mod.NimMulti as unknown as React.ComponentType<unknown> })));
 export const nimMultiSettings = {
   piles: {
     kind: "enum" as const,

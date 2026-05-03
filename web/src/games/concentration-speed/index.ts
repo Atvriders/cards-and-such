@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConcentrationSpeedState, ConcentrationSpeedAction, ConcentrationSpeedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ConcentrationSpeedGame } from "./Game.js";
-
+const ConcentrationSpeedGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ConcentrationSpeedGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

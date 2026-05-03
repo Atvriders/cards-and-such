@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StoryState, StoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StoryBuilder } from "./Game.js";
-
+const StoryBuilder = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.StoryBuilder as unknown as React.ComponentType<unknown> })));
 export const storyBuilderSettings = {
   rounds: {
     kind: "enum" as const,

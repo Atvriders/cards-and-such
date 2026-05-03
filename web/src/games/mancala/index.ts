@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MancalaState, MancalaAction, MancalaSettings } from "./state.js";
 import { initialState, reducer, isTerminal, PLAYER0_PITS } from "./state.js";
-import { Mancala } from "./Game.js";
-
+const Mancala = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Mancala as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const mancalaPlugin: GamePlugin<MancalaState, MancalaAction, typeof settings> = {

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { YoteState, YoteAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { YoteGame } from "./Game.js";
-
+const YoteGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.YoteGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const yotePlugin: GamePlugin<YoteState, YoteAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MahjongState, MahjongAction } from "../_shared/mahjongEngine.js";
 import { mahjongHint } from "../_shared/mahjongEngine.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MahjongGuangdongLayoutGame } from "./Game.js";
-
+const MahjongGuangdongLayoutGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MahjongGuangdongLayoutGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const mahjongGuangdongLayoutPlugin: GamePlugin<MahjongState, MahjongAction, typeof settings> = {

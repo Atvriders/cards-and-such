@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OilPumpState, OilPumpAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OilPump } from "./OilPump.js";
+const OilPump = /* @__PURE__ */ lazy(() => import("./OilPump.js").then((mod) => ({ default: mod.OilPump as unknown as React.ComponentType<unknown> })));
 export const oilPumpSettings = { rounds:{kind:"enum" as const,label:"Rounds",options:["5","10","15"] as const,default:"10" as const} } as const;
 type S=SettingsOf<typeof oilPumpSettings>;
 export const oilPumpPlugin:GamePlugin<OilPumpState,OilPumpAction,typeof oilPumpSettings> = {

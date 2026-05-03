@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KKState, KKAction, KKSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KingsAndKnights } from "./KingsAndKnights.js";
-
+const KingsAndKnights = /* @__PURE__ */ lazy(() => import("./KingsAndKnights.js").then((mod) => ({ default: mod.KingsAndKnights as unknown as React.ComponentType<unknown> })));
 export const kkSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PearlState, PearlAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Pearl } from "./Pearl.js";
-
+const Pearl = /* @__PURE__ */ lazy(() => import("./Pearl.js").then((mod) => ({ default: mod.Pearl as unknown as React.ComponentType<unknown> })));
 const pearlSettings = {
   difficulty: {
     kind: "enum" as const,

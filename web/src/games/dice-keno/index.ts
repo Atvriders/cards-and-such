@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceKenoState, DiceKenoAction, DiceKenoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceKenoGame } from "./Game.js";
+const DiceKenoGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceKenoGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const diceKenoPlugin: GamePlugin<DiceKenoState, DiceKenoAction, typeof settings> = {

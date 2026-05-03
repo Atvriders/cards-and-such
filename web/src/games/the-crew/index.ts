@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrewState, CrewAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TheCrewGame } from "./Game.js";
-
+const TheCrewGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TheCrewGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const theCrewPlugin: GamePlugin<CrewState, CrewAction, typeof settings> = {

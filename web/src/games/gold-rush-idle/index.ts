@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type GoldRushIdleState, type GoldRushIdleAction } from "./state.js";
-import { GoldRushIdle } from "./GoldRushIdle.js";
-
+const GoldRushIdle = /* @__PURE__ */ lazy(() => import("./GoldRushIdle.js").then((mod) => ({ default: mod.GoldRushIdle as unknown as React.ComponentType<unknown> })));
 export const goldRushIdleSettings = {
   nuggets: { kind: "enum" as const, label: "Nugget Goal", options: ["100", "500", "2500"] as const, default: "100" as const },
 } as const;

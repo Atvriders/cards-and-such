@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GravityLanderState, GravityLanderAction, GravityLanderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GravityLander } from "./GravityLander.js";
-
+const GravityLander = /* @__PURE__ */ lazy(() => import("./GravityLander.js").then((mod) => ({ default: mod.GravityLander as unknown as React.ComponentType<unknown> })));
 export const gravityLanderSettings = {} as const;
 
 export const gravityLanderPlugin: GamePlugin<

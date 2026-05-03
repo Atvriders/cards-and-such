@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CubeRollState, CubeRollAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CubeRoll } from "./CubeRoll.js";
-
+const CubeRoll = /* @__PURE__ */ lazy(() => import("./CubeRoll.js").then((mod) => ({ default: mod.CubeRoll as unknown as React.ComponentType<unknown> })));
 const cubeRollSettings = {
   difficulty: {
     kind: "enum" as const,

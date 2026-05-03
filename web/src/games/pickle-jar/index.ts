@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PickleJarState, PickleJarAction, PickleJarSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PickleJar } from "./Game.js";
-
+const PickleJar = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PickleJar as unknown as React.ComponentType<unknown> })));
 const pickleJarSettings = {
   jars: { kind: "enum" as const, label: "Jars", options: ["3", "5"] as const, default: "3" as const },
 } as const;

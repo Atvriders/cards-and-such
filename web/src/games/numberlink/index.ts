@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NumberlinkState, NumberlinkAction, NumberlinkSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Numberlink } from "./Numberlink.js";
-
+const Numberlink = /* @__PURE__ */ lazy(() => import("./Numberlink.js").then((mod) => ({ default: mod.Numberlink as unknown as React.ComponentType<unknown> })));
 export const numberlinkSettings = {
   difficulty: {
     kind: "enum" as const,

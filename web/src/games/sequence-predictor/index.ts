@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SequencePredictorState, SequencePredictorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SequencePredictorGame } from "./Game.js";
-
+const SequencePredictorGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SequencePredictorGame as unknown as React.ComponentType<unknown> })));
 export const sequencePredictorSettings = {
   rounds: {
     kind: "enum" as const,

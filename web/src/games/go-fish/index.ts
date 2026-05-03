@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type GoFishState, type GoFishAction } from "./state.js";
-import { GoFish } from "./GoFish.js";
-
+const GoFish = /* @__PURE__ */ lazy(() => import("./GoFish.js").then((mod) => ({ default: mod.GoFish as unknown as React.ComponentType<unknown> })));
 export const goFishSettings = {
   opponents: { kind: "enum" as const, label: "Opponents", options: ["1", "2", "3"] as const, default: "2" as const },
 } as const;

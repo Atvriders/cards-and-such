@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TicTacToeLargeState, TicTacToeLargeAction, TicTacToeLargeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TicTacToeLarge } from "./Game.js";
+const TicTacToeLarge = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TicTacToeLarge as unknown as React.ComponentType<unknown> })));
 const settings = { aiStrength: { kind:"enum" as const, label:"AI Strength", options:["easy","hard"] as const, default:"easy" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const ticTacToeLargePlugin: GamePlugin<TicTacToeLargeState, TicTacToeLargeAction, typeof settings> = {

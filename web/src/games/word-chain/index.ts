@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordChainState, WordChainAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordChain } from "./WordChain.js";
-
+const WordChain = /* @__PURE__ */ lazy(() => import("./WordChain.js").then((mod) => ({ default: mod.WordChain as unknown as React.ComponentType<unknown> })));
 export const wordChainSettings = {
   duration: {
     kind: "enum" as const,

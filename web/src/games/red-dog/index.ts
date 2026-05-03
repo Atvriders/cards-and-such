@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RedDogState, RedDogAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RedDog } from "./Game.js";
-
+const RedDog = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RedDog as unknown as React.ComponentType<unknown> })));
 export const redDogSettings = {
   startingBankroll: {
     kind: "number" as const,

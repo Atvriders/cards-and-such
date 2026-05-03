@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { WishState, WishAction, WishSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Wish } from "./Wish.js";
-
+const Wish = /* @__PURE__ */ lazy(() => import("./Wish.js").then((mod) => ({ default: mod.Wish as unknown as React.ComponentType<unknown> })));
 export const wishSettings = {} as const;
 
 export const wishPlugin: GamePlugin<WishState, WishAction, typeof wishSettings> = {

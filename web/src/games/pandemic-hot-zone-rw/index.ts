@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PandemicHotZoneRwState, PandemicHotZoneRwAction, PandemicHotZoneRwSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PandemicHotZoneRwGame } from "./Game.js";
+const PandemicHotZoneRwGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PandemicHotZoneRwGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const pandemicHotZoneRwPlugin: GamePlugin<PandemicHotZoneRwState, PandemicHotZoneRwAction, typeof settings> = {

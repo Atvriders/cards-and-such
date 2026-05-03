@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CheatBsState, CheatBsAction, CheatBsSettings } from "./state.js";
 import { CheatBs_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { CheatBsGame } from "./Game.js";
-
+const CheatBsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CheatBsGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

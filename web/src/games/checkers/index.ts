@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CheckersState, CheckersAction } from "./state.js";
 import { initialState, reducer, isTerminal, getLegalMoves } from "./state.js";
-import { Checkers } from "./Checkers.js";
-
+const Checkers = /* @__PURE__ */ lazy(() => import("./Checkers.js").then((mod) => ({ default: mod.Checkers as unknown as React.ComponentType<unknown> })));
 export const checkersSettings = {
   mandatoryCapture: {
     kind: "boolean" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { CarcassonneAmazonasState, CarcassonneAmazonasAction, CarcassonneAmazonasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { tileHintSelector } from "../_shared/tile-engine.js";
-import { CarcassonneAmazonasGame } from "./Game.js";
-
+const CarcassonneAmazonasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CarcassonneAmazonasGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

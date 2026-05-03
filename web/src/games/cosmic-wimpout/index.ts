@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CosmicWimpoutState, CosmicWimpoutAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CosmicWimpout } from "./CosmicWimpout.js";
-
+const CosmicWimpout = /* @__PURE__ */ lazy(() => import("./CosmicWimpout.js").then((mod) => ({ default: mod.CosmicWimpout as unknown as React.ComponentType<unknown> })));
 export const cosmicWimpoutSettings = {
   target: {
     kind: "enum" as const,

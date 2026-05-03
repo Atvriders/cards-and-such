@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TimesTablesState, TimesTablesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TimesTablesGame } from "./Game.js";
-
+const TimesTablesGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TimesTablesGame as unknown as React.ComponentType<unknown> })));
 export const timesTablesSettings = {
   tables: {
     kind: "enum" as const,

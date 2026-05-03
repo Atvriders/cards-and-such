@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { BingoCallState, BingoCallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BingoCall } from "./BingoCall.js";
-
+const BingoCall = /* @__PURE__ */ lazy(() => import("./BingoCall.js").then((mod) => ({ default: mod.BingoCall as unknown as React.ComponentType<unknown> })));
 export const bingoCallPlugin = {
   id: "bingo-call",
   title: "Bingo Call",

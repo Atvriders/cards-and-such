@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SwishCardsState, SwishCardsAction, SwishCardsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SwishCardsGame } from "./Game.js";
+const SwishCardsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SwishCardsGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const swishCardsPlugin: GamePlugin<SwishCardsState, SwishCardsAction, typeof settings> = {

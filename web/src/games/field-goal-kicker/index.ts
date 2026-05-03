@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type FieldGoalState, type FieldGoalAction } from "./state.js";
-import { FieldGoalKicker } from "./Game.js";
-
+const FieldGoalKicker = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FieldGoalKicker as unknown as React.ComponentType<unknown> })));
 export const fieldGoalSettings = {
   kicks: { kind: "enum" as const, label: "Kicks", options: ["10", "15"] as const, default: "10" as const },
 } as const;

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LeafBlowerState, LeafBlowerAction, LeafBlowerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LeafBlower } from "./Game.js";
-
+const LeafBlower = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LeafBlower as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: {
     kind: "enum" as const,

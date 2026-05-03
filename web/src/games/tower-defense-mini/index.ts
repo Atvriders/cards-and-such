@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TowerDefenseMiniState, TowerDefenseMiniAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TowerDefenseMini } from "./Game.js";
-
+const TowerDefenseMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TowerDefenseMini as unknown as React.ComponentType<unknown> })));
 export const towerDefenseMiniPlugin = {
   id: "tower-defense-mini",
   title: "Tower Defense Mini",

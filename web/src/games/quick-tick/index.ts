@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { QuickTickState, QuickTickAction, QuickTickSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { QuickTickGame } from "./Game.js";
-
+const QuickTickGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.QuickTickGame as unknown as React.ComponentType<unknown> })));
 export const quickTickSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CruelState, CruelAction } from "./state.js";
 import { initialState, reducer, isTerminal, cruelRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Cruel } from "./Cruel.js";
-
+const Cruel = /* @__PURE__ */ lazy(() => import("./Cruel.js").then((mod) => ({ default: mod.Cruel as unknown as React.ComponentType<unknown> })));
 export const cruelSettings = {} as const;
 
 type CruelSettings = SettingsOf<typeof cruelSettings>;

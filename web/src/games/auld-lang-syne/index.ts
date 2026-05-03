@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { AuldLangSyneState, AuldLangSyneAction, AuldLangSyneSettings } from "./state.js";
-import { AuldLangSyne } from "./AuldLangSyne.js";
-
+const AuldLangSyne = /* @__PURE__ */ lazy(() => import("./AuldLangSyne.js").then((mod) => ({ default: mod.AuldLangSyne as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const auldLangSynePlugin: GamePlugin<AuldLangSyneState, AuldLangSyneAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SamuraiSliceState, SamuraiSliceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SamuraiSlice } from "./SamuraiSlice.js";
-
+const SamuraiSlice = /* @__PURE__ */ lazy(() => import("./SamuraiSlice.js").then((mod) => ({ default: mod.SamuraiSlice as unknown as React.ComponentType<unknown> })));
 export const samuraiSliceSettings = {
   speed: {
     kind: "enum" as const,

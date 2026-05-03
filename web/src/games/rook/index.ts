@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RookState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Rook } from "./Rook.js";
-
+const Rook = /* @__PURE__ */ lazy(() => import("./Rook.js").then((mod) => ({ default: mod.Rook as unknown as React.ComponentType<unknown> })));
 const rookSettings = {} as const;
 type RookSettings = SettingsOf<typeof rookSettings>;
 type RookAction = { type: "play"; cardId: string };

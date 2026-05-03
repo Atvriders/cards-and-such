@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AppleState, AppleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ApplePicking } from "./Game.js";
-
+const ApplePicking = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ApplePicking as unknown as React.ComponentType<unknown> })));
 export const applePickingSettings = {
   goal: {
     kind: "enum" as const,

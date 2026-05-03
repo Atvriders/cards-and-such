@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SpitState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Spit } from "./Spit.js";
-
+const Spit = /* @__PURE__ */ lazy(() => import("./Spit.js").then((mod) => ({ default: mod.Spit as unknown as React.ComponentType<unknown> })));
 export const spitSettings = {
   botSpeed: {
     kind: "enum" as const,

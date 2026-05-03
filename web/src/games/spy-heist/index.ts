@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SpyHeistState, SpyHeistAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpyHeist } from "./Game.js";
-
+const SpyHeist = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpyHeist as unknown as React.ComponentType<unknown> })));
 export const spyHeistPlugin = {
   id: "spy-heist",
   title: "Spy Heist",

@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HawaiianHanafudaState, HawaiianHanafudaAction, HawaiianHanafudaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HawaiianHanafudaGame } from "./Game.js";
+const HawaiianHanafudaGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HawaiianHanafudaGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const hawaiianHanafudaPlugin: GamePlugin<HawaiianHanafudaState, HawaiianHanafudaAction, typeof settings> = {

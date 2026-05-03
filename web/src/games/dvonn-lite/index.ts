@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DvonnLiteState, DvonnLiteAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DvonnLite } from "./DvonnLite.js";
-
+const DvonnLite = /* @__PURE__ */ lazy(() => import("./DvonnLite.js").then((mod) => ({ default: mod.DvonnLite as unknown as React.ComponentType<unknown> })));
 export const dvonnLiteSettings = {
   opponent: {
     kind: "enum" as const,

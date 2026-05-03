@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { QJumpState, QJumpAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { QJump } from "./QJump.js";
-
+const QJump = /* @__PURE__ */ lazy(() => import("./QJump.js").then((mod) => ({ default: mod.QJump as unknown as React.ComponentType<unknown> })));
 export const qJumpPlugin: GamePlugin<QJumpState, QJumpAction, Record<never, never>> = {
   id: "qbert-like",
   title: "Q-Jump",

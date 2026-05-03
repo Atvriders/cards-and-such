@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BaccaratState, BaccaratAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Baccarat } from "./Baccarat.js";
-
+const Baccarat = /* @__PURE__ */ lazy(() => import("./Baccarat.js").then((mod) => ({ default: mod.Baccarat as unknown as React.ComponentType<unknown> })));
 export const baccaratSettings = {
   deckCount: {
     kind: "enum" as const,

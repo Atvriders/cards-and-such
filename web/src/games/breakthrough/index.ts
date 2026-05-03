@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BreakthroughState, BreakthroughAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Breakthrough } from "./Breakthrough.js";
-
+const Breakthrough = /* @__PURE__ */ lazy(() => import("./Breakthrough.js").then((mod) => ({ default: mod.Breakthrough as unknown as React.ComponentType<unknown> })));
 export const breakthroughSettings = {
   opponent: {
     kind: "enum" as const,

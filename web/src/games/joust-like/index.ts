@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SkyJoustState, SkyJoustAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SkyJoust } from "./SkyJoust.js";
-
+const SkyJoust = /* @__PURE__ */ lazy(() => import("./SkyJoust.js").then((mod) => ({ default: mod.SkyJoust as unknown as React.ComponentType<unknown> })));
 export const skyJoustPlugin: GamePlugin<SkyJoustState, SkyJoustAction, Record<never, never>> = {
   id: "joust-like",
   title: "Sky Joust",

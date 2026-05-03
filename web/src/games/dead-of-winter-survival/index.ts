@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DeadOfWinterSurvivalState, DeadOfWinterSurvivalAction, DeadOfWinterSurvivalSettings } from "./state.js";
 import { DeadOfWinterSurvival_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { coopHintSelector } from "../_shared/coop-engine.js";
-import { DeadOfWinterSurvivalGame } from "./Game.js";
-
+const DeadOfWinterSurvivalGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DeadOfWinterSurvivalGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["Easy", "Standard", "Hard"] as const, default: "Standard" as const },
 } as const;

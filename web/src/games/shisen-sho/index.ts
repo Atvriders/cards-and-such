@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ShisenShoState, ShisenAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ShisenSho } from "./ShisenSho.js";
-
+const ShisenSho = /* @__PURE__ */ lazy(() => import("./ShisenSho.js").then((mod) => ({ default: mod.ShisenSho as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const shisenShoPlugin: GamePlugin<ShisenShoState, ShisenAction, typeof settings> = {

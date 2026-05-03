@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FoxInForestState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FoxInForest } from "./FoxInForest.js";
-
+const FoxInForest = /* @__PURE__ */ lazy(() => import("./FoxInForest.js").then((mod) => ({ default: mod.FoxInForest as unknown as React.ComponentType<unknown> })));
 const foxInForestSettings = {} as const;
 type FoxInForestSettings = SettingsOf<typeof foxInForestSettings>;
 type FoxInForestAction = { type: "play"; cardId: string };

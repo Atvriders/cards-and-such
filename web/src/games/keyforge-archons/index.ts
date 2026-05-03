@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KeyforgeArchonsState, KeyforgeArchonsAction, KeyforgeArchonsSettings } from "./state.js";
 import { KeyforgeArchons_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { coopHintSelector } from "../_shared/coop-engine.js";
-import { KeyforgeArchonsGame } from "./Game.js";
-
+const KeyforgeArchonsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KeyforgeArchonsGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["Easy", "Standard", "Hard"] as const, default: "Standard" as const },
 } as const;

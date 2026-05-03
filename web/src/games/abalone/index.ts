@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AbaloneState, AbaloneAction, AbaloneSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Abalone } from "./Game.js";
-
+const Abalone = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Abalone as unknown as React.ComponentType<unknown> })));
 const settings = {
   startPosition: {
     kind: "enum" as const,

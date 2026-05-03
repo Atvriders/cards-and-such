@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChoHanState, ChoHanAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChoHan } from "./ChoHan.js";
-
+const ChoHan = /* @__PURE__ */ lazy(() => import("./ChoHan.js").then((mod) => ({ default: mod.ChoHan as unknown as React.ComponentType<unknown> })));
 export const choHanSettings = {
   rounds: {
     kind: "enum" as const,

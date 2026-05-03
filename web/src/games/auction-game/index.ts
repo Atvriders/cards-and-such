@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type AuctionState, type AuctionAction } from "./state.js";
-import { AuctionGame } from "./Game.js";
-
+const AuctionGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AuctionGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   rounds: {
     kind: "enum" as const,

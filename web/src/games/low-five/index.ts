@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LowFiveState, LowFiveAction, LowFiveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LowFiveGame } from "./Game.js";
+const LowFiveGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LowFiveGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const lowFivePlugin: GamePlugin<LowFiveState, LowFiveAction, typeof settings> = {

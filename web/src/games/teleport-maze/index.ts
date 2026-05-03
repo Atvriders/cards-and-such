@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TeleportMazeState, TeleportMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TeleportMazeGame } from "./Game.js";
-
+const TeleportMazeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TeleportMazeGame as unknown as React.ComponentType<unknown> })));
 export const teleportMazeSettings = {
   teleporters: {
     kind: "enum" as const,

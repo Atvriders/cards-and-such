@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MagnetsPuzzleState, MagnetsPuzzleAction, MagnetsPuzzleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MagnetsPuzzleGame } from "./Game.js";
+const MagnetsPuzzleGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MagnetsPuzzleGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const magnetsPuzzlePlugin: GamePlugin<MagnetsPuzzleState, MagnetsPuzzleAction, typeof settings> = {
   id: "magnets-puzzle",

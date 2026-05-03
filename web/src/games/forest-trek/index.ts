@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ForestTrekState, ForestTrekAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ForestTrek } from "./ForestTrek.js";
-
+const ForestTrek = /* @__PURE__ */ lazy(() => import("./ForestTrek.js").then((mod) => ({ default: mod.ForestTrek as unknown as React.ComponentType<unknown> })));
 export const forestTrekSettings = {
   size: {
     kind: "enum" as const,

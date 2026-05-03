@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SequenceFlashState, SequenceFlashAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SequenceFlash } from "./SequenceFlash.js";
-
+const SequenceFlash = /* @__PURE__ */ lazy(() => import("./SequenceFlash.js").then((mod) => ({ default: mod.SequenceFlash as unknown as React.ComponentType<unknown> })));
 export const sequenceFlashSettings = {} as const;
 
 export const sequenceFlashPlugin: GamePlugin<SequenceFlashState, SequenceFlashAction, typeof sequenceFlashSettings> = {

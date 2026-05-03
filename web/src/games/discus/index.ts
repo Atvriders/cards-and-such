@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type DiscusState, type DiscusAction } from "./state.js";
-import { Discus } from "./Game.js";
-
+const Discus = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Discus as unknown as React.ComponentType<unknown> })));
 export const discusSettings = {
   throws: { kind: "enum" as const, label: "Throws", options: ["3", "6"] as const, default: "3" as const },
 } as const;

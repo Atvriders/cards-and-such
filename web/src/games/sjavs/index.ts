@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SjavsState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Sjavs } from "./Sjavs.js";
-
+const Sjavs = /* @__PURE__ */ lazy(() => import("./Sjavs.js").then((mod) => ({ default: mod.Sjavs as unknown as React.ComponentType<unknown> })));
 const sjavsSettings = {
   botDifficulty: {
     kind: "enum" as const,

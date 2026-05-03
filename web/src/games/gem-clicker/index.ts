@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type GemClickerState, type GemClickerAction } from "./state.js";
-import { GemClicker } from "./GemClicker.js";
-
+const GemClicker = /* @__PURE__ */ lazy(() => import("./GemClicker.js").then((mod) => ({ default: mod.GemClicker as unknown as React.ComponentType<unknown> })));
 export const gemClickerSettings = {
   goal: { kind: "enum" as const, label: "Gem Goal", options: ["250", "1000", "5000"] as const, default: "250" as const },
 } as const;

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TwentyOneThreeBjState, TwentyOneThreeBjAction, TwentyOneThreeBjSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TwentyOneThreeBjGame } from "./Game.js";
+const TwentyOneThreeBjGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TwentyOneThreeBjGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const twentyOneThreeBjPlugin: GamePlugin<TwentyOneThreeBjState, TwentyOneThreeBjAction, typeof settings> = {

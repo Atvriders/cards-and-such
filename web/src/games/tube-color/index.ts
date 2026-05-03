@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TubeColorState, TubeColorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TubeColor } from "./TubeColor.js";
-
+const TubeColor = /* @__PURE__ */ lazy(() => import("./TubeColor.js").then((mod) => ({ default: mod.TubeColor as unknown as React.ComponentType<unknown> })));
 const tubeColorSettings = {
   tubes: {
     kind: "enum" as const,

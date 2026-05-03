@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CassetteAgnesBernauerState, CassetteAgnesBernauerAction, CassetteAgnesBernauerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CassetteAgnesBernauerGame } from "./Game.js";
+const CassetteAgnesBernauerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CassetteAgnesBernauerGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const cassetteAgnesBernauerPlugin: GamePlugin<CassetteAgnesBernauerState, CassetteAgnesBernauerAction, typeof settings> = {

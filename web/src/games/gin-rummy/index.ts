@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GinRummyState } from "./state.js";
 import { initialState, reducer, isTerminal, detectMelds, cardValue } from "./state.js";
-import { GinRummy } from "./GinRummy.js";
-
+const GinRummy = /* @__PURE__ */ lazy(() => import("./GinRummy.js").then((mod) => ({ default: mod.GinRummy as unknown as React.ComponentType<unknown> })));
 export const ginRummySettings = {
   botDifficulty: {
     kind: "enum" as const,

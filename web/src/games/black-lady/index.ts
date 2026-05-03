@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlackLadyState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BlackLady } from "./BlackLady.js";
-
+const BlackLady = /* @__PURE__ */ lazy(() => import("./BlackLady.js").then((mod) => ({ default: mod.BlackLady as unknown as React.ComponentType<unknown> })));
 const blackLadySettings = {} as const;
 type BlackLadySettings = SettingsOf<typeof blackLadySettings>;
 type BlackLadyAction = { type: "play"; cardId: string };

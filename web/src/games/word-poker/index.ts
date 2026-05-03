@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordPokerState, WordPokerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordPoker } from "./WordPoker.js";
-
+const WordPoker = /* @__PURE__ */ lazy(() => import("./WordPoker.js").then((mod) => ({ default: mod.WordPoker as unknown as React.ComponentType<unknown> })));
 export const wordPokerSettings = {
   rounds: {
     kind: "enum" as const,

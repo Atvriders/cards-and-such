@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SeaTowersState, SeaTowersAction } from "./state.js";
 import { initialState, reducer, isTerminal, seaTowersRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { SeaTowers } from "./SeaTowers.js";
-
+const SeaTowers = /* @__PURE__ */ lazy(() => import("./SeaTowers.js").then((mod) => ({ default: mod.SeaTowers as unknown as React.ComponentType<unknown> })));
 export const seaTowersSettings = {} as const;
 
 type SeaTowersSettings = SettingsOf<typeof seaTowersSettings>;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MonteCarloState, MonteCarloAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MonteCarlo } from "./MonteCarlo.js";
-
+const MonteCarlo = /* @__PURE__ */ lazy(() => import("./MonteCarlo.js").then((mod) => ({ default: mod.MonteCarlo as unknown as React.ComponentType<unknown> })));
 export const monteCarloSettings = {} as const;
 
 type MonteCarloSettings = SettingsOf<typeof monteCarloSettings>;

@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BalloonDartsState, BalloonDartsAction, BalloonDartsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BalloonDarts } from "./Game.js";
+const BalloonDarts = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BalloonDarts as unknown as React.ComponentType<unknown> })));
 const settings = { darts: { kind:"enum" as const, label:"Darts", options:["5","10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const balloonDartsPlugin: GamePlugin<BalloonDartsState, BalloonDartsAction, typeof settings> = {

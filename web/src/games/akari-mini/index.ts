@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { AkariMiniState, AkariMiniAction, AkariMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AkariMiniGame } from "./Game.js";
+const AkariMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AkariMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const akariMiniPlugin: GamePlugin<AkariMiniState, AkariMiniAction, typeof settings> = {
   id: "akari-mini",

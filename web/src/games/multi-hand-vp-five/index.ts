@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MultiHandVpFiveState, MultiHandVpFiveAction, MultiHandVpFiveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MultiHandVpFiveGame } from "./Game.js";
+const MultiHandVpFiveGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MultiHandVpFiveGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const multiHandVpFivePlugin: GamePlugin<MultiHandVpFiveState, MultiHandVpFiveAction, typeof settings> = {

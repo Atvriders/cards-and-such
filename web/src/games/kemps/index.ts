@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { KempsState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Kemps } from "./Kemps.js";
-
+const Kemps = /* @__PURE__ */ lazy(() => import("./Kemps.js").then((mod) => ({ default: mod.Kemps as unknown as React.ComponentType<unknown> })));
 export const kempsSettings = {
   rounds: {
     kind: "enum" as const,

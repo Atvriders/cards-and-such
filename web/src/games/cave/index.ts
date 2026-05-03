@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CaveState, CaveAction, CaveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Cave } from "./Cave.js";
-
+const Cave = /* @__PURE__ */ lazy(() => import("./Cave.js").then((mod) => ({ default: mod.Cave as unknown as React.ComponentType<unknown> })));
 export const caveSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RollThroughAgesState, RollThroughAgesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RollThroughAges } from "./RollThroughAges.js";
-
+const RollThroughAges = /* @__PURE__ */ lazy(() => import("./RollThroughAges.js").then((mod) => ({ default: mod.RollThroughAges as unknown as React.ComponentType<unknown> })));
 const rollThroughAgesSettings = {
   turns: {
     kind: "enum" as const,

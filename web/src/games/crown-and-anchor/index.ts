@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrownAndAnchorState, CrownAndAnchorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrownAndAnchor } from "./CrownAndAnchor.js";
-
+const CrownAndAnchor = /* @__PURE__ */ lazy(() => import("./CrownAndAnchor.js").then((mod) => ({ default: mod.CrownAndAnchor as unknown as React.ComponentType<unknown> })));
 export const crownAndAnchorSettings = {
   startingCoins: {
     kind: "enum" as const,

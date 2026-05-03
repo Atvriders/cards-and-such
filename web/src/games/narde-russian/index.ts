@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NardeState, NardeAction, NardeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NardeGame } from "./Game.js";
+const NardeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NardeGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const nardeRussianPlugin: GamePlugin<NardeState, NardeAction, typeof settings> = {

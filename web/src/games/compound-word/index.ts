@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CompoundState, CompoundAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CompoundWord } from "./Game.js";
-
+const CompoundWord = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CompoundWord as unknown as React.ComponentType<unknown> })));
 export const compoundWordSettings = {} as const;
 
 export const compoundWordPlugin: GamePlugin<CompoundState, CompoundAction, typeof compoundWordSettings> = {

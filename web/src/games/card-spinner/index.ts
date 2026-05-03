@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CardSpinnerState, CardSpinnerAction, CardSpinnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardSpinner } from "./Game.js";
-
+const CardSpinner = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardSpinner as unknown as React.ComponentType<unknown> })));
 const settings = {
   rounds: {
     kind: "enum" as const,

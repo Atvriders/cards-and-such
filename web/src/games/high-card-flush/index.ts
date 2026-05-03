@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HCFState, type HCFAction } from "./state.js";
-import { HighCardFlush } from "./HighCardFlush.js";
-
+const HighCardFlush = /* @__PURE__ */ lazy(() => import("./HighCardFlush.js").then((mod) => ({ default: mod.HighCardFlush as unknown as React.ComponentType<unknown> })));
 export const hcfSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["5", "10", "20"] as const, default: "10" as const },
 } as const;

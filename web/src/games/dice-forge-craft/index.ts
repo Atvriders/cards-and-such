@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { diceForgeCraftState, diceForgeCraftAction, diceForgeCraftSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { diceForgeCraftGame } from "./Game.js";
+const diceForgeCraftGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.diceForgeCraftGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const diceForgeCraftPlugin: GamePlugin<diceForgeCraftState, diceForgeCraftAction, typeof settings> = {

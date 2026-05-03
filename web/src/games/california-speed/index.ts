@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CalSpeedState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CaliforniaSpeed } from "./CaliforniaSpeed.js";
-
+const CaliforniaSpeed = /* @__PURE__ */ lazy(() => import("./CaliforniaSpeed.js").then((mod) => ({ default: mod.CaliforniaSpeed as unknown as React.ComponentType<unknown> })));
 export const calSpeedSettings = {
   botReaction: {
     kind: "enum" as const,

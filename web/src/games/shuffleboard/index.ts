@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type ShuffleboardState, type ShuffleboardAction } from "./state.js";
-import { Shuffleboard } from "./Game.js";
-
+const Shuffleboard = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Shuffleboard as unknown as React.ComponentType<unknown> })));
 export const shuffleboardSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["3", "5", "7"] as const, default: "5" as const },
 } as const;

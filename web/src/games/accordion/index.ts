@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AccordionState, AccordionAction } from "./state.js";
 import { initialState, reducer, isTerminal, legalMoves } from "./state.js";
-import { Accordion } from "./Accordion.js";
-
+const Accordion = /* @__PURE__ */ lazy(() => import("./Accordion.js").then((mod) => ({ default: mod.Accordion as unknown as React.ComponentType<unknown> })));
 export const accordionSettings = {
   allowJump3: {
     kind: "boolean" as const,

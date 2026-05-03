@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CleverHochVierState, CleverHochVierAction, CleverHochVierSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CleverHochVierGame } from "./Game.js";
-
+const CleverHochVierGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CleverHochVierGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

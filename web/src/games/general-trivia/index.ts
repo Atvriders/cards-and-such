@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TriviaState, TriviaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GeneralTrivia } from "./Game.js";
-
+const GeneralTrivia = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GeneralTrivia as unknown as React.ComponentType<unknown> })));
 export const generalTriviaSettings = {
   questions: {
     kind: "enum" as const,

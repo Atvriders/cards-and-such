@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { LemonadeState, LemonadeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LemonadeStand } from "./Game.js";
-
+const LemonadeStand = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LemonadeStand as unknown as React.ComponentType<unknown> })));
 export const lemonadeStandPlugin = {
   id: "lemonade-stand",
   title: "Lemonade Stand",

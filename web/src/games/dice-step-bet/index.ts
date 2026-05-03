@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceStepBetState, DiceStepBetAction, DiceStepBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceStepBet } from "./Game.js";
+const DiceStepBet = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceStepBet as unknown as React.ComponentType<unknown> })));
 const settings = { rounds: { kind:"enum" as const, label:"Rounds", options:["5","10"] as const, default:"5" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const diceStepBetPlugin: GamePlugin<DiceStepBetState, DiceStepBetAction, typeof settings> = {

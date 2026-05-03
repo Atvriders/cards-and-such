@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ContractRummyState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ContractRummy } from "./ContractRummy.js";
-
+const ContractRummy = /* @__PURE__ */ lazy(() => import("./ContractRummy.js").then((mod) => ({ default: mod.ContractRummy as unknown as React.ComponentType<unknown> })));
 export const contractRummySettings = {
   contractRound: {
     kind: "number" as const,

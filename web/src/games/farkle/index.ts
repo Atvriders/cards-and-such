@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FarkleState, FarkleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { scoreFarkleSelection } from "../../engines/dice/index.js";
-import { Farkle } from "./Farkle.js";
-
+const Farkle = /* @__PURE__ */ lazy(() => import("./Farkle.js").then((mod) => ({ default: mod.Farkle as unknown as React.ComponentType<unknown> })));
 export const farkleSettings = {
   target: {
     kind: "enum" as const,

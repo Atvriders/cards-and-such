@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TimeTrialState, TimeTrialAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TimeTrialGame } from "./Game.js";
-
+const TimeTrialGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TimeTrialGame as unknown as React.ComponentType<unknown> })));
 export const timeTrialSettings = {
   gates: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SudokuState, SudokuAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Sudoku } from "./Sudoku.js";
-
+const Sudoku = /* @__PURE__ */ lazy(() => import("./Sudoku.js").then((mod) => ({ default: mod.Sudoku as unknown as React.ComponentType<unknown> })));
 export const sudokuSettings = {
   difficulty: {
     kind: "enum" as const,

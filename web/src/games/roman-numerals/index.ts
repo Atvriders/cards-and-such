@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RomanNumeralsState, RomanNumeralsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RomanNumeralsGame } from "./Game.js";
-
+const RomanNumeralsGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RomanNumeralsGame as unknown as React.ComponentType<unknown> })));
 export const romanNumeralsSettings = {
   direction: {
     kind: "enum" as const,

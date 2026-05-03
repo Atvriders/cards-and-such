@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiplomatState, DiplomatAction } from "./state.js";
 import { initialState, reducer, isTerminal, diplomatRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Diplomat } from "./Diplomat.js";
-
+const Diplomat = /* @__PURE__ */ lazy(() => import("./Diplomat.js").then((mod) => ({ default: mod.Diplomat as unknown as React.ComponentType<unknown> })));
 export const diplomatSettings = {} as const;
 
 type DiplomatSettings = SettingsOf<typeof diplomatSettings>;

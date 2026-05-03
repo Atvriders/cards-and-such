@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TransportationQuizState, TransportationQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TransportationQuiz } from "./TransportationQuiz.js";
+const TransportationQuiz = /* @__PURE__ */ lazy(() => import("./TransportationQuiz.js").then((mod) => ({ default: mod.TransportationQuiz as unknown as React.ComponentType<unknown> })));
 export const transportationQuizSettings = { questionCount: { kind: "enum" as const, label: "Questions", options: ["5", "10", "15"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof transportationQuizSettings>;
 export const transportationQuizPlugin: GamePlugin<TransportationQuizState, TransportationQuizAction, typeof transportationQuizSettings> = {

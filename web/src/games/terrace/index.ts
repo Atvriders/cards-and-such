@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TerraceState, TerraceAction, TerraceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Terrace } from "./Terrace.js";
-
+const Terrace = /* @__PURE__ */ lazy(() => import("./Terrace.js").then((mod) => ({ default: mod.Terrace as unknown as React.ComponentType<unknown> })));
 export const terraceSettings = {} as const;
 
 export const terracePlugin: GamePlugin<TerraceState, TerraceAction, typeof terraceSettings> = {

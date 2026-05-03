@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Make24State, Make24Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Make24 } from "./Make24.js";
-
+const Make24 = /* @__PURE__ */ lazy(() => import("./Make24.js").then((mod) => ({ default: mod.Make24 as unknown as React.ComponentType<unknown> })));
 export const make24Settings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type PennyFlipState, type PennyFlipAction } from "./state.js";
-import { PennyFlip } from "./PennyFlip.js";
-
+const PennyFlip = /* @__PURE__ */ lazy(() => import("./PennyFlip.js").then((mod) => ({ default: mod.PennyFlip as unknown as React.ComponentType<unknown> })));
 export const pennyFlipSettings = {} as const;
 
 export const pennyFlipPlugin: GamePlugin<PennyFlipState, PennyFlipAction, typeof pennyFlipSettings> = {

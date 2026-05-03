@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TentsState, TentsAction, TentsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tents } from "./Game.js";
-
+const Tents = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Tents as unknown as React.ComponentType<unknown> })));
 export const tentsSettings = {
   size: {
     kind: "enum" as const,

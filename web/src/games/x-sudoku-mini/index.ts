@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { XSudokuMiniState, XSudokuMiniAction, XSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { XSudokuMiniGame } from "./Game.js";
+const XSudokuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.XSudokuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const xSudokuMiniPlugin: GamePlugin<XSudokuMiniState, XSudokuMiniAction, typeof settings> = {
   id: "x-sudoku-mini",

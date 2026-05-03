@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SokobanState, SokobanAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Sokoban } from "./Sokoban.js";
-
+const Sokoban = /* @__PURE__ */ lazy(() => import("./Sokoban.js").then((mod) => ({ default: mod.Sokoban as unknown as React.ComponentType<unknown> })));
 export const sokobanSettings = {
   difficulty: {
     kind: "enum" as const,

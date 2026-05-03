@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FourFiveSixState, FourFiveSixAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FourFiveSix } from "./FourFiveSix.js";
-
+const FourFiveSix = /* @__PURE__ */ lazy(() => import("./FourFiveSix.js").then((mod) => ({ default: mod.FourFiveSix as unknown as React.ComponentType<unknown> })));
 export const fourFiveSixSettings = {
   rounds: {
     kind: "enum" as const,

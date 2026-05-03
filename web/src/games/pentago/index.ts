@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PentagoState, PentagoAction, PentagoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Pentago } from "./Game.js";
-
+const Pentago = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Pentago as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const pentagoPlugin: GamePlugin<PentagoState, PentagoAction, typeof settings> = {

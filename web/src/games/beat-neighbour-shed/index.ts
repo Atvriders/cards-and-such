@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BeatNeighbourShedState, BeatNeighbourShedAction, BeatNeighbourShedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BeatNeighbourShedGame } from "./Game.js";
+const BeatNeighbourShedGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BeatNeighbourShedGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const beatNeighbourShedPlugin: GamePlugin<BeatNeighbourShedState, BeatNeighbourShedAction, typeof settings> = {

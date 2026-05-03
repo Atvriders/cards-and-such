@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EggCatcherState, EggCatcherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EggCatcher } from "./EggCatcher.js";
-
+const EggCatcher = /* @__PURE__ */ lazy(() => import("./EggCatcher.js").then((mod) => ({ default: mod.EggCatcher as unknown as React.ComponentType<unknown> })));
 export const eggCatcherSettings = {
   speed: {
     kind: "enum" as const,

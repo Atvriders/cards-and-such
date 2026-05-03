@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrosswordMini3x3State, CrosswordMini3x3Action, CrosswordMini3x3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CrosswordMini3x3Game } from "./Game.js";
+const CrosswordMini3x3Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CrosswordMini3x3Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const crosswordMini3x3Plugin: GamePlugin<CrosswordMini3x3State, CrosswordMini3x3Action, typeof settings> = {

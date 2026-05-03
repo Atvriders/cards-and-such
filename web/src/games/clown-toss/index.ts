@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClownTossState, ClownTossAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ClownToss } from "./ClownToss.js";
-
+const ClownToss = /* @__PURE__ */ lazy(() => import("./ClownToss.js").then((mod) => ({ default: mod.ClownToss as unknown as React.ComponentType<unknown> })));
 export const clownTossSettings = {
   pegs: {
     kind: "enum" as const,

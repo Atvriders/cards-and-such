@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TombOfKingsState, TombOfKingsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TombOfKings } from "./Game.js";
-
+const TombOfKings = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TombOfKings as unknown as React.ComponentType<unknown> })));
 export const tombOfKingsPlugin = {
   id: "tomb-of-kings",
   title: "Tomb of Kings",

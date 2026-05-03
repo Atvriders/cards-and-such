@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LavaLeapState, LavaLeapAction, LavaLeapSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LavaLeap } from "./Game.js";
-
+const LavaLeap = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LavaLeap as unknown as React.ComponentType<unknown> })));
 const lavaLeapSettings = {
   leaps: { kind: "enum" as const, label: "Leaps", options: ["5", "8"] as const, default: "5" as const },
 } as const;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PrefixSuffixState, PrefixSuffixAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PrefixSuffix } from "./PrefixSuffix.js";
-
+const PrefixSuffix = /* @__PURE__ */ lazy(() => import("./PrefixSuffix.js").then((mod) => ({ default: mod.PrefixSuffix as unknown as React.ComponentType<unknown> })));
 export const prefixSuffixSettings = {
   questionCount: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BourreState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Bourre } from "./Bourre.js";
-
+const Bourre = /* @__PURE__ */ lazy(() => import("./Bourre.js").then((mod) => ({ default: mod.Bourre as unknown as React.ComponentType<unknown> })));
 const bourreSettings = {
   botDifficulty: {
     kind: "enum" as const,

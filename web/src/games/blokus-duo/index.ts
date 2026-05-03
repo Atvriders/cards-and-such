@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BlokusDuoState, BlokusDuoAction, BlokusDuoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BlokusDuo } from "./Game.js";
-
+const BlokusDuo = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BlokusDuo as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const blokusDuoPlugin: GamePlugin<BlokusDuoState, BlokusDuoAction, typeof settings> = {

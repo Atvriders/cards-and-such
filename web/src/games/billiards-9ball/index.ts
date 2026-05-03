@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type Billiards9BallState, type Billiards9BallAction } from "./state.js";
-import { Billiards9Ball } from "./Game.js";
-
+const Billiards9Ball = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Billiards9Ball as unknown as React.ComponentType<unknown> })));
 export const billiards9BallSettings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["easy", "medium", "hard"] as const, default: "medium" as const },
 } as const;

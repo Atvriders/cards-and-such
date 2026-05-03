@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpoilFiveState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpoilFive } from "./SpoilFive.js";
-
+const SpoilFive = /* @__PURE__ */ lazy(() => import("./SpoilFive.js").then((mod) => ({ default: mod.SpoilFive as unknown as React.ComponentType<unknown> })));
 const spoilFiveSettings = {} as const;
 type SpoilFiveSettings = SettingsOf<typeof spoilFiveSettings>;
 type SpoilFiveAction = { type: "play"; cardId: string };

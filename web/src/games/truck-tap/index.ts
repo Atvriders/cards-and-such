@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TruckTapState, TruckTapAction, TruckTapSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TruckTapGame } from "./Game.js";
+const TruckTapGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TruckTapGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const truckTapPlugin: GamePlugin<TruckTapState, TruckTapAction, typeof settings> = {

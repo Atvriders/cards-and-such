@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import {
   unoInitial, unoReduce, unoTerminal,
   type UnoLikeState, type UnoLikeAction, type UnoColor,
 } from "@cards/shared";
-import { UnoLike } from "./UnoLike.js";
-
+const UnoLike = /* @__PURE__ */ lazy(() => import("./UnoLike.js").then((mod) => ({ default: mod.UnoLike as unknown as React.ComponentType<unknown> })));
 const settings = {
   bots: { kind: "enum" as const, label: "Opponents", options: ["1","2","3"] as const, default: "3" as const },
 } as const;

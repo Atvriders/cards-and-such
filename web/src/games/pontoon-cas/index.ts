@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PontoonCasState, PontoonCasAction, PontoonCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PontoonCasGame } from "./Game.js";
+const PontoonCasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PontoonCasGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 const hint = (state: PontoonCasState): HintTarget | null => {

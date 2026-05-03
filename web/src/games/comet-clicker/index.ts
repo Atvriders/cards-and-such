@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CometClickerState, CometClickerAction, CometClickerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CometClickerGame } from "./Game.js";
+const CometClickerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CometClickerGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const cometClickerPlugin: GamePlugin<CometClickerState, CometClickerAction, typeof settings> = {

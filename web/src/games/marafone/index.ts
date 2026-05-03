@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MarafoneState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Marafone } from "./Marafone.js";
-
+const Marafone = /* @__PURE__ */ lazy(() => import("./Marafone.js").then((mod) => ({ default: mod.Marafone as unknown as React.ComponentType<unknown> })));
 const marafoneSettings = {} as const;
 type MarafoneSettings = SettingsOf<typeof marafoneSettings>;
 type MarafoneAction = { type: "play"; cardId: string };

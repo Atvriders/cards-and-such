@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KabulSpielcafeState, KabulSpielcafeAction, KabulSpielcafeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KabulSpielcafeGame } from "./Game.js";
-
+const KabulSpielcafeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KabulSpielcafeGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   puzzles: { kind: "enum" as const, label: "Puzzles", options: ["10"] as const, default: "10" as const },
 } as const;

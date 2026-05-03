@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { TileMatchRushState, TileMatchRushAction } from "./state.js";
 import type { HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TileMatchRush } from "./TileMatchRush.js";
-
+const TileMatchRush = /* @__PURE__ */ lazy(() => import("./TileMatchRush.js").then((mod) => ({ default: mod.TileMatchRush as unknown as React.ComponentType<unknown> })));
 export const tileMatchRushSettings = {
   duration: {
     kind: "enum" as const,

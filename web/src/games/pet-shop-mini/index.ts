@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PetShopState, PetAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PetShopMini } from "./Game.js";
-
+const PetShopMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PetShopMini as unknown as React.ComponentType<unknown> })));
 export const petShopMiniPlugin = {
   id: "pet-shop-mini",
   title: "Pet Shop Mini",

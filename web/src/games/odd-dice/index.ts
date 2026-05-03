@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type OddDiceState, type OddDiceAction } from "./state.js";
-import { OddDice } from "./OddDice.js";
-
+const OddDice = /* @__PURE__ */ lazy(() => import("./OddDice.js").then((mod) => ({ default: mod.OddDice as unknown as React.ComponentType<unknown> })));
 export const oddDiceSettings = {
   rounds: {
     kind: "enum" as const,

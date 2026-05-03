@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ZombieDiceState, ZombieAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ZombieDice } from "./ZombieDice.js";
-
+const ZombieDice = /* @__PURE__ */ lazy(() => import("./ZombieDice.js").then((mod) => ({ default: mod.ZombieDice as unknown as React.ComponentType<unknown> })));
 export const zombieDiceSettings = {
   targetBrains: {
     kind: "enum" as const,

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlphameticsMiniState, AlphameticsMiniAction, AlphameticsMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AlphameticsMiniGame } from "./Game.js";
+const AlphameticsMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AlphameticsMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const alphameticsMiniPlugin: GamePlugin<AlphameticsMiniState, AlphameticsMiniAction, typeof settings> = {
   id: "alphametics-mini",

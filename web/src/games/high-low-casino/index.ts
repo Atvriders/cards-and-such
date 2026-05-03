@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HighLowState, HighLowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HighLowCasino } from "./Game.js";
-
+const HighLowCasino = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HighLowCasino as unknown as React.ComponentType<unknown> })));
 export const highLowSettings = {
   handsPerSession: {
     kind: "number" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpaceArenaState, SpaceArenaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SpaceArena } from "./SpaceArena.js";
-
+const SpaceArena = /* @__PURE__ */ lazy(() => import("./SpaceArena.js").then((mod) => ({ default: mod.SpaceArena as unknown as React.ComponentType<unknown> })));
 export const spaceArenaSettings = {
   difficulty: {
     kind: "enum" as const,

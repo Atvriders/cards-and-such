@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { MorseTapState, MorseTapAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MorseTap } from "./MorseTap.js";
-
+const MorseTap = /* @__PURE__ */ lazy(() => import("./MorseTap.js").then((mod) => ({ default: mod.MorseTap as unknown as React.ComponentType<unknown> })));
 export const morseTapSettings = {} as const;
 
 export const morseTapPlugin: GamePlugin<MorseTapState, MorseTapAction, typeof morseTapSettings> = {

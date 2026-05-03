@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HerbsQuizState, HerbsQuizAction, HerbsQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HerbsQuiz } from "./Game.js";
-
+const HerbsQuiz = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HerbsQuiz as unknown as React.ComponentType<unknown> })));
 const herbsQuizSettings = {
   questions: {
     kind: "enum" as const,

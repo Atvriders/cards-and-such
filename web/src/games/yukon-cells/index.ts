@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { YukonCellsState, YukonCellsAction } from "./state.js";
 import { initialState, reducer, isTerminal, yukonCellsRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { YukonCells } from "./YukonCells.js";
-
+const YukonCells = /* @__PURE__ */ lazy(() => import("./YukonCells.js").then((mod) => ({ default: mod.YukonCells as unknown as React.ComponentType<unknown> })));
 export const yukonCellsSettings = {} as const;
 
 export const yukonCellsPlugin: GamePlugin<YukonCellsState, YukonCellsAction, typeof yukonCellsSettings> = {

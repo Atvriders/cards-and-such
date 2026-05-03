@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UfoState, UfoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { UfoRescue } from "./UfoRescue.js";
-
+const UfoRescue = /* @__PURE__ */ lazy(() => import("./UfoRescue.js").then((mod) => ({ default: mod.UfoRescue as unknown as React.ComponentType<unknown> })));
 export const ufoRescueSettings = {
   humans: {
     kind: "enum" as const,

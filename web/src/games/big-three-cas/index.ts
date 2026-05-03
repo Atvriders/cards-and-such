@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BigThreeCasState, BigThreeCasAction, BigThreeCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BigThreeCasGame } from "./Game.js";
+const BigThreeCasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BigThreeCasGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const bigThreeCasPlugin: GamePlugin<BigThreeCasState, BigThreeCasAction, typeof settings> = {

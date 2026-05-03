@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoggleState, BoggleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Boggle } from "./Boggle.js";
-
+const Boggle = /* @__PURE__ */ lazy(() => import("./Boggle.js").then((mod) => ({ default: mod.Boggle as unknown as React.ComponentType<unknown> })));
 export const boggleSettings = {
   size: {
     kind: "enum" as const,

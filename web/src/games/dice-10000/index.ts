@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Dice10000State, Dice10000Action, Dice10000Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Dice10000Game } from "./Game.js";
+const Dice10000Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Dice10000Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const dice10000Plugin: GamePlugin<Dice10000State, Dice10000Action, typeof settings> = {

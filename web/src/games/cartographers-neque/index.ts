@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { cartographersNequeState, cartographersNequeAction, cartographersNequeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { cartographersNequeGame } from "./Game.js";
+const cartographersNequeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.cartographersNequeGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const cartographersNequePlugin: GamePlugin<cartographersNequeState, cartographersNequeAction, typeof settings> = {

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BlackjackSwitchCasState, BlackjackSwitchCasAction, BlackjackSwitchCasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BlackjackSwitchCasGame } from "./Game.js";
+const BlackjackSwitchCasGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BlackjackSwitchCasGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const blackjackSwitchCasPlugin: GamePlugin<BlackjackSwitchCasState, BlackjackSwitchCasAction, typeof settings> = {

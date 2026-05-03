@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpeedState } from "./state.js";
 import { initialState, reducer, isTerminal, canPlay } from "./state.js";
-import { Speed } from "./Speed.js";
-
+const Speed = /* @__PURE__ */ lazy(() => import("./Speed.js").then((mod) => ({ default: mod.Speed as unknown as React.ComponentType<unknown> })));
 export const speedSettings = {
   duration: {
     kind: "enum" as const,

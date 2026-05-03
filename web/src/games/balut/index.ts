@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BalutState, BalutAction, BalutCategory } from "./state.js";
 import { initialState, reducer, isTerminal, ALL_BALUT_CATEGORIES, computeBalutScore } from "./state.js";
-import { Balut } from "./Balut.js";
-
+const Balut = /* @__PURE__ */ lazy(() => import("./Balut.js").then((mod) => ({ default: mod.Balut as unknown as React.ComponentType<unknown> })));
 export const balutSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

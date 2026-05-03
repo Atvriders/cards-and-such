@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TabulaState, TabulaAction, TabulaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TabulaGame } from "./Game.js";
+const TabulaGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TabulaGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const tabulaGamePlugin: GamePlugin<TabulaState, TabulaAction, typeof settings> = {

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HorseshoesState, type HorseshoesAction } from "./state.js";
-import { Horseshoes } from "./Horseshoes.js";
-
+const Horseshoes = /* @__PURE__ */ lazy(() => import("./Horseshoes.js").then((mod) => ({ default: mod.Horseshoes as unknown as React.ComponentType<unknown> })));
 export const horseshoesSettings = {
   targetScore: { kind: "enum" as const, label: "Target Score", options: ["11", "15", "21"] as const, default: "21" as const },
 } as const;

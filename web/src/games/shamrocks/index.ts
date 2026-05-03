@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ShamrocksState, ShamrocksAction, ShamrocksSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Shamrocks } from "./Shamrocks.js";
-
+const Shamrocks = /* @__PURE__ */ lazy(() => import("./Shamrocks.js").then((mod) => ({ default: mod.Shamrocks as unknown as React.ComponentType<unknown> })));
 export const shamrocksSettings = {} as const;
 
 export const shamrocksPlugin: GamePlugin<ShamrocksState, ShamrocksAction, typeof shamrocksSettings> = {

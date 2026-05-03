@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PCState, PCAction, PCSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PoolCheckers } from "./Game.js";
-
+const PoolCheckers = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PoolCheckers as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const poolCheckersPlugin: GamePlugin<PCState, PCAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FoodTruckTycoonState, FoodTruckTycoonAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FoodTruckTycoon } from "./FoodTruckTycoon.js";
-
+const FoodTruckTycoon = /* @__PURE__ */ lazy(() => import("./FoodTruckTycoon.js").then((mod) => ({ default: mod.FoodTruckTycoon as unknown as React.ComponentType<unknown> })));
 export const foodTruckTycoonSettings = {
   days: {
     kind: "enum" as const,

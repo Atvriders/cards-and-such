@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DiddlerState, DiddlerAction, DiddlerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiddlerGame } from "./Game.js";
-
+const DiddlerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiddlerGame as unknown as React.ComponentType<unknown> })));
 export const diddlerSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

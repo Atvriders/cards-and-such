@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Yavalath3State, Yavalath3Action, Yavalath3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Yavalath3Game } from "./Game.js";
+const Yavalath3Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Yavalath3Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 export const yavalath3Plugin: GamePlugin<Yavalath3State, Yavalath3Action, typeof settings> = {

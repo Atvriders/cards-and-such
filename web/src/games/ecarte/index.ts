@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EcarteState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Ecarte } from "./Ecarte.js";
-
+const Ecarte = /* @__PURE__ */ lazy(() => import("./Ecarte.js").then((mod) => ({ default: mod.Ecarte as unknown as React.ComponentType<unknown> })));
 const ecarteSettings = {
   botDifficulty: {
     kind: "enum" as const,

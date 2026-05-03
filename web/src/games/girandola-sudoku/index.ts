@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GirandolaSudokuState, GirandolaSudokuStateAction, GirandolaSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GirandolaSudokuGame } from "./Game.js";
+const GirandolaSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GirandolaSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const girandolaSudokuPlugin: GamePlugin<GirandolaSudokuState, GirandolaSudokuStateAction, typeof settings> = {
   id: "girandola-sudoku",

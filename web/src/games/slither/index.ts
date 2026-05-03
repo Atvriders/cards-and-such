@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SlitherState, SlitherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SlitherGame } from "./Game.js";
-
+const SlitherGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SlitherGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const slitherPlugin: GamePlugin<SlitherState, SlitherAction, typeof settings> = {

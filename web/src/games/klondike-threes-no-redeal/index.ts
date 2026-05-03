@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { KlondikeThreesNoRedealState, KlondikeThreesNoRedealAction } from "./state.js";
 import { initialState, reducer, isTerminal, k3nrRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { KlondikeThreesNoRedealGame } from "./Game.js";
-
+const KlondikeThreesNoRedealGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KlondikeThreesNoRedealGame as unknown as React.ComponentType<unknown> })));
 export const klondikeThreesNoRedealPlugin: GamePlugin<KlondikeThreesNoRedealState, KlondikeThreesNoRedealAction, Record<string, never>> = {
   id: "klondike-threes-no-redeal",
   title: "Klondike by Threes (No Redeal)",

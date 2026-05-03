@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FillominoState, FillominoAction, FillominoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Fillomino } from "./Fillomino.js";
-
+const Fillomino = /* @__PURE__ */ lazy(() => import("./Fillomino.js").then((mod) => ({ default: mod.Fillomino as unknown as React.ComponentType<unknown> })));
 export const fillominoSettings = {
   difficulty: {
     kind: "enum" as const,

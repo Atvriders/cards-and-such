@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PenguinState, PenguinAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Penguin } from "./Penguin.js";
-
+const Penguin = /* @__PURE__ */ lazy(() => import("./Penguin.js").then((mod) => ({ default: mod.Penguin as unknown as React.ComponentType<unknown> })));
 export const penguinSettings = {} as const;
 
 export const penguinPlugin: GamePlugin<PenguinState, PenguinAction, typeof penguinSettings> = {

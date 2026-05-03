@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MastermindState, MastermindAction, MastermindSettings } from "./state.js";
 import { Mastermind_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { MastermindGame } from "./Game.js";
-
+const MastermindGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MastermindGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

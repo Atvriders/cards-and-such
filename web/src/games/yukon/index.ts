@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { YukonState, YukonAction } from "./state.js";
 import { initialState, reducer, isTerminal, yukonRuleset } from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Yukon } from "./Yukon.js";
-
+const Yukon = /* @__PURE__ */ lazy(() => import("./Yukon.js").then((mod) => ({ default: mod.Yukon as unknown as React.ComponentType<unknown> })));
 export const yukonSettings = {} as const;
 
 type YukonSettings = SettingsOf<typeof yukonSettings>;

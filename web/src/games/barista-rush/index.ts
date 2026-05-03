@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BaristaRushState, BaristaRushAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BaristaRushGame } from "./Game.js";
-
+const BaristaRushGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BaristaRushGame as unknown as React.ComponentType<unknown> })));
 export const baristaRushSettings = {
   speed: {
     kind: "enum" as const,

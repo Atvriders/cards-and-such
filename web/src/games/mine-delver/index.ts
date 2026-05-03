@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MineDelverState, MineDelverAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MineDelver } from "./Game.js";
-
+const MineDelver = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MineDelver as unknown as React.ComponentType<unknown> })));
 export const mineDelverPlugin = {
   id: "mine-delver",
   title: "Mine Delver",

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { NumbrixMiniState, NumbrixMiniAction, NumbrixMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NumbrixMiniGame } from "./Game.js";
+const NumbrixMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NumbrixMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const numbrixMiniPlugin: GamePlugin<NumbrixMiniState, NumbrixMiniAction, typeof settings> = {
   id: "numbrix-mini",

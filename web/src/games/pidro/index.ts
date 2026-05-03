@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PidroState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Pidro } from "./Pidro.js";
-
+const Pidro = /* @__PURE__ */ lazy(() => import("./Pidro.js").then((mod) => ({ default: mod.Pidro as unknown as React.ComponentType<unknown> })));
 const pidroSettings = {
   botDifficulty: {
     kind: "enum" as const,

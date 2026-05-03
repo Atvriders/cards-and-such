@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HalloweenPumpkinState, type HalloweenPumpkinAction } from "./state.js";
-import { HalloweenPumpkinGame } from "./Game.js";
-
+const HalloweenPumpkinGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HalloweenPumpkinGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   size: {
     kind: "enum" as const,

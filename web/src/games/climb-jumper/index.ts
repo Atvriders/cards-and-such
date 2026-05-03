@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClimbJumperState, ClimbJumperAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ClimbJumper } from "./ClimbJumper.js";
-
+const ClimbJumper = /* @__PURE__ */ lazy(() => import("./ClimbJumper.js").then((mod) => ({ default: mod.ClimbJumper as unknown as React.ComponentType<unknown> })));
 export const climbJumperSettings = {
   difficulty: {
     kind: "enum" as const,

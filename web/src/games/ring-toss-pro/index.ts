@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RingTossProState, RingTossProAction, RingTossProSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RingTossPro } from "./Game.js";
+const RingTossPro = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RingTossPro as unknown as React.ComponentType<unknown> })));
 const settings = { rings: { kind:"enum" as const, label:"Rings", options:["5","10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const ringTossProPlugin: GamePlugin<RingTossProState, RingTossProAction, typeof settings> = {

@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Sudoku159State, Sudoku159StateAction, Sudoku159Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Sudoku159Game } from "./Game.js";
+const Sudoku159Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Sudoku159Game as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const sudoku159Plugin: GamePlugin<Sudoku159State, Sudoku159StateAction, typeof settings> = {
   id: "sudoku-159",

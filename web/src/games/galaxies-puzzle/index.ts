@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GalaxiesState, GalaxiesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Galaxies } from "./Galaxies.js";
-
+const Galaxies = /* @__PURE__ */ lazy(() => import("./Galaxies.js").then((mod) => ({ default: mod.Galaxies as unknown as React.ComponentType<unknown> })));
 const galaxiesSettings = {
   difficulty: {
     kind: "enum" as const,

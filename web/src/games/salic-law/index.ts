@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SalicLawState, SalicLawAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SalicLaw } from "./SalicLaw.js";
-
+const SalicLaw = /* @__PURE__ */ lazy(() => import("./SalicLaw.js").then((mod) => ({ default: mod.SalicLaw as unknown as React.ComponentType<unknown> })));
 export const salicLawPlugin: GamePlugin<SalicLawState, SalicLawAction, Record<string, never>> = {
   id: "salic-law",
   title: "Salic Law",

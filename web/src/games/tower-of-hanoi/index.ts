@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TowerOfHanoiState, TowerOfHanoiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TowerOfHanoi } from "./TowerOfHanoi.js";
-
+const TowerOfHanoi = /* @__PURE__ */ lazy(() => import("./TowerOfHanoi.js").then((mod) => ({ default: mod.TowerOfHanoi as unknown as React.ComponentType<unknown> })));
 export const towerOfHanoiSettings = {
   disks: {
     kind: "enum" as const,

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type IdleFarmerState, type IdleFarmerAction } from "./state.js";
-import { IdleFarmer } from "./IdleFarmer.js";
-
+const IdleFarmer = /* @__PURE__ */ lazy(() => import("./IdleFarmer.js").then((mod) => ({ default: mod.IdleFarmer as unknown as React.ComponentType<unknown> })));
 export const idleFarmerSettings = {
   goal: { kind: "enum" as const, label: "Crop Goal", options: ["500", "2000", "10000"] as const, default: "500" as const },
 } as const;

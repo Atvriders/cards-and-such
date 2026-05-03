@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MemoryMatchState, MemoryMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MemoryMatch } from "./MemoryMatch.js";
-
+const MemoryMatch = /* @__PURE__ */ lazy(() => import("./MemoryMatch.js").then((mod) => ({ default: mod.MemoryMatch as unknown as React.ComponentType<unknown> })));
 export const memoryMatchSettings = {
   size: {
     kind: "enum" as const,

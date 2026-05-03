@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CasinoHoldemState, CasinoHoldemAction } from "./state.js";
 import { initialState, reducer, isTerminal, bestHand } from "./state.js";
-import { CasinoHoldemGame } from "./Game.js";
-
+const CasinoHoldemGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CasinoHoldemGame as unknown as React.ComponentType<unknown> })));
 export const casinoHoldemSettings = {
   anteSize: {
     kind: "enum" as const,

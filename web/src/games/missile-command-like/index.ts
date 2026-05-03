@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MissileCommandState, MissileCommandAction, MissileCommandSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MissileCommand } from "./MissileCommand.js";
-
+const MissileCommand = /* @__PURE__ */ lazy(() => import("./MissileCommand.js").then((mod) => ({ default: mod.MissileCommand as unknown as React.ComponentType<unknown> })));
 export const missileCommandSettings = {} as const;
 
 export const missileCommandPlugin: GamePlugin<

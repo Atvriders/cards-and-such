@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GrammarFixState, GrammarFixAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GrammarFix } from "./GrammarFix.js";
-
+const GrammarFix = /* @__PURE__ */ lazy(() => import("./GrammarFix.js").then((mod) => ({ default: mod.GrammarFix as unknown as React.ComponentType<unknown> })));
 export const grammarFixSettings = {
   questionCount: {
     kind: "enum" as const,

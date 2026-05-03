@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ForTheCrownSagaState, ForTheCrownSagaAction, ForTheCrownSagaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ForTheCrownSagaGame } from "./Game.js";
+const ForTheCrownSagaGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ForTheCrownSagaGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const forTheCrownSagaPlugin: GamePlugin<ForTheCrownSagaState, ForTheCrownSagaAction, typeof settings> = {

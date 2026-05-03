@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RPSState, RPSAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RockPaperScissors } from "./RockPaperScissors.js";
-
+const RockPaperScissors = /* @__PURE__ */ lazy(() => import("./RockPaperScissors.js").then((mod) => ({ default: mod.RockPaperScissors as unknown as React.ComponentType<unknown> })));
 export const rpsSettings = {
   rounds: {
     kind: "enum" as const,

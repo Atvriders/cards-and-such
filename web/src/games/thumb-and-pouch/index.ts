@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ThumbAndPouchState, ThumbAndPouchAction } from "./state.js";
 import { initialState, reducer, isTerminal, thumbRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { ThumbAndPouch } from "./ThumbAndPouch.js";
-
+const ThumbAndPouch = /* @__PURE__ */ lazy(() => import("./ThumbAndPouch.js").then((mod) => ({ default: mod.ThumbAndPouch as unknown as React.ComponentType<unknown> })));
 export const thumbAndPouchSettings = {} as const;
 
 type ThumbAndPouchSettings = SettingsOf<typeof thumbAndPouchSettings>;

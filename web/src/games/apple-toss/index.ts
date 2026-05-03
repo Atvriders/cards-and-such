@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AppleTossState, AppleTossAction, AppleTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AppleToss } from "./Game.js";
-
+const AppleToss = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AppleToss as unknown as React.ComponentType<unknown> })));
 const appleTossSettings = {
   duration: { kind: "enum" as const, label: "Duration (seconds)", options: ["20", "30", "45"] as const, default: "30" as const },
 } as const;

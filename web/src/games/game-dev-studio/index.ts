@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { GameDevState, GameDevAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GameDevStudio } from "./Game.js";
-
+const GameDevStudio = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GameDevStudio as unknown as React.ComponentType<unknown> })));
 export const gameDevStudioPlugin = {
   id: "game-dev-studio",
   title: "Game Dev Studio",

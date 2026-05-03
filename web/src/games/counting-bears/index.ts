@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CountingState, CountingAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CountingBears } from "./Game.js";
-
+const CountingBears = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CountingBears as unknown as React.ComponentType<unknown> })));
 export const countingBearsSettings = {
   difficulty: {
     kind: "enum" as const,

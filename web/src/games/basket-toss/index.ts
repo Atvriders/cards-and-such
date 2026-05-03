@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BasketTossState, BasketTossAction, BasketTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BasketToss } from "./Game.js";
+const BasketToss = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BasketToss as unknown as React.ComponentType<unknown> })));
 const settings = { balls: { kind:"enum" as const, label:"Balls", options:["5","10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const basketTossPlugin: GamePlugin<BasketTossState, BasketTossAction, typeof settings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ScorpionState, ScorpionAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Scorpion } from "./Scorpion.js";
-
+const Scorpion = /* @__PURE__ */ lazy(() => import("./Scorpion.js").then((mod) => ({ default: mod.Scorpion as unknown as React.ComponentType<unknown> })));
 export const scorpionSettings = {} as const;
 
 type ScorpionSettings = SettingsOf<typeof scorpionSettings>;

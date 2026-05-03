@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AcrosticState, AcrosticAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Acrostic } from "./Acrostic.js";
-
+const Acrostic = /* @__PURE__ */ lazy(() => import("./Acrostic.js").then((mod) => ({ default: mod.Acrostic as unknown as React.ComponentType<unknown> })));
 export const acrosticSettings = {} as const;
 
 type AcrosticSettingsType = SettingsOf<typeof acrosticSettings>;

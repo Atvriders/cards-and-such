@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { RepeatAfterMeState, RepeatAfterMeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RepeatAfterMe } from "./RepeatAfterMe.js";
-
+const RepeatAfterMe = /* @__PURE__ */ lazy(() => import("./RepeatAfterMe.js").then((mod) => ({ default: mod.RepeatAfterMe as unknown as React.ComponentType<unknown> })));
 export const repeatAfterMeSettings = {} as const;
 
 export const repeatAfterMePlugin: GamePlugin<RepeatAfterMeState, RepeatAfterMeAction, typeof repeatAfterMeSettings> = {

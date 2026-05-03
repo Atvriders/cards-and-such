@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WordPyramidState, WordPyramidAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WordPyramid } from "./Game.js";
-
+const WordPyramid = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WordPyramid as unknown as React.ComponentType<unknown> })));
 export const wordPyramidSettings = {} as const;
 
 export const wordPyramidPlugin: GamePlugin<WordPyramidState, WordPyramidAction, typeof wordPyramidSettings> = {

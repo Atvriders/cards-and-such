@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { EgyptianRatscrewState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EgyptianRatscrew } from "./EgyptianRatscrew.js";
-
+const EgyptianRatscrew = /* @__PURE__ */ lazy(() => import("./EgyptianRatscrew.js").then((mod) => ({ default: mod.EgyptianRatscrew as unknown as React.ComponentType<unknown> })));
 export const egyptianRatscrewSettings = {
   botSpeed: {
     kind: "enum" as const,

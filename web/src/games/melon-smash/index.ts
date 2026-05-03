@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MelonSmashState, MelonSmashAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MelonSmash } from "./MelonSmash.js";
+const MelonSmash = /* @__PURE__ */ lazy(() => import("./MelonSmash.js").then((mod) => ({ default: mod.MelonSmash as unknown as React.ComponentType<unknown> })));
 export const melonSmashSettings = { rounds:{kind:"enum" as const,label:"Rounds",options:["5","10","15"] as const,default:"10" as const} } as const;
 type S=SettingsOf<typeof melonSmashSettings>;
 export const melonSmashPlugin:GamePlugin<MelonSmashState,MelonSmashAction,typeof melonSmashSettings> = {

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MendikotState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Mendikot } from "./Mendikot.js";
-
+const Mendikot = /* @__PURE__ */ lazy(() => import("./Mendikot.js").then((mod) => ({ default: mod.Mendikot as unknown as React.ComponentType<unknown> })));
 const mendikotSettings = {} as const;
 type MendikotSettings = SettingsOf<typeof mendikotSettings>;
 type MendikotAction = { type: "play"; cardId: string };

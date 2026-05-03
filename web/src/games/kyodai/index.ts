@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KyodaiState, KyodaiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Kyodai } from "./Kyodai.js";
-
+const Kyodai = /* @__PURE__ */ lazy(() => import("./Kyodai.js").then((mod) => ({ default: mod.Kyodai as unknown as React.ComponentType<unknown> })));
 export const kyodaiSettings = {
   shuffle: {
     kind: "boolean" as const,

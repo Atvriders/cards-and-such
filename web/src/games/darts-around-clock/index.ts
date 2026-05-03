@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DartsAroundClockState, DartsAroundClockAction, DartsAroundClockSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DartsAroundClockGame } from "./Game.js";
-
+const DartsAroundClockGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DartsAroundClockGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"Standard rules", default:true } } as const;
 type S = SettingsOf<typeof settings>;
 

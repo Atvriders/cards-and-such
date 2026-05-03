@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CryptogramState, CryptogramAction, CryptogramSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Cryptogram } from "./Game.js";
-
+const Cryptogram = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Cryptogram as unknown as React.ComponentType<unknown> })));
 export const cryptogramSettings = {
   difficulty: {
     kind: "enum" as const,

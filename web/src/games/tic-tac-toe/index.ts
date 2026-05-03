@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TTTState, TTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TicTacToe } from "./TicTacToe.js";
-
+const TicTacToe = /* @__PURE__ */ lazy(() => import("./TicTacToe.js").then((mod) => ({ default: mod.TicTacToe as unknown as React.ComponentType<unknown> })));
 export const ticTacToeSettings = {
   boardSize: {
     kind: "enum" as const,

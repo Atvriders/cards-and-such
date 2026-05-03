@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SevenStreakState, SevenStreakAction, SevenStreakSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SevenStreakGame } from "./Game.js";
+const SevenStreakGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SevenStreakGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const sevenStreakPlugin: GamePlugin<SevenStreakState, SevenStreakAction, typeof settings> = {

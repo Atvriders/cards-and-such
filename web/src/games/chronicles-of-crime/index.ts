@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChroniclesOfCrimeState, ChroniclesOfCrimeAction, ChroniclesOfCrimeSettings } from "./state.js";
 import { ChroniclesOfCrime_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { ChroniclesOfCrimeGame } from "./Game.js";
-
+const ChroniclesOfCrimeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ChroniclesOfCrimeGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

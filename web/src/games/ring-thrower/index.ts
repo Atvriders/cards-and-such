@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RingThrowerState, RingThrowerAction, RingThrowerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RingThrowerGame } from "./Game.js";
-
+const RingThrowerGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RingThrowerGame as unknown as React.ComponentType<unknown> })));
 export const ringThrowerSettings = {} as const;
 
 export const ringThrowerPlugin: GamePlugin<

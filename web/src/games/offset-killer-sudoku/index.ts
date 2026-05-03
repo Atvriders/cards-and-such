@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { OffsetKillerSudokuState, OffsetKillerSudokuStateAction, OffsetKillerSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { OffsetKillerSudokuGame } from "./Game.js";
+const OffsetKillerSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OffsetKillerSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const offsetKillerSudokuPlugin: GamePlugin<OffsetKillerSudokuState, OffsetKillerSudokuStateAction, typeof settings> = {
   id: "offset-killer-sudoku",

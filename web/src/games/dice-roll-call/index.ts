@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceRollCallState, DiceRollCallAction, DiceRollCallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceRollCallGame } from "./Game.js";
+const DiceRollCallGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DiceRollCallGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const diceRollCallPlugin: GamePlugin<DiceRollCallState, DiceRollCallAction, typeof settings> = {

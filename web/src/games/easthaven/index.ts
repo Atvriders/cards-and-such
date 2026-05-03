@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EasthavenState, EasthavenAction } from "./state.js";
 import { initialState, reducer, isTerminal, easthavenRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Easthaven } from "./Easthaven.js";
-
+const Easthaven = /* @__PURE__ */ lazy(() => import("./Easthaven.js").then((mod) => ({ default: mod.Easthaven as unknown as React.ComponentType<unknown> })));
 export const easthavenSettings = {} as const;
 
 type EasthavenSettings = SettingsOf<typeof easthavenSettings>;

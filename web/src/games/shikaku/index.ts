@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ShikakuState, ShikakuAction, ShikakuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Shikaku } from "./Shikaku.js";
-
+const Shikaku = /* @__PURE__ */ lazy(() => import("./Shikaku.js").then((mod) => ({ default: mod.Shikaku as unknown as React.ComponentType<unknown> })));
 export const shikakuSettings = {
   difficulty: {
     kind: "enum" as const,

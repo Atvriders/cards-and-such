@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HomeRunDerbyState, type HomeRunDerbyAction } from "./state.js";
-import { HomeRunDerby } from "./Game.js";
-
+const HomeRunDerby = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HomeRunDerby as unknown as React.ComponentType<unknown> })));
 export const homeRunDerbySettings = {
   outs: { kind: "enum" as const, label: "Outs", options: ["5", "10"] as const, default: "5" as const },
 } as const;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MinesweeperState, MinesweeperAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Minesweeper } from "./Minesweeper.js";
-
+const Minesweeper = /* @__PURE__ */ lazy(() => import("./Minesweeper.js").then((mod) => ({ default: mod.Minesweeper as unknown as React.ComponentType<unknown> })));
 export const minesweeperSettings = {
   difficulty: {
     kind: "enum" as const,

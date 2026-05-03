@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TapaState, TapaAction, TapaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tapa } from "./Tapa.js";
-
+const Tapa = /* @__PURE__ */ lazy(() => import("./Tapa.js").then((mod) => ({ default: mod.Tapa as unknown as React.ComponentType<unknown> })));
 export const tapaSettings = {
   difficulty: {
     kind: "enum" as const,

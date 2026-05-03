@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RollRightState, RollRightAction, RollRightSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { RollRightGame } from "./Game.js";
-
+const RollRightGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.RollRightGame as unknown as React.ComponentType<unknown> })));
 export const rollRightSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

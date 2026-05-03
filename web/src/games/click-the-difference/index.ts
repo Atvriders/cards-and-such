@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClickDiffState, ClickDiffAction, ClickDiffSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ClickTheDifferenceGame } from "./Game.js";
-
+const ClickTheDifferenceGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ClickTheDifferenceGame as unknown as React.ComponentType<unknown> })));
 export const clickTheDifferenceSettings = {
   variation: {
     kind: "enum" as const,

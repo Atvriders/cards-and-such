@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BridgesState, BridgesAction, BridgesSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Bridges } from "./Bridges.js";
-
+const Bridges = /* @__PURE__ */ lazy(() => import("./Bridges.js").then((mod) => ({ default: mod.Bridges as unknown as React.ComponentType<unknown> })));
 export const bridgesSettings = {
   difficulty: {
     kind: "enum" as const,

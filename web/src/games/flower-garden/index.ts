@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FlowerGardenState, FlowerGardenAction } from "./state.js";
 import { initialState, reducer, isTerminal, flowerGardenRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { FlowerGarden } from "./FlowerGarden.js";
-
+const FlowerGarden = /* @__PURE__ */ lazy(() => import("./FlowerGarden.js").then((mod) => ({ default: mod.FlowerGarden as unknown as React.ComponentType<unknown> })));
 export const flowerGardenSettings = {} as const;
 
 type FlowerGardenSettings = SettingsOf<typeof flowerGardenSettings>;

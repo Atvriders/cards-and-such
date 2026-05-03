@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { PaganiniState, PaganiniAction } from "./state.js";
-import { PaganiniGame } from "./Game.js";
-
+const PaganiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PaganiniGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const paganiniPlugin: GamePlugin<PaganiniState, PaganiniAction, typeof settings> = {

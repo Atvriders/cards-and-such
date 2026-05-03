@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SixtySixState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SixtySix } from "./SixtySix.js";
-
+const SixtySix = /* @__PURE__ */ lazy(() => import("./SixtySix.js").then((mod) => ({ default: mod.SixtySix as unknown as React.ComponentType<unknown> })));
 const sixtySixSettings = {} as const;
 type SixtySixSettings = SettingsOf<typeof sixtySixSettings>;
 type SixtySixAction = { type: "play"; cardId: string };

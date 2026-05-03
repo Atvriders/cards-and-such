@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StreetCrapsState, StreetCrapsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { StreetCraps } from "./StreetCraps.js";
-
+const StreetCraps = /* @__PURE__ */ lazy(() => import("./StreetCraps.js").then((mod) => ({ default: mod.StreetCraps as unknown as React.ComponentType<unknown> })));
 export const streetCrapsSettings = {
   rounds: {
     kind: "enum" as const,

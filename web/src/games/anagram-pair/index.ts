@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnagramPairState, AnagramPairAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AnagramPair } from "./AnagramPair.js";
-
+const AnagramPair = /* @__PURE__ */ lazy(() => import("./AnagramPair.js").then((mod) => ({ default: mod.AnagramPair as unknown as React.ComponentType<unknown> })));
 export const anagramPairSettings = {
   pairCount: {
     kind: "enum" as const,

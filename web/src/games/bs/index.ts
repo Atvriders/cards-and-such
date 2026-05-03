@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { BSState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { BS } from "./BS.js";
+const BS = /* @__PURE__ */ lazy(() => import("./BS.js").then((mod) => ({ default: mod.BS as unknown as React.ComponentType<unknown> })));
 import type { Rank } from "../../engines/deck/index.js";
 
 export const bsSettings = {

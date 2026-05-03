@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StackerState, StackerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Stacker } from "./Stacker.js";
-
+const Stacker = /* @__PURE__ */ lazy(() => import("./Stacker.js").then((mod) => ({ default: mod.Stacker as unknown as React.ComponentType<unknown> })));
 export const stackerSettings = {
   _placeholder: {
     kind: "boolean" as const,

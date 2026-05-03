@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BasketballFTState, type BasketballFTAction } from "./state.js";
-import { BasketballFT } from "./Game.js";
-
+const BasketballFT = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.BasketballFT as unknown as React.ComponentType<unknown> })));
 export const basketballFTSettings = {
   shots: { kind: "enum" as const, label: "Shots", options: ["10", "20"] as const, default: "10" as const },
 } as const;

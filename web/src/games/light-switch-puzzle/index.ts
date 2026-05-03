@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LightSwitchState, LightSwitchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LightSwitchGame } from "./Game.js";
-
+const LightSwitchGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LightSwitchGame as unknown as React.ComponentType<unknown> })));
 const lightSwitchSettings = {
   size: {
     kind: "number" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Dice100TargetState, Dice100TargetAction, Dice100TargetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Dice100Target } from "./Game.js";
-
+const Dice100Target = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Dice100Target as unknown as React.ComponentType<unknown> })));
 const dice100TargetSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["3", "5", "7"] as const, default: "5" as const },
 } as const;

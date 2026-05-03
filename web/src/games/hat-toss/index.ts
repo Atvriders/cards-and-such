@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HatTossState, HatTossAction, HatTossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HatToss } from "./Game.js";
-
+const HatToss = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HatToss as unknown as React.ComponentType<unknown> })));
 const hatTossPluginSettings = {
   duration: { kind: "enum" as const, label: "Duration (seconds)", options: ["20", "30", "45"] as const, default: "30" as const },
 } as const;

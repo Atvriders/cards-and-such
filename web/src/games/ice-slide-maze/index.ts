@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IceSlideMazeState, IceSlideMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { IceSlideMazeGame } from "./Game.js";
-
+const IceSlideMazeGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.IceSlideMazeGame as unknown as React.ComponentType<unknown> })));
 export const iceSlideMazeSettings = {
   size: {
     kind: "enum" as const,

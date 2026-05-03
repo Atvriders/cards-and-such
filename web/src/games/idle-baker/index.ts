@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type IdleBakerState, type IdleBakerAction } from "./state.js";
-import { IdleBaker } from "./IdleBaker.js";
-
+const IdleBaker = /* @__PURE__ */ lazy(() => import("./IdleBaker.js").then((mod) => ({ default: mod.IdleBaker as unknown as React.ComponentType<unknown> })));
 export const idleBakerSettings = {
   goal: { kind: "enum" as const, label: "Pastry Goal", options: ["300", "1500", "8000"] as const, default: "300" as const },
 } as const;

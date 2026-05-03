@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MagicianTrickState, MagicianTrickAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MagicianTrick } from "./MagicianTrick.js";
-
+const MagicianTrick = /* @__PURE__ */ lazy(() => import("./MagicianTrick.js").then((mod) => ({ default: mod.MagicianTrick as unknown as React.ComponentType<unknown> })));
 export const magicianTrickSettings = {
   cups: {
     kind: "enum" as const,

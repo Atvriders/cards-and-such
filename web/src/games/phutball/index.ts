@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PhutballState, PhutballAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Phutball } from "./Phutball.js";
-
+const Phutball = /* @__PURE__ */ lazy(() => import("./Phutball.js").then((mod) => ({ default: mod.Phutball as unknown as React.ComponentType<unknown> })));
 export const phutballSettings = {
   opponent: {
     kind: "enum" as const,

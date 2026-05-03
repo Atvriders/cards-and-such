@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type DicePredictionState, type DicePredictionAction } from "./state.js";
-import { DicePrediction } from "./DicePrediction.js";
-
+const DicePrediction = /* @__PURE__ */ lazy(() => import("./DicePrediction.js").then((mod) => ({ default: mod.DicePrediction as unknown as React.ComponentType<unknown> })));
 export const dicePredictionSettings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["5", "10", "15"] as const, default: "5" as const },
 } as const;

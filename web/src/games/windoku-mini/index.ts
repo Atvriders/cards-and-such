@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WindokuMiniState, WindokuMiniAction, WindokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { WindokuMiniGame } from "./Game.js";
-
+const WindokuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WindokuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   puzzles: { kind: "enum" as const, label: "Puzzles", options: ["8"] as const, default: "8" as const },
 } as const;

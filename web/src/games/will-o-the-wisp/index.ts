@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WillOTheWispState, WillOTheWispAction, WillOTheWispSettings } from "./state.js";
 import { initialState, reducer, isTerminal, ruleset } from "./state.js";
-import { WillOTheWispGame } from "./Game.js";
-
+const WillOTheWispGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.WillOTheWispGame as unknown as React.ComponentType<unknown> })));
 import { canMove } from "../../engines/tableau/moves.js";
 const settings = { _dummy: { kind: "boolean" as const, label: "_", default: false } } as const;
 type S = SettingsOf<typeof settings>;

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { NapoleonsTombState, NapoleonsTombAction, NapoleonsTombSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { NapoleonsTombGame } from "./Game.js";
-
+const NapoleonsTombGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.NapoleonsTombGame as unknown as React.ComponentType<unknown> })));
 export const napoleonsTombSettings = {
   dummy: { kind: "boolean" as const, label: "Standard Rules", default: true },
 } as const;

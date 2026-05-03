@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CoffeeState, CoffeeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CoffeeShop } from "./Game.js";
-
+const CoffeeShop = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CoffeeShop as unknown as React.ComponentType<unknown> })));
 export const coffeeShopPlugin = {
   id: "coffee-shop",
   title: "Coffee Shop",

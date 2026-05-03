@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { KakurasuMiniState, KakurasuMiniAction, KakurasuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KakurasuMiniGame } from "./Game.js";
+const KakurasuMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KakurasuMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const kakurasuMiniPlugin: GamePlugin<KakurasuMiniState, KakurasuMiniAction, typeof settings> = {
   id: "kakurasu-mini",

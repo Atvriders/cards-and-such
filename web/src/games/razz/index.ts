@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RazzState, RazzAction } from "./state.js";
 import { initialState, reducer, isTerminal, razzRank } from "./state.js";
-import { Razz } from "./Razz.js";
-
+const Razz = /* @__PURE__ */ lazy(() => import("./Razz.js").then((mod) => ({ default: mod.Razz as unknown as React.ComponentType<unknown> })));
 export const razzSettings = {
   startingBankroll: {
     kind: "enum" as const,

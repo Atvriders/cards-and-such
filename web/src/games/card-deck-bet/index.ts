@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardDeckBetState, CardDeckBetAction, CardDeckBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardDeckBetGame } from "./Game.js";
+const CardDeckBetGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardDeckBetGame as unknown as React.ComponentType<unknown> })));
 const settings = { rounds: { kind:"enum" as const, label:"Rounds", options:["8","12"] as const, default:"8" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const cardDeckBetPlugin: GamePlugin<CardDeckBetState, CardDeckBetAction, typeof settings> = {

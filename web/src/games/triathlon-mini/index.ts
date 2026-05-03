@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TriathlonState, TriathlonAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TriathlonMini } from "./Game.js";
-
+const TriathlonMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TriathlonMini as unknown as React.ComponentType<unknown> })));
 export const triathlonMiniPlugin = {
   id: "triathlon-mini",
   title: "Triathlon Mini",

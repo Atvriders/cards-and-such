@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorFlowState, ColorFlowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColorFlow } from "./Game.js";
-
+const ColorFlow = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ColorFlow as unknown as React.ComponentType<unknown> })));
 export const colorFlowSettings = {
   difficulty: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SchafkopfState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Schafkopf } from "./Schafkopf.js";
-
+const Schafkopf = /* @__PURE__ */ lazy(() => import("./Schafkopf.js").then((mod) => ({ default: mod.Schafkopf as unknown as React.ComponentType<unknown> })));
 const schafkopfSettings = {
   botDifficulty: {
     kind: "enum" as const,

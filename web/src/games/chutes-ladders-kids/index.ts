@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KidsState, KidsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChutesLaddersKids } from "./Game.js";
-
+const ChutesLaddersKids = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ChutesLaddersKids as unknown as React.ComponentType<unknown> })));
 export const chutesLaddersKidsSettings = {
   opponents: {
     kind: "enum" as const,

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SpideretteState, SpideretteAction } from "./state.js";
 import { initialState, reducer, isTerminal, spideretteRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { Spiderette } from "./Spiderette.js";
-
+const Spiderette = /* @__PURE__ */ lazy(() => import("./Spiderette.js").then((mod) => ({ default: mod.Spiderette as unknown as React.ComponentType<unknown> })));
 export const spideretteSettings = {} as const;
 
 export const spiderettePlugin: GamePlugin<SpideretteState, SpideretteAction, typeof spideretteSettings> = {

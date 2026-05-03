@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MorabarabaState, MorabarabaAction, MorabarabaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Morabaraba } from "./Game.js";
-
+const Morabaraba = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Morabaraba as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const morabarabaPlugin: GamePlugin<MorabarabaState, MorabarabaAction, typeof settings> = {

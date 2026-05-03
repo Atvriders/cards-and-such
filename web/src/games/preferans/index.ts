@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PrefState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Preferans } from "./Preferans.js";
-
+const Preferans = /* @__PURE__ */ lazy(() => import("./Preferans.js").then((mod) => ({ default: mod.Preferans as unknown as React.ComponentType<unknown> })));
 export const preferansSettings = {} as const;
 type PrefSettings = SettingsOf<typeof preferansSettings>;
 type PrefAction =

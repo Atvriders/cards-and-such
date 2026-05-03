@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PictionaryState, PictionaryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PictionaryPrompter } from "./Game.js";
-
+const PictionaryPrompter = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PictionaryPrompter as unknown as React.ComponentType<unknown> })));
 export const pictionarySettings = {
   duration: {
     kind: "enum" as const,

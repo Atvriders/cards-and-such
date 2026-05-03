@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ArchitectureQuizState, ArchitectureQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ArchitectureQuiz } from "./ArchitectureQuiz.js";
+const ArchitectureQuiz = /* @__PURE__ */ lazy(() => import("./ArchitectureQuiz.js").then((mod) => ({ default: mod.ArchitectureQuiz as unknown as React.ComponentType<unknown> })));
 export const architectureQuizSettings = { questionCount: { kind: "enum" as const, label: "Questions", options: ["5", "10", "15"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof architectureQuizSettings>;
 export const architectureQuizPlugin: GamePlugin<ArchitectureQuizState, ArchitectureQuizAction, typeof architectureQuizSettings> = {

@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceBullseyeRollState, DiceBullseyeRollAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DiceBullseyeRoll } from "./DiceBullseyeRoll.js";
+const DiceBullseyeRoll = /* @__PURE__ */ lazy(() => import("./DiceBullseyeRoll.js").then((mod) => ({ default: mod.DiceBullseyeRoll as unknown as React.ComponentType<unknown> })));
 export const diceBullseyeRollSettings = { rounds: { kind: "enum" as const, label: "Rounds", options: ["5","10","15"] as const, default: "10" as const } } as const;
 type S = SettingsOf<typeof diceBullseyeRollSettings>;
 export const diceBullseyeRollPlugin: GamePlugin<DiceBullseyeRollState, DiceBullseyeRollAction, typeof diceBullseyeRollSettings> = {

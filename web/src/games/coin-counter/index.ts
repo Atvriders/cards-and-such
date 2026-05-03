@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CoinCounterState, CoinCounterAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CoinCounter } from "./CoinCounter.js";
-
+const CoinCounter = /* @__PURE__ */ lazy(() => import("./CoinCounter.js").then((mod) => ({ default: mod.CoinCounter as unknown as React.ComponentType<unknown> })));
 export const coinCounterSettings = {
   duration: {
     kind: "enum" as const,

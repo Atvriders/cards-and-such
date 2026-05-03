@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type TTT3DState, type TTT3DAction } from "./state.js";
-import { TicTacToe3D } from "./TicTacToe3D.js";
-
+const TicTacToe3D = /* @__PURE__ */ lazy(() => import("./TicTacToe3D.js").then((mod) => ({ default: mod.TicTacToe3D as unknown as React.ComponentType<unknown> })));
 export const ttt3dSettings = {
   botStrength: { kind: "enum" as const, label: "Bot Strength", options: ["easy", "hard"] as const, default: "hard" as const },
 } as const;

@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CipherCrackState, CipherCrackAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CipherCrackGame } from "./Game.js";
-
+const CipherCrackGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CipherCrackGame as unknown as React.ComponentType<unknown> })));
 const cipherCrackSettings = {
   length: {
     kind: "enum" as const,

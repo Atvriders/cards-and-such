@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SuguruMiniState, SuguruMiniAction, SuguruMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SuguruMiniGame } from "./Game.js";
+const SuguruMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SuguruMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const suguruMiniPlugin: GamePlugin<SuguruMiniState, SuguruMiniAction, typeof settings> = {
   id: "suguru-mini",

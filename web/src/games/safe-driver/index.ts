@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SafeDriverState, SafeDriverAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SafeDriver } from "./SafeDriver.js";
-
+const SafeDriver = /* @__PURE__ */ lazy(() => import("./SafeDriver.js").then((mod) => ({ default: mod.SafeDriver as unknown as React.ComponentType<unknown> })));
 export const safeDriverSettings = {
   speed: {
     kind: "enum" as const,

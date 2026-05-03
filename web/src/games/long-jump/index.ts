@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type LongJumpState, type LongJumpAction } from "./state.js";
-import { LongJump } from "./Game.js";
-
+const LongJump = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LongJump as unknown as React.ComponentType<unknown> })));
 export const longJumpSettings = {
   attempts: { kind: "enum" as const, label: "Attempts", options: ["3", "6"] as const, default: "3" as const },
 } as const;

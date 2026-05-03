@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { HatState, HatAction, HatSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PrisonerHatGame } from "./Game.js";
-
+const PrisonerHatGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PrisonerHatGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const prisonerHatPlugin: GamePlugin<HatState, HatAction, typeof settings> = {

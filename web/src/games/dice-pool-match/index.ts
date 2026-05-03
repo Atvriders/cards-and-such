@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { DicePoolMatchState, DicePoolMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DicePoolMatch } from "./DicePoolMatch.js";
-
+const DicePoolMatch = /* @__PURE__ */ lazy(() => import("./DicePoolMatch.js").then((mod) => ({ default: mod.DicePoolMatch as unknown as React.ComponentType<unknown> })));
 export const dicePoolMatchPlugin = {
   id: "dice-pool-match",
   title: "Dice Pool Match",

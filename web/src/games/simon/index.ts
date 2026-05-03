@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SimonState, SimonAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Simon } from "./Simon.js";
-
+const Simon = /* @__PURE__ */ lazy(() => import("./Simon.js").then((mod) => ({ default: mod.Simon as unknown as React.ComponentType<unknown> })));
 export const simonSettings = {} as const;
 
 export const simonPlugin: GamePlugin<SimonState, SimonAction, typeof simonSettings> = {

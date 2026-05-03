@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LatinSquareMiniState, LatinSquareMiniAction, LatinSquareMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LatinSquareMiniGame } from "./Game.js";
+const LatinSquareMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LatinSquareMiniGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const latinSquareMiniPlugin: GamePlugin<LatinSquareMiniState, LatinSquareMiniAction, typeof settings> = {
   id: "latin-square-mini",

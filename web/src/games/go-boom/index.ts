@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GoBoomState, GoBoomAction, GoBoomSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GoBoomGame } from "./Game.js";
+const GoBoomGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.GoBoomGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 const hint = (state: GoBoomState): HintTarget | null => {

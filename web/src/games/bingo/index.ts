@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BingoState, type BingoAction } from "./state.js";
-import { Bingo } from "./Bingo.js";
-
+const Bingo = /* @__PURE__ */ lazy(() => import("./Bingo.js").then((mod) => ({ default: mod.Bingo as unknown as React.ComponentType<unknown> })));
 export const bingoSettings = {
   difficulty: { kind: "enum" as const, label: "Difficulty", options: ["easy", "medium", "hard"] as const, default: "medium" as const },
 } as const;

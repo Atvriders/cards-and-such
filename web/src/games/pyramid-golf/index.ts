@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, isAvailable } from "./state.js";
 import type { PyramidGolfState, PyramidGolfAction, PyramidGolfSettings } from "./state.js";
-import { PyramidGolf } from "./PyramidGolf.js";
-
+const PyramidGolf = /* @__PURE__ */ lazy(() => import("./PyramidGolf.js").then((mod) => ({ default: mod.PyramidGolf as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const pyramidGolfPlugin: GamePlugin<PyramidGolfState, PyramidGolfAction, typeof settings> = {

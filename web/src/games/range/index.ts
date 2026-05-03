@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RangeState, RangeAction, RangeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Range } from "./Range.js";
-
+const Range = /* @__PURE__ */ lazy(() => import("./Range.js").then((mod) => ({ default: mod.Range as unknown as React.ComponentType<unknown> })));
 export const rangeSettings = {
   difficulty: {
     kind: "enum" as const,

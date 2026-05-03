@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LastCardState } from "./state.js";
 import type { Suit } from "../../engines/deck/index.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { LastCardGame } from "./Game.js";
-
+const LastCardGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LastCardGame as unknown as React.ComponentType<unknown> })));
 export const lastCardSettings = {
   dummy: { kind: "enum" as const, label: "Mode", options: ["off"] as const, default: "off" as const },
 } as const;

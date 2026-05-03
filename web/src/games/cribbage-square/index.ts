@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { CribbageSquareState, CribbageSquareAction, CribbageSquareSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CribbageSquare } from "./Game.js";
-
+const CribbageSquare = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CribbageSquare as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const cribbageSquarePlugin: GamePlugin<CribbageSquareState, CribbageSquareAction, typeof settings> = {

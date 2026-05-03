@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { TaxiState, TaxiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TaxiDriverGame } from "./Game.js";
-
+const TaxiDriverGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TaxiDriverGame as unknown as React.ComponentType<unknown> })));
 export const taxiDriverPlugin = {
   id: "taxi-driver",
   title: "Taxi Driver Sim",

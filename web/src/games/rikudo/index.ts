@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RikudoState, RikudoAction, RikudoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Rikudo } from "./Rikudo.js";
-
+const Rikudo = /* @__PURE__ */ lazy(() => import("./Rikudo.js").then((mod) => ({ default: mod.Rikudo as unknown as React.ComponentType<unknown> })));
 export const rikudoSettings = {
   difficulty: {
     kind: "enum" as const,

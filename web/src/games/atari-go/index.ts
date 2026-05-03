@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AtariGoState, AtariGoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AtariGo } from "./AtariGo.js";
-
+const AtariGo = /* @__PURE__ */ lazy(() => import("./AtariGo.js").then((mod) => ({ default: mod.AtariGo as unknown as React.ComponentType<unknown> })));
 export const atariGoSettings = {
   opponent: {
     kind: "enum" as const,

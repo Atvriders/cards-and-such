@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AsteriskSudokuState, AsteriskSudokuAction, AsteriskSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AsteriskSudokuGame } from "./Game.js";
+const AsteriskSudokuGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AsteriskSudokuGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 export const asteriskSudokuPlugin: GamePlugin<AsteriskSudokuState, AsteriskSudokuAction, typeof settings> = {
   id: "asterisk-sudoku",

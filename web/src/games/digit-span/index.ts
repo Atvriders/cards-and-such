@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DigitSpanState, DigitSpanAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DigitSpan } from "./DigitSpan.js";
-
+const DigitSpan = /* @__PURE__ */ lazy(() => import("./DigitSpan.js").then((mod) => ({ default: mod.DigitSpan as unknown as React.ComponentType<unknown> })));
 export const digitSpanSettings = {
   mode: {
     kind: "enum" as const,

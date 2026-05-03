@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HelicopterState, HelicopterAction, HelicopterSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HelicopterGame } from "./Game.js";
-
+const HelicopterGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HelicopterGame as unknown as React.ComponentType<unknown> })));
 export const helicopterSettings = {} as const;
 
 export const helicopterPlugin: GamePlugin<

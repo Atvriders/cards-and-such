@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SetbackState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Setback } from "./Setback.js";
+const Setback = /* @__PURE__ */ lazy(() => import("./Setback.js").then((mod) => ({ default: mod.Setback as unknown as React.ComponentType<unknown> })));
 import type { Suit } from "../../engines/deck/index.js";
 
 export const setbackSettings = {} as const;

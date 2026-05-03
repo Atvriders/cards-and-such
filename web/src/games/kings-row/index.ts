@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import type { KingsRowState, KingsRowAction } from "./state.js";
-import { KingsRowGame } from "./Game.js";
-
+const KingsRowGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KingsRowGame as unknown as React.ComponentType<unknown> })));
 const settings = {} as const;
 
 export const kingsRowPlugin: GamePlugin<KingsRowState, KingsRowAction, typeof settings> = {

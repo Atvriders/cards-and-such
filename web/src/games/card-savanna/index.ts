@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardSavannaState, CardSavannaAction, CardSavannaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardSavannaGame } from "./Game.js";
+const CardSavannaGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardSavannaGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const cardSavannaPlugin: GamePlugin<CardSavannaState, CardSavannaAction, typeof settings> = {

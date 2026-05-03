@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FractionMatcherState, FractionMatcherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FractionMatcherGame } from "./Game.js";
-
+const FractionMatcherGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FractionMatcherGame as unknown as React.ComponentType<unknown> })));
 export const fractionMatcherSettings = {
   rounds: {
     kind: "enum" as const,

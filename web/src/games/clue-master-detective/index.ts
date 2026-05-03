@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClueMasterDetectiveState, ClueMasterDetectiveAction, ClueMasterDetectiveSettings } from "./state.js";
 import { ClueMasterDetective_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { ClueMasterDetectiveGame } from "./Game.js";
-
+const ClueMasterDetectiveGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ClueMasterDetectiveGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

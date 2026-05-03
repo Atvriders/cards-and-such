@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SeesawBalanceState, SeesawBalanceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { SeesawBalance } from "./SeesawBalance.js";
-
+const SeesawBalance = /* @__PURE__ */ lazy(() => import("./SeesawBalance.js").then((mod) => ({ default: mod.SeesawBalance as unknown as React.ComponentType<unknown> })));
 export const seesawBalanceSettings = {
   difficulty: {
     kind: "enum" as const,

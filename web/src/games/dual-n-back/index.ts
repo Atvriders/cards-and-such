@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DualNBackState, DNBAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DualNBack } from "./Game.js";
-
+const DualNBack = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.DualNBack as unknown as React.ComponentType<unknown> })));
 export const dualNBackSettings = {
   n: {
     kind: "enum" as const,

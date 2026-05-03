@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AdditionSprintState, AdditionSprintAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { AdditionSprintGame } from "./Game.js";
-
+const AdditionSprintGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.AdditionSprintGame as unknown as React.ComponentType<unknown> })));
 export const additionSprintSettings = {
   difficulty: {
     kind: "enum" as const,

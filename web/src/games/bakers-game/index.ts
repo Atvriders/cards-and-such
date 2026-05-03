@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { BakersGameState, BakersGameAction } from "./state.js";
 import { initialState, reducer, isTerminal, bakersRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { BakersGame } from "./BakersGame.js";
-
+const BakersGame = /* @__PURE__ */ lazy(() => import("./BakersGame.js").then((mod) => ({ default: mod.BakersGame as unknown as React.ComponentType<unknown> })));
 export const bakersGameSettings = {} as const;
 
 export const bakersGamePlugin: GamePlugin<BakersGameState, BakersGameAction, typeof bakersGameSettings> = {

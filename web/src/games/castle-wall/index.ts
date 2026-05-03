@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CastleWallState, CastleWallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CastleWall } from "./CastleWall.js";
-
+const CastleWall = /* @__PURE__ */ lazy(() => import("./CastleWall.js").then((mod) => ({ default: mod.CastleWall as unknown as React.ComponentType<unknown> })));
 const castleWallSettings = {
   difficulty: {
     kind: "enum" as const,

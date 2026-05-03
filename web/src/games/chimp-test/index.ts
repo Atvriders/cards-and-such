@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChimpTestState, ChimpTestAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ChimpTest } from "./ChimpTest.js";
-
+const ChimpTest = /* @__PURE__ */ lazy(() => import("./ChimpTest.js").then((mod) => ({ default: mod.ChimpTest as unknown as React.ComponentType<unknown> })));
 export const chimpTestSettings = {
   startCount: {
     kind: "enum" as const,

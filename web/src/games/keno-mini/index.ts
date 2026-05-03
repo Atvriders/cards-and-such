@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KenoMiniState, KenoMiniAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KenoMini } from "./Game.js";
-
+const KenoMini = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.KenoMini as unknown as React.ComponentType<unknown> })));
 export const kenoMiniSettings = {
   roundsPerSession: {
     kind: "number" as const,

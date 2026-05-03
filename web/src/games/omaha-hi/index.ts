@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OmahaHiState, OmahaHiAction, OmahaHiSettings } from "./state.js";
 import { initialState, reducer, isTerminal, bestOmaha } from "./state.js";
 import { handStrength } from "../_shared/poker.js";
-import { OmahaHiGame } from "./Game.js";
-
+const OmahaHiGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.OmahaHiGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   startingBankroll: { kind: "enum" as const, label: "Starting Stack", options: ["500", "1000", "5000"] as const, default: "1000" },
   smallBlind: { kind: "enum" as const, label: "Small Blind", options: ["5", "10", "25"] as const, default: "10" },

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QuartoClassicState, QuartoClassicAction, QuartoClassicSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { QuartoClassicGame } from "./Game.js";
-
+const QuartoClassicGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.QuartoClassicGame as unknown as React.ComponentType<unknown> })));
 const settings = {
   botStrength: { kind: "enum" as const, label: "Bot", options: ["easy", "hard"] as const, default: "easy" as const },
 } as const;

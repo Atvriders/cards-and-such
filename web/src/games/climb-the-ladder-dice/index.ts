@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClimbTheLadderState, ClimbTheLadderAction, ClimbTheLadderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ClimbTheLadderDice } from "./Game.js";
-
+const ClimbTheLadderDice = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ClimbTheLadderDice as unknown as React.ComponentType<unknown> })));
 const settings = {
   rerolls: { kind: "enum" as const, label: "Re-rolls per Rung", options: ["0", "1", "2"] as const, default: "1" as const },
 } as const;

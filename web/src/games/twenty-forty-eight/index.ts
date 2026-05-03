@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TwoFortyEightState, TwoFortyEightAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { TwentyFortyEight } from "./TwentyFortyEight.js";
-
+const TwentyFortyEight = /* @__PURE__ */ lazy(() => import("./TwentyFortyEight.js").then((mod) => ({ default: mod.TwentyFortyEight as unknown as React.ComponentType<unknown> })));
 export const twoFortyEightSettings = {
   boardSize: {
     kind: "enum" as const,

@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { FeedTheCatState, FeedAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FeedTheCat } from "./Game.js";
-
+const FeedTheCat = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FeedTheCat as unknown as React.ComponentType<unknown> })));
 export const feedTheCatPlugin = {
   id: "feed-the-cat",
   title: "Feed the Cat",

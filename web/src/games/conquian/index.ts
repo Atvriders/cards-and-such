@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConquianState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Conquian } from "./Conquian.js";
-
+const Conquian = /* @__PURE__ */ lazy(() => import("./Conquian.js").then((mod) => ({ default: mod.Conquian as unknown as React.ComponentType<unknown> })));
 export const conquianSettings = {} as const;
 type ConquianSettings = SettingsOf<typeof conquianSettings>;
 

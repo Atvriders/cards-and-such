@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TempelTrapState, TempelTrapAction, TempelTrapSettings } from "./state.js";
 import { TempelTrap_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { TempelTrapGame } from "./Game.js";
-
+const TempelTrapGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.TempelTrapGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

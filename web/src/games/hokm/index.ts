@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HokmState } from "./state.js";
 import type { Suit } from "../../engines/deck/index.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Hokm } from "./Hokm.js";
-
+const Hokm = /* @__PURE__ */ lazy(() => import("./Hokm.js").then((mod) => ({ default: mod.Hokm as unknown as React.ComponentType<unknown> })));
 const hokmSettings = {
   botDifficulty: {
     kind: "enum" as const,

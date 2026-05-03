@@ -1,10 +1,11 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RussianSolitaireState, RussianSolitaireAction } from "./state.js";
 import { initialState, reducer, isTerminal, russianRuleset} from "./state.js";
 import { canMove } from "../../engines/tableau/moves.js";
-import { RussianSolitaire } from "./RussianSolitaire.js";
-
+const RussianSolitaire = /* @__PURE__ */ lazy(() => import("./RussianSolitaire.js").then((mod) => ({ default: mod.RussianSolitaire as unknown as React.ComponentType<unknown> })));
 export const russianSolitaireSettings = {} as const;
 
 type RussianSolitaireSettings = SettingsOf<typeof russianSolitaireSettings>;

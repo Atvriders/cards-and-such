@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConceptDeductionState, ConceptDeductionAction, ConceptDeductionSettings } from "./state.js";
 import { ConceptDeduction_CFG, initialState, reducer, isTerminal } from "./state.js";
 import { deductionHintSelector } from "../_shared/deduction-engine.js";
-import { ConceptDeductionGame } from "./Game.js";
-
+const ConceptDeductionGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ConceptDeductionGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

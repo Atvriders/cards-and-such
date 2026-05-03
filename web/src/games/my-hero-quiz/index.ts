@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MyHeroQuizState, MyHeroQuizAction, MyHeroQuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MyHeroQuizGame } from "./Game.js";
+const MyHeroQuizGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MyHeroQuizGame as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["10","20"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const myHeroQuizPlugin: GamePlugin<MyHeroQuizState, MyHeroQuizAction, typeof settings> = {

@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type WarState, type WarAction } from "./state.js";
-import { War } from "./War.js";
-
+const War = /* @__PURE__ */ lazy(() => import("./War.js").then((mod) => ({ default: mod.War as unknown as React.ComponentType<unknown> })));
 export const warSettings = {
   autoPlay: { kind: "boolean" as const, label: "Auto-play whole game", default: false },
 } as const;

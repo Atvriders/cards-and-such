@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { EagleWingState, EagleWingAction, EagleWingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { EagleWing } from "./EagleWing.js";
-
+const EagleWing = /* @__PURE__ */ lazy(() => import("./EagleWing.js").then((mod) => ({ default: mod.EagleWing as unknown as React.ComponentType<unknown> })));
 export const eagleWingSettings = {} as const;
 
 export const eagleWingPlugin: GamePlugin<EagleWingState, EagleWingAction, typeof eagleWingSettings> = {

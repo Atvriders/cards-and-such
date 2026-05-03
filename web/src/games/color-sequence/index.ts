@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { ColorSequenceState, ColorSequenceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ColorSequence } from "./Game.js";
-
+const ColorSequence = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ColorSequence as unknown as React.ComponentType<unknown> })));
 export const colorSequenceSettings = {} as const;
 
 export const colorSequencePlugin: GamePlugin<ColorSequenceState, ColorSequenceAction, typeof colorSequenceSettings> = {

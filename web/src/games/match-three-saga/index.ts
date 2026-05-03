@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MatchThreeSagaState, MatchThreeSagaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MatchThreeSaga } from "./MatchThreeSaga.js";
-
+const MatchThreeSaga = /* @__PURE__ */ lazy(() => import("./MatchThreeSaga.js").then((mod) => ({ default: mod.MatchThreeSaga as unknown as React.ComponentType<unknown> })));
 export const matchThreeSagaSettings = {
   levels: {
     kind: "enum" as const,

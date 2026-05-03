@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HairstylesQuizState, HairstylesQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { HairstylesQuiz } from "./Game.js";
-
+const HairstylesQuiz = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.HairstylesQuiz as unknown as React.ComponentType<unknown> })));
 export const hairstylesQuizSettings = {
   questionCount: { kind: "enum" as const, label: "Questions", options: ["5", "10", "15"] as const, default: "10" as const },
 } as const;

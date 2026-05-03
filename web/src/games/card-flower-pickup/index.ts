@@ -1,8 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardFlowerPickupState, CardFlowerPickupAction, CardFlowerPickupSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CardFlowerPickupGame } from "./Game.js";
+const CardFlowerPickupGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CardFlowerPickupGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind:"boolean" as const, label:"dummy", default:false } } as const;
 type S = SettingsOf<typeof settings>;
 export const cardFlowerPickupPlugin: GamePlugin<CardFlowerPickupState, CardFlowerPickupAction, typeof settings> = {

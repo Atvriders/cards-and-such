@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CutthroatSpadesState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { CutthroatSpades } from "./CutthroatSpades.js";
-
+const CutthroatSpades = /* @__PURE__ */ lazy(() => import("./CutthroatSpades.js").then((mod) => ({ default: mod.CutthroatSpades as unknown as React.ComponentType<unknown> })));
 const cutthroatSpadesSettings = {} as const;
 type CutthroatSpadesSettings = SettingsOf<typeof cutthroatSpadesSettings>;
 type CutthroatSpadesAction = { type: "play"; cardId: string };

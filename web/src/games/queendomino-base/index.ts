@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { HintTarget, GamePlugin, SettingsOf} from "../../platform/game-plugin/types.js";
 import type { QueendominoBaseState, QueendominoBaseAction, QueendominoBaseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { tileHintSelector } from "../_shared/tile-engine.js";
-import { QueendominoBaseGame } from "./Game.js";
-
+const QueendominoBaseGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.QueendominoBaseGame as unknown as React.ComponentType<unknown> })));
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 

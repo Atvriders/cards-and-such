@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DominoState, DominoAction, DominoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { DominoPlacement } from "./DominoPlacement.js";
-
+const DominoPlacement = /* @__PURE__ */ lazy(() => import("./DominoPlacement.js").then((mod) => ({ default: mod.DominoPlacement as unknown as React.ComponentType<unknown> })));
 export const dominoSettings = {
   difficulty: {
     kind: "enum" as const,

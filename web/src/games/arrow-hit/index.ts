@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ArrowHitState, ArrowHitAction, ArrowHitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { ArrowHit } from "./Game.js";
-
+const ArrowHit = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.ArrowHit as unknown as React.ComponentType<unknown> })));
 const arrowHitSettings = {
   arrows: { kind: "enum" as const, label: "Arrows", options: ["5", "10"] as const, default: "5" as const },
 } as const;

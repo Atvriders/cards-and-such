@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FlappyBirdState, FlappyBirdAction, FlappyBirdSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FlappyBirdGame } from "./Game.js";
-
+const FlappyBirdGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FlappyBirdGame as unknown as React.ComponentType<unknown> })));
 export const flappyBirdSettings = {} as const;
 
 export const flappyBirdPlugin: GamePlugin<

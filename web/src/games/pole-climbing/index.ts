@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { PoleState, PoleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { PoleClimbing } from "./Game.js";
-
+const PoleClimbing = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.PoleClimbing as unknown as React.ComponentType<unknown> })));
 export const poleClimbingPlugin = {
   id: "pole-climbing",
   title: "Pole Climbing",

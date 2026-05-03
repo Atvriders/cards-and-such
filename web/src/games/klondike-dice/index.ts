@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KlondikeDiceState, KlondikeDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KlondikeDice } from "./KlondikeDice.js";
-
+const KlondikeDice = /* @__PURE__ */ lazy(() => import("./KlondikeDice.js").then((mod) => ({ default: mod.KlondikeDice as unknown as React.ComponentType<unknown> })));
 export const klondikeDiceSettings = {
   target: {
     kind: "enum" as const,

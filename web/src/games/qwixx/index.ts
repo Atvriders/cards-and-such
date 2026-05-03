@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QwixxState, QwixxAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Qwixx } from "./Qwixx.js";
-
+const Qwixx = /* @__PURE__ */ lazy(() => import("./Qwixx.js").then((mod) => ({ default: mod.Qwixx as unknown as React.ComponentType<unknown> })));
 const qwixxSettings = {
   mode: {
     kind: "enum" as const,

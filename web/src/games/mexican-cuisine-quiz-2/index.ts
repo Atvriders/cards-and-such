@@ -1,7 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MexicanCuisineQuiz2State, MexicanCuisineQuiz2Action, MexicanCuisineQuiz2Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { MexicanCuisineQuiz2Game } from "./Game.js";
+const MexicanCuisineQuiz2Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MexicanCuisineQuiz2Game as unknown as React.ComponentType<unknown> })));
 const settings = { questions: { kind:"enum" as const, label:"Questions", options:["5","10"] as const, default:"10" as const } } as const;
 type S = SettingsOf<typeof settings>;
 export const mexicanCuisineQuiz2Plugin: GamePlugin<MexicanCuisineQuiz2State, MexicanCuisineQuiz2Action, typeof settings> = {

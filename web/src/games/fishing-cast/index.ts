@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FishingCastState, FishingCastAction, FishingCastSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { FishingCast } from "./Game.js";
-
+const FishingCast = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.FishingCast as unknown as React.ComponentType<unknown> })));
 const fishingCastSettings = {
   casts: { kind: "enum" as const, label: "Casts", options: ["5", "8"] as const, default: "5" as const },
 } as const;

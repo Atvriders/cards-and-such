@@ -1,7 +1,8 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BalloonPopState, type BalloonPopAction } from "./state.js";
-import { BalloonPop } from "./BalloonPop.js";
-
+const BalloonPop = /* @__PURE__ */ lazy(() => import("./BalloonPop.js").then((mod) => ({ default: mod.BalloonPop as unknown as React.ComponentType<unknown> })));
 export const balloonPopSettings = {
   colors: {
     kind: "enum" as const,

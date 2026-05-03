@@ -1,8 +1,9 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { GalaxyFormationState, GalaxyFormationAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { GalaxyFormation } from "./GalaxyFormation.js";
-
+const GalaxyFormation = /* @__PURE__ */ lazy(() => import("./GalaxyFormation.js").then((mod) => ({ default: mod.GalaxyFormation as unknown as React.ComponentType<unknown> })));
 export const galaxyFormationPlugin: GamePlugin<GalaxyFormationState, GalaxyFormationAction, Record<never, never>> = {
   id: "galaga-like",
   title: "Galaxy Formation",

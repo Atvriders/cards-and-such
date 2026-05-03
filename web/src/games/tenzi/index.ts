@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TenziState, TenziAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { Tenzi } from "./Tenzi.js";
-
+const Tenzi = /* @__PURE__ */ lazy(() => import("./Tenzi.js").then((mod) => ({ default: mod.Tenzi as unknown as React.ComponentType<unknown> })));
 export const tenziSettings = {
   dice: {
     kind: "enum" as const,

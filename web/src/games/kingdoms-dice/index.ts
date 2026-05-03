@@ -1,9 +1,10 @@
+import { lazy } from "react";
+import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KingdomsDiceState, KingdomsDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
-import { KingdomsDice } from "./KingdomsDice.js";
-
+const KingdomsDice = /* @__PURE__ */ lazy(() => import("./KingdomsDice.js").then((mod) => ({ default: mod.KingdomsDice as unknown as React.ComponentType<unknown> })));
 export const kingdomsDiceSettings = {
   targetScore: {
     kind: "enum" as const,
