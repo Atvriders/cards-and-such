@@ -2427,6 +2427,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               onClick={replay}
               className="play-again-btn play-replay-btn play-again-btn--big"
               data-testid="replay-btn"
+              autoFocus={showLossBanner}
             >
               {t("hud.replay")}
             </button>
