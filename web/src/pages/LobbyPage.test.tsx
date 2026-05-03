@@ -999,12 +999,19 @@ describe("LobbyPage — tile hover-tooltip 500ms delay (W197)", () => {
     fireEvent.mouseEnter(target);
 
     // Exactly one engine hydrated — the hovered tile is the only one
-    // now advertising the tooltip via `aria-describedby`.
+    // now advertising the tooltip via `aria-describedby`. We pin both
+    // the count (so a future bug that splash-hydrates every tile in
+    // response to one hover surfaces immediately) and the *identity*
+    // of the activated tile (so a bug that hydrates the wrong tile
+    // — e.g. always the first in DOM order — also surfaces).
     const described = document.querySelectorAll(
       '[aria-describedby^="tile-tooltip-"]',
     );
     expect(described.length).toBe(1);
     expect(described[0]?.getAttribute("data-testid")).toBe("tile-klondike");
+    expect(described[0]?.getAttribute("aria-describedby")).toBe(
+      "tile-tooltip-klondike",
+    );
 
     // The visible floating node is still absent — the 500ms
     // hover-intent timer hasn't fired yet, so engine-mounted but
