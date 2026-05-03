@@ -1,12 +1,13 @@
 import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
 // W579 — capture navigate() calls so the surprise-me button test can assert
 // the destination URL shape without mounting a real /play/<id> route. Other
 // describe blocks in this file never trigger navigate(), so the spy is a
-// no-op for them.
+// no-op for them. The wrapper also forwards to the real navigate so that the
+// W604 LocationProbe-based test observes actual location changes.
 const navigateSpy = vi.fn();
 vi.mock("react-router-dom", async () => {
   const actual = await vi.importActual<typeof import("react-router-dom")>(
@@ -14,7 +15,16 @@ vi.mock("react-router-dom", async () => {
   );
   return {
     ...actual,
-    useNavigate: () => navigateSpy,
+    // Called as a hook during render — invoke the real hook here, then
+    // return a wrapper that records to navigateSpy AND forwards to the real
+    // router so MemoryRouter's location actually updates.
+    useNavigate: () => {
+      const real = actual.useNavigate();
+      return ((to: unknown, opts?: unknown) => {
+        navigateSpy(to, opts);
+        return (real as (to: unknown, opts?: unknown) => void)(to, opts);
+      }) as ReturnType<typeof actual.useNavigate>;
+    },
   };
 });
 
@@ -1020,6 +1030,85 @@ describe("LobbyPage — tile hover-tooltip 500ms delay (W197)", () => {
       document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
     ).toBe(0);
   });
+
+  /**
+   * W197 — full lazy-hydration round-trip across many tiles.
+   *
+   * The two existing tests above pin (a) the 500ms delay gating the
+   * visible node and (b) the engine staying unhydrated for non-hovered
+   * tiles. This third test composes both halves into the exact path a
+   * real user takes:
+   *
+   *   1. Mount the lobby — many tiles render, but BEFORE any hover the
+   *      DOM contains zero `tile-tooltip-*` nodes (lazy gate honoured
+   *      across the whole grid, not just one tile).
+   *   2. Hover exactly one tile (`tile-klondike` — same canonical id
+   *      used by the sibling W197 tests so the assertion stays stable
+   *      across registry churn).
+   *   3. Advance fake timers by 500ms — the hover-intent threshold the
+   *      engine schedules in its first effect.
+   *   4. Exactly one tooltip mounts, and it is the hovered tile's
+   *      `tile-tooltip-klondike` — no splash-hydration of siblings,
+   *      no stray tooltips elsewhere in the DOM.
+   *
+   * This guards against three composed regressions the single-axis
+   * tests above can't catch together:
+   *   - A change that fires `show()` synchronously on hover (collapsing
+   *     the 500ms gate) would surface as the tooltip mounting before
+   *     the timer advances; this test's pre-advance snapshot pins
+   *     that the visible node stays absent until the timer fires.
+   *   - A change that re-introduces eager engine hydration would leave
+   *     the pre-hover `tile-tooltip-*` count above zero.
+   *   - A change that hydrates EVERY tile's engine in response to one
+   *     hover would mount multiple tooltips after the timer fires —
+   *     the post-advance count assertion (=== 1) would fail.
+   */
+  it("W197: lazy-hydrates only the hovered tile's tooltip after the 500ms timer", () => {
+    renderAt("/");
+
+    // Sanity: many tiles render. The 50+ lower bound mirrors the
+    // sibling lazy-hydration test so a future tile-pruning regression
+    // surfaces visibly rather than silently passing.
+    const tiles = document.querySelectorAll('[data-testid^="tile-"]');
+    expect(tiles.length).toBeGreaterThanOrEqual(50);
+
+    // Pre-hover invariant: zero tooltips anywhere in the DOM. This is
+    // the "before any hover" half of the contract — proves the engine
+    // stays dormant for every one of the 50+ tiles until the user
+    // actually interacts.
+    expect(
+      document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
+    ).toBe(0);
+
+    // Hover exactly one tile. The hover-intent timer starts here, but
+    // the visible floating node MUST NOT mount yet — only the engine
+    // hydrates in response to the mouseenter.
+    const target = screen.getByTestId("tile-klondike");
+    fireEvent.mouseEnter(target);
+
+    // Cross the 500ms threshold via fake timers — the engine's
+    // setTimeout callback flips visible=true and renders the floating
+    // tooltip node into the DOM.
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+
+    // Exactly one tooltip mounted, and it is the hovered tile's. The
+    // count assertion (=== 1) catches any regression that splash-
+    // hydrates sibling tiles in response to a single hover, while the
+    // identity assertion catches a regression that mounts the wrong
+    // tooltip (e.g. always the first tile's).
+    const tooltips = document.querySelectorAll(
+      '[data-testid^="tile-tooltip-"]',
+    );
+    expect(tooltips.length).toBe(1);
+    expect(tooltips[0]?.getAttribute("data-testid")).toBe(
+      "tile-tooltip-klondike",
+    );
+    expect(
+      screen.getByTestId("tile-tooltip-klondike"),
+    ).toBeInTheDocument();
+  });
 });
 
 /**
@@ -1168,6 +1257,158 @@ describe("LobbyPage — list-mode toggle pagination/infinite (W183/W582)", () =>
 });
 
 /**
+ * W414 — drag-handle visual cue is gated by the favorites filter.
+ *
+ * Each lobby tile permanently renders a `tile-drag-handle-<id>` span, but
+ * LobbyPage.css keeps it `display: none` until the parent tile carries
+ * `data-fav-drag-id` (an attribute stamped by the favorites-filter
+ * useEffect — the same gate the drag-reorder pathway uses, see W397). The
+ * load-bearing CSS contract is exactly:
+ *
+ *   .tile-drag-handle              { display: none; }
+ *   .tile[data-fav-drag-id] .tile-drag-handle { display: inline-block; }
+ *
+ * jsdom does not apply Vite-imported CSS, so we inject the two gating
+ * rules directly into the document so `getComputedStyle` actually
+ * reflects the visual outcome a real browser would render. This pins
+ * both halves of the contract: handle visible under the favorites filter,
+ * hidden otherwise.
+ */
+describe("LobbyPage — drag-handle visual cue gating (W414)", () => {
+  // `2048` is a stand-alone game (no family, not in FEATURED_IDS — see
+  // `web/src/games/twenty-forty-eight/`), so its main-grid GameCard always
+  // renders the `tile-drag-handle-2048` span and there is no featured-strip
+  // duplicate to disambiguate against. Adding it to the favorites blob
+  // surfaces the same tile under the favorites filter, exercising both
+  // halves of the gating contract on a single stable id.
+  const GAME_ID = "2048";
+  let styleEl: HTMLStyleElement;
+
+  beforeEach(() => {
+    localStorage.clear();
+    // Mirror the production CSS rules from LobbyPage.css so jsdom's
+    // computed-style resolves the gate authentically. We only inject the
+    // two load-bearing rules — full stylesheet import is out of scope and
+    // would couple this test to unrelated layout properties.
+    styleEl = document.createElement("style");
+    styleEl.setAttribute("data-testid", "w414-css");
+    styleEl.textContent = `
+      .tile-drag-handle { display: none; }
+      .tile[data-fav-drag-id] .tile-drag-handle { display: inline-block; }
+    `;
+    document.head.appendChild(styleEl);
+    // Seed favorites so the favorites filter has at least one visible tile
+    // to stamp `data-fav-drag-id` on (otherwise `lobby-favorites-empty`
+    // renders instead of the grid and there's no handle to inspect).
+    localStorage.setItem("cards-favorites", JSON.stringify([GAME_ID]));
+  });
+
+  afterEach(() => {
+    styleEl.remove();
+  });
+
+  it("shows tile-drag-handle-<id> only when filter=favorites stamps data-fav-drag-id", async () => {
+    // Default filter is "all" — the tile renders in the main grid but
+    // has no `data-fav-drag-id`, so the always-rendered handle stays
+    // `display: none` per the injected gating CSS.
+    renderAt("/");
+    const handleAll = screen.getByTestId(`tile-drag-handle-${GAME_ID}`);
+    expect(handleAll).toBeInTheDocument();
+    expect(window.getComputedStyle(handleAll).display).toBe("none");
+    // The parent tile is missing the gating attribute under "all" — this
+    // guards against a regression that stamps the attribute outside the
+    // favorites filter (which would silently flip every tile draggable).
+    expect(
+      handleAll.closest(".tile")?.getAttribute("data-fav-drag-id"),
+    ).toBeNull();
+
+    // Flip to favorites — the DOM-stamping effect adds `data-fav-drag-id`
+    // to each visible favorite tile, which flips the CSS gate to
+    // `inline-block` and makes the handle visible.
+    fireEvent.click(screen.getByTestId("chip-favorites"));
+    await waitFor(() => {
+      expect(
+        document.querySelectorAll(".tile[data-fav-drag-id]").length,
+      ).toBeGreaterThan(0);
+    });
+    const handleFav = screen.getByTestId(`tile-drag-handle-${GAME_ID}`);
+    expect(handleFav.closest(".tile")?.getAttribute("data-fav-drag-id")).toBe(
+      `game-${GAME_ID}`,
+    );
+    expect(window.getComputedStyle(handleFav).display).toBe("inline-block");
+  });
+
+  // W414 — DOM existence half of the contract: when the lobby mounts
+  // directly on the favorites filter (i.e. `cards-lobby-filter` ===
+  // "favorites" pre-render), the `tile-drag-handle-<id>` span MUST be
+  // present in the DOM for every favorited tile. This is a stricter
+  // existence check than the CSS-gated visibility test above — even if
+  // a future refactor decouples the visual cue from `data-fav-drag-id`,
+  // the handle node itself is the affordance ARIA / screen readers
+  // discover by testid, so its presence under the favorites filter is
+  // the load-bearing promise. Pinning this independently of any CSS
+  // rule means a regression that conditionally renders the handle
+  // (e.g. only on hover) would surface here even without the style
+  // injection the sibling test relies on.
+  it("renders tile-drag-handle-<id> in the DOM when filter=favorites", () => {
+    // Mount directly into the favorites filter so the favorites grid
+    // owns the canonical (non-featured) tile for GAME_ID and the
+    // always-rendered handle span is reachable by its stable testid.
+    localStorage.setItem("cards-lobby-filter", "favorites");
+    renderAt("/");
+    const handle = screen.getByTestId(`tile-drag-handle-${GAME_ID}`);
+    expect(handle).toBeInTheDocument();
+  });
+});
+
+/**
+ * W603 — HeartToggle persistence on a lobby tile.
+ *
+ * The per-tile ♥ button is the inline favorites entry point. Clicking
+ * it must (a) flip the tile's `aria-pressed` state in the same render
+ * so the UI feels responsive, AND (b) write the new favorite id
+ * through to the canonical `cards-favorites` localStorage blob so a
+ * reload (or a sibling tab) sees the same state. This test pins both
+ * halves on a stand-alone game (`pool-10ball` — no family, so the
+ * HeartToggle id, the click-handler arg, and the persisted id are all
+ * literally the same string and the round-trip is unambiguous).
+ *
+ * A complementary file (LobbyPageHearts.test.tsx) covers the unfavorite
+ * direction and rehydration; this test is the favoriting-half single-
+ * shot kept inside the main LobbyPage suite so the contract surfaces
+ * here even when the suites are run in isolation.
+ */
+describe("LobbyPage — HeartToggle persistence (W603)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking ♥ on a tile flips fav state and persists cards-favorites", async () => {
+    renderAt("/");
+    const heart = await screen.findByTestId("tile-fav-toggle-pool-10ball");
+    // Precondition — fresh user has no favorites and no persisted blob.
+    expect(heart.getAttribute("aria-pressed")).toBe("false");
+    expect(localStorage.getItem("cards-favorites")).toBeNull();
+
+    fireEvent.click(heart);
+
+    // Persistence is synchronous inside the click handler, so the
+    // canonical `cards-favorites` blob must already contain the id.
+    const persisted = localStorage.getItem("cards-favorites");
+    expect(persisted).not.toBeNull();
+    expect(JSON.parse(persisted as string) as string[]).toContain("pool-10ball");
+
+    // Visual flip arrives after the favSet setState commit — wait for
+    // the re-render to align aria-pressed with the persisted truth.
+    await waitFor(() => {
+      expect(
+        screen.getByTestId("tile-fav-toggle-pool-10ball").getAttribute("aria-pressed"),
+      ).toBe("true");
+    });
+  });
+});
+
+/**
  * W579 — the "Surprise me" button on the lobby toolbar (rendered with the
  * canonical `lobby-surprise` testid alongside the category stat-strip)
  * must navigate the user to a random `/play/<id>` route when clicked.
@@ -1214,5 +1455,159 @@ describe("LobbyPage — surprise me button (W579)", () => {
     // `/play/` prefix + at least one id char — the random pick must
     // resolve to a real game id, never an empty suffix.
     expect(target).toMatch(/^\/play\/.+/);
+  });
+
+  /**
+   * W604 — companion check that doesn't rely on the navigateSpy. Mounts a
+   * sibling `LocationProbe` inside the same MemoryRouter so we can read the
+   * router's actual pathname after the click. This pins the user-visible
+   * outcome (URL changes to something under `/play/`) rather than just the
+   * internal navigate() call shape.
+   */
+  it("clicking lobby-surprise updates the router location to /play/<id>", () => {
+    vi.spyOn(Math, "random").mockReturnValue(0);
+
+    function LocationProbe(): JSX.Element {
+      const loc = useLocation();
+      return <div data-testid="loc-probe">{loc.pathname}</div>;
+    }
+
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <LobbyPage />
+        <LocationProbe />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByTestId("loc-probe").textContent).toBe("/");
+    fireEvent.click(screen.getByTestId("lobby-surprise"));
+    expect(screen.getByTestId("loc-probe").textContent).toMatch(/^\/play\/.+/);
+  });
+});
+
+/**
+ * W609 — FamilyPicker search input filters the visible variant list.
+ *
+ * Once the picker is open, typing into `fam-picker-search-<id>` must
+ * narrow the rendered `pick-<variant-id>` items to those whose title
+ * contains the query (case-insensitive substring match — see the
+ * `members.filter((m) => m.title.toLowerCase().includes(q))` branch in
+ * `FamilyPicker`'s `view` useMemo). The klondike family is the canonical
+ * exemplar: it ships with multiple variants so a "vegas" query can be
+ * proven to narrow the list rather than coincidentally matching every
+ * member. We deep-link via `/?family=klondike` so the picker auto-opens
+ * without depending on tile-click wiring (covered separately above).
+ */
+describe("LobbyPage — FamilyPicker search filter (W609)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("typing into fam-picker-search-klondike filters visible variants", async () => {
+    renderAt(`/?family=${FAMILY_ID}`);
+    // Wait for the auto-open path to mount the picker dialog.
+    await waitFor(() => {
+      expect(screen.getByTestId(`fam-picker-${FAMILY_ID}`)).toBeInTheDocument();
+    });
+
+    // Baseline: at least one non-vegas klondike variant is visible — i.e.
+    // the unfiltered list is not already trivially equal to the matches.
+    // `pick-bakers-klondike` is a stable klondike family member (see
+    // `web/src/games/families.ts`) whose title does NOT contain the
+    // substring "vegas", so its presence pre-filter and absence post-
+    // filter together prove the query genuinely narrowed the list
+    // rather than the picker happening to already render only matches.
+    expect(
+      screen.getByTestId("pick-bakers-klondike"),
+    ).toBeInTheDocument();
+    // And the target match itself is also present pre-filter so the
+    // post-filter "still there" assertion below is meaningful.
+    expect(
+      screen.getByTestId("pick-vegas-klondike"),
+    ).toBeInTheDocument();
+
+    const search = screen.getByTestId(
+      `fam-picker-search-${FAMILY_ID}`,
+    ) as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "vegas" } });
+    // Controlled input — the value reflects the query immediately.
+    expect(search.value).toBe("vegas");
+
+    // Post-filter: the matching variant remains, the non-matching
+    // sibling is gone. Pinning both sides of the predicate guards
+    // against a regression that no-ops the filter (everything stays)
+    // OR over-filters (everything goes), either of which would let a
+    // single-sided assertion silently pass.
+    await waitFor(() => {
+      expect(
+        screen.queryByTestId("pick-bakers-klondike"),
+      ).not.toBeInTheDocument();
+    });
+    expect(
+      screen.getByTestId("pick-vegas-klondike"),
+    ).toBeInTheDocument();
+  });
+});
+
+/**
+ * W608 — lobby search clear (X) button.
+ *
+ * The lobby search input is a controlled field bound to the `query` state.
+ * When `query` is non-empty, a tiny "×" affordance (rendered with
+ * `className="lobby-search-clear"` and `aria-label="Clear search"`) appears
+ * inside the search box; clicking it must reset the input to "" in a
+ * single user gesture so the lobby's filtered-pool returns to its
+ * unfiltered baseline. The button is conditionally mounted — it is absent
+ * before the user types anything and absent again after a successful
+ * clear — which is how we distinguish "input was emptied via the button"
+ * from "input was emptied some other way" without poking at internal
+ * state. There is no `data-testid` on this button (it carries only a
+ * stable className + aria-label), so we resolve it via the accessible
+ * label, which is the screen-reader contract real users rely on anyway.
+ */
+describe("LobbyPage — search clear button (W608)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("typing then clicking the Clear search button empties the input", () => {
+    renderAt("/");
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+
+    // Pre-type baseline: input is empty and the conditionally-mounted
+    // clear button is absent — the affordance only appears once the
+    // controlled `query` state is truthy.
+    expect(search.value).toBe("");
+    expect(
+      screen.queryByRole("button", { name: /clear search/i }),
+    ).not.toBeInTheDocument();
+
+    // Type a non-empty query — fires a single change event so the
+    // controlled input picks up the value through `setQuery`. We use
+    // "klondike" to mirror the canonical search query exercised by the
+    // W566 highlight test above; the exact text is not load-bearing,
+    // only that it is non-empty so the clear button mounts.
+    fireEvent.change(search, { target: { value: "klondike" } });
+    expect(search.value).toBe("klondike");
+
+    // The clear button is now mounted — resolved via its accessible
+    // name (the only stable selector the production markup exposes for
+    // this affordance, since no `data-testid` is stamped on it). The
+    // className assertion pins the production class so a refactor that
+    // renames `lobby-search-clear` (and breaks its CSS sizing/position)
+    // surfaces here rather than only in visual regression.
+    const clearBtn = screen.getByRole("button", { name: /clear search/i });
+    expect(clearBtn).toBeInTheDocument();
+    expect(clearBtn).toHaveClass("lobby-search-clear");
+
+    fireEvent.click(clearBtn);
+
+    // Input is empty again and the clear button has un-mounted, both
+    // of which together prove the click flowed through `setQuery("")`
+    // rather than just clearing the visible text via some other path.
+    expect(search.value).toBe("");
+    expect(
+      screen.queryByRole("button", { name: /clear search/i }),
+    ).not.toBeInTheDocument();
   });
 });
