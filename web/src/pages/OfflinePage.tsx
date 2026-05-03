@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { PageHead } from "../platform/PageHead.js";
 import { GAMES } from "../games/registry.js";
 import { readRecentlyPlayed } from "../platform/quickstart.js";
+import { loadStats } from "../platform/stats.js";
+import { TIME_HISTORY_KEY_PREFIX } from "../platform/userdata.js";
 import "./OfflinePage.css";
 
 interface RecentEntry {
@@ -10,10 +12,21 @@ interface RecentEntry {
   title: string;
 }
 
+function safeLookup(): Map<string, string> {
+  return new Map(
+    GAMES.filter((g): g is NonNullable<typeof g> => g != null).map(
+      (g) => [g.id, g.title] as const,
+    ),
+  );
+}
+
 function readEntries(): RecentEntry[] {
   // Prefer the canonical recents key written by `recordPlayed` so the
   // offline fallback shares state with Quick Start. Fall back to the
-  // simpler `cards-recent-games` array if a host page wrote one.
+  // simpler `cards-recent-games` array if a host page wrote one. As a
+  // last-ditch fallback, scrape `cards-time-history:<id>` keys so a
+  // device that only has play-time history (and no recents blob yet)
+  // still surfaces something to play.
   const ids = new Set<string>();
   try {
     if (typeof localStorage !== "undefined") {
@@ -30,20 +43,50 @@ function readEntries(): RecentEntry[] {
   }
   for (const id of readRecentlyPlayed()) ids.add(id);
 
-  const lookup = new Map(
-    GAMES.filter((g): g is NonNullable<typeof g> => g != null).map(
-      (g) => [g.id, g.title] as const,
-    ),
-  );
+  const lookup = safeLookup();
+
+  if (ids.size === 0 && typeof localStorage !== "undefined") {
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key || !key.startsWith(TIME_HISTORY_KEY_PREFIX)) continue;
+        const id = key.slice(TIME_HISTORY_KEY_PREFIX.length);
+        if (id && lookup.has(id)) ids.add(id);
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+
   return Array.from(ids)
     .filter((id) => lookup.has(id))
     .slice(0, 12)
     .map((id) => ({ id, title: lookup.get(id) ?? id }));
 }
 
+function readMostPlayed(): RecentEntry[] {
+  // Build a "most-played offline" list from the persisted stats.perGame
+  // blob. Sorted by `played` desc so power-users see their go-to games
+  // first when the network drops. Capped at 8 to keep the section tidy.
+  try {
+    const stats = loadStats();
+    const lookup = safeLookup();
+    const rows = Object.entries(stats.perGame ?? {})
+      .filter(([id, g]) => lookup.has(id) && (g?.played ?? 0) > 0)
+      .sort((a, b) => (b[1]?.played ?? 0) - (a[1]?.played ?? 0))
+      .slice(0, 8);
+    return rows.map(([id]) => ({ id, title: lookup.get(id) ?? id }));
+  } catch {
+    return [];
+  }
+}
+
 export default function OfflinePage(): JSX.Element {
-  const initial = useMemo(readEntries, []);
-  const [recents, setRecents] = useState<RecentEntry[]>(initial);
+  const initialRecents = useMemo(readEntries, []);
+  const initialMostPlayed = useMemo(readMostPlayed, []);
+  const [recents, setRecents] = useState<RecentEntry[]>(initialRecents);
+  const [mostPlayed, setMostPlayed] =
+    useState<RecentEntry[]>(initialMostPlayed);
   const [online, setOnline] = useState<boolean>(
     typeof navigator !== "undefined" ? navigator.onLine : true,
   );
@@ -51,6 +94,7 @@ export default function OfflinePage(): JSX.Element {
   useEffect(() => {
     function refresh(): void {
       setRecents(readEntries());
+      setMostPlayed(readMostPlayed());
     }
     function handleOnline(): void {
       setOnline(true);
@@ -110,6 +154,29 @@ export default function OfflinePage(): JSX.Element {
           </ul>
         )}
       </section>
+
+      {mostPlayed.length > 0 && (
+        <section
+          className="offline-section"
+          data-testid="offline-most-played-section"
+        >
+          <h2 className="offline-section-title">Most-played offline</h2>
+          <ul className="offline-recents">
+            {mostPlayed.map((g) => (
+              <li key={g.id}>
+                <Link
+                  to={`/play/${g.id}`}
+                  className="offline-recent"
+                  data-testid={`offline-most-played-${g.id}`}
+                >
+                  <span className="offline-recent-title">{g.title}</span>
+                  <span className="offline-recent-cta">Play</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="offline-section offline-tips">
         <h2 className="offline-section-title">Tips</h2>
