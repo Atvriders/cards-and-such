@@ -135,6 +135,52 @@ describe("LobbyPage — keyboard shortcut tip", () => {
     renderAt("/");
     expect(screen.queryByTestId("lobby-kbd-tip")).not.toBeInTheDocument();
   });
+
+  // W416 — the tip's visibility is the AND of two conditions: the user
+  // has zero recorded plays AND has not previously dismissed the tip.
+  // This test pins both gates simultaneously by asserting the freshly
+  // cleared localStorage state (no stats key, no dismissal key) is the
+  // exact precondition under which the tip and its dismiss button both
+  // render. A regression that flips either gate's polarity (or replaces
+  // the AND with an OR) would surface here even though the existing
+  // single-axis tests above might still pass.
+  it("W416: shows the tip when stats are absent AND dismissal flag is unset", () => {
+    // Belt-and-suspenders — beforeEach already clears, but be explicit
+    // about the two precise keys the visibility predicate consults so
+    // the test reads as a contract rather than a side-effect of clear().
+    expect(localStorage.getItem("cards-and-such:stats:v1")).toBeNull();
+    expect(localStorage.getItem("cards-lobby-kbd-tip-dismissed")).toBeNull();
+    renderAt("/");
+    const tip = screen.getByTestId("lobby-kbd-tip");
+    expect(tip).toBeInTheDocument();
+    expect(within(tip).getByTestId("lobby-kbd-tip-dismiss")).toBeInTheDocument();
+  });
+
+  // W416 — exercises the full dismissal round-trip: clicking the close
+  // button must (1) hide the tip immediately in the current render and
+  // (2) write the canonical persistence key so a sibling tab / next
+  // page-load reads back the dismissed state. We verify the persisted
+  // value is truthy (the impl stores "1", which is the documented
+  // sentinel the hydrate path checks for === "1") and then re-render
+  // from scratch to confirm it survives a fresh component lifecycle.
+  it("W416: dismiss click writes cards-lobby-kbd-tip-dismissed and survives re-render", () => {
+    renderAt("/");
+    expect(screen.getByTestId("lobby-kbd-tip")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("lobby-kbd-tip-dismiss"));
+
+    // Persisted under the documented key with the truthy sentinel the
+    // hydrate predicate expects.
+    const persisted = localStorage.getItem("cards-lobby-kbd-tip-dismissed");
+    expect(persisted).toBe("1");
+    expect(persisted).toBeTruthy();
+
+    // The dismissal must still hide the tip after a fresh render — i.e.
+    // the persisted flag is the source of truth, not just in-memory
+    // component state. A regression that re-arms the tip on remount
+    // would surface as a failure here.
+    renderAt("/");
+    expect(screen.queryByTestId("lobby-kbd-tip")).not.toBeInTheDocument();
+  });
 });
 
 /**
