@@ -29,5 +29,6 @@ Use Settings to choose 10 or 20 moles per game. Your score is the total of all s
   initialState: (seed: number, settings: MolePopSettingsType) => initialState(seed, settings as MolePopSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-mole-pop-action"]', pulses: 3 }; },
   component: MolePop,
 };

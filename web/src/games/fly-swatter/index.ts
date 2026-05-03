@@ -20,5 +20,5 @@ There is no penalty for missing a click — just keep clicking! The challenge is
 Your final score is 100 × flies swatted. Click as fast and accurately as you can — the faster you swat them, the higher your score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FlySwatterSettings),
-  reducer, isTerminal, component:FlySwatter,
+  reducer, isTerminal, hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-fly-swatter-action"]', pulses: 3 }; }, component:FlySwatter,
 };

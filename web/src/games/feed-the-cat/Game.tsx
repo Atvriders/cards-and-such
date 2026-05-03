@@ -50,7 +50,7 @@ export function FeedTheCat({
         {state.items
           .filter(i => !i.caught && !i.missed)
           .map(item => (
-            <div
+            <div data-testid="hint-target-feed-the-cat-action"
               key={item.id}
               className="ftc-food"
               style={{ left: `${item.x}%`, top: `${item.y}%` }}

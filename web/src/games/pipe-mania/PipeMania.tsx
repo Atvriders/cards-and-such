@@ -39,7 +39,7 @@ export function PipeMania({ state, dispatch }: GameProps<PipeManiaState, PipeMan
               const isSource = cell.type === "source";
               const isFlooded = cell.flooded;
               return (
-                <div
+                <div data-testid="hint-target-pipe-mania-action"
                   key={`${r},${c}`}
                   className={`pipemania-cell${isFlooded ? " pipemania-cell--flooded" : ""}${isSource ? " pipemania-cell--source" : ""}`}
                   onClick={() => !isSource && dispatch({ type: "place", row: r, col: c })}

@@ -28,7 +28,7 @@ export function ApplePicking({ state, dispatch, onGameOver }: GameProps<AppleSta
       {!state.done && (
         <div className="ap-trees">
           {state.trees.map((tree) => (
-            <div
+            <div data-testid="hint-target-apple-picking-action"
               key={tree.id}
               className={`ap-tree${tree.apples === 0 ? " empty" : ""}`}
               onClick={() => tree.apples > 0 && dispatch({ type: "pick", treeId: tree.id } satisfies AppleAction)}

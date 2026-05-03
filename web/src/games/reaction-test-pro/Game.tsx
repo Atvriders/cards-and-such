@@ -32,7 +32,7 @@ export function ReactionTestProGame({ state, dispatch, onGameOver }: GameProps<R
         <span className="rxtstp-score">{state.score} pts</span>
       </div>
       <div className="rxtstp-prompt">Pro reflexes — tap GO instantly!</div>
-      <button
+      <button data-testid="hint-target-reaction-test-pro-action"
         className={`rxtstp-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as ReactionTestProAction)}
         aria-label="react">{state.isGo ? "⚡" : "🛑"}</button>

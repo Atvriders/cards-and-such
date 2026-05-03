@@ -53,7 +53,7 @@ export function DragonEggHatchGame({
         {state.eggs.map((egg) => {
           const st = eggState(egg);
           return (
-            <div
+            <div data-testid="hint-target-dragon-egg-hatch-action"
               key={egg.id}
               className={`deh-egg ${st}`}
               onClick={() => !egg.tapped && !egg.missed && dispatch({ type: "tap", eggId: egg.id })}

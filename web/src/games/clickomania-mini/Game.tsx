@@ -37,7 +37,7 @@ export function ClickomaniaMiniGame({ state, dispatch, onGameOver }: GameProps<C
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`clkmn-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-clickomania-mini-action" key={`${r}-${c}`} className={`clkmn-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as ClickomaniaMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

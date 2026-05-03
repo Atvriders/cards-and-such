@@ -12,5 +12,5 @@ export const reactionTestProPlugin: GamePlugin<ReactionTestProState, ReactionTes
   howToPlay:"Reaction Test Pro is a thirty-tick classic go/no-go reaction-time test. Each round (about one second per tick), the central panel shows either a GO signal or a STOP signal. Your task: tap on GO, hold still on STOP. A correct GO tap scores ten points; a wrongful STOP tap deducts five points (minimum zero). The timer counts down thirty ticks in the upper-right corner. This is the same paradigm psychologists have used for over a century to measure simple reaction time and inhibitory control — it's a small dose of cognitive neuroscience disguised as a game. Average runs land at 80-140 points; trained reflex testers with sharp inhibition score above 200 routinely. When the thirty ticks expire, your final score is locked in. Stay calm, stay focused, react when you see GO — and never on STOP. Rack up those reaction points!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ReactionTestProSettings),
-  reducer,isTerminal,component:ReactionTestProGame,
+  reducer,isTerminal,hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-reaction-test-pro-action"]', pulses: 3 }; }, component:ReactionTestProGame,
 };

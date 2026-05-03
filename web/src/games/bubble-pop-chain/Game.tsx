@@ -63,7 +63,7 @@ export function BubblePopChain({ state, dispatch }: GameProps<BubblePopState, Se
       >
         {grid.map((row, r) =>
           row.map((bubble, c) => (
-            <div
+            <div data-testid="hint-target-bubble-pop-chain-action"
               key={bubble.id}
               className={`bpc-cell${!bubble.alive ? " bpc-cell--dead" : ""}`}
               style={{ background: bubble.alive ? COLOR_HEX[bubble.color] : undefined }}

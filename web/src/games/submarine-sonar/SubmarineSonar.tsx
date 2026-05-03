@@ -29,7 +29,7 @@ export function SubmarineSonar({ state, dispatch, onGameOver }: GameProps<Submar
         style={{ gridTemplateColumns: `repeat(${state.size}, 44px)` }}
       >
         {state.grid.map((cell, i) => (
-          <div
+          <div data-testid="hint-target-submarine-sonar-action"
             key={i}
             className={`submarine-sonar-cell ${cell}`}
             onClick={() => dispatch({ type: "ping", cell: i })}

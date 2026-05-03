@@ -27,5 +27,5 @@ Use Settings to choose 8, 12, or 16 total jumps. The frog cannot jump to the pad
 The game ends when you run out of jumps. Your total score is the sum of all jump distances. Can you plan a route that racks up the maximum distance across all your jumps?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as FrogLeapSettings),
-  reducer, isTerminal, component: FrogLeap,
+  reducer, isTerminal, hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-frog-leap-action"]', pulses: 3 }; }, component: FrogLeap,
 };

@@ -37,7 +37,7 @@ export function Match3HexMiniGame({ state, dispatch, onGameOver }: GameProps<Mat
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3hex-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-match3-hex-mini-action" key={`${r}-${c}`} className={`m3hex-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as Match3HexMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

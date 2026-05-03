@@ -25,7 +25,7 @@ export function TargetGrab({ state, dispatch, onGameOver }: GameProps<TargetGrab
       {state.targets.filter(t=>!t.hit&&t.timeLeft>0).map(t=>{
         const pct=t.timeLeft/t.maxTime;
         const color=pct>0.6?"#e74c3c":pct>0.3?"#e67e22":"#f1c40f";
-        return <button key={t.id} onClick={()=>dispatch({type:"click",id:t.id} as TargetGrabAction)}
+        return <button data-testid="hint-target-target-grab-action" key={t.id} onClick={()=>dispatch({type:"click",id:t.id} as TargetGrabAction)}
           style={{position:"absolute",left:(t.x-t.radius)*W,top:(t.y-t.radius)*H,width:t.radius*2*W,height:t.radius*2*H,
             borderRadius:"50%",background:color,border:"3px solid #fff",cursor:"crosshair",transition:"background 0.2s"}}/>;
       })}

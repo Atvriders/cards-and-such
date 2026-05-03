@@ -36,7 +36,7 @@ export function EasterEggHuntGame({
               const idx = r * COLS + c;
               const isRevealed = state.revealed.has(idx);
               return (
-                <div
+                <div data-testid="hint-target-easter-egg-hunt-action"
                   key={c}
                   className={`eeh-cell ${isRevealed ? (state.eggPositions.has(idx) ? "egg" : "miss") : "hidden"}`}
                   onClick={() => !state.over && dispatch({ type: "dig", index: idx })}

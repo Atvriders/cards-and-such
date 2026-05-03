@@ -40,5 +40,6 @@ Tips: Don't fixate on one virus — scan the whole grid quickly. Prioritize fast
   initialState: (seed: number, settings: WhackVirusSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-whack-a-virus-action"]', pulses: 3 }; },
   component: WhackAVirus,
 };

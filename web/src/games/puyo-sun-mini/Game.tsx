@@ -37,7 +37,7 @@ export function PuyoSunMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoS
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pyosun-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-puyo-sun-mini-action" key={`${r}-${c}`} className={`pyosun-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoSunMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

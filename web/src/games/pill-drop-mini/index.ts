@@ -12,5 +12,5 @@ export const pillDropMiniPlugin: GamePlugin<PillDropMiniState, PillDropMiniActio
   howToPlay:"Pill Drop Mini is a sixty-second match-three inspired by classic pill-and-virus puzzlers. The six-by-six grid is filled with colored pills and viruses. Click adjacent cells to swap them. Whenever a swap creates a horizontal or vertical run of three or more matching colors, those cells clear for ten points each, and new pieces fall in from above to refill the board. Cascade chains are very common with only four colors in play, so a single swap can trigger several rounds of automatic clears for bonus points. Invalid swaps cancel without penalty. The four-color palette makes matches plentiful but the play is fast — strategy lies in setting up cascades. The clock counts down sixty seconds at the top. Average scores hover around 350-450 due to the dense match probability; cascade specialists clear 600+. Time's up — final score locks. Pop those pills!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PillDropMiniSettings),
-  reducer,isTerminal,component:PillDropMiniGame,
+  reducer,isTerminal,hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pill-drop-mini-action"]', pulses: 3 }; }, component:PillDropMiniGame,
 };

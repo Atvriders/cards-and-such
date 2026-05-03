@@ -39,7 +39,7 @@ export function ValentineMatchGame({
         {state.cards.map((type, i) => {
           const isFlipped = state.flipped[i] || state.matched[i];
           return (
-            <div
+            <div data-testid="hint-target-valentine-match-action"
               key={i}
               className={`vm-card ${isFlipped ? "flipped" : ""} ${state.matched[i] ? "matched" : ""}`}
               onClick={() => !state.lockBoard && !state.over && dispatch({ type: "flip", index: i })}

@@ -42,7 +42,7 @@ export function FireworkShow({
         {state.targets
           .filter(t => !t.hit && t.timeLeft > 0)
           .map(t => (
-            <div
+            <div data-testid="hint-target-firework-show-action"
               key={t.id}
               className={`fw-target fw-target-${t.color}`}
               style={{

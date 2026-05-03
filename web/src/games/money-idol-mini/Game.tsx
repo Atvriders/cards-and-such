@@ -29,7 +29,7 @@ export function MoneyIdolMiniGame({ state, dispatch, onGameOver }: GameProps<Mon
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-money-idol-mini-action" key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as MoneyIdolMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

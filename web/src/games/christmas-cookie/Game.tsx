@@ -43,7 +43,7 @@ export function ChristmasCookieGame({
         {state.cards.map((type, i) => {
           const isFlipped = state.flipped[i] || state.matched[i];
           return (
-            <div
+            <div data-testid="hint-target-christmas-cookie-action"
               key={i}
               className={`cc-card ${isFlipped ? "flipped" : ""} ${state.matched[i] ? "matched" : ""}`}
               onClick={() => !state.lockBoard && !state.over && dispatch({ type: "flip", index: i })}

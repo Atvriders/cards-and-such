@@ -27,5 +27,5 @@ Use Settings to choose 20, 30, or 45 seconds. The longer the game, the higher yo
 The game ends when time runs out. Your final score, total slices, and miss count are displayed. Can you keep your accuracy high while clicking at top speed?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SwordSliceSettings),
-  reducer, isTerminal, component: SwordSlice,
+  reducer, isTerminal, hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-sword-slice-action"]', pulses: 3 }; }, component: SwordSlice,
 };

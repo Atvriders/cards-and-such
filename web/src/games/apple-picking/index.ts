@@ -33,5 +33,6 @@ Try to always pick the fullest tree each turn for the best result. Good luck fil
   initialState: (seed: number, settings: ApplePickingSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-apple-picking-action"]', pulses: 3 }; },
   component: ApplePicking,
 };

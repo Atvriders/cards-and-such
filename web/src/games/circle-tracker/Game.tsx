@@ -32,7 +32,7 @@ export function CircleTrackerGame({ state, dispatch, onGameOver }: GameProps<Cir
         <span className="crtrkr-score">{state.score} pts</span>
       </div>
       <div className="crtrkr-prompt">Track the circle — tap when blue!</div>
-      <button
+      <button data-testid="hint-target-circle-tracker-action"
         className={`crtrkr-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as CircleTrackerAction)}
         aria-label="react">{state.isGo ? "🔵" : "⚫"}</button>

@@ -32,7 +32,7 @@ export function SwordSlice({ state, dispatch, onGameOver }: GameProps<SwordSlice
   return (
     <div className="slice-wrap">
       <div className="slice-header"><span>{state.timeLeft}s</span><span>Score: {state.score}</span><span>Sliced: {state.sliced}</span></div>
-      <div className="slice-arena" onClick={() => dispatch({ type: "miss" } as SwordSliceAction)}>
+      <div data-testid="hint-target-sword-slice-action" className="slice-arena" onClick={() => dispatch({ type: "miss" } as SwordSliceAction)}>
         {state.targets.map(t => (
           <button key={t.id} className="slice-target"
             style={{ left: `${t.x}%`, top: `${t.y}%`, width: `${t.size}px`, height: `${t.size}px`, fontSize: `${t.size * 0.5}px` }}

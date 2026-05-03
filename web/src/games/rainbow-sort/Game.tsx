@@ -36,7 +36,7 @@ export function RainbowSort({ state, dispatch, onGameOver }: GameProps<RainbowSt
       {!state.done && (
         <div className="rs-buckets">
           {ALL_COLORS.map(color => (
-            <div
+            <div data-testid="hint-target-rainbow-sort-action"
               key={color}
               className="rs-bucket"
               style={{ background: COLOR_BG[color] }}

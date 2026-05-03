@@ -62,7 +62,7 @@ export function WhackAVirus({ state, dispatch }: GameProps<WhackVirusState, Sett
           const warnClass = pct < 30 ? " wav-timer-fill--crit" : pct < 60 ? " wav-timer-fill--warn" : "";
 
           return (
-            <div
+            <div data-testid="hint-target-whack-a-virus-action"
               key={i}
               className={`wav-slot${!virus ? " wav-slot--empty" : ""}`}
               onClick={() => virus && !virus.whacked && dispatch({ type: "whack", id: virus.id } as WhackVirusAction)}

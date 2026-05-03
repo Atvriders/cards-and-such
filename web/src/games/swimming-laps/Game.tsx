@@ -65,7 +65,7 @@ export function SwimmingLaps({
 
       {state.phase === "playing" && (
         <div className="swim-controls">
-          <button className="swim-btn lane-l" onClick={() => d({ type: "changeLane", dir: -1 })}>← Lane</button>
+          <button data-testid="hint-target-swimming-laps-action" className="swim-btn lane-l" onClick={() => d({ type: "changeLane", dir: -1 })}>← Lane</button>
           <button className="swim-btn stroke-l" onClick={() => d({ type: "stroke", key: "L" })}>L Stroke</button>
           <button className="swim-btn stroke-r" onClick={() => d({ type: "stroke", key: "R" })}>R Stroke</button>
           <button className="swim-btn lane-r" onClick={() => d({ type: "changeLane", dir: 1 })}>Lane →</button>

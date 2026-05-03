@@ -30,5 +30,6 @@ Settings: choose 3, 5, or 7 eggs per round. More eggs means more action and high
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-dragon-egg-hatch-action"]', pulses: 3 }; },
   component: DragonEggHatchGame,
 };

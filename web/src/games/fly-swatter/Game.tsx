@@ -21,7 +21,7 @@ export function FlySwatter({ state, dispatch, onGameOver }: GameProps<FlySwatter
     <div className="arcade-header"><span>Score: {state.score}</span><span>Swatted: {state.swatted}/50</span></div>
     <div style={{position:"relative",width:W,height:H,background:"#f9f9f0",border:"2px solid #27ae60",borderRadius:"12px",overflow:"hidden",cursor:"none"}}>
       {state.flies.map(f=>(
-        <button key={f.id} onClick={()=>dispatch({type:"swat",id:f.id} as FlySwatterAction)}
+        <button data-testid="hint-target-fly-swatter-action" key={f.id} onClick={()=>dispatch({type:"swat",id:f.id} as FlySwatterAction)}
           style={{position:"absolute",left:f.x*W-14,top:f.y*H-14,width:28,height:28,borderRadius:"50%",
             background:"#2c3e50",border:"none",fontSize:"1.1rem",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff"}}>
           ✕

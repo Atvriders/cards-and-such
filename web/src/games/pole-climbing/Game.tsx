@@ -71,7 +71,7 @@ export function PoleClimbing({
 
       {state.phase === "climbing" && (
         <div className="pole-controls">
-          <button className="pole-btn left" onClick={() => d({ type: "gripLeft" })}>Left Grip</button>
+          <button data-testid="hint-target-pole-climbing-action" className="pole-btn left" onClick={() => d({ type: "gripLeft" })}>Left Grip</button>
           <button className="pole-btn right" onClick={() => d({ type: "gripRight" })}>Right Grip</button>
         </div>
       )}

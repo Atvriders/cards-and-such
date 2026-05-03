@@ -27,5 +27,6 @@ This game sharpens practical web development skills and trains your eye for colo
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-hex-color-guess-action"]', pulses: 3 }; },
   component: HexColorGuess,
 };

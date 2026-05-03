@@ -18,5 +18,5 @@ Missing a target (letting it fade out) counts as one miss. You have 3 misses (ea
 On Hard difficulty, targets are smaller and last less time, demanding faster reactions. Click as many targets as possible to build your score. There is no time limit — the game ends only when you run out of miss allowances. How high can you score?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TargetGrabSettings),
-  reducer, isTerminal, component:TargetGrab,
+  reducer, isTerminal, hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-target-grab-action"]', pulses: 3 }; }, component:TargetGrab,
 };

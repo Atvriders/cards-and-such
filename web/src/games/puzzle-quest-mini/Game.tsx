@@ -37,7 +37,7 @@ export function PuzzleQuestMiniGame({ state, dispatch, onGameOver }: GameProps<P
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pzqst-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-puzzle-quest-mini-action" key={`${r}-${c}`} className={`pzqst-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuzzleQuestMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

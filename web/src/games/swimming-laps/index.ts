@@ -24,5 +24,6 @@ Your final score combines lap bonuses, combo consistency, and obstacle avoidance
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: SwimState, action: SwimAction) => SwimState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-swimming-laps-action"]', pulses: 3 }; },
   component: SwimmingLaps,
 } as unknown as GamePlugin;

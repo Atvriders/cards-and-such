@@ -37,7 +37,7 @@ export function LuminesMiniGame({ state, dispatch, onGameOver }: GameProps<Lumin
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`lumns-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-lumines-mini-action" key={`${r}-${c}`} className={`lumns-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as LuminesMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

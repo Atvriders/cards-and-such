@@ -37,7 +37,7 @@ export function PuyoTsuMiniGame({ state, dispatch, onGameOver }: GameProps<PuyoT
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`pyotsu-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-puyo-tsu-mini-action" key={`${r}-${c}`} className={`pyotsu-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as PuyoTsuMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

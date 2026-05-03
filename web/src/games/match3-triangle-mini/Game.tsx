@@ -37,7 +37,7 @@ export function Match3TriangleMiniGame({ state, dispatch, onGameOver }: GameProp
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3tri-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-match3-triangle-mini-action" key={`${r}-${c}`} className={`m3tri-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as Match3TriangleMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

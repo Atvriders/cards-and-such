@@ -67,7 +67,7 @@ export function MarathonPacer({
               onClick={() => d({ type: "surge" })}>
               Surge (-15 energy)
             </button>
-            <button className="mara-btn recover"
+            <button data-testid="hint-target-marathon-pacer-action" className="mara-btn recover"
               onClick={() => d({ type: "recover" })}>
               Ease Up (+energy)
             </button>

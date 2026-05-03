@@ -37,7 +37,7 @@ export function ColumnsMiniGame({ state, dispatch, onGameOver }: GameProps<Colum
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`colmn-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-columns-mini-action" key={`${r}-${c}`} className={`colmn-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as ColumnsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

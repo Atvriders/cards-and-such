@@ -37,7 +37,7 @@ export function SuperColumnsMiniGame({ state, dispatch, onGameOver }: GameProps<
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`spcolmn-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-super-columns-mini-action" key={`${r}-${c}`} className={`spcolmn-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as SuperColumnsMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

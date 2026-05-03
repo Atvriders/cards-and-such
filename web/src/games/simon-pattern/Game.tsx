@@ -32,7 +32,7 @@ export function SimonPatternGame({ state, dispatch, onGameOver }: GameProps<Simo
         <span className="smnpat-score">{state.score} pts</span>
       </div>
       <div className="smnpat-prompt">Watch for the GO beat — tap on rhythm!</div>
-      <button
+      <button data-testid="hint-target-simon-pattern-action"
         className={`smnpat-stage ${state.isGo ? "go" : "nogo"}`}
         onClick={() => dispatch({ type: "react" } as SimonPatternAction)}
         aria-label="react">{state.isGo ? "🎵" : "🔇"}</button>

@@ -29,7 +29,7 @@ export function SharikiGame({ state, dispatch, onGameOver }: GameProps<SharikiSt
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-shariki-action" key={`${r}-${c}`} className={`m3-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as SharikiAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

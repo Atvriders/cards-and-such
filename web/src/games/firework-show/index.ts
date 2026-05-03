@@ -22,5 +22,6 @@ Your final score is calculated at the end of the show. A score of 100 requires 5
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: FireworkState, action: FireworkAction) => FireworkState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-firework-show-action"]', pulses: 3 }; },
   component: FireworkShow,
 } as unknown as GamePlugin;

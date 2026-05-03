@@ -37,7 +37,7 @@ export function SamegameMiniGame({ state, dispatch, onGameOver }: GameProps<Same
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`smgam-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-samegame-mini-action" key={`${r}-${c}`} className={`smgam-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as SamegameMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

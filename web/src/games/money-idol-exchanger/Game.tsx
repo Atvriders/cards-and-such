@@ -29,7 +29,7 @@ export function MoneyIdolExchangerGame({ state, dispatch, onGameOver }: GameProp
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`mnyidl-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-money-idol-exchanger-action" key={`${r}-${c}`} className={`mnyidl-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as MoneyIdolExchangerAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

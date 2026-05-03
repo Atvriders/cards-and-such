@@ -68,7 +68,7 @@ export function SwarmShoot({
         <span>Wave {state.wave}</span>
         <span>{"❤️".repeat(state.lives)}</span>
       </div>
-      <div
+      <div data-testid="hint-target-swarm-shoot-action"
         className="ss2-field"
         style={{ width: W, height: H }}
         onMouseMove={onMouseMove}

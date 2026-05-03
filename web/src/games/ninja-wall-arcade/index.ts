@@ -12,5 +12,5 @@ export const ninjaWallArcadePlugin: GamePlugin<NinjaWallArcadeState, NinjaWallAr
   howToPlay:"Ninja Wall Trivia is a ten-question quiz about Ninja Wall and similar wall-jumping climber arcade games (Ninja Up!, Wall Jump, etc.). The protagonist clings to one of two opposing walls and tap to leap to the other. The walls scroll downward (player climbs upward) and obstacles like spikes, blades, and enemies appear on each wall. The player times jumps to avoid obstacles and chains successful jumps for high scores. Each question tests genre conventions, famous titles, and history. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NinjaWallArcadeSettings),
-  reducer,isTerminal,component:NinjaWallArcadeGame,
+  reducer,isTerminal,hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-ninja-wall-arcade-action"]', pulses: 3 }; }, component:NinjaWallArcadeGame,
 };

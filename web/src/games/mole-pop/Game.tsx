@@ -27,7 +27,7 @@ export function MolePop({ state, dispatch, onGameOver }: GameProps<MolePopState,
       <div className="mp-timer" style={{ width: `${(state.ticksRemaining / state.visibleFor) * 100}%` }} />
       <div className="mp-grid">
         {[0,1,2,3,4,5].map(i => (
-          <button key={i} className={`mp-hole ${state.activeMole === i ? "active" : ""}`}
+          <button data-testid="hint-target-mole-pop-action" key={i} className={`mp-hole ${state.activeMole === i ? "active" : ""}`}
             onClick={() => dispatch({ type: "whack", hole: i } as MolePopAction)}>
             {state.activeMole === i ? "🦔" : "○"}
           </button>

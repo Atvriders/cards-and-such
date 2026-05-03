@@ -37,7 +37,7 @@ export function CandyJellyMiniGame({ state, dispatch, onGameOver }: GameProps<Ca
         {state.grid.map((row, r) => row.map((g, c) => {
           const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
           return (
-            <button key={`${r}-${c}`} className={`cdjly-cell${sel ? " sel" : ""}`}
+            <button data-testid="hint-target-candy-jelly-mini-action" key={`${r}-${c}`} className={`cdjly-cell${sel ? " sel" : ""}`}
               onClick={() => dispatch({ type: "select", row: r, col: c } as CandyJellyMiniAction)}
               aria-label={`gem ${g}`}>{GEMS[g] ?? "?"}</button>
           );

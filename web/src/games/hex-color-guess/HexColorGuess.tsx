@@ -39,7 +39,7 @@ export function HexColorGuess({
                 else if (opt === round.chosen) cls += " wrong";
               }
               return (
-                <button
+                <button data-testid="hint-target-hex-color-guess-action"
                   key={opt}
                   className={cls}
                   onClick={() => !answered && dispatch({ type: "choose", hex: opt })}

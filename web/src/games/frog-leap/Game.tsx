@@ -22,7 +22,7 @@ export function FrogLeap({ state, dispatch, onGameOver }: GameProps<FrogLeapStat
         {state.pads.map(pad => {
           const isCurrent = pad.id === state.currentPad;
           return (
-            <button key={pad.id} className={`lily-pad${isCurrent ? " current" : ""}`}
+            <button data-testid="hint-target-frog-leap-action" key={pad.id} className={`lily-pad${isCurrent ? " current" : ""}`}
               style={{ left: `${pad.x}%`, top: `${pad.y}%` }}
               disabled={isCurrent}
               onClick={() => dispatch({ type: "jump", padId: pad.id } as FrogLeapAction)}>
