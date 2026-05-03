@@ -757,8 +757,8 @@ describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
       expect(gridTiles().length).toBeGreaterThanOrEqual(COLS * 2 + 1);
     });
     const tiles = gridTiles();
-    const grid = tiles[0].parentElement as HTMLElement;
-    expect(grid.classList.contains("lobby-grid")).toBe(true);
+    const grid = tiles[0].closest(".lobby-grid") as HTMLElement;
+    expect(grid).not.toBeNull();
 
     tiles[0].focus();
     expect(document.activeElement).toBe(tiles[0]);
@@ -792,7 +792,7 @@ describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
       expect(gridTiles().length).toBeGreaterThanOrEqual(COLS * (ROWS - 1));
     });
     const tiles = gridTiles();
-    const grid = tiles[0].parentElement as HTMLElement;
+    const grid = tiles[0].closest(".lobby-grid") as HTMLElement;
 
     tiles[0].focus();
     expect(document.activeElement).toBe(tiles[0]);
