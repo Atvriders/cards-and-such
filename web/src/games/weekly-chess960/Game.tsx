@@ -23,7 +23,7 @@ export function WeeklyChess960Game({ state, dispatch, onGameOver }: GameProps<We
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as WeeklyChess960Action)}>{n}</button>;
+          return <button data-testid={`hint-target-weekly-chess960-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as WeeklyChess960Action)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-weekches-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as WeeklyChess960Action)}>Submit</button>}

@@ -38,7 +38,7 @@ export function KimsGameGame({ state, dispatch, onGameOver }: GameProps<KimsGame
                 if (i === r.correct) cls += " correct";
                 else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
               } else if (i === state.selected) cls += " selected";
-              return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as KimsGameAction)}>{n}</button>;
+              return <button data-testid={`hint-target-kims-game-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as KimsGameAction)}>{n}</button>;
             })}
           </div>
           {!state.submitted && <button className="kimsobs-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as KimsGameAction)}>Submit</button>}

@@ -45,7 +45,7 @@ export function GridmagicGame({ state, dispatch, onGameOver }: GameProps<Gridmag
           <div className="gm-bank-label">Pick a value for the highlighted blank:</div>
           <div className="gm-bank">
             {p.bank.map((v, i) => (
-              <button key={i} className="gm-bank-btn" onClick={() => dispatch({ type: "pick", value: v } as GridmagicAction)}>{v}</button>
+              <button data-testid={`hint-target-gridmagic-answer-${i}`} key={i} className="gm-bank-btn" onClick={() => dispatch({ type: "pick", value: v } as GridmagicAction)}>{v}</button>
             ))}
           </div>
           <button className="gm-btn submit" disabled={state.fillA === null || state.fillB === null} onClick={() => dispatch({ type: "submit" } as GridmagicAction)}>Submit</button>

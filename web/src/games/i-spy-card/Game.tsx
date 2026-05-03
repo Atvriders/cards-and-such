@@ -23,7 +23,7 @@ export function ISpyCardGame({ state, dispatch, onGameOver }: GameProps<ISpyCard
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as ISpyCardAction)}>{n}</button>;
+          return <button data-testid={`hint-target-i-spy-card-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as ISpyCardAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="ispycrd-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as ISpyCardAction)}>Submit</button>}

@@ -23,7 +23,7 @@ export function DilemmaDeckGame({ state, dispatch, onGameOver }: GameProps<Dilem
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as DilemmaDeckAction)}>{n}</button>;
+          return <button data-testid={`hint-target-dilemma-deck-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as DilemmaDeckAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-diledeck-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as DilemmaDeckAction)}>Submit</button>}

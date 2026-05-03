@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WarObserveState, WarObserveAction, WarObserveSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const warObservePlugin: GamePlugin<WarObserveState, WarObserveAction, typ
   howToPlay: "War Observation is the classic War card flip with an observation twist: predict which of four cards will win the comparison. Each round shows four numbered cards (values 2-14, like 2 through Ace). Tap the highest one, hit Submit, score ten points if you correctly picked the maximum. Twenty rounds total — max score 200. There is no random element to predicting beyond reading the four numbers; that is the point. War Observation strips War down to pure speed-comparison drill, useful as warm-up for any number-based card game. Even kids learning to compare two-digit numbers can play. Repeated values are deduplicated when generating candidates. Solid players hit 200 (perfect) within a few practices; rushed first-timers might miss two or three from misreading. Hit Submit to lock and Next to advance. There is no timer — accuracy is everything. Twenty rounds takes about two minutes; great between longer sessions and ideal for kids.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as WarObserveSettings),
-  reducer, isTerminal, component: WarObserveGame,
+  reducer, isTerminal, hint: (state: WarObserveState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-war-observe-answer-0"]', pulses: 3 } : null, component: WarObserveGame,
 };

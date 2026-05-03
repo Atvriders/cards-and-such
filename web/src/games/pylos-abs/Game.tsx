@@ -30,7 +30,7 @@ export function PylosAbsGame({ state, dispatch, onGameOver }: GameProps<PylosAbs
           let cls = "pls-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as PylosAbsAction)}><span className="pls-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-pylos-abs-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as PylosAbsAction)}><span className="pls-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`pls-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FramedFilmState, FramedFilmAction, FramedFilmSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const framedFilmPlugin: GamePlugin<FramedFilmState, FramedFilmAction, typ
   howToPlay: "Framed Film tests cinema knowledge by clue-cluster. Each of fifteen rounds gives you a three-element scene description ('Spaceship, lightsaber, desert planet') and asks which film matches. Pick from four candidates, hit Submit, score ten points if right. Fifteen rounds, max 150 points. The film pool spans Star Wars, Harry Potter, Lord of the Rings, Jurassic Park, Titanic, Back to the Future, James Bond, Rocky, Jaws, Finding Nemo, Toy Story, The Lion King, Frozen, and Yellow Submarine — broadly recognized blockbusters and animations. Framed Film mimics the daily online Framed puzzle where players guess films from sequential frame-stills. This digital version uses textual scene clues instead. Cinema buffs hit 110+; casual viewers 60-90. Hit Submit and Next to advance. Total run takes about two minutes. Perfect scores certify deep film knowledge useful for film-club warm-ups and party trivia rounds.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as FramedFilmSettings),
-  reducer, isTerminal, component: FramedFilmGame,
+  reducer, isTerminal, hint: (state: FramedFilmState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-framed-film-answer-0"]', pulses: 3 } : null, component: FramedFilmGame,
 };

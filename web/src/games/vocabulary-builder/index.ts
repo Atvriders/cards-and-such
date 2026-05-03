@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VocabularyBuilderState, VocabularyBuilderAction, VocabularyBuilderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Tap a choice, then press Submit. Correct answers glow green, wrong ones turn red
 A strong vocabulary unlocks better reading, more precise writing, and clearer thinking. Whether you are prepping for the SAT, GRE, or just love learning new words, Vocabulary Builder is a reliable daily workout. Build skills, score points, master English!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as VocabularyBuilderSettings),
-  reducer, isTerminal, component: VocabularyBuilderGame,
+  reducer, isTerminal, hint: (state: VocabularyBuilderState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-vocabulary-builder-answer-0"]', pulses: 3 } : null, component: VocabularyBuilderGame,
 };

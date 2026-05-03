@@ -30,7 +30,7 @@ export function OmegaChessGame({ state, dispatch, onGameOver }: GameProps<OmegaC
           let cls = "omegch-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as OmegaChessAction)}><span className="omegch-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-omega-chess-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as OmegaChessAction)}><span className="omegch-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`omegch-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

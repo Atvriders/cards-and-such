@@ -30,7 +30,7 @@ export function Minichess5x5Game({ state, dispatch, onGameOver }: GameProps<Mini
           let cls = "mini5x5-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as Minichess5x5Action)}><span className="mini5x5-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-minichess-5x5-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as Minichess5x5Action)}><span className="mini5x5-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`mini5x5-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

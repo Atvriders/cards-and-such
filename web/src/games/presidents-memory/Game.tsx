@@ -23,7 +23,7 @@ export function PresidentsMemoryGame({ state, dispatch, onGameOver }: GameProps<
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as PresidentsMemoryAction)}>{n}</button>;
+          return <button data-testid={`hint-target-presidents-memory-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as PresidentsMemoryAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="presmemo-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as PresidentsMemoryAction)}>Submit</button>}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RomanNumeralsMiniState, RomanNumeralsMiniAction, RomanNumeralsMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ The four choices cluster near the right answer (within ±10), so you can't simpl
 There are 20 rounds and no timer; accuracy matters more than speed. Maximum score is 200 points. Sharpen those classical-language reflexes!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as RomanNumeralsMiniSettings),
-  reducer, isTerminal, component: RomanNumeralsMiniGame,
+  reducer, isTerminal, hint: (state: RomanNumeralsMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-roman-numerals-mini-answer-0"]', pulses: 3 } : null, component: RomanNumeralsMiniGame,
 };

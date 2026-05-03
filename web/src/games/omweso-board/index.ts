@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OmwesoBoardState, OmwesoBoardAction, OmwesoBoardSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const omwesoBoardPlugin: GamePlugin<OmwesoBoardState, OmwesoBoardAction, 
   howToPlay:"Omweso Trivia is a ten-question quiz about Omweso, a traditional Ugandan mancala game played on a board of 4 rows × 8 pits (32 pits total). Each player controls two adjacent rows. The game uses 64 seeds (or stones), and the player sows seeds counterclockwise, with the option of relays — when the last seed lands in an occupied pit, the player picks up all those seeds and continues sowing. Captures occur when a player's last seed lands in their own pit, the opposite enemy pit is non-empty, and on certain board configurations. Each question tests rules and history of Omweso. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OmwesoBoardSettings),
-  reducer,isTerminal,component:OmwesoBoardGame,
+  reducer,isTerminal,hint: (state: OmwesoBoardState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-omweso-board-answer-0"]', pulses: 3 } : null, component:OmwesoBoardGame,
 };

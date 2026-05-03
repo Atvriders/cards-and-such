@@ -23,7 +23,7 @@ export function BrainbowGame({ state, dispatch, onGameOver }: GameProps<Brainbow
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as BrainbowAction)}>{n}</button>;
+          return <button data-testid={`hint-target-brainbow-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as BrainbowAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="brnbow-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as BrainbowAction)}>Submit</button>}

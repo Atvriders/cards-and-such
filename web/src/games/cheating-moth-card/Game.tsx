@@ -23,7 +23,7 @@ export function CheatingMothCardGame({ state, dispatch, onGameOver }: GameProps<
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as CheatingMothCardAction)}>{n}</button>;
+          return <button data-testid={`hint-target-cheating-moth-card-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as CheatingMothCardAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-cheamothcard-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as CheatingMothCardAction)}>Submit</button>}

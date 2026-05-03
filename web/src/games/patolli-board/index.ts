@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PatolliBoardState, PatolliBoardAction, PatolliBoardSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const patolliBoardPlugin: GamePlugin<PatolliBoardState, PatolliBoardActio
   howToPlay:"Patolli Trivia is a ten-question quiz about Patolli, an Aztec and Mesoamerican race game played on a cross-shaped (X) board. Players raced six tokens around the board, moving according to throws of marked beans (often five). Patolli was a highly social and ritual game; players bet jewelry, capes, food, and even their freedom on the outcome. The Spanish conquerors banned the game and its priest-players for its perceived spiritual significance and gambling associations. Each question tests known rules, components, and history of Patolli. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PatolliBoardSettings),
-  reducer,isTerminal,component:PatolliBoardGame,
+  reducer,isTerminal,hint: (state: PatolliBoardState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-patolli-board-answer-0"]', pulses: 3 } : null, component:PatolliBoardGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FluxxOriginalMiniState, FluxxOriginalMiniAction, FluxxOriginalMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const fluxxOriginalMiniPlugin: GamePlugin<FluxxOriginalMiniState, FluxxOr
   howToPlay: "Fluxx Original Mini is a quick-fire trivia about the original 1997 Fluxx deck by Looney Labs. Each of twelve rounds shows you a card name from the original Fluxx and asks which category (Action, New Rule, Keeper, Goal, or Creeper) it belongs to. Ten points per correct answer, 120 max. The original Fluxx popularised the 'rules shift mid-game' mechanic that anchors the entire Fluxx family. Cards like Cookies, Milk, Brain, Love and Toast are Keepers; Goals like 'Milk and Cookies' or 'Bread and Chocolate' tie them together. New Rules like 'Hand Limit 2' or 'Draw 4' alter play dynamically. Frequent Fluxx players will hit 110+; first-timers can still pass 60 by reading card names and inferring. Two minutes start to finish. Submit each pick and Next. A friendly invitation to dive into the original game and discover why Fluxx remains one of the most-played casual card games of the past three decades.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as FluxxOriginalMiniSettings),
-  reducer, isTerminal, component: FluxxOriginalMiniGame,
+  reducer, isTerminal, hint: (state: FluxxOriginalMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-fluxx-original-mini-answer-0"]', pulses: 3 } : null, component: FluxxOriginalMiniGame,
 };

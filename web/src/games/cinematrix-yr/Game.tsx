@@ -23,7 +23,7 @@ export function CinematrixYrGame({ state, dispatch, onGameOver }: GameProps<Cine
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as CinematrixYrAction)}>{n}</button>;
+          return <button data-testid={`hint-target-cinematrix-yr-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as CinematrixYrAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="gcinema-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as CinematrixYrAction)}>Submit</button>}

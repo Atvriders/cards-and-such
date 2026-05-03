@@ -23,7 +23,7 @@ export function SherlookDiffGame({ state, dispatch, onGameOver }: GameProps<Sher
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SherlookDiffAction)}>{n}</button>;
+          return <button data-testid={`hint-target-sherlook-diff-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SherlookDiffAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="shrlokd-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SherlookDiffAction)}>Submit</button>}

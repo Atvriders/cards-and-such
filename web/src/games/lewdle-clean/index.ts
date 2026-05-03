@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LewdleCleanState, LewdleCleanAction, LewdleCleanSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const lewdleCleanPlugin: GamePlugin<LewdleCleanState, LewdleCleanAction, 
   howToPlay: "Lewdle Clean is a family-friendly nod to the themed-Wordle clones (Lewdle, Nerdle, Lordle, Gordle, etc.). Each round provides a casual descriptive emoji-style clue and asks which five-letter answer word matches. Twelve rounds, ten points each, total 120 points. We've kept the answer pool to clean five-letter words — fruits, animals, simple verbs, and common objects. The point of themed Wordles is that the daily answer comes from a curated dictionary, dramatically narrowing what valid guesses look like. So this quiz tests whether you can predict the curated answer space from a quick clue. Sharp Wordle players who guess from category-fitness rather than letter-frequency tend to nail 100+; casual word-fans aim for 60-70. Submit, Next, finish in under three minutes. A pleasant warm-up to playing real Wordle clones online — and a reminder that themed Wordle answers always live in their theme.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as LewdleCleanSettings),
-  reducer, isTerminal, component: LewdleCleanGame,
+  reducer, isTerminal, hint: (state: LewdleCleanState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-lewdle-clean-answer-0"]', pulses: 3 } : null, component: LewdleCleanGame,
 };

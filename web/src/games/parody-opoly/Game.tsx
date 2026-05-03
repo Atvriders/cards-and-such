@@ -23,7 +23,7 @@ export function ParodyOpolyGame({ state, dispatch, onGameOver }: GameProps<Parod
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as ParodyOpolyAction)}>{n}</button>;
+          return <button data-testid={`hint-target-parody-opoly-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as ParodyOpolyAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-paroopol-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as ParodyOpolyAction)}>Submit</button>}

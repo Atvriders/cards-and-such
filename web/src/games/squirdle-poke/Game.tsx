@@ -23,7 +23,7 @@ export function SquirdlePokeGame({ state, dispatch, onGameOver }: GameProps<Squi
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SquirdlePokeAction)}>{n}</button>;
+          return <button data-testid={`hint-target-squirdle-poke-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SquirdlePokeAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="gsquird-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SquirdlePokeAction)}>Submit</button>}

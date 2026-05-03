@@ -23,7 +23,7 @@ export function MonetMemoryGame({ state, dispatch, onGameOver }: GameProps<Monet
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as MonetMemoryAction)}>{n}</button>;
+          return <button data-testid={`hint-target-monet-memory-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as MonetMemoryAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="monetmem-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as MonetMemoryAction)}>Submit</button>}

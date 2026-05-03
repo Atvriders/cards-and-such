@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PylosAbsState, PylosAbsAction, PylosAbsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const pylosAbsPlugin: GamePlugin<PylosAbsState, PylosAbsAction, typeof se
   howToPlay:"Pylos Trivia is a ten-question quiz about Pylos, a David Parlett-designed abstract two-player strategy game published by Gigamic. The wooden game uses a 4×4 base for stacking spheres into a pyramid. Each turn a player places one of their spheres on an empty position. A new layer can be built on top of any 2×2 square completed below; each higher layer is one row narrower (4×4 → 3×3 → 2×2 → 1). Players may also 'climb' a sphere from a lower position to a higher (a free upgrade). The player forced to place the very last (top) sphere loses. Each question tests rules and tactics. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PylosAbsSettings),
-  reducer,isTerminal,component:PylosAbsGame,
+  reducer,isTerminal,hint: (state: PylosAbsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-pylos-abs-answer-0"]', pulses: 3 } : null, component:PylosAbsGame,
 };

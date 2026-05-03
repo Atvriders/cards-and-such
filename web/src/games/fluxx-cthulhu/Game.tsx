@@ -23,7 +23,7 @@ export function FluxxCthulhuGame({ state, dispatch, onGameOver }: GameProps<Flux
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxCthulhuAction)}>{n}</button>;
+          return <button data-testid={`hint-target-fluxx-cthulhu-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxCthulhuAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-fluxcthu-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FluxxCthulhuAction)}>Submit</button>}

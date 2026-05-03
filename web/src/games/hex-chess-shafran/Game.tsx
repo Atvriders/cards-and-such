@@ -30,7 +30,7 @@ export function HexChessShafranGame({ state, dispatch, onGameOver }: GameProps<H
           let cls = "hxsha-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as HexChessShafranAction)}><span className="hxsha-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-hex-chess-shafran-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as HexChessShafranAction)}><span className="hxsha-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`hxsha-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

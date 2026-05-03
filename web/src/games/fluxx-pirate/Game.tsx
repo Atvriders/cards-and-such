@@ -23,7 +23,7 @@ export function FluxxPirateGame({ state, dispatch, onGameOver }: GameProps<Fluxx
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxPirateAction)}>{n}</button>;
+          return <button data-testid={`hint-target-fluxx-pirate-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxPirateAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-fluxpira-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FluxxPirateAction)}>Submit</button>}

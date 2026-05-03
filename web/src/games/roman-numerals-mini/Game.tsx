@@ -23,7 +23,7 @@ export function RomanNumeralsMiniGame({ state, dispatch, onGameOver }: GameProps
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as RomanNumeralsMiniAction)}>{c}</button>;
+          return <button data-testid={`hint-target-roman-numerals-mini-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as RomanNumeralsMiniAction)}>{c}</button>;
         })}
       </div>
       {!state.submitted && <button className="rn-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as RomanNumeralsMiniAction)}>Submit</button>}

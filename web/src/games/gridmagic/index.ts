@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GridmagicState, GridmagicAction, GridmagicSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Each correct puzzle scores 30 points; wrong attempts score 0. Use the magic prop
 There are 6 puzzles. Maximum score is 180 points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as GridmagicSettings),
-  reducer, isTerminal, component: GridmagicGame,
+  reducer, isTerminal, hint: (state: GridmagicState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-gridmagic-answer-0"]', pulses: 3 } : null, component: GridmagicGame,
 };

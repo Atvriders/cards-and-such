@@ -23,7 +23,7 @@ export function FluxxStarGame({ state, dispatch, onGameOver }: GameProps<FluxxSt
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxStarAction)}>{n}</button>;
+          return <button data-testid={`hint-target-fluxx-star-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxStarAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-fluxstar-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FluxxStarAction)}>Submit</button>}

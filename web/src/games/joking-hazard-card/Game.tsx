@@ -23,7 +23,7 @@ export function JokingHazardCardGame({ state, dispatch, onGameOver }: GameProps<
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as JokingHazardCardAction)}>{n}</button>;
+          return <button data-testid={`hint-target-joking-hazard-card-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as JokingHazardCardAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-jokihazacard-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as JokingHazardCardAction)}>Submit</button>}

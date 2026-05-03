@@ -23,7 +23,7 @@ export function TaylordleTsGame({ state, dispatch, onGameOver }: GameProps<Taylo
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as TaylordleTsAction)}>{n}</button>;
+          return <button data-testid={`hint-target-taylordle-ts-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as TaylordleTsAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="gtaylor-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as TaylordleTsAction)}>Submit</button>}

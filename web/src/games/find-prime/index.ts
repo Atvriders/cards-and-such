@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FindPrimeState, FindPrimeAction, FindPrimeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ A quick refresher: a prime number has exactly two positive divisors — 1 and it
 There are 20 rounds. Maximum score is 200 points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as FindPrimeSettings),
-  reducer, isTerminal, component: FindPrimeGame,
+  reducer, isTerminal, hint: (state: FindPrimeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-find-prime-answer-0"]', pulses: 3 } : null, component: FindPrimeGame,
 };

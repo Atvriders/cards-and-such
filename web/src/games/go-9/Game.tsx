@@ -30,7 +30,7 @@ export function Go9Game({ state, dispatch, onGameOver }: GameProps<Go9State, Go9
           let cls = "go9-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as Go9Action)}><span className="go9-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-go-9-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as Go9Action)}><span className="go9-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`go9-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

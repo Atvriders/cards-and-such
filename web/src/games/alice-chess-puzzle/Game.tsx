@@ -30,7 +30,7 @@ export function AliceChessPuzzleGame({ state, dispatch, onGameOver }: GameProps<
           let cls = "alicep-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as AliceChessPuzzleAction)}><span className="alicep-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-alice-chess-puzzle-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as AliceChessPuzzleAction)}><span className="alicep-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`alicep-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

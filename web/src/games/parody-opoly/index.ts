@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ParodyOpolyState, ParodyOpolyAction, ParodyOpolySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const parodyOpolyPlugin: GamePlugin<ParodyOpolyState, ParodyOpolyAction, 
   howToPlay: "Parody Opoly is a trivia about the dozens of theme-Monopoly clones released over the years. Twelve rounds describe a property name, action card, or board theme and ask which Opoly variant it belongs to. Pick from four candidates, ten points each, 120 max. Variants covered include Catopoly, Dogopoly, Coffeopoly, Disney-Opoly, Star-Wars-Opoly, Pokemon-Opoly, Doctor-Whoopoly, and the original Monopoly. Each variant rebrands the standard board (Boardwalk, Park Place) into themed property names. Disney-Opoly has Cinderella's Castle as the Boardwalk equivalent; Catopoly has Cat-Bed; Pokemon-Opoly has Cinnabar Island. Hardcore Monopoly-clone collectors hit 100+. Casual quizzers aim for 60-80. Run takes around two minutes. Submit each guess, Next to advance. The Opoly market is a fascinating niche of licensed and parody board games and this quiz invites you into its weirdness.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ParodyOpolySettings),
-  reducer, isTerminal, component: ParodyOpolyGame,
+  reducer, isTerminal, hint: (state: ParodyOpolyState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-parody-opoly-answer-0"]', pulses: 3 } : null, component: ParodyOpolyGame,
 };

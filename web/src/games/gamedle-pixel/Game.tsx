@@ -23,7 +23,7 @@ export function GamedlePixelGame({ state, dispatch, onGameOver }: GameProps<Game
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as GamedlePixelAction)}>{n}</button>;
+          return <button data-testid={`hint-target-gamedle-pixel-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as GamedlePixelAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="ggamedl-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as GamedlePixelAction)}>Submit</button>}

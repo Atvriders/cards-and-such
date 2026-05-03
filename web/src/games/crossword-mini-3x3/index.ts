@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrosswordMini3x3State, CrosswordMini3x3Action, CrosswordMini3x3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CrosswordMini3x3Game } from "./Game.js";
@@ -19,5 +19,5 @@ Each game randomly picks one of four mini puzzles, so seed variety keeps things 
 Sharpen your three-letter vocab and you'll be a mini-crossword speed demon!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CrosswordMini3x3Settings),
-  reducer, isTerminal, component: CrosswordMini3x3Game,
+  reducer, isTerminal, hint: (state: CrosswordMini3x3State): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-crossword-mini-3x3-answer-0"]', pulses: 3 } : null, component: CrosswordMini3x3Game,
 };

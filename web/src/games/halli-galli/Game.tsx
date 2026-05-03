@@ -23,7 +23,7 @@ export function HalliGalliGame({ state, dispatch, onGameOver }: GameProps<HalliG
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as HalliGalliAction)}>{n}</button>;
+          return <button data-testid={`hint-target-halli-galli-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as HalliGalliAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="hgalli-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as HalliGalliAction)}>Submit</button>}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FindCompositeState, FindCompositeAction, FindCompositeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ The deceptive ones tend to look prime: 51, 57, 87, 91, 93. Always test small pri
 There are 20 rounds. Maximum is 200 points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as FindCompositeSettings),
-  reducer, isTerminal, component: FindCompositeGame,
+  reducer, isTerminal, hint: (state: FindCompositeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-find-composite-answer-0"]', pulses: 3 } : null, component: FindCompositeGame,
 };

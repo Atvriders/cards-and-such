@@ -23,7 +23,7 @@ export function MapMemoryGame({ state, dispatch, onGameOver }: GameProps<MapMemo
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as MapMemoryAction)}>{n}</button>;
+          return <button data-testid={`hint-target-map-memory-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as MapMemoryAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="mapmem-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as MapMemoryAction)}>Submit</button>}

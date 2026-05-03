@@ -23,7 +23,7 @@ export function CardAdventureMiniGame({ state, dispatch, onGameOver }: GameProps
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as CardAdventureMiniAction)}>{n}</button>;
+          return <button data-testid={`hint-target-card-adventure-mini-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as CardAdventureMiniAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-cardadvemini-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as CardAdventureMiniAction)}>Submit</button>}

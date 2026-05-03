@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { zipItLetterState, zipItLetterAction, zipItLetterSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { zipItLetterGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const zipItLetterPlugin: GamePlugin<zipItLetterState, zipItLetterAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as zipItLetterSettings),
   reducer,
   isTerminal,
-  component: zipItLetterGame,
+  
+  hint: (state: zipItLetterState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-zip-it-letter-answer-0"]', pulses: 3 } : null,component: zipItLetterGame,
 };

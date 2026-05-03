@@ -23,7 +23,7 @@ export function GuillotineHeadsGame({ state, dispatch, onGameOver }: GameProps<G
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as GuillotineHeadsAction)}>{n}</button>;
+          return <button data-testid={`hint-target-guillotine-heads-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as GuillotineHeadsAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="gguillo-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as GuillotineHeadsAction)}>Submit</button>}

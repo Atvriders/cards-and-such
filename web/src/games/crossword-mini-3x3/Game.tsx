@@ -15,7 +15,7 @@ export function CrosswordMini3x3Game({ state, dispatch, onGameOver }: GameProps<
       <div className="cw3-header">Moves: {state.moves}</div>
       <div className="cw3-grid">
         {state.cells.map((c, i) => (
-          <button key={i} className={`cw3-cell${state.selected === i ? " sel" : ""}`} onClick={() => dispatch({ type:"select", index:i } as CrosswordMini3x3Action)}>{c}</button>
+          <button data-testid={`hint-target-crossword-mini-3x3-answer-${i}`} key={i} className={`cw3-cell${state.selected === i ? " sel" : ""}`} onClick={() => dispatch({ type:"select", index:i } as CrosswordMini3x3Action)}>{c}</button>
         ))}
       </div>
       <div className="cw3-clues">

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { YinshAbsState, YinshAbsAction, YinshAbsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const yinshAbsPlugin: GamePlugin<YinshAbsState, YinshAbsAction, typeof se
   howToPlay:"YINSH Trivia is a ten-question quiz about YINSH, an abstract two-player strategy game by Kris Burm and the third entry in the GIPF Project series. Each player has five rings on a hexagonal board. On a turn a player places a marker inside one of their rings, then moves the ring along a straight line — flipping any markers it passes. When five same-colored markers form a row, that player removes the row and one of their rings. The first to remove three rings wins. Each question tests rules, the GIPF Project context, and strategy of YINSH. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown. YINSH offers crystalline tactics and elegant rule-economy.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as YinshAbsSettings),
-  reducer,isTerminal,component:YinshAbsGame,
+  reducer,isTerminal,hint: (state: YinshAbsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-yinsh-abs-answer-0"]', pulses: 3 } : null, component:YinshAbsGame,
 };

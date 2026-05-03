@@ -30,7 +30,7 @@ export function RenjuGame({ state, dispatch, onGameOver }: GameProps<RenjuState,
           let cls = "renju-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as RenjuAction)}><span className="renju-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-renju-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as RenjuAction)}><span className="renju-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`renju-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

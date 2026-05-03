@@ -23,7 +23,7 @@ export function FindCompositeGame({ state, dispatch, onGameOver }: GameProps<Fin
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FindCompositeAction)}>{n}</button>;
+          return <button data-testid={`hint-target-find-composite-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FindCompositeAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="fc2-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FindCompositeAction)}>Submit</button>}

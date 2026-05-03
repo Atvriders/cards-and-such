@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DrunkStonedStupidState, DrunkStonedStupidAction, DrunkStonedStupidSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,5 @@ export const drunkStonedStupidPlugin: GamePlugin<DrunkStonedStupidState, DrunkSt
   howToPlay: "Drunk Stoned or Stupid is a party card game where you assign labels to friends in your group — 'Most likely to call their ex at 2am,' 'Most likely to start a band' — and the group votes on who fits best. Our quiz version presents a label and four candidate archetypes, asking which best fits the popular consensus. Twelve rounds, ten points each, 120 max. The original card game was published in 2015 by Kheper Games and works for 4-20 players, ages 17+. The cards are deliberately provocative and meant to start arguments. Hardcore party-game fans hit 100+; casual quizzers can still expect 60-80. Run takes around two minutes. Submit each guess and Next to advance. Drunk Stoned or Stupid sits in the same comedic genre as Cards Against Humanity, Joking Hazard, What Do You Meme, and Disturbed Friends — adult, social, often profane. Our quiz keeps it PG.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DrunkStonedStupidSettings),
-  reducer, isTerminal, component: DrunkStonedStupidGame,
+  reducer, isTerminal, hint: (state: DrunkStonedStupidState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-drunk-stoned-stupid-answer-0"]', pulses: 3 } : null, component: DrunkStonedStupidGame,
 };

@@ -30,7 +30,7 @@ export function CrazyhousePuzzleGame({ state, dispatch, onGameOver }: GameProps<
           let cls = "czpz-choice";
           if (isResult) { if (i === q.correct) cls += " correct"; else if (i === state.selected && state.selected !== q.correct) cls += " wrong"; }
           else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as CrazyhousePuzzleAction)}><span className="czpz-choice-letter">{LABELS[i]}</span>{choice}</button>;
+          return <button data-testid={`hint-target-crazyhouse-puzzle-answer-${i}`} key={i} className={cls} disabled={isResult} onClick={() => dispatch({ type:"select", choice:i } as CrazyhousePuzzleAction)}><span className="czpz-choice-letter">{LABELS[i]}</span>{choice}</button>;
         })}
       </div>
       {isResult && <div className={`czpz-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}

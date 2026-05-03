@@ -23,7 +23,7 @@ export function UnstableUnicornsMiniGame({ state, dispatch, onGameOver }: GamePr
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as UnstableUnicornsMiniAction)}>{n}</button>;
+          return <button data-testid={`hint-target-unstable-unicorns-mini-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as UnstableUnicornsMiniAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-unstunicmini-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as UnstableUnicornsMiniAction)}>Submit</button>}

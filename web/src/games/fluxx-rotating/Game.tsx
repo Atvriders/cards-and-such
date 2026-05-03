@@ -23,7 +23,7 @@ export function FluxxRotatingGame({ state, dispatch, onGameOver }: GameProps<Flu
             if (i === r.correct) c += " correct";
             else if (i === state.selected && state.selected !== r.correct) c += " wrong";
           } else if (i === state.selected) c += " selected";
-          return <button key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxRotatingAction)}>{n}</button>;
+          return <button data-testid={`hint-target-fluxx-rotating-answer-${i}`} key={i} className={c} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FluxxRotatingAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="g-fluxrota-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FluxxRotatingAction)}>Submit</button>}

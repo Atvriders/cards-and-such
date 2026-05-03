@@ -23,7 +23,7 @@ export function SpeedPairsGame({ state, dispatch, onGameOver }: GameProps<SpeedP
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SpeedPairsAction)}>{n}</button>;
+          return <button data-testid={`hint-target-speed-pairs-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as SpeedPairsAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="spdpair-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as SpeedPairsAction)}>Submit</button>}

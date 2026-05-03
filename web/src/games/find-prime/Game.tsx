@@ -23,7 +23,7 @@ export function FindPrimeGame({ state, dispatch, onGameOver }: GameProps<FindPri
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FindPrimeAction)}>{n}</button>;
+          return <button data-testid={`hint-target-find-prime-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FindPrimeAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="fp-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FindPrimeAction)}>Submit</button>}

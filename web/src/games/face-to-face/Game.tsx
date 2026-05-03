@@ -23,7 +23,7 @@ export function FaceToFaceGame({ state, dispatch, onGameOver }: GameProps<FaceTo
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FaceToFaceAction)}>{n}</button>;
+          return <button data-testid={`hint-target-face-to-face-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as FaceToFaceAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="gfaceto-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as FaceToFaceAction)}>Submit</button>}

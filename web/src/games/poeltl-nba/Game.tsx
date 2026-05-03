@@ -23,7 +23,7 @@ export function PoeltlNbaGame({ state, dispatch, onGameOver }: GameProps<PoeltlN
             if (i === r.correct) cls += " correct";
             else if (i === state.selected && state.selected !== r.correct) cls += " wrong";
           } else if (i === state.selected) cls += " selected";
-          return <button key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as PoeltlNbaAction)}>{n}</button>;
+          return <button data-testid={`hint-target-poeltl-nba-answer-${i}`} key={i} className={cls} disabled={state.submitted} onClick={() => dispatch({ type: "select", choice: i } as PoeltlNbaAction)}>{n}</button>;
         })}
       </div>
       {!state.submitted && <button className="gpoeltl-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type: "submit" } as PoeltlNbaAction)}>Submit</button>}
