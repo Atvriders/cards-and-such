@@ -304,6 +304,17 @@ describe("ACHIEVEMENTS – a11y / exploration / theme / sharing (v44)", () => {
     expect(find("friendly").isUnlocked(emptyStats())).toBe(true);
   });
 
+  it("friendly (W201): seeded `cards-friend-sessions=1` unlocks the 'Friendly' achievement", () => {
+    // W201 regression: friend-mode unlock must trigger off the literal
+    // string "1" written by PlayPage's friend session bootstrap, and the
+    // achievement's display title must remain "Friendly" so the toast
+    // copy stays in sync with the unlock.
+    localStorage.setItem("cards-friend-sessions", "1");
+    const friendly = find("friendly");
+    expect(friendly.title).toBe("Friendly");
+    expect(friendly.isUnlocked(emptyStats())).toBe(true);
+  });
+
   it("exporter fires when the stats-exported flag is set", () => {
     localStorage.setItem("cards-stats-exported", "true");
     expect(find("exporter").isUnlocked(emptyStats())).toBe(true);
