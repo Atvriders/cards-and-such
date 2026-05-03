@@ -17,5 +17,6 @@ export const tic3d3x3x3Plugin: GamePlugin<ConnectState, ConnectAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as ConnectSettings),
   reducer,
   isTerminal,
+  hint: (state) => state.phase === "playing" && state.turn === "P" ? { selector: ".cn-cell:not(.p):not(.c)", pulses: 3 } : null,
   component: ConnectGame,
 };

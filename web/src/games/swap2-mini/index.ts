@@ -17,5 +17,6 @@ export const swap2MiniPlugin: GamePlugin<ConnectState, ConnectAction, typeof set
   initialState: (seed: number, s: S) => initialState(seed, s as ConnectSettings),
   reducer,
   isTerminal,
+  hint: (state) => state.phase === "playing" && state.turn === "P" ? { selector: ".cn-cell:not(.p):not(.c)", pulses: 3 } : null,
   component: ConnectGame,
 };
