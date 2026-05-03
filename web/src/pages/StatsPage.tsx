@@ -1512,29 +1512,6 @@ export default function StatsPage(): JSX.Element {
           )}
         </div>
 
-        <div className="stats-card" data-testid="stats-most-hinted">
-          <h2>Most-hinted games</h2>
-          {mostHinted.length === 0 ? (
-            <p className="stats-empty">No hints used yet — try the lightbulb button on a game!</p>
-          ) : (
-            <ul className="stats-most-hinted-list">
-              {mostHinted.map((row, idx) => (
-                <li key={row.id} data-testid={`stats-most-hinted-row-${idx}`}>
-                  <span className="stats-most-hinted-rank">{idx + 1}</span>
-                  <span className="stats-most-hinted-title">{row.title}</span>
-                  {/* No per-week hint history is tracked, so we render a single
-                   *  sample which the Sparkline draws as a small horizontal bar
-                   *  proportional only to the row's accent. The data-testid lets
-                   *  tests assert presence without depending on shape. */}
-                  <Sparkline data={[row.count]} testId={`stats-sparkline-${row.id}`} />
-                  <span className="stats-most-hinted-count">{row.count}</span>
-                  <Link to={`/play/${row.id}`} className="btn btn-ghost stats-most-hinted-play">Play</Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
         <div className="stats-card" data-testid="stats-hour-of-day">
           <h2>Plays by hour of day</h2>
           <p className="stats-chart-label">
@@ -1555,6 +1532,61 @@ export default function StatsPage(): JSX.Element {
               : `${heatmapData.total} plays in the last 30 days`}
           </p>
           <HeatmapChart data={heatmapData} />
+        </div>
+
+        <div className="stats-card stats-card--week" data-testid="stats-this-week">
+          <h2>This week</h2>
+          <p className="stats-chart-label">Last 7 days vs prior 7 days</p>
+          {(() => {
+            const { current, prior } = weekAggregates;
+            const playsDelta = pctDelta(current.plays, prior.plays);
+            const winsDelta = pctDelta(current.wins, prior.wins);
+            // Avg-time deltas are inverted in tone (faster = better), but we
+            // still report the raw % change — color signaling is left to the
+            // CSS based on direction. A null delta renders as an em-dash.
+            const avgDelta = pctDelta(current.avgTime, prior.avgTime);
+            const renderDelta = (d: number | null): JSX.Element => {
+              if (d == null) return <span className="stats-week-delta is-flat" data-direction="flat">—</span>;
+              if (d > 0) return <span className="stats-week-delta is-up" data-direction="up">▲ {d}%</span>;
+              if (d < 0) return <span className="stats-week-delta is-down" data-direction="down">▼ {Math.abs(d)}%</span>;
+              return <span className="stats-week-delta is-flat" data-direction="flat">0%</span>;
+            };
+            return (
+              <>
+                <ul className="stats-week-list" data-testid="stats-this-week-list">
+                  <li>
+                    <span className="stats-week-label">Plays</span>
+                    <em className="stats-week-value">{current.plays}</em>
+                    {renderDelta(playsDelta)}
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Wins</span>
+                    <em className="stats-week-value">{current.wins}</em>
+                    {renderDelta(winsDelta)}
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Avg time</span>
+                    <em className="stats-week-value">{formatAvgTime(current.avgTime)}</em>
+                    {renderDelta(avgDelta)}
+                  </li>
+                </ul>
+                <ul className="stats-week-list stats-week-list--prev" data-testid="stats-prev-week">
+                  <li>
+                    <span className="stats-week-label">Prior plays</span>
+                    <em className="stats-week-value">{prior.plays}</em>
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Prior wins</span>
+                    <em className="stats-week-value">{prior.wins}</em>
+                  </li>
+                  <li>
+                    <span className="stats-week-label">Prior avg time</span>
+                    <em className="stats-week-value">{formatAvgTime(prior.avgTime)}</em>
+                  </li>
+                </ul>
+              </>
+            );
+          })()}
         </div>
 
         <div className="stats-card" data-testid="stats-personal-records">
@@ -1614,59 +1646,27 @@ export default function StatsPage(): JSX.Element {
           </ul>
         </div>
 
-        <div className="stats-card stats-card--week" data-testid="stats-this-week">
-          <h2>This week</h2>
-          <p className="stats-chart-label">Last 7 days vs prior 7 days</p>
-          {(() => {
-            const { current, prior } = weekAggregates;
-            const playsDelta = pctDelta(current.plays, prior.plays);
-            const winsDelta = pctDelta(current.wins, prior.wins);
-            // Avg-time deltas are inverted in tone (faster = better), but we
-            // still report the raw % change — color signaling is left to the
-            // CSS based on direction. A null delta renders as an em-dash.
-            const avgDelta = pctDelta(current.avgTime, prior.avgTime);
-            const renderDelta = (d: number | null): JSX.Element => {
-              if (d == null) return <span className="stats-week-delta is-flat" data-direction="flat">—</span>;
-              if (d > 0) return <span className="stats-week-delta is-up" data-direction="up">▲ {d}%</span>;
-              if (d < 0) return <span className="stats-week-delta is-down" data-direction="down">▼ {Math.abs(d)}%</span>;
-              return <span className="stats-week-delta is-flat" data-direction="flat">0%</span>;
-            };
-            return (
-              <>
-                <ul className="stats-week-list" data-testid="stats-this-week-list">
-                  <li>
-                    <span className="stats-week-label">Plays</span>
-                    <em className="stats-week-value">{current.plays}</em>
-                    {renderDelta(playsDelta)}
-                  </li>
-                  <li>
-                    <span className="stats-week-label">Wins</span>
-                    <em className="stats-week-value">{current.wins}</em>
-                    {renderDelta(winsDelta)}
-                  </li>
-                  <li>
-                    <span className="stats-week-label">Avg time</span>
-                    <em className="stats-week-value">{formatAvgTime(current.avgTime)}</em>
-                    {renderDelta(avgDelta)}
-                  </li>
-                </ul>
-                <ul className="stats-week-list stats-week-list--prev" data-testid="stats-prev-week">
-                  <li>
-                    <span className="stats-week-label">Prior plays</span>
-                    <em className="stats-week-value">{prior.plays}</em>
-                  </li>
-                  <li>
-                    <span className="stats-week-label">Prior wins</span>
-                    <em className="stats-week-value">{prior.wins}</em>
-                  </li>
-                  <li>
-                    <span className="stats-week-label">Prior avg time</span>
-                    <em className="stats-week-value">{formatAvgTime(prior.avgTime)}</em>
-                  </li>
-                </ul>
-              </>
-            );
-          })()}
+        <div className="stats-card" data-testid="stats-most-hinted">
+          <h2>Most-hinted games</h2>
+          {mostHinted.length === 0 ? (
+            <p className="stats-empty">No hints used yet — try the lightbulb button on a game!</p>
+          ) : (
+            <ul className="stats-most-hinted-list">
+              {mostHinted.map((row, idx) => (
+                <li key={row.id} data-testid={`stats-most-hinted-row-${idx}`}>
+                  <span className="stats-most-hinted-rank">{idx + 1}</span>
+                  <span className="stats-most-hinted-title">{row.title}</span>
+                  {/* No per-week hint history is tracked, so we render a single
+                   *  sample which the Sparkline draws as a small horizontal bar
+                   *  proportional only to the row's accent. The data-testid lets
+                   *  tests assert presence without depending on shape. */}
+                  <Sparkline data={[row.count]} testId={`stats-sparkline-${row.id}`} />
+                  <span className="stats-most-hinted-count">{row.count}</span>
+                  <Link to={`/play/${row.id}`} className="btn btn-ghost stats-most-hinted-play">Play</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className="stats-card" data-testid="stats-replays-panel">
