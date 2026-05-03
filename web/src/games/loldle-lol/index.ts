@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { loldleLolState, loldleLolAction, loldleLolSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { loldleLolGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const loldleLolPlugin: GamePlugin<loldleLolState, loldleLolAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as loldleLolSettings),
   reducer,
   isTerminal,
-  component: loldleLolGame,
+  
+  hint: (state: loldleLolState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-loldle-lol-answer-0"]', pulses: 3 } : null,component: loldleLolGame,
 };

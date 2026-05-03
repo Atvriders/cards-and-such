@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { weddleNflState, weddleNflAction, weddleNflSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { weddleNflGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const weddleNflPlugin: GamePlugin<weddleNflState, weddleNflAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as weddleNflSettings),
   reducer,
   isTerminal,
-  component: weddleNflGame,
+  
+  hint: (state: weddleNflState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-weddle-nfl-answer-0"]', pulses: 3 } : null,component: weddleNflGame,
 };

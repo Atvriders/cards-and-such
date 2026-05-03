@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CenterDotSudokuState, CenterDotSudokuAction, CenterDotSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CenterDotSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const centerDotSudokuPlugin: GamePlugin<CenterDotSudokuState, CenterDotSu
   initialState: (seed: number) => initialState(seed, { dummy: true } as CenterDotSudokuSettings),
   reducer,
   isTerminal,
-  component: CenterDotSudokuGame,
+  
+  hint: (state: CenterDotSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-center-dot-sudoku-answer-0"]', pulses: 3 } : null,component: CenterDotSudokuGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlinkSpeedState, BlinkSpeedAction, BlinkSpeedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BlinkSpeedGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const blinkSpeedPlugin: GamePlugin<BlinkSpeedState, BlinkSpeedAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as BlinkSpeedSettings),
   reducer,
   isTerminal,
-  component: BlinkSpeedGame,
+  
+  hint: (state: BlinkSpeedState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-blink-speed-answer-0"]', pulses: 3 } : null,component: BlinkSpeedGame,
 };

@@ -27,5 +27,6 @@ Tips: there are no tips for a 50/50 coin. But some players swear by always picki
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-coin-flip-streak-action"]', pulses: 3 }; },
   component: CoinFlipStreak,
 };

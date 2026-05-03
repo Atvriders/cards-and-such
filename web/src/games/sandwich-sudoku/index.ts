@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SandwichSudokuState, SandwichSudokuAction, SandwichSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SandwichSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const sandwichSudokuPlugin: GamePlugin<SandwichSudokuState, SandwichSudok
   initialState: (seed: number) => initialState(seed, { dummy: true } as SandwichSudokuSettings),
   reducer,
   isTerminal,
-  component: SandwichSudokuGame,
+  
+  hint: (state: SandwichSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-sandwich-sudoku-answer-0"]', pulses: 3 } : null,component: SandwichSudokuGame,
 };

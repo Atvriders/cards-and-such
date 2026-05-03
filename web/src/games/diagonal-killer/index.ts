@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DiagonalKillerState, DiagonalKillerStateAction, DiagonalKillerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DiagonalKillerGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const diagonalKillerPlugin: GamePlugin<DiagonalKillerState, DiagonalKille
   initialState: (seed: number) => initialState(seed, { dummy: true } as DiagonalKillerSettings),
   reducer,
   isTerminal,
-  component: DiagonalKillerGame,
+  
+  hint: (state: DiagonalKillerState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-diagonal-killer-answer-0"]', pulses: 3 } : null,component: DiagonalKillerGame,
 };

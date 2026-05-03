@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NononoMiniState, NononoMiniAction, NononoMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NononoMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const nononoMiniPlugin: GamePlugin<NononoMiniState, NononoMiniAction, typ
   initialState: (seed: number) => initialState(seed, { dummy: true } as NononoMiniSettings),
   reducer,
   isTerminal,
-  component: NononoMiniGame,
+  
+  hint: (state: NononoMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-nonono-mini-answer-0"]', pulses: 3 } : null,component: NononoMiniGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HamleMiniState, HamleMiniAction, HamleMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HamleMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const hamleMiniPlugin: GamePlugin<HamleMiniState, HamleMiniAction, typeof
   initialState: (seed: number) => initialState(seed, { dummy: true } as HamleMiniSettings),
   reducer,
   isTerminal,
-  component: HamleMiniGame,
+  
+  hint: (state: HamleMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-hamle-mini-answer-0"]', pulses: 3 } : null,component: HamleMiniGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QueensPuzzleState, QueensPuzzleAction, QueensPuzzleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { QueensPuzzleGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const queensPuzzlePlugin: GamePlugin<QueensPuzzleState, QueensPuzzleActio
   initialState: (seed: number) => initialState(seed, { dummy: true } as QueensPuzzleSettings),
   reducer,
   isTerminal,
-  component: QueensPuzzleGame,
+  
+  hint: (state: QueensPuzzleState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-queens-puzzle-answer-0"]', pulses: 3 } : null,component: QueensPuzzleGame,
 };

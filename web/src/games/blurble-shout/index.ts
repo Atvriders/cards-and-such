@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlurbleShoutState, BlurbleShoutAction, BlurbleShoutSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const blurbleShoutPlugin: GamePlugin<BlurbleShoutState, BlurbleShoutActio
   initialState: (seed: number, s: S) => initialState(seed, s as BlurbleShoutSettings),
   reducer,
   isTerminal,
-  component: BlurbleShoutGame,
+  
+  hint: (state: BlurbleShoutState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-blurble-shout-answer-0"]', pulses: 3 } : null,component: BlurbleShoutGame,
 };

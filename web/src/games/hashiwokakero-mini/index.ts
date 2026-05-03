@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HashiwokakeroMiniState, HashiwokakeroMiniAction, HashiwokakeroMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HashiwokakeroMiniGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: classic Bridges techniques include: an island with degree N adjacent to K 
   initialState: (seed: number, s: S) => initialState(seed, s as HashiwokakeroMiniSettings),
   reducer,
   isTerminal,
-  component: HashiwokakeroMiniGame,
+  
+  hint: (state: HashiwokakeroMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-hashiwokakero-mini-answer-0"]', pulses: 3 } : null,component: HashiwokakeroMiniGame,
 };

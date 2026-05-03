@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChineseRingsState, ChineseRingsAction, ChineseRingsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ChineseRingsGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: the optimal path encodes binary as a Gray code — each move flips exactly
   initialState: (seed: number, s: S) => initialState(seed, s as ChineseRingsSettings),
   reducer,
   isTerminal,
-  component: ChineseRingsGame,
+  
+  hint: (state: ChineseRingsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-chinese-rings-answer-0"]', pulses: 3 } : null,component: ChineseRingsGame,
 };

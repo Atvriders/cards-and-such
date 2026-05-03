@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NerdleEquationState, NerdleEquationAction, NerdleEquationSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const nerdleEquationPlugin: GamePlugin<NerdleEquationState, NerdleEquatio
   initialState: (seed: number, s: S) => initialState(seed, s as NerdleEquationSettings),
   reducer,
   isTerminal,
-  component: NerdleEquationGame,
+  
+  hint: (state: NerdleEquationState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-nerdle-equation-answer-0"]', pulses: 3 } : null,component: NerdleEquationGame,
 };

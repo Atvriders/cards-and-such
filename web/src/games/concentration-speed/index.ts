@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConcentrationSpeedState, ConcentrationSpeedAction, ConcentrationSpeedSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ConcentrationSpeedGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const concentrationSpeedPlugin: GamePlugin<ConcentrationSpeedState, Conce
   initialState: (seed: number, s: S) => initialState(seed, s as ConcentrationSpeedSettings),
   reducer,
   isTerminal,
-  component: ConcentrationSpeedGame,
+  
+  hint: (state: ConcentrationSpeedState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-concentration-speed-answer-0"]', pulses: 3 } : null,component: ConcentrationSpeedGame,
 };

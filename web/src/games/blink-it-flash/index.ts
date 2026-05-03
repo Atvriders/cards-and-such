@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { blinkItFlashState, blinkItFlashAction, blinkItFlashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { blinkItFlashGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const blinkItFlashPlugin: GamePlugin<blinkItFlashState, blinkItFlashActio
   initialState: (seed: number, s: S) => initialState(seed, s as blinkItFlashSettings),
   reducer,
   isTerminal,
-  component: blinkItFlashGame,
+  
+  hint: (state: blinkItFlashState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-blink-it-flash-answer-0"]', pulses: 3 } : null,component: blinkItFlashGame,
 };

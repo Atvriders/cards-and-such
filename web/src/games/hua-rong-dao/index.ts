@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HuaRongDaoState, HuaRongDaoAction, HuaRongDaoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HuaRongDaoGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: the canonical Hua Rong Dao starting position requires 81 moves to escape â
   initialState: (seed: number, s: S) => initialState(seed, s as HuaRongDaoSettings),
   reducer,
   isTerminal,
-  component: HuaRongDaoGame,
+  
+  hint: (state: HuaRongDaoState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-hua-rong-dao-answer-0"]', pulses: 3 } : null,component: HuaRongDaoGame,
 };

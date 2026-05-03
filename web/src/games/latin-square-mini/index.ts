@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LatinSquareMiniState, LatinSquareMiniAction, LatinSquareMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { LatinSquareMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const latinSquareMiniPlugin: GamePlugin<LatinSquareMiniState, LatinSquare
   initialState: (seed: number) => initialState(seed, { dummy: true } as LatinSquareMiniSettings),
   reducer,
   isTerminal,
-  component: LatinSquareMiniGame,
+  
+  hint: (state: LatinSquareMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-latin-square-mini-answer-0"]', pulses: 3 } : null,component: LatinSquareMiniGame,
 };

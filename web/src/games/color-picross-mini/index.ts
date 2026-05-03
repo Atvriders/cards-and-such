@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorPicrossMiniState, ColorPicrossMiniAction, ColorPicrossMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ColorPicrossMiniGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: solve along axes with the most-constraining clues first. A row with clues 
   initialState: (seed: number, s: S) => initialState(seed, s as ColorPicrossMiniSettings),
   reducer,
   isTerminal,
-  component: ColorPicrossMiniGame,
+  
+  hint: (state: ColorPicrossMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-color-picross-mini-answer-0"]', pulses: 3 } : null,component: ColorPicrossMiniGame,
 };

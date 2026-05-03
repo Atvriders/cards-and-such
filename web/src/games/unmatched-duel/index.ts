@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { unmatchedDuelState, unmatchedDuelAction, unmatchedDuelSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { unmatchedDuelGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const unmatchedDuelPlugin: GamePlugin<unmatchedDuelState, unmatchedDuelAc
   initialState: (seed: number, s: S) => initialState(seed, s as unmatchedDuelSettings),
   reducer,
   isTerminal,
-  component: unmatchedDuelGame,
+  
+  hint: (state: unmatchedDuelState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-unmatched-duel-answer-0"]', pulses: 3 } : null,component: unmatchedDuelGame,
 };

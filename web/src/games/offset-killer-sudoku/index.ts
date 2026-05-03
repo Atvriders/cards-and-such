@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { OffsetKillerSudokuState, OffsetKillerSudokuStateAction, OffsetKillerSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OffsetKillerSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const offsetKillerSudokuPlugin: GamePlugin<OffsetKillerSudokuState, Offse
   initialState: (seed: number) => initialState(seed, { dummy: true } as OffsetKillerSudokuSettings),
   reducer,
   isTerminal,
-  component: OffsetKillerSudokuGame,
+  
+  hint: (state: OffsetKillerSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-offset-killer-sudoku-answer-0"]', pulses: 3 } : null,component: OffsetKillerSudokuGame,
 };

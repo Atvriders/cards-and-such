@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { fiascoNoirState, fiascoNoirAction, fiascoNoirSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { fiascoNoirGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const fiascoNoirPlugin: GamePlugin<fiascoNoirState, fiascoNoirAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as fiascoNoirSettings),
   reducer,
   isTerminal,
-  component: fiascoNoirGame,
+  
+  hint: (state: fiascoNoirState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-fiasco-noir-answer-0"]', pulses: 3 } : null,component: fiascoNoirGame,
 };

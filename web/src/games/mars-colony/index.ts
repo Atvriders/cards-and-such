@@ -30,5 +30,6 @@ Difficulty: Easy boosts production by 20%; Hard reduces it by 20%, making every 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-mars-colony-action"]', pulses: 3 }; },
   component: MarsColonyGame,
 };

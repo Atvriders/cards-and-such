@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AsteriskSudokuState, AsteriskSudokuAction, AsteriskSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AsteriskSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const asteriskSudokuPlugin: GamePlugin<AsteriskSudokuState, AsteriskSudok
   initialState: (seed: number) => initialState(seed, { dummy: true } as AsteriskSudokuSettings),
   reducer,
   isTerminal,
-  component: AsteriskSudokuGame,
+  
+  hint: (state: AsteriskSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-asterisk-sudoku-answer-0"]', pulses: 3 } : null,component: AsteriskSudokuGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DisneyMemoryState, DisneyMemoryAction, DisneyMemorySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DisneyMemoryGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const disneyMemoryPlugin: GamePlugin<DisneyMemoryState, DisneyMemoryActio
   initialState: (seed: number, s: S) => initialState(seed, s as DisneyMemorySettings),
   reducer,
   isTerminal,
-  component: DisneyMemoryGame,
+  
+  hint: (state: DisneyMemoryState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-disney-memory-answer-0"]', pulses: 3 } : null,component: DisneyMemoryGame,
 };

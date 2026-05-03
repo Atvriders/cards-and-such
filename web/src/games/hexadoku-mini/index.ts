@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HexadokuMiniState, HexadokuMiniStateAction, HexadokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HexadokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const hexadokuMiniPlugin: GamePlugin<HexadokuMiniState, HexadokuMiniState
   initialState: (seed: number) => initialState(seed, { dummy: true } as HexadokuMiniSettings),
   reducer,
   isTerminal,
-  component: HexadokuMiniGame,
+  
+  hint: (state: HexadokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-hexadoku-mini-answer-0"]', pulses: 3 } : null,component: HexadokuMiniGame,
 };

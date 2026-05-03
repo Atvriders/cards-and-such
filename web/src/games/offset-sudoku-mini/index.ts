@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { OffsetSudokuMiniState, OffsetSudokuMiniStateAction, OffsetSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OffsetSudokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const offsetSudokuMiniPlugin: GamePlugin<OffsetSudokuMiniState, OffsetSud
   initialState: (seed: number) => initialState(seed, { dummy: true } as OffsetSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: OffsetSudokuMiniGame,
+  
+  hint: (state: OffsetSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-offset-sudoku-mini-answer-0"]', pulses: 3 } : null,component: OffsetSudokuMiniGame,
 };

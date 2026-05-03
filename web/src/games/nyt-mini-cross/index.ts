@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { nytMiniCrossState, nytMiniCrossAction, nytMiniCrossSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { nytMiniCrossGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const nytMiniCrossPlugin: GamePlugin<nytMiniCrossState, nytMiniCrossActio
   initialState: (seed: number, s: S) => initialState(seed, s as nytMiniCrossSettings),
   reducer,
   isTerminal,
-  component: nytMiniCrossGame,
+  
+  hint: (state: nytMiniCrossState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-nyt-mini-cross-answer-0"]', pulses: 3 } : null,component: nytMiniCrossGame,
 };

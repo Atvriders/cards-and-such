@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrypticSudokuState, CrypticSudokuStateAction, CrypticSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CrypticSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const crypticSudokuPlugin: GamePlugin<CrypticSudokuState, CrypticSudokuSt
   initialState: (seed: number) => initialState(seed, { dummy: true } as CrypticSudokuSettings),
   reducer,
   isTerminal,
-  component: CrypticSudokuGame,
+  
+  hint: (state: CrypticSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cryptic-sudoku-answer-0"]', pulses: 3 } : null,component: CrypticSudokuGame,
 };

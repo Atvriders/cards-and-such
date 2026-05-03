@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AntiKnightSudokuMiniState, AntiKnightSudokuMiniAction, AntiKnightSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AntiKnightSudokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const antiKnightSudokuMiniPlugin: GamePlugin<AntiKnightSudokuMiniState, A
   initialState: (seed: number) => initialState(seed, { dummy: true } as AntiKnightSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: AntiKnightSudokuMiniGame,
+  
+  hint: (state: AntiKnightSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-anti-knight-sudoku-mini-answer-0"]', pulses: 3 } : null,component: AntiKnightSudokuMiniGame,
 };

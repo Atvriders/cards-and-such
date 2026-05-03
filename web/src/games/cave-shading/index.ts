@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CaveShadingState, CaveShadingAction, CaveShadingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CaveShadingGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const caveShadingPlugin: GamePlugin<CaveShadingState, CaveShadingAction, 
   initialState: (seed: number) => initialState(seed, { dummy: true } as CaveShadingSettings),
   reducer,
   isTerminal,
-  component: CaveShadingGame,
+  
+  hint: (state: CaveShadingState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cave-shading-answer-0"]', pulses: 3 } : null,component: CaveShadingGame,
 };

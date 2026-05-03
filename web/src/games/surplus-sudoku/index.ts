@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SurplusSudokuState, SurplusSudokuStateAction, SurplusSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SurplusSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const surplusSudokuPlugin: GamePlugin<SurplusSudokuState, SurplusSudokuSt
   initialState: (seed: number) => initialState(seed, { dummy: true } as SurplusSudokuSettings),
   reducer,
   isTerminal,
-  component: SurplusSudokuGame,
+  
+  hint: (state: SurplusSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-surplus-sudoku-answer-0"]', pulses: 3 } : null,component: SurplusSudokuGame,
 };

@@ -32,5 +32,6 @@ Settings: choose 4×4, 5×5, or 6×6 arenas. Larger arenas have more enemies and
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-robot-arena-action"]', pulses: 3 }; },
   component: RobotArenaGame,
 };

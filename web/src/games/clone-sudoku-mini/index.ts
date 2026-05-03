@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CloneSudokuMiniState, CloneSudokuMiniAction, CloneSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CloneSudokuMiniGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: clone regions act as bidirectional information — solving the clone fills
   initialState: (seed: number, s: S) => initialState(seed, s as CloneSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: CloneSudokuMiniGame,
+  
+  hint: (state: CloneSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-clone-sudoku-mini-answer-0"]', pulses: 3 } : null,component: CloneSudokuMiniGame,
 };

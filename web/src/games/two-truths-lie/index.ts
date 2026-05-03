@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TTLState, TTLAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,6 @@ Final score and accuracy are shown at the end. Try to beat your record across di
   initialState: (seed: number, settings: TTLSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
-  component: TwoTruthsLie,
+  
+  hint: (state: TTLState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-two-truths-lie-answer-0"]', pulses: 3 } : null,component: TwoTruthsLie,
 };

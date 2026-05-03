@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DabbleWordsState, DabbleWordsAction, DabbleWordsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const dabbleWordsPlugin: GamePlugin<DabbleWordsState, DabbleWordsAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as DabbleWordsSettings),
   reducer,
   isTerminal,
-  component: DabbleWordsGame,
+  
+  hint: (state: DabbleWordsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-dabble-words-answer-0"]', pulses: 3 } : null,component: DabbleWordsGame,
 };

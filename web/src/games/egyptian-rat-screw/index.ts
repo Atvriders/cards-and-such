@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EgyptianRatScrewState, EgyptianRatScrewAction, EgyptianRatScrewSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { EgyptianRatScrewGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const egyptianRatScrewPlugin: GamePlugin<EgyptianRatScrewState, EgyptianR
   initialState: (seed: number, s: S) => initialState(seed, s as EgyptianRatScrewSettings),
   reducer,
   isTerminal,
-  component: EgyptianRatScrewGame,
+  
+  hint: (state: EgyptianRatScrewState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-egyptian-rat-screw-answer-0"]', pulses: 3 } : null,component: EgyptianRatScrewGame,
 };

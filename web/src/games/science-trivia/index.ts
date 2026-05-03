@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QuizState, QuizAction, QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Review your final score and accuracy at the end of the game. Push yourself to sc
   initialState: (seed: number, settings: ScienceTriviaSettingsType) => initialState(seed, settings as QuizSettings),
   reducer,
   isTerminal,
-  component: ScienceTrivia,
+  
+  hint: (state: QuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-science-trivia-answer-0"]', pulses: 3 } : null,component: ScienceTrivia,
 };

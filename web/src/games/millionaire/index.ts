@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MillionaireState, MillionaireAction, MillionaireSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Millionaire } from "./Game.js";
@@ -34,5 +34,6 @@ The game ends when you answer all 14 questions correctly ($1,000,000), answer on
   initialState: (seed: number, s: MillionaireSettings) => initialState(seed, s),
   reducer,
   isTerminal,
-  component: Millionaire,
+  
+  hint: (state: MillionaireState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-millionaire-answer-0"]', pulses: 3 } : null,component: Millionaire,
 } as unknown as GamePlugin;

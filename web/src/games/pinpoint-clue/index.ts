@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { pinpointClueState, pinpointClueAction, pinpointClueSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { pinpointClueGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const pinpointCluePlugin: GamePlugin<pinpointClueState, pinpointClueActio
   initialState: (seed: number, s: S) => initialState(seed, s as pinpointClueSettings),
   reducer,
   isTerminal,
-  component: pinpointClueGame,
+  
+  hint: (state: pinpointClueState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-pinpoint-clue-answer-0"]', pulses: 3 } : null,component: pinpointClueGame,
 };

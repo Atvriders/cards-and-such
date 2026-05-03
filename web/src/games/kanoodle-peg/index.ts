@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { kanoodlePegState, kanoodlePegAction, kanoodlePegSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { kanoodlePegGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const kanoodlePegPlugin: GamePlugin<kanoodlePegState, kanoodlePegAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as kanoodlePegSettings),
   reducer,
   isTerminal,
-  component: kanoodlePegGame,
+  
+  hint: (state: kanoodlePegState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-kanoodle-peg-answer-0"]', pulses: 3 } : null,component: kanoodlePegGame,
 };

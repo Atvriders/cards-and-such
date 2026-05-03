@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TridokuMiniState, TridokuMiniStateAction, TridokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TridokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const tridokuMiniPlugin: GamePlugin<TridokuMiniState, TridokuMiniStateAct
   initialState: (seed: number) => initialState(seed, { dummy: true } as TridokuMiniSettings),
   reducer,
   isTerminal,
-  component: TridokuMiniGame,
+  
+  hint: (state: TridokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-tridoku-mini-answer-0"]', pulses: 3 } : null,component: TridokuMiniGame,
 };

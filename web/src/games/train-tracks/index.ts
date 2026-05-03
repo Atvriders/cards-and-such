@@ -32,5 +32,6 @@ Strategy: start with rows or columns whose clue is 0 (no track in that line) or 
   initialState: (seed: number, settings: TTSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-train-tracks-action"]', pulses: 3 }; },
   component: TrainTracks,
 };

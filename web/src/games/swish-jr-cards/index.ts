@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { swishJrCardsState, swishJrCardsAction, swishJrCardsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { swishJrCardsGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const swishJrCardsPlugin: GamePlugin<swishJrCardsState, swishJrCardsActio
   initialState: (seed: number, s: S) => initialState(seed, s as swishJrCardsSettings),
   reducer,
   isTerminal,
-  component: swishJrCardsGame,
+  
+  hint: (state: swishJrCardsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-swish-jr-cards-answer-0"]', pulses: 3 } : null,component: swishJrCardsGame,
 };

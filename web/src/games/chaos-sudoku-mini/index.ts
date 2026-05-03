@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChaosSudokuMiniState, ChaosSudokuMiniAction, ChaosSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ChaosSudokuMiniGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: Chaos Construction puzzles famously appeared on Cracking the Cryptic. Look
   initialState: (seed: number, s: S) => initialState(seed, s as ChaosSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: ChaosSudokuMiniGame,
+  
+  hint: (state: ChaosSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-chaos-sudoku-mini-answer-0"]', pulses: 3 } : null,component: ChaosSudokuMiniGame,
 };

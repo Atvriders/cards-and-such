@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QuizState, QuizAction, QuizSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Your final score and accuracy are displayed at the end — challenge yourself to
   initialState: (seed: number, settings: SportsTriviaSettingsType) => initialState(seed, settings as QuizSettings),
   reducer,
   isTerminal,
-  component: SportsTrivia,
+  
+  hint: (state: QuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-sports-trivia-answer-0"]', pulses: 3 } : null,component: SportsTrivia,
 };

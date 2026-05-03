@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CashCabState, CashCabAction, CashCabSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CashCab } from "./Game.js";
@@ -33,5 +33,6 @@ Questions span geography, science, math, history, sports, and pop culture. Every
   initialState: (seed: number, s: CashCabSettings) => initialState(seed, s),
   reducer,
   isTerminal,
-  component: CashCab,
+  
+  hint: (state: CashCabState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cash-cab-answer-0"]', pulses: 3 } : null,component: CashCab,
 } as unknown as GamePlugin;

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { pairsInPearsState, pairsInPearsAction, pairsInPearsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { pairsInPearsGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const pairsInPearsPlugin: GamePlugin<pairsInPearsState, pairsInPearsActio
   initialState: (seed: number, s: S) => initialState(seed, s as pairsInPearsSettings),
   reducer,
   isTerminal,
-  component: pairsInPearsGame,
+  
+  hint: (state: pairsInPearsState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-pairs-in-pears-answer-0"]', pulses: 3 } : null,component: pairsInPearsGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ChronogramPuzzleState, ChronogramPuzzleAction, ChronogramPuzzleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ChronogramPuzzleGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const chronogramPuzzlePlugin: GamePlugin<ChronogramPuzzleState, Chronogra
   initialState: (seed: number) => initialState(seed, { dummy: true } as ChronogramPuzzleSettings),
   reducer,
   isTerminal,
-  component: ChronogramPuzzleGame,
+  
+  hint: (state: ChronogramPuzzleState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-chronogram-puzzle-answer-0"]', pulses: 3 } : null,component: ChronogramPuzzleGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LightningRoundState, LightningRoundAction, LightningRoundSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { LightningRound } from "./Game.js";
@@ -29,5 +29,6 @@ Strategy tips: skip mentally if you are stuck — a quick wrong click beats losi
   initialState: (seed: number, s: LightningRoundSettings) => initialState(seed, s),
   reducer,
   isTerminal,
-  component: LightningRound,
+  
+  hint: (state: LightningRoundState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-lightning-round-answer-0"]', pulses: 3 } : null,component: LightningRound,
 } as unknown as GamePlugin;

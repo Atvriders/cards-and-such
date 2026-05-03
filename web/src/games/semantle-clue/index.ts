@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SemantleClueState, SemantleClueAction, SemantleClueSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const semantleCluePlugin: GamePlugin<SemantleClueState, SemantleClueActio
   initialState: (seed: number, s: S) => initialState(seed, s as SemantleClueSettings),
   reducer,
   isTerminal,
-  component: SemantleClueGame,
+  
+  hint: (state: SemantleClueState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-semantle-clue-answer-0"]', pulses: 3 } : null,component: SemantleClueGame,
 };

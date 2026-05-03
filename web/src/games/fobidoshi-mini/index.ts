@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FobidoshiMiniState, FobidoshiMiniAction, FobidoshiMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FobidoshiMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const fobidoshiMiniPlugin: GamePlugin<FobidoshiMiniState, FobidoshiMiniAc
   initialState: (seed: number) => initialState(seed, { dummy: true } as FobidoshiMiniSettings),
   reducer,
   isTerminal,
-  component: FobidoshiMiniGame,
+  
+  hint: (state: FobidoshiMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-fobidoshi-mini-answer-0"]', pulses: 3 } : null,component: FobidoshiMiniGame,
 };

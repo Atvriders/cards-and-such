@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SuguruMiniState, SuguruMiniAction, SuguruMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SuguruMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const suguruMiniPlugin: GamePlugin<SuguruMiniState, SuguruMiniAction, typ
   initialState: (seed: number) => initialState(seed, { dummy: true } as SuguruMiniSettings),
   reducer,
   isTerminal,
-  component: SuguruMiniGame,
+  
+  hint: (state: SuguruMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-suguru-mini-answer-0"]', pulses: 3 } : null,component: SuguruMiniGame,
 };

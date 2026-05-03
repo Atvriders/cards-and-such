@@ -40,5 +40,6 @@ Tips: Relax your hand and keep a finger hovering near the button. Anticipating t
   initialState: (seed: number, settings: ReactionTimeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-reaction-time-action"]', pulses: 3 }; },
   component: ReactionTime,
 };

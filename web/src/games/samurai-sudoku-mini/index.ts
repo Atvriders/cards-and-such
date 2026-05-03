@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SamuraiSudokuMiniState, SamuraiSudokuMiniStateAction, SamuraiSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SamuraiSudokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const samuraiSudokuMiniPlugin: GamePlugin<SamuraiSudokuMiniState, Samurai
   initialState: (seed: number) => initialState(seed, { dummy: true } as SamuraiSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: SamuraiSudokuMiniGame,
+  
+  hint: (state: SamuraiSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-samurai-sudoku-mini-answer-0"]', pulses: 3 } : null,component: SamuraiSudokuMiniGame,
 };

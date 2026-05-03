@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KabulSpielcafeState, KabulSpielcafeAction, KabulSpielcafeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KabulSpielcafeGame } from "./Game.js";
@@ -19,5 +19,6 @@ export const kabulSpielcafePlugin: GamePlugin<KabulSpielcafeState, KabulSpielcaf
   initialState: (seed: number, s: S) => initialState(seed, s as KabulSpielcafeSettings),
   reducer,
   isTerminal,
-  component: KabulSpielcafeGame,
+  
+  hint: (state: KabulSpielcafeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-kabul-spielcafe-answer-0"]', pulses: 3 } : null,component: KabulSpielcafeGame,
 };

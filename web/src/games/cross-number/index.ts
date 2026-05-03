@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrossNumberState, CrossNumberAction, CrossNumberSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CrossNumberGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const crossNumberPlugin: GamePlugin<CrossNumberState, CrossNumberAction, 
   initialState: (seed: number) => initialState(seed, { dummy: true } as CrossNumberSettings),
   reducer,
   isTerminal,
-  component: CrossNumberGame,
+  
+  hint: (state: CrossNumberState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cross-number-answer-0"]', pulses: 3 } : null,component: CrossNumberGame,
 };

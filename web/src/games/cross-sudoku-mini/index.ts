@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrossSudokuMiniState, CrossSudokuMiniStateAction, CrossSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CrossSudokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const crossSudokuMiniPlugin: GamePlugin<CrossSudokuMiniState, CrossSudoku
   initialState: (seed: number) => initialState(seed, { dummy: true } as CrossSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: CrossSudokuMiniGame,
+  
+  hint: (state: CrossSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cross-sudoku-mini-answer-0"]', pulses: 3 } : null,component: CrossSudokuMiniGame,
 };

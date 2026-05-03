@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TribondClueState, TribondClueAction, TribondClueSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const tribondCluePlugin: GamePlugin<TribondClueState, TribondClueAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as TribondClueSettings),
   reducer,
   isTerminal,
-  component: TribondClueGame,
+  
+  hint: (state: TribondClueState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-tribond-clue-answer-0"]', pulses: 3 } : null,component: TribondClueGame,
 };

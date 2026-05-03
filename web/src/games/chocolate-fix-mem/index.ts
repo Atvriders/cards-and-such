@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { chocolateFixMemState, chocolateFixMemAction, chocolateFixMemSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { chocolateFixMemGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const chocolateFixMemPlugin: GamePlugin<chocolateFixMemState, chocolateFi
   initialState: (seed: number, s: S) => initialState(seed, s as chocolateFixMemSettings),
   reducer,
   isTerminal,
-  component: chocolateFixMemGame,
+  
+  hint: (state: chocolateFixMemState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-chocolate-fix-mem-answer-0"]', pulses: 3 } : null,component: chocolateFixMemGame,
 };

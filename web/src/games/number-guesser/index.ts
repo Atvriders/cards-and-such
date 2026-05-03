@@ -26,5 +26,6 @@ Settings: choose a larger range and tighter attempt limit for a real challenge, 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-number-guesser-action"]', pulses: 3 }; },
   component: NumberGuesser,
 };

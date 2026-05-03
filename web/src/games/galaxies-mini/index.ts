@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GalaxiesMiniState, GalaxiesMiniAction, GalaxiesMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GalaxiesMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const galaxiesMiniPlugin: GamePlugin<GalaxiesMiniState, GalaxiesMiniActio
   initialState: (seed: number) => initialState(seed, { dummy: true } as GalaxiesMiniSettings),
   reducer,
   isTerminal,
-  component: GalaxiesMiniGame,
+  
+  hint: (state: GalaxiesMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-galaxies-mini-answer-0"]', pulses: 3 } : null,component: GalaxiesMiniGame,
 };

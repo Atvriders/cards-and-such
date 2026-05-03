@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GameState, GameAction, GameSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const boggle5x5Plugin: GamePlugin<GameState, GameAction, typeof settings>
   initialState: (seed: number, s: S) => initialState(seed, s as GameSettings),
   reducer,
   isTerminal,
-  component: Boggle5x5Game,
+  
+  hint: (state: GameState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-boggle-5x5-answer-0"]', pulses: 3 } : null,component: Boggle5x5Game,
 };

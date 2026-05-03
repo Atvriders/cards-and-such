@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { KakurasuMiniState, KakurasuMiniAction, KakurasuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KakurasuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const kakurasuMiniPlugin: GamePlugin<KakurasuMiniState, KakurasuMiniActio
   initialState: (seed: number) => initialState(seed, { dummy: true } as KakurasuMiniSettings),
   reducer,
   isTerminal,
-  component: KakurasuMiniGame,
+  
+  hint: (state: KakurasuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-kakurasu-mini-answer-0"]', pulses: 3 } : null,component: KakurasuMiniGame,
 };

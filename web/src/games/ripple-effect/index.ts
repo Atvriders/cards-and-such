@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RippleEffectState, RippleEffectAction, RippleEffectSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RippleEffectGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const rippleEffectPlugin: GamePlugin<RippleEffectState, RippleEffectActio
   initialState: (seed: number) => initialState(seed, { dummy: true } as RippleEffectSettings),
   reducer,
   isTerminal,
-  component: RippleEffectGame,
+  
+  hint: (state: RippleEffectState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-ripple-effect-answer-0"]', pulses: 3 } : null,component: RippleEffectGame,
 };

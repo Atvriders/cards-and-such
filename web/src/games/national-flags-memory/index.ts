@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { nationalFlagsMemoryState, nationalFlagsMemoryAction, nationalFlagsMemorySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { nationalFlagsMemoryGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const nationalFlagsMemoryPlugin: GamePlugin<nationalFlagsMemoryState, nat
   initialState: (seed: number, s: S) => initialState(seed, s as nationalFlagsMemorySettings),
   reducer,
   isTerminal,
-  component: nationalFlagsMemoryGame,
+  
+  hint: (state: nationalFlagsMemoryState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-national-flags-memory-answer-0"]', pulses: 3 } : null,component: nationalFlagsMemoryGame,
 };

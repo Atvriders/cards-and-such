@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SnakeLogicState, SnakeLogicAction, SnakeLogicSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SnakeLogicGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const snakeLogicPlugin: GamePlugin<SnakeLogicState, SnakeLogicAction, typ
   initialState: (seed: number) => initialState(seed, { dummy: true } as SnakeLogicSettings),
   reducer,
   isTerminal,
-  component: SnakeLogicGame,
+  
+  hint: (state: SnakeLogicState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-snake-logic-answer-0"]', pulses: 3 } : null,component: SnakeLogicGame,
 };

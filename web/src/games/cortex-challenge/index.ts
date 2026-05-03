@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CortexChallengeState, CortexChallengeAction, CortexChallengeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CortexChallengeGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const cortexChallengePlugin: GamePlugin<CortexChallengeState, CortexChall
   initialState: (seed: number, s: S) => initialState(seed, s as CortexChallengeSettings),
   reducer,
   isTerminal,
-  component: CortexChallengeGame,
+  
+  hint: (state: CortexChallengeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cortex-challenge-answer-0"]', pulses: 3 } : null,component: CortexChallengeGame,
 };

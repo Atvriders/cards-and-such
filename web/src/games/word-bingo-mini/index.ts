@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WordBingoMiniState, WordBingoMiniAction, WordBingoMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const wordBingoMiniPlugin: GamePlugin<WordBingoMiniState, WordBingoMiniAc
   initialState: (seed: number, s: S) => initialState(seed, s as WordBingoMiniSettings),
   reducer,
   isTerminal,
-  component: WordBingoMiniGame,
+  
+  hint: (state: WordBingoMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-word-bingo-mini-answer-0"]', pulses: 3 } : null,component: WordBingoMiniGame,
 };

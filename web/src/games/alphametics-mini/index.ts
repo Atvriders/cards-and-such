@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlphameticsMiniState, AlphameticsMiniAction, AlphameticsMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AlphameticsMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const alphameticsMiniPlugin: GamePlugin<AlphameticsMiniState, Alphametics
   initialState: (seed: number) => initialState(seed, { dummy: true } as AlphameticsMiniSettings),
   reducer,
   isTerminal,
-  component: AlphameticsMiniGame,
+  
+  hint: (state: AlphameticsMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-alphametics-mini-answer-0"]', pulses: 3 } : null,component: AlphameticsMiniGame,
 };

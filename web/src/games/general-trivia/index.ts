@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TriviaState, TriviaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,6 @@ At the end you see your total score and how many you got right. Aim to answer fa
   initialState: (seed: number, settings: GeneralTriviaSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
-  component: GeneralTrivia,
+  
+  hint: (state: TriviaState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-general-trivia-answer-0"]', pulses: 3 } : null,component: GeneralTrivia,
 };

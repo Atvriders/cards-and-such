@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnagramMagicState, AnagramMagicAction, AnagramMagicSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const anagramMagicPlugin: GamePlugin<AnagramMagicState, AnagramMagicActio
   initialState: (seed: number, s: S) => initialState(seed, s as AnagramMagicSettings),
   reducer,
   isTerminal,
-  component: AnagramMagicGame,
+  
+  hint: (state: AnagramMagicState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-anagram-magic-answer-0"]', pulses: 3 } : null,component: AnagramMagicGame,
 };

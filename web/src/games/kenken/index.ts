@@ -31,5 +31,6 @@ Strategy tip: single-cell cages give you free digits to anchor the puzzle. Two-c
   initialState: (seed: number, settings: KenKenSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-kenken-action"]', pulses: 3 }; },
   component: KenKen,
 };

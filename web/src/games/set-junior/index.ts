@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SetJuniorState, SetJuniorAction, SetJuniorSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SetJuniorGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const setJuniorPlugin: GamePlugin<SetJuniorState, SetJuniorAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as SetJuniorSettings),
   reducer,
   isTerminal,
-  component: SetJuniorGame,
+  
+  hint: (state: SetJuniorState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-set-junior-answer-0"]', pulses: 3 } : null,component: SetJuniorGame,
 };

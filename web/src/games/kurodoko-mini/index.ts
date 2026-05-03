@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { KurodokoMiniState, KurodokoMiniAction, KurodokoMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KurodokoMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const kurodokoMiniPlugin: GamePlugin<KurodokoMiniState, KurodokoMiniActio
   initialState: (seed: number) => initialState(seed, { dummy: true } as KurodokoMiniSettings),
   reducer,
   isTerminal,
-  component: KurodokoMiniGame,
+  
+  hint: (state: KurodokoMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-kurodoko-mini-answer-0"]', pulses: 3 } : null,component: KurodokoMiniGame,
 };

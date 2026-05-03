@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Sudoku25State, Sudoku25StateAction, Sudoku25Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Sudoku25Game } from "./Game.js";
@@ -14,5 +14,6 @@ export const sudoku25Plugin: GamePlugin<Sudoku25State, Sudoku25StateAction, type
   initialState: (seed: number) => initialState(seed, { dummy: true } as Sudoku25Settings),
   reducer,
   isTerminal,
-  component: Sudoku25Game,
+  
+  hint: (state: Sudoku25State): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-sudoku-25-answer-0"]', pulses: 3 } : null,component: Sudoku25Game,
 };

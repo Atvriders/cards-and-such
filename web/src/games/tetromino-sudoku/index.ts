@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TetrominoSudokuState, TetrominoSudokuStateAction, TetrominoSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TetrominoSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const tetrominoSudokuPlugin: GamePlugin<TetrominoSudokuState, TetrominoSu
   initialState: (seed: number) => initialState(seed, { dummy: true } as TetrominoSudokuSettings),
   reducer,
   isTerminal,
-  component: TetrominoSudokuGame,
+  
+  hint: (state: TetrominoSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-tetromino-sudoku-answer-0"]', pulses: 3 } : null,component: TetrominoSudokuGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EruditMiniState, EruditMiniAction, EruditMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const eruditMiniPlugin: GamePlugin<EruditMiniState, EruditMiniAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as EruditMiniSettings),
   reducer,
   isTerminal,
-  component: EruditMiniGame,
+  
+  hint: (state: EruditMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-erudit-mini-answer-0"]', pulses: 3 } : null,component: EruditMiniGame,
 };

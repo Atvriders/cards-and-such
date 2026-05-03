@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WindokuMiniState, WindokuMiniAction, WindokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WindokuMiniGame } from "./Game.js";
@@ -25,5 +25,6 @@ Tips: extra constraints give Windoku more information than classic Sudoku, so un
   initialState: (seed: number, s: S) => initialState(seed, s as WindokuMiniSettings),
   reducer,
   isTerminal,
-  component: WindokuMiniGame,
+  
+  hint: (state: WindokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-windoku-mini-answer-0"]', pulses: 3 } : null,component: WindokuMiniGame,
 };

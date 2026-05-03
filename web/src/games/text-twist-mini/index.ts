@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TextTwistMiniState, TextTwistMiniAction, TextTwistMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const textTwistMiniPlugin: GamePlugin<TextTwistMiniState, TextTwistMiniAc
   initialState: (seed: number, s: S) => initialState(seed, s as TextTwistMiniSettings),
   reducer,
   isTerminal,
-  component: TextTwistMiniGame,
+  
+  hint: (state: TextTwistMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-text-twist-mini-answer-0"]', pulses: 3 } : null,component: TextTwistMiniGame,
 };

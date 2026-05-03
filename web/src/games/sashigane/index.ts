@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SashiganeState, SashiganeAction, SashiganeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SashiganeGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const sashiganePlugin: GamePlugin<SashiganeState, SashiganeAction, typeof
   initialState: (seed: number) => initialState(seed, { dummy: true } as SashiganeSettings),
   reducer,
   isTerminal,
-  component: SashiganeGame,
+  
+  hint: (state: SashiganeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-sashigane-answer-0"]', pulses: 3 } : null,component: SashiganeGame,
 };

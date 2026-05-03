@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { dreamAskewState, dreamAskewAction, dreamAskewSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { dreamAskewGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const dreamAskewPlugin: GamePlugin<dreamAskewState, dreamAskewAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as dreamAskewSettings),
   reducer,
   isTerminal,
-  component: dreamAskewGame,
+  
+  hint: (state: dreamAskewState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-dream-askew-answer-0"]', pulses: 3 } : null,component: dreamAskewGame,
 };

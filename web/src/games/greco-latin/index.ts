@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GrecoLatinState, GrecoLatinAction, GrecoLatinSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GrecoLatinGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const grecoLatinPlugin: GamePlugin<GrecoLatinState, GrecoLatinAction, typ
   initialState: (seed: number) => initialState(seed, { dummy: true } as GrecoLatinSettings),
   reducer,
   isTerminal,
-  component: GrecoLatinGame,
+  
+  hint: (state: GrecoLatinState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-greco-latin-answer-0"]', pulses: 3 } : null,component: GrecoLatinGame,
 };

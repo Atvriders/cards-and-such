@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Sudoku159State, Sudoku159StateAction, Sudoku159Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Sudoku159Game } from "./Game.js";
@@ -14,5 +14,6 @@ export const sudoku159Plugin: GamePlugin<Sudoku159State, Sudoku159StateAction, t
   initialState: (seed: number) => initialState(seed, { dummy: true } as Sudoku159Settings),
   reducer,
   isTerminal,
-  component: Sudoku159Game,
+  
+  hint: (state: Sudoku159State): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-sudoku-159-answer-0"]', pulses: 3 } : null,component: Sudoku159Game,
 };

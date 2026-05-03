@@ -31,5 +31,6 @@ Tips: Try to establish a rhythm by watching the block's travel speed and pressin
   initialState: (_seed: number, _settings: StackerSettingsType) => initialState(),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-stacker-action"]', pulses: 3 }; },
   component: Stacker,
 };

@@ -36,5 +36,6 @@ The draw speed setting affects the visual pacing only. Good luck — tombola!`,
   initialState: (seed: number, settings: Lotto90SettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-lotto-90-action"]', pulses: 3 }; },
   component: Lotto90,
 };

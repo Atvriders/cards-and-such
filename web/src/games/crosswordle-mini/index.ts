@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrosswordleMiniState, CrosswordleMiniAction, CrosswordleMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const crosswordleMiniPlugin: GamePlugin<CrosswordleMiniState, Crosswordle
   initialState: (seed: number, s: S) => initialState(seed, s as CrosswordleMiniSettings),
   reducer,
   isTerminal,
-  component: CrosswordleMiniGame,
+  
+  hint: (state: CrosswordleMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-crosswordle-mini-answer-0"]', pulses: 3 } : null,component: CrosswordleMiniGame,
 };

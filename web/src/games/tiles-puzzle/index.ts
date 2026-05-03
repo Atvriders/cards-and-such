@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { tilesPuzzleState, tilesPuzzleAction, tilesPuzzleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { tilesPuzzleGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const tilesPuzzlePlugin: GamePlugin<tilesPuzzleState, tilesPuzzleAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as tilesPuzzleSettings),
   reducer,
   isTerminal,
-  component: tilesPuzzleGame,
+  
+  hint: (state: tilesPuzzleState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-tiles-puzzle-answer-0"]', pulses: 3 } : null,component: tilesPuzzleGame,
 };

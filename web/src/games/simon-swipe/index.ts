@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SimonSwipeState, SimonSwipeAction, SimonSwipeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SimonSwipeGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const simonSwipePlugin: GamePlugin<SimonSwipeState, SimonSwipeAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as SimonSwipeSettings),
   reducer,
   isTerminal,
-  component: SimonSwipeGame,
+  
+  hint: (state: SimonSwipeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-simon-swipe-answer-0"]', pulses: 3 } : null,component: SimonSwipeGame,
 };

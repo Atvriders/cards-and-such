@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QuadrupleClueSudokuState, QuadrupleClueSudokuStateAction, QuadrupleClueSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { QuadrupleClueSudokuGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const quadrupleClueSudokuPlugin: GamePlugin<QuadrupleClueSudokuState, Qua
   initialState: (seed: number) => initialState(seed, { dummy: true } as QuadrupleClueSudokuSettings),
   reducer,
   isTerminal,
-  component: QuadrupleClueSudokuGame,
+  
+  hint: (state: QuadrupleClueSudokuState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quadruple-clue-sudoku-answer-0"]', pulses: 3 } : null,component: QuadrupleClueSudokuGame,
 };

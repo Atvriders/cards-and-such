@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { gloomCthulhuMiseryState, gloomCthulhuMiseryAction, gloomCthulhuMiserySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { gloomCthulhuMiseryGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const gloomCthulhuMiseryPlugin: GamePlugin<gloomCthulhuMiseryState, gloom
   initialState: (seed: number, s: S) => initialState(seed, s as gloomCthulhuMiserySettings),
   reducer,
   isTerminal,
-  component: gloomCthulhuMiseryGame,
+  
+  hint: (state: gloomCthulhuMiseryState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-gloom-cthulhu-misery-answer-0"]', pulses: 3 } : null,component: gloomCthulhuMiseryGame,
 };

@@ -29,5 +29,6 @@ Strategy tip: a clue of 1 means the tallest building (height N) must be first. A
   initialState: (seed: number, settings: SkyscrapersSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-skyscrapers-action"]', pulses: 3 }; },
   component: Skyscrapers,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Str8tsMiniState, Str8tsMiniAction, Str8tsMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Str8tsMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const str8tsMiniPlugin: GamePlugin<Str8tsMiniState, Str8tsMiniAction, typ
   initialState: (seed: number) => initialState(seed, { dummy: true } as Str8tsMiniSettings),
   reducer,
   isTerminal,
-  component: Str8tsMiniGame,
+  
+  hint: (state: Str8tsMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-str8ts-mini-answer-0"]', pulses: 3 } : null,component: Str8tsMiniGame,
 };

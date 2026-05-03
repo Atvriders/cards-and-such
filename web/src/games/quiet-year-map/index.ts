@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { quietYearMapState, quietYearMapAction, quietYearMapSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { quietYearMapGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const quietYearMapPlugin: GamePlugin<quietYearMapState, quietYearMapActio
   initialState: (seed: number, s: S) => initialState(seed, s as quietYearMapSettings),
   reducer,
   isTerminal,
-  component: quietYearMapGame,
+  
+  hint: (state: quietYearMapState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiet-year-map-answer-0"]', pulses: 3 } : null,component: quietYearMapGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CorralMiniState, CorralMiniAction, CorralMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CorralMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const corralMiniPlugin: GamePlugin<CorralMiniState, CorralMiniAction, typ
   initialState: (seed: number) => initialState(seed, { dummy: true } as CorralMiniSettings),
   reducer,
   isTerminal,
-  component: CorralMiniGame,
+  
+  hint: (state: CorralMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-corral-mini-answer-0"]', pulses: 3 } : null,component: CorralMiniGame,
 };

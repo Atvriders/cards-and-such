@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { perplexusMazeState, perplexusMazeAction, perplexusMazeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { perplexusMazeGame } from "./Game.js";
@@ -15,5 +15,6 @@ export const perplexusMazePlugin: GamePlugin<perplexusMazeState, perplexusMazeAc
   initialState: (seed: number, s: S) => initialState(seed, s as perplexusMazeSettings),
   reducer,
   isTerminal,
-  component: perplexusMazeGame,
+  
+  hint: (state: perplexusMazeState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-perplexus-maze-answer-0"]', pulses: 3 } : null,component: perplexusMazeGame,
 };

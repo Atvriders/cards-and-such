@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NumberLinkMiniState, NumberLinkMiniAction, NumberLinkMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NumberLinkMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const numberLinkMiniPlugin: GamePlugin<NumberLinkMiniState, NumberLinkMin
   initialState: (seed: number) => initialState(seed, { dummy: true } as NumberLinkMiniSettings),
   reducer,
   isTerminal,
-  component: NumberLinkMiniGame,
+  
+  hint: (state: NumberLinkMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-number-link-mini-answer-0"]', pulses: 3 } : null,component: NumberLinkMiniGame,
 };

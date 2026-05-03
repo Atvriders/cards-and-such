@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CatchphraseClueState, CatchphraseClueAction, CatchphraseClueSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const catchphraseCluePlugin: GamePlugin<CatchphraseClueState, Catchphrase
   initialState: (seed: number, s: S) => initialState(seed, s as CatchphraseClueSettings),
   reducer,
   isTerminal,
-  component: CatchphraseClueGame,
+  
+  hint: (state: CatchphraseClueState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-catchphrase-clue-answer-0"]', pulses: 3 } : null,component: CatchphraseClueGame,
 };

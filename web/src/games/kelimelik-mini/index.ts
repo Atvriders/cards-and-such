@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KelimelikMiniState, KelimelikMiniAction, KelimelikMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,6 @@ export const kelimelikMiniPlugin: GamePlugin<KelimelikMiniState, KelimelikMiniAc
   initialState: (seed: number, s: S) => initialState(seed, s as KelimelikMiniSettings),
   reducer,
   isTerminal,
-  component: KelimelikMiniGame,
+  
+  hint: (state: KelimelikMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-kelimelik-mini-answer-0"]', pulses: 3 } : null,component: KelimelikMiniGame,
 };

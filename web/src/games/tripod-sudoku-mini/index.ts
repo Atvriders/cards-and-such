@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TripodSudokuMiniState, TripodSudokuMiniStateAction, TripodSudokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TripodSudokuMiniGame } from "./Game.js";
@@ -14,5 +14,6 @@ export const tripodSudokuMiniPlugin: GamePlugin<TripodSudokuMiniState, TripodSud
   initialState: (seed: number) => initialState(seed, { dummy: true } as TripodSudokuMiniSettings),
   reducer,
   isTerminal,
-  component: TripodSudokuMiniGame,
+  
+  hint: (state: TripodSudokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-tripod-sudoku-mini-answer-0"]', pulses: 3 } : null,component: TripodSudokuMiniGame,
 };
