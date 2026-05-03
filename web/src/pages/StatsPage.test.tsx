@@ -301,6 +301,50 @@ describe("StatsPage", () => {
     expect(localStorage.getItem(STATS_KEY)).toBeNull();
   });
 
+  // W325 — Reset isolation. The stats-reset action is contractually
+  // limited to the stats blob + its derived counters (hints/undos/time-
+  // history). Sister blobs that represent independent user signals —
+  // `cards-ratings`, `cards-favorites`, and `cards-best-times` — must
+  // survive a reset so users don't lose curated metadata when they only
+  // intended to wipe play stats. Pins the negative half of resetStats()'s
+  // contract that the existing tests don't cover.
+  it("W325: stats-reset clears stats key only, leaving ratings/favorites/best-times untouched", async () => {
+    seedRichStats();
+    // Seed the three sister blobs that must survive a reset.
+    const ratings = { klondike: 5, spider: 4, agram: 3 };
+    const favorites = ["klondike", "spider"];
+    const bestTimes = { klondike: 120, spider: 90, agram: 200 };
+    localStorage.setItem("cards-ratings", JSON.stringify(ratings));
+    localStorage.setItem("cards-favorites", JSON.stringify(favorites));
+    localStorage.setItem("cards-best-times", JSON.stringify(bestTimes));
+
+    renderPage();
+    // Pre-condition: stats blob + sister blobs all present.
+    expect(localStorage.getItem(STATS_KEY)).not.toBeNull();
+    expect(localStorage.getItem("cards-ratings")).not.toBeNull();
+    expect(localStorage.getItem("cards-favorites")).not.toBeNull();
+    expect(localStorage.getItem("cards-best-times")).not.toBeNull();
+
+    // Click reset, confirm.
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const yes = await screen.findByTestId("confirm-yes");
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+
+    // Stats key + its derived counters are gone.
+    expect(localStorage.getItem(STATS_KEY)).toBeNull();
+    expect(localStorage.getItem("cards-hints-used")).toBeNull();
+    expect(localStorage.getItem("cards-undos-used")).toBeNull();
+
+    // Sister blobs must be byte-for-byte identical to what we seeded —
+    // not merely present, but unmodified. Round-trip the JSON to ensure
+    // no in-place mutation snuck in via a shared reference.
+    expect(localStorage.getItem("cards-ratings")).toBe(JSON.stringify(ratings));
+    expect(localStorage.getItem("cards-favorites")).toBe(JSON.stringify(favorites));
+    expect(localStorage.getItem("cards-best-times")).toBe(JSON.stringify(bestTimes));
+  });
+
   it("export buttons exist and are clickable without throwing", () => {
     seedRichStats();
     renderPage();
