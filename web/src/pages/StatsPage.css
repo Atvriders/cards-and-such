@@ -212,6 +212,7 @@
 }
 
 .achievement-card {
+  position: relative;
   border-radius: 14px;
   padding: 0.9rem 1rem;
   border: 1px solid rgba(148, 163, 184, 0.12);
@@ -220,13 +221,33 @@
   flex-direction: column;
   gap: 0.35rem;
 }
-.achievement-card.locked {
+.achievement-card.locked,
+.achievement-card[data-state="locked"] {
   opacity: 0.55;
   filter: grayscale(0.4);
 }
-.achievement-card.unlocked {
-  border-color: rgba(167, 139, 250, 0.45);
-  background: linear-gradient(140deg, rgba(76, 29, 149, 0.35), rgba(10, 12, 22, 0.55));
+.achievement-card.in-progress,
+.achievement-card[data-state="in-progress"] {
+  border-color: rgba(167, 139, 250, 0.25);
+  opacity: 0.85;
+}
+.achievement-card.unlocked,
+.achievement-card[data-state="unlocked"] {
+  border-color: rgba(74, 222, 128, 0.55);
+  background: linear-gradient(140deg, rgba(20, 83, 45, 0.35), rgba(10, 12, 22, 0.55));
+  box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.18) inset;
+}
+/* Subtle green accent dot in the top-right corner of unlocked tiles. */
+.achievement-card[data-state="unlocked"]::after {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
 }
 .achievement-title { font-weight: 700; color: #f1f5f9; }
 .achievement-desc { font-size: 0.85rem; color: rgba(203, 213, 225, 0.8); }
@@ -237,7 +258,13 @@
   letter-spacing: 0.08em;
   color: rgba(167, 139, 250, 0.85);
 }
-.achievement-card.locked .achievement-status { color: rgba(148, 163, 184, 0.7); }
+.achievement-card[data-state="unlocked"] .achievement-status {
+  color: rgba(134, 239, 172, 0.95);
+}
+.achievement-card.locked .achievement-status,
+.achievement-card[data-state="locked"] .achievement-status {
+  color: rgba(148, 163, 184, 0.7);
+}
 
 /* Stats card grid — explicit breakpoints so cards balance predictably:
  *   <768px  → 1 column (mobile, stack everything)

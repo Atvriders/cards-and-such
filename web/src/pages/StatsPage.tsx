@@ -1251,11 +1251,40 @@ export default function StatsPage(): JSX.Element {
 
   const filteredAchievements = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return ACHIEVEMENTS;
-    return ACHIEVEMENTS.filter(
-      (a) => a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q),
-    );
-  }, [search]);
+    const base = q
+      ? ACHIEVEMENTS.filter(
+          (a) => a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q),
+        )
+      : ACHIEVEMENTS;
+    // Sort: unlocked first, then in-progress (highest progress % first),
+    // then locked (alphabetical by title). Stable sort via decorate-sort-undecorate.
+    const decorated = base.map((a, idx) => {
+      const unlocked = stats.unlocked.includes(a.id);
+      const { cur, goal } = progressFor(a, stats);
+      const pct = goal > 0 ? cur / goal : 0;
+      const state: "unlocked" | "in-progress" | "locked" = unlocked
+        ? "unlocked"
+        : cur > 0
+          ? "in-progress"
+          : "locked";
+      return { a, idx, state, pct, cur, goal };
+    });
+    const rank = { unlocked: 0, "in-progress": 1, locked: 2 } as const;
+    decorated.sort((x, y) => {
+      if (x.state !== y.state) return rank[x.state] - rank[y.state];
+      if (x.state === "in-progress") {
+        // Highest progress first; ties broken by stable original order.
+        if (y.pct !== x.pct) return y.pct - x.pct;
+        return x.idx - y.idx;
+      }
+      if (x.state === "locked") {
+        return x.a.title.localeCompare(y.a.title);
+      }
+      // unlocked: keep original order (stable)
+      return x.idx - y.idx;
+    });
+    return decorated;
+  }, [search, stats]);
 
   const drillInfo = useMemo(() => {
     if (!drillId) return null;
@@ -1695,19 +1724,23 @@ export default function StatsPage(): JSX.Element {
             aria-label="Search achievements"
           />
           <div className="achievements-grid">
-            {filteredAchievements.map((a) => {
-              const unlocked = stats.unlocked.includes(a.id);
-              const { cur, goal } = progressFor(a, stats);
-              const pct = Math.round((cur / goal) * 100);
+            {filteredAchievements.map(({ a, state, cur, goal }) => {
+              const unlocked = state === "unlocked";
+              const pct = goal > 0 ? Math.round((cur / goal) * 100) : 0;
+              const statusLabel = unlocked
+                ? "Unlocked"
+                : state === "in-progress"
+                  ? "In progress"
+                  : "Locked";
               return (
-                <div key={a.id} className={`achievement-card ${unlocked ? "unlocked" : "locked"}`} data-testid={`achievement-${a.id}`} data-state={unlocked ? "unlocked" : "locked"}>
+                <div key={a.id} className={`achievement-card ${state}`} data-testid={`achievement-${a.id}`} data-state={state}>
                   <div className="achievement-title">{a.title}</div>
                   <div className="achievement-desc">{a.description}</div>
                   <div className="achievement-progress" data-testid={`achievement-progress-${a.id}`}>
                     <div className="achievement-progress-bar" role="progressbar" aria-valuenow={cur} aria-valuemin={0} aria-valuemax={goal} data-pct={pct}><div className="achievement-progress-fill" style={{ width: `${pct}%` }} /></div>
                     <div className="achievement-progress-label">{cur}/{goal}</div>
                   </div>
-                  <div className="achievement-status">{unlocked ? "Unlocked" : "Locked"}</div>
+                  <div className="achievement-status">{statusLabel}</div>
                 </div>
               );
             })}
