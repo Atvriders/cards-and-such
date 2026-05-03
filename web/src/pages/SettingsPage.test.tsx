@@ -470,6 +470,76 @@ describe("SettingsPage Test sounds panel (W214)", () => {
   });
 });
 
+// W614 (W289 + W169): the Data → "Reset favorites only" mini-action must
+// clear the `cards-favorites` blob and *only* that blob — the user's
+// hidden-games set and star ratings live in sibling localStorage keys
+// and must survive untouched. Pinning this isolation prevents a future
+// refactor from accidentally fanning out to clearAllRatings /
+// clearAllHiddenGames in the same handler.
+describe("SettingsPage Reset favorites isolation (W614)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("Reset favorites clears only cards-favorites; hidden games + ratings survive", async () => {
+    // Seed all three sibling user-data blobs with non-empty values so the
+    // post-click assertions are observable (a test that started empty
+    // would pass trivially even on a buggy clearKeys(KNOWN_KEYS) regress).
+    localStorage.setItem("cards-favorites", '["klondike","spider"]');
+    localStorage.setItem("cards-hidden-games", '["freecell"]');
+    localStorage.setItem("cards-ratings", '{"klondike":4,"spider":3}');
+
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-reset-favorites"));
+    // The confirm dialog (driven by useStandaloneConfirm — same provider
+    // shape as ConfirmProvider) must appear and accept a plain Yes.
+    const yes = (await screen.findByTestId("confirm-yes")) as HTMLButtonElement;
+    // No requireText for this action — confirm-yes is enabled immediately.
+    expect(yes.disabled).toBe(false);
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+
+    // Favorites blob is gone (clearAllFavorites does removeItem, not "[]").
+    expect(localStorage.getItem("cards-favorites")).toBeNull();
+    // Hidden games + ratings are byte-for-byte the seeded values.
+    expect(localStorage.getItem("cards-hidden-games")).toBe('["freecell"]');
+    expect(localStorage.getItem("cards-ratings")).toBe('{"klondike":4,"spider":3}');
+  });
+});
+
+// W616 (W289): the Data → "Show hidden games" mini-action must clear the
+// `cards-hidden-games` blob so previously-hidden tiles surface again in
+// every lobby filter. Other sibling user-data blobs (favorites, ratings)
+// must survive untouched, mirroring the W614 favorites isolation contract.
+describe("SettingsPage Show hidden games (W616)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("Show hidden games clears cards-hidden-games; favorites + ratings survive", async () => {
+    localStorage.setItem("cards-hidden-games", '["spider","freecell"]');
+    localStorage.setItem("cards-favorites", '["klondike"]');
+    localStorage.setItem("cards-ratings", '{"klondike":4}');
+
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-show-hidden"));
+    // Confirm dialog driven by useStandaloneConfirm (same shape as
+    // ConfirmProvider). No requireText — confirm-yes is enabled at once.
+    const yes = (await screen.findByTestId("confirm-yes")) as HTMLButtonElement;
+    expect(yes.disabled).toBe(false);
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+
+    // Hidden-games blob is gone (clearAllHiddenGames does removeItem).
+    expect(localStorage.getItem("cards-hidden-games")).toBeNull();
+    // Sibling user-data blobs are byte-for-byte the seeded values.
+    expect(localStorage.getItem("cards-favorites")).toBe('["klondike"]');
+    expect(localStorage.getItem("cards-ratings")).toBe('{"klondike":4}');
+  });
+});
+
 // W170 + W493: the Gameplay → "Welcome tutorial → Show again" link must
 // clear only the `__welcome__` slot inside the `cards-tutorial-seen`
 // SeenMap (preserving any other game-specific tutorial-seen flags) and
