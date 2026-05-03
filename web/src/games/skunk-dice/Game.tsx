@@ -16,8 +16,8 @@ export function SkunkDiceGame({ state, dispatch, onGameOver }: GameProps<SkunkDi
       <div className="sk-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="sk-row">{state.dice.map((d, i) => <div key={i} className="sk-die">{d}</div>)}</div>}
       {state.message && <div className="sk-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="sk-btn" onClick={() => dispatch({ type:"roll" } as SkunkDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="sk-btn alt" onClick={() => dispatch({ type:"next" } as SkunkDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-skunk-dice-roll" className="sk-btn" onClick={() => dispatch({ type:"roll" } as SkunkDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-skunk-dice-next" className="sk-btn alt" onClick={() => dispatch({ type:"next" } as SkunkDiceAction)}>Next</button>}
     </div>
   );
 }

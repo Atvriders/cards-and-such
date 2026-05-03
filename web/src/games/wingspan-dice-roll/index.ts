@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WingspanDiceRollState, WingspanDiceRollAction, WingspanDiceRollSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WingspanDiceRollGame } from "./Game.js";
@@ -15,5 +15,11 @@ export const wingspanDiceRollPlugin: GamePlugin<WingspanDiceRollState, WingspanD
   initialState: (seed: number, s: S) => initialState(seed, s as WingspanDiceRollSettings),
   reducer,
   isTerminal,
+  hint: (state: WingspanDiceRollState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-wingspan-dice-roll-roll"]', pulses: 3 };
+    if (state.phase === "marking") return { selector: '[data-testid="hint-target-wingspan-dice-roll-skip"]', pulses: 3 };
+    return null;
+  },
   component: WingspanDiceRollGame,
 };

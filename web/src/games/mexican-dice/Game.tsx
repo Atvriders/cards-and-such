@@ -21,12 +21,12 @@ export function MexicanDiceGame({ state, dispatch, onGameOver }: GameProps<Mexic
         </div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as MexicanDiceAction)}>Roll Two</button>
+        <button data-testid="hint-target-mexican-dice-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as MexicanDiceAction)}>Roll Two</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">{state.lastTag}: +{state.lastPts}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as MexicanDiceAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-mexican-dice-next" className="dm-btn alt" onClick={() => dispatch({ type:"next" } as MexicanDiceAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

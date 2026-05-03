@@ -30,8 +30,8 @@ export function QuarmageddonDice({ state, dispatch, onGameOver }: GameProps<Quar
       )}
       {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as QuarmageddonDiceAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as QuarmageddonDiceAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-quarmageddon-dice-roll" className="g-btn" onClick={() => dispatch({ type: "roll" } as QuarmageddonDiceAction)}>Roll 5 Dice</button>}
+        {state.phase === "rolled" && <button data-testid="hint-target-quarmageddon-dice-next" className="g-btn" onClick={() => dispatch({ type: "next" } as QuarmageddonDiceAction)}>Next Round</button>}
       </div>
     </div>
   );

@@ -35,10 +35,10 @@ export function WingspanDiceRollGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as WingspanDiceRollAction)}>Roll</button>
+        <button data-testid="hint-target-wingspan-dice-roll-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as WingspanDiceRollAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as WingspanDiceRollAction)}>Skip</button>
+        <button data-testid="hint-target-wingspan-dice-roll-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as WingspanDiceRollAction)}>Skip</button>
       )}
     </div>
   );

@@ -30,8 +30,8 @@ export function DragonDiceArena({ state, dispatch, onGameOver }: GameProps<Drago
       )}
       {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as DragonDiceArenaAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as DragonDiceArenaAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-dragon-dice-arena-roll" className="g-btn" onClick={() => dispatch({ type: "roll" } as DragonDiceArenaAction)}>Roll 5 Dice</button>}
+        {state.phase === "rolled" && <button data-testid="hint-target-dragon-dice-arena-next" className="g-btn" onClick={() => dispatch({ type: "next" } as DragonDiceArenaAction)}>Next Round</button>}
       </div>
     </div>
   );

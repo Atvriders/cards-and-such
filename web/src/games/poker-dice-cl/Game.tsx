@@ -35,8 +35,8 @@ export function PokerDiceClGame({ state, dispatch, onGameOver }: GameProps<Poker
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as PokerDiceClAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as PokerDiceClAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+        {!isResult && <button data-testid="hint-target-poker-dice-cl-submit" className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as PokerDiceClAction)}>Submit</button>}
+        {isResult && <button data-testid="hint-target-poker-dice-cl-next" className="trivia-btn next" onClick={() => dispatch({ type:"next" } as PokerDiceClAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ChuckALuckDiceState, ChuckALuckDiceAction, ChuckALuckDiceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const chuckALuckDicePlugin: GamePlugin<ChuckALuckDiceState, ChuckALuckDic
   howToPlay:"Chuck-a-Luck Trivia is a ten-question quiz about Chuck-a-Luck (also called Birdcage or Sweat), a casino dice game where three dice are tumbled in a wire cage and players bet on which numbers will appear. Bets include single numbers (1-6), 'big' (sum 11-17), 'small' (sum 4-10), 'any triple', or specific triples. Payouts vary: matching one die pays 1:1, matching two pays 2:1, and matching all three pays 10:1 (with house rules pushing the rate higher in some casinos). The house edge is significant. Each question tests rules, payouts, names, and history of Chuck-a-Luck. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ChuckALuckDiceSettings),
-  reducer,isTerminal,component:ChuckALuckDiceGame,
+  reducer,isTerminal,
+  hint: (state: ChuckALuckDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-chuck-a-luck-dice-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-chuck-a-luck-dice-submit"]', pulses: 3 };
+  },
+  component:ChuckALuckDiceGame,
 };

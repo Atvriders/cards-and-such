@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DoubleOrNothingState, DoubleOrNothingAction, DoubleOrNothingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,15 @@ Strategy matters — the chance of rolling doubles is 1 in 6 (about 17%). After 
 Final banked score is your result. Can you ride your luck to a massive total?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DoubleOrNothingSettings),
-  reducer, isTerminal, component: DoubleOrNothingDice,
+  reducer, isTerminal,
+  hint: (state: DoubleOrNothingState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    // Roll/Bank pattern: nudge Bank when sitting on a doubled score; else Roll
+    const score = (state as any).score ?? 0;
+    if ((state as any).round > 0 && (state as any).lastDoubles && score >= 20) {
+      return { selector: '[data-testid="hint-target-double-or-nothing-dice-bank"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-double-or-nothing-dice-roll"]', pulses: 3 };
+  },
+  component: DoubleOrNothingDice,
 };

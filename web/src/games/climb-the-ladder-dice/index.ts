@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClimbTheLadderState, ClimbTheLadderAction, ClimbTheLadderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,10 @@ After all six rungs, your total is your final score. A perfect game where every 
 Adjust re-rolls in Settings for an easier or harder challenge. No re-rolls is the purest test of luck!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ClimbTheLadderSettings),
-  reducer, isTerminal, component: ClimbTheLadderDice,
+  reducer, isTerminal,
+  hint: (state: ClimbTheLadderState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-climb-the-ladder-dice-accept"]', pulses: 3 };
+  },
+  component: ClimbTheLadderDice,
 };

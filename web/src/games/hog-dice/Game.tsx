@@ -16,8 +16,8 @@ export function HogDiceGame({ state, dispatch, onGameOver }: GameProps<HogDiceSt
       <div className="hg-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="hg-row">{state.dice.map((d, i) => <div key={i} className="hg-die">{d}</div>)}</div>}
       {state.message && <div className="hg-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="hg-btn" onClick={() => dispatch({ type:"roll" } as HogDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="hg-btn alt" onClick={() => dispatch({ type:"next" } as HogDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-hog-dice-roll" className="hg-btn" onClick={() => dispatch({ type:"roll" } as HogDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-hog-dice-next" className="hg-btn alt" onClick={() => dispatch({ type:"next" } as HogDiceAction)}>Next</button>}
     </div>
   );
 }

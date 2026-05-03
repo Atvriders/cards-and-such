@@ -36,7 +36,7 @@ export function ClimbTheLadderDice({ state, dispatch, onGameOver }: GameProps<Cl
       <p className="dice-msg">Sum: {sum} {sum >= target ? "✓ Pass!" : "✗ Miss"}</p>
       <div className="dice-actions">
         {state.rerollsLeft > 0 && <button className="dice-btn" onClick={() => dispatch({ type: "roll" } as ClimbTheLadderAction)}>Re-roll ({state.rerollsLeft} left)</button>}
-        <button className="dice-btn bank" onClick={() => dispatch({ type: "accept" } as ClimbTheLadderAction)}>Accept {sum >= target ? `+${sum} pts` : "+0 pts"}</button>
+        <button data-testid="hint-target-climb-the-ladder-dice-accept" className="dice-btn bank" onClick={() => dispatch({ type: "accept" } as ClimbTheLadderAction)}>Accept {sum >= target ? `+${sum} pts` : "+0 pts"}</button>
       </div>
       <p style={{ color: "#888", fontSize: "0.85rem" }}>Click a die to hold it before re-rolling</p>
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MexicanDiceState, MexicanDiceAction, MexicanDiceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,12 @@ Plain sum. Anything else just scores the total of the two dice — anywhere from
 Twelve rounds in all. The expected value per roll works out to around 75 points, so a typical run lands in the 700-1000 point range. A lucky string of doubles or a Mexican will push you well into the four-digit territory!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MexicanDiceSettings),
-  reducer,isTerminal,component:MexicanDiceGame,
+  reducer,isTerminal,
+  hint: (state: MexicanDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-mexican-dice-roll"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-mexican-dice-next"]', pulses: 3 };
+    return null;
+  },
+  component:MexicanDiceGame,
 };

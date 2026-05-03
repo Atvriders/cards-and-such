@@ -16,8 +16,8 @@ export function ZanzibarDiceGame({ state, dispatch, onGameOver }: GameProps<Zanz
       <div className="zb-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="zb-row">{state.dice.map((d, i) => <div key={i} className="zb-die">{d}</div>)}</div>}
       {state.message && <div className="zb-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="zb-btn" onClick={() => dispatch({ type:"roll" } as ZanzibarDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="zb-btn alt" onClick={() => dispatch({ type:"next" } as ZanzibarDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-zanzibar-dice-roll" className="zb-btn" onClick={() => dispatch({ type:"roll" } as ZanzibarDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-zanzibar-dice-next" className="zb-btn alt" onClick={() => dispatch({ type:"next" } as ZanzibarDiceAction)}>Next</button>}
     </div>
   );
 }

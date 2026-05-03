@@ -16,8 +16,8 @@ export function PigTwoDiceGame({ state, dispatch, onGameOver }: GameProps<PigTwo
       <div className="p2-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="p2-row">{state.dice.map((d, i) => <div key={i} className="p2-die">{d}</div>)}</div>}
       {state.message && <div className="p2-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="p2-btn" onClick={() => dispatch({ type:"roll" } as PigTwoDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="p2-btn alt" onClick={() => dispatch({ type:"next" } as PigTwoDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-pig-two-dice-roll" className="p2-btn" onClick={() => dispatch({ type:"roll" } as PigTwoDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-pig-two-dice-next" className="p2-btn alt" onClick={() => dispatch({ type:"next" } as PigTwoDiceAction)}>Next</button>}
     </div>
   );
 }

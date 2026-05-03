@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QuarmageddonDiceState, QuarmageddonDiceAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { QuarmageddonDice } from "./Game.js";
@@ -18,5 +18,11 @@ export const quarmageddonDicePlugin: GamePlugin<QuarmageddonDiceState, Quarmaged
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: QuarmageddonDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-quarmageddon-dice-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-quarmageddon-dice-next"]', pulses: 3 };
+    return null;
+  },
   component: QuarmageddonDice,
 };

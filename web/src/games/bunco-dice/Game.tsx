@@ -16,8 +16,8 @@ export function BuncoDiceGame({ state, dispatch, onGameOver }: GameProps<BuncoDi
       <div className="bu-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="bu-row">{state.dice.map((d, i) => <div key={i} className="bu-die">{d}</div>)}</div>}
       {state.message && <div className="bu-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="bu-btn" onClick={() => dispatch({ type:"roll" } as BuncoDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="bu-btn alt" onClick={() => dispatch({ type:"next" } as BuncoDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-bunco-dice-roll" className="bu-btn" onClick={() => dispatch({ type:"roll" } as BuncoDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-bunco-dice-next" className="bu-btn alt" onClick={() => dispatch({ type:"next" } as BuncoDiceAction)}>Next</button>}
     </div>
   );
 }

@@ -35,10 +35,10 @@ export function YokohamaDiceGame({ state, dispatch, onGameOver }: GameProps<Yoko
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as YokohamaDiceAction)}>Roll</button>
+        <button data-testid="hint-target-yokohama-dice-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as YokohamaDiceAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as YokohamaDiceAction)}>Skip</button>
+        <button data-testid="hint-target-yokohama-dice-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as YokohamaDiceAction)}>Skip</button>
       )}
     </div>
   );

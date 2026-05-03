@@ -34,10 +34,10 @@ export function SumTargetDice({ state, dispatch, onGameOver }: GameProps<SumTarg
           <button className="dice-btn" onClick={() => dispatch({ type: "roll" } as SumTargetAction)}>Re-roll ({state.rerollsLeft} left)</button>
         )}
         {state.phase === "rolling" && (
-          <button className="dice-btn bank" onClick={() => dispatch({ type: "score" } as SumTargetAction)}>Score {pts} pts</button>
+          <button data-testid="hint-target-sum-target-dice-score" className="dice-btn bank" onClick={() => dispatch({ type: "score" } as SumTargetAction)}>Score {pts} pts</button>
         )}
         {state.phase === "scored" && (
-          <button className="dice-btn" onClick={() => dispatch({ type: "next" } as SumTargetAction)}>Next Round</button>
+          <button data-testid="hint-target-sum-target-dice-next" className="dice-btn" onClick={() => dispatch({ type: "next" } as SumTargetAction)}>Next Round</button>
         )}
       </div>
     </div>

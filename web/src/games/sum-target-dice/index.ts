@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SumTargetState, SumTargetAction, SumTargetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,12 @@ Use Settings to play 5, 8, or 12 rounds. A perfect game can score up to 600 poin
 Think about probability: if your current sum is two below target and you have one re-roll left, which die should you re-roll to maximize your odds?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SumTargetSettings),
-  reducer, isTerminal, component: SumTargetDice,
+  reducer, isTerminal,
+  hint: (state: SumTargetState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-sum-target-dice-next"]', pulses: 3 };
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-sum-target-dice-score"]', pulses: 3 };
+    return null;
+  },
+  component: SumTargetDice,
 };

@@ -17,12 +17,12 @@ export function QuarriorsDiceDeckbuildGame({ state, dispatch, onGameOver }: Game
         <div className="dm-row">{state.rolls.map((r, k) => <div key={k} className="dm-die">{r}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as QuarriorsDiceDeckbuildAction)}>Roll</button>
+        <button data-testid="hint-target-quarriors-dice-deckbuild-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as QuarriorsDiceDeckbuildAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">+{state.lastPts} pts{state.bonus > 0 ? ` (bonus +${state.bonus})` : ""}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as QuarriorsDiceDeckbuildAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-quarriors-dice-deckbuild-next" className="dm-btn alt" onClick={() => dispatch({ type:"next" } as QuarriorsDiceDeckbuildAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

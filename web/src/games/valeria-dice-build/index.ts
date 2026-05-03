@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ValeriaDiceBuildState, ValeriaDiceBuildAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ValeriaDiceBuild } from "./Game.js";
@@ -18,5 +18,11 @@ export const valeriaDiceBuildPlugin: GamePlugin<ValeriaDiceBuildState, ValeriaDi
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: ValeriaDiceBuildState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-valeria-dice-build-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-valeria-dice-build-next"]', pulses: 3 };
+    return null;
+  },
   component: ValeriaDiceBuild,
 };

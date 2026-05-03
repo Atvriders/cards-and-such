@@ -16,8 +16,8 @@ export function CthulhuDiceGame({ state, dispatch, onGameOver }: GameProps<Cthul
       <div className="ct-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="ct-row">{state.dice.map((d, i) => <div key={i} className="ct-die">{d}</div>)}</div>}
       {state.message && <div className="ct-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="ct-btn" onClick={() => dispatch({ type:"roll" } as CthulhuDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="ct-btn alt" onClick={() => dispatch({ type:"next" } as CthulhuDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-cthulhu-dice-roll" className="ct-btn" onClick={() => dispatch({ type:"roll" } as CthulhuDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-cthulhu-dice-next" className="ct-btn alt" onClick={() => dispatch({ type:"next" } as CthulhuDiceAction)}>Next</button>}
     </div>
   );
 }

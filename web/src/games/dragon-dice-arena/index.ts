@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DragonDiceArenaState, DragonDiceArenaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DragonDiceArena } from "./Game.js";
@@ -18,5 +18,11 @@ export const dragonDiceArenaPlugin: GamePlugin<DragonDiceArenaState, DragonDiceA
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: DragonDiceArenaState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-dragon-dice-arena-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-dragon-dice-arena-next"]', pulses: 3 };
+    return null;
+  },
   component: DragonDiceArena,
 };

@@ -30,8 +30,8 @@ export function ValeriaDiceBuild({ state, dispatch, onGameOver }: GameProps<Vale
       )}
       {state.phase === "rolled" && <div className="g-gain">+{state.lastGain} this roll</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "roll" } as ValeriaDiceBuildAction)}>Roll 5 Dice</button>}
-        {state.phase === "rolled" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as ValeriaDiceBuildAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-valeria-dice-build-roll" className="g-btn" onClick={() => dispatch({ type: "roll" } as ValeriaDiceBuildAction)}>Roll 5 Dice</button>}
+        {state.phase === "rolled" && <button data-testid="hint-target-valeria-dice-build-next" className="g-btn" onClick={() => dispatch({ type: "next" } as ValeriaDiceBuildAction)}>Next Round</button>}
       </div>
     </div>
   );

@@ -16,8 +16,8 @@ export function HooliganDiceGame({ state, dispatch, onGameOver }: GameProps<Hool
       <div className="hd-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="hd-row">{state.dice.map((d, i) => <div key={i} className="hd-die">{d}</div>)}</div>}
       {state.message && <div className="hd-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="hd-btn" onClick={() => dispatch({ type:"roll" } as HooliganDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="hd-btn alt" onClick={() => dispatch({ type:"next" } as HooliganDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-hooligan-dice-roll" className="hd-btn" onClick={() => dispatch({ type:"roll" } as HooliganDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-hooligan-dice-next" className="hd-btn alt" onClick={() => dispatch({ type:"next" } as HooliganDiceAction)}>Next</button>}
     </div>
   );
 }

@@ -16,8 +16,8 @@ export function DinoHuntDiceGame({ state, dispatch, onGameOver }: GameProps<Dino
       <div className="dh-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="dh-row">{state.dice.map((d, i) => <div key={i} className="dh-die">{d}</div>)}</div>}
       {state.message && <div className="dh-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="dh-btn" onClick={() => dispatch({ type:"roll" } as DinoHuntDiceAction)}>Roll</button>}
-      {state.phase === "result" && <button className="dh-btn alt" onClick={() => dispatch({ type:"next" } as DinoHuntDiceAction)}>Next</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-dino-hunt-dice-roll" className="dh-btn" onClick={() => dispatch({ type:"roll" } as DinoHuntDiceAction)}>Roll</button>}
+      {state.phase === "result" && <button data-testid="hint-target-dino-hunt-dice-next" className="dh-btn alt" onClick={() => dispatch({ type:"next" } as DinoHuntDiceAction)}>Next</button>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SkunkBingoDiceState, SkunkBingoDiceAction, SkunkBingoDiceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const skunkBingoDicePlugin: GamePlugin<SkunkBingoDiceState, SkunkBingoDic
   howToPlay:"Skunk Trivia is a ten-question quiz about Skunk, a school-classroom-favorite push-your-luck dice game. Each player has a card divided into S-K-U-N-K columns. Each round, players roll two dice and may bank or continue. The sum is added to that letter's column total — but if a 1 appears on either die, the column scores zero (or its current round score is wiped). If both dice show 1, that letter and all earlier letters' scores are wiped. Players choose to stop or continue rolling each turn, with the player having the highest total at the end of all five letters winning. Each question tests rules and strategy. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SkunkBingoDiceSettings),
-  reducer,isTerminal,component:SkunkBingoDiceGame,
+  reducer,isTerminal,
+  hint: (state: SkunkBingoDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-skunk-bingo-dice-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-skunk-bingo-dice-submit"]', pulses: 3 };
+  },
+  component:SkunkBingoDiceGame,
 };

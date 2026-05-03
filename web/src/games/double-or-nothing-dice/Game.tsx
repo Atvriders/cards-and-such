@@ -28,8 +28,8 @@ export function DoubleOrNothingDice({ state, dispatch, onGameOver }: GameProps<D
         </div>
       )}
       <div className="dice-actions">
-        <button className="dice-btn" onClick={() => dispatch({ type: "roll" } as DoubleOrNothingAction)}>Roll 2d6</button>
-        {state.round > 0 && <button className="dice-btn bank" onClick={() => dispatch({ type: "bank" } as DoubleOrNothingAction)}>Bank {state.score} pts</button>}
+        <button data-testid="hint-target-double-or-nothing-dice-roll" className="dice-btn" onClick={() => dispatch({ type: "roll" } as DoubleOrNothingAction)}>Roll 2d6</button>
+        {state.round > 0 && <button data-testid="hint-target-double-or-nothing-dice-bank" className="dice-btn bank" onClick={() => dispatch({ type: "bank" } as DoubleOrNothingAction)}>Bank {state.score} pts</button>}
       </div>
       <p style={{ color: "#888", fontSize: "0.85rem" }}>Roll doubles to double your score. Non-doubles cost 3 pts. Bank anytime!</p>
     </div>
