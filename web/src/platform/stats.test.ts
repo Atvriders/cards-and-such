@@ -359,3 +359,43 @@ describe("ACHIEVEMENTS – a11y / exploration / theme / sharing (v44)", () => {
     expect(find("search-sleuth").isUnlocked(emptyStats())).toBe(false);
   });
 });
+
+/**
+ * Regression coverage for the PlayPage achievement-unlock toast.
+ *
+ * The toast surfaces by snapshotting `loadStats().unlocked` *before*
+ * calling `recordGame`, then diffing against the returned state. These
+ * tests exercise that exact diff shape against the live stats module
+ * (no mocks) so an accidental change to the order or de-duplication
+ * inside `recordGame` would surface as a test break before users see a
+ * spurious or missing celebratory toast.
+ */
+describe("recordGame – achievement diff", () => {
+  it("returns the new 'first-win' achievement on the first win", async () => {
+    const { loadStats, recordGame } = await import("./stats.js");
+    const before = new Set(loadStats().unlocked);
+    const after = recordGame("klondike", 800, true);
+    const newly = after.unlocked.filter((id) => !before.has(id));
+    expect(newly).toContain("first-win");
+  });
+
+  it("does not re-fire 'first-win' on subsequent wins", async () => {
+    const { loadStats, recordGame } = await import("./stats.js");
+    recordGame("klondike", 800, true);
+    const before = new Set(loadStats().unlocked);
+    expect(before.has("first-win")).toBe(true);
+    const after = recordGame("klondike", 850, true);
+    const newly = after.unlocked.filter((id) => !before.has(id));
+    expect(newly).not.toContain("first-win");
+  });
+
+  it("returns no diff when a play unlocks nothing new", async () => {
+    const { loadStats, recordGame } = await import("./stats.js");
+    // Losses don't unlock a `first-win` and won't trip the streak chain.
+    const before = new Set(loadStats().unlocked);
+    const after = recordGame("klondike", 0, false);
+    const newly = after.unlocked.filter((id) => !before.has(id));
+    expect(newly).toEqual([]);
+  });
+});
+
