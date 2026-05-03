@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { InstallPrompt } from "./InstallPrompt.js";
 
 const DISMISS_KEY = "cards-install-dismissed";
@@ -48,5 +48,24 @@ describe("InstallPrompt", () => {
 
     expect(screen.queryByTestId("install-prompt")).toBeNull();
     expect(window.localStorage.getItem(DISMISS_KEY)).toBe("1");
+  });
+
+  it("persisted dismissal survives a remount — banner stays hidden", () => {
+    // First mount: surface the banner and dismiss it.
+    const first = render(<InstallPrompt />);
+    fireBeforeInstallPrompt();
+    fireEvent.click(screen.getByTestId("install-prompt-dismiss"));
+    expect(window.localStorage.getItem(DISMISS_KEY)).toBe("1");
+
+    // Tear down to simulate a fresh page load / new mount.
+    first.unmount();
+    cleanup();
+
+    // Second mount: the install event fires again, but the persisted dismissal
+    // should keep the banner hidden without any user interaction.
+    render(<InstallPrompt />);
+    fireBeforeInstallPrompt();
+
+    expect(screen.queryByTestId("install-prompt")).toBeNull();
   });
 });
