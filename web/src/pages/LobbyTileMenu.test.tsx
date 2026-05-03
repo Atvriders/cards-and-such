@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import { afterEach } from "vitest";
+import { useState, type JSX } from "react";
 import { LobbyTileMenu, type LobbyTileMenuProps } from "./LobbyTileMenu.js";
 
 /**
@@ -234,5 +235,80 @@ describe("LobbyTileMenu", () => {
     fireEvent.keyDown(menu, { key: " " });
     expect(onShareWithFriend).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  /**
+   * Minimal fixture mirroring the LobbyPage tile contract: a focusable
+   * "tile" element advertising `aria-haspopup="menu"` and toggling
+   * `aria-expanded` based on whether a `LobbyTileMenu` is currently open.
+   * The actual lobby tile (a router `<Link>`) wires identical attributes;
+   * this fixture lets us assert the AT-facing contract without spinning
+   * up the full LobbyPage / router stack.
+   */
+  function TileWithMenu(): JSX.Element {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <a
+          href="/play/klondike"
+          data-testid="tile-klondike"
+          aria-haspopup="menu"
+          aria-expanded={open}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            setOpen(true);
+          }}
+        >
+          Klondike
+        </a>
+        {open && (
+          <LobbyTileMenu
+            gameId="klondike"
+            gameTitle="Klondike"
+            x={10}
+            y={10}
+            isFavorite={false}
+            onClose={() => setOpen(false)}
+            onPlay={() => {}}
+            onCopyLink={() => {}}
+            onToggleFavorite={() => {}}
+            onShareWithFriend={() => {}}
+            onHide={() => {}}
+          />
+        )}
+      </>
+    );
+  }
+
+  it("tile advertises aria-haspopup=\"menu\" after right-click opens the menu", () => {
+    render(<TileWithMenu />);
+    const tile = screen.getByTestId("tile-klondike");
+    // Pre-condition: the tile must always advertise that it owns a menu
+    // so screen readers announce it before the user opens the popover.
+    expect(tile).toHaveAttribute("aria-haspopup", "menu");
+    fireEvent.contextMenu(tile);
+    // Right-click materializes the popover; aria-haspopup is unchanged
+    // (it describes a static relationship, not menu visibility).
+    expect(screen.getByTestId("tile-menu")).toBeInTheDocument();
+    expect(tile).toHaveAttribute("aria-haspopup", "menu");
+  });
+
+  it("tile aria-expanded toggles as the menu opens and closes", async () => {
+    render(<TileWithMenu />);
+    const tile = screen.getByTestId("tile-klondike");
+    // Closed: aria-expanded reflects the absent popover.
+    expect(tile).toHaveAttribute("aria-expanded", "false");
+    fireEvent.contextMenu(tile);
+    // Opened: popover mounts and aria-expanded flips to true so AT users
+    // hear "expanded" when they land on the tile after right-clicking.
+    expect(screen.getByTestId("tile-menu")).toBeInTheDocument();
+    expect(tile).toHaveAttribute("aria-expanded", "true");
+    // Escape dismisses the menu via LobbyTileMenu's document listener;
+    // aria-expanded must drop back to false in the same render cycle.
+    fireEvent.keyDown(document, { key: "Escape" });
+    await waitFor(() => {
+      expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
+    });
+    expect(tile).toHaveAttribute("aria-expanded", "false");
   });
 });
