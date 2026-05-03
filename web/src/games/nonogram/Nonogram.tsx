@@ -101,6 +101,7 @@ export function Nonogram({
                 <div
                   key={`cell-${r}-${c}`}
                   className={cls}
+                  data-cell-index={idx}
                   style={{ gridColumn: c + 2, gridRow: maxColClues + r + 1 }}
                   onClick={(e) => handleFill(idx, e)}
                   onContextMenu={(e) => handleContextMenu(idx, e)}

@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NonogramState, NonogramAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -37,5 +37,11 @@ Tip: Start with rows or columns whose clues sum close to the grid width — they
   initialState: (seed: number, settings: NonogramSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: NonogramState): HintTarget | null => {
+    if (state.won) return null;
+    const idx = state.cells.findIndex((c) => c === 0);
+    if (idx < 0) return null;
+    return { selector: `.nonogrampixel [data-cell-index="${idx}"]`, pulses: 3 };
+  },
   component: Nonogram,
 };
