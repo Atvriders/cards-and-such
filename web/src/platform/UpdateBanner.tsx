@@ -24,10 +24,10 @@ export function UpdateBanner(): JSX.Element | null {
       const detail = (e as CustomEvent<UpdateReadyDetail>).detail;
       if (detail && detail.registration) {
         setRegistration(detail.registration);
-        // A new update should override a previous "Later" dismissal —
-        // the user explicitly said "later for THIS one"; a newer build
-        // is a fresh prompt.
-        setDismissed(false);
+        // Dismiss is session-sticky: once the user clicks "Later" we don't
+        // re-pester them on subsequent sw-update-ready events in the same
+        // session (e.g. rapid dev rebuilds). The next page load resets state
+        // and they'll be prompted again if an update is still waiting.
         track("update.available");
       }
     };
