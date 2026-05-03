@@ -331,6 +331,51 @@ describe("StatsPage", () => {
     expect(undosCard.textContent).toContain("7");
   });
 
+  // W472 — Total time played aggregate card. Two pinning tests:
+  //   1. Empty stats (no time-history blobs at all) → "0h 0m 0s" sentinel.
+  //   2. Multi-game time-history → sum is rendered with full H/M/S breakdown.
+  // Complements the existing "stats-total-time card renders summed seconds"
+  // test below by isolating the empty-state sentinel and a richer multi-game
+  // sum that crosses the hour boundary (so we exercise all three Hh/Mm/Ss
+  // components rather than just minutes/seconds).
+  it("W472: stats-total-time card shows '0h 0m 0s' when no time-history blobs exist", () => {
+    seedStats({ totalPlayed: 0, totalWins: 0 });
+    renderPage();
+    const card = screen.getByTestId("stats-total-time");
+    expect(card).toBeInTheDocument();
+    expect(card.textContent).toContain("Total time played");
+    expect(card.textContent).toContain("0h 0m 0s");
+    expect(card.textContent).not.toMatch(/NaN/);
+  });
+
+  it("W472: stats-total-time card sums multi-game time-history across the hour boundary", () => {
+    // 3 klondike entries totaling 3700s + 2 spider entries totaling 125s +
+    // 1 agram entry of 75s = 3900s = 1h 5m 0s. Verifies cross-game aggregation
+    // and that hours/minutes/seconds all roll up correctly past 3600s.
+    seedRichStats();
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: 1, time: 1200 },
+        { ts: 2, time: 1500 },
+        { ts: 3, time: 1000 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:spider",
+      JSON.stringify([{ ts: 1, time: 100 }, { ts: 2, time: 25 }]),
+    );
+    localStorage.setItem(
+      "cards-time-history:agram",
+      JSON.stringify([{ ts: 1, time: 75 }]),
+    );
+    renderPage();
+    const card = screen.getByTestId("stats-total-time");
+    expect(card).toBeInTheDocument();
+    expect(card.textContent).toContain("1h 5m 0s");
+    expect(card.textContent).not.toMatch(/NaN/);
+  });
+
   it("stats-total-time card renders summed seconds from cards-time-history blobs", () => {
     seedRichStats();
     // 90 + 60 = 150s for klondike, 30s for spider → 180s total → "0h 3m 0s".
