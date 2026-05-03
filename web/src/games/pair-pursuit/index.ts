@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PairPursuitState, PairPursuitAction, PairPursuitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,12 @@ You play 10 rounds. The expected average score lands around 250 to 280 points ac
 After each round, press Next to continue. There's no choice — just press Roll, see the dice come up, watch the best-match scorer crunch the numbers, and move on. Aim for those rare quadruples (about a 1-in-216 chance per roll) and watch your score balloon!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PairPursuitSettings),
-  reducer,isTerminal,component:PairPursuitGame,
+  reducer,isTerminal,
+  hint: (state: PairPursuitState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-pair-pursuit-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-pair-pursuit-next"]', pulses: 3 };
+    return null;
+  },
+  component:PairPursuitGame,
 };

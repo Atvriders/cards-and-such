@@ -17,12 +17,12 @@ export function DungeonRollDelveGame({ state, dispatch, onGameOver }: GameProps<
         <div className="dm-row">{state.rolls.map((r, k) => <div key={k} className="dm-die">{r}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DungeonRollDelveAction)}>Roll</button>
+        <button className="dm-btn" data-testid="hint-target-dungeon-roll-delve-roll" onClick={() => dispatch({ type:"roll" } as DungeonRollDelveAction)}>Roll</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="dm-result">+{state.lastPts} pts{state.bonus > 0 ? ` (bonus +${state.bonus})` : ""}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DungeonRollDelveAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-dungeon-roll-delve-next" onClick={() => dispatch({ type:"next" } as DungeonRollDelveAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

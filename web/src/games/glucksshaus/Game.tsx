@@ -16,8 +16,8 @@ export function GlucksshausGame({ state, dispatch, onGameOver }: GameProps<Gluck
       <div className="gh-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="gh-row">{state.dice.map((d, i) => <div key={i} className="gh-die">{d}</div>)}</div>}
       {state.message && <div className="gh-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="gh-btn" onClick={() => dispatch({ type:"roll" } as GlucksshausAction)}>Roll</button>}
-      {state.phase === "result" && <button className="gh-btn alt" onClick={() => dispatch({ type:"next" } as GlucksshausAction)}>Next</button>}
+      {state.phase === "roll" && <button className="gh-btn" data-testid="hint-target-glucksshaus-roll" onClick={() => dispatch({ type:"roll" } as GlucksshausAction)}>Roll</button>}
+      {state.phase === "result" && <button className="gh-btn alt" data-testid="hint-target-glucksshaus-next" onClick={() => dispatch({ type:"next" } as GlucksshausAction)}>Next</button>}
     </div>
   );
 }

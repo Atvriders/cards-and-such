@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LuckySixState, LuckySixAction, LuckySixSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,12 @@ The probability of any roll being a 6 is 1/6 (about 16.7%). Across 12 rolls you 
 There's no decision-making — just press Roll and Next. The result panel shows what came up and your running score and six-count. The whole game takes about 30 seconds and is perfect for a quick adrenaline spike. Roll often, roll loud, and chase that lucky number 6!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LuckySixSettings),
-  reducer,isTerminal,component:LuckySixGame,
+  reducer,isTerminal,
+  hint: (state: LuckySixState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-lucky-six-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-lucky-six-next"]', pulses: 3 };
+    return null;
+  },
+  component:LuckySixGame,
 };

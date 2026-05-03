@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SuperSixState, SuperSixAction, SuperSixSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,12 @@ You play 10 rounds. Triple 1s have a 1 in 216 (~0.5%) chance per roll, so over 1
 Pure luck — no strategy. Roll, watch for sixes, and hope those three 1s never align. Average expected scores hover around 60-90 points; lucky games push 150+ if multi-six rolls land. Hit a wipe and… well, you start over!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SuperSixSettings),
-  reducer,isTerminal,component:SuperSixGame,
+  reducer,isTerminal,
+  hint: (state: SuperSixState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-super-six-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-super-six-next"]', pulses: 3 };
+    return null;
+  },
+  component:SuperSixGame,
 };

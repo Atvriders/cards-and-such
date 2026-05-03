@@ -16,8 +16,8 @@ export function HighPointCrapsGame({ state, dispatch, onGameOver }: GameProps<Hi
       <div className="hpcr-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="hpcr-row">{state.dice.map((d, i) => <div key={i} className="hpcr-die">{d}</div>)}</div>}
       {state.message && <div className="hpcr-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="hpcr-btn" onClick={() => dispatch({ type:"roll" } as HighPointCrapsAction)}>Roll</button>}
-      {state.phase === "result" && <button className="hpcr-btn alt" onClick={() => dispatch({ type:"next" } as HighPointCrapsAction)}>Next</button>}
+      {state.phase === "roll" && <button className="hpcr-btn" data-testid="hint-target-high-point-craps-roll" onClick={() => dispatch({ type:"roll" } as HighPointCrapsAction)}>Roll</button>}
+      {state.phase === "result" && <button className="hpcr-btn alt" data-testid="hint-target-high-point-craps-next" onClick={() => dispatch({ type:"next" } as HighPointCrapsAction)}>Next</button>}
     </div>
   );
 }

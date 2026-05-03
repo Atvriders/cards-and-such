@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PasseDixState, PasseDixAction, PasseDixSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,12 @@ export const passeDixPlugin: GamePlugin<PasseDixState, PasseDixAction, typeof se
   howToPlay:"Passe-dix is one of the oldest known dice games, dating to 12th-century Europe and possibly earlier. The name means \"pass ten\" in French — and that's the entire game: roll three dice, and if your sum exceeds 10, you win the round.\n\nIn this 12-round version, you auto-roll three dice each round. Sum > 10 = win = 15 points. Sum ≤ 10 = loss = 0 points. Sum exactly 10 is \"house edge\" (loss). The probability distribution of three dice means sums of 11+ occur about 50% of the time.\n\n12 rounds total. Average expected score: 75-105 points (about 6 wins per session at 15 points each).\n\nThe historical Passe-dix was played in taverns for coins; medieval gamblers loved its simplicity. There's no strategy — just roll and pray. The game's appeal is its purity: ancient, brutal, evergreen.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PasseDixSettings),
-  reducer,isTerminal,component:PasseDixGame,
+  reducer,isTerminal,
+  hint: (state: PasseDixState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "roll") return { selector: '[data-testid="hint-target-passe-dix-roll"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-passe-dix-next"]', pulses: 3 };
+    return null;
+  },
+  component:PasseDixGame,
 };

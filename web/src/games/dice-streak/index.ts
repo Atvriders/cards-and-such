@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceStreakState, DiceStreakAction, DiceStreakSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,11 @@ Maximum theoretical score is unbounded but rarely tops 100 points. The probabili
 Roll, watch, and pray for that beautiful chain of repeats!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceStreakSettings),
-  reducer,isTerminal,component:DiceStreakGame,
+  reducer,isTerminal,
+  hint: (state: DiceStreakState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.streak >= 3) return { selector: '[data-testid="hint-target-dice-streak-stop"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-streak-roll"]', pulses: 3 };
+  },
+  component:DiceStreakGame,
 };

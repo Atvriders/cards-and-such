@@ -18,10 +18,10 @@ export function DiceStepBet({ state, dispatch, onGameOver }: GameProps<DiceStepB
       {state.phase==="result" && <p className={`dg-msg${state.bust?" bad":""}`}>{state.bust?`Bust at ${state.runTotal}! +0 pts`:`Banked ${state.lastBank} pts!`}</p>}
       <div style={{display:"flex",gap:"12px"}}>
         {state.phase==="stepping" && <>
-          <button className="dg-btn" onClick={()=>dispatch({type:"step"} as DiceStepBetAction)}>Roll</button>
-          {state.runTotal>0 && <button className="dg-btn green" onClick={()=>dispatch({type:"bank"} as DiceStepBetAction)}>Bank {state.runTotal}</button>}
+          <button className="dg-btn" data-testid="hint-target-dice-step-bet-roll" onClick={()=>dispatch({type:"step"} as DiceStepBetAction)}>Roll</button>
+          {state.runTotal>0 && <button className="dg-btn green" data-testid="hint-target-dice-step-bet-bank" onClick={()=>dispatch({type:"bank"} as DiceStepBetAction)}>Bank {state.runTotal}</button>}
         </>}
-        {state.phase==="result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceStepBetAction)}>{state.round>=state.maxRounds?"Finish":"Next Round"}</button>}
+        {state.phase==="result" && <button className="dg-btn" data-testid="hint-target-dice-step-bet-next" onClick={()=>dispatch({type:"next"} as DiceStepBetAction)}>{state.round>=state.maxRounds?"Finish":"Next Round"}</button>}
       </div>
     </div>
   );

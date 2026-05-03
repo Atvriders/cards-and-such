@@ -17,11 +17,11 @@ export function StraightShotGame({ state, dispatch, onGameOver }: GameProps<Stra
       {state.dice.length > 0 && (
         <div className="dm-row">{state.dice.map((d, i) => <div key={i} className="dm-die">{d}</div>)}</div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as StraightShotAction)}>Roll 5</button>}
+      {state.phase === "ready" && <button className="dm-btn" data-testid="hint-target-straight-shot-roll" onClick={() => dispatch({ type:"roll" } as StraightShotAction)}>Roll 5</button>}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{state.lastLabel}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as StraightShotAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-straight-shot-next" onClick={() => dispatch({ type:"next" } as StraightShotAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

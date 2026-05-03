@@ -16,8 +16,8 @@ export function BarboothGame({ state, dispatch, onGameOver }: GameProps<Barbooth
       <div className="bb-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="bb-row">{state.dice.map((d, i) => <div key={i} className="bb-die">{d}</div>)}</div>}
       {state.message && <div className="bb-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="bb-btn" onClick={() => dispatch({ type:"roll" } as BarboothAction)}>Roll</button>}
-      {state.phase === "result" && <button className="bb-btn alt" onClick={() => dispatch({ type:"next" } as BarboothAction)}>Next</button>}
+      {state.phase === "roll" && <button className="bb-btn" data-testid="hint-target-barbooth-roll" onClick={() => dispatch({ type:"roll" } as BarboothAction)}>Roll</button>}
+      {state.phase === "result" && <button className="bb-btn alt" data-testid="hint-target-barbooth-next" onClick={() => dispatch({ type:"next" } as BarboothAction)}>Next</button>}
     </div>
   );
 }

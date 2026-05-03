@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceStepBetState, DiceStepBetAction, DiceStepBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,12 @@ Strategy: rolling when low is almost always right (a 14 can only bust with 8+, w
 Play 5 or 10 rounds and accumulate points. The maximum per round is 21. See how often you can stay alive and bank a high total!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceStepBetSettings),
-  reducer, isTerminal, component: DiceStepBet,
+  reducer, isTerminal,
+  hint: (state: DiceStepBetState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-step-bet-next"]', pulses: 3 };
+    if (state.phase === "stepping" && state.runTotal >= 14) return { selector: '[data-testid="hint-target-dice-step-bet-bank"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-step-bet-roll"]', pulses: 3 };
+  },
+  component: DiceStepBet,
 };

@@ -32,8 +32,8 @@ export function DiceStormGame({ state, dispatch, onGameOver }: GameProps<DiceSto
       )}
       <div className="st-log">{state.log || "Risk a roll or bank your pool. Snake-eyes wipes you."}</div>
       <div className="st-actions">
-        <button className="st-btn roll" onClick={() => dispatch({ type: "roll" } as DiceStormAction)}>Roll</button>
-        <button className="st-btn bank" disabled={state.pool === 0} onClick={() => dispatch({ type: "bank" } as DiceStormAction)}>Bank</button>
+        <button className="st-btn roll" data-testid="hint-target-dice-storm-roll" onClick={() => dispatch({ type: "roll" } as DiceStormAction)}>Roll</button>
+        <button className="st-btn bank" disabled={state.pool === 0} data-testid="hint-target-dice-storm-bank" onClick={() => dispatch({ type: "bank" } as DiceStormAction)}>Bank</button>
       </div>
     </div>
   );

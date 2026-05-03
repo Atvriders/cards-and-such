@@ -31,8 +31,8 @@ export function DiceTyphoonGame({ state, dispatch, onGameOver }: GameProps<DiceT
       )}
       <div className="ty-log">{state.log || "Roll for points or bank what you have. Double 1s wipe the pool."}</div>
       <div className="ty-actions">
-        <button className="ty-btn roll" onClick={() => dispatch({ type: "roll" } as DiceTyphoonAction)}>Roll Wave</button>
-        <button className="ty-btn bank" disabled={state.pool <= 0} onClick={() => dispatch({ type: "bank" } as DiceTyphoonAction)}>Bank ({state.pool})</button>
+        <button className="ty-btn roll" data-testid="hint-target-dice-typhoon-roll" onClick={() => dispatch({ type: "roll" } as DiceTyphoonAction)}>Roll Wave</button>
+        <button className="ty-btn bank" disabled={state.pool <= 0} data-testid="hint-target-dice-typhoon-bank" onClick={() => dispatch({ type: "bank" } as DiceTyphoonAction)}>Bank ({state.pool})</button>
       </div>
     </div>
   );

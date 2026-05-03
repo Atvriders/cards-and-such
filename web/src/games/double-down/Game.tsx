@@ -20,11 +20,11 @@ export function DoubleDownGame({ state, dispatch, onGameOver }: GameProps<Double
           <div className="dm-die">{state.dice[1]}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as DoubleDownAction)}>Roll 2</button>}
+      {state.phase === "ready" && <button className="dm-btn" data-testid="hint-target-double-down-roll" onClick={() => dispatch({ type:"roll" } as DoubleDownAction)}>Roll 2</button>}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{state.lastIsDouble ? `Doubles! +30` : `No doubles −5`}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DoubleDownAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-double-down-next" onClick={() => dispatch({ type:"next" } as DoubleDownAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

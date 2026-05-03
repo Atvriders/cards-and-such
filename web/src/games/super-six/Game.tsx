@@ -21,12 +21,12 @@ export function SuperSixGame({ state, dispatch, onGameOver }: GameProps<SuperSix
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as SuperSixAction)}>Roll 3 Dice</button>
+        <button className="dm-btn" data-testid="hint-target-super-six-roll" onClick={() => dispatch({ type:"roll" } as SuperSixAction)}>Roll 3 Dice</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{state.busted ? "TRIPLE 1s — score wiped!" : state.lastBonus > 0 ? `+${state.lastBonus} pts` : "No sixes"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as SuperSixAction)}>Next</button>
+          <button className="dm-btn alt" data-testid="hint-target-super-six-next" onClick={() => dispatch({ type:"next" } as SuperSixAction)}>Next</button>
         </>
       )}
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DoubleDownState, DoubleDownAction, DoubleDownSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,12 @@ You play 15 rounds. The chance of doubles on any roll is exactly 1 in 6, or 16.7
 After each round, press Next to continue. There's no choice — just press Roll and pray for matching pips. The game's name comes from the dice term and the steady doubling-down vibe of risking small losses for big gains. Variance is the whole game!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DoubleDownSettings),
-  reducer,isTerminal,component:DoubleDownGame,
+  reducer,isTerminal,
+  hint: (state: DoubleDownState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-double-down-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-double-down-next"]', pulses: 3 };
+    return null;
+  },
+  component:DoubleDownGame,
 };

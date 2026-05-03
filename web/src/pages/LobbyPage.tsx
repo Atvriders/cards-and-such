@@ -183,6 +183,36 @@ function writePersistedDensity(mode: DensityMode): void {
   } catch { /* ignore */ }
 }
 
+/** localStorage key persisting the lobby grid/list view-mode preference. */
+const VIEW_STORAGE_KEY = "cards-lobby-view";
+
+/**
+ * Two ways to render the lobby's main results list:
+ *  - "grid" (default): the multi-column tile grid, sized by `data-density`.
+ *  - "list":           single-column rows with a horizontal layout —
+ *                      stripe (icon) + title + meta + favourite heart.
+ *
+ * The active mode is mirrored as a `data-view` attribute on the grid
+ * container so all layout differences are CSS-driven (see LobbyPage.css).
+ */
+type ViewMode = "grid" | "list";
+
+function readPersistedView(): ViewMode {
+  try {
+    if (typeof localStorage === "undefined") return "grid";
+    const raw = localStorage.getItem(VIEW_STORAGE_KEY);
+    if (raw === "grid" || raw === "list") return raw;
+  } catch { /* ignore */ }
+  return "grid";
+}
+
+function writePersistedView(mode: ViewMode): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(VIEW_STORAGE_KEY, mode);
+  } catch { /* ignore */ }
+}
+
 /**
  * Tooltip data shared between GameCard / FamilyCard / FeaturedTile and
  * the hover hook. Positioning is "right of tile if room, otherwise left"
@@ -627,6 +657,7 @@ export default function LobbyPage(): JSX.Element {
   const [listMode, setListMode] = useState<ListMode>(() => readPersistedListMode());
   const [sortMode, setSortMode] = useState<SortMode>(() => readPersistedSort());
   const [density, setDensity] = useState<DensityMode>(() => readPersistedDensity());
+  const [viewMode, setViewMode] = useState<ViewMode>(() => readPersistedView());
   // Infinite-scroll high-water mark (number of entries appended so far);
   // pagination mode ignores this and slices by `page` instead.
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -836,6 +867,11 @@ export default function LobbyPage(): JSX.Element {
   useEffect(() => {
     writePersistedDensity(density);
   }, [density]);
+
+  // Persist view-mode (grid/list) changes; rehydrates on next mount.
+  useEffect(() => {
+    writePersistedView(viewMode);
+  }, [viewMode]);
 
   // Flip favorite status for a single game id and write through to the
   // shared persistence helper, then update the in-memory set so all
@@ -1844,6 +1880,73 @@ export default function LobbyPage(): JSX.Element {
               </span>
             )}
           </h2>
+          {/* Two-state icon toggle for grid vs list view. Persisted in
+              localStorage under `cards-lobby-view`; mirrored as
+              `data-view` on `.lobby-grid` so the layout switch is
+              CSS-driven (see `.lobby-grid[data-view="list"]`). */}
+          <div
+            className="lobby-view-toggle"
+            role="group"
+            aria-label="Lobby view"
+            data-testid="lobby-view-toggle"
+          >
+            <button
+              type="button"
+              className={`lobby-view-toggle-btn${viewMode === "grid" ? " is-active" : ""}`}
+              aria-pressed={viewMode === "grid"}
+              aria-label="Grid view"
+              title="Grid view"
+              onClick={() => setViewMode("grid")}
+              data-testid="lobby-view-grid"
+            >
+              <svg
+                className="lobby-view-toggle-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className={`lobby-view-toggle-btn${viewMode === "list" ? " is-active" : ""}`}
+              aria-pressed={viewMode === "list"}
+              aria-label="List view"
+              title="List view"
+              onClick={() => setViewMode("list")}
+              data-testid="lobby-view-list"
+            >
+              <svg
+                className="lobby-view-toggle-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <circle cx="4" cy="6" r="1" />
+                <circle cx="4" cy="12" r="1" />
+                <circle cx="4" cy="18" r="1" />
+              </svg>
+            </button>
+          </div>
           {/* Three-state pill toggle for grid density (compact/comfortable/
               spacious). Persisted in localStorage; mirrored as
               `data-density` on `.lobby-grid` so all sizing is CSS-driven. */}
@@ -1938,6 +2041,7 @@ export default function LobbyPage(): JSX.Element {
                     onToggleFavorite={onToggleFavorite}
                     onHideGame={onHideGame}
                     highlightQuery={deferredQuery}
+                    playCount={stats.perGame[entry.game.id]?.played ?? 0}
                   />
                 ) : (
                   <FamilyCard
@@ -2348,6 +2452,7 @@ function GameCard({
   onToggleFavorite,
   onHideGame,
   highlightQuery,
+  playCount = 0,
 }: {
   game: GamePlugin;
   userRating?: number;
@@ -2360,6 +2465,11 @@ function GameCard({
    * matching substring of the title in a `<mark>`. Mirrors SearchPage.
    */
   highlightQuery?: string;
+  /**
+   * Number of plays the user has logged for this game. When > 0 a small
+   * "X plays" badge renders next to the tile title; 0 hides it.
+   */
+  playCount?: number;
 }): JSX.Element {
   const { handlers, tooltip } = useTileTooltip(
     {
@@ -2573,6 +2683,15 @@ function GameCard({
         {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
           ? highlightMatch(g.title, highlightQuery)
           : g.title}
+        {playCount > 0 && (
+          <span
+            className="tile-plays"
+            data-testid={`tile-plays-${g.id}`}
+            aria-label={`${playCount} ${playCount === 1 ? "play" : "plays"}`}
+          >
+            {playCount} {playCount === 1 ? "play" : "plays"}
+          </span>
+        )}
       </div>
       <div className="tile-desc">{g.description}</div>
       <TileMetaChips gameId={g.id} />

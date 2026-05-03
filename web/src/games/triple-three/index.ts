@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TripleThreeState, TripleThreeAction, TripleThreeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,12 @@ You play 12 rounds. The probability of rolling triple threes is just 1 in 216 (~
 Average expected scores hover around 75-90 points across 12 rounds, with most points coming from the floor and the occasional high-roll bonus. Hit a triple three and you'll be partying past 100. Roll, watch, hope, repeat — and when the 3s align, celebrate accordingly!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TripleThreeSettings),
-  reducer,isTerminal,component:TripleThreeGame,
+  reducer,isTerminal,
+  hint: (state: TripleThreeState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-triple-three-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-triple-three-next"]', pulses: 3 };
+    return null;
+  },
+  component:TripleThreeGame,
 };

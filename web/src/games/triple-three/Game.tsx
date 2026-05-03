@@ -21,12 +21,12 @@ export function TripleThreeGame({ state, dispatch, onGameOver }: GameProps<Tripl
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as TripleThreeAction)}>Roll 3 Dice</button>
+        <button className="dm-btn" data-testid="hint-target-triple-three-roll" onClick={() => dispatch({ type:"roll" } as TripleThreeAction)}>Roll 3 Dice</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{state.lastBonus === 50 ? "TRIPLE THREES! +50" : state.lastBonus === 15 ? "High roll! +15" : "+5"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as TripleThreeAction)}>Next</button>
+          <button className="dm-btn alt" data-testid="hint-target-triple-three-next" onClick={() => dispatch({ type:"next" } as TripleThreeAction)}>Next</button>
         </>
       )}
     </div>

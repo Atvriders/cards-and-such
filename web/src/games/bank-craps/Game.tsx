@@ -16,8 +16,8 @@ export function BankCrapsGame({ state, dispatch, onGameOver }: GameProps<BankCra
       <div className="bkcr-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="bkcr-row">{state.dice.map((d, i) => <div key={i} className="bkcr-die">{d}</div>)}</div>}
       {state.message && <div className="bkcr-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="bkcr-btn" onClick={() => dispatch({ type:"roll" } as BankCrapsAction)}>Roll</button>}
-      {state.phase === "result" && <button className="bkcr-btn alt" onClick={() => dispatch({ type:"next" } as BankCrapsAction)}>Next</button>}
+      {state.phase === "roll" && <button className="bkcr-btn" data-testid="hint-target-bank-craps-roll" onClick={() => dispatch({ type:"roll" } as BankCrapsAction)}>Roll</button>}
+      {state.phase === "result" && <button className="bkcr-btn alt" data-testid="hint-target-bank-craps-next" onClick={() => dispatch({ type:"next" } as BankCrapsAction)}>Next</button>}
     </div>
   );
 }

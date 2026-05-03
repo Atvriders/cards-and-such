@@ -17,11 +17,11 @@ export function PairPursuitGame({ state, dispatch, onGameOver }: GameProps<PairP
       {state.dice.length > 0 && (
         <div className="dm-row">{state.dice.map((d, i) => <div key={i} className="dm-die">{d}</div>)}</div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as PairPursuitAction)}>Roll 4</button>}
+      {state.phase === "ready" && <button className="dm-btn" data-testid="hint-target-pair-pursuit-roll" onClick={() => dispatch({ type:"roll" } as PairPursuitAction)}>Roll 4</button>}
       {state.phase === "rolled" && (
         <>
           <div className="dm-result">{bestMatch(state.dice).label}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as PairPursuitAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button className="dm-btn alt" data-testid="hint-target-pair-pursuit-next" onClick={() => dispatch({ type:"next" } as PairPursuitAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

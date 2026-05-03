@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StraightShotState, StraightShotAction, StraightShotSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,12 @@ Eight rounds per game. Note that duplicates within the dice don't matter — onl
 A 5-straight from five dice is around a 3% chance per roll, so don't expect them often. Most rounds you'll see 25 or 50 points; some yield zero. Average expected scores are around 100 to 150 over a game. Two perfect 5-straights would give you a remarkable 200+ run!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as StraightShotSettings),
-  reducer,isTerminal,component:StraightShotGame,
+  reducer,isTerminal,
+  hint: (state: StraightShotState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-straight-shot-roll"]', pulses: 3 };
+    if (state.phase === "rolled") return { selector: '[data-testid="hint-target-straight-shot-next"]', pulses: 3 };
+    return null;
+  },
+  component:StraightShotGame,
 };

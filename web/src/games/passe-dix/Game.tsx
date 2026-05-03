@@ -16,8 +16,8 @@ export function PasseDixGame({ state, dispatch, onGameOver }: GameProps<PasseDix
       <div className="pd-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="pd-row">{state.dice.map((d, i) => <div key={i} className="pd-die">{d}</div>)}</div>}
       {state.message && <div className="pd-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="pd-btn" onClick={() => dispatch({ type:"roll" } as PasseDixAction)}>Roll</button>}
-      {state.phase === "result" && <button className="pd-btn alt" onClick={() => dispatch({ type:"next" } as PasseDixAction)}>Next</button>}
+      {state.phase === "roll" && <button className="pd-btn" data-testid="hint-target-passe-dix-roll" onClick={() => dispatch({ type:"roll" } as PasseDixAction)}>Roll</button>}
+      {state.phase === "result" && <button className="pd-btn alt" data-testid="hint-target-passe-dix-next" onClick={() => dispatch({ type:"next" } as PasseDixAction)}>Next</button>}
     </div>
   );
 }

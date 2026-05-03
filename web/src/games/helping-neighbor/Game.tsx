@@ -16,8 +16,8 @@ export function HelpingNeighborGame({ state, dispatch, onGameOver }: GameProps<H
       <div className="hn-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="hn-row">{state.dice.map((d, i) => <div key={i} className="hn-die">{d}</div>)}</div>}
       {state.message && <div className="hn-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="hn-btn" onClick={() => dispatch({ type:"roll" } as HelpingNeighborAction)}>Roll</button>}
-      {state.phase === "result" && <button className="hn-btn alt" onClick={() => dispatch({ type:"next" } as HelpingNeighborAction)}>Next</button>}
+      {state.phase === "roll" && <button className="hn-btn" data-testid="hint-target-helping-neighbor-roll" onClick={() => dispatch({ type:"roll" } as HelpingNeighborAction)}>Roll</button>}
+      {state.phase === "result" && <button className="hn-btn alt" data-testid="hint-target-helping-neighbor-next" onClick={() => dispatch({ type:"next" } as HelpingNeighborAction)}>Next</button>}
     </div>
   );
 }

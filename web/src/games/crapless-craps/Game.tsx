@@ -16,8 +16,8 @@ export function CraplessCrapsGame({ state, dispatch, onGameOver }: GameProps<Cra
       <div className="ccrp-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="ccrp-row">{state.dice.map((d, i) => <div key={i} className="ccrp-die">{d}</div>)}</div>}
       {state.message && <div className="ccrp-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="ccrp-btn" onClick={() => dispatch({ type:"roll" } as CraplessCrapsAction)}>Roll</button>}
-      {state.phase === "result" && <button className="ccrp-btn alt" onClick={() => dispatch({ type:"next" } as CraplessCrapsAction)}>Next</button>}
+      {state.phase === "roll" && <button className="ccrp-btn" data-testid="hint-target-crapless-craps-roll" onClick={() => dispatch({ type:"roll" } as CraplessCrapsAction)}>Roll</button>}
+      {state.phase === "result" && <button className="ccrp-btn alt" data-testid="hint-target-crapless-craps-next" onClick={() => dispatch({ type:"next" } as CraplessCrapsAction)}>Next</button>}
     </div>
   );
 }

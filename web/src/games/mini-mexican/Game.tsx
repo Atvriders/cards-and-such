@@ -11,10 +11,10 @@ export function MiniMexicanGame({ state, dispatch, onGameOver }: GameProps<MiniM
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="dm-score">{state.score} pts</div>
       {state.dice && <div className="dm-row"><div className="dm-die">{state.dice[0]}</div><div className="dm-die">{state.dice[1]}</div></div>}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as MiniMexicanAction)}>Roll!</button>}
+      {state.phase === "ready" && <button className="dm-btn" data-testid="hint-target-mini-mexican-roll" onClick={() => dispatch({ type:"roll" } as MiniMexicanAction)}>Roll!</button>}
       {state.phase === "rolled" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as MiniMexicanAction)}>Next</button>
+        <button className="dm-btn alt" data-testid="hint-target-mini-mexican-next" onClick={() => dispatch({ type:"next" } as MiniMexicanAction)}>Next</button>
       </>}
     </div>
   );

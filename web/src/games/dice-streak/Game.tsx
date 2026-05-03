@@ -20,8 +20,8 @@ export function DiceStreakGame({ state, dispatch, onGameOver }: GameProps<DiceSt
         {state.history.slice(-15).map((d, i) => <span key={i} className="dstk-mini">{d}</span>)}
       </div>
       <div className="dstk-row">
-        <button className="dstk-btn" onClick={() => dispatch({ type:"roll" } as DiceStreakAction)}>Roll</button>
-        <button className="dstk-btn alt" onClick={() => dispatch({ type:"stop" } as DiceStreakAction)}>Stop & Score</button>
+        <button className="dstk-btn" data-testid="hint-target-dice-streak-roll" onClick={() => dispatch({ type:"roll" } as DiceStreakAction)}>Roll</button>
+        <button className="dstk-btn alt" data-testid="hint-target-dice-streak-stop" onClick={() => dispatch({ type:"stop" } as DiceStreakAction)}>Stop & Score</button>
       </div>
     </div>
   );

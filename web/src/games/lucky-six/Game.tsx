@@ -12,10 +12,10 @@ export function LuckySixGame({ state, dispatch, onGameOver }: GameProps<LuckySix
       <div className="dm-info">Roll {state.roll} / {TOTAL_ROLLS}</div>
       <div className="dm-score">{state.score} pts (Sixes: {state.sixes})</div>
       {state.lastDie !== null && <div className="dm-die">{state.lastDie}</div>}
-      {state.phase === "rolling" && <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as LuckySixAction)}>Roll</button>}
+      {state.phase === "rolling" && <button className="dm-btn" data-testid="hint-target-lucky-six-roll" onClick={() => dispatch({ type:"roll" } as LuckySixAction)}>Roll</button>}
       {state.phase === "result" && <>
         <div className="dm-result">{state.lastDie === 6 ? "SIX! +20" : "no six"}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as LuckySixAction)}>{state.roll >= TOTAL_ROLLS ? "Finish" : "Next"}</button>
+        <button className="dm-btn alt" data-testid="hint-target-lucky-six-next" onClick={() => dispatch({ type:"next" } as LuckySixAction)}>{state.roll >= TOTAL_ROLLS ? "Finish" : "Next"}</button>
       </>}
     </div>
   );
