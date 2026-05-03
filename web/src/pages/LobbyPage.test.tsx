@@ -924,6 +924,80 @@ describe("LobbyPage — tile hover-tooltip 500ms delay (W197)", () => {
     });
     expect(screen.getByTestId("tile-tooltip-klondike")).toBeInTheDocument();
   });
+
+  /**
+   * Lazy-hydration contract for the tooltip *engine* itself, not just
+   * the visible floating node.
+   *
+   * The lobby renders dozens of tiles per page (well over 50 across
+   * the various categories/families). Pre-hover, every tile's
+   * `useTileTooltip` hook stays in its lightweight shape — `activated`
+   * is false, the sibling `<TileTooltipEngine>` returns `null`, and
+   * crucially nothing in the DOM matches `tile-tooltip-*`. The 500ms
+   * delay test above only proves the *visible* node is gated; this
+   * test proves the engine itself isn't paying its allocation cost
+   * for tiles the user never touches.
+   *
+   * Then, hovering exactly one tile must hydrate exactly one engine.
+   * We don't advance the 500ms timer here — the visible floating node
+   * is irrelevant to this assertion. What matters is that hovering
+   * one tile does not splash-hydrate every other tile's engine; only
+   * the activated tile's `setActivated(true)` fires.
+   *
+   * To detect "engine mounted but not yet visible" we check the
+   * `aria-describedby` attribute on the hovered tile: pre-activation
+   * it's omitted, post-activation it points at `tile-tooltip-<id>`
+   * regardless of whether the floating node is currently visible. A
+   * regression that eagerly mounts every engine would either render
+   * `tile-tooltip-*` nodes pre-hover or stamp `aria-describedby` on
+   * every tile without interaction.
+   */
+  it("does not mount engines for non-hovered tiles, even with many tiles present", () => {
+    renderAt("/");
+
+    // Sanity: the lobby renders many tiles (the contract calls for
+    // 50+; in practice it's well above that across the default view).
+    // We assert the lower bound so a future tile-pruning regression
+    // that collapses the grid to a handful of tiles makes this test
+    // visibly meaningless rather than silently passing.
+    const tiles = document.querySelectorAll('[data-testid^="tile-"]');
+    expect(tiles.length).toBeGreaterThanOrEqual(50);
+
+    // Pre-hover: zero engines mounted. No `tile-tooltip-*` element
+    // exists in the DOM — `useTileTooltip` returns `tooltip: null`
+    // for every tile until `activated` flips.
+    expect(
+      document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
+    ).toBe(0);
+    // And no tile carries the post-hydration `aria-describedby`
+    // pointing at a tooltip — the omitted-attr branch is taken
+    // for every tile.
+    expect(
+      document.querySelectorAll('[aria-describedby^="tile-tooltip-"]').length,
+    ).toBe(0);
+
+    // Hover one specific tile. This flips that tile's `activated`
+    // state, which mounts its sibling `<TileTooltipEngine>`. The
+    // engine's first effect publishes `aria-describedby` immediately;
+    // we don't need to advance the 500ms timer to observe hydration.
+    const target = screen.getByTestId("tile-klondike");
+    fireEvent.mouseEnter(target);
+
+    // Exactly one engine hydrated — the hovered tile is the only one
+    // now advertising the tooltip via `aria-describedby`.
+    const described = document.querySelectorAll(
+      '[aria-describedby^="tile-tooltip-"]',
+    );
+    expect(described.length).toBe(1);
+    expect(described[0]?.getAttribute("data-testid")).toBe("tile-klondike");
+
+    // The visible floating node is still absent — the 500ms
+    // hover-intent timer hasn't fired yet, so engine-mounted but
+    // tooltip-hidden is the expected interim state.
+    expect(
+      document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
+    ).toBe(0);
+  });
 });
 
 /**
@@ -948,10 +1022,14 @@ describe("LobbyPage — search title <mark> highlight (W566)", () => {
     const search = screen.getByTestId("lobby-search") as HTMLInputElement;
     fireEvent.change(search, { target: { value: "klondike" } });
 
-    // The klondike family tile must still be in the DOM after filtering
-    // — searching for the family id is the trivial path that should
-    // never accidentally drop the matching tile from the grid.
-    const tile = await waitFor(() => screen.getByTestId("tile-klondike"));
+    // While a search query is active, the featured strip is suppressed
+    // and `klondike` (a FEATURED_IDS family) lives in the main grid only,
+    // where its testid is demoted to `grid-tile-klondike` so DOM querying
+    // stays unambiguous when the featured strip is also visible. We
+    // target that canonical post-search testid here.
+    const tile = await waitFor(() =>
+      screen.getByTestId("grid-tile-klondike"),
+    );
 
     // Locate the title span (the `lobby-tile-title` element) and assert
     // it contains a `<mark>` wrapping the matched text. We compare on

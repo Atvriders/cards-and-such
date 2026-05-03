@@ -293,6 +293,21 @@ describe("LobbyTileMenu", () => {
     expect(tile).toHaveAttribute("aria-haspopup", "menu");
   });
 
+  it("renders all 5 menu items in DOM regardless of isFavorite state (W248)", () => {
+    // W248: the tile context menu must always expose its full 5-item action
+    // set. Favorite state only flips one label; it must never add/remove items.
+    for (const isFavorite of [false, true] as const) {
+      cleanup();
+      renderMenu({ isFavorite });
+      expect(screen.getByTestId("tile-menu-play")).toBeInTheDocument();
+      expect(screen.getByTestId("tile-menu-copy")).toBeInTheDocument();
+      expect(screen.getByTestId("tile-menu-fav")).toBeInTheDocument();
+      expect(screen.getByTestId("tile-menu-friend")).toBeInTheDocument();
+      expect(screen.getByTestId("tile-menu-hide")).toBeInTheDocument();
+      expect(screen.getAllByRole("menuitem")).toHaveLength(5);
+    }
+  });
+
   it("tile aria-expanded toggles as the menu opens and closes", async () => {
     render(<TileWithMenu />);
     const tile = screen.getByTestId("tile-klondike");
