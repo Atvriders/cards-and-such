@@ -382,6 +382,106 @@ describe("StatsPage", () => {
     expect(cardsTotal).toBe(1);
   });
 
+  it("stats-cat-heatmap renders an empty 5x7 grid (35 cells, all data-count=0) when no time history exists", () => {
+    // Seed only the stats blob so the page renders, but no cards-time-history:* keys
+    // and no cards-best-times. Heatmap should render every cell with data-count="0".
+    seedStats({ totalPlayed: 0, totalWins: 0 });
+    renderPage();
+    const grid = screen.getByTestId("stats-cat-heatmap");
+    expect(grid).toBeInTheDocument();
+    const cells = grid.querySelectorAll('[data-testid^="stats-cat-heatmap-"]');
+    // 5 categories (solitaire/cards/dice/board/arcade) × 7 days = 35 cells.
+    expect(cells.length).toBe(35);
+    cells.forEach((c) => {
+      expect(c.getAttribute("data-count")).toBe("0");
+      expect((c as HTMLElement).textContent).toBe("");
+    });
+    // Each of the 5 known categories must contribute exactly 7 cells.
+    for (const cat of ["solitaire", "cards", "dice", "board", "arcade"]) {
+      const catCells = grid.querySelectorAll(`[data-testid^="stats-cat-heatmap-${cat}-"]`);
+      expect(catCells.length).toBe(7);
+    }
+  });
+
+  it("stats-cat-heatmap sets per-cell data-count and opacity scaled to max across categories", () => {
+    seedRichStats();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // Anchor to 12:00 today so DST/midnight rollover doesn't flip the bucketed
+    // weekday. We reuse this base to derive deterministic per-day timestamps.
+    const base = new Date();
+    base.setHours(12, 0, 0, 0);
+    const baseMs = base.getTime();
+    // dowIndex matches the page's Mon=0..Sun=6 remap of getDay().
+    const dowOf = (ts: number): number => (new Date(ts).getDay() + 6) % 7;
+
+    // Three klondike (solitaire) plays all on the same weekday — yields a
+    // single solitaire cell with count=3 (the global max).
+    const solTs = baseMs - 1 * dayMs;
+    // Two agram (cards) plays on a *different* weekday — count=2 in one cell.
+    const cardsTs = baseMs - 2 * dayMs;
+    // One balut (dice) play on yet another weekday — count=1 in one cell.
+    const diceTs = baseMs - 3 * dayMs;
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: solTs, time: 60 },
+        { ts: solTs + 60_000, time: 60 },
+        { ts: solTs + 120_000, time: 60 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:agram",
+      JSON.stringify([
+        { ts: cardsTs, time: 30 },
+        { ts: cardsTs + 60_000, time: 30 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:balut",
+      JSON.stringify([{ ts: diceTs, time: 45 }]),
+    );
+
+    renderPage();
+    const grid = screen.getByTestId("stats-cat-heatmap");
+    const dayLabels = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
+    const solCell = grid.querySelector(
+      `[data-testid="stats-cat-heatmap-solitaire-${dayLabels[dowOf(solTs)]}"]`,
+    ) as HTMLElement;
+    const cardsCell = grid.querySelector(
+      `[data-testid="stats-cat-heatmap-cards-${dayLabels[dowOf(cardsTs)]}"]`,
+    ) as HTMLElement;
+    const diceCell = grid.querySelector(
+      `[data-testid="stats-cat-heatmap-dice-${dayLabels[dowOf(diceTs)]}"]`,
+    ) as HTMLElement;
+    expect(solCell).not.toBeNull();
+    expect(cardsCell).not.toBeNull();
+    expect(diceCell).not.toBeNull();
+    expect(solCell.getAttribute("data-count")).toBe("3");
+    expect(cardsCell.getAttribute("data-count")).toBe("2");
+    expect(diceCell.getAttribute("data-count")).toBe("1");
+    // Opacity formula in HeatmapChart: max>0 ? 0.12 + 0.88*(v/max) : 0.08.
+    // With max=3 the solitaire cell hits the full 1.0, cards = 0.12 + 0.88*(2/3),
+    // dice = 0.12 + 0.88*(1/3).
+    const solOpacity = Number(solCell.style.opacity);
+    const cardsOpacity = Number(cardsCell.style.opacity);
+    const diceOpacity = Number(diceCell.style.opacity);
+    expect(solOpacity).toBeCloseTo(1.0, 5);
+    expect(cardsOpacity).toBeCloseTo(0.12 + 0.88 * (2 / 3), 5);
+    expect(diceOpacity).toBeCloseTo(0.12 + 0.88 * (1 / 3), 5);
+    // Strict ordering: more plays => higher opacity.
+    expect(solOpacity).toBeGreaterThan(cardsOpacity);
+    expect(cardsOpacity).toBeGreaterThan(diceOpacity);
+    // Untouched cells use the max>0 baseline (formula: 0.12 + 0.88*0/max = 0.12).
+    // The deeper 0.08 floor only applies when max === 0 (whole-grid empty case).
+    const emptyBoardCell = grid.querySelector(
+      '[data-testid="stats-cat-heatmap-board-mon"]',
+    ) as HTMLElement;
+    expect(emptyBoardCell.getAttribute("data-count")).toBe("0");
+    expect(Number(emptyBoardCell.style.opacity)).toBeCloseTo(0.12, 5);
+    // Empty cells render no text content (only nonzero counts get printed).
+    expect(emptyBoardCell.textContent).toBe("");
+  });
+
   it("stats-hour-of-day card buckets time-history timestamps into hour bins", () => {
     seedRichStats();
     // Pin three klondike plays to a known local hour so peak text is stable.
@@ -488,5 +588,128 @@ describe("StatsPage", () => {
     // At least one delta should render with up direction.
     const ups = card.querySelectorAll('[data-direction="up"]');
     expect(ups.length).toBeGreaterThan(0);
+  });
+
+  // W537: defensive rendering against extreme localStorage corruption.
+  // The page must NOT crash, and the affected cards must degrade gracefully:
+  //   - corrupt time-history blob → hour chart still renders, total === 0.
+  //   - bad best-times entries (NaN/negatives/strings/null/non-finite) →
+  //     personal-records card filters them out instead of showing garbage.
+  describe("defensive against corrupt localStorage (W537)", () => {
+    it("renders with corrupt JSON in cards-time-history:klondike — hour chart shows 0 plays", () => {
+      seedRichStats();
+      // Malformed JSON (truncated object), trailing garbage, and unicode.
+      // progressJSON() catches the SyntaxError and returns null, so the entry
+      // is skipped without bubbling the throw up to the render tree.
+      localStorage.setItem(
+        "cards-time-history:klondike",
+        '{"ts":1234,"time":\u{1F4A9}NaN, broken json \u{0000}\uD800',
+      );
+      // Sibling well-formed-but-semantically-corrupt blob: object instead of
+      // array, and an array of non-objects + non-finite ts values. Each
+      // branch is rejected by the `Array.isArray` / typeof / isFinite gates.
+      localStorage.setItem(
+        "cards-time-history:spider",
+        JSON.stringify({ not: "an array" }),
+      );
+      localStorage.setItem(
+        "cards-time-history:agram",
+        JSON.stringify([null, "string-not-object", 42, { ts: "nope", time: 60 }, { ts: null, time: 60 }]),
+      );
+
+      // The render itself is the primary assertion — if any of the above
+      // threw, this would explode before reaching the testid checks.
+      expect(() => renderPage()).not.toThrow();
+
+      const card = screen.getByTestId("stats-hour-of-day");
+      expect(card).toBeInTheDocument();
+      expect(card.textContent).toContain("No plays recorded yet");
+
+      // The chart SVG itself reports total=0 via its data-total attribute,
+      // and no bar carries data-peak="true" because peakHour is null.
+      const chart = screen.getByTestId("stats-hour-chart");
+      expect(chart.getAttribute("data-total")).toBe("0");
+      expect(chart.getAttribute("data-peak-hour")).toBe("");
+      expect(chart.querySelectorAll('[data-peak="true"]').length).toBe(0);
+    });
+
+    it("filters NaN/negative/non-finite entries from personal records card", () => {
+      seedRichStats();
+      // JSON.stringify converts NaN/Infinity → null, so we go through a Record
+      // shape that exercises every reject branch in the personalRecords memo:
+      //   - klondike: legit positive   → kept
+      //   - spider:   null (was NaN)   → typeof !== "number" → dropped
+      //   - agram:    -50              → t <= 0 → dropped
+      //   - balut:    "NaN" string     → typeof !== "number" → dropped
+      //   - 0 second entry             → t <= 0 → dropped
+      //   - unknown game id            → no plug → dropped
+      const corruptBestTimes: Record<string, unknown> = {
+        klondike: 120,
+        spider: null,
+        agram: -50,
+        balut: "NaN",
+        "extra-zero-game": 0,
+        "ghost-game-id-not-in-registry": 90,
+      };
+      localStorage.setItem("cards-best-times", JSON.stringify(corruptBestTimes));
+
+      expect(() => renderPage()).not.toThrow();
+
+      const card = screen.getByTestId("stats-personal-records");
+      expect(card).toBeInTheDocument();
+
+      // Only the single legit entry survives — exactly one PR row rendered.
+      const rows = card.querySelectorAll('[data-testid^="stats-pr-row-"]');
+      expect(rows.length).toBe(1);
+      expect(rows[0].getAttribute("data-testid")).toBe("stats-pr-row-0");
+      expect(rows[0].textContent).toContain("Klondike");
+      // None of the dropped IDs leak into the DOM as a row.
+      expect(card.textContent).not.toContain("Spider");
+      expect(card.textContent).not.toContain("Agram");
+      expect(card.textContent).not.toContain("Balut");
+      expect(card.textContent).not.toContain("ghost-game-id-not-in-registry");
+    });
+  });
+
+  // Final integration coverage for the show-locked toggle (W515 / W531).
+  // Three discrete checks: hide-on-off, show-on-on, persistence to the
+  // `cards-stats-show-locked` localStorage key.
+  describe("stats-show-locked-toggle (integration)", () => {
+    function gridLockedCount(): number {
+      const grid = screen
+        .getByTestId("stats-achievements")
+        .querySelector(".achievements-grid") as HTMLElement;
+      return Array.from(grid.querySelectorAll('[data-state="locked"]')).length;
+    }
+
+    it("toggle off hides locked cards", () => {
+      seedStats({ totalWins: 1, unlocked: ["first-win"] });
+      localStorage.setItem("cards-stats-show-locked", "false");
+      renderPage();
+      const toggle = screen.getByTestId("stats-show-locked-toggle") as HTMLInputElement;
+      expect(toggle.checked).toBe(false);
+      expect(gridLockedCount()).toBe(0);
+    });
+
+    it("toggle on shows locked cards", () => {
+      seedStats({ totalWins: 1, unlocked: ["first-win"] });
+      localStorage.setItem("cards-stats-show-locked", "true");
+      renderPage();
+      const toggle = screen.getByTestId("stats-show-locked-toggle") as HTMLInputElement;
+      expect(toggle.checked).toBe(true);
+      expect(gridLockedCount()).toBeGreaterThan(0);
+    });
+
+    it("toggle state persists in cards-stats-show-locked", () => {
+      seedStats({ totalWins: 1, unlocked: ["first-win"] });
+      renderPage();
+      const toggle = screen.getByTestId("stats-show-locked-toggle") as HTMLInputElement;
+      // Default off → flipping on writes "true".
+      fireEvent.click(toggle);
+      expect(localStorage.getItem("cards-stats-show-locked")).toBe("true");
+      // Flipping back writes "false" (round-trip persistence).
+      fireEvent.click(toggle);
+      expect(localStorage.getItem("cards-stats-show-locked")).toBe("false");
+    });
   });
 });
