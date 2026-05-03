@@ -2291,13 +2291,35 @@ button.tile {
     font-variant-numeric: tabular-nums;
   }
   .lobby-drawer[data-collapsed="true"] .lobby-drawer-link {
+    /* W516 — collapse the three-column expanded grid down to a single
+       icon cell. `min-width: 0` lets the grid track shrink below the
+       row's min-content size — without it a long label that's still
+       in the DOM (display:none below) could keep the button wider
+       than the 56px rail during the width transition. `overflow:
+       hidden` is belt-and-suspenders: if a future glyph or focus ring
+       tries to paint outside the cell it gets clipped instead of
+       bleeding out of the rounded corners. */
     grid-template-columns: 1fr;
     justify-items: center;
     padding: 0.55rem 0.25rem;
+    min-width: 0;
+    overflow: hidden;
   }
+  /* Hide both the label and the count badge entirely when collapsed —
+     `display: none` (not `visibility: hidden`) so they don't reserve
+     layout space and can't widen the button past the rail. The
+     `aria-label` on the row still announces "<label> — <count> games"
+     to screen readers and the native `title` provides a hover
+     tooltip, so no information is lost in icon-only mode. */
   .lobby-drawer[data-collapsed="true"] .lobby-drawer-link-label,
   .lobby-drawer[data-collapsed="true"] .lobby-drawer-link-count {
     display: none;
+  }
+  /* Keep the glyph crisply centered inside its 22px track even if the
+     character ships extra side-bearing — clipping any spillover keeps
+     the icon rail visually aligned at 56px. */
+  .lobby-drawer[data-collapsed="true"] .lobby-drawer-link-glyph {
+    overflow: hidden;
   }
   .lobby-drawer-sep {
     height: 1px;
