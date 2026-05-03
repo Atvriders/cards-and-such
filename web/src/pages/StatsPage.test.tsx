@@ -351,6 +351,55 @@ describe("StatsPage", () => {
     expect(card.textContent).toContain("3 total plays");
   });
 
+  it("achievement cards render in unlocked → in-progress → locked order with matching data-state", () => {
+    // Seed exactly: 1 unlocked (first-win), 2 in-progress (ten-wins, hundred-wins),
+    // rest locked. totalWins=1 is the only stats lever flipped, so the only
+    // achievements with cur>0 are first-win/ten-wins/hundred-wins. first-win is
+    // forced to "unlocked" via the unlocked array, leaving exactly 2 in-progress.
+    seedStats({
+      totalWins: 1,
+      unlocked: ["first-win"],
+    });
+    renderPage();
+
+    const grid = screen
+      .getByTestId("stats-achievements")
+      .querySelector(".achievements-grid") as HTMLElement;
+    expect(grid).not.toBeNull();
+    const cards = Array.from(
+      grid.querySelectorAll('[data-testid^="achievement-"]'),
+    ).filter((el) => !el.getAttribute("data-testid")?.startsWith("achievement-progress-"));
+
+    // Bucket counts: 1 / 2 / many.
+    const states = cards.map((c) => c.getAttribute("data-state"));
+    expect(states.filter((s) => s === "unlocked").length).toBe(1);
+    expect(states.filter((s) => s === "in-progress").length).toBe(2);
+    expect(states.filter((s) => s === "locked").length).toBeGreaterThan(0);
+
+    // Section ordering: every unlocked precedes every in-progress, and every
+    // in-progress precedes every locked.
+    const firstInProgress = states.indexOf("in-progress");
+    const lastUnlocked = states.lastIndexOf("unlocked");
+    const firstLocked = states.indexOf("locked");
+    const lastInProgress = states.lastIndexOf("in-progress");
+    expect(lastUnlocked).toBeLessThan(firstInProgress);
+    expect(lastInProgress).toBeLessThan(firstLocked);
+
+    // Concrete head-of-list assertions: the unlocked + both in-progress cards
+    // are the seeded ones, and ten-wins (10% progress) outranks hundred-wins
+    // (1% progress) within the in-progress bucket.
+    expect(cards[0].getAttribute("data-testid")).toBe("achievement-first-win");
+    expect(cards[0].getAttribute("data-state")).toBe("unlocked");
+    expect(cards[1].getAttribute("data-testid")).toBe("achievement-ten-wins");
+    expect(cards[1].getAttribute("data-state")).toBe("in-progress");
+    expect(cards[2].getAttribute("data-testid")).toBe("achievement-hundred-wins");
+    expect(cards[2].getAttribute("data-state")).toBe("in-progress");
+
+    // First locked card sits immediately after the in-progress block and
+    // carries data-state="locked".
+    expect(cards[3].getAttribute("data-state")).toBe("locked");
+  });
+
   it("this-week comparison card shows current and prior 7-day windows with deltas", () => {
     seedRichStats();
     const now = Date.now();
