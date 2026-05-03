@@ -380,6 +380,60 @@ describe("StatsPage", () => {
     expect(within(panel).getByTestId("stats-sparkline-klondike")).toBeInTheDocument();
   });
 
+  // W573 — Drill-down sparkline pulls last-N best times from
+  // `cards-time-history:<gameId>` and renders a polyline with one vertex per
+  // surviving entry. Multi-entry histories must produce a <polyline> (not a
+  // single horizontal bar / baseline), and the vertex count must match the
+  // number of finite, positive `time` values on the blob.
+  it("W573: drill-down sparkline renders a polyline vertex per cards-time-history:<gameId> entry", () => {
+    seedRichStats();
+    // Five klondike finishes, oldest -> newest. All `time` values are finite
+    // and positive so each one survives the projection in `drillInfo.times`
+    // and contributes a vertex to the polyline.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: 1, time: 200 },
+        { ts: 2, time: 180 },
+        { ts: 3, time: 150 },
+        { ts: 4, time: 130 },
+        { ts: 5, time: 110 },
+      ]),
+    );
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-drill-klondike"));
+    const panel = screen.getByTestId("stats-drill-panel");
+    const spark = within(panel).getByTestId("stats-sparkline-klondike");
+    expect(spark).toBeInTheDocument();
+    // With >1 finite samples the Sparkline renders a <polyline> (single-sample
+    // path emits a <line> instead). Vertex count must equal the seeded length.
+    const polyline = spark.querySelector("polyline");
+    expect(polyline).not.toBeNull();
+    const points = (polyline?.getAttribute("points") ?? "")
+      .trim()
+      .split(/\s+/)
+      .filter((p) => p.length > 0);
+    expect(points.length).toBe(5);
+  });
+
+  // W573 — Empty-history fallback. With no `cards-time-history:<gameId>` blob
+  // (or one with zero usable entries), the drill-down panel must NOT mount the
+  // sparkline at all. The page's render gate is `drillInfo.times.length > 0`,
+  // so the testid simply isn't in the DOM rather than rendering an empty SVG.
+  it("W573: drill-down sparkline is absent when cards-time-history:<gameId> is empty", () => {
+    seedRichStats();
+    // No `cards-time-history:klondike` key exists; readTimeHistory returns [].
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-drill-klondike"));
+    const panel = screen.getByTestId("stats-drill-panel");
+    expect(panel).toBeInTheDocument();
+    // Sparkline is gated on times.length > 0 → not rendered for empty history.
+    expect(within(panel).queryByTestId("stats-sparkline-klondike")).toBeNull();
+    // Best-time row still renders the em-dash fallback so layout is preserved.
+    expect(panel.textContent).toContain("Best time");
+    expect(panel.textContent).toContain("—");
+  });
+
   it("aggregate hint/undo cards render with localStorage values", () => {
     seedRichStats();
     renderPage();
