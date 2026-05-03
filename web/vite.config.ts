@@ -23,6 +23,32 @@ export default defineConfig({
   define: {
     __BUILD_LATEST_COMMITS__: JSON.stringify(readLatestCommits()),
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // React + react-router into a single vendor chunk.
+          if (
+            id.includes("/node_modules/react/") ||
+            id.includes("/node_modules/react-dom/") ||
+            id.includes("/node_modules/react-router/") ||
+            id.includes("/node_modules/react-router-dom/") ||
+            id.includes("/node_modules/scheduler/") ||
+            id.includes("/node_modules/@remix-run/router/") ||
+            id.includes("/node_modules/history/")
+          ) {
+            return "vendor-react";
+          }
+          // Each engine into its own chunk.
+          const engineMatch = id.match(/\/src\/engines\/([^/]+)\//);
+          if (engineMatch) {
+            return `engine-${engineMatch[1]}`;
+          }
+          return undefined;
+        },
+      },
+    },
+  },
   server: {
     port: 5173,
     proxy: {
