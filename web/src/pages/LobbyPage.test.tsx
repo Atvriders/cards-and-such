@@ -1905,3 +1905,52 @@ describe("LobbyPage — tile keyboard Enter activation (W606)", () => {
     });
   });
 });
+
+/**
+ * W624 — clicking the `chip-solitaire` category chip must filter the
+ * lobby grid down to entries whose underlying GameCategory is
+ * `solitaire`. The visual contract is enforced via the className
+ * modifier `tile--cat-s` (CATEGORY_TAG.solitaire === "s") that
+ * GameCard / family tiles stamp on every tile root; the dice category
+ * uses the disjoint tag `d`. We assert (1) the chip flips to
+ * aria-pressed=true and persists `solitaire` to `cards-lobby-filter`,
+ * (2) at least one tile is in the grid (the registry has many
+ * solitaire entries so the filter must not nuke the list), (3) every
+ * rendered `.tile--cat-X` carries the solitaire tag, and (4) no tile
+ * carries the dice tag — proving the filter is strictly
+ * category-scoped, not just visually relabelled.
+ */
+describe("LobbyPage — category chip filter (W624)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking chip-solitaire filters the grid to solitaire-category tiles only", () => {
+    renderAt("/");
+
+    const solitaireChip = screen.getByTestId("chip-solitaire");
+    expect(solitaireChip).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(solitaireChip);
+
+    // Chip activation contract — pressed state and persisted filter key.
+    expect(solitaireChip).toHaveAttribute("aria-pressed", "true");
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("solitaire");
+
+    // Every tile in the grid must carry CATEGORY_TAG.solitaire ("s").
+    // Scope to elements whose className includes a `tile--cat-` modifier
+    // so we hit the real lobby grid (and ignore unrelated nodes).
+    const tiles = Array.from(
+      document.querySelectorAll<HTMLElement>('[class*="tile--cat-"]'),
+    );
+    expect(tiles.length).toBeGreaterThan(0);
+
+    for (const tile of tiles) {
+      // Must be the solitaire tag…
+      expect(tile.className).toMatch(/\btile--cat-s\b/);
+      // …and explicitly NOT the dice tag (cross-category contamination
+      // would surface here even if the tile somehow also carried `s`).
+      expect(tile.className).not.toMatch(/\btile--cat-d\b/);
+    }
+  });
+});
