@@ -2971,6 +2971,7 @@ function GameCard({
       className={`tile tile--cat-${CATEGORY_TAG[g.category]}${pressed ? " tile--pressed" : ""}`}
       data-testid={`tile-${g.id}`}
       aria-haspopup="menu"
+      aria-expanded={menuPos !== null}
       aria-label={tileAriaLabel}
       onMouseDown={startPress}
       onMouseUp={endPress}
