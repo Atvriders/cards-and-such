@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AcesUpMiniState, AcesUpMiniAction, AcesUpMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Each draw is independent (the deck reshuffles in spirit each time), so don't wor
 There is no skill component here — just press Draw, watch the card, and press Next. The fun is in the suspense and that little jolt when the Ace finally shows up. Enjoy the deck's gambler-style randomness, and chase your personal best Ace count!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AcesUpMiniSettings),
-  reducer,isTerminal,component:AcesUpMiniGame,
+  reducer,isTerminal, hint: (state: AcesUpMiniState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-aces-up-mini-primary"]', pulses: 3 } : null),component:AcesUpMiniGame,
 };

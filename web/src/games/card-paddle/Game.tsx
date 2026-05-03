@@ -18,7 +18,7 @@ export function CardPaddleGame({ state, dispatch, onGameOver }: GameProps<CardPa
       {state.phase === "predict" && (
         <div className="rg-row">
           {CHOICES.map(c => (
-            <button key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardPaddleAction)}>{c}</button>
+            <button data-testid="hint-target-card-paddle-primary" key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardPaddleAction)}>{c}</button>
           ))}
         </div>
       )}

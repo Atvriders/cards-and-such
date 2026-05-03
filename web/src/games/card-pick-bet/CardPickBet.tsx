@@ -36,7 +36,7 @@ export function CardPickBet({ state, dispatch, onGameOver }: GameProps<CardPickB
           </div>
           {state.phase === "playing" && (
             <div className="cpb-btns">
-              <button className="cpb-btn higher" onClick={() => dispatch({ type: "bet", choice: "higher" })}>Higher ▲</button>
+              <button data-testid="hint-target-card-pick-bet-primary" className="cpb-btn higher" onClick={() => dispatch({ type: "bet", choice: "higher" })}>Higher ▲</button>
               <button className="cpb-btn lower" onClick={() => dispatch({ type: "bet", choice: "lower" })}>Lower ▼</button>
             </div>
           )}

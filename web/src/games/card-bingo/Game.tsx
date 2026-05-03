@@ -18,7 +18,7 @@ export function CardBingoGame({ state, dispatch, onGameOver }: GameProps<CardBin
       {state.phase === "predict" && (
         <div className="rg-row">
           {CHOICES.map(c => (
-            <button key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardBingoAction)}>{c}</button>
+            <button data-testid="hint-target-card-bingo-primary" key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardBingoAction)}>{c}</button>
           ))}
         </div>
       )}

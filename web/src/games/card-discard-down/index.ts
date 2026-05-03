@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardDiscardDownState, CardDiscardDownAction, CardDiscardDownSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ You don't have to discard if you're already happy. Just press Discard & Draw wit
 Strategy: prioritize discarding the highest-pip cards. With Aces around, a perfect 5-Ace finish is theoretically possible (sum = 5, score = 45 per round).`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardDiscardDownSettings),
-  reducer, isTerminal, component: CardDiscardDownGame,
+  reducer, isTerminal, hint: (state: CardDiscardDownState): HintTarget | null => (state.phase === "selecting" ? { selector: '[data-testid="hint-target-card-discard-down-primary"]', pulses: 3 } : null), component: CardDiscardDownGame,
 };

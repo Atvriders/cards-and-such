@@ -20,7 +20,7 @@ export function CardMuseumGame({ state, dispatch, onGameOver }: GameProps<CardMu
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cmu-btn" onClick={() => dispatch({ type:"draw" } as CardMuseumAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-museum-primary" className="cmu-btn" onClick={() => dispatch({ type:"draw" } as CardMuseumAction)}>Draw Card</button>
       )}
     </div>
   );

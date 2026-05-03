@@ -32,7 +32,7 @@ export function CardDiscardDownGame({ state, dispatch, onGameOver }: GameProps<C
       {state.phase === "selecting" && (
         <>
           <div className="cdd-info">Selected to discard: {state.selected.length} / 2</div>
-          <button className="cdd-btn" onClick={() => dispatch({ type: "discard" } as CardDiscardDownAction)}>Discard & Draw</button>
+          <button data-testid="hint-target-card-discard-down-primary" className="cdd-btn" onClick={() => dispatch({ type: "discard" } as CardDiscardDownAction)}>Discard & Draw</button>
         </>
       )}
       {state.phase === "result" && (

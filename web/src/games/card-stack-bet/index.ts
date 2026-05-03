@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardStackBetState, CardStackBetAction, CardStackBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,6 @@ Your final coin total is your score. Use Settings to choose 10 or 15 rounds. Can
   initialState: (seed: number, settings: CardStackBetSettingsType) => initialState(seed, settings as CardStackBetSettings),
   reducer,
   isTerminal,
+  hint: (state: CardStackBetState): HintTarget | null => (state.phase === "betting" ? { selector: '[data-testid="hint-target-card-stack-bet-primary"]', pulses: 3 } : null),
   component: CardStackBet,
 };

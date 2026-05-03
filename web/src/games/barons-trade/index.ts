@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BaronsTradeState, BaronsTradeAction, BaronsTradeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BaronsTradeGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const baronsTradePlugin: GamePlugin<BaronsTradeState, BaronsTradeAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as BaronsTradeSettings),
   reducer,
   isTerminal,
+  hint: (state: BaronsTradeState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-barons-trade-primary"]', pulses: 3 } : null),
   component: BaronsTradeGame,
 };

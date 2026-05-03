@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardFlagPoleState, CardFlagPoleAction, CardFlagPoleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Press Draw Card to reveal your next card from the shuffled deck. Each card's sco
 The maximum possible score is 12 Aces × 13 = 156, but with only 4 of each rank in a deck, an average run lands around 75-90 points. Lucky draws of Aces and Kings push you toward the top of the leaderboard. Aim for the sky!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardFlagPoleSettings),
-  reducer,isTerminal,component:CardFlagPoleGame,
+  reducer,isTerminal, hint: (state: CardFlagPoleState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-card-flag-pole-primary"]', pulses: 3 } : null),component:CardFlagPoleGame,
 };

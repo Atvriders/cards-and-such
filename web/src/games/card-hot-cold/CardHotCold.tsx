@@ -28,7 +28,7 @@ export function CardHotCold({ state, dispatch, onGameOver }: GameProps<CardHotCo
           </div>
           {state.phase === "playing" && (
             <div className="chc-btns">
-              <button className="chc-btn hot" onClick={() => dispatch({ type: "guess", choice: "hot" })}>Hot 🔥</button>
+              <button data-testid="hint-target-card-hot-cold-primary" className="chc-btn hot" onClick={() => dispatch({ type: "guess", choice: "hot" })}>Hot 🔥</button>
               <button className="chc-btn cold" onClick={() => dispatch({ type: "guess", choice: "cold" })}>Cold ❄️</button>
             </div>
           )}

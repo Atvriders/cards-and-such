@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardMuseumState, CardMuseumAction, CardMuseumSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Press Draw Card to reveal each card. The score updates immediately. After 12 car
 There are no decisions to make. Just walk through the gallery and let the deck decide which exhibits you encounter. Every Spade is a treasure unearthed!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardMuseumSettings),
-  reducer,isTerminal,component:CardMuseumGame,
+  reducer,isTerminal, hint: (state: CardMuseumState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-card-museum-primary"]', pulses: 3 } : null),component:CardMuseumGame,
 };

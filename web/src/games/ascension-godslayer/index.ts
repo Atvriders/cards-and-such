@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AscensionGodslayerState, AscensionGodslayerAction, AscensionGodslayerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,6 @@ export const ascensionGodslayerPlugin: GamePlugin<AscensionGodslayerState, Ascen
   initialState:(seed:number,s:S)=>initialState(seed,s as AscensionGodslayerSettings),
   reducer,
   isTerminal,
+  hint: (state: AscensionGodslayerState): HintTarget | null => (state.phase === "play" ? { selector: '[data-testid="hint-target-ascension-godslayer-primary"]', pulses: 3 } : null),
   component:AscensionGodslayerGame,
 };

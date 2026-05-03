@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardArenaMiniState, CardArenaMiniAction, CardArenaMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Press Draw Card each round to reveal the gladiator. The maximum possible score i
 There are no decisions to make. The deck shuffles at the start, and you simply draw your way through 8 cards. Each face card is a victory cheer; each pip card is a missed swing. Step into the arena!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardArenaMiniSettings),
-  reducer,isTerminal,component:CardArenaMiniGame,
+  reducer,isTerminal, hint: (state: CardArenaMiniState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-card-arena-mini-primary"]', pulses: 3 } : null),component:CardArenaMiniGame,
 };

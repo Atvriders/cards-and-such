@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardClutchState, CardClutchAction, CardClutchSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Score is clamped at zero, so you can't end the game in the negatives. With pure 
 Maximum is 130 points (8 normal wins + 1 clutch win = 80 + 50).`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardClutchSettings),
-  reducer, isTerminal, component: CardClutchGame,
+  reducer, isTerminal, hint: (state: CardClutchState): HintTarget | null => (state.phase === "predict" ? { selector: '[data-testid="hint-target-card-clutch-primary"]', pulses: 3 } : null), component: CardClutchGame,
 };

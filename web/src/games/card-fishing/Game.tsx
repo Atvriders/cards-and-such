@@ -18,7 +18,7 @@ export function CardFishingGame({ state, dispatch, onGameOver }: GameProps<CardF
       {state.phase === "predict" && (
         <div className="rg-row">
           {CHOICES.map(c => (
-            <button key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardFishingAction)}>{c}</button>
+            <button data-testid="hint-target-card-fishing-primary" key={c} className="rg-btn" onClick={() => dispatch({ type:"go", choice:c } as CardFishingAction)}>{c}</button>
           ))}
         </div>
       )}

@@ -20,7 +20,7 @@ export function CardFlagPoleGame({ state, dispatch, onGameOver }: GameProps<Card
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cfp-btn" onClick={() => dispatch({ type:"draw" } as CardFlagPoleAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-flag-pole-primary" className="cfp-btn" onClick={() => dispatch({ type:"draw" } as CardFlagPoleAction)}>Draw Card</button>
       )}
     </div>
   );

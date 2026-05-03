@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardBidFlipState, CardBidFlipAction, CardBidFlipSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -29,5 +29,6 @@ Your final coin total is your score. Use Settings to play 10 or 20 rounds. Can y
   initialState: (seed: number, settings: CardBidFlipSettingsType) => initialState(seed, settings as CardBidFlipSettings),
   reducer,
   isTerminal,
+  hint: (state: CardBidFlipState): HintTarget | null => (state.phase === "bidding" ? { selector: '[data-testid="hint-target-card-bid-flip-primary"]', pulses: 3 } : null),
   component: CardBidFlip,
 };

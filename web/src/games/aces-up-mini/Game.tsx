@@ -18,7 +18,7 @@ export function AcesUpMiniGame({ state, dispatch, onGameOver }: GameProps<AcesUp
         <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="cm-btn" onClick={() => dispatch({ type: "draw" } as AcesUpMiniAction)}>Draw</button>
+        <button data-testid="hint-target-aces-up-mini-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as AcesUpMiniAction)}>Draw</button>
       )}
       {state.phase === "shown" && (
         <>

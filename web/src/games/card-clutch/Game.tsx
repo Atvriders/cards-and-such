@@ -22,7 +22,7 @@ export function CardClutchGame({ state, dispatch, onGameOver }: GameProps<CardCl
         <>
           <div className="cc-prompt">Predict: HIGH (8+) or LOW (≤7)?</div>
           <div className="cc-row">
-            <button className="cc-btn" onClick={() => dispatch({ type: "predict", choice: "high" } as CardClutchAction)}>HIGH</button>
+            <button data-testid="hint-target-card-clutch-primary" className="cc-btn" onClick={() => dispatch({ type: "predict", choice: "high" } as CardClutchAction)}>HIGH</button>
             <button className="cc-btn alt" onClick={() => dispatch({ type: "predict", choice: "low" } as CardClutchAction)}>LOW</button>
           </div>
         </>

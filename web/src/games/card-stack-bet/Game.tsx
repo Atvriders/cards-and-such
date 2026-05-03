@@ -27,7 +27,7 @@ export function CardStackBet({ state, dispatch, onGameOver }: GameProps<CardStac
         <div className="csb-body">
           <div className="csb-bid-row">
             <input type="number" min={1} max={state.coins} value={amount} onChange={e => setAmount(Number(e.target.value))} className="csb-input" />
-            <button className="csb-btn high" onClick={() => dispatch({ type: "bet", amount, dir: "higher" } as CardStackBetAction)}>Higher</button>
+            <button data-testid="hint-target-card-stack-bet-primary" className="csb-btn high" onClick={() => dispatch({ type: "bet", amount, dir: "higher" } as CardStackBetAction)}>Higher</button>
             <button className="csb-btn low" onClick={() => dispatch({ type: "bet", amount, dir: "lower" } as CardStackBetAction)}>Lower</button>
           </div>
         </div>

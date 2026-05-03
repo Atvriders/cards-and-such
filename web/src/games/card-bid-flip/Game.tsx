@@ -27,7 +27,7 @@ export function CardBidFlip({ state, dispatch, onGameOver }: GameProps<CardBidFl
           <p className="cbf-hint">Bet on whether the next card is <strong>8 or higher</strong> (ranks 8–A win).</p>
           <div className="cbf-bid-row">
             <input type="number" min={1} max={state.coins} value={bidInput} onChange={e => setBidInput(Number(e.target.value))} className="cbf-input" />
-            <button className="cbf-btn" onClick={() => dispatch({ type: "bid", amount: bidInput } as CardBidFlipAction)}>Flip</button>
+            <button data-testid="hint-target-card-bid-flip-primary" className="cbf-btn" onClick={() => dispatch({ type: "bid", amount: bidInput } as CardBidFlipAction)}>Flip</button>
           </div>
         </div>
       )}

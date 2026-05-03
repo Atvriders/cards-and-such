@@ -20,7 +20,7 @@ export function CardArenaMiniGame({ state, dispatch, onGameOver }: GameProps<Car
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="cam-btn" onClick={() => dispatch({ type:"draw" } as CardArenaMiniAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-arena-mini-primary" className="cam-btn" onClick={() => dispatch({ type:"draw" } as CardArenaMiniAction)}>Draw Card</button>
       )}
     </div>
   );

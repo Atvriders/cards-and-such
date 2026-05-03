@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardMountainClimbState, CardMountainClimbAction, CardMountainClimbSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Press Draw Card to reveal each card. The score updates immediately, and after 8 
 A great climb is one where Kings, Queens, and Aces dominate; a tough one is full of low pip cards. Either way, every card carries you a little higher — to the summit and a high score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardMountainClimbSettings),
-  reducer,isTerminal,component:CardMountainClimbGame,
+  reducer,isTerminal, hint: (state: CardMountainClimbState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-card-mountain-climb-primary"]', pulses: 3 } : null),component:CardMountainClimbGame,
 };

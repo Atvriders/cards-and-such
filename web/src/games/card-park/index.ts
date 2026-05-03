@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardParkState, CardParkAction, CardParkSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Press Draw Card to reveal each card. The score updates with each draw. After 12 
 There are no choices to make. Just enjoy the stroll, draw your cards, and hope the diamonds shine through. Watch out — you might find yourself wishing for a sunnier deck!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardParkSettings),
-  reducer,isTerminal,component:CardParkGame,
+  reducer,isTerminal, hint: (state: CardParkState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-card-park-primary"]', pulses: 3 } : null),component:CardParkGame,
 };

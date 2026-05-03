@@ -40,7 +40,7 @@ export function AscensionGodslayerGame({ state, dispatch, onGameOver }: GameProp
         })}
       </div>
       {state.phase === "play" && (
-        <button className="asc-btn primary" onClick={() => dispatch({ type: "playAll" } as AscensionGodslayerAction)}>Play All</button>
+        <button data-testid="hint-target-ascension-godslayer-primary" className="asc-btn primary" onClick={() => dispatch({ type: "playAll" } as AscensionGodslayerAction)}>Play All</button>
       )}
       {state.phase === "buy" && (
         <>

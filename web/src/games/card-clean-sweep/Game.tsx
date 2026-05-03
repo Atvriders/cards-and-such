@@ -20,7 +20,7 @@ export function CardCleanSweepGame({ state, dispatch, onGameOver }: GameProps<Ca
         <div className={`ccs-card ${isRed(last) ? "red" : "black"} ${isFace(last) ? "face" : ""}`}>{cardName(last)}</div>
       )}
       {state.phase === "drawing" && (
-        <button className="ccs-btn" onClick={() => dispatch({ type: "draw" } as CardCleanSweepAction)}>Draw</button>
+        <button data-testid="hint-target-card-clean-sweep-primary" className="ccs-btn" onClick={() => dispatch({ type: "draw" } as CardCleanSweepAction)}>Draw</button>
       )}
       {state.phase === "roundDone" && (
         <>

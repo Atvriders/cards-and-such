@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPickBetState, CardPickBetAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -28,5 +28,6 @@ Tips: A 7 in the middle of the rank range gives you roughly even odds either way
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CardPickBetState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-card-pick-bet-primary"]', pulses: 3 } : null),
   component: CardPickBet,
 };

@@ -18,7 +18,7 @@ export function BaronsTradeGame({ state, dispatch, onGameOver }: GameProps<Baron
       </div>
       {state.phase === "choosing" && (
         <div className="bz-btr-actions">
-          <button onClick={() => dispatch({ type: "invest" } as BaronsTradeAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-barons-trade-primary" onClick={() => dispatch({ type: "invest" } as BaronsTradeAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as BaronsTradeAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as BaronsTradeAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as BaronsTradeAction)}>Trade Asset</button>
