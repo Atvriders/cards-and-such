@@ -244,6 +244,34 @@ describe("StatsPage", () => {
     expect(localStorage.getItem("cards-undos-used")).toBeNull();
   });
 
+  // Tight three-step pin on the stats-reset → ConfirmDialog → confirm-yes
+  // happy path: assert the dialog is NOT present pre-click, IS present after
+  // click, and that confirming clears the canonical stats blob at
+  // `cards-and-such:stats:v1`. This complements the broader test above by
+  // isolating the dialog visibility transition + the single key the page is
+  // contractually obligated to wipe (sister blobs are covered separately).
+  it("stats-reset → ConfirmDialog → confirm-yes clears cards-and-such:stats:v1", async () => {
+    seedRichStats();
+    renderPage();
+    // Pre-click: stats blob is seeded, dialog is not mounted.
+    expect(localStorage.getItem(STATS_KEY)).not.toBeNull();
+    expect(screen.queryByTestId("confirm-dialog")).toBeNull();
+    expect(screen.queryByTestId("confirm-yes")).toBeNull();
+
+    // Click the reset button → ConfirmProvider mounts the dialog.
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const dialog = await screen.findByTestId("confirm-dialog");
+    expect(dialog).toBeInTheDocument();
+    const yes = screen.getByTestId("confirm-yes");
+    expect(yes).toBeInTheDocument();
+
+    // Confirm → resetStats() removes the canonical stats key.
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+    expect(localStorage.getItem(STATS_KEY)).toBeNull();
+  });
+
   it("export buttons exist and are clickable without throwing", () => {
     seedRichStats();
     renderPage();
@@ -668,6 +696,127 @@ describe("StatsPage", () => {
       expect(card.textContent).not.toContain("Agram");
       expect(card.textContent).not.toContain("Balut");
       expect(card.textContent).not.toContain("ghost-game-id-not-in-registry");
+    });
+  });
+
+  // W513 — Replays panel: when there are saved replays in
+  // `cards-replays`, the panel must render one row per replay (newest-
+  // first) AND surface a "View all replays" link pointing at /replays
+  // so power users can jump from the dashboard summary to the full
+  // replay browser. This test pins both halves of that contract: the
+  // row testids are present in newest-first order, and the link's
+  // href round-trips through React Router as `/replays`.
+  it("W513: replays panel lists saved replays and links to /replays", () => {
+    seedStats({ totalPlayed: 1 });
+    // Disk order is newest-last; the panel reverses for display so
+    // the freshest entry shows up at index 0 (matching the user's
+    // mental model of "most recent on top").
+    localStorage.setItem(
+      "cards-replays",
+      JSON.stringify([
+        { id: "r-old", gameId: "klondike", seed: 1, actions: [], savedAt: 1 },
+        { id: "r-new", gameId: "spider", seed: 2, actions: ["a", "b"], savedAt: 2 },
+      ]),
+    );
+    renderPage();
+
+    const panel = screen.getByTestId("stats-replays-panel");
+    expect(panel).toBeInTheDocument();
+    // Empty-state message must NOT render once we have entries — the
+    // two branches of the panel are mutually exclusive and a regression
+    // that forgot to gate on `replays.length` would surface here.
+    expect(screen.queryByTestId("stats-replays-empty")).not.toBeInTheDocument();
+
+    // Newest-first ordering: r-new ("spider") at index 0, r-old
+    // ("klondike") at index 1. The Play link's href encodes the gameId
+    // for that row, giving us a stable, locale-independent assertion
+    // surface that doesn't depend on which display title the GAMES
+    // registry happens to expose for each plugin.
+    const row0Play = within(panel).getByTestId("stats-replay-0-play");
+    const row1Play = within(panel).getByTestId("stats-replay-1-play");
+    expect(row0Play.getAttribute("href")).toBe("/play/spider?seed=2");
+    expect(row1Play.getAttribute("href")).toBe("/play/klondike?seed=1");
+
+    // The "View all replays" link is the load-bearing affordance for
+    // W513 — it must point at the standalone /replays route so the
+    // dashboard panel never becomes a dead-end.
+    const viewAll = within(panel).getByTestId("view-all-replays");
+    expect(viewAll).toBeInTheDocument();
+    expect(viewAll.getAttribute("href")).toBe("/replays");
+  });
+
+  // W519: defensive against root-stats-blob corruption (StatsState shape).
+  // The W537 block above hits side-tables (time-history, best-times); this
+  // block exercises the canonical `cards-and-such:stats:v1` blob itself —
+  // historically only protected by a JSON-parse try/catch + a shallow
+  // `{...empty, ...parsed}` spread, which let bad field types (string
+  // perGame, non-array daysPlayed/unlocked, etc.) bubble straight into
+  // render and crash deep inside `Object.entries` / `new Set(daysPlayed)` /
+  // `unlocked.includes`. loadStats() now coerces each field to its empty
+  // default; these tests pin that contract at the page boundary.
+  describe("defensive against root stats blob corruption (W519)", () => {
+    it("structurally corrupt StatsState fields fall back to empty defaults", () => {
+      // perGame as a string would make `Object.entries(perGame)` yield
+      // single-character tuples; daysPlayed as a number would crash
+      // `new Set(daysPlayed)`; unlocked as a string would crash
+      // `unlocked.includes(...)`. NaN / null / object-shaped numerics must
+      // clamp to 0 rather than render "NaN" or "[object Object]" text.
+      localStorage.setItem(
+        STATS_KEY,
+        JSON.stringify({
+          totalPlayed: "not-a-number",
+          totalWins: null,
+          longestStreak: NaN,
+          currentStreak: { wat: 1 },
+          perGame: "totally-not-an-object",
+          perCategory: null,
+          daysPlayed: 12345,
+          unlocked: "first-win",
+        }),
+      );
+      expect(() => renderPage()).not.toThrow();
+      expect(screen.getByTestId("stats-page")).toBeInTheDocument();
+      expect(screen.getByTestId("stats-line-chart")).toBeInTheDocument();
+      // Aggregates fall back to zero; never render "NaN" or junk.
+      const played = screen.getByTestId("stat-total-played");
+      expect(played.textContent).toContain("0");
+      expect(played.textContent).not.toMatch(/NaN/);
+      expect(screen.getByTestId("stat-total-wins").textContent).toContain("0");
+      // The bogus string-shaped `unlocked` field must not phantom-unlock the
+      // first-win achievement — coerces to []. The card is locked + hidden by
+      // the default show-locked toggle, so it shouldn't render at all; if a
+      // future change relaxes that, it must not carry data-state="unlocked".
+      const firstWin = screen.queryByTestId("achievement-first-win");
+      if (firstWin) {
+        expect(firstWin.getAttribute("data-state")).not.toBe("unlocked");
+      }
+    });
+
+    it("unicode-keyed time-history blob with NaN times — totalTime + page survive", () => {
+      // totalTimePlayedSeconds() walks every `cards-time-history:*` key. A
+      // unicode gameId suffix is allowed (no registered game matches, but the
+      // aggregator still parses the entry list). NaN / string / negative /
+      // Infinity times must be filtered, leaving only the single 45s entry.
+      seedRichStats();
+      const now = Date.now();
+      localStorage.setItem(
+        "cards-time-history:🎴-mystery-\u{1F0A1}-game",
+        JSON.stringify([
+          { ts: now - 1000, time: NaN },
+          { ts: now - 2000, time: "60" },
+          { ts: now - 3000, time: -5 },
+          { ts: now - 4000, time: 45 },
+          { ts: now - 5000, time: Number.POSITIVE_INFINITY },
+        ]),
+      );
+      expect(() => renderPage()).not.toThrow();
+      const totalTime = screen.getByTestId("stats-total-time");
+      // Only the 45s entry survives → "0h 0m 45s"; never renders "NaN".
+      expect(totalTime.textContent).toContain("0h 0m 45s");
+      expect(totalTime.textContent).not.toMatch(/NaN/);
+      // Charts that scan time-history globally also survive a unicode key.
+      expect(screen.getByTestId("stats-hour-chart")).toBeInTheDocument();
+      expect(screen.getByTestId("stats-cat-heatmap")).toBeInTheDocument();
     });
   });
 
