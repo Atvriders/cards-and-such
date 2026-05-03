@@ -261,6 +261,82 @@ describe("LeaderboardPage tabs", () => {
     expect(card.getAttribute("href")).toBe("/play/klondike");
   });
 
+  it("My Ladder rows display 1-5 ★ filled stars based on cards-ratings values", async () => {
+    // Seed five games with strictly-increasing ratings so the rounding logic
+    // resolves to 1, 2, 3, 4, and 5 filled stars respectively. The component
+    // renders a `lb-rating-filled` span containing N copies of the ★ glyph,
+    // followed by a `lb-rating-empty` span containing (5 - N) copies; we
+    // assert on the filled-span text for each game's row.
+    localStorage.setItem(
+      STATS_KEY,
+      JSON.stringify({
+        perGame: {
+          klondike: { played: 1, wins: 0, best: 1 },
+          spider: { played: 1, wins: 0, best: 1 },
+          freecell: { played: 1, wins: 0, best: 1 },
+          pyramid: { played: 1, wins: 0, best: 1 },
+          tripeaks: { played: 1, wins: 0, best: 1 },
+        },
+      }),
+    );
+    localStorage.setItem(
+      RATINGS_KEY,
+      JSON.stringify({
+        klondike: 1,
+        spider: 2,
+        freecell: 3,
+        pyramid: 4,
+        tripeaks: 5,
+      }),
+    );
+
+    renderPage();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("tab", { name: /my ladder/i }));
+    });
+
+    // Wait for the ladder to populate before querying individual rows.
+    await screen.findByTestId("lb-row-klondike");
+
+    const expectations: Array<[string, number]> = [
+      ["klondike", 1],
+      ["spider", 2],
+      ["freecell", 3],
+      ["pyramid", 4],
+      ["tripeaks", 5],
+    ];
+    for (const [id, stars] of expectations) {
+      const row = screen.getByTestId(`lb-row-${id}`);
+      const filled = row.querySelector(".lb-rating-filled") as HTMLElement;
+      expect(filled).not.toBeNull();
+      // The filled span holds exactly `stars` ★ glyphs, no more.
+      expect(filled.textContent).toBe("★".repeat(stars));
+      // And the empty span holds the complementary (5 - stars) glyphs.
+      const emptySpan = row.querySelector(".lb-rating-empty") as HTMLElement;
+      expect(emptySpan.textContent).toBe("★".repeat(5 - stars));
+    }
+  });
+
+  it("My Ladder shows lb-empty empty state with a link to lobby when no stats exist", async () => {
+    // No stats, ratings, last-played, or best-times in localStorage — the
+    // ladder collects zero rows and the empty-state branch renders.
+    renderPage();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("tab", { name: /my ladder/i }));
+    });
+
+    const empty = await screen.findByTestId("lb-empty");
+    expect(empty).toBeInTheDocument();
+    // The empty state must offer a way back to the lobby ("/" — the home
+    // route, which renders the game catalog). It's a react-router <Link>,
+    // which serializes to an <a href="/">.
+    const link = empty.querySelector('a[href="/"]') as HTMLAnchorElement;
+    expect(link).not.toBeNull();
+    expect(link.textContent).toMatch(/play a game/i);
+    // And no ladder rows should be rendered while the empty state is up.
+    expect(screen.queryByTestId("lb-row-klondike")).not.toBeInTheDocument();
+  });
+
   it("My Ladder rows render relative time correctly when cards-last-played is set", async () => {
     const now = Date.now();
     // 2h ago — should render as "2h ago" via the formatRelative helper.
