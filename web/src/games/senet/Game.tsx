@@ -69,7 +69,7 @@ export function Senet({
       </div>
 
       {isPlayerTurn && state.mustRoll && (
-        <button className="senet-roll-btn" onClick={handleRoll}>Roll Sticks</button>
+        <button data-testid="hint-target-senet-action" className="senet-roll-btn" onClick={handleRoll}>Roll Sticks</button>
       )}
       {!state.mustRoll && state.turn === "P" && (
         <div className="senet-info">Roll: {state.lastRoll}</div>

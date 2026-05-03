@@ -81,7 +81,7 @@ export function Shikaku({ state, dispatch, onGameOver }: GameProps<ShikakuState,
       </div>
 
       <div className="shikakumosaic-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-shikaku-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

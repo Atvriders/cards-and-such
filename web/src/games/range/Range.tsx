@@ -50,7 +50,7 @@ export function Range({ state, dispatch, onGameOver }: GameProps<RangeState, Ran
       <div className="range-hint">Click blank cells to shade them black. Numbered cells show how many white cells they can see in 4 directions (including themselves).</div>
 
       <div className="range-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-range-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

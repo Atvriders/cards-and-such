@@ -45,5 +45,6 @@ Choose 30 or 60 seconds in settings. The prompt word is randomly selected each s
   initialState: (seed: number, settings: RhymeTimeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-rhyme-time-action"]', pulses: 3 }; },
   component: RhymeTime,
 };

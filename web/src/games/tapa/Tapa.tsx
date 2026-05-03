@@ -55,7 +55,7 @@ export function Tapa({ state, dispatch, onGameOver }: GameProps<TapaState, TapaS
       </div>
 
       <div className="tapa-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-tapa-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
       <div className="tapa-legend">Click: empty → shaded → dot → empty</div>
     </div>

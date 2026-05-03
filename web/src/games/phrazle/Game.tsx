@@ -82,7 +82,7 @@ export function Phrazle({ state, dispatch, onGameOver }: GameProps<PhrazleState,
           onChange={() => {}}
           autoFocus
         />
-        <button className="phrazle-btn" onClick={() => {
+        <button data-testid="hint-target-phrazle-action" className="phrazle-btn" onClick={() => {
           dispatch({ type: "submit" } as PhrazleAction);
           inputRef.current?.focus();
         }}>Enter</button>

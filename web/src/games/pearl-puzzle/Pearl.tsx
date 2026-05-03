@@ -128,7 +128,7 @@ export function Pearl({ state, dispatch, onGameOver }: GameProps<PearlState, Pea
       <div className="pearl-legend">Black pearl = turn here, straight neighbours | White pearl = straight here, turn nearby</div>
 
       <div className="pearl-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies PearlAction)}>Reset</button>
+        <button data-testid="hint-target-pearl-puzzle-action" onClick={() => dispatch({ type: "reset" } satisfies PearlAction)}>Reset</button>
       </div>
     </div>
   );

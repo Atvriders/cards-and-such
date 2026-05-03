@@ -52,7 +52,7 @@ export function PuzzleBox({
         <div className="pb-victory">
           <div className="pb-victory-text">Solved in {state.movesMade} moves!</div>
           <div className="pb-score">Score: {terminal?.score}</div>
-          <button
+          <button data-testid="hint-target-puzzle-box-action"
             className="pb-restart-btn"
             onClick={() => dispatch({ type: "restart" } as PuzzleBoxAction)}
           >

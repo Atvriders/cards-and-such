@@ -34,5 +34,6 @@ Strategy: rows or columns with clue 0 must have no stitches at all; eliminate al
   initialState: (seed: number, settings: StitchSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-stitches-action"]', pulses: 3 }; },
   component: Stitches,
 };

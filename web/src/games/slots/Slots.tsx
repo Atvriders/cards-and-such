@@ -62,7 +62,7 @@ export function Slots({
         {lastResult && <div className="slots-result">{lastResult}</div>}
 
         {!terminal && (
-          <button
+          <button data-testid="hint-target-slots-action"
             className="slots-lever"
             onClick={() => dis({ type: "spin" })}
             disabled={!canSpin}

@@ -107,7 +107,7 @@ export function NinetyNine({ state, dispatch, onGameOver }: GameProps<NinetyNine
                 />
               ))}
           </div>
-          <button
+          <button data-testid="hint-target-ninety-nine-action"
             className="ninetynine-confirm-btn"
             disabled={selectedIds.length !== 3}
             onClick={confirmBid}

@@ -91,7 +91,7 @@ export function KarmaGame({ state, dispatch, onGameOver }: GameProps<KarmaState,
           <div className="karma-swap-hint">Select one hand card + one table card, then Swap. Confirm when done.</div>
           <div className="karma-actions">
             <button className="karma-btn" disabled={!selectedHand || !selectedTable} onClick={handleSwap}>Swap</button>
-            <button className="karma-btn secondary" onClick={() => dispatch({ type: "confirmSwap" })}>Confirm &amp; Start</button>
+            <button data-testid="hint-target-karma-card-action" className="karma-btn secondary" onClick={() => dispatch({ type: "confirmSwap" })}>Confirm &amp; Start</button>
           </div>
         </>
       )}

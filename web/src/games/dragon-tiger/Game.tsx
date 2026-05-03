@@ -69,7 +69,7 @@ export function DragonTiger({ state, dispatch, onGameOver }: GameProps<DragonTig
             >Tiger (1:1)</button>
           </div>
           <button
-            className="dt-deal-btn"
+            data-testid="hint-target-dragon-tiger-action" className="dt-deal-btn"
             onClick={() => dispatch({ type: "deal" })}
             disabled={!betChoice}
           >

@@ -94,7 +94,7 @@ export function Numberlink({ state, dispatch, onGameOver }: GameProps<Numberlink
       </div>
 
       <div className="numberlink-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-numberlink-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
         {selectedColor > 0 && (
           <button onClick={() => dispatch({ type: "clearPath", color: selectedColor } satisfies NumberlinkAction)}>
             Clear {selectedColor}

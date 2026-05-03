@@ -54,7 +54,7 @@ export function ForestTrek({ state, dispatch, onGameOver }: GameProps<ForestTrek
         </div>
       )}
 
-      <button onClick={() => dispatch({ type: "restart" })}>New Trek</button>
+      <button data-testid="hint-target-forest-trek-action" onClick={() => dispatch({ type: "restart" })}>New Trek</button>
     </div>
   );
 }

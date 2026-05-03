@@ -34,5 +34,6 @@ Your score is calculated from the fraction of treasure collected (up to 70 point
   initialState: (seed: number, settings: JungleExplorerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-jungle-explorer-action"]', pulses: 3 }; },
   component: JungleExplorer,
 };

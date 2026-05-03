@@ -68,7 +68,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<TarneebState, ob
               {SUITS.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </label>
-          <button className="tarneeb-btn" onClick={() => dispatch({ type: "bid", tricks: bidTricks, trump: bidTrump } as TarneebAction)}>
+          <button data-testid="hint-target-tarneeb-action" className="tarneeb-btn" onClick={() => dispatch({ type: "bid", tricks: bidTricks, trump: bidTrump } as TarneebAction)}>
             Confirm Bid
           </button>
         </div>

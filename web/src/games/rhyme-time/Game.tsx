@@ -86,7 +86,7 @@ export function RhymeTime({ state, dispatch, onGameOver }: GameProps<RhymeTimeSt
           }}
           autoFocus
         />
-        <button
+        <button data-testid="hint-target-rhyme-time-action"
           className="rhyme-btn"
           onClick={() => dispatch({ type: "submit" } as RhymeTimeAction)}
         >

@@ -122,7 +122,7 @@ export function LaserMaze({ state, dispatch, onGameOver }: GameProps<LaserMazeSt
       </div>
 
       <div className="laser-maze-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-laser-maze-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

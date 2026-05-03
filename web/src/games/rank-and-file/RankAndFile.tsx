@@ -52,7 +52,7 @@ export function RankAndFile({
       <div className="rank-and-file-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/52</span>
-        <button
+        <button data-testid="hint-target-rank-and-file-action"
           className="auto-move-btn"
           type="button"
           onClick={() => dispatch({ type: "auto-move-to-foundation" } as RankAndFileAction)}

@@ -100,7 +100,7 @@ export function Piquet({
           })}
         </div>
         {phase === "discard" && (
-          <button className="pq-btn" onClick={handleDiscard}>
+          <button data-testid="hint-target-piquet-action" className="pq-btn" onClick={handleDiscard}>
             Discard ({selected.size}) &amp; Draw
           </button>
         )}

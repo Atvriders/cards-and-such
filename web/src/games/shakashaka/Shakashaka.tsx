@@ -74,7 +74,7 @@ export function Shakashaka({ state, dispatch, onGameOver }: GameProps<ShakaState
       <div className="shaka-hint">Select a triangle direction above, then click a white cell to place it. Click again to remove.</div>
 
       <div className="shaka-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-shakashaka-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

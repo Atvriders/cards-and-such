@@ -137,7 +137,7 @@ export function Thermometer({ state, dispatch, onGameOver }: GameProps<Thermomet
       </div>
 
       <div className="thermometer-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-thermometer-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

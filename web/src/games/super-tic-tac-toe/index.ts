@@ -22,5 +22,6 @@ Strategy tips: Aim to send your opponent to unfavorable boards. Winning the cent
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: SuperTTTState, action: SuperAction) => SuperTTTState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-super-tic-tac-toe-action"]', pulses: 3 }; },
   component: SuperTicTacToe,
 } as unknown as GamePlugin;

@@ -72,7 +72,7 @@ export function PlayOrPayGame({ state, dispatch, onGameOver }: GameProps<PlayOrP
       {isPlayerTurn && (
         <div className="pop-actions">
           <button
-            className="pop-btn pay-btn"
+            data-testid="hint-target-play-or-pay-action" className="pop-btn pay-btn"
             disabled={(state.chips[0] ?? 0) <= 0}
             onClick={() => dispatch({ type: "pay" })}
           >

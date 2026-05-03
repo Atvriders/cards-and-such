@@ -43,5 +43,6 @@ Controls: During bidding, click 3 cards to select them (yellow highlight), then 
   initialState: (seed: number, settings: NinetyNineSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-ninety-nine-action"]', pulses: 3 }; },
   component: NinetyNine,
 };

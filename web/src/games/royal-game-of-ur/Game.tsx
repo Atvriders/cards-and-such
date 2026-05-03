@@ -56,7 +56,7 @@ export function Ur({
       </div>
 
       {isPlayerTurn && state.mustRoll && (
-        <button className="ur-roll-btn" onClick={() => dispatch({ type: "roll" } satisfies UrAction)}>
+        <button data-testid="hint-target-royal-game-of-ur-action" className="ur-roll-btn" onClick={() => dispatch({ type: "roll" } satisfies UrAction)}>
           Roll Dice
         </button>
       )}

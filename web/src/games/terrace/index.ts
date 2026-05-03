@@ -30,5 +30,6 @@ Tip: The terrace row is one-way — use those cards early to build foundations a
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-terrace-action"]', pulses: 3 }; },
   component: Terrace,
 };

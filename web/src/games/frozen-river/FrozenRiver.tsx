@@ -54,7 +54,7 @@ export function FrozenRiver({ state, dispatch, onGameOver }: GameProps<FrozenRiv
         </div>
       )}
 
-      <button onClick={() => dispatch({ type: "restart" })}>New River</button>
+      <button data-testid="hint-target-frozen-river-action" onClick={() => dispatch({ type: "restart" })}>New River</button>
     </div>
   );
 }

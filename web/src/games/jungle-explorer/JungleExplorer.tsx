@@ -62,7 +62,7 @@ export function JungleExplorer({ state, dispatch, onGameOver }: GameProps<Jungle
         <div className="je-gameover">
           <div>{state.treasure >= state.totalTreasure ? "All treasure found!" : state.hp <= 0 ? "You perished." : "Out of moves!"}</div>
           <div>Score: {state.score}</div>
-          <button onClick={() => dispatch({ type: "restart" })}>Play Again</button>
+          <button data-testid="hint-target-jungle-explorer-action" onClick={() => dispatch({ type: "restart" })}>Play Again</button>
         </div>
       )}
     </div>

@@ -44,7 +44,7 @@ export function Nurimisaki({ state, dispatch, onGameOver }: GameProps<Nurimisaki
       </div>
 
       <div className="nurimisaki-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies NurimisakiAction)}>Reset</button>
+        <button data-testid="hint-target-nurimisaki-action" onClick={() => dispatch({ type: "reset" } satisfies NurimisakiAction)}>Reset</button>
       </div>
     </div>
   );

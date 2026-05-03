@@ -31,5 +31,6 @@ Strategy tip: rows or columns with a clue of 0 can be immediately marked — no 
   initialState: (seed: number, settings: TentsSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-tents-action"]', pulses: 3 }; },
   component: Tents,
 };

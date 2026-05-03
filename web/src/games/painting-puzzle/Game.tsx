@@ -55,7 +55,7 @@ export function PaintingPuzzle({
       <div className="paint-hint">Each row and column must have exactly one of each color.</div>
 
       <div className="paint-controls">
-        <button className="paint-btn" onClick={() => d({ type: "reset" })}>New Puzzle</button>
+        <button data-testid="hint-target-painting-puzzle-action" className="paint-btn" onClick={() => d({ type: "reset" })}>New Puzzle</button>
       </div>
 
       {state.phase === "won" && (

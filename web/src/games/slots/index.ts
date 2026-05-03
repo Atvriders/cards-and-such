@@ -48,5 +48,6 @@ Settings: Bet size (1, 5, or 10 credits per spin), max spins (20, 50, or 100). S
   initialState: (seed: number, settings: SlotsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-slots-action"]', pulses: 3 }; },
   component: Slots,
 };

@@ -63,7 +63,7 @@ export function SpoonsGame({ state, dispatch, onGameOver }: GameProps<SpoonsStat
       </div>
 
       {canGrab && (
-        <button className="sp-grab-btn" onClick={() => dispatch({ type: "grab" })}>
+        <button data-testid="hint-target-spoons-action" className="sp-grab-btn" onClick={() => dispatch({ type: "grab" })}>
           Grab a Spoon! 🥄
         </button>
       )}

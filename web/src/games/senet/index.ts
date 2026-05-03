@@ -24,5 +24,6 @@ Win by escaping all 5 of your pieces.`,
   initialState: (seed: number, s: SenetSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-senet-action"]', pulses: 3 }; },
   component: Senet,
 };

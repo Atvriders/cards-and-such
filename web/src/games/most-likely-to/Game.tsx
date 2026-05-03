@@ -35,7 +35,7 @@ export function MostLikelyTo({ state, dispatch, onGameOver }: GameProps<MLTState
         <span className="mlt-prompt">{prompt}</span>
       </div>
       <p className="mlt-hint">Everyone points at the person most likely to — count fingers and record the winner!</p>
-      <button className="mlt-next-btn" onClick={() => dispatch({ type: "next" } as MLTAction)}>
+      <button data-testid="hint-target-most-likely-to-action" className="mlt-next-btn" onClick={() => dispatch({ type: "next" } as MLTAction)}>
         {state.currentIndex + 1 >= state.prompts.length ? "Finish" : "Next Prompt"}
       </button>
     </div>

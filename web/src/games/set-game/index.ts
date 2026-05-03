@@ -28,5 +28,6 @@ Tips: start by scanning for all-different cards on each attribute — they are c
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-set-game-action"]', pulses: 3 }; },
   component: SetGame,
 };

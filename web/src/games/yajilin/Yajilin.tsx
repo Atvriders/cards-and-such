@@ -50,7 +50,7 @@ export function Yajilin({ state, dispatch, onGameOver }: GameProps<YajilinState,
 
       <div className="yajilin-legend">Click: empty → loop (○) → shaded → empty</div>
       <div className="yajilin-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-yajilin-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

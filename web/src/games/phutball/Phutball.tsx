@@ -74,7 +74,7 @@ export function Phutball({ state, dispatch, onGameOver }: GameProps<PhutballStat
             </button>
           ))}
           {state.jumpInProgress && (
-            <button onClick={() => dispatch({ type: "endJump" })}>End Jump</button>
+            <button data-testid="hint-target-phutball-action" onClick={() => dispatch({ type: "endJump" })}>End Jump</button>
           )}
         </div>
       )}

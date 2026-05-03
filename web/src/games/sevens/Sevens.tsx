@@ -106,7 +106,7 @@ export function Sevens({
       {isMyTurn && (
         <div className="sevens-actions">
           {canPass && (
-            <button onClick={() => dispatch({ type: "pass" })}>Pass</button>
+            <button data-testid="hint-target-sevens-action" onClick={() => dispatch({ type: "pass" })}>Pass</button>
           )}
           {!canPass && playable.length > 0 && (
             <span style={{ opacity: 0.7, fontSize: "0.85rem" }}>Click a highlighted card to play</span>

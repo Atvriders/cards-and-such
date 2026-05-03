@@ -50,7 +50,7 @@ export function PigGame({ state, dispatch, onGameOver }: GameProps<PigState, Pig
       </div>
 
       {canNose && (
-        <button className="pig-nose-btn" onClick={() => dispatch({ type: "pressNose" })}>
+        <button data-testid="hint-target-pig-card-action" className="pig-nose-btn" onClick={() => dispatch({ type: "pressNose" })}>
           Touch Your Nose! 🐽
         </button>
       )}

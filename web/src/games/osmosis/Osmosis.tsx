@@ -65,7 +65,7 @@ export function Osmosis({
             >
               {wasteTop ? `${rankLabel(wasteTop.rank)}${wasteTop.suit}` : ""}
             </div>
-            <button
+            <button data-testid="hint-target-osmosis-action"
               className="recycle-btn"
               onClick={handleRecycle}
               disabled={state.stock.length > 0 || state.recyclesLeft <= 0}

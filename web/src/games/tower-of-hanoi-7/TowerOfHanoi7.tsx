@@ -63,7 +63,7 @@ export function TowerOfHanoi7({ state, dispatch, onGameOver }: GameProps<TowerOf
       )}
 
       <div className="toh7-buttons">
-        <button onClick={() => dispatch({ type: "restart" })}>Restart</button>
+        <button data-testid="hint-target-tower-of-hanoi-7-action" onClick={() => dispatch({ type: "restart" })}>Restart</button>
       </div>
     </div>
   );

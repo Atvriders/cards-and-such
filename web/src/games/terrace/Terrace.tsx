@@ -52,7 +52,7 @@ export function Terrace({
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/52</span>
         <span>Start Rank: {state.foundationStartRank}</span>
-        <button
+        <button data-testid="hint-target-terrace-action"
           className="auto-move-btn"
           type="button"
           onClick={() => dispatch({ type: "auto-move-to-foundation" } as TerraceAction)}

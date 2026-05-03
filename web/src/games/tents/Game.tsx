@@ -97,7 +97,7 @@ export function Tents({
       </div>
 
       <div className="tentsforest-btn-row">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-tents-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

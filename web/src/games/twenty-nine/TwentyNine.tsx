@@ -49,7 +49,7 @@ export function TwentyNine({ state, dispatch, onGameOver }: GameProps<TwentyNine
               max={28}
               onChange={e => setBidAmount(Number(e.target.value))}
             />
-            <button
+            <button data-testid="hint-target-twenty-nine-action"
               className="tn-btn"
               onClick={() => dispatch({ type: "bid", amount: bidAmount } as TwentyNineAction)}
             >

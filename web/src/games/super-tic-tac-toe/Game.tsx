@@ -77,7 +77,7 @@ export function SuperTicTacToe({
         </div>
       )}
 
-      <button className="stt-btn" onClick={() => d({ type: "reset", seed: Date.now() })}>
+      <button data-testid="hint-target-super-tic-tac-toe-action" className="stt-btn" onClick={() => d({ type: "reset", seed: Date.now() })}>
         New Game
       </button>
     </div>

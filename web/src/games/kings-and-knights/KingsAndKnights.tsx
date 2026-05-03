@@ -67,7 +67,7 @@ export function KingsAndKnights({ state, dispatch, onGameOver }: GameProps<KKSta
       </div>
 
       <div className="kk-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-kings-and-knights-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

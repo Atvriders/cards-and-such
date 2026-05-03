@@ -38,5 +38,6 @@ Tip: Before clicking, trace the required path with your eyes. Numbered endpoints
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-number-chain-action"]', pulses: 3 }; },
   component: NumberChainGame,
 };

@@ -58,7 +58,7 @@ export function DesertTrek({ state, dispatch, onGameOver }: GameProps<DesertTrek
         </div>
       )}
 
-      <button onClick={() => dispatch({ type: "restart" })}>New Desert</button>
+      <button data-testid="hint-target-desert-trek-action" onClick={() => dispatch({ type: "restart" })}>New Desert</button>
     </div>
   );
 }

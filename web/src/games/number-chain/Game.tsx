@@ -62,7 +62,7 @@ export function NumberChainGame({
       </div>
 
       <div className="number-chain-controls">
-        <button className="number-chain-btn" onClick={handleReset}>Reset Path</button>
+        <button data-testid="hint-target-number-chain-action" className="number-chain-btn" onClick={handleReset}>Reset Path</button>
       </div>
 
       <p className="number-chain-hint">

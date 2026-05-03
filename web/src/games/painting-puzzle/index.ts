@@ -24,5 +24,6 @@ Click New Puzzle anytime to get a fresh layout. Each new puzzle is slightly more
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: PaintState, action: PaintAction) => PaintState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-painting-puzzle-action"]', pulses: 3 }; },
   component: PaintingPuzzle,
 } as unknown as GamePlugin;

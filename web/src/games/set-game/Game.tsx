@@ -73,7 +73,7 @@ export function SetGame({ state, dispatch }: GameProps<SetState, Record<string, 
 
       {!terminal && (
         <div className="set-game-actions">
-          <button className="set-game-btn" onClick={() => dispatch({ type: "hint" } satisfies SetAction)}>
+          <button data-testid="hint-target-set-game-action" className="set-game-btn" onClick={() => dispatch({ type: "hint" } satisfies SetAction)}>
             Hint (highlight 1st card of a set)
           </button>
         </div>

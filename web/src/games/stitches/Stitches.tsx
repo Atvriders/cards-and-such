@@ -114,7 +114,7 @@ export function Stitches({ state, dispatch, onGameOver }: GameProps<StitchState,
       <div className="stitches-hint">Click a cell at a region boundary to toggle a stitch there.</div>
 
       <div className="stitches-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-stitches-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );
