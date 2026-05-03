@@ -74,6 +74,7 @@ const LS_MUTE_HIDDEN = LS_MUTE_ON_HIDDEN;
 const LS_AUTO_MOVE = "cards-auto-move";
 const LS_HINT_COUNT = "cards-hint-count";
 const LS_HINTS_ENABLED = "cards-hints-enabled";
+const LS_HINT_COOLDOWN = "cards-hint-cooldown";
 const LS_SHOW_UNDO_COUNT = "cards-show-undo-count";
 const LS_BG_THEME = "cards-bg-theme";
 
@@ -85,7 +86,7 @@ const APPEARANCE_KEYS = [
   LS_CARD_FONT,
 ];
 const AUDIO_KEYS = [LS_SOUND, LS_SOUND_LEGACY, LS_VOLUME, LS_MUTE_HIDDEN];
-const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED, LS_SHOW_UNDO_COUNT];
+const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED, LS_HINT_COOLDOWN, LS_SHOW_UNDO_COUNT];
 
 // Gallery of selectable card-back designs. Each entry is rendered as a
 // preview tile in Settings; selecting one writes `cards-card-back` to
@@ -203,6 +204,11 @@ function readHintsEnabled(): boolean {
   const v = localStorage.getItem(LS_HINTS_ENABLED);
   return v === null ? true : v === "true";
 }
+function readHintCooldown(): boolean {
+  if (typeof localStorage === "undefined") return true;
+  const v = localStorage.getItem(LS_HINT_COOLDOWN);
+  return v === null ? true : v === "true";
+}
 function readShowUndoCount(): boolean {
   if (typeof localStorage === "undefined") return false;
   const v = localStorage.getItem(LS_SHOW_UNDO_COUNT);
@@ -252,6 +258,7 @@ export default function SettingsPage(): JSX.Element {
   const [autoMove, setAutoMove] = useState<boolean>(readAutoMove);
   const [hintCount, setHintCount] = useState<number>(readHintCount);
   const [hintsEnabled, setHintsEnabled] = useState<boolean>(readHintsEnabled);
+  const [hintCooldown, setHintCooldown] = useState<boolean>(readHintCooldown);
   const [showUndoCount, setShowUndoCount] = useState<boolean>(readShowUndoCount);
   const [mockLeaderboard, setMockLeaderboard] = useState<boolean>(isMockLeaderboardEnabled);
   // Hidden dev panel: surfaces the local-only analytics ring buffer. The
@@ -323,6 +330,7 @@ export default function SettingsPage(): JSX.Element {
     setAutoMove(readAutoMove());
     setHintCount(readHintCount());
     setHintsEnabled(readHintsEnabled());
+    setHintCooldown(readHintCooldown());
     setShowUndoCount(readShowUndoCount());
     applyCardBack(readCardBack());
     applyAnimations(readAnimations());
@@ -485,6 +493,7 @@ export default function SettingsPage(): JSX.Element {
     setAutoMove(true);
     setHintCount(3);
     setHintsEnabled(true);
+    setHintCooldown(true);
     setShowUndoCount(false);
     applyAnimations("full");
   }
@@ -541,6 +550,9 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     localStorage.setItem(LS_HINTS_ENABLED, String(hintsEnabled));
   }, [hintsEnabled]);
+  useEffect(() => {
+    localStorage.setItem(LS_HINT_COOLDOWN, String(hintCooldown));
+  }, [hintCooldown]);
   useEffect(() => {
     localStorage.setItem(LS_SHOW_UNDO_COUNT, String(showUndoCount));
   }, [showUndoCount]);
@@ -1018,6 +1030,30 @@ export default function SettingsPage(): JSX.Element {
               <span className="settings-toggle-thumb" />
             </span>
             <span className="settings-toggle-label">{hintsEnabled ? "On" : "Off"}</span>
+          </label>
+        </div>
+
+        <div className="settings-divider" role="presentation" />
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Hint cooldown</div>
+            <p className="settings-hint">
+              Throttle the Hint button to a 3-second cooldown between presses.
+              Disable for quicker successive hints.
+            </p>
+          </div>
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={hintCooldown}
+              onChange={(e) => setHintCooldown(e.target.checked)}
+              data-testid="settings-hint-cooldown"
+            />
+            <span className="settings-toggle-track" aria-hidden="true">
+              <span className="settings-toggle-thumb" />
+            </span>
+            <span className="settings-toggle-label">{hintCooldown ? "On" : "Off"}</span>
           </label>
         </div>
 
