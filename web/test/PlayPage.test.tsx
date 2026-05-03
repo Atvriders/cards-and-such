@@ -10,7 +10,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 // Reducer increments/decrements a `count` field. Each transition
 // returns a brand-new object so the reducer never returns the same
 // reference (PlayPage skips undo bookkeeping when next === prev).
-const { counterPlugin } = vi.hoisted(() => {
+const { counterPlugin, winPlugin } = vi.hoisted(() => {
   type CounterState = { count: number };
   type CounterAction =
     | { type: "inc" }
@@ -50,11 +50,52 @@ const { counterPlugin } = vi.hoisted(() => {
       </div>
     ),
   };
-  return { counterPlugin: plugin };
+  // Companion plugin for achievement-toast tests (W396). Same counter
+  // reducer, but `isTerminal` returns a positive-score win as soon as
+  // the count reaches 1 — so a single "inc" click drives PlayPage all
+  // the way through the win-flow and into recordWithAchievementToast.
+  const win = {
+    id: "test-win-game",
+    title: "Win Test Game",
+    category: "cards" as const,
+    players: { min: 1, max: 1, multiplayer: false },
+    description: "Deterministic counter that wins on first increment.",
+    settings: {},
+    initialState: (): CounterState => ({ count: 0 }),
+    reducer: (s: CounterState, a: CounterAction): CounterState => {
+      if (a.type === "inc") return { count: s.count + 1 };
+      if (a.type === "dec") return { count: s.count - 1 };
+      if (a.type === "set") return { count: a.value };
+      return s;
+    },
+    isTerminal: (s: CounterState) => (s.count >= 1 ? { score: 1 } : null),
+    component: ({
+      state,
+      dispatch,
+    }: {
+      state: CounterState;
+      dispatch: (a: CounterAction) => void;
+    }) => (
+      <div>
+        <span data-testid="win-counter-value">{state.count}</span>
+        <button data-testid="win-counter-inc" onClick={() => dispatch({ type: "inc" })}>
+          inc
+        </button>
+      </div>
+    ),
+  };
+  return { counterPlugin: plugin, winPlugin: win };
 });
 
 vi.mock("../src/games/registry.js", () => ({
-  GAMES: [counterPlugin],
+  GAMES: [counterPlugin, winPlugin],
+}));
+
+// Stub the score-submit fetch so the win flow doesn't fire a relative-URL
+// fetch that jsdom can't resolve (which surfaces as a noisy "unhandled
+// rejection" warning even though the call is fire-and-forget).
+vi.mock("../src/platform/game-plugin/submitScore.js", () => ({
+  submitScore: vi.fn(async () => {}),
 }));
 
 import App from "../src/App.js";
@@ -371,5 +412,90 @@ describe("PlayPage info popover", () => {
 
     expect(screen.queryByTestId("play-info-popover")).toBeNull();
     expect(document.activeElement).toBe(trigger);
+  });
+});
+
+/**
+ * Achievement-unlock toast on the play page (W396). When a finished
+ * round causes one or more achievements to cross their unlock
+ * threshold, PlayPage surfaces a celebratory `play-achievement-toast`
+ * that names the unlocked achievement.
+ *
+ * The hoisted `winPlugin` above wins on the first `inc` action, so
+ * starting with seeded stats that have zero wins / zero unlocks lets a
+ * single click cross the "First Win" threshold deterministically.
+ */
+describe("PlayPage achievement toast", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    useAuth.setState({
+      username: "alice",
+      token: "t.t.t",
+      expiresAt: Date.now() + 1000 * 60,
+    });
+    // Seed an empty stats blob so `unlocked` is definitely [] before
+    // the win flow runs — guarantees the "first-win" predicate flips
+    // from unmet to met during recordGame, which is what triggers the
+    // toast diff in recordWithAchievementToast.
+    localStorage.setItem(
+      "cards-and-such:stats:v1",
+      JSON.stringify({
+        totalPlayed: 0,
+        totalWins: 0,
+        longestStreak: 0,
+        currentStreak: 0,
+        perGame: {},
+        perCategory: {},
+        daysPlayed: [],
+        unlocked: [],
+      }),
+    );
+  });
+
+  function mountWinGame(): void {
+    render(
+      <MemoryRouter initialEntries={["/play/test-win-game"]}>
+        <App />
+      </MemoryRouter>,
+    );
+    fireEvent.click(screen.getByTestId("start-game"));
+  }
+
+  it("shows the play-achievement-toast naming the unlock when a win crosses the first-win threshold", () => {
+    mountWinGame();
+    expect(screen.queryByTestId("play-achievement-toast")).toBeNull();
+
+    // Single inc — winPlugin.isTerminal returns { score: 1 } at count >= 1,
+    // so PlayPage runs the win flow and recordGame flips "first-win" to
+    // unlocked, which surfaces the play-page-scoped toast.
+    fireEvent.click(screen.getByTestId("win-counter-inc"));
+
+    const toast = screen.getByTestId("play-achievement-toast");
+    expect(toast).toBeInTheDocument();
+    expect(toast).toHaveTextContent(/Achievement unlocked: First Win/i);
+  });
+
+  it("does not show the toast when the unlock was already recorded before this play", () => {
+    // Pre-record the first-win unlock so the diff between before/after
+    // unlocked sets is empty — recordWithAchievementToast must bail out
+    // and leave the toast unmounted.
+    localStorage.setItem(
+      "cards-and-such:stats:v1",
+      JSON.stringify({
+        totalPlayed: 1,
+        totalWins: 1,
+        longestStreak: 1,
+        currentStreak: 1,
+        perGame: { "test-win-game": { played: 1, wins: 1, best: 1 } },
+        perCategory: { cards: 1 },
+        daysPlayed: ["1970-01-01"],
+        unlocked: ["first-win"],
+      }),
+    );
+
+    mountWinGame();
+    fireEvent.click(screen.getByTestId("win-counter-inc"));
+
+    expect(screen.queryByTestId("play-achievement-toast")).toBeNull();
   });
 });
