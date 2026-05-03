@@ -296,6 +296,26 @@ describe("PlayPage undo/redo", () => {
     expect(getCount()).toBe(2);
   });
 
+  it("Ctrl+Y triggers redo as an alternate binding to Ctrl+Shift+Z (W208)", () => {
+    // PlayPage's keydown handler accepts Ctrl+Y as a redo accelerator in
+    // addition to Ctrl+Shift+Z (matches Windows-style editor conventions).
+    // Build up a frame on the redo stack via undo, then fire Ctrl+Y and
+    // confirm the popped state is restored exactly.
+    const { getCount } = mountAndStart();
+
+    fireEvent.click(screen.getByTestId("counter-inc")); // 1
+    fireEvent.click(screen.getByTestId("counter-inc")); // 2
+    expect(getCount()).toBe(2);
+
+    // Undo via Ctrl+Z to push count=2 onto the redo stack.
+    fireEvent.keyDown(window, { key: "z", code: "KeyZ", ctrlKey: true });
+    expect(getCount()).toBe(1);
+
+    // Ctrl+Y must restore count=2 — proves the alt binding is wired.
+    fireEvent.keyDown(window, { key: "y", code: "KeyY", ctrlKey: true });
+    expect(getCount()).toBe(2);
+  });
+
   it("Ctrl+Z while focused on an input is a no-op for the page-level handler", () => {
     const { getCount } = mountAndStart();
 
