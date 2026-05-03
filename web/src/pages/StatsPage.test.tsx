@@ -392,6 +392,35 @@ describe("StatsPage", () => {
     expect(localStorage.getItem("cards-best-times")).toBe(JSON.stringify(bestTimes));
   });
 
+  // W650 — Reset CANCEL flow. The destructive reset path is gated by a
+  // ConfirmDialog: clicking `stats-reset` mounts the dialog, but the
+  // user must be able to back out (via `confirm-no` or the backdrop)
+  // and have the stats blob remain byte-for-byte intact. This pins the
+  // negative half of the reset contract — no resetStats() call should
+  // fire when the dialog is dismissed rather than confirmed.
+  it("W650: stats-reset → confirm-no leaves stats blob intact", async () => {
+    seedRichStats();
+    const seeded = localStorage.getItem(STATS_KEY);
+    const seededHints = localStorage.getItem("cards-hints-used");
+    const seededUndos = localStorage.getItem("cards-undos-used");
+    expect(seeded).not.toBeNull();
+
+    renderPage();
+    // Open the dialog, then back out via the Cancel button.
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const cancel = await screen.findByTestId("confirm-no");
+    expect(screen.getByTestId("confirm-dialog")).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(cancel);
+    });
+
+    // Dialog dismissed, stats + sister counters untouched.
+    expect(screen.queryByTestId("confirm-dialog")).toBeNull();
+    expect(localStorage.getItem(STATS_KEY)).toBe(seeded);
+    expect(localStorage.getItem("cards-hints-used")).toBe(seededHints);
+    expect(localStorage.getItem("cards-undos-used")).toBe(seededUndos);
+  });
+
   it("export buttons exist and are clickable without throwing", () => {
     seedRichStats();
     renderPage();
