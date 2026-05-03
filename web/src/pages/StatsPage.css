@@ -185,6 +185,26 @@
   box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.08) inset;
 }
 
+/* "Personal records by category" mini-card: drops the achieved-on date
+ * column and re-uses the rank slot for the category label. */
+.stats-pr-list--by-cat li {
+  grid-template-columns: auto 1fr auto;
+}
+.stats-pr-list--by-cat .stats-pr-rank {
+  width: auto;
+  min-width: 4rem;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.stats-pr-list--by-cat li[data-empty="true"] .stats-pr-time,
+.stats-pr-list--by-cat li[data-empty="true"] .stats-pr-title {
+  color: rgba(203, 213, 225, 0.5);
+  font-weight: 500;
+}
+
 .achievements-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

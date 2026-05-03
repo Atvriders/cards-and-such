@@ -1161,6 +1161,49 @@ export default function StatsPage(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stats]);
 
+  /** Per-category personal records: walks `cards-best-times`, groups each
+   *  game by its registry `category`, then keeps the single fastest entry
+   *  per category. Returns one row per known category (5 rows total) so the
+   *  layout doesn't shift as users accumulate PRs — categories with no timed
+   *  plays render with `time: null` and a "—" placeholder in the UI. */
+  const personalRecordsByCategory = useMemo<{
+    cat: string;
+    label: string;
+    id: string | null;
+    title: string | null;
+    time: number | null;
+  }[]>(() => {
+    const v = progressJSON<Record<string, number>>("cards-best-times");
+    const cats = CATEGORY_FILTERS.filter((c) => c.id !== "all").map((c) => ({
+      cat: c.id as string,
+      label: c.label,
+    }));
+    const best: Record<string, { id: string; title: string; time: number }> = {};
+    if (v && typeof v === "object") {
+      for (const [id, t] of Object.entries(v)) {
+        if (typeof t !== "number" || !Number.isFinite(t) || t <= 0) continue;
+        const plug = GAMES.find((g) => g.id === id);
+        if (!plug) continue;
+        const cat = plug.category;
+        const cur = best[cat];
+        if (!cur || t < cur.time) {
+          best[cat] = { id, title: plug.title, time: t };
+        }
+      }
+    }
+    return cats.map(({ cat, label }) => {
+      const b = best[cat];
+      return {
+        cat,
+        label,
+        id: b ? b.id : null,
+        title: b ? b.title : null,
+        time: b ? b.time : null,
+      };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats]);
+
   const topGamesPie = useMemo<PieDatum[]>(() => {
     return Object.entries(stats.perGame)
       .filter(([id]) => matchesCategory(id))
@@ -1488,6 +1531,26 @@ export default function StatsPage(): JSX.Element {
           )}
         </div>
 
+        <div className="stats-card" data-testid="stats-personal-records-by-category">
+          <h2>Personal records by category</h2>
+          <p className="stats-chart-label">Your best time in each category</p>
+          <ul className="stats-pr-list stats-pr-list--by-cat">
+            {personalRecordsByCategory.map((row) => (
+              <li
+                key={row.cat}
+                data-testid={`stats-pr-cat-${row.cat}`}
+                data-empty={row.time == null ? "true" : undefined}
+              >
+                <span className="stats-pr-rank">{row.label}</span>
+                <span className="stats-pr-title">{row.title ?? "—"}</span>
+                <span className="stats-pr-time">
+                  {row.time != null ? formatBestTime(row.time) : "—"}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <div className="stats-card stats-card--week" data-testid="stats-this-week">
           <h2>This week</h2>
           <p className="stats-chart-label">Last 7 days vs prior 7 days</p>
@@ -1577,6 +1640,13 @@ export default function StatsPage(): JSX.Element {
               })}
             </ul>
           )}
+          <Link
+            to="/replays"
+            className="stats-replays-all"
+            data-testid="view-all-replays"
+          >
+            View all replays →
+          </Link>
         </div>
 
         <div className="stats-card" data-testid="stats-achievements">
