@@ -22,5 +22,6 @@ Watch your cash carefully — you cannot plant without funds. Try to keep all si
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: FarmTycoonState, action: FarmTycoonAction) => FarmTycoonState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".farm-crop-btn", pulses: 3 }; },
   component: FarmTycoon,
 } as unknown as GamePlugin;

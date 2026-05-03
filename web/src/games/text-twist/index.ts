@@ -39,5 +39,6 @@ Tips: after hitting Twist a few times you often spot hidden words you missed. Al
   initialState: (seed: number, settings: TextTwistSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".tt-letter-btn", pulses: 3 }; },
   component: TextTwist,
 };

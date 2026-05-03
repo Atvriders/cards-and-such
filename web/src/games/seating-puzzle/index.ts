@@ -24,5 +24,6 @@ The puzzle is solved when all seats are filled correctly. Score is based on move
   initialState: (seed: number, s: SeatingSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".seating-remove-btn", pulses: 3 }; },
   component: SeatingPuzzleGame,
 };

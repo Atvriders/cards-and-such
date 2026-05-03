@@ -32,5 +32,6 @@ Score = floor(valuation / 1000), with a 1000-point bonus for hitting IPO. The tr
   initialState: (seed: number, s: S) => initialState(seed, s as StartupSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".sl-btn", pulses: 3 }; },
   component: StartupLifeMiniGame,
 };

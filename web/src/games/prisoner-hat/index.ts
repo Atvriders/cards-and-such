@@ -26,5 +26,6 @@ Each correct answer earns 500 points. Work through as many as you like!`,
   initialState: (seed: number, s: HatSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".ph-submit-btn", pulses: 3 }; },
   component: PrisonerHatGame,
 };

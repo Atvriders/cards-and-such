@@ -24,5 +24,6 @@ The puzzle is solved when every cell is correctly marked. Einstein reportedly sa
   initialState: (seed: number, s: EinsteinSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".einstein-reset-btn", pulses: 3 }; },
   component: EinsteinPuzzleGame,
 };

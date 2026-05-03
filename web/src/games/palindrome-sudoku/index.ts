@@ -14,5 +14,6 @@ export const palindromeSudokuPlugin: GamePlugin<PalindromeSudokuState, Palindrom
   initialState: (seed: number) => initialState(seed, { dummy: true } as PalindromeSudokuSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".palindromemirror-num", pulses: 3 }; },
   component: PalindromeSudokuGame,
 };

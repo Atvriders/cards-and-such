@@ -22,5 +22,6 @@ Monsters grow tougher each wave — more HP, more attack, more armor. The Stone 
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: MonsterSlayerState, action: MonsterSlayerAction) => MonsterSlayerState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".ms-next", pulses: 3 }; },
   component: MonsterSlayer,
 } as unknown as GamePlugin;

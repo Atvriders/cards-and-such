@@ -22,5 +22,6 @@ At the end of 15 jumps, your score is based on total credits plus the base value
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: SpaceTraderState, action: SpaceTraderAction) => SpaceTraderState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".st-qty-btn", pulses: 3 }; },
   component: SpaceTraderGame,
 } as unknown as GamePlugin;

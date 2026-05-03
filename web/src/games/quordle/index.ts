@@ -26,5 +26,6 @@ Tips: your first couple of guesses should use common letters — try words rich 
   initialState: (seed: number, settings: QuordleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".qrd-enter", pulses: 3 }; },
   component: Quordle,
 };

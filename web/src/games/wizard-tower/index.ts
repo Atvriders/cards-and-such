@@ -24,5 +24,6 @@ Score = 100 + HP × 2 + mana × 5 on victory.`,
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: WizardTowerState, action: WizardTowerAction) => WizardTowerState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".wt-spell", pulses: 3 }; },
   component: WizardTower,
 } as unknown as GamePlugin;

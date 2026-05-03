@@ -17,5 +17,6 @@ export const tavliGreekRacePlugin: GamePlugin<TavliGrState, TavliGrAction, typeo
   initialState: (seed: number, s: S) => initialState(seed, s as TavliGrSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".tavli-movebtn", pulses: 3 }; },
   component: TavliGrGame,
 };

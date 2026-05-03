@@ -33,5 +33,6 @@ Start with N=1 (one step back) to learn the rhythm, then advance to N=2 and N=3 
   initialState: (seed: number, settings: DNBSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".dnb-btn-primary", pulses: 3 }; },
   component: DualNBack,
 };

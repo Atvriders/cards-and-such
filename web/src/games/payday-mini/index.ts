@@ -26,5 +26,6 @@ After all 30 days the game ends. Your final score is whatever cash you have left
   initialState: (seed: number, s: S) => initialState(seed, s as PaydaySettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".pd-btn", pulses: 3 }; },
   component: PaydayMiniGame,
 };

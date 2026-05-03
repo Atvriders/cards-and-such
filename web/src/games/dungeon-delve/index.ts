@@ -20,5 +20,6 @@ Strategy: Prioritize Block when enemy attack is high. Use Fireball against tough
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: DungeonDelveState, action: DungeonDelveAction) => DungeonDelveState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".dd-end-turn", pulses: 3 }; },
   component: DungeonDelve,
 } as unknown as GamePlugin;

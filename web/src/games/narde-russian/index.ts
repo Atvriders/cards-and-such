@@ -16,5 +16,6 @@ export const nardeRussianPlugin: GamePlugin<NardeState, NardeAction, typeof sett
   initialState: (seed: number, s: S) => initialState(seed, s as NardeSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".narde-movebtn", pulses: 3 }; },
   component: NardeGame,
 };

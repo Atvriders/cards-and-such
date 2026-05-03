@@ -24,5 +24,6 @@ Goal: accumulate $1000 cash by day 20. Watch your margins on each animal and rei
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: PetShopState, action: PetAction) => PetShopState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".psm-btn-sm", pulses: 3 }; },
   component: PetShopMini,
 } as unknown as GamePlugin;

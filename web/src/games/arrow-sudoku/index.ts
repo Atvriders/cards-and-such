@@ -37,5 +37,6 @@ Click Reset to start fresh.`,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".arrowsudoku-num", pulses: 3 }; },
   component: ArrowSudokuGame,
 };

@@ -22,5 +22,6 @@ Strategy: Start with 8 dozens of Glazed at $8. Invest in one glaze upgrade early
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: DonutState, action: DonutAction) => DonutState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".donut-btn", pulses: 3 }; },
   component: DonutShop,
 } as unknown as GamePlugin;

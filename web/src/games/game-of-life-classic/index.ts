@@ -39,5 +39,6 @@ The life arc has three stages tracked in the HUD: Early Career (squares 0-7), Mi
   initialState: (seed: number, s: S) => initialState(seed, s as ClassicSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".golclassic-btn", pulses: 3 }; },
   component: GameOfLifeClassicGame,
 };

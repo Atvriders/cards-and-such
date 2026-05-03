@@ -31,5 +31,6 @@ After about 100 steps the ant produces chaotic squiggles. Around step 10,000 (mo
   initialState: (seed: number, s: S) => initialState(seed, s as AntSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".la-finish", pulses: 3 }; },
   component: LangtonsAntMiniGame,
 };

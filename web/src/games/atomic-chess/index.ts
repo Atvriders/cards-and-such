@@ -34,5 +34,6 @@ Click a piece to select it, then click a highlighted square to move. Explosions 
   initialState: (seed: number, settings: AtomicChessSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".atomic-promotion-btn", pulses: 3 }; },
   component: AtomicChess,
 };

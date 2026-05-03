@@ -22,5 +22,6 @@ Random events occur occasionally — a hungry lion, or a crowd favorite — so w
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: ZooState, action: ZooAction) => ZooState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".zoo-btn", pulses: 3 }; },
   component: ZooKeeper,
 } as unknown as GamePlugin;

@@ -22,5 +22,6 @@ Strategy: Reveal as much of the map as possible before committing your path. Loo
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: TombOfKingsState, action: TombOfKingsAction) => TombOfKingsState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".tok-btn", pulses: 3 }; },
   component: TombOfKings,
 } as unknown as GamePlugin;

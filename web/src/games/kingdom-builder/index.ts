@@ -20,5 +20,6 @@ Strategy: Build clusters of the same tile type for the adjacency bonus. Surround
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: KingdomBuilderState, action: KingdomBuilderAction) => KingdomBuilderState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".kb-discard-btn", pulses: 3 }; },
   component: KingdomBuilder,
 } as unknown as GamePlugin;

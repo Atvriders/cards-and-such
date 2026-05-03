@@ -25,5 +25,6 @@ Your final score is 500 points + 50 for every stroke under par (or minus 50 per 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".mg-btn", pulses: 3 }; },
   component: MiniGolf,
 };

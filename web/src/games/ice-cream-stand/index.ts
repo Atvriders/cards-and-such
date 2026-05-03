@@ -24,5 +24,6 @@ Goal: finish 20 days with $800 in cash. Vanilla and Chocolate are reliable bests
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: IceCreamState, action: IceCreamAction) => IceCreamState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".ics-btn", pulses: 3 }; },
   component: IceCreamStand,
 } as unknown as GamePlugin;

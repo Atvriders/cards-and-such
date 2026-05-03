@@ -40,5 +40,6 @@ Your score is the number of prompts your team correctly guessed. Compete against
   initialState: (seed: number, settings: PictionarySettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".pictionary-btn", pulses: 3 }; },
   component: PictionaryPrompter,
 };

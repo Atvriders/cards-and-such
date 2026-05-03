@@ -20,5 +20,6 @@ Key tips: Reading the journal in the entrance hall gives you a solid plan. Talki
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: CyoaHorrorState, action: CyoaHorrorAction) => CyoaHorrorState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".ch-choice", pulses: 3 }; },
   component: CyoaHorror,
 } as unknown as GamePlugin;

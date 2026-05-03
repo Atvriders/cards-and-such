@@ -17,5 +17,6 @@ export const aggravationPlugin: GamePlugin<AggravationState, AggravationAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as AggravationSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".aggravation-btn", pulses: 3 }; },
   component: AggravationGame,
 };

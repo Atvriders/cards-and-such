@@ -32,5 +32,6 @@ Tips: Focus on the vowel sound and any consonants following it — that is the p
   initialState: (seed: number, settings: RhymeFinderSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".rf-next", pulses: 3 }; },
   component: RhymeFinder,
 };

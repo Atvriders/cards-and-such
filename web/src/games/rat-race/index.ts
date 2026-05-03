@@ -33,5 +33,6 @@ Strategy tip: there's no real strategy here — it's pure chaos and fun! Cheer f
   initialState: (seed: number, settings: RatRaceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".draw-btn", pulses: 3 }; },
   component: RatRace,
 };

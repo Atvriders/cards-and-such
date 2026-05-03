@@ -40,5 +40,6 @@ Tips: Group the lit cells into shapes or patterns you recognize — a diagonal, 
   initialState: (seed: number, settings: VisualMemoryGridSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".vmg-next-btn", pulses: 3 }; },
   component: VisualMemoryGrid,
 };

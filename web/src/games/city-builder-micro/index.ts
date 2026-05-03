@@ -22,5 +22,6 @@ Click "End Turn" when done placing. After 20 turns your final happiness score is
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: CityBuilderState, action: CityBuilderAction) => CityBuilderState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".city-cell", pulses: 3 }; },
   component: CityBuilderMicro,
 } as unknown as GamePlugin;

@@ -25,5 +25,6 @@ Score is calculated as: aces × 100 + successful serves × 50 − double faults 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".ts-btn", pulses: 3 }; },
   component: TennisServe,
 };

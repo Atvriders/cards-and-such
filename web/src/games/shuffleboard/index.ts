@@ -23,5 +23,6 @@ Play 3, 5, or 7 rounds. Highest total score wins. Score = points × 100 + 500 bo
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".sb-btn", pulses: 3 }; },
   component: Shuffleboard,
 };

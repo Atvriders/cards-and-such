@@ -22,5 +22,6 @@ Strategy: Lead with high-demand items like Bread and Donuts for steady cash flow
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: BakeryState, action: BakeryAction) => BakeryState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".bake-btn", pulses: 3 }; },
   component: BakeryShop,
 } as unknown as GamePlugin;

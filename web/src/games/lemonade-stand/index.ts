@@ -24,5 +24,6 @@ Your final score is based on total money at end of day 30. Starting cash is $2.0
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".lemon-btn", pulses: 3 }; },
   component: LemonadeStand,
 } as unknown as GamePlugin;

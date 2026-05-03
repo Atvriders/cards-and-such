@@ -23,5 +23,6 @@ Holing out awards Eagle, Birdie, Par, Bogey, etc. You have up to 12 strokes per 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".g18-btn-sec", pulses: 3 }; },
   component: Golf18,
 };

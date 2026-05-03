@@ -24,5 +24,6 @@ Tip: once you get 4 exactmatches in some positions, keep those digits fixed and 
   initialState: (seed: number, s: SafeCrackerSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".sc-up-btn", pulses: 3 }; },
   component: SafeCrackerGame,
 };

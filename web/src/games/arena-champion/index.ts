@@ -22,5 +22,6 @@ Score 100 for winning all 8 fights. Losing earlier scores proportionally based o
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: ArenaChampionState, action: ArenaChampionAction) => ArenaChampionState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".ac-move", pulses: 3 }; },
   component: ArenaChampion,
 } as unknown as GamePlugin;

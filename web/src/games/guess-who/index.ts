@@ -33,5 +33,6 @@ There are 20 characters with 6 attributes: hair color (brown, blonde, black, red
   initialState: (seed: number, settings: GuessWhoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".gw-q-btn", pulses: 3 }; },
   component: GuessWhoGame,
 };

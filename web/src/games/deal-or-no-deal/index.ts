@@ -29,5 +29,6 @@ Strategy tips: the bank's offer fraction rises each round, so patience pays if b
   initialState: (seed: number, s: DealOrNoDealSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".dond-btn", pulses: 3 }; },
   component: DealOrNoDeal,
 } as unknown as GamePlugin;

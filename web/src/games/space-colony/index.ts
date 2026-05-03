@@ -22,5 +22,6 @@ Strategy: Keep all three bars above 25 at all times. Never let two resources dro
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: SpaceColonyState, action: SpaceColonyAction) => SpaceColonyState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".colony-action-btn", pulses: 3 }; },
   component: SpaceColony,
 } as unknown as GamePlugin;

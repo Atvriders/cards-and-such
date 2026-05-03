@@ -26,5 +26,6 @@ After submitting, you can try a new puzzle with different parameters. Each corre
   initialState: (seed: number, s: WeighingSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".weighing-submit-btn", pulses: 3 }; },
   component: WeighingPuzzleGame,
 };

@@ -22,5 +22,6 @@ Final score is based on both gold earned and number of quests completed. A top s
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: QuestTavernState, action: QuestTavernAction) => QuestTavernState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".qt-btn", pulses: 3 }; },
   component: QuestTavern,
 } as unknown as GamePlugin;

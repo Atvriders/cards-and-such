@@ -14,5 +14,6 @@ export const hashiMiniPlugin: GamePlugin<HashiMiniState, HashiMiniAction, typeof
   initialState: (seed: number) => initialState(seed, { dummy: true } as HashiMiniSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".hashiminicyan-num", pulses: 3 }; },
   component: HashiMiniGame,
 };

@@ -36,5 +36,6 @@ Difficulty controls which puzzle sets are chosen — Easy has many valid solutio
   initialState: (seed: number, settings: Make24SettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".make-24-btn", pulses: 3 }; },
   component: Make24,
 };

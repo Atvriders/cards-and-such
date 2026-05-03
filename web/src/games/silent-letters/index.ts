@@ -34,5 +34,6 @@ Tips: Many words with KN start keep the K silent (KNIFE, KNEEL, KNOB). Words sta
   initialState: (seed: number, settings: SilentLettersSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".sl-next", pulses: 3 }; },
   component: SilentLetters,
 };

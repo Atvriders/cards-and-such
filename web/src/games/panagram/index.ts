@@ -26,5 +26,6 @@ Tips: the center letter is your anchor — build outward from it. Short common w
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".panagram-btn", pulses: 3 }; },
   component: Panagram,
 };

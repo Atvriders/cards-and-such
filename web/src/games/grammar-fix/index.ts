@@ -34,5 +34,6 @@ Tips: Watch for subject-verb agreement errors (we was → we were), incorrect pr
   initialState: (seed: number, settings: GrammarFixSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".gf-next", pulses: 3 }; },
   component: GrammarFix,
 };

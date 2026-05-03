@@ -22,5 +22,6 @@ Strategy: The early rooms are nearly safe (1-2 dice, low trap chance). Room 6 on
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: LootGoblinState, action: LootGoblinAction) => LootGoblinState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".lg-btn", pulses: 3 }; },
   component: LootGoblin,
 } as unknown as GamePlugin;

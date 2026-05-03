@@ -20,5 +20,6 @@ export const octordleMiniPlugin: GamePlugin<OctordleMiniState, OctordleMiniActio
   initialState: (seed: number, s: S) => initialState(seed, s as OctordleMiniSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".om-key", pulses: 3 }; },
   component: OctordleMiniGame,
 };

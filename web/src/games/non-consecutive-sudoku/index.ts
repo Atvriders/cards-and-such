@@ -14,5 +14,6 @@ export const nonConsecutiveSudokuPlugin: GamePlugin<NonConsecutiveSudokuState, N
   initialState: (seed: number) => initialState(seed, { dummy: true } as NonConsecutiveSudokuSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".nonconsecutivesteel-num", pulses: 3 }; },
   component: NonConsecutiveSudokuGame,
 };

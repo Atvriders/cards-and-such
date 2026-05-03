@@ -22,5 +22,6 @@ Strategy: Start conservative (25 tacos, $4) and build capital. Chicken is the mo
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: TacoState, action: TacoAction) => TacoState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".taco-btn", pulses: 3 }; },
   component: TacoTruck,
 } as unknown as GamePlugin;

@@ -26,5 +26,6 @@ Scoring: win = 100 + (opponent discs − your discs) × 5; draw = 50; loss = max
   initialState: (seed: number, s: S) => initialState(seed, s as AntiOthelloSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".antiothello-pass", pulses: 3 }; },
   component: AntiOthelloGame,
 };

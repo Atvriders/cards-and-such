@@ -21,5 +21,6 @@ Click a piece to select, then click a green dot to move. Good luck!`,
   initialState: () => initialState(),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".cp-btn", pulses: 3 }; },
   component: Game,
 } as unknown as GamePlugin;

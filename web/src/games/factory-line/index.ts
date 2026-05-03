@@ -22,5 +22,6 @@ Revenue only arrives when a full order is completed — so don't change products
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: FactoryState, action: FactoryAction) => FactoryState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".factory-btn", pulses: 3 }; },
   component: FactoryLine,
 } as unknown as GamePlugin;

@@ -22,5 +22,6 @@ Strategy: Start small (30 cups, $4) and build cash. Invest in one loyalty tier e
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: CoffeeState, action: CoffeeAction) => CoffeeState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".cafe-btn", pulses: 3 }; },
   component: CoffeeShop,
 } as unknown as GamePlugin;
