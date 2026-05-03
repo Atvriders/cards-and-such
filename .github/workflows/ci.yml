@@ -36,10 +36,19 @@ jobs:
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
       - name: Wait for health
         run: |
+          ok=0
           for i in {1..30}; do
-            curl -sf http://127.0.0.1:3050/api/health && break
+            if curl -sf http://127.0.0.1:3050/api/health; then
+              ok=1
+              break
+            fi
             sleep 2
           done
+          if [ "$ok" -ne 1 ]; then
+            echo "Health check failed after 30 attempts; dumping logs:"
+            docker compose -f docker-compose.yml -f docker-compose.ci.yml logs
+            exit 1
+          fi
       - run: npm -w @cards/e2e run test:install
       - run: npm -w @cards/e2e run test
       - if: always()

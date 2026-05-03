@@ -1,7 +1,9 @@
 name: Publish images
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
     branches: ["master"]
 
 permissions:
@@ -10,6 +12,7 @@ permissions:
 
 jobs:
   build-and-push:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
