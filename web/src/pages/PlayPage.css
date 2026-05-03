@@ -466,13 +466,33 @@
   background: rgba(129, 140, 248, 0.42);
 }
 
-/* End-panel layout for replay/new game/share */
+/* End-panel layout for replay/new game/share.
+ *
+ * Two stacked action rows live in the win banner: a "primary" row
+ * (.end-actions) with the big New Game / Replay / Lobby buttons, and a
+ * "secondary" pill row (.end-share-row) with Tweet / Copy link / Save
+ * image / Print / Save replay. Both share the same horizontal rhythm:
+ *
+ *  - Mobile (<560px): a single-column stack so each action gets a
+ *    comfortable tap target without crowding two pills onto one line.
+ *  - >=560px: a 3-column grid so the row reads as a clean trio on
+ *    desktop, with extra secondary pills wrapping onto a 2nd grid line.
+ */
 .end-actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0.6rem;
-  justify-content: center;
+  align-items: center;
+  justify-items: stretch;
   margin-top: 0.5rem;
+}
+.end-actions > * { width: 100%; }
+@media (min-width: 560px) {
+  .end-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+  }
+  .end-actions > * { width: auto; min-width: 0; }
 }
 .end-seed {
   font-size: 0.85rem;
@@ -992,12 +1012,25 @@
   letter-spacing: -0.01em;
 }
 
+/* Secondary pill row (Tweet / Copy link / Save image / Print / Save replay).
+ * Mirrors the .end-actions cadence above: stacks on mobile, settles into
+ * a centred 3-col grid on >=560px so the win banner reads as two tidy
+ * action zones (primary + secondary) instead of a free-flowing wrap. */
 .end-share-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-items: stretch;
   margin: 0.65rem 0 0.85rem;
+}
+.end-share-row > * { width: 100%; }
+@media (min-width: 560px) {
+  .end-share-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+  }
+  .end-share-row > * { width: auto; min-width: 0; }
 }
 .end-share-twitter {
   display: inline-flex;
