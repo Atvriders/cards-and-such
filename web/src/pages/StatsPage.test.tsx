@@ -583,6 +583,30 @@ describe("StatsPage", () => {
     expect(undosCard.textContent).toContain("7");
   });
 
+  // W225 — Aggregate hints/undos sum across all per-game keys in
+  // `cards-hints-used` / `cards-undos-used`. Pins the asymmetric case where
+  // the hints blob has multiple games (klondike:7 + spider:3 → 10) but the
+  // undos blob carries a single key (klondike:2 → 2). Guards against any
+  // drift in hintsTotal()/undosTotal() that would over- or under-count a
+  // sparse second blob (e.g. mistakenly intersecting keys across the two).
+  it("W225: stat-total-hints/undos sum cards-hints-used / cards-undos-used across per-game keys", () => {
+    // Seed minimal stats so the page hydrates past the loader; the hint/undo
+    // aggregate cards read directly from the side blobs, not the main stats.
+    seedStats({ totalPlayed: 1 });
+    localStorage.setItem("cards-hints-used", JSON.stringify({ klondike: 7, spider: 3 }));
+    localStorage.setItem("cards-undos-used", JSON.stringify({ klondike: 2 }));
+    renderPage();
+    const hintsCard = screen.getByTestId("stat-total-hints");
+    const undosCard = screen.getByTestId("stat-total-undos");
+    // 7 + 3 = 10 hints from a two-key blob.
+    expect(hintsCard.textContent).toContain("10");
+    // 2 from a single-key undos blob — must NOT borrow spider's 3 from the
+    // hints blob (no key intersection / cross-blob bleed).
+    expect(undosCard.textContent).toContain("2");
+    expect(hintsCard.textContent).not.toMatch(/NaN/);
+    expect(undosCard.textContent).not.toMatch(/NaN/);
+  });
+
   // W472 — Total time played aggregate card. Two pinning tests:
   //   1. Empty stats (no time-history blobs at all) → "0h 0m 0s" sentinel.
   //   2. Multi-game time-history → sum is rendered with full H/M/S breakdown.
@@ -826,6 +850,63 @@ describe("StatsPage", () => {
     expect(card).toBeInTheDocument();
     expect(card.textContent).toContain("Peak 09:00");
     expect(card.textContent).toContain("3 total plays");
+  });
+
+  // W353 — Hour-of-day chart peak hour highlight. Seed 5 klondike plays at
+  // 14:00 + 2 at 09:00 across two time-history blobs so buildHourOfDayCounts
+  // sees a clear winner at hour 14. The card text must include `Peak 14:00`
+  // and only the 14h bar (`stats-hour-bar-14`) carries `data-peak="true"`,
+  // pinning both the human-readable peak label and the SVG bar marker that
+  // downstream styling / screenshot diffs key off of.
+  it("W353: hour-of-day chart highlights peak hour 14:00 with data-peak=true on stats-hour-bar-14", () => {
+    seedRichStats();
+    // Anchor seeded plays to fixed local-time hours by cloning a noon-base
+    // Date and rewriting the hour field, so DST and timezone offsets don't
+    // shift the bucket out from under the assertion.
+    const at = (hour: number): number => {
+      const d = new Date();
+      d.setHours(hour, 0, 0, 0);
+      return d.getTime();
+    };
+    const peakTs = at(14);
+    const otherTs = at(9);
+    // 5 plays at 14:00 (split across klondike + spider so we exercise the
+    // multi-blob aggregator) and 2 plays at 09:00 to give 14 a clean win.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: peakTs, time: 60 },
+        { ts: peakTs + 60_000, time: 60 },
+        { ts: peakTs + 120_000, time: 60 },
+        { ts: otherTs, time: 60 },
+        { ts: otherTs + 60_000, time: 60 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:spider",
+      JSON.stringify([
+        { ts: peakTs + 180_000, time: 60 },
+        { ts: peakTs + 240_000, time: 60 },
+      ]),
+    );
+
+    renderPage();
+    const card = screen.getByTestId("stats-hour-of-day");
+    expect(card).toBeInTheDocument();
+    // Card subtitle pins the peak hour label + total sample count (5+2=7).
+    expect(card.textContent).toContain("Peak 14:00");
+    expect(card.textContent).toContain("7 total plays");
+
+    // The chart SVG advertises peak hour via data-peak-hour, and exactly the
+    // 14h bar carries data-peak="true" — every other bar is unmarked.
+    const chart = screen.getByTestId("stats-hour-chart");
+    expect(chart.getAttribute("data-peak-hour")).toBe("14");
+    const peakBar = screen.getByTestId("stats-hour-bar-14");
+    expect(peakBar.getAttribute("data-peak")).toBe("true");
+    const nonPeakBar = screen.getByTestId("stats-hour-bar-9");
+    expect(nonPeakBar.getAttribute("data-peak")).toBeNull();
+    // Across all 24 bars, exactly one is marked as the peak.
+    expect(chart.querySelectorAll('[data-peak="true"]').length).toBe(1);
   });
 
   it("achievement cards render in unlocked → in-progress → locked order with matching data-state", () => {
