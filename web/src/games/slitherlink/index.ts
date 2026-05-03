@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SlitherlinkState, SlitherlinkAction, SlitherlinkSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Slitherlink } from "./Game.js";
@@ -33,5 +33,6 @@ Score = max(100, 1000 − moves × 5).`,
   initialState: (seed: number, s: SlitherlinkSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".slitherinksketch-svg")) ? { selector: ".slitherinksketch-svg", pulses: 3 } : null,
   component: Slitherlink,
 };

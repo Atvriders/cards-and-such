@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Match3State, Match3Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ Settings: Gem Colors lets you choose 5, 6, or 7 colors — fewer colors mean mor
   initialState: (seed: number, settings: Match3SettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".match3-board")) ? { selector: ".match3-board", pulses: 3 } : null,
   component: Match3,
 };

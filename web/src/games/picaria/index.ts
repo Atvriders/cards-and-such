@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PicariaState, PicariaAction, PicariaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Picaria } from "./Game.js";
@@ -22,5 +22,6 @@ The center point is the most powerful square — it connects to every other poin
   initialState: (seed: number, s: PicariaSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".picaria-board")) ? { selector: ".picaria-board", pulses: 3 } : null,
   component: Picaria,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NumericTTTState, NumericTTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NumericTicTacToe } from "./NumericTicTacToe.js";
@@ -20,5 +20,6 @@ Think about both attack and defence: a triple like (1,5,9) or (3,5,7) both sum t
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".nttt-board")) ? { selector: ".nttt-board", pulses: 3 } : null,
   component: NumericTicTacToe,
 } as unknown as GamePlugin;

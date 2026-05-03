@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Drop7State, Drop7Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Speed setting controls how quickly new blank rows are introduced. Normal gives y
   initialState: (seed: number, settings: Drop7SettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".drop7-board")) ? { selector: ".drop7-board", pulses: 3 } : null,
   component: Drop7,
 };

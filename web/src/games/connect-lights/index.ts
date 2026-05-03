@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { ConnectLightsState, ConnectLightsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ConnectLights } from "./Game.js";
@@ -33,5 +33,6 @@ Choose from 20, 30, or 50 moves. Plan carefully — think about how swapping one
   initialState: (seed: number, settings: ConnectLightsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".cl-lights-grid")) ? { selector: ".cl-lights-grid", pulses: 3 } : null,
   component: ConnectLights,
 };

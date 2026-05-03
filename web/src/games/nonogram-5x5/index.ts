@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Nonogram5x5State, Nonogram5x5Action } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ Tip: Start with lines whose clue numbers sum closest to 5 — those lines are ti
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".nonogram5-grid")) ? { selector: ".nonogram5-grid", pulses: 3 } : null,
   component: Nonogram5x5Game,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TriangleMatchState, TriangleMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ The game ends when no group of 3 or more same-color triangles exists anywhere on
   initialState: (seed: number, settings: TriangleMatchSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".trimatch-svg")) ? { selector: ".trimatch-svg", pulses: 3 } : null,
   component: TriangleMatch,
 };

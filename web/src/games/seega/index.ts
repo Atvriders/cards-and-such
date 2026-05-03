@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SeegaState, SeegaAction, SeegaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Seega } from "./Game.js";
@@ -22,5 +22,6 @@ Win by capturing all of the opponent's pieces, or by leaving them with no legal 
   initialState: (seed: number, s: SeegaSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".seega-board")) ? { selector: ".seega-board", pulses: 3 } : null,
   component: Seega,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FogMazeState, FogMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,6 @@ Your score rewards efficiency — fewer moves earn more points. The real challen
   initialState: (seed: number, settings: FogMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".fog-maze-svg")) ? { selector: ".fog-maze-svg", pulses: 3 } : null,
   component: FogMazeGame,
 };

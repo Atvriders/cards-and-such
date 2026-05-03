@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GomokuTacticState, GomokuTacticAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GomokuTactic } from "./GomokuTactic.js";
@@ -20,5 +20,6 @@ A win scores 1000 points, a draw 300, and a loss 0. The 9×9 format keeps games 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".gt-board")) ? { selector: ".gt-board", pulses: 3 } : null,
   component: GomokuTactic,
 } as unknown as GamePlugin;

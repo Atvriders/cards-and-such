@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { OperationState, OperationAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OperationGame } from "./Game.js";
@@ -35,5 +35,6 @@ Score as high as possible across all 10 operations!`,
   initialState: (seed: number, settings: OperationSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".op-game")) ? { selector: ".op-game", pulses: 3 } : null,
   component: OperationGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TawlbwrddState, TawlbwrddAction, TawlbwrddSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Tawlbwrdd } from "./Game.js";
@@ -24,5 +24,6 @@ The larger board compared to smaller tafl variants gives the king more room to m
   initialState: (seed: number, s: TawlbwrddSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".tawlbwrdd-grid")) ? { selector: ".tawlbwrdd-grid", pulses: 3 } : null,
   component: Tawlbwrdd,
 };

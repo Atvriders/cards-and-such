@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IceSlideMazeState, IceSlideMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Small uses an 11×11 grid with fewer decision points; Medium is 15×15 with many
   initialState: (seed: number, settings: IceSlideMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".ice-maze-svg")) ? { selector: ".ice-maze-svg", pulses: 3 } : null,
   component: IceSlideMazeGame,
 };

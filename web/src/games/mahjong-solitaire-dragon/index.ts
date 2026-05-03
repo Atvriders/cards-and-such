@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MahjongSolitaireState, MahjongAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MahjongSolitaireDragon } from "./MahjongSolitaireDragon.js";
@@ -24,5 +24,6 @@ Score: 10,000 points minus 50 per move on a full clear, or partial credit scaled
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mahjong-board")) ? { selector: ".mahjong-board", pulses: 3 } : null,
   component: MahjongSolitaireDragon,
 };

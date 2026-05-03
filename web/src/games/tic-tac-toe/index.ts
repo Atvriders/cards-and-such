@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TTTState, TTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -50,5 +50,6 @@ Tips: on a 3×3 board with Hard bot and win length 3, perfect play always draws 
   initialState: (seed: number, settings: TTTSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".tictactoe-board-wrap")) ? { selector: ".tictactoe-board-wrap", pulses: 3 } : null,
   component: TicTacToe,
 };

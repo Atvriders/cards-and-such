@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ShisenShoState, ShisenAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ShisenSho } from "./ShisenSho.js";
@@ -24,5 +24,6 @@ Score: 5,000 minus 30 per move on a full clear; partial credit proportional to t
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".shisen-grid")) ? { selector: ".shisen-grid", pulses: 3 } : null,
   component: ShisenSho,
 };

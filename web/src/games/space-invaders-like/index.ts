@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SpaceInvadersState, SpaceInvadersAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Difficulty controls how fast aliens march and how often they drop bombs. On hard
   initialState: (seed: number, settings: SpaceInvadersSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".sinv-game")) ? { selector: ".sinv-game", pulses: 3 } : null,
   component: SpaceInvaders,
 };

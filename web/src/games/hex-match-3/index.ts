@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HexMatchState, HexMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ The game ends when your moves are exhausted. Try to maximize your score before t
   initialState: (seed: number, settings: HexMatch3SettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".hexmatch-grid")) ? { selector: ".hexmatch-grid", pulses: 3 } : null,
   component: HexMatch3,
 };

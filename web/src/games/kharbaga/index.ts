@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KharbagaState, KharbagaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Tips: controlling the centre row is vital. Push pieces inward early to threaten 
   initialState: (seed: number, settings: KharbagaSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".kharbaga-board")) ? { selector: ".kharbaga-board", pulses: 3 } : null,
   component: Kharbaga,
 };

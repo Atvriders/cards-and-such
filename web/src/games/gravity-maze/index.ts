@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GravityMazeState, GravityMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Your score is based on the number of rotations used. Fewer rotations mean higher
   initialState: (seed: number, settings: GravityMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".gravity-maze-svg")) ? { selector: ".gravity-maze-svg", pulses: 3 } : null,
   component: GravityMazeGame,
 };

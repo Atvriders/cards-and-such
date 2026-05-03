@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MakrukState, MakrukAction, MakrukSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Makruk } from "./Game.js";
@@ -22,5 +22,6 @@ The game ends when a player's King cannot escape check (checkmate). Click a piec
   initialState: (seed: number, s: MakrukSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".makruk-board")) ? { selector: ".makruk-board", pulses: 3 } : null,
   component: Makruk,
 };

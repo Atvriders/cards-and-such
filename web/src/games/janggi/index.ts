@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { JanggiState, JanggiAction, JanggiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Janggi } from "./Game.js";
@@ -22,5 +22,6 @@ Click a piece to select it; highlighted squares show legal moves. The bot plays 
   initialState: (seed: number, s: JanggiSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".janggi-svg")) ? { selector: ".janggi-svg", pulses: 3 } : null,
   component: Janggi,
 };

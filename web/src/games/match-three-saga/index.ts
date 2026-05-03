@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MatchThreeSagaState, MatchThreeSagaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ The game runs for 3, 5, or 7 levels. Later levels require much higher scores so 
   initialState: (seed: number, settings: MatchThreeSagaSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mts-grid")) ? { selector: ".mts-grid", pulses: 3 } : null,
   component: MatchThreeSaga,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HnefataflState, HnefataflAction, HnefataflSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Hnefatafl } from "./Game.js";
@@ -24,5 +24,6 @@ Tactics: open a path for the King while blocking attacker advances. The King can
   initialState: (seed: number, s: HnefataflSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".hnefatafl-board")) ? { selector: ".hnefatafl-board", pulses: 3 } : null,
   component: Hnefatafl,
 };

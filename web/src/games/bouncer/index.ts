@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BouncerState, BouncerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ You lose a life each time the ball escapes off the bottom of the screen. Lose al
   initialState: (seed: number, settings: BouncerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".bouncer-game")) ? { selector: ".bouncer-game", pulses: 3 } : null,
   component: Bouncer,
 };

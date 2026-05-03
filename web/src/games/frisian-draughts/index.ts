@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FDState, FDAction, FDSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FrisianDraughts } from "./Game.js";
@@ -24,5 +24,6 @@ Win by capturing all opponent pieces or leaving them with no legal moves. The bo
   initialState: (seed: number, s: FDSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".fd-board")) ? { selector: ".fd-board", pulses: 3 } : null,
   component: FrisianDraughts,
 };

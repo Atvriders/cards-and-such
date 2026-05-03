@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FoxGeeseState, FoxGeeseAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Scoring: Fox wins = 20; Geese win = 0.`,
   initialState: (seed: number, settings: FoxGeeseSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".foxgeese-board")) ? { selector: ".foxgeese-board", pulses: 3 } : null,
   component: FoxAndGeese,
 };

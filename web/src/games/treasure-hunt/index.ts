@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { TreasureState, TreasureAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TreasureHunt } from "./Game.js";
@@ -36,5 +36,6 @@ Choose a 4×4 grid for a quick game, a 5×5 for medium difficulty, or a 6×6 for
   initialState: (seed: number, settings: TreasureHuntSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".th-grid")) ? { selector: ".th-grid", pulses: 3 } : null,
   component: TreasureHunt,
 };

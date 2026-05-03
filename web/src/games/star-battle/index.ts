@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StarBattleState, StarBattleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -35,5 +35,6 @@ Strategy: start by finding rows, columns, or regions that are heavily constraine
   initialState: (seed: number, settings: StarBattleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".star-battle-grid")) ? { selector: ".star-battle-grid", pulses: 3 } : null,
   component: StarBattle,
 };

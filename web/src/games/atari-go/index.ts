@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AtariGoState, AtariGoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ The bot searches three moves ahead, evaluating the total liberties of each side.
   initialState: (seed: number, settings: AtariGoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".atarigo-grid")) ? { selector: ".atarigo-grid", pulses: 3 } : null,
   component: AtariGo,
 };

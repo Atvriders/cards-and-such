@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { MiniXiangqiState, MiniXiangqiAction, MiniXiangqiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MiniXiangqiGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const miniXiangqiPlugin: GamePlugin<MiniXiangqiState, MiniXiangqiAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as MiniXiangqiSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mxq-board")) ? { selector: ".mxq-board", pulses: 3 } : null,
   component: MiniXiangqiGame,
 };

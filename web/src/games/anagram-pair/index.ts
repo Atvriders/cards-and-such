@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnagramPairState, AnagramPairAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Tips: Mentally sort the letters of each word alphabetically to compare them — 
   initialState: (seed: number, settings: AnagramPairSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".ap-grid")) ? { selector: ".ap-grid", pulses: 3 } : null,
   component: AnagramPair,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BattleshipSoloState, BattleshipSoloAction, BattleshipSoloSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ Tip: After your first hit, fire at adjacent cells in a cross pattern to determin
   initialState: (seed: number, settings: S) => initialState(seed, settings as BattleshipSoloSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".battleship-solo-grid")) ? { selector: ".battleship-solo-grid", pulses: 3 } : null,
   component: BattleshipSoloGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FiveFieldKonoState, FiveFieldKonoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Scoring: win = 20; loss = 0.`,
   initialState: (seed: number, settings: FiveFieldKonoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".fivefieldkono-board")) ? { selector: ".fivefieldkono-board", pulses: 3 } : null,
   component: FiveFieldKono,
 };

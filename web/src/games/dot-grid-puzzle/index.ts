@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DotGridPuzzleState, DotGridPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ Tip: look for dots that are far apart and plan the route before clicking. Island
   initialState: (seed: number, settings: DotGridPuzzleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dgp-grid")) ? { selector: ".dgp-grid", pulses: 3 } : null,
   component: DotGridPuzzle,
 };

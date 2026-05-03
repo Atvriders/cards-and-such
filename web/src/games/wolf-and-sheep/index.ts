@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WolfState, WolfAction, WolfSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WolfAndSheep } from "./Game.js";
@@ -24,5 +24,6 @@ Strategy: keep your sheep in a tight diagonal line and advance as a unit. Never 
   initialState: (seed: number, s: WolfSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".wolf-sheep-board")) ? { selector: ".wolf-sheep-board", pulses: 3 } : null,
   component: WolfAndSheep,
 };

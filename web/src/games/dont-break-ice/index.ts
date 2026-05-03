@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { DontBreakState, DontBreakAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DontBreakIce } from "./Game.js";
@@ -33,5 +33,6 @@ The highlighted blue cubes in the center are the 4 danger squares — the pengui
   initialState: (seed: number, settings: DontBreakSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dbi-grid")) ? { selector: ".dbi-grid", pulses: 3 } : null,
   component: DontBreakIce,
 };

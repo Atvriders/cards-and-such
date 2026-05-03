@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MathChallengeState, MathChallengeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ Tips: On addition and subtraction, look for patterns: round up one number then a
   initialState: (seed: number, settings: MathChallengeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mc-problem-bar-wrap")) ? { selector: ".mc-problem-bar-wrap", pulses: 3 } : null,
   component: MathChallenge,
 };

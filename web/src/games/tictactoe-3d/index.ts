@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type TTT3DState, type TTT3DAction } from "./state.js";
 import { TicTacToe3D } from "./TicTacToe3D.js";
 
@@ -31,5 +31,6 @@ Tips: the center cells have the most lines running through them — contest the 
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".ttt3d-grid")) ? { selector: ".ttt3d-grid", pulses: 3 } : null,
   component: TicTacToe3D,
 };

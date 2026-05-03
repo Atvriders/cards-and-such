@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RushHourState, RushHourAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -30,5 +30,6 @@ The number of moves is tracked. Score: max(50, 500 − moves × 10). Easier puzz
   initialState: (seed: number, settings: RushHourSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".rush-hour-grid")) ? { selector: ".rush-hour-grid", pulses: 3 } : null,
   component: RushHour,
 };

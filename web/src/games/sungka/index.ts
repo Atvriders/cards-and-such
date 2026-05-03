@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SungkaState, SungkaAction, SungkaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Sungka } from "./Game.js";
@@ -24,5 +24,6 @@ The game ends when all pits on one side are empty. The player with the most seed
   initialState: (seed: number, s: SungkaSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".sungka-board")) ? { selector: ".sungka-board", pulses: 3 } : null,
   component: Sungka,
 };

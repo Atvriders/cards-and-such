@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { DobbleEuropeanState, DobbleEuropeanAction, DobbleEuropeanSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DobbleEuropeanGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const dobbleEuropeanPlugin: GamePlugin<DobbleEuropeanState, DobbleEuropea
   initialState: (seed: number, s: S) => initialState(seed, s as DobbleEuropeanSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dobeurp-wrap")) ? { selector: ".dobeurp-wrap", pulses: 3 } : null,
   component: DobbleEuropeanGame,
 };

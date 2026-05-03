@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MiniShogiState, MiniShogiAction, MiniShogiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MiniShogi } from "./Game.js";
@@ -24,5 +24,6 @@ Click a piece on the board to select it, then click a highlighted square to move
   initialState: (seed: number, s: MiniShogiSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".minishogi-board")) ? { selector: ".minishogi-board", pulses: 3 } : null,
   component: MiniShogi,
 };

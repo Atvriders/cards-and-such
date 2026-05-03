@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GravityLanderState, GravityLanderAction, GravityLanderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GravityLander } from "./GravityLander.js";
@@ -26,5 +26,6 @@ Score is fuel remaining × 2 plus a landing quality bonus (up to 100) based on h
   initialState: (seed: number, settings: GravityLanderSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".lander-game")) ? { selector: ".lander-game", pulses: 3 } : null,
   component: GravityLander,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BrandubState, BrandubAction, BrandubSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Brandub } from "./Game.js";
@@ -24,5 +24,6 @@ Strategy: open corridors for the king early, use defenders to block attacker lan
   initialState: (seed: number, s: BrandubSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".brandub-grid")) ? { selector: ".brandub-grid", pulses: 3 } : null,
   component: Brandub,
 };

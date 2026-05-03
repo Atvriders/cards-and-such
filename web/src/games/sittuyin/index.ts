@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SittuyinState, SittuyinAction, SittuyinSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Sittuyin } from "./Game.js";
@@ -24,5 +24,6 @@ Click a piece to select it; highlighted squares show legal moves. The bot plays 
   initialState: (seed: number, s: SittuyinSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".sittuyin-board")) ? { selector: ".sittuyin-board", pulses: 3 } : null,
   component: Sittuyin,
 };

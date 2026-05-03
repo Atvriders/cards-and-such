@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ToroidalTTTState, ToroidalTTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TicTacToeToroidal } from "./TicTacToeToroidal.js";
@@ -20,5 +20,6 @@ Win = 1000 points, draw = 500, loss = 0. Study the extra diagonals that wrap thr
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".ttt-board")) ? { selector: ".ttt-board", pulses: 3 } : null,
   component: TicTacToeToroidal,
 } as unknown as GamePlugin;

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ClassicMazeState, ClassicMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Every new game produces a completely different layout. Each seed creates a uniqu
   initialState: (seed: number, settings: ClassicMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".classic-maze-svg")) ? { selector: ".classic-maze-svg", pulses: 3 } : null,
   component: ClassicMazeGame,
 };

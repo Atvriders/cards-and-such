@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlquerqueState, AlquerqueAction, AlquerqueSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Alquerque } from "./Game.js";
@@ -22,5 +22,6 @@ To play: click one of your White pieces to select it (highlighted in yellow), th
   initialState: (seed: number, s: AlquerqueSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".alquerque-board")) ? { selector: ".alquerque-board", pulses: 3 } : null,
   component: Alquerque,
 };

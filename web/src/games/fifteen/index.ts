@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FifteenPuzzleState, FifteenPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,6 @@ Tips: Solve the top row first, then the left column of the remaining grid, and r
   initialState: (seed: number, settings: FifteenPuzzleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".fifteen-grid")) ? { selector: ".fifteen-grid", pulses: 3 } : null,
   component: Fifteen,
 };

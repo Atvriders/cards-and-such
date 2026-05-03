@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UnrulyState, UnrulyAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Score: max(100, 1000 − moves × 3). Use the given tiles as anchors — when a 
   initialState: (seed: number, settings: UnrulySettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".unruly-grid")) ? { selector: ".unruly-grid", pulses: 3 } : null,
   component: Unruly,
 };

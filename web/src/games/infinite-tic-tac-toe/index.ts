@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { InfiniteTTTState, InfiniteTTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ X wins: score 500. Draw: score 200. Losing scores 0.`,
   initialState: (seed: number, settings: InfiniteTTTSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".ittt-board")) ? { selector: ".ittt-board", pulses: 3 } : null,
   component: InfiniteTTTGame,
 };

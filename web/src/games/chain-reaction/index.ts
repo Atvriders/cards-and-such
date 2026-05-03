@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ChainReactionState, ChainReactionAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ChainReactionGame } from "./Game.js";
@@ -30,5 +30,6 @@ Strategy tip: build up orbs near your opponent's critical-mass cells to trigger 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".chain-reaction-grid")) ? { selector: ".chain-reaction-grid", pulses: 3 } : null,
   component: ChainReactionGame,
 };

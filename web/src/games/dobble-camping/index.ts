@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { DobbleCampingState, DobbleCampingAction, DobbleCampingSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DobbleCampingGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const dobbleCampingPlugin: GamePlugin<DobbleCampingState, DobbleCampingAc
   initialState: (seed: number, s: S) => initialState(seed, s as DobbleCampingSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dobcamp-wrap")) ? { selector: ".dobcamp-wrap", pulses: 3 } : null,
   component: DobbleCampingGame,
 };

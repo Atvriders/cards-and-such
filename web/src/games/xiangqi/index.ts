@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { XqState, XqAction, XqSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Xiangqi } from "./Game.js";
@@ -20,5 +20,6 @@ The game ends when a General has no legal moves. Click a Red piece to select it;
   initialState: (seed: number, s: XqSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".xiangqi-svg")) ? { selector: ".xiangqi-svg", pulses: 3 } : null,
   component: Xiangqi,
 };

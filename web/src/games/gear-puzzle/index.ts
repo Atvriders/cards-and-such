@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { GearPuzzleState, GearPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { GearPuzzle } from "./GearPuzzle.js";
@@ -31,5 +31,6 @@ Tips: plan the shortest path from input to output first. Gears can change direct
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".gear-grid")) ? { selector: ".gear-grid", pulses: 3 } : null,
   component: GearPuzzle,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GameState, GameAction, GameSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,6 @@ export const yGamePlugin: GamePlugin<GameState, GameAction, typeof settings> = {
   initialState: (seed: number, s: S) => initialState(seed, s as GameSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".ygm-board")) ? { selector: ".ygm-board", pulses: 3 } : null,
   component: YGameGame,
 };

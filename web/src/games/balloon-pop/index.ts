@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type BalloonPopState, type BalloonPopAction } from "./state.js";
 import { BalloonPop } from "./BalloonPop.js";
 
@@ -32,5 +32,6 @@ Settings: fewer colors makes larger groups more likely; more colors produces a m
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".bp-grid")) ? { selector: ".bp-grid", pulses: 3 } : null,
   component: BalloonPop,
 };

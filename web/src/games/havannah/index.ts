@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HavannahState, HavannahAction, HavannahSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Havannah } from "./Game.js";
@@ -28,5 +28,6 @@ Strategy: try to build stones that contribute toward multiple win conditions sim
   initialState: (seed: number, s: HavannahSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".havannah-board")) ? { selector: ".havannah-board", pulses: 3 } : null,
   component: Havannah,
 };

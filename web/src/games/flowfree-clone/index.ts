@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorFlowState, ColorFlowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Strategy: Look for dots that are in corners or near board edges — their paths 
   initialState: (seed: number, settings: ColorFlowSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".color-flow-grid")) ? { selector: ".color-flow-grid", pulses: 3 } : null,
   component: ColorFlow,
 };

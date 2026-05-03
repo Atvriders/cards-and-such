@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AsteroidsState, AsteroidsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Tips: large asteroids drift slowly; shoot from a safe distance. Small chunks are
   initialState: (seed: number, settings: AsteroidsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".asteroids-game")) ? { selector: ".asteroids-game", pulses: 3 } : null,
   component: Asteroids,
 };

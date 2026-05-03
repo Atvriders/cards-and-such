@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DotsCaptureState, DotsCaptureAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ The bot searches three turns ahead, evaluating the balance of captured dots. Fad
   initialState: (seed: number, settings: DotsCaptureSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dots-grid")) ? { selector: ".dots-grid", pulses: 3 } : null,
   component: DotsCapture,
 };

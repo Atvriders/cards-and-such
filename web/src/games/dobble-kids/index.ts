@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { DobbleKidsState, DobbleKidsAction, DobbleKidsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DobbleKidsGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const dobbleKidsPlugin: GamePlugin<DobbleKidsState, DobbleKidsAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as DobbleKidsSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dobkidz-wrap")) ? { selector: ".dobkidz-wrap", pulses: 3 } : null,
   component: DobbleKidsGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SurakartaState, SurakartaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SurakartaGame } from "./Game.js";
@@ -30,5 +30,6 @@ Tip: control the loop tracks early — pieces on the inner rails (rows/cols 1 an
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".sura-svg")) ? { selector: ".sura-svg", pulses: 3 } : null,
   component: SurakartaGame,
 };

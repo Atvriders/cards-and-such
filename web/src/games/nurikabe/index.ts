@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NurikabeState, NurikabeAction, NurikabeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Nurikabe } from "./Game.js";
@@ -35,5 +35,6 @@ Score = max(100, 1000 − moves × 3). Fewer moves yield a higher score.`,
   initialState: (seed: number, s: NurikabeSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".nurikabeisland-grid")) ? { selector: ".nurikabeisland-grid", pulses: 3 } : null,
   component: Nurikabe,
 };

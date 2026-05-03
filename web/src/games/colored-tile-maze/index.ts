@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColoredTileMazeState, ColoredTileMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,6 @@ Score rewards reaching the exit in as few moves as possible, so plan paths that 
   initialState: (seed: number, settings: ColoredTileMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".color-maze-svg")) ? { selector: ".color-maze-svg", pulses: 3 } : null,
   component: ColoredTileMazeGame,
 };

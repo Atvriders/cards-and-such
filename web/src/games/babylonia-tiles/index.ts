@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BabyloniaTilesState, BabyloniaTilesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BabyloniaTiles } from "./Game.js";
@@ -18,5 +18,6 @@ export const babyloniaTilesPlugin: GamePlugin<BabyloniaTilesState, BabyloniaTile
   initialState: (seed, _s) => initialState(seed, { mode: "easy" }),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".g-grid")) ? { selector: ".g-grid", pulses: 3 } : null,
   component: BabyloniaTiles,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DrMarioState, DrMarioAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Difficulty controls the number of viruses placed at the start: Low (15), Medium 
   initialState: (seed: number, settings: DrMarioSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".drmario-board")) ? { selector: ".drmario-board", pulses: 3 } : null,
   component: DrMario,
 };

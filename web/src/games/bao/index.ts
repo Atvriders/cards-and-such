@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BaoState, BaoAction, BaoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Bao } from "./Game.js";
@@ -24,5 +24,6 @@ Click any of your bottom-row pits to sow. The bot plays at depth 4.`,
   initialState: (seed: number, s: BaoSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".bao-board")) ? { selector: ".bao-board", pulses: 3 } : null,
   component: Bao,
 };

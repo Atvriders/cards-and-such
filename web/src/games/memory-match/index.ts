@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MemoryMatchState, MemoryMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -32,5 +32,6 @@ Tips: On your first few turns, flip systematically across the grid rather than r
   initialState: (seed: number, settings: MemoryMatchSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".memory-match-grid")) ? { selector: ".memory-match-grid", pulses: 3 } : null,
   component: MemoryMatch,
 };

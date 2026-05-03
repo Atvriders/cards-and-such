@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KyodaiState, KyodaiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -33,5 +33,6 @@ Score 100 points per pair matched, plus a 500-point bonus for clearing the entir
   initialState: (seed: number, settings: KyodaiSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".kyodai-board")) ? { selector: ".kyodai-board", pulses: 3 } : null,
   component: Kyodai,
 };

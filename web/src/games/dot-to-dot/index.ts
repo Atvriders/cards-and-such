@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DotToDotState, DotToDotAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,6 @@ Tip: scan the board for clusters of consecutive numbers. Smaller numbered gaps a
   initialState: (seed: number, settings: DotToDotSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".dtd-game")) ? { selector: ".dtd-game", pulses: 3 } : null,
   component: DotToDotGame,
 };

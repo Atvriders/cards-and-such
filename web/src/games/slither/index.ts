@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SlitherState, SlitherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SlitherGame } from "./Game.js";
@@ -30,5 +30,6 @@ Bot: greedy — extends its own chain, blocks human near-wins of 5+.`,
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".sli-svg")) ? { selector: ".sli-svg", pulses: 3 } : null,
   component: SlitherGame,
 };

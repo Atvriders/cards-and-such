@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MuTorereState, MuTorereAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MuTorereGame } from "./Game.js";
@@ -30,5 +30,6 @@ Bot: minimax at depth 4.`,
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".muto-svg")) ? { selector: ".muto-svg", pulses: 3 } : null,
   component: MuTorereGame,
 };

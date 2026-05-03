@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PentalathState, PentalathAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PentalathGame } from "./Game.js";
@@ -28,5 +28,6 @@ Bot strategy: greedy placement — wins immediately if possible, blocks human ne
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".penta-svg")) ? { selector: ".penta-svg", pulses: 3 } : null,
   component: PentalathGame,
 };

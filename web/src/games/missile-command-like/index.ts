@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MissileCommandState, MissileCommandAction, MissileCommandSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MissileCommand } from "./MissileCommand.js";
@@ -29,5 +29,6 @@ Score equals 10 × wave number per streak intercepted, plus a 500-point bonus fo
     initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mc-game")) ? { selector: ".mc-game", pulses: 3 } : null,
   component: MissileCommand,
 };

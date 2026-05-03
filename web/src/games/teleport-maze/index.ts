@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TeleportMazeState, TeleportMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Choose 2, 3, or 4 teleporter pairs to increase the chaos. With 4 pairs the maze 
   initialState: (seed: number, settings: TeleportMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".teleport-maze-svg")) ? { selector: ".teleport-maze-svg", pulses: 3 } : null,
   component: TeleportMazeGame,
 };

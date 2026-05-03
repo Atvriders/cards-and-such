@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TubeColorState, TubeColorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TubeColor } from "./TubeColor.js";
@@ -31,5 +31,6 @@ Tips: identify which colors are closest to being grouped and work backward. Avoi
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".tube-wrapper")) ? { selector: ".tube-wrapper", pulses: 3 } : null,
   component: TubeColor,
 };

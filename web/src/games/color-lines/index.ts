@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorLinesState, ColorLinesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Strategy: plan ahead using the preview. Try to keep paths open so you can move b
   initialState: (seed: number, settings: ColorLinesSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".colorlines-board")) ? { selector: ".colorlines-board", pulses: 3 } : null,
   component: ColorLines,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MirrorMazeState, MirrorMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MirrorMaze } from "./MirrorMaze.js";
@@ -31,5 +31,6 @@ Tips: trace the laser path from the source and identify where it needs to turn t
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mirror-grid")) ? { selector: ".mirror-grid", pulses: 3 } : null,
   component: MirrorMaze,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PentominoPuzzleState, PentominoPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PentominoPuzzle } from "./PentominoPuzzle.js";
@@ -31,5 +31,6 @@ Tips: start with the most awkward pieces — the I-pentomino (1×5 strip), the U
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".piece-mini-grid")) ? { selector: ".piece-mini-grid", pulses: 3 } : null,
   component: PentominoPuzzle,
 };

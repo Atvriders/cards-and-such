@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KeyMazeState, KeyMazeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Every game generates a fresh 11×11 maze with keys placed at random open cells. 
   initialState: (seed: number, settings: KeyMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".key-maze-svg")) ? { selector: ".key-maze-svg", pulses: 3 } : null,
   component: KeyMazeGame,
 };

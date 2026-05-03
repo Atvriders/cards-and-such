@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { StoryState, StoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -42,5 +42,6 @@ After all rounds are used, the full story is displayed for the group to read alo
   initialState: (seed: number, settings: StorySettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".sb-wrap")) ? { selector: ".sb-wrap", pulses: 3 } : null,
   component: StoryBuilder,
 };

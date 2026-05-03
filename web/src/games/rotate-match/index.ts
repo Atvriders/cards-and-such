@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RotateMatchState, RotateMatchAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Strategy: set up long runs by aligning partial rows before committing to the fin
   initialState: (seed: number, settings: RotateMatchSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".rotatematch-board")) ? { selector: ".rotatematch-board", pulses: 3 } : null,
   component: RotateMatch,
 };

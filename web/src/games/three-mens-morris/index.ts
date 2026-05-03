@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { GameState, GameAction, ThreeMorrisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ThreeMensMorrisGame } from "./Game.js";
@@ -30,5 +30,6 @@ Tips: the centre is golden — it lies on 4 of the 8 winning lines and connects 
   initialState: (seed: number, s: S) => initialState(seed, s as ThreeMorrisSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mm3-board")) ? { selector: ".mm3-board", pulses: 3 } : null,
   component: ThreeMensMorrisGame,
 };

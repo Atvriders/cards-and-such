@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { IDState, IDAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ The game ends when one player has no pieces left or no legal moves. Click a piec
   initialState: (seed: number, settings: IDSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".intl-draughts-board-wrap")) ? { selector: ".intl-draughts-board-wrap", pulses: 3 } : null,
   component: InternationalDraughts,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TablutState, TablutAction, TablutSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Tablut } from "./Game.js";
@@ -24,5 +24,6 @@ To move: click one of your Defenders or the King to select it (highlighted yello
   initialState: (seed: number, s: TablutSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".tablut-board")) ? { selector: ".tablut-board", pulses: 3 } : null,
   component: Tablut,
 };

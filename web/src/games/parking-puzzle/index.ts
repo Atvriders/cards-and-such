@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ParkingPuzzleState, ParkingPuzzleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ParkingPuzzle } from "./ParkingPuzzle.js";
@@ -29,5 +29,6 @@ Tips: work backward from the red car. Identify which cars are blocking it, then 
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".parking-board")) ? { selector: ".parking-board", pulses: 3 } : null,
   component: ParkingPuzzle,
 };

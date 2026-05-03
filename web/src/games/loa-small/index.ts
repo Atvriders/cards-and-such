@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LoaSmallState, LoaSmallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { LoaSmallGame } from "./Game.js";
@@ -26,5 +26,6 @@ Bot: minimax at depth 2, minimizing your number of connected groups.`,
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".loa-svg")) ? { selector: ".loa-svg", pulses: 3 } : null,
   component: LoaSmallGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MineDelverState, MineDelverAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MineDelver } from "./Game.js";
@@ -22,5 +22,6 @@ Score = 50 base + gold collected + 5 per row reached. Explore greedily but don't
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: MineDelverState, action: MineDelverAction) => MineDelverState,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".md-grid")) ? { selector: ".md-grid", pulses: 3 } : null,
   component: MineDelver,
 } as unknown as GamePlugin;

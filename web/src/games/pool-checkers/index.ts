@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PCState, PCAction, PCSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PoolCheckers } from "./Game.js";
@@ -24,5 +24,6 @@ Beat the bot (minimax depth 4) by promoting kings early and using backward captu
   initialState: (seed: number, s: PCSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".pc-board")) ? { selector: ".pc-board", pulses: 3 } : null,
   component: PoolCheckers,
 };

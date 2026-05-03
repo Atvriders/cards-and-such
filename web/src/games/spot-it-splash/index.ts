@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { SpotItSplashState, SpotItSplashAction, SpotItSplashSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SpotItSplashGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const spotItSplashPlugin: GamePlugin<SpotItSplashState, SpotItSplashActio
   initialState: (seed: number, s: S) => initialState(seed, s as SpotItSplashSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".spotspl-wrap")) ? { selector: ".spotspl-wrap", pulses: 3 } : null,
   component: SpotItSplashGame,
 };

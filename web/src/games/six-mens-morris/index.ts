@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { GameState, GameAction, SixMorrisSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SixMensMorrisGame } from "./Game.js";
@@ -30,5 +30,6 @@ Tips: the four mid-side intersections (where the squares connect) are the most f
   initialState: (seed: number, s: S) => initialState(seed, s as SixMorrisSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".mm6-board")) ? { selector: ".mm6-board", pulses: 3 } : null,
   component: SixMensMorrisGame,
 };

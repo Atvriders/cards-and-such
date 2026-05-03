@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ShogiState, ShogiAction, ShogiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Shogi } from "./Game.js";
@@ -24,5 +24,6 @@ Click a piece to select it; click a highlighted square to move. Click a piece in
   initialState: (seed: number, s: ShogiSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".shogi-board-wrap")) ? { selector: ".shogi-board-wrap", pulses: 3 } : null,
   component: Shogi,
 };

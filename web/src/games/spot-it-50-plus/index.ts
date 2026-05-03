@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget} from "../../platform/game-plugin/types.js";
 import type { SpotIt50PlusState, SpotIt50PlusAction, SpotIt50PlusSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SpotIt50PlusGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const spotIt50PlusPlugin: GamePlugin<SpotIt50PlusState, SpotIt50PlusActio
   initialState: (seed: number, s: S) => initialState(seed, s as SpotIt50PlusSettings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".spot50p-wrap")) ? { selector: ".spot50p-wrap", pulses: 3 } : null,
   component: SpotIt50PlusGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConnectPipesState, ConnectPipesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,6 @@ Strategy tips: Start by connecting pairs whose endpoints are nearest together. L
   initialState: (seed: number, settings: ConnectPipesProSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".connect-pipes-grid")) ? { selector: ".connect-pipes-grid", pulses: 3 } : null,
   component: ConnectPipesPro,
 };
