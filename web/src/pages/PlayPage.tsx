@@ -26,6 +26,7 @@ import { encodeQrModules } from "../platform/qr.js";
 import { track } from "../platform/analytics.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
 import { ErrorBoundary } from "../platform/ErrorBoundary.js";
+import { saveReplay, REPLAY_RING_CAP } from "../platform/replays.js";
 import { hashStamp, todayStamp } from "./dailyPicker.js";
 import "./PlayPage.css";
 import "../platform/ErrorBoundary.css";
@@ -372,15 +373,48 @@ function TimeTrendChart({ history }: { history: TimeHistoryEntry[] }): JSX.Eleme
   const xAt = (i: number): number => padX + (n === 1 ? innerW / 2 : (i / (n - 1)) * innerW);
   const yAt = (t: number): number => padY + innerH - ((t - minT) / range) * innerH;
 
-  const points: Array<{ x: number; y: number; e: TimeHistoryEntry }> = entries.map(
-    (e, i) => ({ x: xAt(i), y: yAt(e.time), e }),
-  );
+  // For each entry compute the personal best across all *prior* entries
+  // (i.e. the standing record going into that run). The first entry has no
+  // prior best, so its delta is undefined. This lets every hover dot show
+  // how that specific run compared to the player's record at the time, and
+  // lets the headline indicator describe the most-recent finish.
+  const prevBestAt = (i: number): number | null => {
+    if (i <= 0) return null;
+    let m = Infinity;
+    for (let j = 0; j < i; j += 1) m = Math.min(m, entries[j].time);
+    return Number.isFinite(m) ? m : null;
+  };
+  const formatDelta = (delta: number): string => {
+    // Round to whole seconds so the label matches the chart's formatSecs.
+    // A negative delta means faster than the previous best — flip the sign
+    // for the human-readable label so the number itself is non-negative.
+    const rounded = Math.round(delta);
+    if (rounded === 0) return "tied personal best";
+    if (rounded < 0) return `-${Math.abs(rounded)}s faster`;
+    return `+${rounded}s slower`;
+  };
+
+  const points: Array<{ x: number; y: number; e: TimeHistoryEntry; prevBest: number | null }> =
+    entries.map((e, i) => ({ x: xAt(i), y: yAt(e.time), e, prevBest: prevBestAt(i) }));
   const pathD = points
     .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(2)} ${p.y.toFixed(2)}`)
     .join(" ");
 
   // The current run is the last entry — highlighted in the accent color.
   const lastIdx = points.length - 1;
+  const lastPoint = points[lastIdx];
+  const lastDelta =
+    lastPoint.prevBest != null ? lastPoint.e.time - lastPoint.prevBest : null;
+  // Three-state pace tone: faster (green), tied (neutral), slower (amber).
+  // We classify on the rounded value so it agrees with the visible label.
+  const lastDeltaTone =
+    lastDelta == null
+      ? "none"
+      : Math.round(lastDelta) < 0
+        ? "faster"
+        : Math.round(lastDelta) === 0
+          ? "tied"
+          : "slower";
 
   return (
     <div className="play-time-chart-block">
@@ -412,11 +446,23 @@ function TimeTrendChart({ history }: { history: TimeHistoryEntry[] }): JSX.Eleme
               stroke={isCurrent ? "#c7cdfe" : "none"}
               strokeWidth={isCurrent ? 1.2 : 0}
             >
-              <title>{`${formatSecs(p.e.time)}${typeof p.e.score === "number" ? ` (score ${p.e.score})` : ""}`}</title>
+              <title>
+                {`${formatSecs(p.e.time)}${typeof p.e.score === "number" ? ` (score ${p.e.score})` : ""}${p.prevBest != null ? ` — ${formatDelta(p.e.time - p.prevBest)} vs personal best` : " — first run"}`}
+              </title>
             </circle>
           );
         })}
       </svg>
+      {lastDelta != null && (
+        <div
+          className={`play-time-pace play-time-pace-${lastDeltaTone}`}
+          data-testid="play-time-pace"
+          data-pace={lastDeltaTone}
+          aria-label={`Latest run ${formatDelta(lastDelta)} vs personal best`}
+        >
+          Latest: {formatDelta(lastDelta)} vs personal best
+        </div>
+      )}
       <div className="play-time-stats-line" data-testid="play-time-stats-line">
         Best: {formatSecs(best)} | Avg: {formatSecs(avg)} | Plays: {n}
       </div>
@@ -507,6 +553,14 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // observed by the reducer, so plugin shape is unchanged.
   const [actionLog, setActionLog] = useState<Array<{ id: number; type: string; ts: number }>>([]);
   const actionLogIdRef = useRef(0);
+  // Replay ring buffer. Holds up to REPLAY_RING_CAP recently dispatched
+  // actions for the current seed so the win banner's "Save replay"
+  // button can persist a `{seed, actions[]}` snapshot. Cleared whenever
+  // a new game starts (startWithSeed / quickstart).
+  const replayBufferRef = useRef<unknown[]>([]);
+  // Echoes the in-flight save so the button can swap to a "Saved" label
+  // briefly. Pure presentation state — never read by the reducer.
+  const [replaySaved, setReplaySaved] = useState(false);
   // Whether the Undo button label should include the current depth, e.g.
   // "Undo (3)". Read once at mount from Settings → Gameplay; default off.
   const showUndoCount = useMemo(() => readShowUndoCount(), []);
@@ -2434,11 +2488,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       )}
 
       {playAchievementToast && (
-        <div
+        <button
+          type="button"
           className="play-achievement-toast"
           data-testid="play-achievement-toast"
           role="status"
           aria-live="polite"
+          aria-label={`Achievement unlocked: ${playAchievementToast.title}. ${playAchievementToast.description}. Press to dismiss.`}
+          title={playAchievementToast.description}
+          onClick={() => {
+            // Tap to dismiss — useful on touch where the 5s auto-hide
+            // can feel slow once the user has already seen the unlock.
+            // Cancels the pending timer so a queued setState doesn't try
+            // to clobber state on an already-dismissed toast.
+            if (achievementToastTimerRef.current) {
+              clearTimeout(achievementToastTimerRef.current);
+              achievementToastTimerRef.current = null;
+            }
+            setPlayAchievementToast(null);
+          }}
         >
           <span className="play-achievement-toast-sparkle" aria-hidden="true">
             ✨
@@ -2449,7 +2517,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           <span className="play-achievement-toast-sparkle" aria-hidden="true">
             ✨
           </span>
-        </div>
+        </button>
       )}
 
       {phase === "playing" && tutorialOpen && tutorialSteps && tutorialSteps.length > 0 && (
