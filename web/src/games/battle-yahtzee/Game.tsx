@@ -16,7 +16,7 @@ export function BattleYahtzeeGame({ state, dispatch, onGameOver }: GameProps<Bat
       <div className="by-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="by-row">{state.dice.map((d, i) => <div key={i} className="by-die">{d}</div>)}</div>}
       {state.message && <div className="by-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="by-btn" onClick={() => dispatch({ type:"roll" } as BattleYahtzeeAction)}>Roll</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-battle-yahtzee-primary" className="by-btn" onClick={() => dispatch({ type:"roll" } as BattleYahtzeeAction)}>Roll</button>}
       {state.phase === "result" && <button className="by-btn alt" onClick={() => dispatch({ type:"next" } as BattleYahtzeeAction)}>Next</button>}
     </div>
   );

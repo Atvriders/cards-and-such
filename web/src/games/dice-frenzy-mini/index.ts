@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceFrenzyMiniState, DiceFrenzyMiniAction, DiceFrenzyMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ The total of all 10 dice is between 10 (all 1s) and 60 (all 6s), so finding any 
 There are 8 rounds. Maximum theoretical score: 8 × 50 = 400 points!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceFrenzyMiniSettings),
-  reducer, isTerminal, component: DiceFrenzyMiniGame,
+  reducer, isTerminal, hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-dice-frenzy-mini-primary"]', pulses: 3 }), component: DiceFrenzyMiniGame,
 };

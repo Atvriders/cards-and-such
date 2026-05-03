@@ -16,7 +16,7 @@ export function TripleYahtzeeGame({ state, dispatch, onGameOver }: GameProps<Tri
       <div className="ty-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="ty-row">{state.dice.map((d, i) => <div key={i} className="ty-die">{d}</div>)}</div>}
       {state.message && <div className="ty-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="ty-btn" onClick={() => dispatch({ type:"roll" } as TripleYahtzeeAction)}>Roll</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-triple-yahtzee-primary" className="ty-btn" onClick={() => dispatch({ type:"roll" } as TripleYahtzeeAction)}>Roll</button>}
       {state.phase === "result" && <button className="ty-btn alt" onClick={() => dispatch({ type:"next" } as TripleYahtzeeAction)}>Next</button>}
     </div>
   );

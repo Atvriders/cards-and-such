@@ -35,7 +35,7 @@ export function YatzyScandGame({ state, dispatch, onGameOver }: GameProps<YatzyS
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as YatzyScandAction)}>Submit</button>}
+        {!isResult && <button data-testid="hint-target-yatzy-scand-primary" className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as YatzyScandAction)}>Submit</button>}
         {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as YatzyScandAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>

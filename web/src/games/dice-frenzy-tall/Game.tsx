@@ -27,7 +27,7 @@ export function DiceFrenzyTallGame({ state, dispatch, onGameOver }: GameProps<Di
       </div>
       {state.phase === "rolling" && (
         <div className="dfrt-row">
-          <button className="dfrt-btn alt" disabled={state.rerollUsed || state.selected.every(s => !s)} onClick={() => dispatch({ type: "reroll" } as DiceFrenzyTallAction)}>Reroll{state.rerollUsed ? " (used)" : ""}</button>
+          <button data-testid="hint-target-dice-frenzy-tall-primary" className="dfrt-btn alt" disabled={state.rerollUsed || state.selected.every(s => !s)} onClick={() => dispatch({ type: "reroll" } as DiceFrenzyTallAction)}>Reroll{state.rerollUsed ? " (used)" : ""}</button>
           <button className="dfrt-btn" onClick={() => dispatch({ type: "lock" } as DiceFrenzyTallAction)}>Lock</button>
         </div>
       )}

@@ -47,7 +47,7 @@ export function DiceTournamentGame({ state, dispatch, onGameOver }: GameProps<Di
       )}
       <div className="to-log">{state.log || "Roll 2d6 against your rival. First to 2 wins."}</div>
       {(state.phase === "ready" || state.phase === "result") && (
-        <button className="to-btn" onClick={() => dispatch({ type: "play" } as DiceTournamentAction)}>Roll</button>
+        <button data-testid="hint-target-dice-tournament-primary" className="to-btn" onClick={() => dispatch({ type: "play" } as DiceTournamentAction)}>Roll</button>
       )}
       {state.phase === "match-result" && (
         <button className="to-btn alt" onClick={() => dispatch({ type: "next" } as DiceTournamentAction)}>Continue</button>

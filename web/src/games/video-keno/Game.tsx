@@ -60,7 +60,7 @@ export function VideoKenoGame({
 
       <div className="keno-actions">
         {phase === "picking" && (
-          <button onClick={() => dis({ type: "draw" })} disabled={needMore}>
+          <button data-testid="hint-target-video-keno-primary" onClick={() => dis({ type: "draw" })} disabled={needMore}>
             {needMore ? `Pick ${pickCount - playerPicks.length} more` : "Draw!"}
           </button>
         )}

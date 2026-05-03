@@ -79,7 +79,7 @@ export function MiniCeeLoGame({ state, dispatch, onGameOver }: GameProps<MiniCee
 
       <div className="ceelo-controls">
         {state.phase === "ready" && (
-          <button className="ceelo-btn" onClick={() => dispatch({ type: "roll" } as MiniCeeLoAction)}>
+          <button data-testid="hint-target-mini-cee-lo-primary" className="ceelo-btn" onClick={() => dispatch({ type: "roll" } as MiniCeeLoAction)}>
             Roll!
           </button>
         )}

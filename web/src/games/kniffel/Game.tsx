@@ -16,7 +16,7 @@ export function KniffelGame({ state, dispatch, onGameOver }: GameProps<KniffelSt
       <div className="kn-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="kn-row">{state.dice.map((d, i) => <div key={i} className="kn-die">{d}</div>)}</div>}
       {state.message && <div className="kn-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="kn-btn" onClick={() => dispatch({ type:"roll" } as KniffelAction)}>Roll</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-kniffel-primary" className="kn-btn" onClick={() => dispatch({ type:"roll" } as KniffelAction)}>Roll</button>}
       {state.phase === "result" && <button className="kn-btn alt" onClick={() => dispatch({ type:"next" } as KniffelAction)}>Next</button>}
     </div>
   );

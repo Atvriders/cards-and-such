@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceFrenzyTallState, DiceFrenzyTallAction, DiceFrenzyTallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ A successful ascending stack scores 30 points. A failed stack scores 0. There ar
 Strategy: identify the worst-positioned dice first. If you've got 1-5-3-4-6, the 5 ruins the order — reroll just the 5 hoping for a 2 or 3. With one reroll only, careful targeting matters more than rerolling everything. The probability of randomly rolling a non-decreasing sequence of 5 dice from 6-sided dice is roughly 18%, so plan accordingly.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceFrenzyTallSettings),
-  reducer, isTerminal, component: DiceFrenzyTallGame,
+  reducer, isTerminal, hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-dice-frenzy-tall-primary"]', pulses: 3 }), component: DiceFrenzyTallGame,
 };

@@ -44,7 +44,7 @@ export function DiceTowerMiniGame({ state, dispatch, onGameOver }: GameProps<Dic
         <button className="tw-btn" onClick={() => dispatch({ type: "climb" } as DiceTowerMiniAction)}>Climb (Attempt {state.attempts + 1} / 3)</button>
       )}
       {state.phase === "result" && (
-        <button className="tw-btn alt" onClick={() => dispatch({ type: "next" } as DiceTowerMiniAction)}>Continue</button>
+        <button data-testid="hint-target-dice-tower-mini-primary" className="tw-btn alt" onClick={() => dispatch({ type: "next" } as DiceTowerMiniAction)}>Continue</button>
       )}
     </div>
   );

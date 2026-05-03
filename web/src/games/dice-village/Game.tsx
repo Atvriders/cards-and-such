@@ -54,7 +54,7 @@ export function DiceVillageGame({ state, dispatch, onGameOver }: GameProps<DiceV
       )}
       <div className="vi-log">{state.log || "Roll three dice. Different buildings need different rolls."}</div>
       {state.phase === "roll" && (
-        <button className="vi-btn" onClick={() => dispatch({ type: "roll" } as DiceVillageAction)}>Roll Workers</button>
+        <button data-testid="hint-target-dice-village-primary" className="vi-btn" onClick={() => dispatch({ type: "roll" } as DiceVillageAction)}>Roll Workers</button>
       )}
       {state.phase === "build" && state.rolls && (
         <div className="vi-actions">

@@ -16,7 +16,7 @@ export function JumboYahtzeeGame({ state, dispatch, onGameOver }: GameProps<Jumb
       <div className="jy-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="jy-row">{state.dice.map((d, i) => <div key={i} className="jy-die">{d}</div>)}</div>}
       {state.message && <div className="jy-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="jy-btn" onClick={() => dispatch({ type:"roll" } as JumboYahtzeeAction)}>Roll</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-jumbo-yahtzee-primary" className="jy-btn" onClick={() => dispatch({ type:"roll" } as JumboYahtzeeAction)}>Roll</button>}
       {state.phase === "result" && <button className="jy-btn alt" onClick={() => dispatch({ type:"next" } as JumboYahtzeeAction)}>Next</button>}
     </div>
   );

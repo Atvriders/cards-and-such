@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiniCeeLoState, MiniCeeLoAction, MiniCeeLoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Press Roll to attempt a hand, see the result, then Next to continue.
 There are ten rounds. About 28% of rolls produce a scorable result (pair + point or better), so an average run scores around 60-100 points. Lucky 4-5-6s and triples can push past 200. Long droughts are common, but one big roll changes everything. Play it cool!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniCeeLoSettings),
-  reducer,isTerminal,component:MiniCeeLoGame,
+  reducer,isTerminal,hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-mini-cee-lo-primary"]', pulses: 3 }), component:MiniCeeLoGame,
 };

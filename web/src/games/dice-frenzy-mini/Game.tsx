@@ -27,7 +27,7 @@ export function DiceFrenzyMiniGame({ state, dispatch, onGameOver }: GameProps<Di
         ))}
       </div>
       {state.phase === "selecting" && (
-        <button className="dfrm-btn" onClick={() => dispatch({ type: "submit" } as DiceFrenzyMiniAction)}>Lock In</button>
+        <button data-testid="hint-target-dice-frenzy-mini-primary" className="dfrm-btn" onClick={() => dispatch({ type: "submit" } as DiceFrenzyMiniAction)}>Lock In</button>
       )}
       {state.phase === "result" && (
         <>

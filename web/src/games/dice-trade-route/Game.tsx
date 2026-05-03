@@ -48,7 +48,7 @@ export function DiceTradeRouteGame({ state, dispatch, onGameOver }: GameProps<Di
         </div>
       )}
       {state.phase === "result" && (
-        <button className="tr-btn next" onClick={() => dispatch({ type: "next" } as DiceTradeRouteAction)}>Travel On</button>
+        <button data-testid="hint-target-dice-trade-route-primary" className="tr-btn next" onClick={() => dispatch({ type: "next" } as DiceTradeRouteAction)}>Travel On</button>
       )}
     </div>
   );

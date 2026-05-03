@@ -16,7 +16,7 @@ export function GeneralaDobleGame({ state, dispatch, onGameOver }: GameProps<Gen
       <div className="gd-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="gd-row">{state.dice.map((d, i) => <div key={i} className="gd-die">{d}</div>)}</div>}
       {state.message && <div className="gd-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="gd-btn" onClick={() => dispatch({ type:"roll" } as GeneralaDobleAction)}>Roll</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-generala-doble-primary" className="gd-btn" onClick={() => dispatch({ type:"roll" } as GeneralaDobleAction)}>Roll</button>}
       {state.phase === "result" && <button className="gd-btn alt" onClick={() => dispatch({ type:"next" } as GeneralaDobleAction)}>Next</button>}
     </div>
   );

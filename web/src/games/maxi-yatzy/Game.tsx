@@ -16,7 +16,7 @@ export function MaxiYatzyGame({ state, dispatch, onGameOver }: GameProps<MaxiYat
       <div className="mx-score">{state.score} pts</div>
       {state.dice.length > 0 && <div className="mx-row">{state.dice.map((d, i) => <div key={i} className="mx-die">{d}</div>)}</div>}
       {state.message && <div className="mx-result">{state.message}</div>}
-      {state.phase === "roll" && <button className="mx-btn" onClick={() => dispatch({ type:"roll" } as MaxiYatzyAction)}>Roll</button>}
+      {state.phase === "roll" && <button data-testid="hint-target-maxi-yatzy-primary" className="mx-btn" onClick={() => dispatch({ type:"roll" } as MaxiYatzyAction)}>Roll</button>}
       {state.phase === "result" && <button className="mx-btn alt" onClick={() => dispatch({ type:"next" } as MaxiYatzyAction)}>Next</button>}
     </div>
   );

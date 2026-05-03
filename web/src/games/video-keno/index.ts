@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VideoKenoState, VideoKenoAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -48,5 +48,6 @@ Strategy tips: Picking fewer numbers (2–4 spots) gives more frequent but small
   initialState: (seed: number, settings: Settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state): HintTarget | null => (false ? null : { selector: '[data-testid="hint-target-video-keno-primary"]', pulses: 3 }),
   component: VideoKenoGame,
 };
