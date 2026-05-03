@@ -556,4 +556,89 @@ describe("LobbyPage — favorites drag-reorder (W397)", () => {
     const order = favTiles().map((t) => t.getAttribute("data-fav-drag-id"));
     expect(order).toEqual(persisted);
   });
+
+  // W513 — dropping a tile onto itself must be a no-op: the drop
+  // handler short-circuits when src === dst so the persisted
+  // `cards-favorites-order` blob is never rewritten with a redundant
+  // (and thus visually meaningless) order. This pins the no-op gate so
+  // a regression that always writes on drop — even when nothing moved
+  // — would surface as a stray localStorage write here.
+  it("W513: dropping a favorite tile onto itself does not write cards-favorites-order", async () => {
+    renderAt("/");
+    await waitFor(() => {
+      expect(favTiles().length).toBeGreaterThanOrEqual(FAV_IDS.length);
+    });
+    // Precondition: nothing has been persisted yet — a fresh mount with
+    // no prior drag must not seed the order key on its own.
+    expect(localStorage.getItem("cards-favorites-order")).toBeNull();
+
+    const tiles = favTiles();
+    const self = tiles[1]; // fam-klondike — middle tile, arbitrary
+    const dataTransfer = {
+      effectAllowed: "",
+      dropEffect: "",
+      setData: vi.fn(),
+      getData: vi.fn(() => ""),
+    };
+    fireEvent.dragStart(self, { dataTransfer });
+    fireEvent.dragOver(self, { dataTransfer });
+    fireEvent.drop(self, { dataTransfer });
+
+    // The src===dst guard inside onFavDrop must keep the persistence
+    // key untouched so reloads don't pin the default order from a
+    // self-drop accident.
+    expect(localStorage.getItem("cards-favorites-order")).toBeNull();
+  });
+
+  // W513 — two consecutive drags must compose: the second drag operates
+  // on the post-first-drag visible order, not the original alphabetical
+  // baseline. This guards against a regression where `onFavDrop` reads
+  // a stale `currentIds` snapshot (e.g. memoized by closure) and would
+  // therefore re-derive the second move from the original order.
+  it("W513: a second drag composes on top of the first drag's persisted order", async () => {
+    renderAt("/");
+    await waitFor(() => {
+      expect(favTiles().length).toBeGreaterThanOrEqual(FAV_IDS.length);
+    });
+    // Default visible order: freecell → klondike → spider.
+    const dataTransfer = {
+      effectAllowed: "",
+      dropEffect: "",
+      setData: vi.fn(),
+      getData: vi.fn(() => ""),
+    };
+
+    // Drag 1: spider onto freecell → [spider, freecell, klondike].
+    {
+      const tiles = favTiles();
+      const src = tiles[2]; // fam-spider
+      const dst = tiles[0]; // fam-freecell
+      fireEvent.dragStart(src, { dataTransfer });
+      fireEvent.dragOver(dst, { dataTransfer });
+      fireEvent.drop(dst, { dataTransfer });
+    }
+    expect(localStorage.getItem("cards-favorites-order")).toBe(
+      JSON.stringify(["fam-spider", "fam-freecell", "fam-klondike"]),
+    );
+
+    // Drag 2: now the visible order is [spider, freecell, klondike].
+    // Drag klondike (currently last) onto spider (currently first) →
+    // [klondike, spider, freecell]. If the drop handler regressed to
+    // operate on the alphabetical baseline, it would emit
+    // [klondike, freecell, spider] instead.
+    await waitFor(() => {
+      const order = favTiles().map((t) => t.getAttribute("data-fav-drag-id"));
+      expect(order).toEqual(["fam-spider", "fam-freecell", "fam-klondike"]);
+    });
+    const tiles2 = favTiles();
+    const src2 = tiles2[2]; // fam-klondike
+    const dst2 = tiles2[0]; // fam-spider
+    fireEvent.dragStart(src2, { dataTransfer });
+    fireEvent.dragOver(dst2, { dataTransfer });
+    fireEvent.drop(dst2, { dataTransfer });
+
+    expect(localStorage.getItem("cards-favorites-order")).toBe(
+      JSON.stringify(["fam-klondike", "fam-spider", "fam-freecell"]),
+    );
+  });
 });
