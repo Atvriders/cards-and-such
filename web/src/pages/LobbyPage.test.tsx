@@ -1109,6 +1109,84 @@ describe("LobbyPage — tile hover-tooltip 500ms delay (W197)", () => {
       screen.getByTestId("tile-tooltip-klondike"),
     ).toBeInTheDocument();
   });
+
+  /**
+   * W197 — lazy-hydration on a *different* canonical tile, with an
+   * explicit cross-tile negative assertion.
+   *
+   * The sibling test above pins the contract on `tile-klondike` and
+   * asserts the post-advance tooltip count equals 1. A regression that
+   * always mounts (say) the first-in-DOM-order tile's tooltip in
+   * response to *any* hover would still pass that test if klondike
+   * happens to be the first tile rendered — the count check stays
+   * green and the identity check coincidentally matches.
+   *
+   * This test closes that loophole by hovering `tile-freecell`
+   * (another canonical solitaire family id, see web/src/games/families.ts
+   * — sibling to klondike, also rendered on the default lobby view but
+   * at a different DOM position) and explicitly asserting that BOTH
+   * sides of the lazy gate hold:
+   *   1. Pre-hover, NO tile-tooltip-* nodes exist (gate honoured for
+   *      the entire grid, not just klondike).
+   *   2. Hovering freecell only, then advancing fake timers by the
+   *      500ms hover-intent threshold, mounts EXACTLY `tile-tooltip-
+   *      freecell` — and crucially `tile-tooltip-klondike` (the
+   *      canonical sibling target the rest of the suite hovers) stays
+   *      ABSENT, proving the engine hydrates the tile the user actually
+   *      interacted with rather than a hard-coded default.
+   */
+  it("W197: hovering a different tile mounts only that tile's tooltip after 500ms", () => {
+    renderAt("/");
+
+    // Sanity: the lobby renders many tiles — same 50+ floor as the
+    // sibling tests so a future tile-pruning regression surfaces
+    // visibly here too.
+    const tiles = document.querySelectorAll('[data-testid^="tile-"]');
+    expect(tiles.length).toBeGreaterThanOrEqual(50);
+
+    // Pre-hover invariant: zero tile-tooltip-* nodes anywhere — the
+    // engine stays dormant for every tile until first interaction.
+    expect(
+      document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
+    ).toBe(0);
+
+    // Hover the freecell tile (NOT klondike — the cross-tile axis is
+    // the whole point of this companion test). The hover-intent timer
+    // begins; the floating node must not yet be in the DOM.
+    const target = screen.getByTestId("tile-freecell");
+    fireEvent.mouseEnter(target);
+
+    // Advance fake timers across the 500ms threshold — the engine's
+    // setTimeout fires, flipping visible=true and rendering the
+    // floating tooltip into the DOM.
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+
+    // Exactly one tooltip mounted, and it is freecell's. Pinning the
+    // identity here (rather than just the count) catches a regression
+    // that hydrates the wrong tile — e.g. always the first DOM-order
+    // tile, or always klondike because some default got hard-coded.
+    const tooltips = document.querySelectorAll(
+      '[data-testid^="tile-tooltip-"]',
+    );
+    expect(tooltips.length).toBe(1);
+    expect(tooltips[0]?.getAttribute("data-testid")).toBe(
+      "tile-tooltip-freecell",
+    );
+    expect(
+      screen.getByTestId("tile-tooltip-freecell"),
+    ).toBeInTheDocument();
+
+    // Cross-tile negative assertion: the canonical sibling
+    // `tile-tooltip-klondike` (the target every other W197 test
+    // hovers) MUST stay absent. A regression that splash-hydrates
+    // siblings, or one that always picks klondike regardless of
+    // which tile was hovered, would surface here as a stray node.
+    expect(
+      screen.queryByTestId("tile-tooltip-klondike"),
+    ).not.toBeInTheDocument();
+  });
 });
 
 /**
@@ -1609,6 +1687,52 @@ describe("LobbyPage — search clear button (W608)", () => {
     expect(
       screen.queryByRole("button", { name: /clear search/i }),
     ).not.toBeInTheDocument();
+  });
+
+  // W608 — companion test pinning the *behavioral* outcome of clearing,
+  // not just the input-emptied state above. While a query is active, the
+  // lobby grid filters down to matching tiles and prunes the rest; the
+  // canonical evidence of "clear button restored the unfiltered pool" is
+  // that a tile which was filtered OUT during the query reappears after
+  // the click. We use `tile-pool-9ball` as the canary: a stand-alone
+  // game (no family, distinct id) that is not a substring of the
+  // "klondike" query and therefore must be pruned during the search and
+  // re-rendered on clear. This guards against a regression that wires
+  // the X to clear only the input value but forgets to flow through
+  // `setQuery` (which drives the filter recomputation downstream).
+  it("clearing the search restores tiles that were filtered out by the query", async () => {
+    renderAt("/");
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+
+    // Baseline: a non-matching, stand-alone game tile is visible in the
+    // unfiltered grid. `pool-9ball` is a stable stand-alone game id whose
+    // label does not contain "klondike" — picking a different family-
+    // prefixed canary would risk false-positives if the family label
+    // happened to share characters.
+    const canary = await waitFor(() =>
+      screen.getByTestId("tile-pool-9ball"),
+    );
+    expect(canary).toBeInTheDocument();
+
+    // Type the canonical solitaire query — `pool-9ball` does not match
+    // "klondike" anywhere in its label/aliases, so it must be pruned
+    // from the filtered grid.
+    fireEvent.change(search, { target: { value: "klondike" } });
+    await waitFor(() => {
+      expect(screen.queryByTestId("tile-pool-9ball")).not.toBeInTheDocument();
+    });
+
+    // Click the clear button — this is the assertion-of-record for the
+    // W608 contract: the X must trigger `setQuery("")` so the filtered
+    // pool is recomputed against the empty query, restoring every tile.
+    fireEvent.click(screen.getByRole("button", { name: /clear search/i }));
+
+    // The canary tile is back. Pinning the post-clear visibility (rather
+    // than just `search.value === ""`) is what proves the click flowed
+    // through to the filter pipeline, not merely the input element.
+    await waitFor(() => {
+      expect(screen.getByTestId("tile-pool-9ball")).toBeInTheDocument();
+    });
   });
 });
 
