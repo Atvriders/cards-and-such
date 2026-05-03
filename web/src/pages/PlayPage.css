@@ -534,6 +534,16 @@
   background: rgba(129, 140, 248, 0.18);
 }
 
+.play-friend-qr {
+  display: inline-block;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+  border-radius: 4px;
+  background: #fff;
+  padding: 2px;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.2);
+}
+
 /* How-to-play (inline + modal) */
 .setup-panel .how-to-play {
   margin-bottom: 1.25rem;
@@ -1265,6 +1275,59 @@
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Achievement-unlock celebratory toast ----------
+   Centered banner that surfaces when a freshly-finished round crosses an
+   achievement threshold. Lives above the action toast queue (different
+   placement + stronger styling) so the unlock reads as a special moment
+   rather than another transient action breadcrumb. */
+.play-achievement-toast {
+  position: fixed;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.96), rgba(217, 70, 239, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 18px 38px -12px rgba(99, 102, 241, 0.55), 0 0 0 4px rgba(129, 140, 248, 0.18);
+  z-index: 480;
+  pointer-events: none;
+  animation: achievement-pop 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.play-achievement-toast-sparkle {
+  display: inline-block;
+  font-size: 1.05rem;
+  animation: achievement-sparkle 1.4s ease-in-out infinite;
+}
+.play-achievement-toast-text {
+  white-space: nowrap;
+  max-width: min(70vw, 420px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@keyframes achievement-pop {
+  from { opacity: 0; transform: translate(-50%, -8px) scale(0.94); }
+  to   { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+@keyframes achievement-sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50%      { transform: scale(1.25) rotate(12deg); opacity: 0.7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .play-achievement-toast,
+  .play-achievement-toast-sparkle {
+    animation: none;
+  }
 }
 
 /* ---------- Mobile header collapse ---------- */

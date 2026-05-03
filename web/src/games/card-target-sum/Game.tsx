@@ -14,7 +14,7 @@ export function CardTargetSumGame({ state, dispatch, onGameOver }: GameProps<Car
         const sel = state.selected.includes(i);
         return <button key={i} className={`dm-card ${isRed(c) ? "red" : "black"}${sel ? " selected" : ""}`} disabled={state.phase !== "play"} style={{ outline: sel ? "3px solid #3498db" : "none" }} onClick={() => dispatch({ type:"toggle", idx:i } as CardTargetSumAction)}>{cardName(c)}<br/><small>{pipValue(c)}</small></button>;
       })}</div>
-      {state.phase === "play" && <button className="dm-btn" disabled={state.selected.length !== 3} onClick={() => dispatch({ type:"submit" } as CardTargetSumAction)}>Submit ({state.selected.length}/3)</button>}
+      {state.phase === "play" && <button data-testid="hint-target-card-target-sum-primary" className="dm-btn" disabled={state.selected.length !== 3} onClick={() => dispatch({ type:"submit" } as CardTargetSumAction)}>Submit ({state.selected.length}/3)</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">Sum {state.sum} (target {state.target}) — +{state.pts}</div>
         <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as CardTargetSumAction)}>Next</button>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardTargetSumState, CardTargetSumAction, CardTargetSumSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Tap a card to select or deselect it. Once you have exactly three selected, press
 There are ten rounds. Top scoring runs over 200 points show genuine arithmetic chops; even hitting target dead-on twice is impressive given the random draws. Stay sharp and weigh combinations carefully — there are 20 different ways to pick 3 from 6.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardTargetSumSettings),
-  reducer,isTerminal,component:CardTargetSumGame,
+  reducer,isTerminal, hint: (state: CardTargetSumState): HintTarget | null => (state.phase === "play" ? { selector: '[data-testid="hint-target-card-target-sum-primary"]', pulses: 3 } : null),component:CardTargetSumGame,
 };

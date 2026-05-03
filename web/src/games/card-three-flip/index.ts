@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardThreeFlipState, CardThreeFlipAction, CardThreeFlipSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Over 10 or 20 rounds, your points accumulate to form your final score. Consisten
 Choose your round count in Settings. The deck reshuffles at the start of each game, so every session is different. Aim to beat your best score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardThreeFlipSettings),
-  reducer, isTerminal, component: CardThreeFlip,
+  reducer, isTerminal, hint: (state: CardThreeFlipState): HintTarget | null => (state.phase === "waiting" ? { selector: '[data-testid="hint-target-card-three-flip-primary"]', pulses: 3 } : null), component: CardThreeFlip,
 };

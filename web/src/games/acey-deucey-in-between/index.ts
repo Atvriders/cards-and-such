@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AceyDeuceyInBetweenState, AceyDeuceyInBetweenAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AceyDeuceyInBetweenGame } from "./Game.js";
@@ -26,5 +26,6 @@ The seed determines the entire shuffle sequence, so you can replay an identical 
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: AceyDeuceyInBetweenState): HintTarget | null => (state.phase === "ready" ? { selector: '[data-testid="hint-target-acey-deucey-in-between-primary"]', pulses: 3 } : null),
   component: AceyDeuceyInBetweenGame,
 };

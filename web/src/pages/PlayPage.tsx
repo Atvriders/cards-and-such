@@ -16,11 +16,13 @@ import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
 import { StatsPanel } from "../platform/StatsPanel.js";
 import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import { recordPlayed } from "../platform/quickstart.js";
+import { recordGame, loadStats, ACHIEVEMENTS, type Achievement } from "../platform/stats.js";
 import { appendTimeHistory, readTimeHistory, toggleFavorite, type TimeHistoryEntry } from "../platform/userdata.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import { encodeChallenge, MAX_FRIEND_SEED } from "../platform/friendCode.js";
+import { encodeQrModules } from "../platform/qr.js";
 import { track } from "../platform/analytics.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
 import { ErrorBoundary } from "../platform/ErrorBoundary.js";
@@ -512,6 +514,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // that React keys stay stable as older toasts fall off the front.
   const [toasts, setToasts] = useState<ActionToast[]>([]);
   const toastIdRef = useRef(0);
+  // Celebratory toast surfaced when finishing a game unlocks one or more
+  // achievements. Holds the most-recently unlocked entry so the banner
+  // shows a single named achievement; auto-dismisses after a few seconds.
+  const [playAchievementToast, setPlayAchievementToast] =
+    useState<Achievement | null>(null);
+  const achievementToastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Session metadata for the info popover.
   const [infoOpen, setInfoOpen] = useState(false);
   const sessionStartRef = useRef<Date | null>(null);
@@ -1000,6 +1008,65 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     [plugin.id],
   );
 
+  /**
+   * Persist the just-finished round via `recordGame`, snapshotting
+   * `unlocked` before/after so we can surface a celebratory toast for
+   * any achievement that crossed the threshold *during this play*.
+   *
+   * The diff is the source of truth — we never trust ACHIEVEMENTS order
+   * or rely on `recordGame`'s own toast (that path uses the global
+   * `useToast` store; this surfaces a play-page-scoped banner with a
+   * dedicated test id so e2e tests can assert without coupling to the
+   * generic toast queue). Only the most-recent unlock is featured to
+   * keep the banner uncluttered when a single play happens to clear
+   * several at once.
+   */
+  const recordWithAchievementToast = useCallback(
+    (score: number, won: boolean, time: number) => {
+      const before = new Set(loadStats().unlocked);
+      const after = recordGame(plugin.id, score, won, time);
+      const newlyUnlocked: Achievement[] = [];
+      for (const id of after.unlocked) {
+        if (before.has(id)) continue;
+        const ach = ACHIEVEMENTS.find((a) => a.id === id);
+        if (ach) newlyUnlocked.push(ach);
+      }
+      if (newlyUnlocked.length === 0) return;
+      // Show the last new unlock — `recordGame` walks ACHIEVEMENTS in
+      // declaration order, so the trailing entry is the "most advanced"
+      // one cleared this round. Earlier unlocks still surface via the
+      // global toast inside `recordGame`.
+      const featured = newlyUnlocked[newlyUnlocked.length - 1]!;
+      setPlayAchievementToast(featured);
+      try {
+        if (typeof window !== "undefined") {
+          emitSparkles(window.innerWidth / 2, window.innerHeight / 2);
+        }
+      } catch {
+        /* sparkles unavailable */
+      }
+      if (achievementToastTimerRef.current) {
+        clearTimeout(achievementToastTimerRef.current);
+      }
+      achievementToastTimerRef.current = setTimeout(() => {
+        setPlayAchievementToast(null);
+        achievementToastTimerRef.current = null;
+      }, 5000);
+    },
+    [plugin.id],
+  );
+
+  // Tear down any in-flight achievement-toast timer on unmount so we
+  // don't try to setState on an unmounted PlayPage during fast nav.
+  useEffect(() => {
+    return () => {
+      if (achievementToastTimerRef.current) {
+        clearTimeout(achievementToastTimerRef.current);
+        achievementToastTimerRef.current = null;
+      }
+    };
+  }, []);
+
   const dispatch = useCallback(
     (action: unknown) => {
       actionCountRef.current += 1;
@@ -1054,6 +1121,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           // history so the info popover trend chart reflects all plays.
           setTimeHistory(appendTimeHistory(plugin.id, elapsed, term.score));
           void submitScore(plugin.id, term.score, settings as Record<string, unknown>);
+          recordWithAchievementToast(term.score, term.score > 0, elapsed);
           track(term.score > 0 ? "game.win" : "game.lose", {
             gameId: plugin.id,
             score: term.score,
@@ -1063,7 +1131,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         return next;
       });
     },
-    [plugin, settings, elapsed, recordBest, pushToast],
+    [plugin, settings, elapsed, recordBest, pushToast, recordWithAchievementToast],
   );
 
   /**
@@ -1177,13 +1245,14 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       // trend chart reflects all plays — not just personal-best winners.
       setTimeHistory(appendTimeHistory(plugin.id, elapsed, score));
       void submitScore(plugin.id, score, settings as Record<string, unknown>);
+      recordWithAchievementToast(score, score > 0, elapsed);
       track(score > 0 ? "game.win" : "game.lose", {
         gameId: plugin.id,
         score,
         elapsed,
       });
     },
-    [plugin.id, settings, elapsed, recordBest],
+    [plugin.id, settings, elapsed, recordBest, recordWithAchievementToast],
   );
 
   const showProminentSeed = plugin.id === "klondike" || plugin.id === "freecell" || plugin.id === "spider";
@@ -2244,6 +2313,55 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               </>
             );
           })()}
+          {(() => {
+            // Render a small QR code of the friend URL so a phone can
+            // scan straight into the seeded game. Encoder caps at QR
+            // version 10 (~213 byte chars) which comfortably fits the
+            // canonical share URL format.
+            const origin =
+              typeof window !== "undefined" && window.location && window.location.origin
+                ? window.location.origin
+                : "https://cards.waterburp.com";
+            const url = `${origin}/play/${plugin.id}?seed=${seed}&friend=1`;
+            const qr = encodeQrModules(url);
+            if (!qr) return null;
+            const px = 3;
+            const margin = 2;
+            const total = (qr.size + margin * 2) * px;
+            const rects: JSX.Element[] = [];
+            for (let r = 0; r < qr.size; r++) {
+              for (let c = 0; c < qr.size; c++) {
+                if (!qr.modules[r][c]) continue;
+                rects.push(
+                  <rect
+                    key={`${r}-${c}`}
+                    x={(c + margin) * px}
+                    y={(r + margin) * px}
+                    width={px}
+                    height={px}
+                    fill="#000"
+                  />,
+                );
+              }
+            }
+            return (
+              <svg
+                className="play-friend-qr"
+                data-testid="play-friend-qr"
+                role="img"
+                aria-label={`QR code for ${url}`}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox={`0 0 ${total} ${total}`}
+                width={total}
+                height={total}
+                shapeRendering="crispEdges"
+              >
+                <title>Scan to open this seeded game on another device</title>
+                <rect width={total} height={total} fill="#fff" />
+                {rects}
+              </svg>
+            );
+          })()}
         </div>
       )}
 
@@ -2312,6 +2430,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               {toast.message}
             </div>
           ))}
+        </div>
+      )}
+
+      {playAchievementToast && (
+        <div
+          className="play-achievement-toast"
+          data-testid="play-achievement-toast"
+          role="status"
+          aria-live="polite"
+        >
+          <span className="play-achievement-toast-sparkle" aria-hidden="true">
+            ✨
+          </span>
+          <span className="play-achievement-toast-text">
+            Achievement unlocked: {playAchievementToast.title}
+          </span>
+          <span className="play-achievement-toast-sparkle" aria-hidden="true">
+            ✨
+          </span>
         </div>
       )}
 
@@ -2481,6 +2618,26 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             >
               Print
             </button>
+            {isWin && (
+              <button
+                type="button"
+                onClick={() => {
+                  saveReplay({
+                    gameId: plugin.id,
+                    seed,
+                    actions: replayBufferRef.current,
+                  });
+                  setReplaySaved(true);
+                  track("play.replay_saved", { gameId: plugin.id, seed });
+                }}
+                className="play-share-pill"
+                data-testid="play-save-replay"
+                aria-label="Save replay"
+                title="Store this game's seed and recent actions to your replays"
+              >
+                {replaySaved ? "Replay saved" : "Save replay"}
+              </button>
+            )}
           </div>
 
           <StatsPanel gameId={plugin.id} bestTime={bestTime} />

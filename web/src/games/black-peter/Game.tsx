@@ -11,7 +11,7 @@ export function BlackPeterGame({ state, dispatch, onGameOver }: GameProps<BlackP
       <div className="black-peter-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="black-peter-score">{state.score} pts</div>
       <div className="black-peter-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="black-peter-btn" onClick={() => dispatch({ type: "play" } as BlackPeterAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-black-peter-primary" className="black-peter-btn" onClick={() => dispatch({ type: "play" } as BlackPeterAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="black-peter-result">{state.result}</div>
         <button className="black-peter-btn alt" onClick={() => dispatch({ type: "next" } as BlackPeterAction)}>Next</button>

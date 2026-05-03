@@ -25,7 +25,7 @@ export function CardPickThree({ state, dispatch, onGameOver }: GameProps<CardPic
       </div>
       {state.phase === "result" && <p className="ctf-msg">+{state.lastScore} pts!</p>}
       <div className="ctf-actions">
-        {state.phase === "picking" && <button className="ctf-btn" disabled={state.picked.length!==3} onClick={()=>dispatch({type:"confirm"} as CardPickThreeAction)}>Confirm Pick</button>}
+        {state.phase === "picking" && <button data-testid="hint-target-card-pick-three-primary" className="ctf-btn" disabled={state.picked.length!==3} onClick={()=>dispatch({type:"confirm"} as CardPickThreeAction)}>Confirm Pick</button>}
         {state.phase === "result" && <button className="ctf-btn" onClick={()=>dispatch({type:"next"} as CardPickThreeAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
       </div>
     </div>

@@ -11,7 +11,7 @@ export function CapitalismGame({ state, dispatch, onGameOver }: GameProps<Capita
       <div className="capitalism-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="capitalism-score">{state.score} pts</div>
       <div className="capitalism-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="capitalism-btn" onClick={() => dispatch({ type: "play" } as CapitalismAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-capitalism-primary" className="capitalism-btn" onClick={() => dispatch({ type: "play" } as CapitalismAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="capitalism-result">{state.result}</div>
         <button className="capitalism-btn alt" onClick={() => dispatch({ type: "next" } as CapitalismAction)}>Next</button>

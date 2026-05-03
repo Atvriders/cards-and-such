@@ -18,7 +18,7 @@ export function CardThreeFlip({ state, dispatch, onGameOver }: GameProps<CardThr
       </div>
       {state.phase === "revealed" && <p className="ctf-msg">+{state.lastScore} pts (best rank: {rankName(state.flipped.reduce((a,b)=>(b%13>a%13?b:a)))})</p>}
       <div className="ctf-actions">
-        {state.phase === "waiting" && <button className="ctf-btn" onClick={() => dispatch({ type:"flip" } as CardThreeFlipAction)}>Flip 3 Cards</button>}
+        {state.phase === "waiting" && <button data-testid="hint-target-card-three-flip-primary" className="ctf-btn" onClick={() => dispatch({ type:"flip" } as CardThreeFlipAction)}>Flip 3 Cards</button>}
         {state.phase === "revealed" && <button className="ctf-btn" onClick={() => dispatch({ type:"next" } as CardThreeFlipAction)}>{state.round >= state.maxRounds ? "Finish" : "Next Round"}</button>}
       </div>
     </div>

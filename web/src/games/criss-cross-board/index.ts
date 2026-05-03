@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrissCrossBoardState, CrissCrossBoardAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CrissCrossBoard } from "./Game.js";
@@ -18,5 +18,6 @@ export const crissCrossBoardPlugin: GamePlugin<CrissCrossBoardState, CrissCrossB
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (state: CrissCrossBoardState): HintTarget | null => (state.phase === "ready" ? { selector: '[data-testid="hint-target-criss-cross-board-primary"]', pulses: 3 } : null),
   component: CrissCrossBoard,
 };

@@ -12,7 +12,7 @@ export function AceAlleyGame({ state, dispatch, onGameOver }: GameProps<AceAlley
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts (Aces: {state.aces})</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
-      {state.phase === "drawing" && <button className="cm-btn" onClick={() => dispatch({ type:"draw" } as AceAlleyAction)}>Draw</button>}
+      {state.phase === "drawing" && <button data-testid="hint-target-ace-alley-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as AceAlleyAction)}>Draw</button>}
       {state.phase === "result" && <>
         <div className="cm-result">{state.isAce ? "ACE! +100" : "no ace"}</div>
         <button className="cm-btn alt" onClick={() => dispatch({ type:"next" } as AceAlleyAction)}>{state.draw >= TOTAL_DRAWS ? "Finish" : "Next"}</button>

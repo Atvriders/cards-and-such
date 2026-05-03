@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPickThreeState, CardPickThreeAction, CardPickThreeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Play over 10 or 20 rounds, building up your cumulative point total. The maximum 
 Settings allow you to choose the round count. The deck is shuffled fresh each game for variety.`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardPickThreeSettings),
-  reducer, isTerminal, component: CardPickThree,
+  reducer, isTerminal, hint: (state: CardPickThreeState): HintTarget | null => (state.phase === "picking" ? { selector: '[data-testid="hint-target-card-pick-three-primary"]', pulses: 3 } : null), component: CardPickThree,
 };

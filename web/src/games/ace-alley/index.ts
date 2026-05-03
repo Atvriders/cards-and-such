@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AceAlleyState, AceAlleyAction, AceAlleySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ The probability of any given card being an Ace is 4/52 (about 7.7%). Across 8 dr
 Press Draw to flip a card, then Next to move to the following draw. The game shows your running ace count and total points. Don't expect dazzling scores most runs — the joy here is the small thrill of the flip and the rare moment when the Ace appears in the alley!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AceAlleySettings),
-  reducer,isTerminal,component:AceAlleyGame,
+  reducer,isTerminal, hint: (state: AceAlleyState): HintTarget | null => (state.phase === "drawing" ? { selector: '[data-testid="hint-target-ace-alley-primary"]', pulses: 3 } : null),component:AceAlleyGame,
 };

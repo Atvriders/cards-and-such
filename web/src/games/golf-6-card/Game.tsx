@@ -11,7 +11,7 @@ export function Golf6CardGame({ state, dispatch, onGameOver }: GameProps<Golf6Ca
       <div className="golf-6-card-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="golf-6-card-score">{state.score} pts</div>
       <div className="golf-6-card-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="golf-6-card-btn" onClick={() => dispatch({ type: "play" } as Golf6CardAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-golf-6-card-primary" className="golf-6-card-btn" onClick={() => dispatch({ type: "play" } as Golf6CardAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="golf-6-card-result">{state.result}</div>
         <button className="golf-6-card-btn alt" onClick={() => dispatch({ type: "next" } as Golf6CardAction)}>Next</button>

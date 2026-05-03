@@ -11,7 +11,7 @@ export function HappyFamiliesGame({ state, dispatch, onGameOver }: GameProps<Hap
       <div className="happy-families-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="happy-families-score">{state.score} pts</div>
       <div className="happy-families-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="happy-families-btn" onClick={() => dispatch({ type: "play" } as HappyFamiliesAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-happy-families-primary" className="happy-families-btn" onClick={() => dispatch({ type: "play" } as HappyFamiliesAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="happy-families-result">{state.result}</div>
         <button className="happy-families-btn alt" onClick={() => dispatch({ type: "next" } as HappyFamiliesAction)}>Next</button>

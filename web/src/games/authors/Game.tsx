@@ -11,7 +11,7 @@ export function AuthorsGame({ state, dispatch, onGameOver }: GameProps<AuthorsSt
       <div className="authors-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="authors-score">{state.score} pts</div>
       <div className="authors-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="authors-btn" onClick={() => dispatch({ type: "play" } as AuthorsAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-authors-primary" className="authors-btn" onClick={() => dispatch({ type: "play" } as AuthorsAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="authors-result">{state.result}</div>
         <button className="authors-btn alt" onClick={() => dispatch({ type: "next" } as AuthorsAction)}>Next</button>
