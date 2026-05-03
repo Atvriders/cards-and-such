@@ -51,8 +51,9 @@ describe("AppShell header search popover (W179/W230)", () => {
     await openHeaderSearch(user);
 
     const popover = await screen.findByTestId("header-search-popover-empty");
-    // Recent searches header + both stored entries are rendered.
-    expect(within(popover).getByText(/recent searches/i)).toBeInTheDocument();
+    // Recent searches header + both stored entries are rendered. Use exact
+    // match to avoid colliding with the "Clear recent searches" footer button.
+    expect(within(popover).getByText("Recent searches")).toBeInTheDocument();
     expect(screen.getByTestId("header-search-recent-0")).toHaveTextContent(
       "solitaire",
     );
