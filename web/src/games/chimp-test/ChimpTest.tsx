@@ -80,7 +80,7 @@ export function ChimpTest({
           </div>
 
           {state.phase === "show" && (
-            <button className="ct-start-btn" onClick={() => dispatch({ type: "start" })}>
+            <button data-testid="hint-target-chimp-test-action" className="ct-start-btn" onClick={() => dispatch({ type: "start" })}>
               Start (hide numbers)
             </button>
           )}

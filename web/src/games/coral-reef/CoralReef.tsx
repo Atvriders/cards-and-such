@@ -44,7 +44,7 @@ export function CoralReef({ state, dispatch, onGameOver }: GameProps<CoralReefSt
 
       <div className={state.gameOver ? "cr-won" : "cr-message"}>{state.message}</div>
 
-      <button onClick={() => dispatch({ type: "restart" })}>New Reef</button>
+      <button data-testid="hint-target-coral-reef-action" onClick={() => dispatch({ type: "restart" })}>New Reef</button>
     </div>
   );
 }

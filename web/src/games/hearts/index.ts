@@ -38,5 +38,6 @@ Tips: Pass your highest hearts and the Queen of Spades early. Watch who is colle
   initialState: (seed: number, settings: HeartsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-hearts-action"]', pulses: 3 }; },
   component: Hearts,
 };

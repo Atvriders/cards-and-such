@@ -50,7 +50,7 @@ export function Martha({
       <div className="martha-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/52</span>
-        <button
+        <button data-testid="hint-target-martha-action"
           className="auto-move-btn"
           type="button"
           onClick={() => dispatch({ type: "auto-move-to-foundation" } as MarthaAction)}

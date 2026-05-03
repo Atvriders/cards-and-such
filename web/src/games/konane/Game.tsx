@@ -99,7 +99,7 @@ export function Konane({
         />
       </div>
       {jumpDir !== null && isMyTurn && (
-        <button className="konane-end-btn" onClick={() => dispatch({ type: "end-chain" } satisfies KonaneAction)}>
+        <button data-testid="hint-target-konane-action" className="konane-end-btn" onClick={() => dispatch({ type: "end-chain" } satisfies KonaneAction)}>
           End Turn
         </button>
       )}

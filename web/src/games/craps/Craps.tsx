@@ -76,7 +76,7 @@ export function Craps({
 
       <div className="craps-actions">
         {!terminal && (
-          <button onClick={() => dis({ type: "roll" })} disabled={!canRoll}>
+          <button data-testid="hint-target-craps-action" onClick={() => dis({ type: "roll" })} disabled={!canRoll}>
             {rollLabel}
           </button>
         )}

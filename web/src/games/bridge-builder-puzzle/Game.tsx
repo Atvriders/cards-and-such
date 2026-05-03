@@ -47,7 +47,7 @@ export function BridgeBuilderPuzzle({
       </div>
 
       <div className="bridge-controls">
-        <button className="bridge-btn" onClick={() => d({ type: "reset" })}>New Puzzle</button>
+        <button data-testid="hint-target-bridge-builder-puzzle-action" className="bridge-btn" onClick={() => d({ type: "reset" })}>New Puzzle</button>
       </div>
 
       {state.phase === "won" && (

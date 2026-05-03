@@ -26,5 +26,6 @@ Tips: start with the short answers you are most confident about to anchor the gr
   initialState: (seed: number, settings: CrosswordMiniSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-crossword-mini-action"]', pulses: 3 }; },
   component: CrosswordMini,
 };

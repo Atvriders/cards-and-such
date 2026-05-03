@@ -52,7 +52,7 @@ export function Akari({ state, dispatch, onGameOver }: GameProps<AkariState, Aka
       </div>
 
       <div className="akarilamp-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-akari-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

@@ -116,7 +116,7 @@ export function Corral({ state, dispatch, onGameOver }: GameProps<CorralState, C
       </div>
 
       <div className="corral-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies CorralAction)}>Reset</button>
+        <button data-testid="hint-target-corral-puzzle-action" onClick={() => dispatch({ type: "reset" } satisfies CorralAction)}>Reset</button>
       </div>
     </div>
   );

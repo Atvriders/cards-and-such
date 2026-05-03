@@ -89,7 +89,7 @@ export function CrosswordMini({
       </div>
 
       {!state.gameOver && (
-        <button className="cmn-check-btn" onClick={() => dispatch({ type: "check" } as CrosswordMiniAction)}>
+        <button data-testid="hint-target-crossword-mini-action" className="cmn-check-btn" onClick={() => dispatch({ type: "check" } as CrosswordMiniAction)}>
           Check Answers
         </button>
       )}

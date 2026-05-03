@@ -116,7 +116,7 @@ export function CastleWall({ state, dispatch, onGameOver }: GameProps<CastleWall
       </div>
 
       <div className="castle-wall-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies CastleWallAction)}>Reset</button>
+        <button data-testid="hint-target-castle-wall-action" onClick={() => dispatch({ type: "reset" } satisfies CastleWallAction)}>Reset</button>
       </div>
     </div>
   );

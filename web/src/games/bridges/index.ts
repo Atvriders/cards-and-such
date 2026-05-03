@@ -34,5 +34,6 @@ The puzzle is solved when every island's bridge count is satisfied and the whole
   initialState: (seed: number, settings: BridgesSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-bridges-action"]', pulses: 3 }; },
   component: Bridges,
 };

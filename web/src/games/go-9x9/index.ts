@@ -34,5 +34,6 @@ The bot uses a two-move minimax with territory evaluation. Strategy: occupy corn
   initialState: (seed: number, settings: Go9x9SettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-go-9x9-action"]', pulses: 3 }; },
   component: Go9x9,
 };

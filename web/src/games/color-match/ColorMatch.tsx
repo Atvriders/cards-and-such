@@ -73,7 +73,7 @@ export function ColorMatch({
         <div className="cm-ended">Done! Score: {terminal.score}</div>
       ) : (
         <>
-          <button
+          <button data-testid="hint-target-color-match-action"
             className={`cm-circle ${isMatch ? "match" : ""}`}
             style={{ background: state.currentColor }}
             onClick={() => dispatch({ type: "tap" })}

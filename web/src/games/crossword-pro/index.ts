@@ -36,5 +36,6 @@ Tips: Start with shorter words — 2–3 letter answers help anchor longer cross
   initialState: (seed: number, settings: CrosswordProSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-crossword-pro-action"]', pulses: 3 }; },
   component: CrosswordPro,
 };

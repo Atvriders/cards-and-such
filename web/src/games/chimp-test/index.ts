@@ -40,5 +40,6 @@ Tips: Rather than memorizing abstract positions, try to trace a visual path thro
   initialState: (seed: number, settings: ChimpTestSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-chimp-test-action"]', pulses: 3 }; },
   component: ChimpTest,
 };

@@ -96,7 +96,7 @@ export function LogicGrid({ state, dispatch, onGameOver }: GameProps<LogicGridSt
       </div>
 
       <div className="logic-grid-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-logic-grid-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

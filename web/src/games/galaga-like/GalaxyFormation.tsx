@@ -188,7 +188,7 @@ export function GalaxyFormation({
 
       <div className="galaxy-controls">
         {!terminal && (
-          <button onClick={() => dispatch({ type: state.paused ? "resume" : "pause" } as GalaxyFormationAction)}>
+          <button data-testid="hint-target-galaga-like-action" onClick={() => dispatch({ type: state.paused ? "resume" : "pause" } as GalaxyFormationAction)}>
             {state.paused ? "Resume" : "Pause"}
           </button>
         )}

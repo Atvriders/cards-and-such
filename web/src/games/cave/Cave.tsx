@@ -45,7 +45,7 @@ export function Cave({ state, dispatch, onGameOver }: GameProps<CaveState, CaveS
       </div>
 
       <div className="cave-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-cave-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
       <div className="cave-legend">Click: empty → shaded → dot → empty</div>
     </div>

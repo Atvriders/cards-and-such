@@ -81,7 +81,7 @@ export function Hearts({ state, dispatch, onGameOver }: GameProps<HeartsState, H
       {phase === "passing" && (
         <div className="hearts-pass">
           <div className="hearts-pass-label">Selected: {passSelection.length}/3</div>
-          <button
+          <button data-testid="hint-target-hearts-action"
             className="hearts-btn primary"
             disabled={passSelection.length !== 3}
             onClick={() => (dispatch as (a: HeartsAction) => void)({ type: "submitPass" })}

@@ -34,5 +34,6 @@ Start with the most specific clues (direct assignments) before tackling relation
   initialState: (seed: number, settings: LogicGridSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-logic-grid-action"]', pulses: 3 }; },
   component: LogicGrid,
 };

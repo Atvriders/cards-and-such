@@ -62,7 +62,7 @@ export function Hitori({
       </div>
 
       <div className="hitorishadow-btn-row">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-hitori-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

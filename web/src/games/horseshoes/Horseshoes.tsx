@@ -60,7 +60,7 @@ export function Horseshoes({
               onChange={(e) => dispatch({ type: "set-aim", aim: parseFloat(e.target.value) })}
             />
           </div>
-          <button className="horseshoes-toss-button" onClick={() => dispatch({ type: "toss" })}>
+          <button data-testid="hint-target-horseshoes-action" className="horseshoes-toss-button" onClick={() => dispatch({ type: "toss" })}>
             Toss!
           </button>
         </div>

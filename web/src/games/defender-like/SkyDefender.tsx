@@ -191,7 +191,7 @@ export function SkyDefender({
       </div>
 
       <div className="skydefender-controls">
-        <button onClick={() => dispatch({ type: "fire" } as SkyDefenderAction)}>Fire (Space)</button>
+        <button data-testid="hint-target-defender-like-action" onClick={() => dispatch({ type: "fire" } as SkyDefenderAction)}>Fire (Space)</button>
       </div>
 
       <div className="skydefender-hint">

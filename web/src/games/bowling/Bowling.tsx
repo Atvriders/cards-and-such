@@ -118,7 +118,7 @@ export function Bowling({
 
         {!gameOver && (
           <div className="bowling-action">
-            <button onClick={() => dispatch({ type: "roll", angle })}>Roll!</button>
+            <button data-testid="hint-target-bowling-action" onClick={() => dispatch({ type: "roll", angle })}>Roll!</button>
           </div>
         )}
       </div>

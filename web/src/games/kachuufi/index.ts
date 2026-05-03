@@ -34,5 +34,6 @@ Strategy: Survey your hand before bidding — count your high cards (Ace, King, 
   initialState: (seed: number, _settings: KachuufiSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-kachuufi-action"]', pulses: 3 }; },
   component: Game,
 };

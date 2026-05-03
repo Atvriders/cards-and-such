@@ -22,5 +22,6 @@ Tips: Scan the full screen — the world is wider than the viewport and aliens o
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-defender-like-action"]', pulses: 3 }; },
   component: SkyDefender,
 };

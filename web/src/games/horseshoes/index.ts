@@ -25,5 +25,6 @@ Tips: consistency beats wild throws. Stay near 70% power and centered aim. The b
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-horseshoes-action"]', pulses: 3 }; },
   component: Horseshoes,
 };

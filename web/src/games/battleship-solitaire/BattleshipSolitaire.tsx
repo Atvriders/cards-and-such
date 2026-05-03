@@ -70,7 +70,7 @@ export function BattleshipSolitaire({ state, dispatch, onGameOver }: GameProps<B
       <div className="bs-legend">Click to cycle: unmarked → ship (■) → water (~) → unmarked</div>
 
       <div className="bs-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-battleship-solitaire-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

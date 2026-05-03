@@ -80,7 +80,7 @@ export function Heyawake({ state, dispatch, onGameOver }: GameProps<HeyawakeStat
       </div>
 
       <div className="heyawake-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-heyawake-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
       <div className="heyawake-hint">Click: empty → shaded → dot → empty</div>
     </div>

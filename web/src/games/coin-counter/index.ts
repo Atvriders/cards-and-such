@@ -40,5 +40,6 @@ Tips: work left to right, starting with the highest-value coins (quarters first,
   initialState: (seed: number, settings: CoinCounterSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-coin-counter-action"]', pulses: 3 }; },
   component: CoinCounter,
 };

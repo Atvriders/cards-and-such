@@ -45,7 +45,7 @@ export function CodenamesLiteGame({ state, dispatch }: GameProps<CodenamesState,
 
       {!terminal && (
         <div className="codenames-actions">
-          <button
+          <button data-testid="hint-target-codenames-lite-action"
             className="codenames-btn"
             onClick={() => dispatch({ type: "endGuessing" } satisfies CodenamesAction)}
           >

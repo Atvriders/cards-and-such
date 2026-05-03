@@ -47,7 +47,7 @@ export function Mosaic({ state, dispatch, onGameOver }: GameProps<MosaicState, M
       <div className="mosaic-legend">Click: unknown → white → black → unknown</div>
 
       <div className="mosaic-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies MosaicAction)}>Reset</button>
+        <button data-testid="hint-target-mosaic-puzzle-action" onClick={() => dispatch({ type: "reset" } satisfies MosaicAction)}>Reset</button>
       </div>
     </div>
   );

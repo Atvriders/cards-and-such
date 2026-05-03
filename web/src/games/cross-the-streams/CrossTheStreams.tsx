@@ -64,7 +64,7 @@ export function CrossTheStreams({ state, dispatch, onGameOver }: GameProps<CTSSt
       <div className="cts-legend">Click to cycle: blank → filled (■) → empty (×) → blank. Row/col clues turn green when matched.</div>
 
       <div className="cts-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-cross-the-streams-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

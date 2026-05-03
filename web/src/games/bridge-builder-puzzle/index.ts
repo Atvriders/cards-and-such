@@ -24,5 +24,6 @@ Strategy: Look at both the start and end rows, then plan a route that minimizes 
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: BridgeState, action: BridgeAction) => BridgeState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-bridge-builder-puzzle-action"]', pulses: 3 }; },
   component: BridgeBuilderPuzzle,
 } as unknown as GamePlugin;

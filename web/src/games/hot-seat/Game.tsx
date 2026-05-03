@@ -34,7 +34,7 @@ export function HotSeat({ state, dispatch, onGameOver }: GameProps<HotSeatState,
         {q}
       </div>
       <p className="hs-hint">The person in the hot seat must answer honestly. The group may follow up!</p>
-      <button className="hs-next-btn" onClick={() => dispatch({ type: "next" } as HotSeatAction)}>
+      <button data-testid="hint-target-hot-seat-action" className="hs-next-btn" onClick={() => dispatch({ type: "next" } as HotSeatAction)}>
         {state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next Question"}
       </button>
     </div>

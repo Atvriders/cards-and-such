@@ -22,5 +22,6 @@ Select a Black stone by clicking it, then click the highlighted destination to j
   initialState: (seed: number, s: KonaneSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-konane-action"]', pulses: 3 }; },
   component: Konane,
 };

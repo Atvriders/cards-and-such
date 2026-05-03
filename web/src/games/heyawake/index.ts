@@ -36,5 +36,6 @@ Strategy: start with rooms numbered 0 (no shading) to immediately clear all cell
   initialState: (seed: number, settings: HeyawakeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-heyawake-action"]', pulses: 3 }; },
   component: Heyawake,
 };

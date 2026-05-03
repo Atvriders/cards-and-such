@@ -71,7 +71,7 @@ export function CoinCounter({
               disabled={state.phase !== "playing"}
             />
             <span className="cc-unit">¢</span>
-            <button className="cc-btn" onClick={handleSubmit}>Check</button>
+            <button data-testid="hint-target-coin-counter-action" className="cc-btn" onClick={handleSubmit}>Check</button>
           </div>
 
           {state.lastResult && (

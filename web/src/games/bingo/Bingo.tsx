@@ -32,7 +32,7 @@ export function Bingo({
           Drawn: {state.drawCount} / 75
         </div>
         {!gameOver && (
-          <button
+          <button data-testid="hint-target-bingo-action"
             className="bingo-draw-button"
             onClick={() => dispatch({ type: "draw" })}
             disabled={state.drawCount >= 75}

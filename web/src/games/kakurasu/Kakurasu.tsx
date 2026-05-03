@@ -70,7 +70,7 @@ export function Kakurasu({ state, dispatch, onGameOver }: GameProps<KakurasuStat
       </div>
 
       <div className="kakurasu-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-kakurasu-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

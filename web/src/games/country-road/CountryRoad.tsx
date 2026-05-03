@@ -56,7 +56,7 @@ export function CountryRoad({ state, dispatch, onGameOver }: GameProps<CountryRo
       </div>
 
       <div className="country-road-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies CountryRoadAction)}>Reset</button>
+        <button data-testid="hint-target-country-road-action" onClick={() => dispatch({ type: "reset" } satisfies CountryRoadAction)}>Reset</button>
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<DurakState, obje
 
       {!done && isDefending && attackCard && (
         <div className="durak-actions">
-          <button className="durak-btn danger" onClick={() => dispatch({ type: "take" } as DurakAction)}>
+          <button data-testid="hint-target-durak-action" className="durak-btn danger" onClick={() => dispatch({ type: "take" } as DurakAction)}>
             Take card
           </button>
         </div>

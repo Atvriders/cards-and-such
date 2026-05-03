@@ -33,5 +33,6 @@ Play with 4 animals for an easier game or 6 animals for the full farmyard challe
   initialState: (seed: number, settings: FarmyardMatchSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-farmyard-match-action"]', pulses: 3 }; },
   component: FarmyardMatch,
 };

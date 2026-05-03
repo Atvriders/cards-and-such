@@ -51,7 +51,7 @@ export function FarmyardMatch({ state, dispatch, onGameOver }: GameProps<FarmSta
       </div>
 
       {!state.submitted && (
-        <button
+        <button data-testid="hint-target-farmyard-match-action"
           className="fm-submit-btn"
           disabled={!allGuessed}
           onClick={() => dispatch({ type: "submit" } satisfies FarmAction)}

@@ -62,7 +62,7 @@ export function DominoPlacement({ state, dispatch, onGameOver }: GameProps<Domin
       </div>
 
       <div className="domino-placement-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-domino-placement-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

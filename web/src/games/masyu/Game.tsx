@@ -151,7 +151,7 @@ export function Masyu({
       </div>
 
       <div className="masyupearl-btn-row">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-masyu-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ export function Go9x9({ state, dispatch, onGameOver }: GameProps<Go9x9State, Go9
       </div>
       <div className="go9-actions">
         {!term && isPlayerTurn && (
-          <button onClick={handlePass}>Pass</button>
+          <button data-testid="hint-target-go-9x9-action" onClick={handlePass}>Pass</button>
         )}
       </div>
       <div style={{ fontSize: "0.8rem", color: "#888" }}>

@@ -93,7 +93,7 @@ export function Kropki({ state, dispatch, onGameOver }: GameProps<KropkiState, K
       </div>
 
       <div className="kropki-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-kropki-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

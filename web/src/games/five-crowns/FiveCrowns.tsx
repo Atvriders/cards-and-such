@@ -90,7 +90,7 @@ export function FiveCrowns({
       {/* Actions */}
       {!done && phase === "player-discard" && (
         <div className="fc-actions">
-          <button
+          <button data-testid="hint-target-five-crowns-action"
             className="fc-btn"
             disabled={!canGoOut}
             onClick={() => dispatch({ type: "go-out" } as FiveCrownsAction)}

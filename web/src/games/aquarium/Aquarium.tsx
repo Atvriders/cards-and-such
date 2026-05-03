@@ -69,7 +69,7 @@ export function Aquarium({ state, dispatch, onGameOver }: GameProps<AquariumStat
       </div>
 
       <div className="aquarium-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-aquarium-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
       <div className="aquarium-legend">Click: empty → water (blue) → × → empty</div>
     </div>

@@ -137,7 +137,7 @@ export function Bridges({ state, dispatch, onGameOver }: GameProps<BridgesState,
       </div>
 
       <div className="bridgesnautical-btns">
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        <button data-testid="hint-target-bridges-action" onClick={() => dispatch({ type: "reset" })}>Reset</button>
       </div>
     </div>
   );

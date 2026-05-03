@@ -32,5 +32,6 @@ Strategy: start by identifying columns where the clue number forces a specific w
   initialState: (seed: number, settings: AquariumSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver || (s as any).won || (s as any).isWon || (s as any).isComplete || (s as any).complete) return null; return { selector: '[data-testid="hint-target-aquarium-action"]', pulses: 3 }; },
   component: Aquarium,
 };

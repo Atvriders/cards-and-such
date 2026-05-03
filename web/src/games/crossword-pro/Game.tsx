@@ -115,7 +115,7 @@ export function CrosswordPro({
         </div>
       </div>
       <div className="crossword-pro-controls">
-        <button onClick={() => dispatch({ type: "reveal" } as CrosswordProAction)} disabled={state.won}>
+        <button data-testid="hint-target-crossword-pro-action" onClick={() => dispatch({ type: "reveal" } as CrosswordProAction)} disabled={state.won}>
           Reveal a Letter
         </button>
       </div>

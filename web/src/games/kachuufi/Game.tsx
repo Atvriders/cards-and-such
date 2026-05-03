@@ -66,7 +66,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<KachuufiState, o
               {SUITS.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </label>
-          <button className="kachuufi-btn" onClick={() => dispatch({ type: "bid", tricks: bidTricks, trump: bidTrump } as KachuufiAction)}>
+          <button data-testid="hint-target-kachuufi-action" className="kachuufi-btn" onClick={() => dispatch({ type: "bid", tricks: bidTricks, trump: bidTrump } as KachuufiAction)}>
             Bid!
           </button>
         </div>
