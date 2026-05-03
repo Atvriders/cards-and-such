@@ -512,6 +512,8 @@ describe("SettingsPage Reset favorites isolation (W614)", () => {
 // `cards-hidden-games` blob so previously-hidden tiles surface again in
 // every lobby filter. Other sibling user-data blobs (favorites, ratings)
 // must survive untouched, mirroring the W614 favorites isolation contract.
+// Unlike clear-all, this action is non-destructive (danger:false) and
+// confirm-yes is enabled at once with no requireText gate.
 describe("SettingsPage Show hidden games (W616)", () => {
   beforeEach(() => {
     localStorage.clear();
