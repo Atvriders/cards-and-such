@@ -19,14 +19,14 @@ export function ParityPopGame({ state, dispatch, onGameOver }: GameProps<ParityP
       )}
       {state.phase === "predict" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"predict", choice:"even" } as ParityPopAction)}>Even</button>
+          <button className="dm-btn" onClick={() => dispatch({ type:"predict", choice:"even" } as ParityPopAction)} data-testid="hint-target-paritypop-predict">Even</button>
           <button className="dm-btn alt" onClick={() => dispatch({ type:"predict", choice:"odd" } as ParityPopAction)}>Odd</button>
         </div>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">{state.lastWin ? "Correct! +8" : "Wrong — 0"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as ParityPopAction)}>Next</button>
+          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as ParityPopAction)} data-testid="hint-target-paritypop-next">Next</button>
         </>
       )}
     </div>

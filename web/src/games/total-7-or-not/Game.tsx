@@ -16,13 +16,13 @@ export function Total7OrNot({ state, dispatch, onGameOver }: GameProps<Total7OrN
     {!isReveal&&<p style={{fontSize:"1.2rem"}}>Will 2 dice total exactly <strong>7</strong>?</p>}
     {!isReveal&&<p style={{fontSize:"0.85rem",color:"#888"}}>Seven: +200 pts if correct | Not Seven: +50 pts if correct</p>}
     {!isReveal&&<div className="dice-btns">
-      <button className="dice-btn even" style={{background:"#e67e22"}} onClick={()=>dispatch({type:"guess",value:"seven"} as Total7OrNotAction)}>Seven (7)</button>
+      <button className="dice-btn even" style={{background:"#e67e22"}} onClick={()=>dispatch({type:"guess",value:"seven"} as Total7OrNotAction)} data-testid="hint-target-total7-guess">Seven (7)</button>
       <button className="dice-btn odd" style={{background:"#7f8c8d"}} onClick={()=>dispatch({type:"guess",value:"not"} as Total7OrNotAction)}>Not Seven</button>
     </div>}
     {isReveal&&<div>
       <p className={`result-msg ${state.lastResult===("seven" as string)===false?"wrong":"correct"}`} style={{color:state.lastResult==="seven"?"#e67e22":"#95a5a6"}}>
         The result was: {state.lastResult==="seven"?"SEVEN!":"Not 7"}</p>
-      <button className="dice-btn" onClick={()=>dispatch({type:"next"} as Total7OrNotAction)}>Next</button>
+      <button className="dice-btn" onClick={()=>dispatch({type:"next"} as Total7OrNotAction)} data-testid="hint-target-total7-next">Next</button>
     </div>}
   </div>;
 }

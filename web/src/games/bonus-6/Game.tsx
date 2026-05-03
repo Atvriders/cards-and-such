@@ -42,13 +42,13 @@ export function Bonus6Game({
 
       <div className="bonus6-actions">
         {phase === "betting" && (
-          <button onClick={() => dis({ type: "place-bet" })}>Place Bet</button>
+          <button onClick={() => dis({ type: "place-bet" })} data-testid="hint-target-bonus6-bet">Place Bet</button>
         )}
         {phase === "spinning" && (
-          <button onClick={() => dis({ type: "spin" })}>Spin!</button>
+          <button onClick={() => dis({ type: "spin" })} data-testid="hint-target-bonus6-spin">Spin!</button>
         )}
         {phase === "settled" && !terminal && (
-          <button onClick={() => dis({ type: "next" })}>Next Spin</button>
+          <button onClick={() => dis({ type: "next" })} data-testid="hint-target-bonus6-next">Next Spin</button>
         )}
         {terminal && <div className="bonus6-game-over">Game Over — Final: ${terminal.score}</div>}
       </div>

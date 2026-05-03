@@ -13,12 +13,12 @@ export function CrapsLightGame({ state, dispatch, onGameOver }: GameProps<CrapsL
       <div className="dm-score">{state.score} pts</div>
       {state.dice && <div className="dm-row"><div className="dm-die">{state.dice[0]}</div><div className="dm-die">{state.dice[1]}</div></div>}
       {state.phase === "betting" && <div className="dm-row">
-        <button className="dm-btn" onClick={() => dispatch({ type:"bet", bet:"pass" } as CrapsLightAction)}>Pass Line</button>
+        <button className="dm-btn" onClick={() => dispatch({ type:"bet", bet:"pass" } as CrapsLightAction)} data-testid="hint-target-crapslight-bet">Pass Line</button>
         <button className="dm-btn alt" onClick={() => dispatch({ type:"bet", bet:"dont" } as CrapsLightAction)}>Don't Pass</button>
       </div>}
       {state.phase === "result" && <>
         <div className="dm-result">Bet: {state.bet} — {state.outcome === "win" ? "WIN +10" : state.outcome === "lose" ? "LOSE" : "PUSH"}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as CrapsLightAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+        <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as CrapsLightAction)} data-testid="hint-target-crapslight-next">{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

@@ -22,14 +22,14 @@ export function OverUnderGame({ state, dispatch, onGameOver }: GameProps<OverUnd
       )}
       {state.phase === "predict" && (
         <div className="dm-row">
-          <button className="dm-btn" onClick={() => dispatch({ type:"predict", choice:"under" } as OverUnderAction)}>Under 7</button>
+          <button className="dm-btn" onClick={() => dispatch({ type:"predict", choice:"under" } as OverUnderAction)} data-testid="hint-target-overunder-predict">Under 7</button>
           <button className="dm-btn alt" onClick={() => dispatch({ type:"predict", choice:"over" } as OverUnderAction)}>Over 7</button>
         </div>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">{state.push ? "Push (sum = 7) — 0" : state.lastWin ? "Correct! +10" : "Wrong — 0"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as OverUnderAction)}>Next</button>
+          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as OverUnderAction)} data-testid="hint-target-overunder-next">Next</button>
         </>
       )}
     </div>

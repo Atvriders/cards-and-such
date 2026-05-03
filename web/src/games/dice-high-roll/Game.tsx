@@ -14,13 +14,13 @@ export function DiceHighRollGame({ state, dispatch, onGameOver }: GameProps<Dice
       {state.phase === "betting" && <>
         <p>Bet that 3 dice sum to 12+ (High) — pays 2x if you win!</p>
         <div className="dm-bets">
-          {([5,10,20] as const).map(a => <button key={a} className="dm-bet-btn" onClick={() => dispatch({ type:"bet", amount:a } as DiceHighRollAction)}>Bet High: {a} coins</button>)}
+          {([5,10,20] as const).map(a => <button key={a} className="dm-bet-btn" onClick={() => dispatch({ type:"bet", amount:a } as DiceHighRollAction)} data-testid="hint-target-dicehighroll-bet">Bet High: {a} coins</button>)}
         </div>
       </>}
       {state.phase === "result" && state.dice && <>
         <div className="dm-dice">{state.dice.map((d,i) => <div key={i} className="dm-die">{d}</div>)}</div>
         <div className="dm-result">Sum: {state.dice.reduce((s,v)=>s+v,0)} — {state.lastWin ? "WIN! 2x!" : "Lose"}</div>
-        <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceHighRollAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
+        <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceHighRollAction)} data-testid="hint-target-dicehighroll-next">{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

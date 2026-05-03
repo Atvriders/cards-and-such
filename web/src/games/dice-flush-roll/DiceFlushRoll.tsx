@@ -21,8 +21,8 @@ export function DiceFlushRoll({ state, dispatch, onGameOver }: GameProps<DiceFlu
           </div>
           <div className="dg-result">Current: {pts > 0 ? `+${pts}` : "No match"}</div>
           <div style={{display:"flex",gap:12}}>
-            {state.rollsLeft > 0 && <button className="dg-btn" onClick={() => dispatch({ type: "reroll" })}>Reroll</button>}
-            <button className="dg-btn" style={{background:"#28a745"}} onClick={() => dispatch({ type: "score" })}>Score (+{pts})</button>
+            {state.rollsLeft > 0 && <button className="dg-btn" onClick={() => dispatch({ type: "reroll" })} data-testid="hint-target-diceflushroll-reroll">Reroll</button>}
+            <button className="dg-btn" style={{background:"#28a745"}} onClick={() => dispatch({ type: "score" })} data-testid="hint-target-diceflushroll-score">Score (+{pts})</button>
           </div>
         </>
       ) : (

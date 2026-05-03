@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ParityPopState, ParityPopAction, ParityPopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -17,4 +17,10 @@ Press Even or Odd to commit your prediction. The die rolls, the result shows, yo
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ParityPopSettings),
   reducer,isTerminal,component:ParityPopGame,
+  hint: (state: ParityPopState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "predict") return { selector: '[data-testid="hint-target-paritypop-predict"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-paritypop-next"]', pulses: 3 };
+    return null;
+  },
 };

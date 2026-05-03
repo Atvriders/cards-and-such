@@ -33,11 +33,11 @@ export function DiceTwinBet({ state, dispatch, onGameOver }: GameProps<DiceTwinB
       )}
       {!isReveal && (
         <div className="dice-actions">
-          <button className="dice-btn bank" onClick={() => dispatch({ type: "bet", call: "match" } as DiceTwinBetAction)}>MATCH! (+50)</button>
+          <button className="dice-btn bank" onClick={() => dispatch({ type: "bet", call: "match" } as DiceTwinBetAction)} data-testid="hint-target-dicetwin-bet">MATCH! (+50)</button>
           <button className="dice-btn" onClick={() => dispatch({ type: "bet", call: "nomatch" } as DiceTwinBetAction)}>No Match (+15)</button>
         </div>
       )}
-      {isReveal && <button className="dice-btn" onClick={() => dispatch({ type: "next" } as DiceTwinBetAction)}>Next</button>}
+      {isReveal && <button className="dice-btn" onClick={() => dispatch({ type: "next" } as DiceTwinBetAction)} data-testid="hint-target-dicetwin-next">Next</button>}
     </div>
   );
 }

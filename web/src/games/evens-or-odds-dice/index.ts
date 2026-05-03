@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EvensOrOddsDiceState, EvensOrOddsDiceAction, EvensOrOddsDiceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -19,4 +19,10 @@ Use Settings to play 10 or 20 rounds. Try to build long streaks for maximum poin
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EvensOrOddsDiceSettings),
   reducer, isTerminal, component:EvensOrOddsDice,
+  hint: (state: EvensOrOddsDiceState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "guessing") return { selector: '[data-testid="hint-target-eood-even"]', pulses: 3 };
+    if (state.phase === "reveal") return { selector: '[data-testid="hint-target-eood-next"]', pulses: 3 };
+    return null;
+  },
 };

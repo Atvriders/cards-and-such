@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceFlushRollState, DiceFlushRollAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -13,4 +13,10 @@ export const diceFlushRollPlugin: GamePlugin<DiceFlushRollState, DiceFlushRollAc
   settings: diceFlushRollSettings,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer, isTerminal, component: DiceFlushRoll,
+  hint: (state: DiceFlushRollState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling" && state.rollsLeft > 0) return { selector: '[data-testid="hint-target-diceflushroll-reroll"]', pulses: 3 };
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-diceflushroll-score"]', pulses: 3 };
+    return null;
+  },
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DiceTwinBetState, DiceTwinBetAction, DiceTwinBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -26,4 +26,10 @@ Use Settings to choose 8, 10, or 12 rounds. Final score is displayed when all ro
   settings: diceTwinBetSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceTwinBetSettings),
   reducer, isTerminal, component: DiceTwinBet,
+  hint: (state: DiceTwinBetState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "betting") return { selector: '[data-testid="hint-target-dicetwin-bet"]', pulses: 3 };
+    if (state.phase === "reveal") return { selector: '[data-testid="hint-target-dicetwin-next"]', pulses: 3 };
+    return null;
+  },
 };

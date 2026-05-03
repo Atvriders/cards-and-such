@@ -21,13 +21,13 @@ export function DiceStreakBetGame({ state, dispatch, onGameOver }: GameProps<Dic
       {state.phase === "betting" ? (
         <div className="dm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />
-          <button className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DiceStreakBetAction)}>Roll</button>
+          <button className="dm-btn" onClick={() => dispatch({ type:"roll", amount:bid } as DiceStreakBetAction)} data-testid="hint-target-dicestreak-bet">Roll</button>
         </div>
       ) : (
         <>
           <div className={`dm-result ${state.lastResult ?? ""}`}>{state.lastResult === "win" ? `+${state.bid}` : state.lastResult === "lose" ? `-${state.bid}` : "Tie"}</div>
           <div className="dm-info">{state.resultLabel}</div>
-          <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceStreakBetAction)}>Next</button>
+          <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceStreakBetAction)} data-testid="hint-target-dicestreak-next">Next</button>
         </>
       )}
     </div>

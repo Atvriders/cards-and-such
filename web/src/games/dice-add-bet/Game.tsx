@@ -18,11 +18,11 @@ export function DiceAddBet({ state, dispatch, onGameOver }: GameProps<DiceAddBet
       {state.phase==="betting" && <>
         <label className="dg-label">Bet: <input type="number" min={1} max={state.coins} value={bet} onChange={e=>setBet(Math.max(1,parseInt(e.target.value)||1))} style={{width:"60px",textAlign:"center"}}/></label>
         <div style={{display:"flex",gap:"12px"}}>
-          <button className="dg-btn green" onClick={()=>dispatch({type:"bet",amount:bet,side:"hi"} as DiceAddBetAction)}>High (&gt;10)</button>
+          <button className="dg-btn green" onClick={()=>dispatch({type:"bet",amount:bet,side:"hi"} as DiceAddBetAction)} data-testid="hint-target-diceaddbet-bet">High (&gt;10)</button>
           <button className="dg-btn red" onClick={()=>dispatch({type:"bet",amount:bet,side:"lo"} as DiceAddBetAction)}>Low (≤10)</button>
         </div>
       </>}
-      {state.phase==="result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceAddBetAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
+      {state.phase==="result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceAddBetAction)} data-testid="hint-target-diceaddbet-next">{state.round>=state.maxRounds?"Finish":"Next"}</button>}
     </div>
   );
 }

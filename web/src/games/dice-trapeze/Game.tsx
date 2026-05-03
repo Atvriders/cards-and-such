@@ -23,14 +23,14 @@ export function DiceTrapezeGame({ state, dispatch, onGameOver }: GameProps<DiceT
       {state.phase === "predict" && (
         <div className="dm-row">
           {OPTIONS.map(o => (
-            <button key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceTrapezeAction)}>{o.label} (+{o.points})</button>
+            <button key={o.label} className="dm-btn" onClick={() => dispatch({ type:"predict", choice:o.label } as DiceTrapezeAction)} data-testid="hint-target-dicetrapeze-predict">{o.label} (+{o.points})</button>
           ))}
         </div>
       )}
       {state.phase === "result" && (
         <>
           <div className="dm-result">{state.choice}: {state.lastWin ? `Won +${state.lastPts}` : "Missed (+0)"}</div>
-          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceTrapezeAction)}>Next</button>
+          <button className="dm-btn alt" onClick={() => dispatch({ type:"next" } as DiceTrapezeAction)} data-testid="hint-target-dicetrapeze-next">Next</button>
         </>
       )}
     </div>

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { Total7OrNotState, Total7OrNotAction, Total7OrNotSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -19,4 +19,10 @@ The optimal strategy is never obvious. Take a pure "Not Seven" approach for stea
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as Total7OrNotSettings),
   reducer, isTerminal, component:Total7OrNot,
+  hint: (state: Total7OrNotState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "guessing") return { selector: '[data-testid="hint-target-total7-guess"]', pulses: 3 };
+    if (state.phase === "reveal") return { selector: '[data-testid="hint-target-total7-next"]', pulses: 3 };
+    return null;
+  },
 };
