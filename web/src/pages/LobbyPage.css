@@ -1621,6 +1621,111 @@ button.tile {
   }
 }
 
+/* Compact + List = data-table layout (W387 polish).
+   When the user picks density="compact" AND view="list", expand each
+   row into five aligned columns:
+       title | category | rating | plays | favorite
+   The DOM is untouched — we just relocate existing tile children
+   into a CSS grid using `display: contents` on the natural wrappers,
+   so screen-readers, tests, and the sort dropdown all keep working
+   exactly as before. The leading category-stripe stays as the row's
+   accent edge; the trailing CTA/badges stay hidden (inherited from
+   the base list rules above). */
+.lobby-grid[data-view="list"][data-density="compact"] .tile {
+  display: grid;
+  grid-template-columns:
+    /* stripe accent */ 4px
+    /* title */         minmax(0, 1fr)
+    /* category */      minmax(96px, max-content)
+    /* rating */        minmax(72px, max-content)
+    /* plays */         minmax(64px, max-content)
+    /* favorite */      auto;
+  align-items: center;
+  column-gap: 0.85rem;
+  padding: 0.45rem 0.9rem 0.45rem 0;
+}
+/* The natural wrappers (`.tile-meta`, `.tile-title`, `.tile-foot`)
+   each contain one of the cells we want as a column. `display:
+   contents` collapses the wrapper so its children become direct
+   grid items, letting us drop them straight into named columns
+   without touching the JSX. */
+.lobby-grid[data-view="list"][data-density="compact"] .tile-meta,
+.lobby-grid[data-view="list"][data-density="compact"] .tile-foot {
+  display: contents;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-stripe {
+  grid-column: 1;
+  height: 100%;
+  width: 4px;
+  border-radius: 0 2px 2px 0;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-title,
+.lobby-grid[data-view="list"][data-density="compact"] .lobby-tile-title {
+  grid-column: 2;
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-cat {
+  grid-column: 3;
+  justify-self: start;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-mp-badge {
+  /* Online-multiplayer pill rides alongside the category column when
+     present; tucked to the right edge of cell 3 so the title never
+     reflows when a tile happens to be online. */
+  grid-column: 3;
+  justify-self: end;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-rating,
+.lobby-grid[data-view="list"][data-density="compact"] .tile-stars {
+  grid-column: 4;
+  justify-self: start;
+  margin: 0;
+  position: static;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-players {
+  /* Player-count is part of the foot but not one of the five columns
+     we surface here — collapse it so it doesn't push columns out. */
+  display: none;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-plays {
+  grid-column: 5;
+  justify-self: start;
+  font-size: 0.78rem;
+  color: var(--text-400);
+  white-space: nowrap;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-fav {
+  grid-column: 6;
+  justify-self: end;
+  position: static;
+  margin: 0;
+}
+.lobby-grid[data-view="list"][data-density="compact"] .tile-cta,
+.lobby-grid[data-view="list"][data-density="compact"] .tile-drag-handle {
+  display: none;
+}
+/* Narrow viewports: collapse rating + plays to keep the row legible.
+   Title, category, and favorite are the priority columns. */
+@media (max-width: 720px) {
+  .lobby-grid[data-view="list"][data-density="compact"] .tile {
+    grid-template-columns: 4px minmax(0, 1fr) minmax(96px, max-content) auto;
+  }
+  .lobby-grid[data-view="list"][data-density="compact"] .tile-rating,
+  .lobby-grid[data-view="list"][data-density="compact"] .tile-stars,
+  .lobby-grid[data-view="list"][data-density="compact"] .tile-plays {
+    display: none;
+  }
+  .lobby-grid[data-view="list"][data-density="compact"] .tile-fav {
+    grid-column: 4;
+  }
+}
+
 .lobby-loaded-count {
   text-align: center;
   font-size: 0.78rem;
