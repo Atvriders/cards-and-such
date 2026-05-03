@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { GAMES } from "../games/registry.js";
@@ -82,4 +82,35 @@ describe("AboutPage", () => {
     expect(FAMILIES.length).toBeGreaterThanOrEqual(100);
     expect(families).toHaveTextContent(FAMILIES.length.toLocaleString());
   });
+
+  it(
+    "shows 'Build info unavailable' fallback when commits array is empty",
+    async () => {
+      // Re-import AboutPage with an empty __BUILD_LATEST_COMMITS__ so the
+      // module-scope LATEST_COMMITS captures [] and the fallback branch
+      // renders. resetModules forces the AboutPage module (and its deps,
+      // including the heavy game registry) to be re-evaluated, which is
+      // why this test bumps the timeout.
+      vi.resetModules();
+      (globalThis as unknown as Record<string, unknown>).__BUILD_LATEST_COMMITS__ =
+        [] as readonly string[];
+      const mod = await import("./AboutPage.js");
+      const EmptyAboutPage = mod.default;
+
+      render(
+        <MemoryRouter>
+          <EmptyAboutPage />
+        </MemoryRouter>,
+      );
+
+      const section = screen.getByTestId("about-whatsnew");
+      expect(section).toHaveTextContent("Build info unavailable.");
+      expect(screen.queryByTestId("about-whatsnew-0")).toBeNull();
+
+      // Restore fixture commits for any subsequent imports in this file.
+      (globalThis as unknown as Record<string, unknown>).__BUILD_LATEST_COMMITS__ =
+        FIXTURE_COMMITS;
+    },
+    120_000,
+  );
 });
