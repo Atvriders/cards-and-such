@@ -130,6 +130,22 @@ describe("friendCode", () => {
     vi.resetModules();
   });
 
+  it("isValidFriendCode predicate: valid 6-char alphanumeric / short / garbage", () => {
+    // A real, freshly minted code is the canonical valid 6-char alphanumeric.
+    const valid = encodeChallenge({ gameId: "klondike", seed: 1 });
+    expect(valid).not.toBeNull();
+    expect((valid as string).length).toBe(6);
+    expect(/^[0-9A-Z]{6}$/.test(valid as string)).toBe(true);
+    expect(isValidFriendCode(valid as string)).toBe(true);
+    // Anything shorter than 6 chars must be rejected outright.
+    expect(isValidFriendCode("")).toBe(false);
+    expect(isValidFriendCode("A")).toBe(false);
+    expect(isValidFriendCode("ABCDE")).toBe(false);
+    // Pure garbage / non-alphabet characters must also be rejected.
+    expect(isValidFriendCode("!@#$%^")).toBe(false);
+    expect(isValidFriendCode("??????")).toBe(false);
+  });
+
   it("truncates seeds with bits above 16 yet stays deterministic across calls", () => {
     // Two seeds that share their low 16 bits but differ in the high bits
     // must produce the same friend code (deterministic truncation).
