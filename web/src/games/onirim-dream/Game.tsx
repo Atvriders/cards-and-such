@@ -18,7 +18,7 @@ export function OnirimDreamGame({ state, dispatch, onGameOver }: GameProps<Oniri
       </div>
       {state.phase === "choosing" && (
         <div className="bz-ond-actions">
-          <button onClick={() => dispatch({ type: "invest" } as OnirimDreamAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-onirim-dream-primary" onClick={() => dispatch({ type: "invest" } as OnirimDreamAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as OnirimDreamAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as OnirimDreamAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as OnirimDreamAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function OnirimDreamGame({ state, dispatch, onGameOver }: GameProps<Oniri
       {state.phase === "resolved" && (
         <div className="bz-ond-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as OnirimDreamAction)}>Next Turn</button>
+          <button data-testid="hint-target-onirim-dream-next" onClick={() => dispatch({ type: "next" } as OnirimDreamAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

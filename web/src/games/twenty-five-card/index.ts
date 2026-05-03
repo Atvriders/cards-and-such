@@ -12,5 +12,10 @@ export const twentyFiveCardPlugin: GamePlugin<TwentyFiveCardState, TwentyFiveCar
   howToPlay:"Twenty-Five Trivia is a ten-question quiz about Twenty-Five, the national card game of Ireland and a member of the Spoil Five family. Played by 2-9 players (four or five is best) with a standard 52-card deck, each player is dealt five cards and the dealer turns up the next for trump. Trick-taking begins; the first player to score 25 points wins. Notable rules include a unique trump-ranking where the Five and Jack of trumps are highest, the Ace of Hearts is always third-highest trump regardless of trump suit, and reneging is allowed for high trumps. Each question tests rules, scoring, history, and tactics of Twenty-Five. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown. Twenty-Five is a delightful, idiosyncratic Irish classic.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TwentyFiveCardSettings),
-  reducer,isTerminal,component:TwentyFiveCardGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-twenty-five-card-next"]', pulses: 3 };
+    if (state.phase === "playing" && state.selected !== null) return { selector: '[data-testid="hint-target-twenty-five-card-submit"]', pulses: 3 };
+    return null;
+  },component:TwentyFiveCardGame,
 };

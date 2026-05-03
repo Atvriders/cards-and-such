@@ -18,7 +18,7 @@ export function ParksTrailGame({ state, dispatch, onGameOver }: GameProps<ParksT
       </div>
       {state.phase === "choosing" && (
         <div className="bz-prt-actions">
-          <button onClick={() => dispatch({ type: "invest" } as ParksTrailAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-parks-trail-primary" onClick={() => dispatch({ type: "invest" } as ParksTrailAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ParksTrailAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ParksTrailAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as ParksTrailAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function ParksTrailGame({ state, dispatch, onGameOver }: GameProps<ParksT
       {state.phase === "resolved" && (
         <div className="bz-prt-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as ParksTrailAction)}>Next Turn</button>
+          <button data-testid="hint-target-parks-trail-next" onClick={() => dispatch({ type: "next" } as ParksTrailAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

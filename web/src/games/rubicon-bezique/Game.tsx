@@ -11,10 +11,10 @@ export function RubiconBeziqueGame({ state, dispatch, onGameOver }: GameProps<Ru
       <div className="rubicon-bezique-info">Round {state.round} / {TOTAL_ROUNDS} — Hand {HAND_SIZE} cards · W{state.wins} L{state.losses}</div>
       <div className="rubicon-bezique-score">{state.score} pts</div>
       <div className="rubicon-bezique-info">Tricks: you {state.tricksWon} · cpu {state.tricksLost}</div>
-      {state.phase === "ready" && <button className="rubicon-bezique-btn" onClick={() => dispatch({ type: "play" } as RubiconBeziqueAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-rubicon-bezique-primary" className="rubicon-bezique-btn" onClick={() => dispatch({ type: "play" } as RubiconBeziqueAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="rubicon-bezique-result">{state.result}</div>
-        <button className="rubicon-bezique-btn alt" onClick={() => dispatch({ type: "next" } as RubiconBeziqueAction)}>Next Round</button>
+        <button data-testid="hint-target-rubicon-bezique-next" className="rubicon-bezique-btn alt" onClick={() => dispatch({ type: "next" } as RubiconBeziqueAction)}>Next Round</button>
       </>}
     </div>
   );

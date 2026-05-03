@@ -18,7 +18,7 @@ export function IsleOfCatsGame({ state, dispatch, onGameOver }: GameProps<IsleOf
       </div>
       {state.phase === "choosing" && (
         <div className="bz-ioc-actions">
-          <button onClick={() => dispatch({ type: "invest" } as IsleOfCatsAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-isle-of-cats-primary" onClick={() => dispatch({ type: "invest" } as IsleOfCatsAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as IsleOfCatsAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as IsleOfCatsAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as IsleOfCatsAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function IsleOfCatsGame({ state, dispatch, onGameOver }: GameProps<IsleOf
       {state.phase === "resolved" && (
         <div className="bz-ioc-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as IsleOfCatsAction)}>Next Turn</button>
+          <button data-testid="hint-target-isle-of-cats-next" onClick={() => dispatch({ type: "next" } as IsleOfCatsAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

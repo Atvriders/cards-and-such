@@ -18,7 +18,7 @@ export function HotelAcquisitionGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-haq-actions">
-          <button onClick={() => dispatch({ type: "invest" } as HotelAcquisitionAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-hotel-acquisition-primary" onClick={() => dispatch({ type: "invest" } as HotelAcquisitionAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as HotelAcquisitionAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as HotelAcquisitionAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as HotelAcquisitionAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function HotelAcquisitionGame({ state, dispatch, onGameOver }: GameProps<
       {state.phase === "resolved" && (
         <div className="bz-haq-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as HotelAcquisitionAction)}>Next Turn</button>
+          <button data-testid="hint-target-hotel-acquisition-next" onClick={() => dispatch({ type: "next" } as HotelAcquisitionAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

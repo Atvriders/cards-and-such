@@ -18,7 +18,7 @@ export function CoffeeExportGame({ state, dispatch, onGameOver }: GameProps<Coff
       </div>
       {state.phase === "choosing" && (
         <div className="bz-cex-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CoffeeExportAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-coffee-export-primary" onClick={() => dispatch({ type: "invest" } as CoffeeExportAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CoffeeExportAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CoffeeExportAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CoffeeExportAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function CoffeeExportGame({ state, dispatch, onGameOver }: GameProps<Coff
       {state.phase === "resolved" && (
         <div className="bz-cex-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as CoffeeExportAction)}>Next Turn</button>
+          <button data-testid="hint-target-coffee-export-next" onClick={() => dispatch({ type: "next" } as CoffeeExportAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

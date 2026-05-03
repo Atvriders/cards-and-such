@@ -12,5 +12,10 @@ export const basicRummyPlugin: GamePlugin<BasicRummyState, BasicRummyAction, typ
   howToPlay:"Basic Rummy Trivia is a ten-question quiz about Basic Rummy, the foundation of the rummy family of card games. Played by 2-6 players with a standard 52-card deck (each player dealt 7-10 cards depending on player count), the goal is to form sets (three or more of a kind) and runs (three or more in sequence of one suit) and 'go out' by melding all your cards. On each turn a player draws (from stock or discard) and discards. The first player to lay down all their cards wins the round. Each question tests rules, scoring, sets/runs, and the history of Basic Rummy. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown. Rummy is one of the most-played card families in the world.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BasicRummySettings),
-  reducer,isTerminal,component:BasicRummyGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-basic-rummy-next"]', pulses: 3 };
+    if (state.phase === "playing" && state.selected !== null) return { selector: '[data-testid="hint-target-basic-rummy-submit"]', pulses: 3 };
+    return null;
+  },component:BasicRummyGame,
 };

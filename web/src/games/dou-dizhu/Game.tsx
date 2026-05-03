@@ -11,10 +11,10 @@ export function DouDizhuGame({ state, dispatch, onGameOver }: GameProps<DouDizhu
       <div className="dou-dizhu-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="dou-dizhu-score">{state.score} pts</div>
       <div className="dou-dizhu-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="dou-dizhu-btn" onClick={() => dispatch({ type: "play" } as DouDizhuAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-dou-dizhu-primary" className="dou-dizhu-btn" onClick={() => dispatch({ type: "play" } as DouDizhuAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="dou-dizhu-result">{state.result}</div>
-        <button className="dou-dizhu-btn alt" onClick={() => dispatch({ type: "next" } as DouDizhuAction)}>Next</button>
+        <button data-testid="hint-target-dou-dizhu-next" className="dou-dizhu-btn alt" onClick={() => dispatch({ type: "next" } as DouDizhuAction)}>Next</button>
       </>}
     </div>
   );

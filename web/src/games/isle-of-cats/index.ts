@@ -17,5 +17,10 @@ export const isleOfCatsPlugin: GamePlugin<IsleOfCatsState, IsleOfCatsAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as IsleOfCatsSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-isle-of-cats-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-isle-of-cats-next"]', pulses: 3 };
+    return null;
+  },
   component: IsleOfCatsGame,
 };

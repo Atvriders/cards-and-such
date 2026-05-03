@@ -18,7 +18,7 @@ export function FoodRestaurantGame({ state, dispatch, onGameOver }: GameProps<Fo
       </div>
       {state.phase === "choosing" && (
         <div className="bz-fre-actions">
-          <button onClick={() => dispatch({ type: "invest" } as FoodRestaurantAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-food-restaurant-primary" onClick={() => dispatch({ type: "invest" } as FoodRestaurantAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as FoodRestaurantAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as FoodRestaurantAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as FoodRestaurantAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function FoodRestaurantGame({ state, dispatch, onGameOver }: GameProps<Fo
       {state.phase === "resolved" && (
         <div className="bz-fre-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as FoodRestaurantAction)}>Next Turn</button>
+          <button data-testid="hint-target-food-restaurant-next" onClick={() => dispatch({ type: "next" } as FoodRestaurantAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

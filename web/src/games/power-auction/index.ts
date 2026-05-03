@@ -17,5 +17,10 @@ export const powerAuctionPlugin: GamePlugin<PowerAuctionState, PowerAuctionActio
   initialState: (seed: number, s: S) => initialState(seed, s as PowerAuctionSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-power-auction-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-power-auction-next"]', pulses: 3 };
+    return null;
+  },
   component: PowerAuctionGame,
 };

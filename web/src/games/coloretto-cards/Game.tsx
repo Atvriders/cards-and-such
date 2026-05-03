@@ -18,7 +18,7 @@ export function ColorettoCardsGame({ state, dispatch, onGameOver }: GameProps<Co
       </div>
       {state.phase === "choosing" && (
         <div className="bz-clr-actions">
-          <button onClick={() => dispatch({ type: "invest" } as ColorettoCardsAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-coloretto-cards-primary" onClick={() => dispatch({ type: "invest" } as ColorettoCardsAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ColorettoCardsAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ColorettoCardsAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as ColorettoCardsAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function ColorettoCardsGame({ state, dispatch, onGameOver }: GameProps<Co
       {state.phase === "resolved" && (
         <div className="bz-clr-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as ColorettoCardsAction)}>Next Turn</button>
+          <button data-testid="hint-target-coloretto-cards-next" onClick={() => dispatch({ type: "next" } as ColorettoCardsAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

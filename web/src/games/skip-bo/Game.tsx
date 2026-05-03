@@ -11,10 +11,10 @@ export function SkipBoGame({ state, dispatch, onGameOver }: GameProps<SkipBoStat
       <div className="skip-bo-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="skip-bo-score">{state.score} pts</div>
       <div className="skip-bo-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="skip-bo-btn" onClick={() => dispatch({ type: "play" } as SkipBoAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-skip-bo-primary" className="skip-bo-btn" onClick={() => dispatch({ type: "play" } as SkipBoAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="skip-bo-result">{state.result}</div>
-        <button className="skip-bo-btn alt" onClick={() => dispatch({ type: "next" } as SkipBoAction)}>Next</button>
+        <button data-testid="hint-target-skip-bo-next" className="skip-bo-btn alt" onClick={() => dispatch({ type: "next" } as SkipBoAction)}>Next</button>
       </>}
     </div>
   );

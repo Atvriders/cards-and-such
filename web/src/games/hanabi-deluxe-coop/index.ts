@@ -15,5 +15,10 @@ export const hanabiDeluxeCoopPlugin: GamePlugin<hanabiDeluxeCoopState, hanabiDel
   initialState: (seed: number, s: S) => initialState(seed, s as hanabiDeluxeCoopSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-hanabi-deluxe-coop-primary"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-hanabi-deluxe-coop-next"]', pulses: 3 };
+    return null;
+  },
   component: hanabiDeluxeCoopGame,
 };

@@ -17,5 +17,10 @@ export const onirimDreamPlugin: GamePlugin<OnirimDreamState, OnirimDreamAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as OnirimDreamSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-onirim-dream-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-onirim-dream-next"]', pulses: 3 };
+    return null;
+  },
   component: OnirimDreamGame,
 };

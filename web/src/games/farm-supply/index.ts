@@ -17,5 +17,10 @@ export const farmSupplyPlugin: GamePlugin<FarmSupplyState, FarmSupplyAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as FarmSupplySettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-farm-supply-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-farm-supply-next"]', pulses: 3 };
+    return null;
+  },
   component: FarmSupplyGame,
 };

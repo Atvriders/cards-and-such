@@ -11,10 +11,10 @@ export function UnoStackoGame({ state, dispatch, onGameOver }: GameProps<UnoStac
       <div className="uno-stacko-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="uno-stacko-score">{state.score} pts</div>
       <div className="uno-stacko-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="uno-stacko-btn" onClick={() => dispatch({ type: "play" } as UnoStackoAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-uno-stacko-primary" className="uno-stacko-btn" onClick={() => dispatch({ type: "play" } as UnoStackoAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="uno-stacko-result">{state.result}</div>
-        <button className="uno-stacko-btn alt" onClick={() => dispatch({ type: "next" } as UnoStackoAction)}>Next</button>
+        <button data-testid="hint-target-uno-stacko-next" className="uno-stacko-btn alt" onClick={() => dispatch({ type: "next" } as UnoStackoAction)}>Next</button>
       </>}
     </div>
   );

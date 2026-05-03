@@ -11,10 +11,10 @@ export function TycoonGame({ state, dispatch, onGameOver }: GameProps<TycoonStat
       <div className="tycoon-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="tycoon-score">{state.score} pts</div>
       <div className="tycoon-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="tycoon-btn" onClick={() => dispatch({ type: "play" } as TycoonAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-tycoon-primary" className="tycoon-btn" onClick={() => dispatch({ type: "play" } as TycoonAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="tycoon-result">{state.result}</div>
-        <button className="tycoon-btn alt" onClick={() => dispatch({ type: "next" } as TycoonAction)}>Next</button>
+        <button data-testid="hint-target-tycoon-next" className="tycoon-btn alt" onClick={() => dispatch({ type: "next" } as TycoonAction)}>Next</button>
       </>}
     </div>
   );

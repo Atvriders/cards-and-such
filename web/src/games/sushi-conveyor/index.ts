@@ -17,5 +17,10 @@ export const sushiConveyorPlugin: GamePlugin<SushiConveyorState, SushiConveyorAc
   initialState: (seed: number, s: S) => initialState(seed, s as SushiConveyorSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-sushi-conveyor-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-sushi-conveyor-next"]', pulses: 3 };
+    return null;
+  },
   component: SushiConveyorGame,
 };

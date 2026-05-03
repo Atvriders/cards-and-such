@@ -12,5 +12,10 @@ export const michiganNewmarketPlugin: GamePlugin<MichiganNewmarketState, Michiga
   howToPlay: "Michigan, also called Newmarket or Boodle, is a stops-style shedding game with betting components. Four boodle cards (specific payout cards from a separate deck) are placed on a board and players ante chips to each. The dealer plays the lowest card of any suit and players follow upward in the same suit; when nobody can continue (a stop), the next player starts a new suit. Whoever plays a boodle card collects the chips on it. The first to empty their hand wins the round and collects a kitty bonus. In this one-on-one CPU duel across six rounds, click Play Round to ante, deal, and play. Strategy: play your low cards aggressively to start the suit chain, hoarding high cards for stops. Hold boodle-matching cards (Q♥, J♦, 10♣, A♠) as long as possible to maximize their chip pot. Aim for at least three round wins and a chip total above eighty for a respectable Michigan finish.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MichiganNewmarketSettings),
-  reducer, isTerminal, component: MichiganNewmarketGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-michigan-newmarket-primary"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-michigan-newmarket-next"]', pulses: 3 };
+    return null;
+  }, component: MichiganNewmarketGame,
 };

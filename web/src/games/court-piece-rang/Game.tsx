@@ -11,10 +11,10 @@ export function CourtPieceRangGame({ state, dispatch, onGameOver }: GameProps<Co
       <div className="court-piece-rang-info">Round {state.round} / {TOTAL_ROUNDS} — Hand {HAND_SIZE} cards · W{state.wins} L{state.losses}</div>
       <div className="court-piece-rang-score">{state.score} pts</div>
       <div className="court-piece-rang-info">Tricks: you {state.tricksWon} · cpu {state.tricksLost}</div>
-      {state.phase === "ready" && <button className="court-piece-rang-btn" onClick={() => dispatch({ type: "play" } as CourtPieceRangAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-court-piece-rang-primary" className="court-piece-rang-btn" onClick={() => dispatch({ type: "play" } as CourtPieceRangAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="court-piece-rang-result">{state.result}</div>
-        <button className="court-piece-rang-btn alt" onClick={() => dispatch({ type: "next" } as CourtPieceRangAction)}>Next Round</button>
+        <button data-testid="hint-target-court-piece-rang-next" className="court-piece-rang-btn alt" onClick={() => dispatch({ type: "next" } as CourtPieceRangAction)}>Next Round</button>
       </>}
     </div>
   );

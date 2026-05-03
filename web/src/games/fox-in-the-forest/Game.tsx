@@ -11,10 +11,10 @@ export function FoxInTheForestGame({ state, dispatch, onGameOver }: GameProps<Fo
       <div className="fox-in-the-forest-info">Round {state.round} / {TOTAL_ROUNDS} — Hand {HAND_SIZE} cards · W{state.wins} L{state.losses}</div>
       <div className="fox-in-the-forest-score">{state.score} pts</div>
       <div className="fox-in-the-forest-info">Tricks: you {state.tricksWon} · cpu {state.tricksLost}</div>
-      {state.phase === "ready" && <button className="fox-in-the-forest-btn" onClick={() => dispatch({ type: "play" } as FoxInTheForestAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-fox-in-the-forest-primary" className="fox-in-the-forest-btn" onClick={() => dispatch({ type: "play" } as FoxInTheForestAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="fox-in-the-forest-result">{state.result}</div>
-        <button className="fox-in-the-forest-btn alt" onClick={() => dispatch({ type: "next" } as FoxInTheForestAction)}>Next Round</button>
+        <button data-testid="hint-target-fox-in-the-forest-next" className="fox-in-the-forest-btn alt" onClick={() => dispatch({ type: "next" } as FoxInTheForestAction)}>Next Round</button>
       </>}
     </div>
   );

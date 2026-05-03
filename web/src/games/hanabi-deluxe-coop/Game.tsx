@@ -22,12 +22,12 @@ export function hanabiDeluxeCoopGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "ready" && (
-        <button className="coop-btn" onClick={() => dispatch({ type: "play" } as hanabiDeluxeCoopAction)}>Play Round</button>
+        <button data-testid="hint-target-hanabi-deluxe-coop-primary" className="coop-btn" onClick={() => dispatch({ type: "play" } as hanabiDeluxeCoopAction)}>Play Round</button>
       )}
       {state.phase === "rolled" && (
         <>
           <div className="coop-result">+{state.lastPts} together</div>
-          <button className="coop-btn alt" onClick={() => dispatch({ type: "next" } as hanabiDeluxeCoopAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}</button>
+          <button data-testid="hint-target-hanabi-deluxe-coop-next" className="coop-btn alt" onClick={() => dispatch({ type: "next" } as hanabiDeluxeCoopAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next Round"}</button>
         </>
       )}
     </div>

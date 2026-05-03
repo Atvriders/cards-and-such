@@ -35,8 +35,8 @@ export function OklahomaGinGame({ state, dispatch, onGameOver }: GameProps<Oklah
       </div>
       {isResult && <div className={`okgquiz-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="okgquiz-actions">
-        {!isResult && <button className="okgquiz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as OklahomaGinAction)}>Submit</button>}
-        {isResult && <button className="okgquiz-btn next" onClick={() => dispatch({ type:"next" } as OklahomaGinAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+        {!isResult && <button data-testid="hint-target-oklahoma-gin-submit" className="okgquiz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as OklahomaGinAction)}>Submit</button>}
+        {isResult && <button data-testid="hint-target-oklahoma-gin-next" className="okgquiz-btn next" onClick={() => dispatch({ type:"next" } as OklahomaGinAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

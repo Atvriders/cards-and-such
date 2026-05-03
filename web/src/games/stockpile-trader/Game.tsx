@@ -18,7 +18,7 @@ export function StockpileTraderGame({ state, dispatch, onGameOver }: GameProps<S
       </div>
       {state.phase === "choosing" && (
         <div className="bz-spt-actions">
-          <button onClick={() => dispatch({ type: "invest" } as StockpileTraderAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-stockpile-trader-primary" onClick={() => dispatch({ type: "invest" } as StockpileTraderAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as StockpileTraderAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as StockpileTraderAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as StockpileTraderAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function StockpileTraderGame({ state, dispatch, onGameOver }: GameProps<S
       {state.phase === "resolved" && (
         <div className="bz-spt-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as StockpileTraderAction)}>Next Turn</button>
+          <button data-testid="hint-target-stockpile-trader-next" onClick={() => dispatch({ type: "next" } as StockpileTraderAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

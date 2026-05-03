@@ -35,8 +35,8 @@ export function SpeedSnapGame({ state, dispatch, onGameOver }: GameProps<SpeedSn
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as SpeedSnapAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as SpeedSnapAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+        {!isResult && <button data-testid="hint-target-speed-snap-submit" className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as SpeedSnapAction)}>Submit</button>}
+        {isResult && <button data-testid="hint-target-speed-snap-next" className="trivia-btn next" onClick={() => dispatch({ type:"next" } as SpeedSnapAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

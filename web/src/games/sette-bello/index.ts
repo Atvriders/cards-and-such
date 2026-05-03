@@ -12,5 +12,10 @@ export const setteBelloPlugin: GamePlugin<SetteBelloState, SetteBelloAction, typ
   howToPlay:"Sette Bello Trivia is a ten-question quiz about the Sette Bello (Italian for 'Beautiful Seven'), the Seven of Coins (Sette di Denari) — the single most valuable card in Italian Scopa and its many variants. In standard Scopa scoring, capturing the Sette Bello earns one point in the final tally, and it is one of the four standard scoring categories (alongside cards, coins, primiera). The Sette Bello cannot be captured by exchange — it must be taken via direct match or sweep. Each question tests rules, scoring, and cultural significance of the Sette Bello in Scopa, Scopone, and related games. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SetteBelloSettings),
-  reducer,isTerminal,component:SetteBelloGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-sette-bello-next"]', pulses: 3 };
+    if (state.phase === "playing" && state.selected !== null) return { selector: '[data-testid="hint-target-sette-bello-submit"]', pulses: 3 };
+    return null;
+  },component:SetteBelloGame,
 };

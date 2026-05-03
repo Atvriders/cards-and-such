@@ -18,7 +18,7 @@ export function FarmSupplyGame({ state, dispatch, onGameOver }: GameProps<FarmSu
       </div>
       {state.phase === "choosing" && (
         <div className="bz-fsp-actions">
-          <button onClick={() => dispatch({ type: "invest" } as FarmSupplyAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-farm-supply-primary" onClick={() => dispatch({ type: "invest" } as FarmSupplyAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as FarmSupplyAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as FarmSupplyAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as FarmSupplyAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function FarmSupplyGame({ state, dispatch, onGameOver }: GameProps<FarmSu
       {state.phase === "resolved" && (
         <div className="bz-fsp-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as FarmSupplyAction)}>Next Turn</button>
+          <button data-testid="hint-target-farm-supply-next" onClick={() => dispatch({ type: "next" } as FarmSupplyAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

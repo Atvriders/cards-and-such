@@ -17,5 +17,10 @@ export const marketBlufferPlugin: GamePlugin<MarketBlufferState, MarketBlufferAc
   initialState: (seed: number, s: S) => initialState(seed, s as MarketBlufferSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-market-bluffer-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-market-bluffer-next"]', pulses: 3 };
+    return null;
+  },
   component: MarketBlufferGame,
 };

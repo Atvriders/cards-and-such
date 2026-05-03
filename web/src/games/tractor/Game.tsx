@@ -11,10 +11,10 @@ export function TractorGame({ state, dispatch, onGameOver }: GameProps<TractorSt
       <div className="tractor-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="tractor-score">{state.score} pts</div>
       <div className="tractor-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="tractor-btn" onClick={() => dispatch({ type: "play" } as TractorAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-tractor-primary" className="tractor-btn" onClick={() => dispatch({ type: "play" } as TractorAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="tractor-result">{state.result}</div>
-        <button className="tractor-btn alt" onClick={() => dispatch({ type: "next" } as TractorAction)}>Next</button>
+        <button data-testid="hint-target-tractor-next" className="tractor-btn alt" onClick={() => dispatch({ type: "next" } as TractorAction)}>Next</button>
       </>}
     </div>
   );

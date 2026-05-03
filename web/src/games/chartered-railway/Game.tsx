@@ -18,7 +18,7 @@ export function CharteredRailwayGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-chr-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CharteredRailwayAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-chartered-railway-primary" onClick={() => dispatch({ type: "invest" } as CharteredRailwayAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CharteredRailwayAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CharteredRailwayAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CharteredRailwayAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function CharteredRailwayGame({ state, dispatch, onGameOver }: GameProps<
       {state.phase === "resolved" && (
         <div className="bz-chr-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as CharteredRailwayAction)}>Next Turn</button>
+          <button data-testid="hint-target-chartered-railway-next" onClick={() => dispatch({ type: "next" } as CharteredRailwayAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

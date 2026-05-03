@@ -11,10 +11,10 @@ export function SwitchGame({ state, dispatch, onGameOver }: GameProps<SwitchStat
       <div className="switch-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="switch-score">{state.score} pts</div>
       <div className="switch-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="switch-btn" onClick={() => dispatch({ type: "play" } as SwitchAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-switch-primary" className="switch-btn" onClick={() => dispatch({ type: "play" } as SwitchAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="switch-result">{state.result}</div>
-        <button className="switch-btn alt" onClick={() => dispatch({ type: "next" } as SwitchAction)}>Next</button>
+        <button data-testid="hint-target-switch-next" className="switch-btn alt" onClick={() => dispatch({ type: "next" } as SwitchAction)}>Next</button>
       </>}
     </div>
   );

@@ -11,10 +11,10 @@ export function SuicideSpadesGame({ state, dispatch, onGameOver }: GameProps<Sui
       <div className="suicide-spades-info">Round {state.round} / {TOTAL_ROUNDS} — Hand {HAND_SIZE} cards · W{state.wins} L{state.losses}</div>
       <div className="suicide-spades-score">{state.score} pts</div>
       <div className="suicide-spades-info">Tricks: you {state.tricksWon} · cpu {state.tricksLost}</div>
-      {state.phase === "ready" && <button className="suicide-spades-btn" onClick={() => dispatch({ type: "play" } as SuicideSpadesAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-suicide-spades-primary" className="suicide-spades-btn" onClick={() => dispatch({ type: "play" } as SuicideSpadesAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="suicide-spades-result">{state.result}</div>
-        <button className="suicide-spades-btn alt" onClick={() => dispatch({ type: "next" } as SuicideSpadesAction)}>Next Round</button>
+        <button data-testid="hint-target-suicide-spades-next" className="suicide-spades-btn alt" onClick={() => dispatch({ type: "next" } as SuicideSpadesAction)}>Next Round</button>
       </>}
     </div>
   );

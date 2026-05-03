@@ -17,5 +17,10 @@ export const parksTrailPlugin: GamePlugin<ParksTrailState, ParksTrailAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as ParksTrailSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-parks-trail-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-parks-trail-next"]', pulses: 3 };
+    return null;
+  },
   component: ParksTrailGame,
 };

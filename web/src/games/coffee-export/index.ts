@@ -17,5 +17,10 @@ export const coffeeExportPlugin: GamePlugin<CoffeeExportState, CoffeeExportActio
   initialState: (seed: number, s: S) => initialState(seed, s as CoffeeExportSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-coffee-export-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-coffee-export-next"]', pulses: 3 };
+    return null;
+  },
   component: CoffeeExportGame,
 };

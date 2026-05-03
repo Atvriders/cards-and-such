@@ -18,7 +18,7 @@ export function SpiritOfForestGame({ state, dispatch, onGameOver }: GameProps<Sp
       </div>
       {state.phase === "choosing" && (
         <div className="bz-sof-actions">
-          <button onClick={() => dispatch({ type: "invest" } as SpiritOfForestAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-spirit-of-forest-primary" onClick={() => dispatch({ type: "invest" } as SpiritOfForestAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as SpiritOfForestAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as SpiritOfForestAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as SpiritOfForestAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function SpiritOfForestGame({ state, dispatch, onGameOver }: GameProps<Sp
       {state.phase === "resolved" && (
         <div className="bz-sof-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as SpiritOfForestAction)}>Next Turn</button>
+          <button data-testid="hint-target-spirit-of-forest-next" onClick={() => dispatch({ type: "next" } as SpiritOfForestAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

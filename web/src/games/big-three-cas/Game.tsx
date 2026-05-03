@@ -35,8 +35,8 @@ export function BigThreeCasGame({ state, dispatch, onGameOver }: GameProps<BigTh
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as BigThreeCasAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as BigThreeCasAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+        {!isResult && <button data-testid="hint-target-big-three-cas-submit" className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as BigThreeCasAction)}>Submit</button>}
+        {isResult && <button data-testid="hint-target-big-three-cas-next" className="trivia-btn next" onClick={() => dispatch({ type:"next" } as BigThreeCasAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

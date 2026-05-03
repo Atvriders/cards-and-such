@@ -17,5 +17,10 @@ export const tuscanyEssentialPlugin: GamePlugin<TuscanyEssentialState, TuscanyEs
   initialState: (seed: number, s: S) => initialState(seed, s as TuscanyEssentialSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-tuscany-essential-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-tuscany-essential-next"]', pulses: 3 };
+    return null;
+  },
   component: TuscanyEssentialGame,
 };

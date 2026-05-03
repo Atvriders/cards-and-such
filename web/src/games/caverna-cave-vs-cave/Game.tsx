@@ -18,7 +18,7 @@ export function CavernaCaveVsCaveGame({ state, dispatch, onGameOver }: GameProps
       </div>
       {state.phase === "choosing" && (
         <div className="bz-cvc-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CavernaCaveVsCaveAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-caverna-cave-vs-cave-primary" onClick={() => dispatch({ type: "invest" } as CavernaCaveVsCaveAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CavernaCaveVsCaveAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CavernaCaveVsCaveAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CavernaCaveVsCaveAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function CavernaCaveVsCaveGame({ state, dispatch, onGameOver }: GameProps
       {state.phase === "resolved" && (
         <div className="bz-cvc-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as CavernaCaveVsCaveAction)}>Next Turn</button>
+          <button data-testid="hint-target-caverna-cave-vs-cave-next" onClick={() => dispatch({ type: "next" } as CavernaCaveVsCaveAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

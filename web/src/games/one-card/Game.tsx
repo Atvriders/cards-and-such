@@ -11,10 +11,10 @@ export function OneCardGame({ state, dispatch, onGameOver }: GameProps<OneCardSt
       <div className="one-card-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="one-card-score">{state.score} pts</div>
       <div className="one-card-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="one-card-btn" onClick={() => dispatch({ type: "play" } as OneCardAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-one-card-primary" className="one-card-btn" onClick={() => dispatch({ type: "play" } as OneCardAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="one-card-result">{state.result}</div>
-        <button className="one-card-btn alt" onClick={() => dispatch({ type: "next" } as OneCardAction)}>Next</button>
+        <button data-testid="hint-target-one-card-next" className="one-card-btn alt" onClick={() => dispatch({ type: "next" } as OneCardAction)}>Next</button>
       </>}
     </div>
   );

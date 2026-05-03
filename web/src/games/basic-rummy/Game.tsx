@@ -35,8 +35,8 @@ export function BasicRummyGame({ state, dispatch, onGameOver }: GameProps<BasicR
       </div>
       {isResult && <div className={`trivia-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="trivia-actions">
-        {!isResult && <button className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as BasicRummyAction)}>Submit</button>}
-        {isResult && <button className="trivia-btn next" onClick={() => dispatch({ type:"next" } as BasicRummyAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+        {!isResult && <button data-testid="hint-target-basic-rummy-submit" className="trivia-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as BasicRummyAction)}>Submit</button>}
+        {isResult && <button data-testid="hint-target-basic-rummy-next" className="trivia-btn next" onClick={() => dispatch({ type:"next" } as BasicRummyAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

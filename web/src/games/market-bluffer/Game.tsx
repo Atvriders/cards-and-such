@@ -18,7 +18,7 @@ export function MarketBlufferGame({ state, dispatch, onGameOver }: GameProps<Mar
       </div>
       {state.phase === "choosing" && (
         <div className="bz-actions">
-          <button onClick={() => dispatch({ type: "invest" } as MarketBlufferAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-market-bluffer-primary" onClick={() => dispatch({ type: "invest" } as MarketBlufferAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as MarketBlufferAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as MarketBlufferAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as MarketBlufferAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function MarketBlufferGame({ state, dispatch, onGameOver }: GameProps<Mar
       {state.phase === "resolved" && (
         <div className="bz-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as MarketBlufferAction)}>Next Turn</button>
+          <button data-testid="hint-target-market-bluffer-next" onClick={() => dispatch({ type: "next" } as MarketBlufferAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

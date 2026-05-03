@@ -11,10 +11,10 @@ export function TrucGame({ state, dispatch, onGameOver }: GameProps<TrucState, T
       <div className="truc-info">Round {state.round} / {TOTAL_ROUNDS} — Hand {HAND_SIZE} cards · W{state.wins} L{state.losses}</div>
       <div className="truc-score">{state.score} pts</div>
       <div className="truc-info">Tricks: you {state.tricksWon} · cpu {state.tricksLost}</div>
-      {state.phase === "ready" && <button className="truc-btn" onClick={() => dispatch({ type: "play" } as TrucAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-truc-primary" className="truc-btn" onClick={() => dispatch({ type: "play" } as TrucAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="truc-result">{state.result}</div>
-        <button className="truc-btn alt" onClick={() => dispatch({ type: "next" } as TrucAction)}>Next Round</button>
+        <button data-testid="hint-target-truc-next" className="truc-btn alt" onClick={() => dispatch({ type: "next" } as TrucAction)}>Next Round</button>
       </>}
     </div>
   );

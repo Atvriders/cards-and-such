@@ -18,7 +18,7 @@ export function TuscanyEssentialGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-tus-actions">
-          <button onClick={() => dispatch({ type: "invest" } as TuscanyEssentialAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-tuscany-essential-primary" onClick={() => dispatch({ type: "invest" } as TuscanyEssentialAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as TuscanyEssentialAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as TuscanyEssentialAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as TuscanyEssentialAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function TuscanyEssentialGame({ state, dispatch, onGameOver }: GameProps<
       {state.phase === "resolved" && (
         <div className="bz-tus-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as TuscanyEssentialAction)}>Next Turn</button>
+          <button data-testid="hint-target-tuscany-essential-next" onClick={() => dispatch({ type: "next" } as TuscanyEssentialAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

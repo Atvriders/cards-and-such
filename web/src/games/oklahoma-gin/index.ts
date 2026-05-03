@@ -12,5 +12,10 @@ export const oklahomaGinPlugin: GamePlugin<OklahomaGinState, OklahomaGinAction, 
   howToPlay:"Oklahoma Gin Trivia is a ten-question quiz about Oklahoma Gin, a popular Gin Rummy variant in which the value of the first upcard determines the maximum allowable knock count for that hand. If the upcard is a Spade the score is doubled, and certain ranks (like an Ace) require a forced gin (knock with zero deadwood). Played by two players with a standard 52-card deck, each receives 10 cards. The objective is to form sets and runs, then knock when your unmatched deadwood is at or below the limit set by the upcard. Each question tests rules, scoring, knocking limits, and strategy of Oklahoma Gin. Tap an answer and Submit; correct answers earn 100 base points plus 10 per second remaining on the 15-second timer. Wrong answers reveal the correct option. After ten questions your final score is shown. Oklahoma Gin adds clever variability to standard Gin Rummy through its dynamic knock-limit rule.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OklahomaGinSettings),
-  reducer,isTerminal,component:OklahomaGinGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-oklahoma-gin-next"]', pulses: 3 };
+    if (state.phase === "playing" && state.selected !== null) return { selector: '[data-testid="hint-target-oklahoma-gin-submit"]', pulses: 3 };
+    return null;
+  },component:OklahomaGinGame,
 };

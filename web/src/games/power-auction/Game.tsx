@@ -18,7 +18,7 @@ export function PowerAuctionGame({ state, dispatch, onGameOver }: GameProps<Powe
       </div>
       {state.phase === "choosing" && (
         <div className="bz-pau-actions">
-          <button onClick={() => dispatch({ type: "invest" } as PowerAuctionAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-power-auction-primary" onClick={() => dispatch({ type: "invest" } as PowerAuctionAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as PowerAuctionAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as PowerAuctionAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as PowerAuctionAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function PowerAuctionGame({ state, dispatch, onGameOver }: GameProps<Powe
       {state.phase === "resolved" && (
         <div className="bz-pau-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as PowerAuctionAction)}>Next Turn</button>
+          <button data-testid="hint-target-power-auction-next" onClick={() => dispatch({ type: "next" } as PowerAuctionAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

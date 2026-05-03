@@ -17,5 +17,10 @@ export const stockpileTraderPlugin: GamePlugin<StockpileTraderState, StockpileTr
   initialState: (seed: number, s: S) => initialState(seed, s as StockpileTraderSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "choosing") return { selector: '[data-testid="hint-target-stockpile-trader-primary"]', pulses: 3 };
+    if (state.phase === "resolved") return { selector: '[data-testid="hint-target-stockpile-trader-next"]', pulses: 3 };
+    return null;
+  },
   component: StockpileTraderGame,
 };

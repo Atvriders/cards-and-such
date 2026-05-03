@@ -35,8 +35,8 @@ export function StraightGinGame({ state, dispatch, onGameOver }: GameProps<Strai
       </div>
       {isResult && <div className={`stgquiz-feedback ${state.selected === q.correct ? "correct" : "wrong"}`}>{state.selected === q.correct ? "Correct!" : `Wrong! Answer: ${q.choices[q.correct]}`}</div>}
       <div className="stgquiz-actions">
-        {!isResult && <button className="stgquiz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as StraightGinAction)}>Submit</button>}
-        {isResult && <button className="stgquiz-btn next" onClick={() => dispatch({ type:"next" } as StraightGinAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
+        {!isResult && <button data-testid="hint-target-straight-gin-submit" className="stgquiz-btn submit" disabled={state.selected === null} onClick={() => dispatch({ type:"submit" } as StraightGinAction)}>Submit</button>}
+        {isResult && <button data-testid="hint-target-straight-gin-next" className="stgquiz-btn next" onClick={() => dispatch({ type:"next" } as StraightGinAction)}>{state.currentIndex + 1 >= state.questions.length ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

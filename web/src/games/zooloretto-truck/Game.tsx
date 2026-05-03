@@ -18,7 +18,7 @@ export function ZoolorettoTruckGame({ state, dispatch, onGameOver }: GameProps<Z
       </div>
       {state.phase === "choosing" && (
         <div className="bz-zlt-actions">
-          <button onClick={() => dispatch({ type: "invest" } as ZoolorettoTruckAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-zooloretto-truck-primary" onClick={() => dispatch({ type: "invest" } as ZoolorettoTruckAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ZoolorettoTruckAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ZoolorettoTruckAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as ZoolorettoTruckAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function ZoolorettoTruckGame({ state, dispatch, onGameOver }: GameProps<Z
       {state.phase === "resolved" && (
         <div className="bz-zlt-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as ZoolorettoTruckAction)}>Next Turn</button>
+          <button data-testid="hint-target-zooloretto-truck-next" onClick={() => dispatch({ type: "next" } as ZoolorettoTruckAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (

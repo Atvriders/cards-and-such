@@ -11,10 +11,10 @@ export function ScumGame({ state, dispatch, onGameOver }: GameProps<ScumState, S
       <div className="scum-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="scum-score">{state.score} pts</div>
       <div className="scum-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="scum-btn" onClick={() => dispatch({ type: "play" } as ScumAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-scum-primary" className="scum-btn" onClick={() => dispatch({ type: "play" } as ScumAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="scum-result">{state.result}</div>
-        <button className="scum-btn alt" onClick={() => dispatch({ type: "next" } as ScumAction)}>Next</button>
+        <button data-testid="hint-target-scum-next" className="scum-btn alt" onClick={() => dispatch({ type: "next" } as ScumAction)}>Next</button>
       </>}
     </div>
   );

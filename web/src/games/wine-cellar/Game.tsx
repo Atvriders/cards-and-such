@@ -18,7 +18,7 @@ export function WineCellarGame({ state, dispatch, onGameOver }: GameProps<WineCe
       </div>
       {state.phase === "choosing" && (
         <div className="bz-wcl-actions">
-          <button onClick={() => dispatch({ type: "invest" } as WineCellarAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-wine-cellar-primary" onClick={() => dispatch({ type: "invest" } as WineCellarAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as WineCellarAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as WineCellarAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as WineCellarAction)}>Trade Asset</button>
@@ -27,7 +27,7 @@ export function WineCellarGame({ state, dispatch, onGameOver }: GameProps<WineCe
       {state.phase === "resolved" && (
         <div className="bz-wcl-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as WineCellarAction)}>Next Turn</button>
+          <button data-testid="hint-target-wine-cellar-next" onClick={() => dispatch({ type: "next" } as WineCellarAction)}>Next Turn</button>
         </div>
       )}
       {state.phase === "done" && (
