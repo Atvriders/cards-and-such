@@ -1116,16 +1116,18 @@ export default function StatsPage(): JSX.Element {
     title: string;
     time: number;
     achievedAt: number | null;
+    isFresh: boolean;
   }[]>(() => {
     const v = progressJSON<Record<string, number>>("cards-best-times");
     if (!v || typeof v !== "object") return [];
-    const rows: { id: string; title: string; time: number; achievedAt: number | null }[] = [];
+    const rows: { id: string; title: string; time: number; achievedAt: number | null; isFresh: boolean }[] = [];
     for (const [id, t] of Object.entries(v)) {
       if (typeof t !== "number" || !Number.isFinite(t) || t <= 0) continue;
       const plug = GAMES.find((g) => g.id === id);
       if (!plug) continue;
+      const history = readTimeHistory(id);
       let achievedAt: number | null = null;
-      for (const e of readTimeHistory(id)) {
+      for (const e of history) {
         // Match within 0.05s to absorb float rounding from formatBestTime
         // round-trips elsewhere. Take the EARLIEST match — that's when the PR
         // was first set, even if it was later tied.
@@ -1133,7 +1135,26 @@ export default function StatsPage(): JSX.Element {
           if (achievedAt == null || e.ts < achievedAt) achievedAt = e.ts;
         }
       }
-      rows.push({ id, title: plug.title, time: t, achievedAt });
+      // "Fresh PR": the most recent history entry IS this best time AND it
+      // strictly beats every earlier entry. We compare the latest entry's
+      // time to the second-best (minimum across all prior entries) — if no
+      // earlier entry exists or every earlier entry is slower, the latest
+      // run set a brand-new personal record.
+      let isFresh = false;
+      if (history.length > 0) {
+        const latest = history[history.length - 1];
+        if (Math.abs(latest.time - t) <= 0.05) {
+          let secondBest = Infinity;
+          for (let i = 0; i < history.length - 1; i += 1) {
+            const prev = history[i];
+            if (Number.isFinite(prev.time) && prev.time > 0 && prev.time < secondBest) {
+              secondBest = prev.time;
+            }
+          }
+          if (latest.time < secondBest - 0.05) isFresh = true;
+        }
+      }
+      rows.push({ id, title: plug.title, time: t, achievedAt, isFresh });
     }
     rows.sort((a, b) => a.time - b.time);
     return rows.slice(0, 10);
@@ -1438,9 +1459,25 @@ export default function StatsPage(): JSX.Element {
           ) : (
             <ul className="stats-pr-list">
               {personalRecords.map((row, idx) => (
-                <li key={row.id} data-testid={`stats-pr-row-${idx}`}>
+                <li
+                  key={row.id}
+                  data-testid={`stats-pr-row-${idx}`}
+                  data-fresh={row.isFresh ? "true" : undefined}
+                >
                   <span className="stats-pr-rank">{idx + 1}</span>
-                  <span className="stats-pr-title">{row.title}</span>
+                  <span className="stats-pr-title">
+                    {row.title}
+                    {row.isFresh && (
+                      <span
+                        className="stats-pr-new"
+                        data-testid={`stats-pr-new-${row.id}`}
+                        title="New personal record!"
+                        aria-label="New personal record"
+                      >
+                        <span aria-hidden="true">✨</span> NEW
+                      </span>
+                    )}
+                  </span>
                   <span className="stats-pr-time">{formatBestTime(row.time)}</span>
                   <span className="stats-pr-date">
                     {row.achievedAt != null ? formatAchievedDate(row.achievedAt) : "—"}
