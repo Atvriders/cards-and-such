@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LowestCardBetState, LowestCardBetAction, LowestCardBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Strategy: a high card (King, Ace) on the table means the next card is likely low
 The game lasts 10 or 20 rounds (set in Settings). Final score is your chip total. Start with 100, finish higher for a profit. Can you exploit the probabilities and walk away a winner?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LowestCardBetSettings),
-  reducer, isTerminal, component:LowestCardBet,
+  reducer, isTerminal, hint: (state: LowestCardBetState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component:LowestCardBet,
 };

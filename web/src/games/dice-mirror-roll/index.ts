@@ -26,6 +26,10 @@ Use Settings to choose 8, 10, or 12 rounds. Final score is shown at the end. Pla
   settings: diceMirrorRollSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceMirrorRollSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-mirror-roll-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "reveal") return { selector: '[data-testid="hint-target-dice-mirror-roll-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-mirror-roll-roll"]', pulses: 3 };
+  },
   component: DiceMirrorRoll,
 };

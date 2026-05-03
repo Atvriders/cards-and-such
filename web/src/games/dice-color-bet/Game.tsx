@@ -23,7 +23,7 @@ export function DiceColorBet({ state, dispatch, onGameOver }: GameProps<DiceColo
           <button className="dg-btn" style={{background:"#2980b9"}} onClick={()=>dispatch({type:"bet",amount:bet,color:"blue"} as DiceColorBetAction)}>Blue (Even)</button>
         </div>
       </>}
-      {state.phase==="result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceColorBetAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
+      {state.phase==="result" && <button data-testid="hint-target-dice-color-bet-next" className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceColorBetAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
     </div>
   );
 }

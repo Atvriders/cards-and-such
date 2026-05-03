@@ -36,7 +36,7 @@ export function DiceMirrorRoll({ state, dispatch, onGameOver }: GameProps<DiceMi
           <p className="dice-msg" style={{ color: state.result === "correct" ? "#27ae60" : "#e74c3c" }}>
             {state.result === "correct" ? `Correct! +${state.lastPts} pts` : "Wrong! 0 pts"}
           </p>
-          <button className="dice-btn" onClick={() => dispatch({ type: "next" } as DiceMirrorRollAction)}>Next</button>
+          <button data-testid="hint-target-dice-mirror-roll-next" className="dice-btn" onClick={() => dispatch({ type: "next" } as DiceMirrorRollAction)}>Next</button>
         </div>
       )}
     </div>

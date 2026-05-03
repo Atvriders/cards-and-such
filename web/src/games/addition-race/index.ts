@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AdditionRaceState, AdditionRaceAction, AdditionRaceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Operands range from 1 to 50 and the answers can climb to roughly 100. The wrong 
 Maximum score is 200 points (20 correct x 10). A typical solid run lands near 120-150. Sharpen those mental-math reflexes and chase a perfect score!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AdditionRaceSettings),
-  reducer, isTerminal, component: AdditionRaceGame,
+  reducer, isTerminal, hint: (state: AdditionRaceState): HintTarget | null => (state.phase !== "done" ? { selector: ".mr-choice", pulses: 3 } : null), component: AdditionRaceGame,
 };

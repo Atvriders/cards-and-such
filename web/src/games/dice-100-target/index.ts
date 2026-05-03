@@ -31,7 +31,11 @@ Use Settings to choose 3, 5, or 7 rounds. Maximum possible score is 500/700. Can
   isTerminal,
   hint: (state: Dice100TargetState): HintTarget | null => {
     if (isTerminal(state)) return null;
-    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-100-target-roll"]', pulses: 3 };
+    if (state.phase === "rolling") {
+      if (state.total >= 80) return { selector: '[data-testid="hint-target-dice-100-target-stop"]', pulses: 3 };
+      return { selector: '[data-testid="hint-target-dice-100-target-roll"]', pulses: 3 };
+    }
+    if (state.phase === "bust" || state.phase === "scored") return { selector: '[data-testid="hint-target-dice-100-target-next"]', pulses: 3 };
     return null;
   },
   component: Dice100Target,

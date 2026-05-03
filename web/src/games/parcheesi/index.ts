@@ -31,7 +31,5 @@ Bots play automatically after your turn, always choosing to advance the pawn tha
 Win by getting all four pawns home before any opponent does!`,
   settings: parcheesiSettings,
   initialState: (seed: number, settings: ParcheesiSettingsType) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: Parcheesi,
+  reducer, isTerminal, hint: (state: ParcheesiState): HintTarget | null => (state.phase === "rolling" ? { selector: ".roll-btn", pulses: 3 } : null), component: Parcheesi,
 };

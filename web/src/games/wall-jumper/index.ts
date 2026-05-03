@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { WallJumperState, WallJumperAction, WallJumperSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { WallJumperGame } from "./Game.js";
@@ -26,7 +26,5 @@ The player remains at the same Y height throughout a jump (pure horizontal trave
 Strategy: focus on 3-point red targets but don't be greedy — a well-timed jump at two 1-point targets beats mistiming a jump at one 3-point target. Watch multiple targets at once and anticipate their positions.`,
   settings: wallJumperSettings,
   initialState: (seed, settings) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: WallJumperGame,
+  reducer, isTerminal, hint: (state: WallJumperState): HintTarget | null => (!state.over ? { selector: ".arcade-btn", pulses: 3 } : null), component: WallJumperGame,
 };

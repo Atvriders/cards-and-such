@@ -23,7 +23,7 @@ export function BidouDiceGame({ state, dispatch, onGameOver }: GameProps<BidouDi
       {state.phase === "predict" && (
         <div className="dm-row">
           {CHOICES.map((c, i) => (
-            <button key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as BidouDiceAction)}>{c}</button>
+            <button key={i} data-testid={i === 0 ? "hint-target-bidou-dice-primary" : undefined} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as BidouDiceAction)}>{c}</button>
           ))}
         </div>
       )}

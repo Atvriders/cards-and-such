@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HighestCardBetState, HighestCardBetAction, HighestCardBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Strategy matters: if the current card is a 2, betting big makes sense since almo
 The game runs for 10 or 20 rounds (configurable in Settings). Your final score is your chip total. Starting with 100 and finishing above is a win. The key is managing your bets wisely — one big loss can be devastating. Good luck!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as HighestCardBetSettings),
-  reducer, isTerminal, component:HighestCardBet,
+  reducer, isTerminal, hint: (state: HighestCardBetState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component:HighestCardBet,
 };

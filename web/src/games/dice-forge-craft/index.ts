@@ -16,9 +16,10 @@ export const diceForgeCraftPlugin: GamePlugin<diceForgeCraftState, diceForgeCraf
   reducer,
   isTerminal,
   hint: (state: diceForgeCraftState): HintTarget | null => {
-  if (isTerminal(state)) return null;
-  if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-forge-craft-roll"]', pulses: 3 };
-  return null;
+    if (isTerminal(state)) return null;
+    if (state.phase === "rolling") return { selector: '[data-testid="hint-target-dice-forge-craft-roll"]', pulses: 3 };
+    if (state.phase === "marking") return { selector: '[data-testid="hint-target-dice-forge-craft-skip"]', pulses: 3 };
+    return null;
   },
   component: diceForgeCraftGame,
 };

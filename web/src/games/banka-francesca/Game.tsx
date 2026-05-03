@@ -23,7 +23,7 @@ export function BankaFrancescaGame({ state, dispatch, onGameOver }: GameProps<Ba
       {state.phase === "predict" && (
         <div className="dm-row">
           {CHOICES.map((c, i) => (
-            <button key={i} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as BankaFrancescaAction)}>{c}</button>
+            <button key={i} data-testid={i === 0 ? "hint-target-banka-francesca-primary" : undefined} className={i % 2 === 0 ? "dm-btn" : "dm-btn alt"} onClick={() => dispatch({ type: "predict", choice: i } as BankaFrancescaAction)}>{c}</button>
           ))}
         </div>
       )}

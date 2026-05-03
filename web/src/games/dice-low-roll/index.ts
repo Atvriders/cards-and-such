@@ -17,6 +17,10 @@ The probability of rolling 9 or less with 3 dice is roughly 45%, so this bet los
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceLowRollSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-low-roll-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-dice-low-roll-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-low-roll-roll"]', pulses: 3 };
+  },
   component: DiceLowRollGame,
 };

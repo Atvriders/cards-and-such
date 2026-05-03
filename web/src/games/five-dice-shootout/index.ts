@@ -42,6 +42,7 @@ There's no strategy beyond rolling — it's pure dice luck. But that's what make
   isTerminal,
     hint: (state: FiveDiceState) => {
       if (isTerminal(state)) return null;
+      if (state.phase === "roundOver") return { selector: '[data-testid="hint-target-five-dice-shootout-next"]', pulses: 3 };
       return { selector: '[data-testid="hint-target-five-dice-shootout-action"]', pulses: 3 };
     },
   component: FiveDiceShootout,

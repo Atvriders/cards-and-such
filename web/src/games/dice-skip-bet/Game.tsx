@@ -23,7 +23,7 @@ export function DiceSkipBet({ state, dispatch, onGameOver }: GameProps<DiceSkipB
         </div>
         <button data-testid="hint-target-dice-skip-bet-roll" className="dg-btn" onClick={()=>dispatch({type:"bet",amount:bet,skip} as DiceSkipBetAction)}>Roll!</button>
       </>}
-      {state.phase==="result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceSkipBetAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
+      {state.phase==="result" && <button data-testid="hint-target-dice-skip-bet-next" className="dg-btn" onClick={()=>dispatch({type:"next"} as DiceSkipBetAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
     </div>
   );
 }

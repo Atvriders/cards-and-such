@@ -33,7 +33,5 @@ A pawn that reaches position 56 is safely home. The first player to get all four
 Bots play automatically: they prioritize using a 6 to bring pawns out of the yard, otherwise they advance their most backward pawn.`,
   settings: ludoSettings,
   initialState: (seed: number, settings: LudoSettingsType) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: Ludo,
+  reducer, isTerminal, hint: (state: LudoState): HintTarget | null => (state.phase === "rolling" ? { selector: ".roll-btn", pulses: 3 } : null), component: Ludo,
 };

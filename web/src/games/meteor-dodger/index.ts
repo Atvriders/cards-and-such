@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MeteorDodgerState, MeteorDodgerAction, MeteorDodgerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MeteorDodgerGame } from "./Game.js";
@@ -26,7 +26,5 @@ Stay away from the top of the screen where meteors first appear — you have les
 There are no weapons. You cannot destroy meteors — only dodge them. Every collision ends the run. Challenge yourself to beat your previous best survival time.`,
   settings: meteorDodgerSettings,
   initialState: (seed, settings) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: MeteorDodgerGame,
+  reducer, isTerminal, hint: (state: MeteorDodgerState): HintTarget | null => (!state.over ? { selector: ".arcade-btn", pulses: 3 } : null), component: MeteorDodgerGame,
 };

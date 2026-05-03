@@ -20,7 +20,7 @@ export function DicePairRoll({ state, dispatch, onGameOver }: GameProps<DicePair
       {state.phase === "result" && <p className="dg-msg">{isDouble ? `Doubles! ×2 — +${state.lastGain} pts` : `Sum ${state.dice![0]!+state.dice![1]!} — +${state.lastGain} pts`}</p>}
       <div>
         {state.phase === "rolling" && <button data-testid="hint-target-dice-pair-roll-roll" className="dg-btn" onClick={()=>dispatch({type:"roll"} as DicePairRollAction)}>Roll Dice</button>}
-        {state.phase === "result" && <button className="dg-btn" onClick={()=>dispatch({type:"next"} as DicePairRollAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
+        {state.phase === "result" && <button data-testid="hint-target-dice-pair-roll-next" className="dg-btn" onClick={()=>dispatch({type:"next"} as DicePairRollAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
       </div>
     </div>
   );

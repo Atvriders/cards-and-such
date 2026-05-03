@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NumberRecallState, NumberRecallAction, NumberRecallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Digits 0-9 are all used. The sequence auto-advances every 0.9 seconds — focus!
 Use Settings to play 5 or 10 rounds. The challenge increases as sequences grow — can you recall a 10-digit number? Average humans can hold about 7 digits in working memory. Test your personal limit!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NumberRecallSettings),
-  reducer, isTerminal, component:NumberRecall,
+  reducer, isTerminal, hint: (state: NumberRecallState): HintTarget | null => (state.phase === "input" ? { selector: ".memory-btn", pulses: 3 } : null), component:NumberRecall,
 };

@@ -28,6 +28,10 @@ Use Settings to choose 6, 8, or 10 rounds. Total score accumulates across rounds
   settings: dicePipAddSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DicePipAddSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-pip-add-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-dice-pip-add-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-pip-add-roll"]', pulses: 3 };
+  },
   component: DicePipAdd,
 };

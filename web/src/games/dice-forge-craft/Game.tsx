@@ -38,7 +38,7 @@ export function diceForgeCraftGame({ state, dispatch, onGameOver }: GameProps<di
         <button className="rw-btn" data-testid="hint-target-dice-forge-craft-roll" onClick={() => dispatch({ type: "roll" } as diceForgeCraftAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as diceForgeCraftAction)}>Skip</button>
+        <button data-testid="hint-target-dice-forge-craft-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as diceForgeCraftAction)}>Skip</button>
       )}
     </div>
   );

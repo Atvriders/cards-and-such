@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { SubtractionRaceState, SubtractionRaceAction, SubtractionRaceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ The clock at the top counts down in red. When it hits zero or you finish all 20 
 Maximum score is 200 points (20 correct x 10). Average runs land near 100-150. Sharpen your subtraction reflexes and chase that perfect 200!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as SubtractionRaceSettings),
-  reducer, isTerminal, component: SubtractionRaceGame,
+  reducer, isTerminal, hint: (state: SubtractionRaceState): HintTarget | null => (state.phase !== "done" ? { selector: ".mr-choice", pulses: 3 } : null), component: SubtractionRaceGame,
 };

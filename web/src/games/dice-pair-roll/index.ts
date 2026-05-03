@@ -19,6 +19,10 @@ The expected value per roll is 7 without doubles and about 8.5 counting the doub
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DicePairRollSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-pair-roll-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-dice-pair-roll-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-pair-roll-roll"]', pulses: 3 };
+  },
   component: DicePairRoll,
 };

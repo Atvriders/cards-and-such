@@ -19,6 +19,10 @@ Play 10 or 20 rounds. If you hit your skip on a big bet, it will sting — so ke
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceSkipBetSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-skip-bet-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-dice-skip-bet-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-skip-bet-roll"]', pulses: 3 };
+  },
   component: DiceSkipBet,
 };

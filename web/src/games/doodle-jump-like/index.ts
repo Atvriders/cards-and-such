@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DoodleJumpState, DoodleJumpAction, DoodleJumpSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DoodleJumpGame } from "./Game.js";
@@ -26,7 +26,5 @@ The camera follows the highest point you reach. If the character falls below the
 There are no power-ups or enemies in this version. Pure platforming skill is all that matters. Plan two or three platforms ahead: a missed jump doesn't just cost height, it costs the time to fall back down. Aim for smooth, deliberate lateral movements rather than constant corrections.`,
   settings: doodleJumpSettings,
   initialState: (seed, settings) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: DoodleJumpGame,
+  reducer, isTerminal, hint: (state: DoodleJumpState): HintTarget | null => (!state.over ? { selector: ".arcade-btn", pulses: 3 } : null), component: DoodleJumpGame,
 };

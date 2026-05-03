@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardPileBetState, CardPileBetAction, CardPileBetSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -25,5 +25,5 @@ Click Red or Black to place your bet. The next card is then flipped to reveal wh
 Use Settings to choose 8, 12, or 16 rounds. Final score is shown at the end. A lucky or skillful run of correct calls can rack up a high score!`,
   settings: cardPileBetSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardPileBetSettings),
-  reducer, isTerminal, component: CardPileBet,
+  reducer, isTerminal, hint: (state: CardPileBetState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component: CardPileBet,
 };

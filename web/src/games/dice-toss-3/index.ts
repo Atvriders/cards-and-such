@@ -19,6 +19,7 @@ Average rounds score around 10-11 points, so a great run with lots of high numbe
   reducer, isTerminal,
     hint: (state: DiceToss3State) => {
       if (state.phase === "gameover") return null;
+      if (state.phase === "result") return { selector: '[data-testid="hint-target-dice-toss-3-next"]', pulses: 3 };
       return { selector: '[data-testid="hint-target-dice-toss-3-action"]', pulses: 3 };
     },
   component: DiceToss3Game,

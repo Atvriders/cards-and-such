@@ -31,7 +31,5 @@ Landing on an opponent pawn on a non-safe square sends it back to the yard. Safe
 Bots play automatically using a greedy strategy: they always try to advance their pawn closest to home.`,
   settings: sorrySettings,
   initialState: (seed: number, settings: SorrySettingsType) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: Sorry,
+  reducer, isTerminal, hint: (state: SorryState): HintTarget | null => (state.phase === "rolling" ? { selector: ".roll-btn", pulses: 3 } : null), component: Sorry,
 };

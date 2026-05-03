@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardCollectorState, CardCollectorAction, CardCollectorSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Maximum score is 160 (8 hits × 4 rounds × 5 pts). Average expected score is ar
 A simple, low-stakes card-spotting filler. Perfect when you want a quick palate cleanser between bigger games!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardCollectorSettings),
-  reducer,isTerminal,component:CardCollectorGame,
+  reducer, isTerminal, hint: (state: CardCollectorState): HintTarget | null => (state.phase !== "done" ? { selector: ".col-btn", pulses: 3 } : null), component:CardCollectorGame,
 };

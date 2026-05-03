@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FaceCollectorState, FaceCollectorAction, FaceCollectorSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Maximum score is 320 (8 hits × 4 rounds × 10 pts). Realistic averages cluster 
 Tap Draw to flip the next card. Watch the deck spit out random cards and cheer when your target lands!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FaceCollectorSettings),
-  reducer,isTerminal,component:FaceCollectorGame,
+  reducer, isTerminal, hint: (state: FaceCollectorState): HintTarget | null => (state.phase !== "done" ? { selector: ".col-btn", pulses: 3 } : null), component:FaceCollectorGame,
 };

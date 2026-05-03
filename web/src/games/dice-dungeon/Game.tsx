@@ -51,7 +51,7 @@ export function DiceDungeon({ state, dispatch, onGameOver }: GameProps<DiceDunge
       {state.phase === "reward" && (
         <div style={{ textAlign: "center" }}>
           <div style={{ marginBottom: 8 }}>Room {state.room} cleared!</div>
-          <button className="ddu-next" onClick={() => d({ type: "nextRoom" })}>Next Room →</button>
+          <button data-testid="hint-target-dice-dungeon-next" className="ddu-next" onClick={() => d({ type: "nextRoom" })}>Next Room →</button>
         </div>
       )}
 

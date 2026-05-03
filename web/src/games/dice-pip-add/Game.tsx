@@ -41,7 +41,7 @@ export function DicePipAdd({ state, dispatch, onGameOver }: GameProps<DicePipAdd
           <p className="dice-msg" style={{ color: state.roundScore > 0 ? "#27ae60" : "#e74c3c" }}>
             Final: {state.running} | {state.roundScore > 0 ? `+${state.roundScore} pts!` : "Miss — 0 pts"}
           </p>
-          <button className="dice-btn" onClick={() => dispatch({ type: "next" } as DicePipAddAction)}>Next</button>
+          <button data-testid="hint-target-dice-pip-add-next" className="dice-btn" onClick={() => dispatch({ type: "next" } as DicePipAddAction)}>Next</button>
         </div>
       )}
     </div>

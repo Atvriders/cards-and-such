@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MultiplicationRaceState, MultiplicationRaceAction, MultiplicationRaceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Wrong picks don't penalize your score, but they cost you precious time. The cloc
 Maximum is 200 points. Solid runs land near 130-160. Internalize those tables and chase a perfect score!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MultiplicationRaceSettings),
-  reducer, isTerminal, component: MultiplicationRaceGame,
+  reducer, isTerminal, hint: (state: MultiplicationRaceState): HintTarget | null => (state.phase !== "done" ? { selector: ".mr-choice", pulses: 3 } : null), component: MultiplicationRaceGame,
 };

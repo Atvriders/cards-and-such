@@ -19,6 +19,10 @@ Settings allow 10 or 20 rounds. Keep your bets sensible and try to grow your sta
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DiceColorBetSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-color-bet-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-dice-color-bet-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-color-bet-roll"]', pulses: 3 };
+  },
   component: DiceColorBet,
 };

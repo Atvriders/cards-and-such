@@ -16,7 +16,7 @@ export function DiceToss3Game({ state, dispatch, onGameOver }: GameProps<DiceTos
       {state.phase === "result" && state.dice && <>
         <div className="dm-dice">{state.dice.map((d,i) => <div key={i} className="dm-die">{d}</div>)}</div>
         <div className="dm-result">Sum: {state.dice.reduce((s,v)=>s+v,0)} → +{state.lastPts} pts</div>
-        <button className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceToss3Action)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
+        <button data-testid="hint-target-dice-toss-3-next" className="dm-btn" onClick={() => dispatch({ type:"next" } as DiceToss3Action)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>
       </>}
     </div>
   );

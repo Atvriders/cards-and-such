@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpitOceanClState, SpitOceanClAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SpitOceanClGame } from "./Game.js";
@@ -6,6 +6,8 @@ import { SpitOceanClGame } from "./Game.js";
 const settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
 } as const;
+
+const hint = (state: SpitOceanClState): HintTarget | null => ((state.phase === "ready" || state.phase === "dealt") ? { selector: ".g-btn", pulses: 3 } : null);
 
 export const spitOceanClPlugin: GamePlugin<SpitOceanClState, SpitOceanClAction, typeof settings> = {
   id: "spit-ocean-cl",
@@ -24,7 +26,5 @@ Play continues for ten rounds, accumulating points. The deck reshuffles each rou
 The seed determines the entire shuffle sequence, so you can replay an identical run by entering the same seed. After ten rounds, your final score is locked in. Single-player only — no CPU opponent. A bite-sized poker variant perfect for short play sessions.`,
   settings,
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
-  reducer,
-  isTerminal,
-  component: SpitOceanClGame,
+  reducer, isTerminal, hint, component: SpitOceanClGame,
 };

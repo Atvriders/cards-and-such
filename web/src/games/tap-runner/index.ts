@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TapRunnerState, TapRunnerAction, TapRunnerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TapRunnerGame } from "./Game.js";
@@ -26,7 +26,5 @@ You cannot jump again while airborne — only one jump at a time. Time your jump
 Speed increases continuously, so what starts as a leisurely jog becomes a sprint requiring very fast reactions. Score is distance traveled in meters. There is no ceiling, so you can jump as high as you like, but every second on the ground is a second of forward progress.`,
   settings: tapRunnerSettings,
   initialState: (seed, settings) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: TapRunnerGame,
+  reducer, isTerminal, hint: (state: TapRunnerState): HintTarget | null => (!state.over ? { selector: ".arcade-btn", pulses: 3 } : null), component: TapRunnerGame,
 };

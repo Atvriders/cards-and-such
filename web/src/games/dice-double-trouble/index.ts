@@ -30,6 +30,10 @@ Use Settings to choose 6, 8, or 10 rounds. Total score accumulates across all ro
   settings: diceDoubleTroubleSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DiceDoubleTroubleSettings),
   reducer, isTerminal, 
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-double-trouble-roll"]', pulses: 3 }; },
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover" || (state as any).gameOver) return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-dice-double-trouble-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-dice-double-trouble-roll"]', pulses: 3 };
+  },
   component: DiceDoubleTrouble,
 };

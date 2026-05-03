@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DivisionRaceState, DivisionRaceAction, DivisionRaceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Wrong answers don't reduce your score, but they slow you down. The clock counts 
 Maximum is 200 points (20 correct x 10). Average runs land near 100-150. Drill those tables and chase the perfect run!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DivisionRaceSettings),
-  reducer, isTerminal, component: DivisionRaceGame,
+  reducer, isTerminal, hint: (state: DivisionRaceState): HintTarget | null => (state.phase !== "done" ? { selector: ".mr-choice", pulses: 3 } : null), component: DivisionRaceGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RedOrBlackState, RedOrBlackAction, RedOrBlackSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -27,5 +27,5 @@ Choose 10, 20, or 30 rounds in Settings. The remaining card counts update after 
 Your final score is shown at the end. Think carefully and use the odds — that is the whole game!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as RedOrBlackSettings),
-  reducer, isTerminal, component: RedOrBlack,
+  reducer, isTerminal, hint: (state: RedOrBlackState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component: RedOrBlack,
 };

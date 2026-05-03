@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PositionRecallState, PositionRecallAction, PositionRecallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ The cells flash automatically every 0.8 seconds. Focus on where the highlight ap
 Use Settings to choose 5 or 10 rounds. Longer sequences demand strong spatial working memory. Reaching sequences of 7-8 positions on a 9-cell grid is impressive! This game directly exercises the visuospatial sketchpad component of working memory.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PositionRecallSettings),
-  reducer, isTerminal, component:PositionRecall,
+  reducer, isTerminal, hint: (state: PositionRecallState): HintTarget | null => (state.phase === "input" ? { selector: ".memory-btn", pulses: 3 } : null), component:PositionRecall,
 };

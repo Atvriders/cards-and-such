@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HelicopterState, HelicopterAction, HelicopterSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HelicopterGame } from "./Game.js";
@@ -26,7 +26,5 @@ The key skill is reading the next gap early enough to position yourself correctl
 Score is distance traveled in meters. There is no speed increase, so the only challenge is your ability to read and react to the incoming wall patterns. Stay near the center of the cave when no wall is visible to give yourself the most room to maneuver.`,
   settings: helicopterSettings,
   initialState: (seed, settings) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: HelicopterGame,
+  reducer, isTerminal, hint: (state: HelicopterState): HintTarget | null => (!state.over ? { selector: ".arcade-btn", pulses: 3 } : null), component: HelicopterGame,
 };

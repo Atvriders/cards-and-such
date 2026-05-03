@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ColorRecallState, ColorRecallAction, ColorRecallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Six colors are used: red, blue, green, yellow, purple, and orange. The sequence 
 Use Settings to play 5 or 10 rounds. A skilled player can reach sequences of 8-10+ colors. Memory tip: try to narrate the colors as you watch, or chunk them into groups. Like Simon Says but with six colors — how far can your memory stretch?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ColorRecallSettings),
-  reducer, isTerminal, component:ColorRecall,
+  reducer, isTerminal, hint: (state: ColorRecallState): HintTarget | null => (state.phase === "input" ? { selector: ".memory-btn", pulses: 3 } : null), component:ColorRecall,
 };

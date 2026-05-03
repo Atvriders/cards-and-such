@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RankCollectorState, RankCollectorAction, RankCollectorSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ Maximum score is 1040 (4 hits × 13 rounds × 20 pts). Realistic averages hover 
 Tap Draw to flip a card. Hits flash green; misses fade. Settle in for a classic rank-spotting session!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RankCollectorSettings),
-  reducer,isTerminal,component:RankCollectorGame,
+  reducer, isTerminal, hint: (state: RankCollectorState): HintTarget | null => (state.phase !== "done" ? { selector: ".col-btn", pulses: 3 } : null), component:RankCollectorGame,
 };

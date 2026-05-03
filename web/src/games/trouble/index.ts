@@ -31,7 +31,5 @@ Landing your pawn on a square occupied by an opponent's pawn sends that pawn bac
 The first player to get all four pawns to the finish wins! Bots automatically prioritize getting pawns out first, then advance the most behind pawn.`,
   settings: troubleSettings,
   initialState: (seed: number, settings: TroubleSettingsType) => initialState(seed, settings),
-  reducer,
-  isTerminal,
-  component: Trouble,
+  reducer, isTerminal, hint: (state: TroubleState): HintTarget | null => (state.phase === "moving" ? { selector: ".move-btn", pulses: 3 } : null), component: Trouble,
 };
