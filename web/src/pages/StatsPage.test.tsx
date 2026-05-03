@@ -1181,6 +1181,14 @@ describe("StatsPage", () => {
     const prior = screen.getByTestId("stats-prev-week");
     const priorPlays = prior.querySelectorAll("li")[0];
     expect(priorPlays!.textContent).toContain("2");
+
+    // Whole-card scoping: with score=0 on every play, wins go from 0→0 and
+    // pctDelta returns null (prior <= 0), so wins/avg-time render as flat
+    // em-dashes. Only the Plays row should carry data-direction="up", and
+    // it should be exactly the playsDelta span we already asserted.
+    const upDeltas = card.querySelectorAll('[data-direction="up"]');
+    expect(upDeltas.length).toBe(1);
+    expect(upDeltas[0]).toBe(playsDelta);
   });
 
   // W537: defensive rendering against extreme localStorage corruption.
