@@ -1,6 +1,6 @@
 # Hint Coverage Audit
 
-_Generated: 2026-05-02 (v2 refresh)_
+_Generated: 2026-05-02 (W505 docs refresh)_
 
 Audit of `hint:` field presence in `web/src/games/*/index.ts`. A game is
 considered "hint-wired" if the literal substring `hint:` appears anywhere
@@ -9,9 +9,9 @@ in its `index.ts` (covers both `hint:` definitions and `hint:` invocations).
 ## Summary
 
 - **Total games:** 4505
-- **With hint:** 4505
-- **Without hint:** 0
-- **Coverage:** 100.0%
+- **With hint:** 4467
+- **Without hint:** 38
+- **Coverage:** 99.2%
 
 ## By Category
 
@@ -20,13 +20,16 @@ in its `index.ts` (covers both `hint:` definitions and `hint:` invocations).
 | solitaire | 452 | 452 | 100.0% | 0 |
 | cards | 976 | 976 | 100.0% | 0 |
 | dice | 474 | 474 | 100.0% | 0 |
-| board | 2093 | 2093 | 100.0% | 0 |
+| board | 2055 | 2093 | 98.2% | 38 |
 | arcade | 510 | 510 | 100.0% | 0 |
-| **TOTAL** | **4505** | **4505** | **100.0%** | **0** |
+| **TOTAL** | **4467** | **4505** | **99.2%** | **38** |
 
 ## Unwired Game IDs by Category
 
-Games below have no `hint:` substring in their `index.ts`.
+Games below have no `hint:` substring in their `index.ts`. The remaining
+unwired set is concentrated in deterministic combinatorial board games
+(tafl, tic-tac-toe variants, lights-out, nonograms) where a "best move"
+hint is either trivial or out of scope for the static hint system.
 
 ### solitaire (0 unwired / 452 total — 100.0% coverage)
 
@@ -40,9 +43,46 @@ _All games in this category have hints wired._
 
 _All games in this category have hints wired._
 
-### board (0 unwired / 2093 total — 100.0% coverage)
+### board (38 unwired / 2093 total — 98.2% coverage)
 
-_All games in this category have hints wired._
+- arctic-survival
+- ard-ri
+- brandubh
+- connect-four-mini
+- daldos
+- dameo
+- eight-queens-mini
+- food-truck-tycoon
+- gomoku-mini
+- lights-out-3d
+- lights-out-mini
+- logic-gates-sim
+- magic-square-3
+- magpie-tafl
+- nim-game
+- nonogram
+- nonogram-3x3
+- numlinks
+- pairs-themed
+- pallanguzhi
+- ponnuki
+- religions-quiz
+- roulette
+- slide-puzzle-3x3
+- spot-it
+- spot-it-classic
+- tablan
+- target-practice
+- tic-tac-toe-3-in-row
+- tic-tac-toe-blitz
+- tic-tac-toe-corners-win
+- tic-tac-toe-large
+- ultimate-tic-tac-toe
+- yavalath
+- zamma
+- falling-catcher
+- frog-catcher
+- quick-tick
 
 ### arcade (0 unwired / 510 total — 100.0% coverage)
 
@@ -83,7 +123,7 @@ Sample game IDs (seed=42, n=30): `coin-dribble-pub`, `avalon-quiz`,
 
 A subsequent corpus-wide static check (script: `/tmp/spot_check_hints.py`,
 `/tmp/find_typos.py`, `/tmp/find_class_typos.py`) found **zero** broken
-selectors across all 4505 games:
+selectors across the 4467 hint-wired games:
 
 - Literal `data-testid` selectors → 0 mismatches (testid not rendered).
 - Class selectors → 0 mismatches (class never appears in component CSS or JSX).
@@ -117,8 +157,6 @@ presses Hint:
    which is usually a reasonable hint but not guaranteed to be the
    *best* move. Acceptable for a "nudge"-style hint.
 
-No fixes were required: zero typos, zero missing testids, zero
-class-mismatches across 4505 games. This pass is therefore a no-op on
-game source files; this document is updated to record the audit method
-and result.
-
+The 38 unwired board games are tracked above for future passes; they are
+mostly deterministic puzzles or abstract two-player games where adding a
+solver-backed hint requires per-game work rather than a registry sweep.

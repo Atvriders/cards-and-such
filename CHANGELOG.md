@@ -1,6 +1,13 @@
 # Changelog
 
 ## 2026-05-03 Milestone
+- ce902533 test(stats): achievement state ordering
+- b0fa3be0 perf(registry): lazy-load plugin components
+- 1712d26c test(qr): byte-mode encoder coverage
+- 3a6950b2 test(lobby): coachmark visibility + dismissal
+- 74c282e3 feat(stats): achievement panel sort + state styling
+- d707fe4d test(friend): expanded round-trip + confusable normalisation
+- 34789833 test(play): undo button click + count label
 - 51c17774 test(play): hint pulse class lifecycle
 - 7982c1b2 test(route): RouteTransition basic coverage
 - fd924251 test(kbd): footer button + section coverage

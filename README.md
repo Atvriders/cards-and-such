@@ -86,10 +86,10 @@ the lobby picks it up on next reload.
 
 ## What's in the box
 
-- ~4,500 game plugins registered (4,466 in `web/src/games/registry.ts`)
-- 36 achievements (`web/src/platform/stats.ts`)
-- 10 themes (`web/src/platform/themes.ts`)
-- Hint coverage: 100% — every game has a hint button
+- ~4,500 game plugins registered (4,465 in `web/src/games/registry.ts`)
+- 44 achievements (`web/src/platform/stats.ts`)
+- 19 themes (`web/src/platform/themes.ts`)
+- Hint coverage: 99.2% — 4,467 of 4,505 games have a hint button (see `web/src/games/HINT_COVERAGE.md`)
 - Same-seed friend mode: race a friend on the exact same deal, no signup
 - Single shared reducer for every multiplayer game — no client/server drift
 - Username-only auth, JWT sessions, shared leaderboard, "Online Now" presence
