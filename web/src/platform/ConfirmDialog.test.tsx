@@ -179,6 +179,115 @@ describe("ConfirmDialog", () => {
     fireEvent.keyDown(document, { key: "Enter" });
     expect(confirmed).toBe(false);
   });
+
+  // ---- W491 edge cases ----
+
+  it("requireText: button stays disabled for partial, suffix-mismatched, and whitespace-padded values; only an exact case-sensitive match enables it", () => {
+    render(
+      <ConfirmDialog
+        open
+        title="Clear all"
+        message="really?"
+        requireText="DELETE"
+        onConfirm={() => {}}
+        onCancel={() => {}}
+      />,
+    );
+    const yes = screen.getByTestId("confirm-yes") as HTMLButtonElement;
+    const input = screen.getByTestId("confirm-input") as HTMLInputElement;
+
+    // initially disabled
+    expect(yes.disabled).toBe(true);
+
+    // partial prefix — disabled
+    fireEvent.change(input, { target: { value: "DEL" } });
+    expect(yes.disabled).toBe(true);
+
+    // wrong case — disabled (case-sensitive)
+    fireEvent.change(input, { target: { value: "Delete" } });
+    expect(yes.disabled).toBe(true);
+
+    // trailing whitespace — disabled (no trim)
+    fireEvent.change(input, { target: { value: "DELETE " } });
+    expect(yes.disabled).toBe(true);
+
+    // leading whitespace — disabled
+    fireEvent.change(input, { target: { value: " DELETE" } });
+    expect(yes.disabled).toBe(true);
+
+    // suffix garbage — disabled
+    fireEvent.change(input, { target: { value: "DELETEX" } });
+    expect(yes.disabled).toBe(true);
+
+    // exact match — enabled
+    fireEvent.change(input, { target: { value: "DELETE" } });
+    expect(yes.disabled).toBe(false);
+
+    // mutate back to a near-miss — re-disabled
+    fireEvent.change(input, { target: { value: "DELET" } });
+    expect(yes.disabled).toBe(true);
+  });
+
+  it("focus restoration: closing the dialog returns focus to the element that opened it", async () => {
+    function FocusRestoreHarness(): JSX.Element {
+      const { showConfirm, dialog } = useStandaloneConfirm();
+      return (
+        <div>
+          {dialog}
+          <button
+            data-testid="trigger"
+            onClick={() => {
+              void showConfirm({ title: "t", message: "m" });
+            }}
+          >
+            open
+          </button>
+        </div>
+      );
+    }
+
+    render(<FocusRestoreHarness />);
+    const trigger = screen.getByTestId("trigger") as HTMLButtonElement;
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+
+    await act(async () => {
+      fireEvent.click(trigger);
+    });
+
+    // Dialog open: focus moved away from trigger into the dialog.
+    expect(document.activeElement).not.toBe(trigger);
+    expect(screen.getByTestId("confirm-dialog")).toBeInTheDocument();
+
+    // Cancel: dialog unmounts, useFocusTrap restores focus to the trigger.
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("confirm-no"));
+    });
+
+    expect(screen.queryByTestId("confirm-dialog")).toBeNull();
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it("backdrop click cancels without ever invoking onConfirm", () => {
+    let confirmed = 0;
+    let cancelled = 0;
+    render(
+      <ConfirmDialog
+        open
+        title="x"
+        message="y"
+        onConfirm={() => {
+          confirmed += 1;
+        }}
+        onCancel={() => {
+          cancelled += 1;
+        }}
+      />,
+    );
+    fireEvent.click(screen.getByTestId("confirm-dialog-backdrop"));
+    expect(cancelled).toBe(1);
+    expect(confirmed).toBe(0);
+  });
 });
 
 describe("useStandaloneConfirm", () => {
