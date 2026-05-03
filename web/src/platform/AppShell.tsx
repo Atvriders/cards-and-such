@@ -25,7 +25,7 @@ import {
 import { searchAll, type SearchHit } from "./search.js";
 import { decodeChallenge } from "./friendCode.js";
 import { track } from "./analytics.js";
-import { getStreak } from "./userdata.js";
+import { bumpSessionCount, getStreak } from "./userdata.js";
 import { todayStamp } from "../pages/dailyPicker.js";
 import "./AppShell.css";
 
@@ -170,6 +170,15 @@ export default function AppShell(): JSX.Element {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Session counter: bump once on cold load (AppShell mount). React's empty-
+  // deps useEffect runs exactly once per component mount, which lines up
+  // with a fresh page load — tab refocus / visibilitychange do NOT remount
+  // the shell, so they don't bump the counter. Surfaced as the 6th
+  // aggregate stat on /stats.
+  useEffect(() => {
+    bumpSessionCount();
   }, []);
 
   // Browse-It-All achievement: stamp `cards-pages-visited` with a coarse

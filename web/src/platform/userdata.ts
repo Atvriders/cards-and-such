@@ -57,6 +57,8 @@ export const KNOWN_KEYS: readonly string[] = [
   // undo
   "cards-show-undo-count",
   "cards-undos-used",
+  // session tracking — incremented on every cold app load (AppShell mount)
+  "cards-session-count",
   "cas:lastSeenHighScoreId",
 ] as const;
 
@@ -628,6 +630,43 @@ export function clearAllTimeHistories(): void {
   } catch {
     /* ignore */
   }
+}
+
+/* ----------------------------------------------------------------------
+ * Session count
+ *
+ * Persisted under `cards-session-count` as a base-10 integer string. Bumped
+ * once per cold app load (AppShell mount) — not on tab focus, refocus, or
+ * route change. Surfaced as the 6th aggregate stat on the Stats page so
+ * users can watch their lifetime "times opened" tick up.
+ * -------------------------------------------------------------------- */
+
+const SESSION_COUNT_KEY = "cards-session-count";
+
+/** Read the current session counter. Returns 0 if missing/corrupt. */
+export function getSessionCount(): number {
+  try {
+    if (typeof localStorage === "undefined") return 0;
+    const raw = localStorage.getItem(SESSION_COUNT_KEY);
+    if (!raw) return 0;
+    const n = Number.parseInt(raw, 10);
+    return Number.isFinite(n) && n >= 0 ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Increment the session counter by 1 and return the new value. Best-effort. */
+export function bumpSessionCount(): number {
+  const next = getSessionCount() + 1;
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(SESSION_COUNT_KEY, String(next));
+    }
+  } catch {
+    /* ignore quota / private mode */
+  }
+  return next;
 }
 
 /** Trigger a browser download of the current user-data snapshot. */

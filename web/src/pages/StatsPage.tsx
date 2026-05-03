@@ -6,7 +6,7 @@ import type { Achievement, StatsState } from "../platform/stats.js";
 import { GAMES } from "../games/registry.js";
 import { downloadSvg } from "../platform/svgShare.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
-import { TIME_HISTORY_KEY_PREFIX, readTimeHistory } from "../platform/userdata.js";
+import { TIME_HISTORY_KEY_PREFIX, getSessionCount, readTimeHistory } from "../platform/userdata.js";
 import { loadReplays } from "../platform/replays.js";
 import "./StatsPage.css";
 
@@ -1370,6 +1370,7 @@ export default function StatsPage(): JSX.Element {
             <div className="stat-card" data-testid="stat-total-hints"><div className="stat-label">Total hints used</div><div className="stat-value">{hintsTotal()}</div></div>
             <div className="stat-card" data-testid="stat-total-undos"><div className="stat-label">Total undos used</div><div className="stat-value">{undosTotal()}</div></div>
             <div className="stat-card" data-testid="stats-total-time"><div className="stat-label">Total time played</div><div className="stat-value">{formatTotalTimePlayed(totalTimePlayedSeconds())}</div></div>
+            <div className="stat-card" data-testid="stats-sessions"><div className="stat-label">Sessions</div><div className="stat-value">{getSessionCount()}</div></div>
           </div>
           <div className="stats-range-row">
             <div className="stats-chart-label">Last {range} days</div>
