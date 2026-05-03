@@ -17,5 +17,6 @@ export const miniGolf18Plugin: GamePlugin<MiniGolf18State, MiniGolf18Action, typ
   initialState: (seed: number, s: S) => initialState(seed, s as MiniGolf18Settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-mini-golf-18-action"]', pulses: 3 }; },
   component: MiniGolf18Game,
 };

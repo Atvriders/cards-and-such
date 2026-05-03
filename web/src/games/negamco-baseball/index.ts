@@ -17,5 +17,6 @@ export const negamcoBaseballPlugin: GamePlugin<NegamcoBaseballState, NegamcoBase
   initialState: (seed: number, s: S) => initialState(seed, s as NegamcoBaseballSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-negamco-baseball-action"]', pulses: 3 }; },
   component: NegamcoBaseballGame,
 };

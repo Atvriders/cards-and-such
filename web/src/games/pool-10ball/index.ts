@@ -17,5 +17,6 @@ export const pool10ballPlugin: GamePlugin<Pool10ballState, Pool10ballAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as Pool10ballSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pool-10ball-action"]', pulses: 3 }; },
   component: Pool10ballGame,
 };

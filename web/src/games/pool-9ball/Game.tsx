@@ -41,7 +41,7 @@ export function Pool9ballGame({ state, dispatch, onGameOver }: GameProps<Pool9ba
       </div>
       <div className="poo9ba-actions">
         {state.phase === "rolling" && (
-          <button className="poo9ba-btn primary" onClick={() => dispatch({ type: "roll" } as Pool9ballAction)}>Roll</button>
+          <button data-testid="hint-target-pool-9ball-action" className="poo9ba-btn primary" onClick={() => dispatch({ type: "roll" } as Pool9ballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="poo9ba-btn alt" onClick={() => dispatch({ type: "next" } as Pool9ballAction)}>Next</button>

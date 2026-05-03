@@ -41,7 +41,7 @@ export function SkittlesRubberGame({ state, dispatch, onGameOver }: GameProps<Sk
       </div>
       <div className="skirub-actions">
         {state.phase === "rolling" && (
-          <button className="skirub-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesRubberAction)}>Roll</button>
+          <button data-testid="hint-target-skittles-rubber-action" className="skirub-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesRubberAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="skirub-btn alt" onClick={() => dispatch({ type: "next" } as SkittlesRubberAction)}>Next</button>

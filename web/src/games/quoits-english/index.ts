@@ -17,5 +17,6 @@ export const quoitsEnglishPlugin: GamePlugin<QuoitsEnglishState, QuoitsEnglishAc
   initialState: (seed: number, s: S) => initialState(seed, s as QuoitsEnglishSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-quoits-english-action"]', pulses: 3 }; },
   component: QuoitsEnglishGame,
 };

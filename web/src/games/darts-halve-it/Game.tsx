@@ -41,7 +41,7 @@ export function DartsHalveItGame({ state, dispatch, onGameOver }: GameProps<Dart
       </div>
       <div className="dahait-actions">
         {state.phase === "rolling" && (
-          <button className="dahait-btn primary" onClick={() => dispatch({ type: "roll" } as DartsHalveItAction)}>Roll</button>
+          <button data-testid="hint-target-darts-halve-it-action" className="dahait-btn primary" onClick={() => dispatch({ type: "roll" } as DartsHalveItAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="dahait-btn alt" onClick={() => dispatch({ type: "next" } as DartsHalveItAction)}>Next</button>

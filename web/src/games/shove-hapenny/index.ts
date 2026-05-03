@@ -17,5 +17,6 @@ export const shoveHapennyPlugin: GamePlugin<ShoveHapennyState, ShoveHapennyActio
   initialState: (seed: number, s: S) => initialState(seed, s as ShoveHapennySettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-shove-hapenny-action"]', pulses: 3 }; },
   component: ShoveHapennyGame,
 };

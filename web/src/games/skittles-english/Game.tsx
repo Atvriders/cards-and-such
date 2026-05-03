@@ -41,7 +41,7 @@ export function SkittlesEnglishGame({ state, dispatch, onGameOver }: GameProps<S
       </div>
       <div className="skieng-actions">
         {state.phase === "rolling" && (
-          <button className="skieng-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesEnglishAction)}>Roll</button>
+          <button data-testid="hint-target-skittles-english-action" className="skieng-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesEnglishAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="skieng-btn alt" onClick={() => dispatch({ type: "next" } as SkittlesEnglishAction)}>Next</button>

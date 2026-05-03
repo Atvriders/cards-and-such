@@ -41,7 +41,7 @@ export function ShuffleboardTableGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="shutab-actions">
         {state.phase === "rolling" && (
-          <button className="shutab-btn primary" onClick={() => dispatch({ type: "roll" } as ShuffleboardTableAction)}>Roll</button>
+          <button data-testid="hint-target-shuffleboard-table-action" className="shutab-btn primary" onClick={() => dispatch({ type: "roll" } as ShuffleboardTableAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="shutab-btn alt" onClick={() => dispatch({ type: "next" } as ShuffleboardTableAction)}>Next</button>

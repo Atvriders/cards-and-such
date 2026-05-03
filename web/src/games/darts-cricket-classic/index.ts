@@ -17,5 +17,6 @@ export const dartsCricketClassicPlugin: GamePlugin<DartsCricketClassicState, Dar
   initialState: (seed: number, s: S) => initialState(seed, s as DartsCricketClassicSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-darts-cricket-classic-action"]', pulses: 3 }; },
   component: DartsCricketClassicGame,
 };

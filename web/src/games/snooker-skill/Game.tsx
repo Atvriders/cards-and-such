@@ -41,7 +41,7 @@ export function SnookerSkillGame({ state, dispatch, onGameOver }: GameProps<Snoo
       </div>
       <div className="snoski-actions">
         {state.phase === "rolling" && (
-          <button className="snoski-btn primary" onClick={() => dispatch({ type: "roll" } as SnookerSkillAction)}>Roll</button>
+          <button data-testid="hint-target-snooker-skill-action" className="snoski-btn primary" onClick={() => dispatch({ type: "roll" } as SnookerSkillAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="snoski-btn alt" onClick={() => dispatch({ type: "next" } as SnookerSkillAction)}>Next</button>

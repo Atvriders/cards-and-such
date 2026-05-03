@@ -41,7 +41,7 @@ export function MiniGolf18Game({ state, dispatch, onGameOver }: GameProps<MiniGo
       </div>
       <div className="migo18-actions">
         {state.phase === "rolling" && (
-          <button className="migo18-btn primary" onClick={() => dispatch({ type: "roll" } as MiniGolf18Action)}>Roll</button>
+          <button data-testid="hint-target-mini-golf-18-action" className="migo18-btn primary" onClick={() => dispatch({ type: "roll" } as MiniGolf18Action)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="migo18-btn alt" onClick={() => dispatch({ type: "next" } as MiniGolf18Action)}>Next</button>

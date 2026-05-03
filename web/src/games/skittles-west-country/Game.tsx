@@ -41,7 +41,7 @@ export function SkittlesWestCountryGame({ state, dispatch, onGameOver }: GamePro
       </div>
       <div className="skweco-actions">
         {state.phase === "rolling" && (
-          <button className="skweco-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesWestCountryAction)}>Roll</button>
+          <button data-testid="hint-target-skittles-west-country-action" className="skweco-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesWestCountryAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="skweco-btn alt" onClick={() => dispatch({ type: "next" } as SkittlesWestCountryAction)}>Next</button>

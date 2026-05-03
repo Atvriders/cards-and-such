@@ -41,7 +41,7 @@ export function PursuePennantGame({ state, dispatch, onGameOver }: GameProps<Pur
       </div>
       <div className="purpen-actions">
         {state.phase === "rolling" && (
-          <button className="purpen-btn primary" onClick={() => dispatch({ type: "roll" } as PursuePennantAction)}>Roll</button>
+          <button data-testid="hint-target-pursue-pennant-action" className="purpen-btn primary" onClick={() => dispatch({ type: "roll" } as PursuePennantAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="purpen-btn alt" onClick={() => dispatch({ type: "next" } as PursuePennantAction)}>Next</button>

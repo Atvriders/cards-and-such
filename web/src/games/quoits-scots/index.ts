@@ -17,5 +17,6 @@ export const quoitsScotsPlugin: GamePlugin<QuoitsScotsState, QuoitsScotsAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as QuoitsScotsSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-quoits-scots-action"]', pulses: 3 }; },
   component: QuoitsScotsGame,
 };

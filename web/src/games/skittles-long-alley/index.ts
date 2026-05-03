@@ -17,5 +17,6 @@ export const skittlesLongAlleyPlugin: GamePlugin<SkittlesLongAlleyState, Skittle
   initialState: (seed: number, s: S) => initialState(seed, s as SkittlesLongAlleySettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-skittles-long-alley-action"]', pulses: 3 }; },
   component: SkittlesLongAlleyGame,
 };

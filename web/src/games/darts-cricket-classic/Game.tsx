@@ -41,7 +41,7 @@ export function DartsCricketClassicGame({ state, dispatch, onGameOver }: GamePro
       </div>
       <div className="dacrcl-actions">
         {state.phase === "rolling" && (
-          <button className="dacrcl-btn primary" onClick={() => dispatch({ type: "roll" } as DartsCricketClassicAction)}>Roll</button>
+          <button data-testid="hint-target-darts-cricket-classic-action" className="dacrcl-btn primary" onClick={() => dispatch({ type: "roll" } as DartsCricketClassicAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="dacrcl-btn alt" onClick={() => dispatch({ type: "next" } as DartsCricketClassicAction)}>Next</button>

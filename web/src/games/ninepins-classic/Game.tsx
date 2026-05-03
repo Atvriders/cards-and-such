@@ -41,7 +41,7 @@ export function NinepinsClassicGame({ state, dispatch, onGameOver }: GameProps<N
       </div>
       <div className="nincla-actions">
         {state.phase === "rolling" && (
-          <button className="nincla-btn primary" onClick={() => dispatch({ type: "roll" } as NinepinsClassicAction)}>Roll</button>
+          <button data-testid="hint-target-ninepins-classic-action" className="nincla-btn primary" onClick={() => dispatch({ type: "roll" } as NinepinsClassicAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="nincla-btn alt" onClick={() => dispatch({ type: "next" } as NinepinsClassicAction)}>Next</button>

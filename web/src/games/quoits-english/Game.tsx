@@ -41,7 +41,7 @@ export function QuoitsEnglishGame({ state, dispatch, onGameOver }: GameProps<Quo
       </div>
       <div className="quoeng-actions">
         {state.phase === "rolling" && (
-          <button className="quoeng-btn primary" onClick={() => dispatch({ type: "roll" } as QuoitsEnglishAction)}>Roll</button>
+          <button data-testid="hint-target-quoits-english-action" className="quoeng-btn primary" onClick={() => dispatch({ type: "roll" } as QuoitsEnglishAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="quoeng-btn alt" onClick={() => dispatch({ type: "next" } as QuoitsEnglishAction)}>Next</button>

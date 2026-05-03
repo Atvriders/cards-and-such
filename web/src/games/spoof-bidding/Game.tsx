@@ -41,7 +41,7 @@ export function SpoofBiddingGame({ state, dispatch, onGameOver }: GameProps<Spoo
       </div>
       <div className="spobid-actions">
         {state.phase === "rolling" && (
-          <button className="spobid-btn primary" onClick={() => dispatch({ type: "roll" } as SpoofBiddingAction)}>Roll</button>
+          <button data-testid="hint-target-spoof-bidding-action" className="spobid-btn primary" onClick={() => dispatch({ type: "roll" } as SpoofBiddingAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="spobid-btn alt" onClick={() => dispatch({ type: "next" } as SpoofBiddingAction)}>Next</button>

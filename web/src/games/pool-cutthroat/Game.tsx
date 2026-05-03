@@ -41,7 +41,7 @@ export function PoolCutthroatGame({ state, dispatch, onGameOver }: GameProps<Poo
       </div>
       <div className="poocut-actions">
         {state.phase === "rolling" && (
-          <button className="poocut-btn primary" onClick={() => dispatch({ type: "roll" } as PoolCutthroatAction)}>Roll</button>
+          <button data-testid="hint-target-pool-cutthroat-action" className="poocut-btn primary" onClick={() => dispatch({ type: "roll" } as PoolCutthroatAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="poocut-btn alt" onClick={() => dispatch({ type: "next" } as PoolCutthroatAction)}>Next</button>

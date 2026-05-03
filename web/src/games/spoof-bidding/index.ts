@@ -17,5 +17,6 @@ export const spoofBiddingPlugin: GamePlugin<SpoofBiddingState, SpoofBiddingActio
   initialState: (seed: number, s: S) => initialState(seed, s as SpoofBiddingSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-spoof-bidding-action"]', pulses: 3 }; },
   component: SpoofBiddingGame,
 };

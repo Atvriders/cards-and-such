@@ -41,7 +41,7 @@ export function ReplayBaseballGame({ state, dispatch, onGameOver }: GameProps<Re
       </div>
       <div className="repbas-actions">
         {state.phase === "rolling" && (
-          <button className="repbas-btn primary" onClick={() => dispatch({ type: "roll" } as ReplayBaseballAction)}>Roll</button>
+          <button data-testid="hint-target-replay-baseball-action" className="repbas-btn primary" onClick={() => dispatch({ type: "roll" } as ReplayBaseballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="repbas-btn alt" onClick={() => dispatch({ type: "next" } as ReplayBaseballAction)}>Next</button>

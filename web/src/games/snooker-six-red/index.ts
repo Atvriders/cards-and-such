@@ -17,5 +17,6 @@ export const snookerSixRedPlugin: GamePlugin<SnookerSixRedState, SnookerSixRedAc
   initialState: (seed: number, s: S) => initialState(seed, s as SnookerSixRedSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-snooker-six-red-action"]', pulses: 3 }; },
   component: SnookerSixRedGame,
 };

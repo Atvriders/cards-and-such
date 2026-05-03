@@ -41,7 +41,7 @@ export function PoolBankGame({ state, dispatch, onGameOver }: GameProps<PoolBank
       </div>
       <div className="pooban-actions">
         {state.phase === "rolling" && (
-          <button className="pooban-btn primary" onClick={() => dispatch({ type: "roll" } as PoolBankAction)}>Roll</button>
+          <button data-testid="hint-target-pool-bank-action" className="pooban-btn primary" onClick={() => dispatch({ type: "roll" } as PoolBankAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="pooban-btn alt" onClick={() => dispatch({ type: "next" } as PoolBankAction)}>Next</button>

@@ -41,7 +41,7 @@ export function NapWellingtonGame({ state, dispatch, onGameOver }: GameProps<Nap
       </div>
       <div className="napwel-actions">
         {state.phase === "rolling" && (
-          <button className="napwel-btn primary" onClick={() => dispatch({ type: "roll" } as NapWellingtonAction)}>Roll</button>
+          <button data-testid="hint-target-nap-wellington-action" className="napwel-btn primary" onClick={() => dispatch({ type: "roll" } as NapWellingtonAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="napwel-btn alt" onClick={() => dispatch({ type: "next" } as NapWellingtonAction)}>Next</button>

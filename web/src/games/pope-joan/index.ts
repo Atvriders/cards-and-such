@@ -17,5 +17,6 @@ export const popeJoanPlugin: GamePlugin<PopeJoanState, PopeJoanAction, typeof se
   initialState: (seed: number, s: S) => initialState(seed, s as PopeJoanSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pope-joan-action"]', pulses: 3 }; },
   component: PopeJoanGame,
 };

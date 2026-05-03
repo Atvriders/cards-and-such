@@ -41,7 +41,7 @@ export function StratBaseballGame({ state, dispatch, onGameOver }: GameProps<Str
       </div>
       <div className="strbas-actions">
         {state.phase === "rolling" && (
-          <button className="strbas-btn primary" onClick={() => dispatch({ type: "roll" } as StratBaseballAction)}>Roll</button>
+          <button data-testid="hint-target-strat-baseball-action" className="strbas-btn primary" onClick={() => dispatch({ type: "roll" } as StratBaseballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="strbas-btn alt" onClick={() => dispatch({ type: "next" } as StratBaseballAction)}>Next</button>

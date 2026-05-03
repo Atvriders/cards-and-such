@@ -41,7 +41,7 @@ export function NineMensMorrisPubGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="nimemopu-actions">
         {state.phase === "rolling" && (
-          <button className="nimemopu-btn primary" onClick={() => dispatch({ type: "roll" } as NineMensMorrisPubAction)}>Roll</button>
+          <button data-testid="hint-target-nine-mens-morris-pub-action" className="nimemopu-btn primary" onClick={() => dispatch({ type: "roll" } as NineMensMorrisPubAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="nimemopu-btn alt" onClick={() => dispatch({ type: "next" } as NineMensMorrisPubAction)}>Next</button>

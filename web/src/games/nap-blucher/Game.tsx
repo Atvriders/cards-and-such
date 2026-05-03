@@ -41,7 +41,7 @@ export function NapBlucherGame({ state, dispatch, onGameOver }: GameProps<NapBlu
       </div>
       <div className="napblu-actions">
         {state.phase === "rolling" && (
-          <button className="napblu-btn primary" onClick={() => dispatch({ type: "roll" } as NapBlucherAction)}>Roll</button>
+          <button data-testid="hint-target-nap-blucher-action" className="napblu-btn primary" onClick={() => dispatch({ type: "roll" } as NapBlucherAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="napblu-btn alt" onClick={() => dispatch({ type: "next" } as NapBlucherAction)}>Next</button>

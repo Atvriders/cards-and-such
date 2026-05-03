@@ -17,5 +17,6 @@ export const shuffleboardTablePlugin: GamePlugin<ShuffleboardTableState, Shuffle
   initialState: (seed: number, s: S) => initialState(seed, s as ShuffleboardTableSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-shuffleboard-table-action"]', pulses: 3 }; },
   component: ShuffleboardTableGame,
 };

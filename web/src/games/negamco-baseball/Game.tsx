@@ -41,7 +41,7 @@ export function NegamcoBaseballGame({ state, dispatch, onGameOver }: GameProps<N
       </div>
       <div className="negbas-actions">
         {state.phase === "rolling" && (
-          <button className="negbas-btn primary" onClick={() => dispatch({ type: "roll" } as NegamcoBaseballAction)}>Roll</button>
+          <button data-testid="hint-target-negamco-baseball-action" className="negbas-btn primary" onClick={() => dispatch({ type: "roll" } as NegamcoBaseballAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="negbas-btn alt" onClick={() => dispatch({ type: "next" } as NegamcoBaseballAction)}>Next</button>

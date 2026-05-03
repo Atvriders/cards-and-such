@@ -41,7 +41,7 @@ export function SkittlesLongAlleyGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="skloal-actions">
         {state.phase === "rolling" && (
-          <button className="skloal-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesLongAlleyAction)}>Roll</button>
+          <button data-testid="hint-target-skittles-long-alley-action" className="skloal-btn primary" onClick={() => dispatch({ type: "roll" } as SkittlesLongAlleyAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="skloal-btn alt" onClick={() => dispatch({ type: "next" } as SkittlesLongAlleyAction)}>Next</button>

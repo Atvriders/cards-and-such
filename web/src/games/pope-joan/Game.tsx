@@ -41,7 +41,7 @@ export function PopeJoanGame({ state, dispatch, onGameOver }: GameProps<PopeJoan
       </div>
       <div className="popjoa-actions">
         {state.phase === "rolling" && (
-          <button className="popjoa-btn primary" onClick={() => dispatch({ type: "roll" } as PopeJoanAction)}>Roll</button>
+          <button data-testid="hint-target-pope-joan-action" className="popjoa-btn primary" onClick={() => dispatch({ type: "roll" } as PopeJoanAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="popjoa-btn alt" onClick={() => dispatch({ type: "next" } as PopeJoanAction)}>Next</button>

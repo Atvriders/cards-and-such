@@ -41,7 +41,7 @@ export function SnookerSixRedGame({ state, dispatch, onGameOver }: GameProps<Sno
       </div>
       <div className="snsire-actions">
         {state.phase === "rolling" && (
-          <button className="snsire-btn primary" onClick={() => dispatch({ type: "roll" } as SnookerSixRedAction)}>Roll</button>
+          <button data-testid="hint-target-snooker-six-red-action" className="snsire-btn primary" onClick={() => dispatch({ type: "roll" } as SnookerSixRedAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="snsire-btn alt" onClick={() => dispatch({ type: "next" } as SnookerSixRedAction)}>Next</button>

@@ -17,5 +17,6 @@ export const pursuePennantPlugin: GamePlugin<PursuePennantState, PursuePennantAc
   initialState: (seed: number, s: S) => initialState(seed, s as PursuePennantSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pursue-pennant-action"]', pulses: 3 }; },
   component: PursuePennantGame,
 };

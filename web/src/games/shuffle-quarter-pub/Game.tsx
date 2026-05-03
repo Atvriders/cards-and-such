@@ -41,7 +41,7 @@ export function ShuffleQuarterPubGame({ state, dispatch, onGameOver }: GameProps
       </div>
       <div className="shqupu-actions">
         {state.phase === "rolling" && (
-          <button className="shqupu-btn primary" onClick={() => dispatch({ type: "roll" } as ShuffleQuarterPubAction)}>Roll</button>
+          <button data-testid="hint-target-shuffle-quarter-pub-action" className="shqupu-btn primary" onClick={() => dispatch({ type: "roll" } as ShuffleQuarterPubAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="shqupu-btn alt" onClick={() => dispatch({ type: "next" } as ShuffleQuarterPubAction)}>Next</button>

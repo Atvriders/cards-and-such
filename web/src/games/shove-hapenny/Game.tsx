@@ -41,7 +41,7 @@ export function ShoveHapennyGame({ state, dispatch, onGameOver }: GameProps<Shov
       </div>
       <div className="shohap-actions">
         {state.phase === "rolling" && (
-          <button className="shohap-btn primary" onClick={() => dispatch({ type: "roll" } as ShoveHapennyAction)}>Roll</button>
+          <button data-testid="hint-target-shove-hapenny-action" className="shohap-btn primary" onClick={() => dispatch({ type: "roll" } as ShoveHapennyAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="shohap-btn alt" onClick={() => dispatch({ type: "next" } as ShoveHapennyAction)}>Next</button>
