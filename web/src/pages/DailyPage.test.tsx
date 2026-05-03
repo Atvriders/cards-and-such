@@ -150,6 +150,40 @@ describe("DailyPage", () => {
     expect(detail.textContent ?? "").toContain("Not played");
   });
 
+  it("clicking daily-cal-cell-<YYYY-MM-DD> for a past in-month date opens detail panel with that day's pick", () => {
+    // W393 regression: addressing a specific past calendar cell by its
+    // data-testid must reveal a detail panel showing the deterministic pick
+    // for that exact date stamp.
+    renderPage();
+    const now = new Date();
+    // Pick a past in-month date: previous day if today isn't the 1st,
+    // otherwise the last day of the previous month (which won't have a
+    // testid since the calendar only shows the current month — fall back
+    // to scanning instead).
+    const candidate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    let pastStamp = formatDateStamp(candidate);
+    if (candidate.getMonth() !== now.getMonth()) {
+      // We're on day 1 — find the latest past in-month cell available.
+      const cells = document.querySelectorAll<HTMLButtonElement>("[data-testid^='daily-cal-cell-']");
+      const today = todayStamp();
+      const latestPast = Array.from(cells)
+        .map((c) => c.getAttribute("data-stamp") ?? "")
+        .filter((s) => s && s < today)
+        .sort()
+        .pop();
+      if (!latestPast) return; // no in-month past cell — skip.
+      pastStamp = latestPast;
+    }
+    const cell = screen.getByTestId(`daily-cal-cell-${pastStamp}`);
+    expect((cell as HTMLButtonElement).disabled).toBe(false);
+    fireEvent.click(cell);
+    const detail = screen.getByTestId("daily-cal-detail");
+    expect(detail).toBeInTheDocument();
+    const expectedPick = pickDailyGame(pastStamp);
+    expect(detail.textContent ?? "").toContain(expectedPick.game.title);
+    expect(detail.textContent ?? "").toContain("Not played");
+  });
+
   it("Play Daily button links to /play/<id>?seed=<n>&daily=1", () => {
     renderPage();
     const btn = screen.getByTestId("daily-play-btn") as HTMLAnchorElement;
