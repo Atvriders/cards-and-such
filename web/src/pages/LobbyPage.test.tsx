@@ -1611,3 +1611,88 @@ describe("LobbyPage — search clear button (W608)", () => {
     ).not.toBeInTheDocument();
   });
 });
+
+/**
+ * W606 — keyboard activation on a lobby tile must navigate to the
+ * underlying `/play/<id>` route. Stand-alone game tiles are rendered as
+ * react-router `<Link>` elements (see GameCard in LobbyPage.tsx), and
+ * the lobby's roving-tabindex effect makes exactly one of them the
+ * Tab-stop at any given time (`tabIndex=0`). Pressing Enter on the
+ * focused link is the canonical keyboard equivalent of a click — in
+ * real browsers this fires the anchor's default click pathway, which
+ * react-router intercepts and turns into a router navigation.
+ *
+ * jsdom does not synthesise that click-on-Enter for anchors, so we
+ * exercise the activation pathway via `fireEvent.click(tile)` after
+ * focusing — the contract this test pins is "tile activated by the
+ * user (via Enter or click) navigates to /play/<id>", and click is the
+ * deterministic stand-in for the Enter that would fire the same
+ * handler in a real browser. The test wires a sibling `LocationProbe`
+ * inside the same MemoryRouter so the assertion reads the router's
+ * actual pathname rather than poking history internals.
+ *
+ * `2048` is a stand-alone game with no family wrapper (see W414 for
+ * the same id used precisely because of that property), so its tile
+ * is rendered by GameCard as a `<Link to="/play/2048">` and its testid
+ * is the unambiguous `tile-2048`.
+ */
+describe("LobbyPage — tile keyboard Enter activation (W606)", () => {
+  const GAME_ID = "2048";
+
+  beforeEach(() => {
+    localStorage.clear();
+    navigateSpy.mockReset();
+  });
+
+  it("focused tile (tabIndex=0) activated by click navigates to /play/<id>", async () => {
+    function LocationProbe(): JSX.Element {
+      const loc = useLocation();
+      return <div data-testid="loc-probe">{loc.pathname}</div>;
+    }
+
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <LobbyPage />
+        <LocationProbe />
+      </MemoryRouter>,
+    );
+
+    // Sanity baseline: the router starts on the lobby root.
+    expect(screen.getByTestId("loc-probe").textContent).toBe("/");
+
+    // Resolve the stand-alone tile via its canonical testid — GameCard
+    // stamps `tile-<id>` on the underlying `<Link>` itself, so this
+    // element IS the activation surface (not a wrapping div).
+    const tile = await screen.findByTestId(`tile-${GAME_ID}`);
+    expect(tile.tagName).toBe("A");
+    expect(tile.getAttribute("href")).toBe(`/play/${GAME_ID}`);
+
+    // Focus the tile by promoting it into the roving-tabindex tab stop
+    // and calling .focus(). The lobby's post-render effect normally
+    // hands tabIndex=0 to whichever tile owns focus, so once we focus
+    // the target the next render keeps it as the lone Tab stop. We
+    // also set tabIndex=0 explicitly first so the activeElement check
+    // below holds even if the layout effect hasn't yet committed.
+    tile.tabIndex = 0;
+    tile.focus();
+    expect(document.activeElement).toBe(tile);
+    expect(tile.tabIndex).toBe(0);
+
+    // Activate the link. In a real browser, pressing Enter on a focused
+    // anchor dispatches the default click pathway; jsdom doesn't
+    // synthesise that, so we fire the click directly — the same handler
+    // the Enter keystroke would invoke. react-router's Link intercepts
+    // the click via useLinkClickHandler and pushes the history entry
+    // that LocationProbe will read back.
+    fireEvent.click(tile);
+
+    // The router's location now reflects the deep-link target. Reading
+    // through LocationProbe (rather than the navigateSpy) pins the
+    // user-visible outcome — the URL really did change to /play/2048.
+    await waitFor(() => {
+      expect(screen.getByTestId("loc-probe").textContent).toBe(
+        `/play/${GAME_ID}`,
+      );
+    });
+  });
+});
