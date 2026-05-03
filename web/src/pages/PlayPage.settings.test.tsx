@@ -18,7 +18,7 @@
  *     it without pulling in the real registry / lazy imports.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 
@@ -110,6 +110,34 @@ describe("PlayPage per-game settings popover (W188)", () => {
     const banner = screen.getByTestId("play-settings-restart-banner");
     expect(banner).toBeTruthy();
     expect(banner.textContent).toContain("Restart to apply");
+  });
+
+  it("clicking Restart now after toggling a setting triggers replay", async () => {
+    // Spy on the fixture plugin's initialState so we can confirm replay()
+    // re-entered startWithSeed (which is the only path that re-invokes it
+    // after the initial mount). Tracking calls beats poking at internal
+    // banner/snapshot state and tightly couples the test to user intent.
+    const initSpy = vi.spyOn(hoisted.fixturePlugin, "initialState");
+
+    await mountPlayingPhase();
+    const initialCalls = initSpy.mock.calls.length;
+
+    fireEvent.click(screen.getByTestId("play-settings-btn"));
+    // Mid-game toggle drifts settings from the start-of-game snapshot,
+    // which is what surfaces the "Restart to apply" banner + button.
+    fireEvent.click(screen.getByTestId("play-setting-deluxe"));
+
+    const banner = screen.getByTestId("play-settings-restart-banner");
+    expect(banner.textContent).toContain("Restart to apply");
+
+    fireEvent.click(screen.getByTestId("play-settings-restart-now"));
+
+    // Replay is async (it awaits a confirm-if-in-progress check) before
+    // calling startWithSeed, so wait for the spy + modal close to settle.
+    await waitFor(() => {
+      expect(initSpy.mock.calls.length).toBeGreaterThan(initialCalls);
+    });
+    expect(screen.queryByTestId("play-settings-modal")).toBeNull();
   });
 
   it("Reset to defaults restores original values (clearing dirty state)", async () => {
