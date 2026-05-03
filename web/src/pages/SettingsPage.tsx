@@ -42,6 +42,8 @@ import {
 import {
   isMockLeaderboardEnabled,
   setMockLeaderboardEnabled,
+  isMockFriendsEnabled,
+  setMockFriendsEnabled,
 } from "../platform/leaderboardClient.js";
 import { useToast } from "../platform/ui/Toast.js";
 import { t } from "../platform/i18n.js";
@@ -261,6 +263,7 @@ export default function SettingsPage(): JSX.Element {
   const [hintCooldown, setHintCooldown] = useState<boolean>(readHintCooldown);
   const [showUndoCount, setShowUndoCount] = useState<boolean>(readShowUndoCount);
   const [mockLeaderboard, setMockLeaderboard] = useState<boolean>(isMockLeaderboardEnabled);
+  const [mockFriends, setMockFriends] = useState<boolean>(isMockFriendsEnabled);
   // Hidden dev panel: surfaces the local-only analytics ring buffer. The
   // toggle starts off — the link itself is small + de-emphasized so casual
   // users never notice it, but power users + maintainers can pop it open
@@ -559,6 +562,9 @@ export default function SettingsPage(): JSX.Element {
   useEffect(() => {
     setMockLeaderboardEnabled(mockLeaderboard);
   }, [mockLeaderboard]);
+  useEffect(() => {
+    setMockFriendsEnabled(mockFriends);
+  }, [mockFriends]);
 
   return (
     <div className="settings-page" data-testid="settings-page">
@@ -1246,6 +1252,31 @@ export default function SettingsPage(): JSX.Element {
               <span className="settings-toggle-thumb" />
             </span>
             <span className="settings-toggle-label">{mockLeaderboard ? "On" : "Off"}</span>
+          </label>
+        </div>
+
+        <div className="settings-field settings-field--row">
+          <div>
+            <div className="settings-field-label">Use mock friends</div>
+            <p className="settings-hint">
+              Populate the Friends tab on the Leaderboard with up to 10
+              simulated friends and their per-game scores. Like the mock
+              leaderboard, this is a UI preview toggle — there's no friends
+              backend yet. Off = empty friends list.
+            </p>
+          </div>
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={mockFriends}
+              onChange={(e) => setMockFriends(e.target.checked)}
+              data-testid="settings-mock-friends"
+              aria-label="Use mock friends"
+            />
+            <span className="settings-toggle-track" aria-hidden="true">
+              <span className="settings-toggle-thumb" />
+            </span>
+            <span className="settings-toggle-label">{mockFriends ? "On" : "Off"}</span>
           </label>
         </div>
 

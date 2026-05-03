@@ -18,12 +18,13 @@ import { getLastPlayed } from "../platform/userdata.js";
 import { buildLadderSvg, downloadSvg } from "../platform/svgShare.js";
 import {
   getLeaderboardClient,
+  getFriendsClient,
   type LeaderboardClient,
   type LeaderboardEntry,
 } from "../platform/leaderboardClient.js";
 import "./LeaderboardPage.css";
 
-type Tab = "per-game" | "global" | "online" | "my-ladder" | "top-players";
+type Tab = "per-game" | "global" | "online" | "my-ladder" | "top-players" | "friends";
 type GameCategory = "solitaire" | "cards" | "dice" | "board" | "arcade";
 type CategoryFilter = "all" | GameCategory;
 type TimeRange = "all" | "today" | "week" | "month";
@@ -155,12 +156,14 @@ export default function LeaderboardPage(): JSX.Element {
           <button role="tab" aria-selected={tab === "top-players"} onClick={() => setTab("top-players")}>Top Players</button>
           <button role="tab" aria-selected={tab === "per-game"} onClick={() => setTab("per-game")}>Per-game</button>
           <button role="tab" aria-selected={tab === "global"} onClick={() => setTab("global")}>Global</button>
+          <button role="tab" aria-selected={tab === "friends"} onClick={() => setTab("friends")}>Friends</button>
           <button role="tab" aria-selected={tab === "my-ladder"} onClick={() => setTab("my-ladder")}>My Ladder</button>
           <button role="tab" aria-selected={tab === "online"} onClick={() => setTab("online")}>Online now</button>
         </nav>
         {tab === "top-players" && <TopPlayersPanel />}
         {tab === "per-game" && <PerGamePanel />}
         {tab === "global" && <GlobalPanel />}
+        {tab === "friends" && <FriendsPanel />}
         {tab === "my-ladder" && <MyLadderPanel />}
         {tab === "online" && <div className="online-standalone"><OnlineNowPanel /></div>}
       </section>
@@ -947,6 +950,100 @@ function MyLadderPanel(): JSX.Element {
           </section>
         </>
       )}
+    </div>
+  );
+}
+
+/* ============================================================
+ * Friends — sourced from the FriendsClient (or whichever client
+ * the active toggles resolve to). When Settings → Data → "Use
+ * mock friends" is on, this returns up to 10 deterministic faux
+ * friends with per-game scores. Otherwise it falls back to the
+ * same client the rest of the leaderboard uses, so the tab
+ * always renders something rather than going blank.
+ * ============================================================ */
+
+function FriendsPanel({
+  client,
+}: {
+  client?: LeaderboardClient;
+} = {}): JSX.Element {
+  const me = useAuth((s) => s.username);
+  const [gameId, setGameId] = useState<string>("klondike");
+  const [rows, setRows] = useState<LeaderboardEntry[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    const c = client ?? getFriendsClient();
+    c.getTop(gameId, 10)
+      .then((r) => { if (!cancelled) setRows(r); })
+      .catch(() => { if (!cancelled) setRows([]); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [client, gameId]);
+
+  return (
+    <div className="lb-top-players" data-testid="lb-friends">
+      <div className="lb-controls">
+        <label className="lb-control">
+          <span>Game</span>
+          <select
+            aria-label="friends game"
+            value={gameId}
+            onChange={(e) => setGameId(e.target.value)}
+          >
+            {FEATURED_GAMES.map((g) => (
+              <option key={g.id} value={g.id}>{g.title}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="lb-table-wrap">
+        <table className="lb-table">
+          <thead>
+            <tr>
+              <th scope="col" className="lb-rank">#</th>
+              <th scope="col">Friend</th>
+              <th scope="col" className="lb-score">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading && <SkeletonRows rows={5} cols={3} testId="lb-friends-skeleton-row" />}
+            {!loading && rows && rows.length === 0 && (
+              <tr>
+                <td colSpan={3} className="lb-empty" data-testid="lb-friends-empty">
+                  No friends yet — turn on "Use mock friends" in Settings to preview this tab.
+                </td>
+              </tr>
+            )}
+            {!loading && rows && rows.map((r, i) => {
+              const medal = MEDALS[i + 1];
+              const isMe = me && r.name.toLowerCase() === me.toLowerCase();
+              return (
+                <tr
+                  key={`${r.name}-${i}`}
+                  className={[
+                    medal ? `lb-medal lb-medal-${i + 1}` : "",
+                    isMe ? "lb-me" : "",
+                  ].filter(Boolean).join(" ")}
+                  data-testid="lb-friends-row"
+                >
+                  <td className="lb-rank">
+                    {medal ? <span className="lb-medal-icon" aria-label={`rank ${i + 1}`}>{medal}</span> : i + 1}
+                  </td>
+                  <td className="lb-user">
+                    <span>{r.name}</span>
+                    {isMe && <span className="lb-you-badge">you</span>}
+                  </td>
+                  <td className="lb-score">{r.score.toLocaleString()}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
