@@ -549,6 +549,35 @@ describe("StatsPage", () => {
     expect(screen.getByTestId("stats-sparkline-spider")).toBeInTheDocument();
   });
 
+  // W291 — Most-hinted rows feed the Sparkline a single sample (`[row.count]`)
+  // because no per-week hint history is tracked. The Sparkline component's
+  // single-sample branch draws one centered horizontal bar (a `<line>`, not a
+  // `<polyline>`), so the row gets exactly one bar/dot for the current count.
+  // This pins both the testid contract and the single-sample render shape so a
+  // future refactor can't silently switch the most-hinted card to a multi-point
+  // polyline (which would imply hint history we don't actually track).
+  it("W291: most-hinted row gets stats-sparkline-<id> SVG with a single bar per current count", () => {
+    // Seed only klondike at count=5 so the row index and shape are unambiguous.
+    localStorage.setItem("cards-hints-used", JSON.stringify({ klondike: 5 }));
+    renderPage();
+    const spark = screen.getByTestId("stats-sparkline-klondike");
+    // Element is the SVG itself, scoped to the most-hinted row (not the
+    // drill-down panel, which is closed by default).
+    expect(spark.tagName.toLowerCase()).toBe("svg");
+    expect(spark).toHaveClass("stats-sparkline");
+    // Single-sample branch: one <line>, zero <polyline>. This is the "single
+    // bar/dot per current count" rendering — count=5 doesn't draw 5 marks, it
+    // draws one bar whose presence represents the row's count.
+    const lines = spark.querySelectorAll("line");
+    const polylines = spark.querySelectorAll("polyline");
+    expect(lines.length).toBe(1);
+    expect(polylines.length).toBe(0);
+    // Sparkline lives inside the most-hinted card's first row (rank 1) so the
+    // testid is wired through the Top-5 map rather than to some other panel.
+    const row = screen.getByTestId("stats-most-hinted-row-0");
+    expect(row).toContainElement(spark);
+  });
+
   it("drill-down panel shows a best-times sparkline when history exists", () => {
     seedRichStats();
     // Seed a per-game time history so the drill-down has something to plot.
@@ -742,6 +771,29 @@ describe("StatsPage", () => {
     expect(screen.getByTestId("stats-pr-cat-dice").textContent).toContain("Balut");
     // Untouched category renders an em-dash placeholder.
     expect(screen.getByTestId("stats-pr-cat-board").getAttribute("data-empty")).toBe("true");
+  });
+
+  // W635: Personal records by category — one entry per category with no
+  // contention, so each category row should show exactly its seeded game's
+  // title + formatted best time. `texas-holdem` is the cards-category
+  // hold'em plugin (id "holdem" is only a family alias, not a registered
+  // GamePlugin). formatBestTime: 120->"2m 0s", 60->"1m 0s", 80->"1m 20s".
+  it("W635: stats-personal-records-by-category maps one PR per category from cards-best-times", () => {
+    seedRichStats();
+    localStorage.setItem(
+      "cards-best-times",
+      JSON.stringify({ klondike: 120, "texas-holdem": 60, yahtzee: 80 }),
+    );
+    renderPage();
+    const solitaireRow = screen.getByTestId("stats-pr-cat-solitaire");
+    expect(solitaireRow.textContent).toContain("Klondike Solitaire");
+    expect(solitaireRow.textContent).toContain("2m 0s");
+    const cardsRow = screen.getByTestId("stats-pr-cat-cards");
+    expect(cardsRow.textContent).toContain("Texas Hold'em");
+    expect(cardsRow.textContent).toContain("1m 0s");
+    const diceRow = screen.getByTestId("stats-pr-cat-dice");
+    expect(diceRow.textContent).toContain("Yahtzee-style");
+    expect(diceRow.textContent).toContain("1m 20s");
   });
 
   it("stats-cat-heatmap aggregates plays by category × day-of-week from time histories", () => {
@@ -1086,6 +1138,15 @@ describe("StatsPage", () => {
     expect(playsDelta!.classList.contains("is-up")).toBe(true);
     expect(playsDelta!.textContent).toContain("▲");
     expect(playsDelta!.textContent).toContain("100%");
+
+    // Inversion-immunity: the same span must NOT carry the down/flat
+    // classes or glyphs. If a future refactor ever swaps the if/else
+    // branches in renderDelta, these guards fail loudly instead of
+    // letting "up" render with the wrong styling.
+    expect(playsDelta!.classList.contains("is-down")).toBe(false);
+    expect(playsDelta!.classList.contains("is-flat")).toBe(false);
+    expect(playsDelta!.textContent).not.toContain("▼");
+    expect(playsDelta!.textContent).not.toContain("—");
 
     // Prior block confirms the 2-play baseline is what the delta divided by.
     const prior = screen.getByTestId("stats-prev-week");
