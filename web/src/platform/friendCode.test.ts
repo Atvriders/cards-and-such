@@ -146,6 +146,28 @@ describe("friendCode", () => {
     expect(isValidFriendCode("??????")).toBe(false);
   });
 
+  it("round-trips every encodeable game (first 256 in registry) for a fixed seed", () => {
+    // Walk the first 256 registry slots — exactly the encodeable window.
+    // Every game with a string id must encode to a 6-char code and decode
+    // back to the identical {gameId, seed} pair for our fixed seed.
+    const fixedSeed = 0x4321;
+    const slice = GAMES.slice(0, 256);
+    let checked = 0;
+    for (const game of slice) {
+      if (game == null || typeof game.id !== "string") continue;
+      const code = encodeChallenge({ gameId: game.id, seed: fixedSeed });
+      expect(code, `encode failed for ${game.id}`).not.toBeNull();
+      expect((code as string).length).toBe(6);
+      const decoded = decodeChallenge(code as string);
+      expect(decoded, `decode failed for ${code} (${game.id})`).toEqual({
+        gameId: game.id,
+        seed: fixedSeed,
+      });
+      checked++;
+    }
+    expect(checked).toBeGreaterThan(0);
+  });
+
   it("truncates seeds with bits above 16 yet stays deterministic across calls", () => {
     // Two seeds that share their low 16 bits but differ in the high bits
     // must produce the same friend code (deterministic truncation).
