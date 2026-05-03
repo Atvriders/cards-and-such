@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { welcomeAdventurelandState, welcomeAdventurelandAction, welcomeAdventurelandSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { welcomeAdventurelandGame } from "./Game.js";
@@ -14,6 +14,6 @@ export const welcomeAdventurelandPlugin: GamePlugin<welcomeAdventurelandState, w
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as welcomeAdventurelandSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: welcomeAdventurelandState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-welcome-adventureland-primary"]', pulses: 3 } : null),
   component: welcomeAdventurelandGame,
 };

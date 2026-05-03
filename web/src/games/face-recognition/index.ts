@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { FaceRecognitionState, FRAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FaceRecognition } from "./Game.js";
@@ -30,6 +30,6 @@ Tips: Instead of trying to memorize the face as a whole, focus on a single disti
   settings: faceRecognitionSettings,
   initialState: (seed: number, settings: FRSettings) => initialState(seed, settings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: FaceRecognitionState): HintTarget | null => (state.phase === "idle" ? { selector: '[data-testid="hint-target-face-recognition-primary"]', pulses: 3 } : null),
   component: FaceRecognition,
 };

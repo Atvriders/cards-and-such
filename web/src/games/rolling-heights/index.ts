@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { rollingHeightsState, rollingHeightsAction, rollingHeightsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { rollingHeightsGame } from "./Game.js";
@@ -14,6 +14,6 @@ export const rollingHeightsPlugin: GamePlugin<rollingHeightsState, rollingHeight
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as rollingHeightsSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: rollingHeightsState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-rolling-heights-primary"]', pulses: 3 } : null),
   component: rollingHeightsGame,
 };

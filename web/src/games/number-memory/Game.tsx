@@ -44,7 +44,7 @@ export function NumberMemory({
       {state.phase === "idle" && (
         <div className="nm-center">
           <p className="nm-desc">A number will flash for 2 seconds. Type it from memory!</p>
-          <button className="nm-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
+          <button data-testid="hint-target-number-memory-primary" className="nm-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
         </div>
       )}
 

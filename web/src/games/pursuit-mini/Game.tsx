@@ -13,7 +13,7 @@ export function PursuitMiniGame({ state, dispatch, onGameOver }: GameProps<Pursu
       <div className="pm-track">
         <div className="pm-fill" style={{ width: `${(state.pos / PATH_LEN) * 100}%` }} />
       </div>
-      {state.phase === "rolling" && <button className="pm-btn" onClick={() => dispatch({ type: "roll" } as PursuitAction)}>Roll</button>}
+      {state.phase === "rolling" && <button data-testid="hint-target-pursuit-mini-primary" className="pm-btn" onClick={() => dispatch({ type: "roll" } as PursuitAction)}>Roll</button>}
       {state.phase === "asking" && state.current && (
         <div className="pm-q">
           <div className="pm-text">{state.current.q}</div>

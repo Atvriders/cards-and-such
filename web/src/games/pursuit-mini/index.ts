@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { PursuitState, PursuitAction, PursuitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PursuitMiniGame } from "./Game.js";
@@ -26,6 +26,6 @@ There is no fail state — the game always finishes. Aim to think before answeri
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as PursuitSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: PursuitState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-pursuit-mini-primary"]', pulses: 3 } : null),
   component: PursuitMiniGame,
 };

@@ -49,7 +49,7 @@ export function FaceRecognition({
       {state.phase === "idle" && (
         <div className="fr-center">
           <p className="fr-desc">Memorize the face, then pick it from 4 choices!</p>
-          <button className="fr-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
+          <button data-testid="hint-target-face-recognition-primary" className="fr-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
         </div>
       )}
 

@@ -23,7 +23,7 @@ export function MallManiaMiniGame({ state, dispatch, onGameOver }: GameProps<Mal
           </div>
         ))}
       </div>
-      {state.phase === "rolling" && <button className="mm-btn" onClick={() => dispatch({ type: "roll" } as MallAction)}>Roll</button>}
+      {state.phase === "rolling" && <button data-testid="hint-target-mall-mania-mini-primary" className="mm-btn" onClick={() => dispatch({ type: "roll" } as MallAction)}>Roll</button>}
       {state.phase === "deciding" && (
         <div className="mm-decide">
           At <b>{shop.label}</b> (${shop.price}, {shop.kind}). Buy?

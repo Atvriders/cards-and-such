@@ -50,7 +50,7 @@ export function ImageMemory({
       {state.phase === "idle" && (
         <div className="im-center">
           <p className="im-desc">Icons will flash one by one. Then click them in the order they appeared!</p>
-          <button className="im-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
+          <button data-testid="hint-target-image-memory-primary" className="im-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
         </div>
       )}
 

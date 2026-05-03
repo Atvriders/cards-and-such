@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { RaceState, RaceAction, RaceSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RaceGame } from "./Game.js";
@@ -16,6 +16,6 @@ export const gulBaraPlugin: GamePlugin<RaceState, RaceAction, typeof settings> =
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as RaceSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: RaceState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-gul-bara-primary"]', pulses: 3 } : null),
   component: RaceGame,
 };

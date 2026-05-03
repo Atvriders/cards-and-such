@@ -35,7 +35,7 @@ export function truffleShuffleGame({ state, dispatch, onGameOver }: GameProps<tr
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as truffleShuffleAction)}>Roll</button>
+        <button data-testid="hint-target-truffle-shuffle-primary" className="rw-btn" onClick={() => dispatch({ type: "roll" } as truffleShuffleAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
         <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as truffleShuffleAction)}>Skip</button>

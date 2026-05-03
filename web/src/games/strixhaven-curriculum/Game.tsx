@@ -35,7 +35,7 @@ export function strixhavenCurriculumGame({ state, dispatch, onGameOver }: GamePr
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as strixhavenCurriculumAction)}>Roll</button>
+        <button data-testid="hint-target-strixhaven-curriculum-primary" className="rw-btn" onClick={() => dispatch({ type: "roll" } as strixhavenCurriculumAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
         <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as strixhavenCurriculumAction)}>Skip</button>

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { NumberMemoryState, NumberMemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NumberMemory } from "./Game.js";
@@ -30,6 +30,6 @@ Tips: chunk long numbers into groups of 3 or 4 (like a phone number). Say the di
   settings: numberMemorySettings,
   initialState: (seed: number, settings: NMSettings) => initialState(seed, settings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: NumberMemoryState): HintTarget | null => (state.phase === "idle" ? { selector: '[data-testid="hint-target-number-memory-primary"]', pulses: 3 } : null),
   component: NumberMemory,
 };

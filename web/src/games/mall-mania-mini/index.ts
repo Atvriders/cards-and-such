@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { MallState, MallAction, MallSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MallManiaMiniGame } from "./Game.js";
@@ -30,6 +30,6 @@ After 16 turns the mall closes. Final score = items × 20 + cash remaining. Hunt
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MallSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: MallState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-mall-mania-mini-primary"]', pulses: 3 } : null),
   component: MallManiaMiniGame,
 };

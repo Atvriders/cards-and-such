@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { TrekAmericasState, TrekAmericasAction, TrekAmericasSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TrekAmericasGame } from "./Game.js";
@@ -14,6 +14,6 @@ export const trekAmericasPlugin: GamePlugin<TrekAmericasState, TrekAmericasActio
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as TrekAmericasSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: TrekAmericasState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-trek-americas-primary"]', pulses: 3 } : null),
   component: TrekAmericasGame,
 };

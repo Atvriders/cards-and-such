@@ -35,7 +35,7 @@ export function TrekAmericasGame({ state, dispatch, onGameOver }: GameProps<Trek
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as TrekAmericasAction)}>Roll</button>
+        <button data-testid="hint-target-trek-americas-primary" className="rw-btn" onClick={() => dispatch({ type: "roll" } as TrekAmericasAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
         <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as TrekAmericasAction)}>Skip</button>

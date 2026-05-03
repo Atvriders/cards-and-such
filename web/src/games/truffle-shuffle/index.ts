@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { truffleShuffleState, truffleShuffleAction, truffleShuffleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { truffleShuffleGame } from "./Game.js";
@@ -14,6 +14,6 @@ export const truffleShufflePlugin: GamePlugin<truffleShuffleState, truffleShuffl
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as truffleShuffleSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: truffleShuffleState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-truffle-shuffle-primary"]', pulses: 3 } : null),
   component: truffleShuffleGame,
 };

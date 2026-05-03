@@ -35,7 +35,7 @@ export function rollingHeightsGame({ state, dispatch, onGameOver }: GameProps<ro
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as rollingHeightsAction)}>Roll</button>
+        <button data-testid="hint-target-rolling-heights-primary" className="rw-btn" onClick={() => dispatch({ type: "roll" } as rollingHeightsAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
         <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as rollingHeightsAction)}>Skip</button>

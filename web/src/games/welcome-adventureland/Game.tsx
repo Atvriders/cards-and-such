@@ -35,7 +35,7 @@ export function welcomeAdventurelandGame({ state, dispatch, onGameOver }: GamePr
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as welcomeAdventurelandAction)}>Roll</button>
+        <button data-testid="hint-target-welcome-adventureland-primary" className="rw-btn" onClick={() => dispatch({ type: "roll" } as welcomeAdventurelandAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
         <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as welcomeAdventurelandAction)}>Skip</button>

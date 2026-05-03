@@ -57,7 +57,7 @@ export function PatternRecall({
       {state.phase === "idle" && (
         <div className="pr-center">
           <p className="pr-desc">A pattern of highlighted cells will flash briefly. Reproduce it from memory!</p>
-          <button className="pr-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
+          <button data-testid="hint-target-pattern-recall-primary" className="pr-btn-primary" onClick={() => dispatch({ type: "start" })}>Start</button>
         </div>
       )}
 

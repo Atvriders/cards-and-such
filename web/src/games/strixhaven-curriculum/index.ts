@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { strixhavenCurriculumState, strixhavenCurriculumAction, strixhavenCurriculumSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { strixhavenCurriculumGame } from "./Game.js";
@@ -14,6 +14,6 @@ export const strixhavenCurriculumPlugin: GamePlugin<strixhavenCurriculumState, s
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as strixhavenCurriculumSettings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: strixhavenCurriculumState): HintTarget | null => (state.phase === "rolling" ? { selector: '[data-testid="hint-target-strixhaven-curriculum-primary"]', pulses: 3 } : null),
   component: strixhavenCurriculumGame,
 };

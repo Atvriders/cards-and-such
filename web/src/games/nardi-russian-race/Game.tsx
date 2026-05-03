@@ -25,7 +25,7 @@ export function RaceGame({ state, dispatch, onGameOver }: GameProps<RaceState, R
         <div className="die" data-used={state.diceUsed[0]}>D1: {state.dice[0] || "-"}</div>
         <div className="die" data-used={state.diceUsed[1]}>D2: {state.dice[1] || "-"}</div>
         {state.phase === "rolling" && isPTurn && (
-          <button className="race-btn" onClick={() => dispatch({ type: "roll" } as RaceAction)}>Roll</button>
+          <button data-testid="hint-target-nardi-russian-race-primary" className="race-btn" onClick={() => dispatch({ type: "roll" } as RaceAction)}>Roll</button>
         )}
         {state.phase === "moving" && isPTurn && (
           <button className="race-btn" onClick={() => dispatch({ type: "endTurn" } as RaceAction)}>End Turn</button>

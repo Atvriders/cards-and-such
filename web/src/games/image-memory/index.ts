@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { ImageMemoryState, ImageMemoryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ImageMemory } from "./Game.js";
@@ -32,6 +32,6 @@ Tips: As each icon flashes, say a short story aloud in your head — for example
   settings: imageMemorySettings,
   initialState: (seed: number, settings: IMSettings) => initialState(seed, settings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: ImageMemoryState): HintTarget | null => (state.phase === "idle" ? { selector: '[data-testid="hint-target-image-memory-primary"]', pulses: 3 } : null),
   component: ImageMemory,
 };

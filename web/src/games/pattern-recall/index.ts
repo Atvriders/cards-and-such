@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { PatternRecallState, PatternRecallAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PatternRecall } from "./Game.js";
@@ -30,6 +30,6 @@ Tips: Rather than scanning the grid randomly, use anchor points. For example, "t
   settings: patternRecallSettings,
   initialState: (seed: number, settings: PRSettings) => initialState(seed, settings),
   reducer,
-  isTerminal,
+  isTerminal, hint: (state: PatternRecallState): HintTarget | null => (state.phase === "idle" ? { selector: '[data-testid="hint-target-pattern-recall-primary"]', pulses: 3 } : null),
   component: PatternRecall,
 };
