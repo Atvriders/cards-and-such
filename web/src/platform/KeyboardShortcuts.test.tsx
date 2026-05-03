@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent, act, within } from "@testing-library/react";
 import { useEffect } from "react";
 import {
   KeyboardShortcutsModal,
@@ -19,6 +19,28 @@ function Harness(): JSX.Element {
     document.body.dataset.kbdOpen = api.open ? "1" : "0";
   }, [api.open]);
   return <KeyboardShortcutsModal open={api.open} onClose={api.close} />;
+}
+
+/**
+ * Mirrors the AppShell footer wiring: a real <button data-testid=
+ * "footer-shortcuts-btn"> calling `shortcuts.setOpen(true)`. We re-create the
+ * binding here (rather than rendering AppShell) so the unit test stays focused
+ * on the hook+modal contract that the footer relies on.
+ */
+function FooterHarness(): JSX.Element {
+  const api = useKeyboardShortcutsModal();
+  return (
+    <>
+      <button
+        type="button"
+        data-testid="footer-shortcuts-btn"
+        onClick={() => api.setOpen(true)}
+      >
+        Shortcuts
+      </button>
+      <KeyboardShortcutsModal open={api.open} onClose={api.close} />
+    </>
+  );
 }
 
 describe("KeyboardShortcutsModal", () => {
@@ -98,5 +120,28 @@ describe("KeyboardShortcutsModal", () => {
     expect(dialog.getAttribute("aria-modal")).toBe("true");
     expect(dialog.getAttribute("aria-labelledby")).toBe("kbd-modal-title");
     expect(screen.getByText("Keyboard Shortcuts")).toBeTruthy();
+  });
+
+  it("opens the modal when the footer Shortcuts button is clicked", () => {
+    render(<FooterHarness />);
+    expect(screen.queryByTestId("kbd-modal")).toBeNull();
+    fireEvent.click(screen.getByTestId("footer-shortcuts-btn"));
+    expect(screen.getByTestId("kbd-modal")).toBeTruthy();
+    // Sanity: the same dialog semantics surface from the footer entry point.
+    expect(screen.getByRole("dialog")).toBeTruthy();
+  });
+
+  it("renders all three sections (Global / Lobby / Play) with >=1 row each", () => {
+    render(<KeyboardShortcutsModal open onClose={() => {}} />);
+    for (const id of ["global", "lobby", "play"] as const) {
+      const section = screen.getByTestId(`kbd-section-${id}`);
+      expect(section).toBeTruthy();
+      // aria-labelledby points at the heading id so the section is named.
+      expect(section.getAttribute("aria-labelledby")).toBe(
+        `kbd-section-${id}-heading`,
+      );
+      const rows = within(section).getAllByTestId(/^kbd-row-\d+$/);
+      expect(rows.length).toBeGreaterThanOrEqual(1);
+    }
   });
 });
