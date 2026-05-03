@@ -8,7 +8,7 @@
     "test:install": "playwright install --with-deps chromium"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.9.1",
+    "@axe-core/playwright": "^4.11.3",
     "@playwright/test": "^1.44.0"
   }
 }
