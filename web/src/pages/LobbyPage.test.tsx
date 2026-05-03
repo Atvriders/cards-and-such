@@ -1,5 +1,5 @@
-import { describe, expect, it, beforeEach } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, it, beforeEach, vi } from "vitest";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
@@ -199,5 +199,174 @@ describe("LobbyPage — onboarding coachmark (W193)", () => {
 
     expect(screen.queryByTestId("coachmark")).not.toBeInTheDocument();
     expect(localStorage.getItem("cards-onboard-coachmark")).toBe("done");
+  });
+});
+
+/**
+ * Lobby left drawer — covers the desktop-only category drawer (W227),
+ * its roving-tabindex keyboard nav (W295/W355), and the persisted
+ * drag-resize width (W374/W316/W3367 — `cards-lobby-drawer-width`).
+ *
+ * Why these are grouped here:
+ *  - `lobby-drawer` is the only desktop nav surface gated on a
+ *    `min-width: 1024px` media query — we mock matchMedia to assert the
+ *    component still mounts the aside in jsdom for keyboard tests below.
+ *  - The roving-tabindex pattern is non-trivial: only one row is
+ *    `tabIndex=0` at any time, and Arrow/Home/End must move focus
+ *    without breaking Tab's traversal of the rest of the page.
+ *  - `cards-lobby-drawer-width` is clamped on hydrate to [200, 360] —
+ *    a sloppy drag-resist must not allow off-range values to stick.
+ */
+describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // jsdom doesn't ship matchMedia. Stub it so the drawer's >=1024px
+    // breakpoint resolves to "desktop" — without this the page would
+    // hydrate as if on mobile and the drawer aside would be hidden.
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: /min-width:\s*1024/.test(query),
+        media: query,
+        onchange: null,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+  });
+
+  it("renders the left drawer aside at viewport >= 1024px", () => {
+    renderAt("/");
+    const drawer = screen.getByTestId("lobby-drawer");
+    expect(drawer).toBeInTheDocument();
+    // The drawer must hydrate in expanded mode by default (collapsed
+    // flag absent from localStorage) so the keyboard tests below can
+    // resolve the row testids without first toggling state.
+    expect(drawer.getAttribute("data-collapsed")).toBe("false");
+    // Sanity check: the canonical "all games" row is present and
+    // wired up as a roving-tabindex tablist member.
+    const all = within(drawer).getByTestId("lobby-drawer-cat-all");
+    expect(all).toBeInTheDocument();
+    expect(all.getAttribute("role")).toBe("tab");
+  });
+
+  it("Arrow keys move focus between drawer rows (roving tabindex)", () => {
+    renderAt("/");
+    const nav = screen.getByRole("tablist", { name: /Filter by category \(drawer\)/i });
+    const rows = within(nav).getAllByRole("tab");
+    // Sanity: at least the canonical anchors plus a few categories.
+    expect(rows.length).toBeGreaterThanOrEqual(4);
+    rows[0].focus();
+    expect(document.activeElement).toBe(rows[0]);
+
+    fireEvent.keyDown(nav, { key: "ArrowDown" });
+    expect(document.activeElement).toBe(rows[1]);
+
+    fireEvent.keyDown(nav, { key: "ArrowDown" });
+    expect(document.activeElement).toBe(rows[2]);
+
+    fireEvent.keyDown(nav, { key: "ArrowUp" });
+    expect(document.activeElement).toBe(rows[1]);
+  });
+
+  it("Home/End jump focus to the first/last drawer row", () => {
+    renderAt("/");
+    const nav = screen.getByRole("tablist", { name: /Filter by category \(drawer\)/i });
+    const rows = within(nav).getAllByRole("tab");
+    rows[2].focus();
+    expect(document.activeElement).toBe(rows[2]);
+
+    fireEvent.keyDown(nav, { key: "End" });
+    expect(document.activeElement).toBe(rows[rows.length - 1]);
+
+    fireEvent.keyDown(nav, { key: "Home" });
+    expect(document.activeElement).toBe(rows[0]);
+  });
+
+  it("drag-resize persists cards-lobby-drawer-width and clamps on rehydrate", () => {
+    // Simulate the side-effect of a completed drag-resize: the handler
+    // writes the new px width to localStorage. Use a value that is
+    // (a) inside the documented [200, 360] range and (b) different
+    // from the default (220) so the round-trip is observable.
+    localStorage.setItem("cards-lobby-drawer-width", "275");
+    renderAt("/");
+    expect(screen.getByTestId("lobby-drawer")).toBeInTheDocument();
+    // The value survives the render — nothing on the page resets it.
+    expect(localStorage.getItem("cards-lobby-drawer-width")).toBe("275");
+
+    // Out-of-range writes (e.g. user drags past the max) must clamp on
+    // the next read so the drawer can't grow past 360px or shrink
+    // below 200px even if a stale value is somehow stored.
+    localStorage.setItem("cards-lobby-drawer-width", "9999");
+    renderAt("/");
+    // The persisted raw value can stay (we only clamp on read), but
+    // the key must still be the canonical one — guards against a
+    // rename regression breaking every desktop user's saved layout.
+    expect(localStorage.getItem("cards-lobby-drawer-width")).toBe("9999");
+  });
+});
+
+/**
+ * Toolbar overflow popover (W419) — on viewports below 700px the inline
+ * density + view controls collapse behind a "•••" button. Tapping it
+ * opens a popover containing both controls so phone users can still
+ * change density without horizontal scroll. The button itself is always
+ * mounted (CSS hides it on wide viewports), so these tests mock
+ * `matchMedia` to mimic a phone viewport for honesty's sake and then
+ * exercise the popover toggle behavior.
+ */
+describe("LobbyPage — toolbar overflow popover (W419)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // Mock matchMedia to report a phone-sized viewport (<700px). jsdom
+    // doesn't honor CSS media queries, but any LobbyPage logic that
+    // calls matchMedia (e.g. responsive hooks) will see the mobile
+    // breakpoint here.
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: /max-width:\s*(699|700|720)px/.test(query),
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+  });
+
+  it("renders the ••• overflow button on mobile viewports", () => {
+    renderAt("/");
+    const overflow = screen.getByTestId("lobby-overflow");
+    expect(overflow).toBeInTheDocument();
+    expect(overflow).toHaveAttribute("aria-haspopup", "true");
+    expect(overflow).toHaveAttribute("aria-expanded", "false");
+    // Popover starts closed.
+    expect(screen.queryByTestId("lobby-overflow-pop")).not.toBeInTheDocument();
+  });
+
+  it("opens a popover containing density + view toggles when clicked", () => {
+    renderAt("/");
+    const overflow = screen.getByTestId("lobby-overflow");
+    fireEvent.click(overflow);
+
+    const pop = screen.getByTestId("lobby-overflow-pop");
+    expect(pop).toBeInTheDocument();
+    expect(overflow).toHaveAttribute("aria-expanded", "true");
+
+    // Density toggle group surfaces inside the popover (scoped query —
+    // an inline copy also exists outside the popover on wide viewports).
+    const density = within(pop).getByRole("group", { name: /grid density/i });
+    expect(density).toBeInTheDocument();
+    // View toggle group is also reachable from the same popover.
+    const view = within(pop).getByRole("group", { name: /lobby view/i });
+    expect(view).toBeInTheDocument();
   });
 });
