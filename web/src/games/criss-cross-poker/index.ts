@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CrissCrossPokerState, CrissCrossPokerAction, CrissCrossPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const crissCrossPokerPlugin: GamePlugin<CrissCrossPokerState, CrissCrossP
   howToPlay:"Criss-Cross (sometimes called X-Cross) lays out five community cards in a plus-sign — a shared middle card with two arms — and players combine two hole cards with one full arm or column to make their best hand. In this solo version we deal seven random cards (your two hole cards plus the five-card cross) and the reducer picks the best five-card subset for you.\n\nPress Deal each round to draw seven cards from a fresh 52-card deck. Hand rankings: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nYou play eight independent rounds. Picture the middle card as the universal hub and the arms as competing options; even though we don't enforce arm-or-column rules here, your seven-card pool lets you preview the kind of strong hands the Criss-Cross board can produce. Press Next after each round to chase a top cumulative score across the whole session.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CrissCrossPokerSettings),
-  reducer,isTerminal,component:CrissCrossPokerGame,
+  reducer,isTerminal,  hint: (state: CrissCrossPokerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-criss-cross-poker-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-criss-cross-poker-next"]', pulses: 3 };
+    return null;
+  },
+  component:CrissCrossPokerGame,
 };

@@ -13,10 +13,10 @@ export function JacksOrBetterGame({ state, dispatch, onGameOver }: GameProps<Jac
       {state.hand.length > 0 && (
         <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       )}
-      {state.phase === "deal" && <button className="dm-btn" onClick={() => dispatch({ type: "deal" } as JacksOrBetterAction)}>Deal {CARDS_PER_HAND} cards</button>}
+      {state.phase === "deal" && <button className="dm-btn" data-testid="hint-target-jacks-or-better-deal" onClick={() => dispatch({ type: "deal" } as JacksOrBetterAction)}>Deal {CARDS_PER_HAND} cards</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.rank} — +{state.rankPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as JacksOrBetterAction)}>Next</button>
+        <button className="dm-btn alt" data-testid="hint-target-jacks-or-better-next" onClick={() => dispatch({ type: "next" } as JacksOrBetterAction)}>Next</button>
       </>}
     </div>
   );

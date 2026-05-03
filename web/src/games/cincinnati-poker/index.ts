@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CincinnatiPokerState, CincinnatiPokerAction, CincinnatiPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const cincinnatiPokerPlugin: GamePlugin<CincinnatiPokerState, CincinnatiP
   howToPlay:"Cincinnati — sometimes called Lamebrains — is a wild home-game variant where each player receives five hole cards and five community cards are dealt in the middle, all active. The strongest five-card hand from any combination wins. This solo edition condenses the deal to seven cards (a sample of hole + board) and scores the best five.\n\nPress Deal each round to draw seven random cards from a fresh 52-card deck. The reducer evaluates every five-card subset and surfaces the strongest poker hand. Values: High Card 0, Pair 10, Two Pair 30, Trips 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nThere are eight independent rounds. Picture the cards as a generous Cincinnati spread — even with the trim, your seven-card pool gives you frequent pair-or-better outcomes and respectable shots at flushes. Press Next between rounds and chase the strongest cumulative score across the eight-round session.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CincinnatiPokerSettings),
-  reducer,isTerminal,component:CincinnatiPokerGame,
+  reducer,isTerminal,  hint: (state: CincinnatiPokerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-cincinnati-poker-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-cincinnati-poker-next"]', pulses: 3 };
+    return null;
+  },
+  component:CincinnatiPokerGame,
 };

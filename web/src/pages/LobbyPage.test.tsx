@@ -95,3 +95,44 @@ describe("LobbyPage — sort dropdown", () => {
     expect(select.value).toBe("newest");
   });
 });
+
+/**
+ * New-user keyboard-shortcut tip — only renders for users with zero
+ * games played, on the empty default view, when not previously
+ * dismissed. The dismissal flag round-trips through localStorage so
+ * the same browser is never re-prompted.
+ */
+describe("LobbyPage — keyboard shortcut tip", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders the inline tip for a brand-new user on the default view", () => {
+    renderAt("/");
+    expect(screen.getByTestId("lobby-kbd-tip")).toBeInTheDocument();
+    expect(screen.getByTestId("lobby-kbd-tip-dismiss")).toBeInTheDocument();
+  });
+
+  it("hides the tip once the user has played at least one game", () => {
+    localStorage.setItem(
+      "cards-and-such:stats:v1",
+      JSON.stringify({ totalPlayed: 1, perGame: {}, perCategory: {} }),
+    );
+    renderAt("/");
+    expect(screen.queryByTestId("lobby-kbd-tip")).not.toBeInTheDocument();
+  });
+
+  it("hides and persists dismissal when the close button is clicked", () => {
+    renderAt("/");
+    const dismiss = screen.getByTestId("lobby-kbd-tip-dismiss");
+    fireEvent.click(dismiss);
+    expect(screen.queryByTestId("lobby-kbd-tip")).not.toBeInTheDocument();
+    expect(localStorage.getItem("cards-lobby-kbd-tip-dismissed")).toBe("1");
+  });
+
+  it("stays hidden across renders once the dismissal flag is set", () => {
+    localStorage.setItem("cards-lobby-kbd-tip-dismissed", "1");
+    renderAt("/");
+    expect(screen.queryByTestId("lobby-kbd-tip")).not.toBeInTheDocument();
+  });
+});

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnacondaPokerState, AnacondaPokerAction, AnacondaPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const anacondaPokerPlugin: GamePlugin<AnacondaPokerState, AnacondaPokerAc
   howToPlay:"Anaconda is a wild home-game classic where players are dealt seven cards and pass three, then two, then a single card to neighbors before the showdown. This solo edition skips the social passing and just awards you the deal — but with seven full cards to choose from, the swings get spicy fast.\n\nPress Deal each round to draw seven random cards from a fresh 52-card deck. The reducer evaluates every five-card subset and returns the strongest hand: High Card 0, Pair 10, Two Pair 30, Trips 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nYou play eight rounds, each independent. Treat the early rounds as scouting trips and the later rounds as your shot to chase a flush or boat. Because the seven-card pool is so generous, expect to stumble into pairs and two-pair regularly, and big hands more often than in a five-card draw.\n\nPress Next after each round and try to pile up the highest cumulative score across all eight deals!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AnacondaPokerSettings),
-  reducer,isTerminal,component:AnacondaPokerGame,
+  reducer,isTerminal,  hint: (state: AnacondaPokerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-anaconda-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-anaconda-next"]', pulses: 3 };
+    return null;
+  },
+  component:AnacondaPokerGame,
 };

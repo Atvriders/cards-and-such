@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AnteOnlyGameState, AnteOnlyGameAction, AnteOnlyGameSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const anteOnlyGamePlugin: GamePlugin<AnteOnlyGameState, AnteOnlyGameActio
   howToPlay:"Ante-Only Game Solo simulates the format where every player posts a single ante instead of standard blinds. Press Deal each round to receive seven cards and the engine grades the best five-card poker hand among all 21 possible combinations.\n\nHand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200. Nine rounds — nine ante-pot scenarios.\n\nLive ante-only play removes positional disadvantages from blinds and tends to encourage looser opening ranges. Pots start bigger relative to stacks because everyone has skin in the game. Here every round you ante in equally and chase the best hand. Press Next to grind through nine balanced ante deals!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as AnteOnlyGameSettings),
-  reducer,isTerminal,component:AnteOnlyGameGame,
+  reducer,isTerminal,  hint: (state: AnteOnlyGameState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-ante-only-game-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-ante-only-game-next"]', pulses: 3 };
+    return null;
+  },
+  component:AnteOnlyGameGame,
 };

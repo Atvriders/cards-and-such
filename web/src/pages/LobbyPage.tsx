@@ -2991,6 +2991,15 @@ function GameCard({
         )}
       </div>
       <div className="tile-title lobby-tile-title">
+        {isFavorite && (
+          <span
+            className="tile-fav-marker"
+            data-testid={`tile-fav-marker-${g.id}`}
+            aria-hidden="true"
+          >
+            ♥
+          </span>
+        )}
         {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
           ? highlightMatch(g.title, highlightQuery)
           : g.title}
@@ -3210,6 +3219,15 @@ function FamilyCard({
         </span>
       </div>
       <div className="tile-title lobby-tile-title">
+        {isFavorite && (
+          <span
+            className="tile-fav-marker"
+            data-testid={`tile-fav-marker-${family.id}`}
+            aria-hidden="true"
+          >
+            ♥
+          </span>
+        )}
         {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
           ? highlightMatch(family.label, highlightQuery)
           : family.label}
@@ -3342,6 +3360,15 @@ function FeaturedTile({
           </span>
         </div>
         <div className="tile-title lobby-tile-title">
+        {isFavorite && (
+          <span
+            className="tile-fav-marker"
+            data-testid={`tile-fav-marker-${familyId}`}
+            aria-hidden="true"
+          >
+            ♥
+          </span>
+        )}
         {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
           ? highlightMatch(g.title, highlightQuery)
           : g.title}
@@ -3395,6 +3422,15 @@ function FeaturedTile({
         )}
       </div>
       <div className="tile-title lobby-tile-title">
+        {isFavorite && (
+          <span
+            className="tile-fav-marker"
+            data-testid={`tile-fav-marker-feat-${g.id}`}
+            aria-hidden="true"
+          >
+            ♥
+          </span>
+        )}
         {highlightQuery && highlightQuery.length >= TITLE_HIGHLIGHT_MIN_LEN
           ? highlightMatch(g.title, highlightQuery)
           : g.title}

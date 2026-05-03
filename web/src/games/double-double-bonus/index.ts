@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { DoubleDoubleBonusState, DoubleDoubleBonusAction, DoubleDoubleBonusSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const doubleDoubleBonusPlugin: GamePlugin<DoubleDoubleBonusState, DoubleD
   howToPlay:"Double Double Bonus Poker is a video-poker paytable that piles extra premium on top of four-of-a-kind hands when accompanied by specific kickers — four aces with a 2/3/4 kicker, for example, pays an enormous bonus. This solo trainer skips the kicker math and uses the standard hand ranking so you can enjoy the deal-and-score loop.\n\nPress Deal each round to draw five random cards from a fresh 52-card deck. Hand values: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200. In a real Double Double Bonus machine, the rare four-aces-plus-kicker hand can pay 800x the bet — a small fortune.\n\nThere are ten independent rounds. Press Next between rounds and try to chase those quads — every four-of-a-kind here is the moral equivalent of hitting the kicker bonus. Stack up your highest cumulative session score.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DoubleDoubleBonusSettings),
-  reducer,isTerminal,component:DoubleDoubleBonusGame,
+  reducer,isTerminal,  hint: (state: DoubleDoubleBonusState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-double-double-bonus-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-double-double-bonus-next"]', pulses: 3 };
+    return null;
+  },
+  component:DoubleDoubleBonusGame,
 };

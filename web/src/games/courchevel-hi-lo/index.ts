@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CourchevelHiLoState, CourchevelHiLoAction, CourchevelHiLoSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -12,5 +12,11 @@ export const courchevelHiLoPlugin: GamePlugin<CourchevelHiLoState, CourchevelHiL
   howToPlay:"Courchevel Hi-Lo Solo is the split-pot variant of Courchevel boiled down to a solo dealer game. Press Deal each round and receive ten cards from a 52-card deck (five hole + five community); the best five-card poker hand is scored as the high half.\n\nHand rankings: High Card 0, Pair 10, Two Pair 30, Three of a Kind 50, Straight 70, Flush 80, Full House 100, Four of a Kind 150, Straight Flush 200.\n\nIn the live game an eight-or-better low hand qualifies for half the pot, but here we focus on the high half — the more reliably scoring side of the equation.\n\nSix rounds. Because the wide deal makes plenty of low cards likely, expect more Pair and Two Pair hands than in straight high-only Courchevel. Press Next between rounds and try multiple seeds to compare your average.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CourchevelHiLoSettings),
-  reducer,isTerminal,component:CourchevelHiLoGame,
+  reducer,isTerminal,  hint: (state: CourchevelHiLoState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "deal") return { selector: '[data-testid="hint-target-courchevel-hi-lo-deal"]', pulses: 3 };
+    if (state.phase === "scored") return { selector: '[data-testid="hint-target-courchevel-hi-lo-next"]', pulses: 3 };
+    return null;
+  },
+  component:CourchevelHiLoGame,
 };
