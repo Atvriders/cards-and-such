@@ -1038,6 +1038,7 @@ export default function AppShell(): JSX.Element {
             <NavLink to="/" end>Lobby</NavLink>
             <NavLink to="/daily">Daily</NavLink>
             <NavLink to="/stats">Stats</NavLink>
+            <NavLink to="/replays" data-testid="footer-replays-link">Replays</NavLink>
             <NavLink to="/leaderboard">Leaderboard</NavLink>
             <NavLink to="/settings">Settings</NavLink>
             <NavLink to="/about">About</NavLink>
