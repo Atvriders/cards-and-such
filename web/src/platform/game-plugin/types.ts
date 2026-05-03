@@ -68,7 +68,13 @@ export interface GamePlugin<State = unknown, Action = unknown, Schema extends Se
    *  plausible next move/control. */
   hint?: (state: State) => HintTarget | null;
 
-  component: React.FC<GameProps<State, SettingsOf<Schema>>>;
+  /** The play surface React component. Either an eagerly imported `FC` or
+   *  a `React.lazy()` wrapper. Lazy wrappers let each game's `Game.tsx`
+   *  module split out of the main JS chunk; PlayPage already wraps the
+   *  render site in `<Suspense>` so the skeleton fallback covers loading. */
+  component:
+    | React.FC<GameProps<State, SettingsOf<Schema>>>
+    | React.LazyExoticComponent<React.ComponentType<unknown>>;
 
   /** Optional per-game CSS variable overrides for the play surface. When
    *  present, PlayPage scopes these onto the `.play-page` wrapper (NOT

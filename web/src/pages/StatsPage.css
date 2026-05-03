@@ -421,8 +421,8 @@
 }
 .stats-page .lobby-chip:focus-visible {
   outline: none;
-  border-color: rgba(167, 139, 250, 0.6);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 .stats-page .lobby-chip.is-active {
   color: #ffffff;
@@ -466,8 +466,9 @@
   color: #ffffff;
 }
 .stats-range-btn:focus-visible {
-  outline: 2px solid rgba(167, 139, 250, 0.7);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 .stats-search {
@@ -484,8 +485,8 @@
 .stats-search::placeholder { color: rgba(203, 213, 225, 0.5); }
 .stats-search:focus-visible {
   outline: none;
-  border-color: rgba(167, 139, 250, 0.6);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 .stats-drill-panel {
@@ -623,8 +624,8 @@
 }
 .stats-export-btn:focus-visible {
   outline: none;
-  border-color: rgba(167, 139, 250, 0.7);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 .stats-footer {

@@ -90,6 +90,23 @@ const APPEARANCE_KEYS = [
 const AUDIO_KEYS = [LS_SOUND, LS_SOUND_LEGACY, LS_VOLUME, LS_MUTE_HIDDEN];
 const GAMEPLAY_KEYS = [LS_ANIMATIONS, LS_AUTO_MOVE, LS_HINT_COUNT, LS_HINTS_ENABLED, LS_HINT_COOLDOWN, LS_SHOW_UNDO_COUNT];
 
+// Mobile accordion: on viewports <600px the four section cards collapse
+// down to one-open-at-a-time. The active section is persisted under
+// `cards-settings-section` so a return visit re-opens the same panel.
+type SectionKey = "appearance" | "audio" | "gameplay" | "data";
+const LS_SETTINGS_SECTION = "cards-settings-section";
+const VALID_SECTIONS: ReadonlySet<SectionKey> = new Set([
+  "appearance",
+  "audio",
+  "gameplay",
+  "data",
+]);
+function readOpenSection(): SectionKey {
+  if (typeof localStorage === "undefined") return "appearance";
+  const v = localStorage.getItem(LS_SETTINGS_SECTION);
+  return v && VALID_SECTIONS.has(v as SectionKey) ? (v as SectionKey) : "appearance";
+}
+
 // Gallery of selectable card-back designs. Each entry is rendered as a
 // preview tile in Settings; selecting one writes `cards-card-back` to
 // localStorage and the matching `:root[data-card-back="<id>"]` rule in
@@ -291,6 +308,60 @@ export default function SettingsPage(): JSX.Element {
   // Theme-styled confirm dialog — replaces native window.confirm() so
   // every destructive action gets the same keyboard-accessible UX.
   const { showConfirm, dialog: confirmDialog } = useStandaloneConfirm();
+
+  // Mobile accordion: collapse the four section cards to one-open-at-a-
+  // time below 600px. On wider viewports the toggle still exists (so
+  // its test id stays addressable) but every body renders unconditionally
+  // via CSS — this keeps desktop behavior unchanged.
+  const [openSection, setOpenSection] = useState<SectionKey>(readOpenSection);
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return false;
+    }
+    try {
+      return window.matchMedia("(max-width: 600px)").matches;
+    } catch {
+      return false;
+    }
+  });
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    let mql: MediaQueryList;
+    try {
+      mql = window.matchMedia("(max-width: 600px)");
+    } catch {
+      return;
+    }
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    setIsMobile(mql.matches);
+    if (typeof mql.addEventListener === "function") {
+      mql.addEventListener("change", onChange);
+      return () => mql.removeEventListener("change", onChange);
+    }
+    // Safari < 14 fallback.
+    type LegacyMQL = MediaQueryList & {
+      addListener?: (cb: (e: MediaQueryListEvent) => void) => void;
+      removeListener?: (cb: (e: MediaQueryListEvent) => void) => void;
+    };
+    const legacy = mql as LegacyMQL;
+    legacy.addListener?.(onChange);
+    return () => legacy.removeListener?.(onChange);
+  }, []);
+  useEffect(() => {
+    if (typeof localStorage === "undefined") return;
+    try {
+      localStorage.setItem(LS_SETTINGS_SECTION, openSection);
+    } catch {
+      /* quota / private mode — ignore */
+    }
+  }, [openSection]);
+  const toggleSection = (key: SectionKey) => {
+    // Clicking any section makes it the active one — exactly one section
+    // is open on mobile. On desktop every body still renders, so the click
+    // only persists the "last-active" choice for the next mobile visit.
+    setOpenSection(key);
+  };
+  const isOpen = (key: SectionKey) => !isMobile || openSection === key;
 
   // Search-bar filter: each .settings-field row checks `matchesQuery` on
   // its label and renders `hidden` when there's no substring match. The
@@ -592,15 +663,26 @@ export default function SettingsPage(): JSX.Element {
       <section
         className="settings-card"
         data-testid="settings-section-appearance"
+        data-section-open={isOpen("appearance") ? "true" : "false"}
         aria-labelledby="settings-appearance-heading"
       >
         <div className="settings-card-head">
-          <div>
-            <h2 id="settings-appearance-heading">Appearance</h2>
-            <p className="settings-hint">
-              Background palette, light/dark, and card visuals.
-            </p>
-          </div>
+          <button
+            type="button"
+            className="settings-section-toggle"
+            onClick={() => toggleSection("appearance")}
+            data-testid="settings-section-toggle-appearance"
+            aria-expanded={isOpen("appearance")}
+            aria-controls="settings-appearance-body"
+          >
+            <span>
+              <h2 id="settings-appearance-heading">Appearance</h2>
+              <p className="settings-hint">
+                Background palette, light/dark, and card visuals.
+              </p>
+            </span>
+            <span className="settings-section-chevron" aria-hidden="true" />
+          </button>
           <button
             type="button"
             className="settings-mini-btn"
@@ -611,6 +693,8 @@ export default function SettingsPage(): JSX.Element {
           </button>
         </div>
 
+        {isOpen("appearance") && (
+        <div id="settings-appearance-body">
         <div className="settings-field" hidden={!matchesQuery("Background theme")}>
           <label className="settings-field-label">
             {labelNode("Background theme")}
@@ -832,19 +916,32 @@ export default function SettingsPage(): JSX.Element {
             </button>
           </div>
         </div>
+        </div>
+        )}
       </section>
 
       {/* Audio ----------------------------------------------------------- */}
       <section
         className="settings-card"
         data-testid="settings-section-audio"
+        data-section-open={isOpen("audio") ? "true" : "false"}
         aria-labelledby="settings-audio-heading"
       >
         <div className="settings-card-head">
-          <div>
-            <h2 id="settings-audio-heading">Audio</h2>
-            <p className="settings-hint">Sound effects and volume.</p>
-          </div>
+          <button
+            type="button"
+            className="settings-section-toggle"
+            onClick={() => toggleSection("audio")}
+            data-testid="settings-section-toggle-audio"
+            aria-expanded={isOpen("audio")}
+            aria-controls="settings-audio-body"
+          >
+            <span>
+              <h2 id="settings-audio-heading">Audio</h2>
+              <p className="settings-hint">Sound effects and volume.</p>
+            </span>
+            <span className="settings-section-chevron" aria-hidden="true" />
+          </button>
           <button
             type="button"
             className="settings-mini-btn"
@@ -855,6 +952,8 @@ export default function SettingsPage(): JSX.Element {
           </button>
         </div>
 
+        {isOpen("audio") && (
+        <div id="settings-audio-body">
         <div className="settings-field settings-field--row">
           <div>
             <div className="settings-field-label">Sound effects</div>
@@ -973,19 +1072,32 @@ export default function SettingsPage(): JSX.Element {
             <span className="settings-toggle-label">{muteOnHidden ? "On" : "Off"}</span>
           </label>
         </div>
+        </div>
+        )}
       </section>
 
       {/* Gameplay -------------------------------------------------------- */}
       <section
         className="settings-card"
         data-testid="settings-section-gameplay"
+        data-section-open={isOpen("gameplay") ? "true" : "false"}
         aria-labelledby="settings-gameplay-heading"
       >
         <div className="settings-card-head">
-          <div>
-            <h2 id="settings-gameplay-heading">Gameplay</h2>
-            <p className="settings-hint">Auto-move, hints, and motion.</p>
-          </div>
+          <button
+            type="button"
+            className="settings-section-toggle"
+            onClick={() => toggleSection("gameplay")}
+            data-testid="settings-section-toggle-gameplay"
+            aria-expanded={isOpen("gameplay")}
+            aria-controls="settings-gameplay-body"
+          >
+            <span>
+              <h2 id="settings-gameplay-heading">Gameplay</h2>
+              <p className="settings-hint">Auto-move, hints, and motion.</p>
+            </span>
+            <span className="settings-section-chevron" aria-hidden="true" />
+          </button>
           <button
             type="button"
             className="settings-mini-btn"
@@ -996,6 +1108,8 @@ export default function SettingsPage(): JSX.Element {
           </button>
         </div>
 
+        {isOpen("gameplay") && (
+        <div id="settings-gameplay-body">
         <div className="settings-field settings-field--row">
           <div>
             <div className="settings-field-label">Auto-move to foundations</div>
@@ -1170,24 +1284,40 @@ export default function SettingsPage(): JSX.Element {
             Show again
           </button>
         </div>
+        </div>
+        )}
       </section>
 
       {/* Data ------------------------------------------------------------ */}
       <section
         className="settings-card settings-card--data"
         data-testid="settings-section-data"
+        data-section-open={isOpen("data") ? "true" : "false"}
         aria-labelledby="settings-data-heading"
       >
         <div className="settings-card-head">
-          <div>
-            <h2 id="settings-data-heading">Your data</h2>
-            <p className="settings-hint">
-              Export bundles every <code>cards-</code> key (settings, ratings,
-              stats, recents) into a JSON file. Import restores them. Clear
-              wipes everything from this device.
-            </p>
-          </div>
+          <button
+            type="button"
+            className="settings-section-toggle"
+            onClick={() => toggleSection("data")}
+            data-testid="settings-section-toggle-data"
+            aria-expanded={isOpen("data")}
+            aria-controls="settings-data-body"
+          >
+            <span>
+              <h2 id="settings-data-heading">Your data</h2>
+              <p className="settings-hint">
+                Export bundles every <code>cards-</code> key (settings, ratings,
+                stats, recents) into a JSON file. Import restores them. Clear
+                wipes everything from this device.
+              </p>
+            </span>
+            <span className="settings-section-chevron" aria-hidden="true" />
+          </button>
         </div>
+
+        {isOpen("data") && (
+        <div id="settings-data-body">
 
         <div className="settings-row settings-row--actions">
           <button
@@ -1431,6 +1561,8 @@ export default function SettingsPage(): JSX.Element {
               </ol>
             )}
           </div>
+        )}
+        </div>
         )}
       </section>
     </div>

@@ -97,6 +97,48 @@
   gap: 1rem;
   margin: 0 0 0.85rem;
 }
+
+/* Section toggle: full-width, transparent button that wraps the heading
+   + hint so the entire header strip is the click target on mobile. On
+   desktop the button still renders (test ids stay addressable) but the
+   chevron is hidden because every section body is unconditionally
+   visible — see the @media (max-width: 600px) block below. */
+.settings-section-toggle {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+.settings-section-toggle:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  border-radius: 8px;
+}
+.settings-section-chevron {
+  display: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+  opacity: 0.65;
+  margin-right: 0.25rem;
+  flex: 0 0 auto;
+}
+.settings-card[data-section-open="false"] .settings-section-chevron {
+  transform: rotate(-45deg);
+}
 .settings-card h2 {
   font-size: 1.05rem;
   letter-spacing: -0.01em;
@@ -131,6 +173,11 @@
   background: rgba(148, 163, 184, 0.10);
   border-color: rgba(148, 163, 184, 0.4);
   color: var(--text-100, #f1f5f9);
+}
+.settings-mini-btn:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 /* ---------------------------------------------------------------- Field */
@@ -211,6 +258,11 @@
   color: #e0e3ff;
   box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.35) inset;
 }
+.theme-chip:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 .theme-chip-swatch {
   display: inline-block;
   width: 22px;
@@ -244,6 +296,11 @@
 .card-back-swatch.is-selected {
   border-color: rgba(129, 140, 248, 0.7);
   box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.30);
+}
+.card-back-swatch:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 .card-back-preview {
   display: block;
@@ -296,6 +353,11 @@
   border-color: rgba(129, 140, 248, 0.5);
   color: #e0e3ff;
 }
+.pill:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 
 /* -------------------------------------------------------------- Toggle */
 .settings-toggle {
@@ -341,8 +403,9 @@
   transform: translateX(16px);
 }
 .settings-toggle input:focus-visible + .settings-toggle-track {
-  outline: 2px solid rgba(129, 140, 248, 0.6);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 .settings-toggle-label {
   font-size: 0.85rem;
@@ -439,13 +502,25 @@
     padding: 0.95rem 1rem 1.05rem;
   }
   .settings-card-head {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    margin-bottom: 0;
   }
   .settings-mini-btn {
     align-self: flex-start;
   }
   .settings-action {
     flex-basis: 100%;
+  }
+  /* Surface the chevron + add a hairline between the collapsed header
+     and the next card. The body is conditionally rendered in TS, so no
+     display:none rules are needed here — but we restore the head margin
+     when the section is open so the layout matches desktop spacing. */
+  .settings-section-chevron {
+    display: inline-block;
+  }
+  .settings-card[data-section-open="true"] .settings-card-head {
+    margin-bottom: 0.85rem;
   }
 }

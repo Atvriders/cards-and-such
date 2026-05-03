@@ -251,6 +251,106 @@ describe("StatsPage", () => {
     expect(undosCard.textContent).toContain("7");
   });
 
+  it("stats-total-time card renders summed seconds from cards-time-history blobs", () => {
+    seedRichStats();
+    // 90 + 60 = 150s for klondike, 30s for spider → 180s total → "0h 3m 0s".
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([{ ts: 1, time: 90 }, { ts: 2, time: 60 }]),
+    );
+    localStorage.setItem(
+      "cards-time-history:spider",
+      JSON.stringify([{ ts: 1, time: 30 }]),
+    );
+    renderPage();
+    const card = screen.getByTestId("stats-total-time");
+    expect(card).toBeInTheDocument();
+    expect(card.textContent).toContain("0h 3m 0s");
+  });
+
+  it("stats-sessions card renders the cards-session-count localStorage value", () => {
+    seedRichStats();
+    localStorage.setItem("cards-session-count", "42");
+    renderPage();
+    const card = screen.getByTestId("stats-sessions");
+    expect(card).toBeInTheDocument();
+    expect(card.textContent).toContain("42");
+  });
+
+  it("stats-personal-records-by-category renders fastest time per category from cards-best-times", () => {
+    seedRichStats();
+    // klondike (solitaire) 120s, spider (solitaire) 90s → solitaire pick = spider 90s.
+    // agram (cards) 200s. balut (dice) 150s.
+    localStorage.setItem(
+      "cards-best-times",
+      JSON.stringify({ klondike: 120, spider: 90, agram: 200, balut: 150 }),
+    );
+    renderPage();
+    const card = screen.getByTestId("stats-personal-records-by-category");
+    expect(card).toBeInTheDocument();
+    const solitaireRow = screen.getByTestId("stats-pr-cat-solitaire");
+    expect(solitaireRow.textContent).toContain("Spider Solitaire");
+    expect(screen.getByTestId("stats-pr-cat-cards").textContent).toContain("Agram");
+    expect(screen.getByTestId("stats-pr-cat-dice").textContent).toContain("Balut");
+    // Untouched category renders an em-dash placeholder.
+    expect(screen.getByTestId("stats-pr-cat-board").getAttribute("data-empty")).toBe("true");
+  });
+
+  it("stats-cat-heatmap aggregates plays by category × day-of-week from time histories", () => {
+    seedRichStats();
+    // Two recent klondike (solitaire) plays + one recent agram (cards) play.
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60 },
+        { ts: now - 2 * dayMs, time: 90 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:agram",
+      JSON.stringify([{ ts: now - 1 * dayMs, time: 30 }]),
+    );
+    renderPage();
+    const grid = screen.getByTestId("stats-cat-heatmap");
+    expect(grid).toBeInTheDocument();
+    // Sum the data-count attribute across every solitaire cell — must equal 2.
+    const solitaireCells = grid.querySelectorAll('[data-testid^="stats-cat-heatmap-solitaire-"]');
+    let solitaireTotal = 0;
+    solitaireCells.forEach((c) => {
+      solitaireTotal += Number(c.getAttribute("data-count") ?? 0);
+    });
+    expect(solitaireTotal).toBe(2);
+    const cardsCells = grid.querySelectorAll('[data-testid^="stats-cat-heatmap-cards-"]');
+    let cardsTotal = 0;
+    cardsCells.forEach((c) => {
+      cardsTotal += Number(c.getAttribute("data-count") ?? 0);
+    });
+    expect(cardsTotal).toBe(1);
+  });
+
+  it("stats-hour-of-day card buckets time-history timestamps into hour bins", () => {
+    seedRichStats();
+    // Pin three klondike plays to a known local hour so peak text is stable.
+    const peak = new Date();
+    peak.setHours(9, 0, 0, 0);
+    const peakTs = peak.getTime();
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: peakTs, time: 60 },
+        { ts: peakTs + 60_000, time: 60 },
+        { ts: peakTs + 120_000, time: 60 },
+      ]),
+    );
+    renderPage();
+    const card = screen.getByTestId("stats-hour-of-day");
+    expect(card).toBeInTheDocument();
+    expect(card.textContent).toContain("Peak 09:00");
+    expect(card.textContent).toContain("3 total plays");
+  });
+
   it("this-week comparison card shows current and prior 7-day windows with deltas", () => {
     seedRichStats();
     const now = Date.now();

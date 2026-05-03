@@ -525,10 +525,16 @@
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.daily-share-btn:hover,
-.daily-share-btn:focus-visible {
+.daily-share-btn:hover {
   background: rgba(99, 102, 241, 0.12);
   border-color: var(--daily-accent);
+  transform: translateY(-1px);
+}
+.daily-share-btn:focus-visible {
+  outline: none;
+  background: rgba(99, 102, 241, 0.12);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
   transform: translateY(-1px);
 }
 

@@ -1,9 +1,30 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import SettingsPage, { _buildExportSnapshot } from "./SettingsPage.js";
 import { KNOWN_KEYS } from "../platform/userdata.js";
 import { applyLightMode } from "../platform/lightMode.js";
+
+// Helper: stub window.matchMedia so the SettingsPage's mobile detection
+// can be flipped per-test. jsdom doesn't ship a matchMedia implementation,
+// so without this the page falls back to its desktop default (`false`).
+function setMatchMedia(mobile: boolean): void {
+  const mql = {
+    matches: mobile,
+    media: "(max-width: 600px)",
+    onchange: null,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  };
+  Object.defineProperty(window, "matchMedia", {
+    configurable: true,
+    writable: true,
+    value: vi.fn().mockImplementation(() => mql),
+  });
+}
 
 function renderPage(): void {
   render(
@@ -319,5 +340,75 @@ describe("SettingsPage reset isolation", () => {
     for (const k of diff(beforeGameplay, afterGameplay)) {
       expect(GAMEPLAY).toContain(k);
     }
+  });
+});
+
+// Mobile accordion: at viewports <600px the four sections collapse into
+// a one-open-at-a-time accordion. The active section is persisted under
+// `cards-settings-section` and defaults to "appearance" on first load.
+describe("SettingsPage mobile accordion", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+  afterEach(() => {
+    setMatchMedia(false);
+  });
+
+  it("exposes a section-toggle button with the documented test id for each section", () => {
+    setMatchMedia(false);
+    renderPage();
+    expect(screen.getByTestId("settings-section-toggle-appearance")).toBeInTheDocument();
+    expect(screen.getByTestId("settings-section-toggle-audio")).toBeInTheDocument();
+    expect(screen.getByTestId("settings-section-toggle-gameplay")).toBeInTheDocument();
+    expect(screen.getByTestId("settings-section-toggle-data")).toBeInTheDocument();
+  });
+
+  it("on mobile, only the appearance section body renders by default", () => {
+    setMatchMedia(true);
+    renderPage();
+    // Appearance body fields are present.
+    expect(screen.getByTestId("cardback-gallery")).toBeInTheDocument();
+    // Other section fields are NOT mounted while their card is collapsed.
+    expect(screen.queryByTestId("sound-toggle")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("settings-auto-move")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("settings-export")).not.toBeInTheDocument();
+  });
+
+  it("on mobile, clicking a different toggle opens that section and closes the previous one", () => {
+    setMatchMedia(true);
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-section-toggle-audio"));
+    expect(screen.getByTestId("sound-toggle")).toBeInTheDocument();
+    // Appearance body has unmounted.
+    expect(screen.queryByTestId("cardback-gallery")).not.toBeInTheDocument();
+    // Switching again leaves only one body open.
+    fireEvent.click(screen.getByTestId("settings-section-toggle-gameplay"));
+    expect(screen.getByTestId("settings-auto-move")).toBeInTheDocument();
+    expect(screen.queryByTestId("sound-toggle")).not.toBeInTheDocument();
+  });
+
+  it("persists the last-open section under cards-settings-section", () => {
+    setMatchMedia(true);
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-section-toggle-data"));
+    expect(localStorage.getItem("cards-settings-section")).toBe("data");
+  });
+
+  it("hydrates the previously-open section from localStorage on mount", () => {
+    localStorage.setItem("cards-settings-section", "gameplay");
+    setMatchMedia(true);
+    renderPage();
+    expect(screen.getByTestId("settings-auto-move")).toBeInTheDocument();
+    expect(screen.queryByTestId("cardback-gallery")).not.toBeInTheDocument();
+  });
+
+  it("on desktop, every section body remains rendered regardless of the persisted choice", () => {
+    localStorage.setItem("cards-settings-section", "data");
+    setMatchMedia(false);
+    renderPage();
+    expect(screen.getByTestId("cardback-gallery")).toBeInTheDocument();
+    expect(screen.getByTestId("sound-toggle")).toBeInTheDocument();
+    expect(screen.getByTestId("settings-auto-move")).toBeInTheDocument();
+    expect(screen.getByTestId("settings-export")).toBeInTheDocument();
   });
 });
