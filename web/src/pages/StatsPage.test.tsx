@@ -1329,4 +1329,18 @@ describe("StatsPage", () => {
       expect(within(panel).queryByTestId("stats-most-hinted-row-0")).toBeNull();
     });
   });
+
+  // W475: The `stats-sessions` summary card surfaces the persisted
+  // `cards-session-count` integer (bumped once per app boot by userdata.ts).
+  // Seeding the raw localStorage key with "42" before render must round-trip
+  // straight into the card's value, pinning the read path that
+  // `getSessionCount()` exposes to StatsPage's summary grid.
+  it("W475: stats-sessions card renders seeded cards-session-count value", () => {
+    seedStats({ totalPlayed: 1 });
+    localStorage.setItem("cards-session-count", "42");
+    renderPage();
+    const card = screen.getByTestId("stats-sessions");
+    expect(within(card).getByText("Sessions")).toBeTruthy();
+    expect(within(card).getByText("42")).toBeTruthy();
+  });
 });
