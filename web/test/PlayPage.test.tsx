@@ -315,6 +315,52 @@ describe("PlayPage undo/redo", () => {
     expect(getCount()).toBe(1);
   });
 
+  it("clicking the undo button pops the most recent frame off the stack", () => {
+    // The keyboard-handler test above covers Ctrl+Z; this asserts the
+    // toolbar button itself (not just the global listener) is wired to
+    // `undo()` and rolls state back by exactly one frame per click.
+    const { getCount } = mountAndStart();
+
+    fireEvent.click(screen.getByTestId("counter-inc")); // 1
+    fireEvent.click(screen.getByTestId("counter-inc")); // 2
+    fireEvent.click(screen.getByTestId("counter-inc")); // 3
+    expect(getCount()).toBe(3);
+
+    fireEvent.click(screen.getByTestId("play-undo-btn"));
+    expect(getCount()).toBe(2);
+    fireEvent.click(screen.getByTestId("play-undo-btn"));
+    expect(getCount()).toBe(1);
+  });
+
+  it("'Show undo count' toggle in settings updates the Undo (N) label live", () => {
+    // Default off → no count label is rendered. Toggling the
+    // Settings → Gameplay flag and dispatching a `storage` event
+    // (the cross-tab/page sync mechanism PlayPage subscribes to) must
+    // surface a "Undo (N)" label that mirrors the current stack depth.
+    const { getCount } = mountAndStart();
+
+    fireEvent.click(screen.getByTestId("counter-inc")); // 1
+    fireEvent.click(screen.getByTestId("counter-inc")); // 2
+    expect(getCount()).toBe(2);
+    expect(screen.queryByTestId("play-undo-btn-label")).toBeNull();
+
+    // Flip the preference and notify listeners exactly the way the
+    // browser would for a write that came from a different document.
+    localStorage.setItem("cards-show-undo-count", "true");
+    fireEvent(
+      window,
+      new StorageEvent("storage", { key: "cards-show-undo-count", newValue: "true" }),
+    );
+
+    const label = screen.getByTestId("play-undo-btn-label");
+    expect(label).toHaveTextContent("Undo (2)");
+
+    // And the label tracks subsequent stack changes — undo once and the
+    // count must drop to 1 without a remount.
+    fireEvent.click(screen.getByTestId("play-undo-btn"));
+    expect(screen.getByTestId("play-undo-btn-label")).toHaveTextContent("Undo (1)");
+  });
+
   it("undo cap drops the oldest frame after more than 20 actions", () => {
     const { getCount } = mountAndStart();
 

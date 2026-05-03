@@ -562,8 +562,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // briefly. Pure presentation state — never read by the reducer.
   const [replaySaved, setReplaySaved] = useState(false);
   // Whether the Undo button label should include the current depth, e.g.
-  // "Undo (3)". Read once at mount from Settings → Gameplay; default off.
-  const showUndoCount = useMemo(() => readShowUndoCount(), []);
+  // "Undo (3)". Mirrors the Settings → Gameplay toggle and stays in sync
+  // via a `storage` listener so toggling the preference from the Settings
+  // page (or another tab) updates the toolbar label live.
+  const [showUndoCount, setShowUndoCount] = useState<boolean>(() => readShowUndoCount());
+  useEffect(() => {
+    const refresh = () => setShowUndoCount(readShowUndoCount());
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === LS_SHOW_UNDO_COUNT) refresh();
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
   // Action toast queue. Each push gets a monotonically increasing id so
   // that React keys stay stable as older toasts fall off the front.
   const [toasts, setToasts] = useState<ActionToast[]>([]);
