@@ -859,6 +859,91 @@ function formatRelativeTime(ms: number): string {
   return `${Math.round(mo / 12)}y ago`;
 }
 
+/** Aggregate of plays / wins / mean elapsed-seconds within a single bucket of
+ *  the "this week vs prior week" comparison card. `avgTime` is `null` when no
+ *  finished plays carried a positive elapsed time, so the UI can render an
+ *  em-dash rather than "0s" — those are meaningfully different. */
+interface WeekBucket {
+  plays: number;
+  wins: number;
+  avgTime: number | null;
+}
+
+/**
+ * Walk every `cards-time-history:<gameId>` localStorage entry and bucket each
+ * play timestamp into either the current 7-day window (`[now-7d, now]`) or the
+ * prior 7-day window (`[now-14d, now-7d)`). A play counts as a "win" when its
+ * `score` field is a positive finite number — this matches how PlayPage records
+ * a finished game. `avgTime` is the simple mean of every entry's `time` (in
+ * seconds) within that window, ignoring zero / negative / non-finite values.
+ *
+ * Pure given a fixed `now`. Tolerates corrupt JSON the same way the rest of
+ * this file does (skips silently, never throws).
+ */
+function buildWeekAggregates(
+  now: number = Date.now(),
+): { current: WeekBucket; prior: WeekBucket } {
+  const dayMs = 24 * 60 * 60 * 1000;
+  const curStart = now - 7 * dayMs;
+  const priorStart = now - 14 * dayMs;
+  const cur = { plays: 0, wins: 0, timeSum: 0, timeN: 0 };
+  const prv = { plays: 0, wins: 0, timeSum: 0, timeN: 0 };
+  if (typeof localStorage === "undefined") {
+    return {
+      current: { plays: 0, wins: 0, avgTime: null },
+      prior: { plays: 0, wins: 0, avgTime: null },
+    };
+  }
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith(TIME_HISTORY_KEY_PREFIX)) continue;
+    const entries = progressJSON<unknown>(k);
+    if (!Array.isArray(entries)) continue;
+    for (const e of entries) {
+      if (!e || typeof e !== "object") continue;
+      const ts = (e as { ts?: unknown }).ts;
+      const time = (e as { time?: unknown }).time;
+      const score = (e as { score?: unknown }).score;
+      if (typeof ts !== "number" || !Number.isFinite(ts)) continue;
+      if (ts > now) continue;
+      const bucket = ts >= curStart ? cur : ts >= priorStart ? prv : null;
+      if (!bucket) continue;
+      bucket.plays += 1;
+      if (typeof score === "number" && Number.isFinite(score) && score > 0) {
+        bucket.wins += 1;
+      }
+      if (typeof time === "number" && Number.isFinite(time) && time > 0) {
+        bucket.timeSum += time;
+        bucket.timeN += 1;
+      }
+    }
+  }
+  const finalize = (b: typeof cur): WeekBucket => ({
+    plays: b.plays,
+    wins: b.wins,
+    avgTime: b.timeN > 0 ? b.timeSum / b.timeN : null,
+  });
+  return { current: finalize(cur), prior: finalize(prv) };
+}
+
+/** Whole-percent delta from `prior` -> `current`. Returns `null` when either
+ *  side is null/undefined or when `prior` is 0 / non-positive (no baseline,
+ *  so a percentage isn't meaningful). Positive = up vs prior, negative = down. */
+function pctDelta(current: number | null, prior: number | null): number | null {
+  if (current == null || prior == null) return null;
+  if (!Number.isFinite(current) || !Number.isFinite(prior)) return null;
+  if (prior <= 0) return null;
+  return Math.round(((current - prior) / prior) * 100);
+}
+
+/** Format a mean elapsed-seconds value for the week-summary card. Mirrors
+ *  {@link formatBestTime}'s shape so both cards read consistently, but accepts
+ *  `null` so the row can render "—" when no plays were timed in the window. */
+function formatAvgTime(seconds: number | null): string {
+  if (seconds == null || !Number.isFinite(seconds) || seconds <= 0) return "—";
+  return formatBestTime(seconds);
+}
+
 function formatBestTime(seconds: number): string {
   if (seconds < 60) return `${seconds.toFixed(seconds < 10 ? 1 : 0)}s`;
   const m = Math.floor(seconds / 60);
@@ -1008,6 +1093,12 @@ export default function StatsPage(): JSX.Element {
   // when stats change so Reset clears the bars to all zero.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const hourData = useMemo(() => buildHourOfDayCounts(), [stats]);
+
+  // "This week" comparison card: current 7-day window vs prior 7-day window
+  // aggregated from `cards-time-history:*`. Re-derived when stats change so a
+  // Reset zeroes out plays/wins and clears the avg-time row.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const weekAggregates = useMemo(() => buildWeekAggregates(), [stats]);
 
   /** Top-10 personal best times across all known games. Reads
    *  `cards-best-times` directly (a `Record<gameId, number>` of seconds), drops
@@ -1323,6 +1414,16 @@ export default function StatsPage(): JSX.Element {
                 : `${hourData.total} total plays`}
           </p>
           <HourChart data={hourData} />
+        </div>
+
+        <div className="stats-card" data-testid="stats-cat-heatmap-card">
+          <h2>Plays by category × day-of-week</h2>
+          <p className="stats-chart-label">
+            {heatmapData.total === 0
+              ? "No plays recorded in the last 30 days yet"
+              : `${heatmapData.total} plays in the last 30 days`}
+          </p>
+          <HeatmapChart data={heatmapData} />
         </div>
 
         <div className="stats-card" data-testid="stats-personal-records">
