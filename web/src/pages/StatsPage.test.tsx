@@ -410,6 +410,46 @@ describe("StatsPage", () => {
     expect(lines[1]).toBe("klondike,10,5,0.5000,120,120,,0,0");
   });
 
+  // W594 — CSV RFC 4180 escaping. A gameId containing a comma or double-quote
+  // must be wrapped in double-quotes with internal quotes doubled, otherwise
+  // spreadsheet parsers will split the row on the embedded comma or
+  // mis-pair the quote. We seed an adversarial id (`evil"game,name`) directly
+  // into stats.perGame — it doesn't need to exist in the registry; csvCell()
+  // operates on the raw key from loadStats().perGame.
+  it("W594: buildStatsCsv escapes gameId with comma and quote per RFC 4180", async () => {
+    const evilId = 'evil"game,name';
+    seedStats({
+      perGame: {
+        [evilId]: { played: 1, wins: 0, best: 0 },
+      },
+    });
+
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-csv"));
+
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+    const lines = text.split(/\r\n|\n/).filter((l) => l.length > 0);
+    // Exactly header + one data row.
+    expect(lines.length).toBe(2);
+    // The escaped cell must:
+    //   1. Begin with a double-quote (wrapping the comma-bearing value).
+    //   2. Double the embedded `"` → `""`.
+    //   3. Preserve the embedded comma inside the quoted region (so the row
+    //      still has the canonical 9 logical fields when parsed RFC 4180-wise).
+    const dataRow = lines[1];
+    expect(dataRow.startsWith('"evil""game,name"')).toBe(true);
+    // Pin the full row so any future drift in csvCell() or column order
+    // surfaces immediately. winRate=0/1=0.0000, bestTime/rating empty.
+    expect(dataRow).toBe('"evil""game,name",1,0,0.0000,,0,,0,0');
+  });
+
   it("most-hinted rows render an inline sparkline per game", () => {
     seedRichStats();
     renderPage();
