@@ -144,6 +144,24 @@ describe("StatsPage", () => {
     expect(r30.getAttribute("aria-pressed")).toBe("true");
   });
 
+  // W180 — Range selector exclusivity for the 7-day window. Clicking
+  // `stats-range-7d` must flip aria-pressed=true on itself AND aria-pressed
+  // =false on `stats-range-14d` (the previously-pressed default), so the
+  // toggle group always has exactly one pressed button. Pins the exclusivity
+  // half of the contract that the existing 14↔30 test doesn't cover.
+  it("W180: clicking stats-range-7d flips aria-pressed true on it and false on stats-range-14d", () => {
+    seedRichStats();
+    renderPage();
+    const r7 = screen.getByTestId("stats-range-7d");
+    const r14 = screen.getByTestId("stats-range-14d");
+    // Default is 14 — pressed; 7 starts unpressed.
+    expect(r14.getAttribute("aria-pressed")).toBe("true");
+    expect(r7.getAttribute("aria-pressed")).toBe("false");
+    fireEvent.click(r7);
+    expect(r7.getAttribute("aria-pressed")).toBe("true");
+    expect(r14.getAttribute("aria-pressed")).toBe("false");
+  });
+
   it("achievement search filters the cards", () => {
     seedRichStats();
     // Show-locked toggle defaults off; streak achievements are locked under
