@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-05-03 Test sweep (latest)
+- 8b605660 test(daily): dailyPicker module
+- 43e33749 test(play): pause + resume
+- 583d57d3 test(about): stat tiles render counts
+- 5a98eb25 test(stats): friendly achievement
+- 8939db1e test(stats): drill sparkline
+
 ## 2026-05-03 Milestone
 - ce902533 test(stats): achievement state ordering
 - b0fa3be0 perf(registry): lazy-load plugin components
