@@ -1003,6 +1003,30 @@ export default function StatsPage(): JSX.Element {
   const [range, setRange] = useState<RangeOption>(14);
   const [search, setSearch] = useState<string>("");
   const [drillId, setDrillId] = useState<string | null>(null);
+  // Whether the achievements grid includes "locked" cards (no progress yet).
+  // Persisted under `cards-stats-show-locked`. Defaults to false so the grid
+  // stays focused on what the player has actually started or finished.
+  const [showLocked, setShowLocked] = useState<boolean>(() => {
+    try {
+      if (typeof localStorage === "undefined") return false;
+      return localStorage.getItem("cards-stats-show-locked") === "true";
+    } catch {
+      return false;
+    }
+  });
+  const toggleShowLocked = (): void => {
+    setShowLocked((prev) => {
+      const next = !prev;
+      try {
+        if (typeof localStorage !== "undefined") {
+          localStorage.setItem("cards-stats-show-locked", String(next));
+        }
+      } catch {
+        /* ignore quota / private mode */
+      }
+      return next;
+    });
+  };
   // Saved replays (newest-first, capped REPLAY_CAP). Read once at mount;
   // the Replays panel is informational and doesn't write to this store.
   const replays = useMemo(() => loadReplays().slice().reverse(), []);
@@ -1283,8 +1307,8 @@ export default function StatsPage(): JSX.Element {
       // unlocked: keep original order (stable)
       return x.idx - y.idx;
     });
-    return decorated;
-  }, [search, stats]);
+    return showLocked ? decorated : decorated.filter((d) => d.state !== "locked");
+  }, [search, stats, showLocked]);
 
   const drillInfo = useMemo(() => {
     if (!drillId) return null;
@@ -1723,6 +1747,16 @@ export default function StatsPage(): JSX.Element {
             data-testid="stats-search"
             aria-label="Search achievements"
           />
+          <label className="stats-show-locked-row">
+            <input
+              type="checkbox"
+              checked={showLocked}
+              onChange={toggleShowLocked}
+              data-testid="stats-show-locked-toggle"
+              aria-label="Show locked achievements"
+            />
+            <span>Show locked</span>
+          </label>
           <div className="achievements-grid">
             {filteredAchievements.map(({ a, state, cur, goal }) => {
               const unlocked = state === "unlocked";

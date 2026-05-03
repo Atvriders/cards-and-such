@@ -146,6 +146,10 @@ describe("StatsPage", () => {
 
   it("achievement search filters the cards", () => {
     seedRichStats();
+    // Show-locked toggle defaults off; streak achievements are locked under
+    // the rich fixture (no daily-streak blob), so flip the persisted flag on
+    // to keep this search assertion focused on filter behavior, not visibility.
+    localStorage.setItem("cards-stats-show-locked", "true");
     renderPage();
     // Sanity: a couple of well-known achievements render initially.
     expect(screen.getByTestId("achievement-first-win")).toBeInTheDocument();
@@ -160,6 +164,54 @@ describe("StatsPage", () => {
     // Empty-state when no match.
     fireEvent.change(search, { target: { value: "zzznotathing" } });
     expect(screen.getByTestId("stats-search-empty")).toBeInTheDocument();
+  });
+
+  it("show-locked toggle defaults off, hides locked cards, persists to localStorage", () => {
+    // 1 unlocked + 2 in-progress + many locked. Same shape as the ordering
+    // test, but here we verify the toggle gates locked cards.
+    seedStats({
+      totalWins: 1,
+      unlocked: ["first-win"],
+    });
+    renderPage();
+
+    const grid = screen
+      .getByTestId("stats-achievements")
+      .querySelector(".achievements-grid") as HTMLElement;
+    const lockedCount = (): number =>
+      Array.from(grid.querySelectorAll('[data-state="locked"]')).length;
+
+    // Toggle defaults to off → no locked cards rendered.
+    const toggle = screen.getByTestId("stats-show-locked-toggle") as HTMLInputElement;
+    expect(toggle.checked).toBe(false);
+    expect(lockedCount()).toBe(0);
+    // Unlocked + in-progress still render.
+    expect(screen.getByTestId("achievement-first-win")).toBeInTheDocument();
+    expect(screen.getByTestId("achievement-ten-wins")).toBeInTheDocument();
+
+    // Flipping the toggle reveals locked cards and persists "true".
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(lockedCount()).toBeGreaterThan(0);
+    expect(localStorage.getItem("cards-stats-show-locked")).toBe("true");
+
+    // Flipping back hides them again and persists "false".
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(lockedCount()).toBe(0);
+    expect(localStorage.getItem("cards-stats-show-locked")).toBe("false");
+  });
+
+  it("show-locked toggle reads its initial value from localStorage", () => {
+    seedStats({ totalWins: 1, unlocked: ["first-win"] });
+    localStorage.setItem("cards-stats-show-locked", "true");
+    renderPage();
+    const toggle = screen.getByTestId("stats-show-locked-toggle") as HTMLInputElement;
+    expect(toggle.checked).toBe(true);
+    const grid = screen
+      .getByTestId("stats-achievements")
+      .querySelector(".achievements-grid") as HTMLElement;
+    expect(grid.querySelectorAll('[data-state="locked"]').length).toBeGreaterThan(0);
   });
 
   it("clicking a bar opens the drill-down panel with hint/undo rows", () => {
@@ -360,6 +412,9 @@ describe("StatsPage", () => {
       totalWins: 1,
       unlocked: ["first-win"],
     });
+    // Show-locked toggle defaults off; this test asserts the locked bucket
+    // ordering, so opt in via the persisted flag before mount.
+    localStorage.setItem("cards-stats-show-locked", "true");
     renderPage();
 
     const grid = screen

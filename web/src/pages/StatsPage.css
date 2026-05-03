@@ -516,6 +516,21 @@
   box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
+.stats-show-locked-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(203, 213, 225, 0.85);
+  cursor: pointer;
+  user-select: none;
+}
+.stats-show-locked-row input[type="checkbox"] {
+  margin: 0;
+  accent-color: var(--primary, #a78bfa);
+}
+
 .stats-drill-panel {
   background: rgba(10, 12, 22, 0.7);
   border: 1px solid rgba(167, 139, 250, 0.35);
