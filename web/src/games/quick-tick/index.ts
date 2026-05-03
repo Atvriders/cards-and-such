@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QuickTickState, QuickTickAction, QuickTickSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const QuickTickGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.QuickTickGame as unknown as React.ComponentType<unknown> })));
@@ -30,5 +30,6 @@ Tips: Try to anticipate the tick rather than reacting to it — reaction time av
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: QuickTickState): HintTarget | null => state.phase !== "done" ? { selector: '.quick-tick', pulses: 3 } : null,
   component: QuickTickGame,
 };

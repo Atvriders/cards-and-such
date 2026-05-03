@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RouletteState, RouletteAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,6 @@ Settings: Choose how many spins per session (10, 25, or 50). Score equals your f
   initialState: (seed: number, settings: RouletteSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: RouletteState): HintTarget | null => state.phase === "betting" ? { selector: '.roulette', pulses: 3 } : null,
   component: Roulette,
 };

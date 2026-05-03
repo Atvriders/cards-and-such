@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NimGameState, NimGameAction, NimGameSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ The mathematical optimal: leave a multiple of 4 (4, 8, 12, 16, 20) for the CPU a
 If the CPU happens to land you in a losing position by luck, you'll have to gamble on the next turn. A wise opening: take 1 to leave 20 — a winning position regardless of what the CPU does next. Outsmart the random opponent and claim the 100-point prize!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as NimGameSettings),
-  reducer,isTerminal,component:NimGameGame,
+  reducer,isTerminal,hint: (state: NimGameState): HintTarget | null => state.phase === "playing" ? { selector: '.nimg-pile', pulses: 3 } : null, component:NimGameGame,
 };

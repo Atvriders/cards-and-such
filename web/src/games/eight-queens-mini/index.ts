@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { EightQueensMiniState, EightQueensMiniAction, EightQueensMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ The 4×4 puzzle has only two valid solutions (and reflections), so it's a tight 
 Tap Reset to clear and try again. Eight Queens Mini is short, sharp, and a great introduction to constraint logic puzzles.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as EightQueensMiniSettings),
-  reducer,isTerminal,component:EightQueensMiniGame,
+  reducer,isTerminal,hint: (state: EightQueensMiniState): HintTarget | null => state.phase === "playing" ? { selector: '.eqm-board', pulses: 3 } : null, component:EightQueensMiniGame,
 };

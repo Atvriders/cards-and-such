@@ -37,5 +37,6 @@ Tips: Flip cards in a systematic left-to-right, top-to-bottom order on your firs
   initialState,
   reducer,
   isTerminal,
+  hint: (state: PairsThemedState) => !state.won ? { selector: '.pairs-grid', pulses: 3 } : null,
   component: PairsThemed,
 };

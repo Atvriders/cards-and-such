@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConnectFourMiniState, ConnectFourMiniAction, ConnectFourMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ The CPU plays a basic strategy: it takes any immediate winning move, blocks your
 Connect Four Mini is one full match. Hit "New Game" any time to start over with a fresh board.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ConnectFourMiniSettings),
-  reducer,isTerminal,component:ConnectFourMiniGame,
+  reducer,isTerminal,hint: (state: ConnectFourMiniState): HintTarget | null => state.phase === "playing" ? { selector: '.c4mini-board-shell', pulses: 3 } : null, component:ConnectFourMiniGame,
 };

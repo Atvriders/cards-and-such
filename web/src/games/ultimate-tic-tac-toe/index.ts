@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { UltimateTTTState, UltimateTTTAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -35,5 +35,6 @@ Strategy: Control the center mini-board early. Try to send your opponent into bo
   initialState: (seed: number, settings: UltimateTTTSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: UltimateTTTState): HintTarget | null => !state.winner ? { selector: '.ultimate-ttt-board-overlay', pulses: 3 } : null,
   component: UltimateTicTacToe,
 };

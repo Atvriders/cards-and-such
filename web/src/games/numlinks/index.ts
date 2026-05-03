@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { NumlinksState, NumlinksAction, NumlinksSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -22,5 +22,5 @@ Strategy: scan the grid for the next number quickly before you click. Cells you 
 Aim for accuracy, complete every puzzle, and chase that 1680 score!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as NumlinksSettings),
-  reducer, isTerminal, component: NumlinksGame,
+  reducer, isTerminal, hint: (state: NumlinksState): HintTarget | null => state.phase === "playing" ? { selector: '.nl-grid', pulses: 3 } : null, component: NumlinksGame,
 };

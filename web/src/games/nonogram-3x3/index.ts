@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { Nonogram3x3State, Nonogram3x3Action, Nonogram3x3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const Nonogram3x3Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Nonogram3x3Game as unknown as React.ComponentType<unknown> })));
@@ -19,5 +19,5 @@ Strategy: start with the rows and columns whose clues fully constrain them. A cl
 Your score is 400 minus 5 per move (50 floor), so be deliberate — random clicking burns points fast. Press Play Again for a fresh picture once you finish.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as Nonogram3x3Settings),
-  reducer, isTerminal, component: Nonogram3x3Game,
+  reducer, isTerminal, hint: (state: Nonogram3x3State): HintTarget | null => state.phase === "playing" ? { selector: '.nonogram3x3candy-board', pulses: 3 } : null, component: Nonogram3x3Game,
 };

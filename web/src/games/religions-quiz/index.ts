@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ReligionsQuizState, ReligionsQuizAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -14,5 +14,5 @@ export const religionsQuizPlugin: GamePlugin<ReligionsQuizState, ReligionsQuizAc
   howToPlay: `Religions Quiz challenges your understanding of the major world faiths and their traditions. Questions cover holy texts, founding figures, key beliefs, geographic origins, and religious practices. Select the correct answer from four options; correct answers turn green and incorrect ones turn red. Earn 10 points per correct answer, with 5, 10, or 15 questions per session. Topics include Christianity, Islam, Hinduism, Buddhism, Judaism, Sikhism, Taoism, Confucianism, Zoroastrianism, and Shinto. Tips: Link religions to their home regions — Hinduism and Buddhism to the Indian subcontinent, Confucianism and Taoism to China, Shinto to Japan. Key texts: Bible for Christianity, Quran for Islam, Torah for Judaism, Vedas for Hinduism.`,
   settings: religionsQuizSettings,
   initialState: (seed: number, settings: S) => initialState(seed, settings),
-  reducer, isTerminal, component: ReligionsQuiz,
+  reducer, isTerminal, hint: (state: ReligionsQuizState): HintTarget | null => !state.done ? { selector: '.sq-choices', pulses: 3 } : null, component: ReligionsQuiz,
 };

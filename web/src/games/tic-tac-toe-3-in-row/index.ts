@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TicTacToe3InRowState, TicTacToe3InRowAction, TicTacToe3InRowSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ When the board is full, whoever has more 3-in-a-row lines wins 100 points. Equal
 Strategy: diagonal and central positions tend to contribute to more possible lines. But watch what the AI is building — sometimes blocking is more important than scoring your own lines. Click New Game to replay with a new board arrangement.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TicTacToe3InRowSettings),
-  reducer, isTerminal, component:TicTacToe3InRow,
+  reducer, isTerminal, hint: (state: TicTacToe3InRowState): HintTarget | null => state.phase === "playing" ? { selector: '.ttt-board', pulses: 3 } : null, component:TicTacToe3InRow,
 };

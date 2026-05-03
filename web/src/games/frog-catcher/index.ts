@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FrogCatcherState, FrogCatcherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,6 @@ Tips: Don't click where a fly is right now — click slightly ahead of its path 
   initialState: (seed: number, settings: FrogCatcherSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FrogCatcherState): HintTarget | null => !state.ended ? { selector: '.fc-arena', pulses: 3 } : null,
   component: FrogCatcher,
 };

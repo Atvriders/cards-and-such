@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TicTacToeBlitzState, TicTacToeBlitzAction, TicTacToeBlitzSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ The CPU plays purely at random, so a careful X player wins more often than not. 
 Watch the timer in the top-right; when it hits zero, your final score locks in. Tic Tac Toe Blitz turns the world's simplest grid game into a fast-twitch numbers chase.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TicTacToeBlitzSettings),
-  reducer,isTerminal,component:TicTacToeBlitzGame,
+  reducer,isTerminal,hint: (state: TicTacToeBlitzState): HintTarget | null => state.phase === "playing" ? { selector: '.tttblitz-board', pulses: 3 } : null, component:TicTacToeBlitzGame,
 };

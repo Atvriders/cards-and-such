@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ArcticSurvivalState, ArcticSurvivalAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -35,5 +35,6 @@ Survive until the final day and your score is calculated from remaining HP, food
   initialState: (seed: number, settings: ArcticSurvivalSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: ArcticSurvivalState): HintTarget | null => state.phase !== "gameover" ? { selector: '.arctic-survival', pulses: 3 } : null,
   component: ArcticSurvival,
 };

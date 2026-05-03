@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SlidePuzzle3x3State, SlidePuzzle3x3Action, SlidePuzzle3x3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const SlidePuzzle3x3Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SlidePuzzle3x3Game as unknown as React.ComponentType<unknown> })));
@@ -19,5 +19,5 @@ Your score rewards efficiency: 500 points minus 5 per move, with a 50-point floo
 When the puzzle is solved, the timer stops and your final tally is locked in. Press Play Again to scramble for another go.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SlidePuzzle3x3Settings),
-  reducer, isTerminal, component: SlidePuzzle3x3Game,
+  reducer, isTerminal, hint: (state: SlidePuzzle3x3State): HintTarget | null => state.phase === "playing" ? { selector: '.sp3-grid', pulses: 3 } : null, component: SlidePuzzle3x3Game,
 };

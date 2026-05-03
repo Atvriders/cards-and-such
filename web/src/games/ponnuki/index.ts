@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PonnukiState, PonnukiAction, PonnukiSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -14,5 +14,5 @@ export const ponnukiPlugin: GamePlugin<PonnukiState, PonnukiAction, typeof setti
   howToPlay:"Ponnuki is a Go term for a \"diamond formation\" of four stones surrounding a single point — and a small-capture Go variant where you aim to make this shape. This compact 4×4 board version reframes the gameplay as a placement contest.\n\nYou and a random CPU alternate placing stones on empty intersections. Click any empty cell to place. The CPU then plays randomly. After 12 moves or when the 16-square board fills, most stones on the board wins.\n\n100 points for a win, 25 for a draw, 0 for a loss. With only 16 cells and 12 moves, both sides place equal counts in most games — but the CPU sometimes self-blocks, giving you placement advantages. The corners and center positions tend to dominate in 4×4.\n\nA tiny Go-flavored experience. The full Ponnuki shape — four stones around a center — is more reliable to form here than on a 19×19 board, capturing the elegance of the original concept.",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PonnukiSettings),
-  reducer,isTerminal,component:PonnukiGame,
+  reducer,isTerminal,hint: (state: PonnukiState): HintTarget | null => state.phase === "playing" ? { selector: '.po-board', pulses: 3 } : null, component:PonnukiGame,
 };

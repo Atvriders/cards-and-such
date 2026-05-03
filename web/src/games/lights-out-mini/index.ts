@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LightsOutMiniState, LightsOutMiniAction, LightsOutMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const LightsOutMiniGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.LightsOutMiniGame as unknown as React.ComponentType<unknown> })));
@@ -19,5 +19,5 @@ Your score rewards efficient solving: 400 points minus 10 per move, with a 50-po
 If you get stuck, press Play Again to generate a fresh board. Master the patterns and you'll become a Lights Out lightning bolt.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LightsOutMiniSettings),
-  reducer, isTerminal, component: LightsOutMiniGame,
+  reducer, isTerminal, hint: (state: LightsOutMiniState): HintTarget | null => state.phase === "playing" ? { selector: '.lom-grid', pulses: 3 } : null, component: LightsOutMiniGame,
 };

@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FoodTruckTycoonState, FoodTruckTycoonAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -37,5 +37,6 @@ Score equals your total profit in dollars, capped at 100. Consistent daily profi
   initialState: (seed: number, settings: FoodTruckTycoonSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FoodTruckTycoonState): HintTarget | null => !state.gameOver ? { selector: '.food-truck-tycoon', pulses: 3 } : null,
   component: FoodTruckTycoon,
 };

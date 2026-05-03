@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { FallingCatcherState, FallingCatcherAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -33,5 +33,6 @@ Tips: Position the basket under stars before coins since stars score triple. Wat
   initialState: (seed: number, settings: FallingCatcherSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FallingCatcherState): HintTarget | null => !state.ended ? { selector: '.falling-arena', pulses: 3 } : null,
   component: FallingCatcher,
 };

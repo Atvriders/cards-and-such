@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TargetPracticeState, TargetPracticeAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -41,5 +41,6 @@ Tips: Keep your cursor near the center of the arena to minimize the distance you
   initialState: (seed: number, settings: TargetPracticeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: TargetPracticeState): HintTarget | null => !state.ended ? { selector: '.tp-arena', pulses: 3 } : null,
   component: TargetPractice,
 };

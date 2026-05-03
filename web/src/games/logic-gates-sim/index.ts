@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LogicGatesState, LogicGatesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -37,5 +37,6 @@ Tip: Work backward from the output gate. Ask what input combination makes that g
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LogicGatesState): HintTarget | null => !state.won ? { selector: '.logic-gates-inputs', pulses: 3 } : null,
   component: LogicGatesGame,
 };

@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LightsOut3DState, LightsOut3DAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -35,5 +35,6 @@ Scoring: 300 points minus 5 per move, with a floor of 10. The fewer moves you us
   initialState: (seed: number, settings: LightsOut3DSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LightsOut3DState): HintTarget | null => !state.won ? { selector: '.lo3d-layers-row', pulses: 3 } : null,
   component: LightsOut3D,
 };

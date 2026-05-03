@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MagicSquare3State, MagicSquare3Action, MagicSquare3Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const MagicSquare3Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.MagicSquare3Game as unknown as React.ComponentType<unknown> })));
@@ -21,5 +21,5 @@ Score: 400 minus 10 per move, with a 50-point floor. The minimum possible move c
 Press Play Again to start over and lock in the technique.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MagicSquare3Settings),
-  reducer, isTerminal, component: MagicSquare3Game,
+  reducer, isTerminal, hint: (state: MagicSquare3State): HintTarget | null => state.phase === "playing" ? { selector: '.ms3-board', pulses: 3 } : null, component: MagicSquare3Game,
 };

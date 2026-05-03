@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { GomokuMiniState, GomokuMiniAction, GomokuMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ Unlike Tic-Tac-Toe, the board is large enough that you must actively build your 
 The AI tries to win when possible and block you when you are threatening. Win earns 100 points, draw (full board) earns 50, loss earns 0. Click New Game to start fresh. This is a great introduction to Gomoku strategy before moving on to full 15x15 or 19x19 boards!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as GomokuMiniSettings),
-  reducer, isTerminal, component:GomokuMini,
+  reducer, isTerminal, hint: (state: GomokuMiniState): HintTarget | null => state.phase === "playing" ? { selector: '.gomoku-mini-board', pulses: 3 } : null, component:GomokuMini,
 };

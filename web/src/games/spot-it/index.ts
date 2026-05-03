@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpotItState, SpotItAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const SpotItGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.SpotItGame as unknown as React.ComponentType<unknown> })));
@@ -27,5 +27,6 @@ Tips: instead of reading left-to-right, let your eyes defocus and look for a "po
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: SpotItState): HintTarget | null => !state.won ? { selector: '.spot-it-cards', pulses: 3 } : null,
   component: SpotItGame,
 };

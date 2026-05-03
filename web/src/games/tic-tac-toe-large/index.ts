@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { TicTacToeLargeState, TicTacToeLargeAction, TicTacToeLargeSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -20,5 +20,5 @@ Winning earns 100 points, a draw earns 50 points, and a loss earns 0. Click New 
 With 25 cells and a 4-in-a-row requirement, the game feels much more like strategy than luck. Corners and center positions are valuable. Watch out for the AI threatening to complete a row — block it while building your own winning lines. How many games can you win in a row?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TicTacToeLargeSettings),
-  reducer, isTerminal, component:TicTacToeLarge,
+  reducer, isTerminal, hint: (state: TicTacToeLargeState): HintTarget | null => state.phase === "playing" ? { selector: '.ttt-board.large', pulses: 3 } : null, component:TicTacToeLarge,
 };
