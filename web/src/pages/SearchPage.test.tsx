@@ -1,12 +1,35 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import SearchPage from "./SearchPage.js";
 
 function renderAt(path: string): void {
   render(
     <MemoryRouter initialEntries={[path]}>
       <SearchPage />
+    </MemoryRouter>,
+  );
+}
+
+/**
+ * Probe that surfaces the current router location into the DOM so tests
+ * can assert against URL state without poking at history internals.
+ */
+function LocationProbe(): JSX.Element {
+  const loc = useLocation();
+  return (
+    <div data-testid="location-probe">
+      {loc.pathname}
+      {loc.search}
+    </div>
+  );
+}
+
+function renderAtWithProbe(path: string): void {
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <SearchPage />
+      <LocationProbe />
     </MemoryRouter>,
   );
 }
@@ -79,6 +102,20 @@ describe("SearchPage", () => {
     // Pure solitaire entries must drop out under the multiplayer filter.
     expect(screen.queryByTestId("search-game-poker-solitaire")).not.toBeInTheDocument();
     expect(screen.queryByTestId("search-game-russian-solitaire")).not.toBeInTheDocument();
+  });
+
+  it("syncs the URL to `?q=test&filter=board` when the Board chip is clicked", async () => {
+    renderAtWithProbe("/search?q=test");
+    const boardChip = await screen.findByTestId("search-filter-board");
+    fireEvent.click(boardChip);
+    // The URL-sync effect runs after debounce + filter state update; wait
+    // for the LocationProbe to reflect the new querystring.
+    await waitFor(() => {
+      const probe = screen.getByTestId("location-probe");
+      expect(probe.textContent).toContain("/search");
+      expect(probe.textContent).toContain("q=test");
+      expect(probe.textContent).toContain("filter=board");
+    });
   });
 
   it("restores the filter chip state from a `?q=&filter=` URL round-trip", async () => {
