@@ -18,6 +18,7 @@ import PrivacyPage from "./pages/PrivacyPage.js";
 import CreditsPage from "./pages/CreditsPage.js";
 import SettingsPage from "./pages/SettingsPage.js";
 import StatsPage from "./pages/StatsPage.js";
+import ReplaysPage from "./pages/ReplaysPage.js";
 import SearchPage from "./pages/SearchPage.js";
 import NotFoundPage from "./pages/NotFoundPage.js";
 import OfflinePage from "./pages/OfflinePage.js";
@@ -63,6 +64,7 @@ export default function App(): JSX.Element {
             <Route path="/credits" element={<CreditsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/stats" element={<StatsPage />} />
+            <Route path="/replays" element={<ReplaysPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/offline" element={<OfflinePage />} />
             {DEV_BUILD && (
