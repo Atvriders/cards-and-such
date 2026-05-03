@@ -469,3 +469,42 @@ describe("SettingsPage Test sounds panel (W214)", () => {
     }
   });
 });
+
+// W170 + W493: the Gameplay → "Welcome tutorial → Show again" link must
+// clear only the `__welcome__` slot inside the `cards-tutorial-seen`
+// SeenMap (preserving any other game-specific tutorial-seen flags) and
+// dispatch a `cards:open-welcome-tutorial` window event so the carousel
+// host can re-mount the four-step intro.
+describe("SettingsPage show-tutorial link (W561)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clears the __welcome__ flag and dispatches cards:open-welcome-tutorial", () => {
+    // Pre-seed the SeenMap with both __welcome__ (must be cleared) and a
+    // real game id (must survive). This pins the "only welcome" contract.
+    localStorage.setItem(
+      "cards-tutorial-seen",
+      JSON.stringify({ __welcome__: true, klondike: true }),
+    );
+    const handler = vi.fn();
+    window.addEventListener("cards:open-welcome-tutorial", handler);
+    try {
+      renderPage();
+      fireEvent.click(screen.getByTestId("settings-show-tutorial"));
+
+      const raw = localStorage.getItem("cards-tutorial-seen");
+      expect(raw).not.toBeNull();
+      const map = JSON.parse(raw as string) as Record<string, boolean>;
+      expect(map.__welcome__).toBeUndefined();
+      // Other tutorial-seen flags must be untouched.
+      expect(map.klondike).toBe(true);
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      const evt = handler.mock.calls[0][0] as Event;
+      expect(evt.type).toBe("cards:open-welcome-tutorial");
+    } finally {
+      window.removeEventListener("cards:open-welcome-tutorial", handler);
+    }
+  });
+});
