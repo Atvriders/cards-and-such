@@ -972,3 +972,92 @@ describe("LobbyPage — search title <mark> highlight (W566)", () => {
     expect(marks[0]?.textContent?.toLowerCase()).toBe("klondike");
   });
 });
+
+/**
+ * W582 — the lobby list-mode toggle (`lobby-mode-toggle`) flips between
+ * the default "pagination" mode (explicit Prev/Next over PAGE_SIZE pages)
+ * and "infinite" mode (IntersectionObserver-driven progressive append).
+ * The two modes are mutually exclusive in the rendered DOM:
+ *   - In pagination mode the `lobby-pager` (with `lobby-pager-prev` /
+ *     `lobby-pager-next`) renders when the filtered pool spans >1 page,
+ *     and the infinite-mode `lobby-sentinel` is absent.
+ *   - In infinite mode the `lobby-sentinel` renders while there is more
+ *     to load, and the Prev/Next pager controls are gone.
+ *
+ * The default-pagination test seeds an empty localStorage so
+ * `readPersistedListMode()` falls back to "pagination", while the toggle
+ * test starts from that same default and clicks `lobby-mode-infinite`
+ * to exercise the live-flip behaviour. Both tests rely only on the
+ * canonical testids stamped in LobbyPage.tsx — no rect mocking or
+ * matchMedia stubs are needed because the toggle and pager are rendered
+ * at any viewport.
+ */
+describe("LobbyPage — list-mode toggle pagination/infinite (W183/W582)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("default pagination mode renders Prev/Next and no infinite-mode sentinel", () => {
+    renderAt("/");
+    // The toggle itself is always mounted so users can opt into infinite
+    // mode at any time.
+    expect(screen.getByTestId("lobby-mode-toggle")).toBeInTheDocument();
+    // Default mode is "pagination" — the pagination button reads pressed,
+    // the infinite button is unpressed. Pinning both halves of the toggle
+    // pair guards against a regression that flips only one side's flag.
+    expect(screen.getByTestId("lobby-mode-pagination")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByTestId("lobby-mode-infinite")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+    // Pager + Prev/Next controls are present (the registry has more than
+    // PAGE_SIZE entries, so totalPages>1 and the pager renders).
+    expect(screen.getByTestId("lobby-pager")).toBeInTheDocument();
+    expect(screen.getByTestId("lobby-pager-prev")).toBeInTheDocument();
+    expect(screen.getByTestId("lobby-pager-next")).toBeInTheDocument();
+    // Infinite-mode-only DOM is absent in the default render — the two
+    // modes never co-render their footer affordances.
+    expect(screen.queryByTestId("lobby-sentinel")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("lobby-loaded-count")).not.toBeInTheDocument();
+  });
+
+  it("clicking lobby-mode-infinite shows the sentinel and removes Prev/Next", async () => {
+    renderAt("/");
+    // Sanity baseline: pagination mode owns the DOM before the toggle click.
+    expect(screen.getByTestId("lobby-pager-prev")).toBeInTheDocument();
+    expect(screen.getByTestId("lobby-pager-next")).toBeInTheDocument();
+    expect(screen.queryByTestId("lobby-sentinel")).not.toBeInTheDocument();
+
+    // Flip to infinite mode via the canonical toggle button.
+    fireEvent.click(screen.getByTestId("lobby-mode-infinite"));
+
+    // The toggle's aria-pressed pair flips together — pagination releases,
+    // infinite engages — and the persistence twin lands under the
+    // canonical `cards-lobby-list-mode` key so a reload rehydrates here.
+    await waitFor(() => {
+      expect(screen.getByTestId("lobby-mode-infinite")).toHaveAttribute(
+        "aria-pressed",
+        "true",
+      );
+    });
+    expect(screen.getByTestId("lobby-mode-pagination")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+    expect(localStorage.getItem("cards-lobby-list-mode")).toBe("infinite");
+
+    // Infinite mode swaps the footer: the sentinel mounts (the pool is
+    // larger than the initial visibleCount so `hasMore` is true) and the
+    // loaded-count live-region is visible.
+    expect(screen.getByTestId("lobby-sentinel")).toBeInTheDocument();
+    expect(screen.getByTestId("lobby-loaded-count")).toBeInTheDocument();
+    // Prev/Next pagination controls are gone — the two modes are
+    // mutually exclusive in the rendered DOM.
+    expect(screen.queryByTestId("lobby-pager")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("lobby-pager-prev")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("lobby-pager-next")).not.toBeInTheDocument();
+  });
+});

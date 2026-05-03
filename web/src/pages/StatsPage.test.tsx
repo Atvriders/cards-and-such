@@ -373,6 +373,43 @@ describe("StatsPage", () => {
     expect(gameIds).toEqual(["agram", "balut", "klondike", "spider"]);
   });
 
+  // W587 — CSV row data contract. Pins the per-game data row produced by
+  // buildStatsCsv() so downstream pivot tables / scripts can rely on the
+  // exact cell contents (not just the header). Seeds a single klondike entry
+  // with plays=10, wins=5, best(Time)=120 and asserts the emitted row matches
+  // `klondike,10,5,0.5000,120,...` after RFC 4180 escaping.
+  it("W587: buildStatsCsv emits klondike,10,5,0.5000,120,... for seeded klondike stats", async () => {
+    seedStats({
+      totalPlayed: 10,
+      totalWins: 5,
+      perGame: {
+        klondike: { played: 10, wins: 5, best: 120 },
+      },
+    });
+    // bestTime column is sourced from `cards-best-times`, not stats.perGame.best.
+    localStorage.setItem("cards-best-times", JSON.stringify({ klondike: 120 }));
+
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-csv"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+    const lines = text.split(/\r\n|\n/).filter((l) => l.length > 0);
+    // Header + exactly one data row for the single seeded game.
+    expect(lines.length).toBe(2);
+    // gameId,plays,wins,winRate(0.5000),bestTime(120),bestScore(120),rating(empty),hintsUsed(0),undosUsed(0).
+    expect(lines[1]).toMatch(/^klondike,10,5,0\.5000,120,/);
+    expect(lines[1]).toBe("klondike,10,5,0.5000,120,120,,0,0");
+  });
+
   it("most-hinted rows render an inline sparkline per game", () => {
     seedRichStats();
     renderPage();
