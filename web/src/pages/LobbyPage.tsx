@@ -2410,6 +2410,13 @@ function GameCard({
   const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
   const longPressTimer = useRef<number | null>(null);
   const longPressFired = useRef(false);
+  // Swipe-right-to-favorite: track touch origin and a "fired" flag so a
+  // horizontal drag of >120 px on a primary touch toggles favorite once
+  // and suppresses the trailing synthetic click. Pure touch handler — no
+  // pointer/mouse paths are touched, so desktop click/hover is unaffected.
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const swipeFired = useRef(false);
+  const SWIPE_FAV_THRESHOLD = 120;
   const cancelLongPress = useCallback(() => {
     if (longPressTimer.current != null) {
       window.clearTimeout(longPressTimer.current);
@@ -2426,6 +2433,8 @@ function GameCard({
     const x = t.clientX;
     const y = t.clientY;
     longPressFired.current = false;
+    swipeFired.current = false;
+    swipeStart.current = { x, y };
     cancelLongPress();
     longPressTimer.current = window.setTimeout(() => {
       longPressFired.current = true;
@@ -2434,18 +2443,44 @@ function GameCard({
   }, [cancelLongPress]);
   const onTileTouchEnd = useCallback(() => {
     cancelLongPress();
+    swipeStart.current = null;
   }, [cancelLongPress]);
-  const onTileTouchMove = useCallback(() => {
+  const onTileTouchMove = useCallback((e: React.TouchEvent) => {
+    const start = swipeStart.current;
+    const t = e.touches[0];
+    if (start && t && !swipeFired.current) {
+      const dx = t.clientX - start.x;
+      const dy = t.clientY - start.y;
+      // Once the gesture clearly goes horizontal, drop the long-press
+      // timer so a swipe never doubles as a context-menu open.
+      if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+        cancelLongPress();
+      }
+      // Right-only, mostly-horizontal swipe past threshold flips favorite.
+      if (dx > SWIPE_FAV_THRESHOLD && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        swipeFired.current = true;
+        cancelLongPress();
+        if (onToggleFavorite) {
+          onToggleFavorite(g.id);
+          pushToast(
+            "success",
+            isFavorite ? "Removed from favorites" : "Added to favorites",
+          );
+        }
+        return;
+      }
+    }
     cancelLongPress();
-  }, [cancelLongPress]);
-  // If the long-press fired, the impending click on the <Link> would
-  // still navigate — swallow it so opening the menu doesn't also
+  }, [cancelLongPress, onToggleFavorite, g.id, isFavorite, pushToast]);
+  // If the long-press or swipe-fav fired, the impending click on the
+  // <Link> would still navigate — swallow it so the gesture doesn't also
   // immediately route to /play/<id>.
   const onTileClick = useCallback((e: React.MouseEvent) => {
-    if (longPressFired.current) {
+    if (longPressFired.current || swipeFired.current) {
       e.preventDefault();
       e.stopPropagation();
       longPressFired.current = false;
+      swipeFired.current = false;
     }
   }, []);
   useEffect(() => () => cancelLongPress(), [cancelLongPress]);
