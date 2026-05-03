@@ -39,7 +39,7 @@ export function PelmanismGame({ state, dispatch, onGameOver }: GameProps<Pelmani
           if (state.revealed[i]) cls += " matched";
           else if (state.flipped.includes(i)) cls += " flipped";
           return (
-            <button key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as PelmanismAction)}>
+            <button data-testid={`hint-target-pelmanism-card-${i}`} key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as PelmanismAction)}>
               <span className="pelman-face">{open ? PELMANISM_FACES[v] : ""}</span>
             </button>
           );

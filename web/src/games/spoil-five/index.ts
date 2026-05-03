@@ -19,5 +19,9 @@ export const spoilFivePlugin: GamePlugin<SpoilFiveState, SpoilFiveAction, typeof
   initialState: (seed: number, _settings: SpoilFiveSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-spoil-five-hand"]', pulses: 3 };
+      return null;
+    },
   component: SpoilFive,
 };

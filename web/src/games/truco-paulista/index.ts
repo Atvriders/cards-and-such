@@ -31,5 +31,9 @@ Strategy: If you hold a Manilha — especially ♣4 or ♥4 — you have a signi
   initialState: (seed: number, _settings: TrucoPaulistaSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "player-turn") return { selector: '[data-testid="hint-target-truco-paulista-hand"]', pulses: 3 };
+      return null;
+    },
   component: Game,
 };

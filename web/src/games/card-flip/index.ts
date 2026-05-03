@@ -19,5 +19,16 @@ Score: 20 per match (160 max from matches) plus a completion bonus of 200 minus 
 Sharpen your memory and flip on!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardFlipSettings),
-  reducer, isTerminal, component: CardFlipGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "done") return null;
+      if (state.firstPick !== null) return null;
+      const cards = state.cards || [];
+      for (let i = 0; i < cards.length; i++) {
+        if (!cards[i].revealed && !cards[i].matched) {
+          return { selector: `[data-testid="hint-target-card-flip-card-${i}"]`, pulses: 3 };
+        }
+      }
+      return null;
+    }, component: CardFlipGame,
 };

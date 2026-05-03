@@ -7,8 +7,6 @@ const settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
 } as const;
 
-const hint = (state: SpitOceanWildState): HintTarget | null => ((state.phase === "ready" || state.phase === "dealt") ? { selector: ".g-btn", pulses: 3 } : null);
-
 export const spitOceanWildPlugin: GamePlugin<SpitOceanWildState, SpitOceanWildAction, typeof settings> = {
   id: "spit-ocean-wild",
   title: "Spit in the Ocean Wild",
@@ -18,5 +16,10 @@ export const spitOceanWildPlugin: GamePlugin<SpitOceanWildState, SpitOceanWildAc
   howToPlay: "Spit in the Ocean Wild is a single-player card-combo game. Draw poker variant where one community card is wild for everyone. Each round you receive a five-card hand from a shuffled 52-card deck and score points based on the strongest poker-style combo present.\n\nSpecial rule: One community card becomes wild for the round — counts as any rank for pairs/sets.\n\nPress Deal to receive a new five-card hand. The score for that hand is computed instantly using the variant's scoring table — pairs, two-pair, three-of-a-kind, straight, flush, full house, four-of-a-kind, straight flush. Bonus or wild rules adjust the totals up.\n\nPlay continues for ten rounds, accumulating points. The deck reshuffles each round so high cards are always available. Aim for the highest possible cumulative score by riding lucky deals.\n\nThe seed determines the entire shuffle sequence, so you can replay an identical run by entering the same seed. After ten rounds, your final score is locked in. Single-player only — no CPU opponent. A bite-sized poker variant perfect for short play sessions.",
   settings,
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
-  reducer, isTerminal, hint, component: SpitOceanWild,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-spit-ocean-wild-deal"]', pulses: 3 };
+    if (state.phase === "dealt") return { selector: '[data-testid="hint-target-spit-ocean-wild-next"]', pulses: 3 };
+    return null;
+  }, component: SpitOceanWild,
 };

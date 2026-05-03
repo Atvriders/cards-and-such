@@ -17,5 +17,10 @@ export const theEstatesBidPlugin: GamePlugin<TheEstatesBidState, TheEstatesBidAc
   initialState: (seed: number, s: S) => initialState(seed, s as TheEstatesBidSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "drafting") return { selector: '[data-testid="hint-target-the-estates-bid-primary"]', pulses: 3 };
+      if (state.phase === "round-done") return { selector: '[data-testid="hint-target-the-estates-bid-next"]', pulses: 3 };
+      return null;
+    },
   component: TheEstatesBidGame,
 };

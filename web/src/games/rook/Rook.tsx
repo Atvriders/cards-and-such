@@ -46,7 +46,7 @@ export function Rook({ state, dispatch, onGameOver }: GameProps<RookState, objec
       <div className="rook-status">{message}</div>
       <div className="rook-player-area">
         <div className="rook-label">Your Hand</div>
-        <div className="rook-player-hand">
+        <div data-testid="hint-target-rook-hand" className="rook-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

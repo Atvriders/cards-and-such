@@ -31,7 +31,7 @@ export function PontoonCasGame({ state, dispatch, onGameOver }: GameProps<Pontoo
       </div>}
       {state.phase === "scored" && <>
         <div className="pon-c-result">{state.result} — +{state.pts}</div>
-        <button className="pon-c-btn alt" onClick={() => dispatch({ type: "next" } as PontoonCasAction)}>Next</button>
+        <button data-testid="hint-target-pontoon-cas-secondary" className="pon-c-btn alt" onClick={() => dispatch({ type: "next" } as PontoonCasAction)}>Next</button>
       </>}
     </div>
   );

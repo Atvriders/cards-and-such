@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { VideoPokerState, VideoPokerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -50,5 +50,9 @@ Tips: On a dealt pair of Jacks or better, hold it and draw three. Prefer a four-
   initialState: (seed: number, settings: VideoPokerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: VideoPokerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-video-poker-primary"]', pulses: 3 };
+  },
   component: VideoPoker,
 };

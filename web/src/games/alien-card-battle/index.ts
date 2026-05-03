@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { AlienCardBattleState, AlienCardBattleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -36,5 +36,9 @@ Strategy: save Double for low-strength cards to surprise; use Steal against high
   initialState: (seed: number, settings: AlienCardBattleSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: AlienCardBattleState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-alien-card-battle-primary"]', pulses: 3 };
+  },
   component: AlienCardBattle,
 };

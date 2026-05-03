@@ -24,7 +24,7 @@ export function CardHoldEmGame({ state, dispatch, onGameOver }: GameProps<CardHo
         <>
           <div className="che-prompt">Bet on this hand:</div>
           <div className="che-row">
-            <button className="che-btn" onClick={() => dispatch({ type: "predict", choice: "strong" } as CardHoldEmAction)}>STRONG</button>
+            <button data-testid="hint-target-card-hold-em-predict" className="che-btn" onClick={() => dispatch({ type: "predict", choice: "strong" } as CardHoldEmAction)}>STRONG</button>
             <button className="che-btn alt" onClick={() => dispatch({ type: "predict", choice: "weak" } as CardHoldEmAction)}>WEAK</button>
           </div>
         </>
@@ -32,7 +32,7 @@ export function CardHoldEmGame({ state, dispatch, onGameOver }: GameProps<CardHo
       {state.phase === "result" && (
         <>
           <div className={`che-feedback ${state.lastWin ? "ok" : "no"}`}>{state.lastWin ? "Correct! +10" : `Wrong — hand was ${state.isStrong ? "STRONG" : "WEAK"}`}</div>
-          <button className="che-btn alt" onClick={() => dispatch({ type: "next" } as CardHoldEmAction)}>Next</button>
+          <button className="che-btn alt" data-testid="hint-target-card-hold-em-next" onClick={() => dispatch({ type: "next" } as CardHoldEmAction)}>Next</button>
         </>
       )}
     </div>

@@ -19,5 +19,9 @@ export const mendikotPlugin: GamePlugin<MendikotState, MendikotAction, typeof me
   initialState: (seed: number, _settings: MendikotSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-mendikot-hand"]', pulses: 3 };
+      return null;
+    },
   component: Mendikot,
 };

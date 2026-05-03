@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FortuneTellerState, FortuneTellerAction, FortuneTellerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FortuneTeller } from "./Game.js";
@@ -33,5 +33,9 @@ Settings: choose a 16-card half-deck for a quicker reading, or a full 32-card de
   initialState: (seed: number, s: FortuneTellerSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: FortuneTellerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-fortune-teller-primary"]', pulses: 3 };
+  },
   component: FortuneTeller,
 };

@@ -46,7 +46,7 @@ export function Seep({ state, dispatch, onGameOver }: GameProps<SeepState, objec
       <div className="seep-status">{message}</div>
       <div className="seep-player-area">
         <div className="seep-label">Your Hand</div>
-        <div className="seep-player-hand">
+        <div data-testid="hint-target-seep-hand" className="seep-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiniPokerState, MiniPokerAction, MiniPokerSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,5 @@ There are eight rounds total, each independent of the others. Average expected s
 Watch for those rare Straight Flushes worth a massive 200 points each. Press Next after each scored round, and chase that high score!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniPokerSettings),
-  reducer,isTerminal,component:MiniPokerGame,
+  reducer,isTerminal,hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-mini-poker-primary"]', pulses: 3 }), component:MiniPokerGame,
 };

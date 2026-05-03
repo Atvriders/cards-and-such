@@ -48,7 +48,7 @@ export function PokerSquares2PGame({ state, dispatch, onGameOver }: GameProps<Po
           <div className="ps2p-grid-title">Your Grid</div>
           <div className="ps2p-grid">
             {playerGrid.map((card, i) => (
-              <div key={i} className={`ps2p-cell${card ? " filled" : phase === "placing" ? " empty clickable" : " empty"}`}
+              <div data-testid="hint-target-poker-squares-2p-primary" key={i} className={`ps2p-cell${card ? " filled" : phase === "placing" ? " empty clickable" : " empty"}`}
                 onClick={() => !card && phase === "placing" && dispatch({ type: "place", cellIndex: i } as PokerSquares2PAction)}>
                 {card ? <Card card={card} /> : <span className="ps2p-empty-label">+</span>}
               </div>

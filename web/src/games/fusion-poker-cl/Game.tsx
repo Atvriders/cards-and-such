@@ -25,8 +25,8 @@ export function FusionPokerClGame({ state, dispatch, onGameOver }: GameProps<Fus
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as FusionPokerClAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as FusionPokerClAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-fusion-poker-cl-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as FusionPokerClAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-fusion-poker-cl-next" className="g-btn" onClick={() => dispatch({ type: "next" } as FusionPokerClAction)}>Next Round</button>}
       </div>
     </div>
   );

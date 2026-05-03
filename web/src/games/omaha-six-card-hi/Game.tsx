@@ -20,10 +20,10 @@ export function CasGame({ state, dispatch, onGameOver }: GameProps<CasState, Cas
           <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as CasAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-omaha-six-card-hi-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as CasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as CasAction)}>Next</button>
+        <button data-testid="hint-target-omaha-six-card-hi-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as CasAction)}>Next</button>
       </>}
     </div>
   );

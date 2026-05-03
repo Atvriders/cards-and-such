@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrewState, CrewAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TheCrewGame } from "./Game.js";
@@ -26,5 +26,9 @@ Score: 100 for mission success, 0 for failure. Task card is highlighted in your 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: CrewState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-the-crew-primary"]', pulses: 3 };
+  },
   component: TheCrewGame,
 };

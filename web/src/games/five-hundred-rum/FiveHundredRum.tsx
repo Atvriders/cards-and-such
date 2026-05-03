@@ -47,7 +47,7 @@ export function FiveHundredRum({ state, dispatch, onGameOver }: GameProps<FiveHu
         <div className="fhr-pile">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0
-            ? <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as FiveHundredRumAction)} />
+            ? <Card data-testid="hint-target-five-hundred-rum-primary" faceDown onClick={() => dispatch({ type: "draw-stock" } as FiveHundredRumAction)} />
             : <div className="fhr-card-back" style={{ opacity: 0.3 }} />}
         </div>
         <div className="fhr-pile">
@@ -99,7 +99,7 @@ export function FiveHundredRum({ state, dispatch, onGameOver }: GameProps<FiveHu
       <div className="fhr-actions">
         {phase === "player-meld" && (
           <>
-            <button className="fhr-btn" disabled={!canMeld} onClick={() => { dispatch({ type: "meld", cardIds: selected } as FiveHundredRumAction); setSelected([]); }}>
+            <button data-testid="hint-target-five-hundred-rum-primary" className="fhr-btn" disabled={!canMeld} onClick={() => { dispatch({ type: "meld", cardIds: selected } as FiveHundredRumAction); setSelected([]); }}>
               Meld ({selected.length})
             </button>
             {selected.length === 1 && (

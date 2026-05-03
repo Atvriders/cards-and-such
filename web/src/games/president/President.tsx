@@ -111,7 +111,7 @@ export function President({
           </div>
 
           <div className="president-actions">
-            <button
+            <button data-testid="hint-target-president-primary"
               className="president-btn play-btn"
               onClick={playSelected}
               disabled={!canPlay}

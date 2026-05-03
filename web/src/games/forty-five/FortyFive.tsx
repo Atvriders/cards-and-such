@@ -46,7 +46,7 @@ export function FortyFive({ state, dispatch, onGameOver }: GameProps<FortyFiveSt
       <div className="forty-five-status">{message}</div>
       <div className="forty-five-player-area">
         <div className="forty-five-label">Your Hand</div>
-        <div className="forty-five-player-hand">
+        <div data-testid="hint-target-forty-five-hand" className="forty-five-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

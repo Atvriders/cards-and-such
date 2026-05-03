@@ -46,7 +46,7 @@ export function OmnibusHearts({ state, dispatch, onGameOver }: GameProps<Omnibus
       <div className="omnibus-hearts-status">{message}</div>
       <div className="omnibus-hearts-player-area">
         <div className="omnibus-hearts-label">Your Hand</div>
-        <div className="omnibus-hearts-player-hand">
+        <div data-testid="hint-target-omnibus-hearts-hand" className="omnibus-hearts-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

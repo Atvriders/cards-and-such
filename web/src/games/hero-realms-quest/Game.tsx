@@ -40,7 +40,7 @@ export function HeroRealmsQuestGame({ state, dispatch, onGameOver }: GameProps<H
         })}
       </div>
       {state.phase === "play" && (
-        <button className="hrh-btn primary" onClick={() => dispatch({ type: "playAll" } as HeroRealmsQuestAction)}>Play All</button>
+        <button data-testid="hint-target-hero-realms-quest-primary" className="hrh-btn primary" onClick={() => dispatch({ type: "playAll" } as HeroRealmsQuestAction)}>Play All</button>
       )}
       {state.phase === "buy" && (
         <>
@@ -59,7 +59,7 @@ export function HeroRealmsQuestGame({ state, dispatch, onGameOver }: GameProps<H
           </div>
           <div className="hrh-actions">
             {state.bought ? <div className="hrh-feedback">Bought {cardById(state.bought).name}</div> : <div className="hrh-feedback">Or pass on a buy</div>}
-            <button className="hrh-btn" onClick={() => dispatch({ type: "endTurn" } as HeroRealmsQuestAction)}>End Turn</button>
+            <button data-testid="hint-target-hero-realms-quest-next" className="hrh-btn" onClick={() => dispatch({ type: "endTurn" } as HeroRealmsQuestAction)}>End Turn</button>
           </div>
         </>
       )}

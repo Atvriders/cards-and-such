@@ -40,7 +40,7 @@ export function StarRealmsDuelGame({ state, dispatch, onGameOver }: GameProps<St
         })}
       </div>
       {state.phase === "play" && (
-        <button className="str-btn primary" onClick={() => dispatch({ type: "playAll" } as StarRealmsDuelAction)}>Play All</button>
+        <button data-testid="hint-target-star-realms-duel-primary" className="str-btn primary" onClick={() => dispatch({ type: "playAll" } as StarRealmsDuelAction)}>Play All</button>
       )}
       {state.phase === "buy" && (
         <>
@@ -59,7 +59,7 @@ export function StarRealmsDuelGame({ state, dispatch, onGameOver }: GameProps<St
           </div>
           <div className="str-actions">
             {state.bought ? <div className="str-feedback">Bought {cardById(state.bought).name}</div> : <div className="str-feedback">Or pass on a buy</div>}
-            <button className="str-btn" onClick={() => dispatch({ type: "endTurn" } as StarRealmsDuelAction)}>End Turn</button>
+            <button data-testid="hint-target-star-realms-duel-next" className="str-btn" onClick={() => dispatch({ type: "endTurn" } as StarRealmsDuelAction)}>End Turn</button>
           </div>
         </>
       )}

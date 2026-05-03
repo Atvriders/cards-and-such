@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BowerState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -19,5 +19,9 @@ export const bowerPlugin: GamePlugin<BowerState, BowerAction, typeof bowerSettin
   initialState: (seed: number, _settings: BowerSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: BowerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-bower-primary"]', pulses: 3 };
+  },
   component: Bower,
 };

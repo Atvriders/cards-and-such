@@ -25,7 +25,7 @@ export function CardTowerFallGame({ state, dispatch, onGameOver }: GameProps<Car
       {state.phase === "result" && (
         <>
           <div className="rg-result">{state.lastWin ? `Correct! +${state.lastPts}` : "Wrong — 0"}</div>
-          <button className="rg-btn alt" onClick={() => dispatch({ type:"next" } as CardTowerFallAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-card-tower-fall-next" className="rg-btn alt" onClick={() => dispatch({ type:"next" } as CardTowerFallAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

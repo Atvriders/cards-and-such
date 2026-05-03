@@ -22,12 +22,12 @@ export function WelcomeToDungeonGame({ state, dispatch, onGameOver }: GameProps<
         </>
       )}
       {state.phase === "drawing" && (
-        <button className="wtd-btn" onClick={() => dispatch({ type:"draw" } as WelcomeToDungeonAction)}>Draw</button>
+        <button data-testid="hint-target-welcome-to-dungeon-primary" className="wtd-btn" onClick={() => dispatch({ type:"draw" } as WelcomeToDungeonAction)}>Draw</button>
       )}
       {state.phase === "scored" && (
         <>
           <div className="wtd-result">+{state.lastPts} pts</div>
-          <button className="wtd-btn alt" onClick={() => dispatch({ type:"next" } as WelcomeToDungeonAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-welcome-to-dungeon-next" className="wtd-btn alt" onClick={() => dispatch({ type:"next" } as WelcomeToDungeonAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

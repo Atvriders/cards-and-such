@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CasinoState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,9 @@ Controls: Click a card in your hand to select it (highlighted in green). Click o
   initialState: (seed: number, settings: CasinoSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CasinoState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-casino-primary"]', pulses: 3 };
+  },
   component: Casino,
 };

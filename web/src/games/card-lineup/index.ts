@@ -25,5 +25,6 @@ Tip: before clicking, figure out which card belongs in position 1, then where th
   initialState,
   reducer,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: CardLineup,
 };

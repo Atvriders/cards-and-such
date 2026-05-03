@@ -24,7 +24,7 @@ export function PipPinchGame({ state, dispatch, onGameOver }: GameProps<PipPinch
           );
         })}
       </div>
-      <button className="pp-btn" onClick={() => dispatch({ type:"finish" } as PipPinchAction)}>Finish & Score</button>
+      <button data-testid="hint-target-pip-pinch-primary" className="pp-btn" onClick={() => dispatch({ type:"finish" } as PipPinchAction)}>Finish & Score</button>
     </div>
   );
 }

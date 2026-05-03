@@ -19,5 +19,9 @@ export const spotHeartsPlugin: GamePlugin<SpotHeartsState, SpotHeartsAction, typ
   initialState: (seed: number, _settings: SpotHeartsSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-spot-hearts-hand"]', pulses: 3 };
+      return null;
+    },
   component: SpotHearts,
 };

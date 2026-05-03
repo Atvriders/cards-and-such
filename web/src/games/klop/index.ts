@@ -37,5 +37,9 @@ Click cards to play. You must follow the led suit — legal plays are highlighte
   initialState: (seed: number, settings: KlopSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-klop-hand"]', pulses: 3 };
+      return null;
+    },
   component: Klop,
 };

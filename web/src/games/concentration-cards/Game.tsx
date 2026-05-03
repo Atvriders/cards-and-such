@@ -39,7 +39,7 @@ export function ConcentrationCardsGame({ state, dispatch, onGameOver }: GameProp
           if (state.revealed[i]) cls += " matched";
           else if (state.flipped.includes(i)) cls += " flipped";
           return (
-            <button key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as ConcentrationCardsAction)}>
+            <button data-testid={`hint-target-concentration-cards-card-${i}`} key={i} className={cls} disabled={open || state.flipped.length >= 2} onClick={() => dispatch({ type: "flip", index: i } as ConcentrationCardsAction)}>
               <span className="cncntrc-face">{open ? SYMBOL_FACES[v] : "?"}</span>
             </button>
           );

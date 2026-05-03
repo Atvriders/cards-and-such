@@ -46,7 +46,7 @@ export function SpoilFive({ state, dispatch, onGameOver }: GameProps<SpoilFiveSt
       <div className="spoil-five-status">{message}</div>
       <div className="spoil-five-player-area">
         <div className="spoil-five-label">Your Hand</div>
-        <div className="spoil-five-player-hand">
+        <div data-testid="hint-target-spoil-five-hand" className="spoil-five-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

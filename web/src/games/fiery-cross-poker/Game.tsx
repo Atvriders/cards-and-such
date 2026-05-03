@@ -25,8 +25,8 @@ export function FieryCrossPokerGame({ state, dispatch, onGameOver }: GameProps<F
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as FieryCrossPokerAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as FieryCrossPokerAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-fiery-cross-poker-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as FieryCrossPokerAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-fiery-cross-poker-next" className="g-btn" onClick={() => dispatch({ type: "next" } as FieryCrossPokerAction)}>Next Round</button>}
       </div>
     </div>
   );

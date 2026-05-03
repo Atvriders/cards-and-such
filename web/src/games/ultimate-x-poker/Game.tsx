@@ -25,8 +25,8 @@ export function UltimateXPoker({ state, dispatch, onGameOver }: GameProps<Ultima
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as UltimateXPokerAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as UltimateXPokerAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-ultimate-x-poker-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as UltimateXPokerAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-ultimate-x-poker-next" className="g-btn" onClick={() => dispatch({ type: "next" } as UltimateXPokerAction)}>Next Round</button>}
       </div>
     </div>
   );

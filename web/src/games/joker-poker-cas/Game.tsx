@@ -21,7 +21,7 @@ export function JokerPokerCasGame({ state, dispatch, onGameOver }: GameProps<Jok
       {state.phase === "ready" && <button data-testid="hint-target-joker-poker-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as JokerPokerCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as JokerPokerCasAction)}>Next</button>
+        <button data-testid="hint-target-joker-poker-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as JokerPokerCasAction)}>Next</button>
       </>}
     </div>
   );

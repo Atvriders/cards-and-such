@@ -18,5 +18,9 @@ The challenge: you only get six pinches, but the deal might include seven or mor
 Maximum score is 17 (12 lows + 5 bonus, if all dealt cards happen to be low). Press Finish & Score when satisfied.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PipPinchSettings),
-  reducer,isTerminal,component:PipPinchGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-pip-pinch-primary"]', pulses: 3 };
+    },component:PipPinchGame,
 };

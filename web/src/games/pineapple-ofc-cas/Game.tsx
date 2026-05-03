@@ -20,7 +20,7 @@ export function PineappleOfcCasGame({ state, dispatch, onGameOver }: GameProps<P
         <div className="dm-info">CPU:</div>
         <div className="dm-row">{state.cpu.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
         <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PineappleOfcCasAction)}>Next</button>
+        <button data-testid="hint-target-pineapple-ofc-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as PineappleOfcCasAction)}>Next</button>
       </>}
     </div>
   );

@@ -37,7 +37,7 @@ export function AlienCardBattle({ state, dispatch, onGameOver }: GameProps<Alien
 
       <div className="acb-hand">
         {state.playerHand.map((card, idx) => (
-          <button
+          <button data-testid="hint-target-alien-card-battle-primary"
             key={card.id}
             className={`acb-card${state.selectedIdx === idx ? " selected" : ""}`}
             onClick={() => dispatch({ type: "select", idx })}
@@ -54,7 +54,7 @@ export function AlienCardBattle({ state, dispatch, onGameOver }: GameProps<Alien
       </div>
 
       <div className="acb-controls">
-        <button
+        <button data-testid="hint-target-alien-card-battle-play"
           onClick={() => dispatch({ type: "play" })}
           disabled={state.selectedIdx === null || state.gameOver}
         >

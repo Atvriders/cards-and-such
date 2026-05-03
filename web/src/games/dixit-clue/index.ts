@@ -17,6 +17,11 @@ export const dixitCluePlugin: GamePlugin<DixitClueState, DixitClueAction, typeof
   initialState: (seed: number, s: S) => initialState(seed, s as DixitClueSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "ask") return { selector: '[data-testid="hint-target-dixit-clue-primary"]', pulses: 3 };
+      if (state.phase === "feedback") return { selector: '[data-testid="hint-target-dixit-clue-next"]', pulses: 3 };
+      return null;
+    },
   component: DixitClueGame,
 };
 

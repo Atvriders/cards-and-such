@@ -40,7 +40,7 @@ export function Samba({ state, dispatch, onGameOver }: GameProps<SambaState, Sam
         <div className="samba-pile">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0
-            ? <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as SambaAction)} />
+            ? <Card data-testid="hint-target-samba-primary" faceDown onClick={() => dispatch({ type: "draw-stock" } as SambaAction)} />
             : <div className="samba-card-back" style={{ opacity: 0.3 }} />}
         </div>
         <div className="samba-pile">
@@ -83,7 +83,7 @@ export function Samba({ state, dispatch, onGameOver }: GameProps<SambaState, Sam
       <div className="samba-actions">
         {phase === "player-meld" && (
           <>
-            <button className="samba-btn" disabled={!canMeld} onClick={() => { dispatch({ type: "meld", cardIds: selected } as SambaAction); setSelected([]); }}>
+            <button data-testid="hint-target-samba-primary" className="samba-btn" disabled={!canMeld} onClick={() => { dispatch({ type: "meld", cardIds: selected } as SambaAction); setSelected([]); }}>
               Meld ({selected.length})
             </button>
             {selected.length === 1 && (

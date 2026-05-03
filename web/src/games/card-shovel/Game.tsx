@@ -20,7 +20,7 @@ export function CardShovelGame({ state, dispatch, onGameOver }: GameProps<CardSh
       <div className={`cs-card${isRed ? " red" : ""}`}>{rankLabel(c.rank)}{SUIT_GLYPH[c.suit]}</div>
       <div className="cs-buckets">
         {SUITS.map(s => (
-          <button key={s} className={`cs-bucket${(s === "H" || s === "D") ? " red" : ""}`} onClick={() => dispatch({ type:"place", suit: s } as CardShovelAction)}>
+          <button data-testid="hint-target-card-shovel-primary" key={s} className={`cs-bucket${(s === "H" || s === "D") ? " red" : ""}`} onClick={() => dispatch({ type:"place", suit: s } as CardShovelAction)}>
             <div className="cs-bucket-glyph">{SUIT_GLYPH[s]}</div>
             <div className="cs-bucket-name">{SUIT_NAME[s]}</div>
             <div className="cs-bucket-count">{state.buckets[s]}</div>

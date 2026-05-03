@@ -25,8 +25,8 @@ export function ThreeCardGutsGame({ state, dispatch, onGameOver }: GameProps<Thr
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as ThreeCardGutsAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as ThreeCardGutsAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-three-card-guts-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as ThreeCardGutsAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-three-card-guts-next" className="g-btn" onClick={() => dispatch({ type: "next" } as ThreeCardGutsAction)}>Next Round</button>}
       </div>
     </div>
   );

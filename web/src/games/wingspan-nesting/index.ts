@@ -17,5 +17,10 @@ export const wingspanNestingPlugin: GamePlugin<WingspanNestingState, WingspanNes
   initialState: (seed: number, s: S) => initialState(seed, s as WingspanNestingSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "drafting") return { selector: '[data-testid="hint-target-wingspan-nesting-primary"]', pulses: 3 };
+      if (state.phase === "round-done") return { selector: '[data-testid="hint-target-wingspan-nesting-next"]', pulses: 3 };
+      return null;
+    },
   component: WingspanNestingGame,
 };

@@ -46,7 +46,7 @@ export function Preference({ state, dispatch, onGameOver }: GameProps<Preference
       <div className="preference-status">{message}</div>
       <div className="preference-player-area">
         <div className="preference-label">Your Hand</div>
-        <div className="preference-player-hand">
+        <div data-testid="hint-target-preference-hand" className="preference-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

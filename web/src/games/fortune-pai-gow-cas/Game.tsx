@@ -23,7 +23,7 @@ export function CasGame({ state, dispatch, onGameOver }: GameProps<CasState, Cas
       {state.phase === "ready" && <button data-testid="hint-target-fortune-pai-gow-cas-primary" className="fpg-c-btn" onClick={() => dispatch({ type: "play" } as CasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="fpg-c-result">{state.result}</div>
-        <button className="fpg-c-btn alt" onClick={() => dispatch({ type: "next" } as CasAction)}>Next</button>
+        <button data-testid="hint-target-fortune-pai-gow-cas-secondary" className="fpg-c-btn alt" onClick={() => dispatch({ type: "next" } as CasAction)}>Next</button>
       </>}
     </div>
   );

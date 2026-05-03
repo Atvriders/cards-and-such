@@ -25,8 +25,8 @@ export function FollowQueenRank({ state, dispatch, onGameOver }: GameProps<Follo
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as FollowQueenRankAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as FollowQueenRankAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-follow-queen-rank-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as FollowQueenRankAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-follow-queen-rank-next" className="g-btn" onClick={() => dispatch({ type: "next" } as FollowQueenRankAction)}>Next Round</button>}
       </div>
     </div>
   );

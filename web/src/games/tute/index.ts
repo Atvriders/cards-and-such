@@ -34,5 +34,9 @@ Strategy: Track which high-value cards (Ace, 3) have been played. Conserve your 
   initialState: (seed: number, _settings: TuteSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-tute-hand"]', pulses: 3 };
+      return null;
+    },
   component: Tute,
 };

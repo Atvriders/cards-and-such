@@ -20,7 +20,7 @@ export function AndarBaharCasGame({ state, dispatch, onGameOver }: GameProps<And
       </>}
       {state.phase === "scored" && <>
         <div className="abh-c-result">{state.result}</div>
-        <button className="abh-c-btn alt" onClick={() => dispatch({ type: "next" } as AndarBaharCasAction)}>Next</button>
+        <button data-testid="hint-target-andar-bahar-cas-secondary" className="abh-c-btn alt" onClick={() => dispatch({ type: "next" } as AndarBaharCasAction)}>Next</button>
       </>}
     </div>
   );

@@ -26,5 +26,6 @@ Final score = fight points + gold collected. Good luck, crawler!`,
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: CardCrawlerState, action: CardCrawlerAction) => CardCrawlerState,
   isTerminal,
+  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
   component: CardCrawler,
 } as unknown as GamePlugin;

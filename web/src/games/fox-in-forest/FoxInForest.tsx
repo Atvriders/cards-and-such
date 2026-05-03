@@ -46,7 +46,7 @@ export function FoxInForest({ state, dispatch, onGameOver }: GameProps<FoxInFore
       <div className="fox-in-forest-status">{message}</div>
       <div className="fox-in-forest-player-area">
         <div className="fox-in-forest-label">Your Hand</div>
-        <div className="fox-in-forest-player-hand">
+        <div data-testid="hint-target-fox-in-forest-hand" className="fox-in-forest-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

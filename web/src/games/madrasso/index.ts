@@ -19,5 +19,9 @@ export const madrassoPlugin: GamePlugin<MadrassoState, MadrassoAction, typeof ma
   initialState: (seed: number, _settings: MadrassoSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-madrasso-hand"]', pulses: 3 };
+      return null;
+    },
   component: Madrasso,
 };

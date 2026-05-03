@@ -75,7 +75,7 @@ export function Sheepshead({ state, dispatch, onGameOver }: GameProps<Sheepshead
         <div className="sheepshead-player-label">
           Your Hand ({hands[0]!.length} cards) — You are the Picker (solo vs 4 bots)
         </div>
-        <div className="sheepshead-player-hand">
+        <div data-testid="hint-target-sheepshead-hand" className="sheepshead-player-hand">
           {hands[0]!
             .slice()
             .sort((a, b) => {

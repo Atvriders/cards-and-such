@@ -25,8 +25,8 @@ export function WoolworthPokerGame({ state, dispatch, onGameOver }: GameProps<Wo
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as WoolworthPokerAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as WoolworthPokerAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-woolworth-poker-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as WoolworthPokerAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-woolworth-poker-next" className="g-btn" onClick={() => dispatch({ type: "next" } as WoolworthPokerAction)}>Next Round</button>}
       </div>
     </div>
   );

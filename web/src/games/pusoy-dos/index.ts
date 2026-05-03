@@ -34,5 +34,9 @@ Controls: click cards to select, then press Play. Press Pass to skip your turn.`
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-pusoy-dos-play"]', pulses: 3 };
+      return null;
+    },
   component: PusoyDosGame,
 };

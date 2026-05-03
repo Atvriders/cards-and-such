@@ -25,8 +25,8 @@ export function FiveCardStudClassicGame({ state, dispatch, onGameOver }: GamePro
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as FiveCardStudClassicAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as FiveCardStudClassicAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-five-card-stud-classic-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as FiveCardStudClassicAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-five-card-stud-classic-next" className="g-btn" onClick={() => dispatch({ type: "next" } as FiveCardStudClassicAction)}>Next Round</button>}
       </div>
     </div>
   );

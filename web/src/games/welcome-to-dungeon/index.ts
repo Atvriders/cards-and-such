@@ -16,5 +16,10 @@ export const welcomeToDungeonPlugin: GamePlugin<WelcomeToDungeonState, WelcomeTo
   initialState:(seed:number,s:S)=>initialState(seed,s as WelcomeToDungeonSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "drawing") return { selector: '[data-testid="hint-target-welcome-to-dungeon-primary"]', pulses: 3 };
+      if (state.phase === "scored") return { selector: '[data-testid="hint-target-welcome-to-dungeon-next"]', pulses: 3 };
+      return null;
+    },
   component:WelcomeToDungeonGame,
 };

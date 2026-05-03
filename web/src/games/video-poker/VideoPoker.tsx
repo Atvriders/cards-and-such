@@ -85,12 +85,11 @@ export function VideoPoker({
 
       <div className="vp-actions">
         {(isDealPhase || isShownPhase) && !terminal && (
-          <button className="primary" onClick={() => dis({ type: "deal" })} disabled={credits < parseInt(settings.betSize, 10)}>
+          <button data-testid="hint-target-video-poker-primary" className="primary" onClick={() => dis({ type: "deal" })} disabled={credits < parseInt(settings.betSize, 10)}>
             Deal
           </button>
         )}
-        {isHoldPhase && (
-          <button className="primary" onClick={() => dis({ type: "draw" })}>
+        {isHoldPhase && (<button data-testid="hint-target-video-poker-primary" className="primary" onClick={() => dis({ type: "draw" })}>
             Draw
           </button>
         )}

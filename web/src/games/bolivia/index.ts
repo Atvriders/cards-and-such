@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BoliviaState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -47,5 +47,9 @@ Controls: Draw from stock or click discard. Select cards to meld, then click Mel
   initialState: (seed: number, s: BoliviaSettingsRaw) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: BoliviaState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-bolivia-primary"]', pulses: 3 };
+  },
   component: Bolivia,
 };

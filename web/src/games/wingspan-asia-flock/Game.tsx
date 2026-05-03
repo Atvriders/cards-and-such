@@ -20,7 +20,7 @@ export function WingspanAsiaFlockGame({ state, dispatch, onGameOver }: GameProps
           <div className="dr-prompt">Pick a card:</div>
           <div className="dr-offer">
             {state.offer.map((c, i) => (
-              <button key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as WingspanAsiaFlockAction)}>
+              <button data-testid="hint-target-wingspan-asia-flock-primary" key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as WingspanAsiaFlockAction)}>
                 <div className="dr-rank">{rankName(c.rank)}</div>
                 <div className="dr-suit">{suitName(c.suit)}</div>
               </button>
@@ -31,7 +31,7 @@ export function WingspanAsiaFlockGame({ state, dispatch, onGameOver }: GameProps
       {state.phase === "round-done" && (
         <div className="dr-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as WingspanAsiaFlockAction)}>Next Round</button>
+          <button data-testid="hint-target-wingspan-asia-flock-next" onClick={() => dispatch({ type: "next" } as WingspanAsiaFlockAction)}>Next Round</button>
         </div>
       )}
       {state.phase === "done" && (

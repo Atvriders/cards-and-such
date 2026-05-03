@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { HoldemNoLimitState, HoldemNoLimitAction, HoldemNoLimitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HoldemNoLimitGame } from "./Game.js";
@@ -33,6 +33,7 @@ export const holdemNoLimitPlugin: GamePlugin<HoldemNoLimitState, HoldemNoLimitAc
   initialState: (seed: number, s: S) => initialState(seed, s as HoldemNoLimitSettings),
   reducer,
   isTerminal,
+  hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-holdem-no-limit-primary"]', pulses: 3 }),
   component: HoldemNoLimitGame,
   themeOverrides: {
     feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",

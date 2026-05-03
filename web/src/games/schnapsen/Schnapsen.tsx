@@ -57,7 +57,7 @@ export function Schnapsen({ state, dispatch, onGameOver }: GameProps<SchnapsenSt
           <div className="schnapsen-label">Your hand — click to play:</div>
           <div className="schnapsen-hand">
             {playerHand.map(card => (
-              <div key={card.id}
+              <div data-testid="hint-target-schnapsen-primary" key={card.id}
                 className={`schnapsen-card${isTrump(card, trumpSuit) ? " trump" : ""}`}
                 style={{ color: isRed(card.suit) ? "#c62828" : "#333" }}
                 onClick={() => dispatch({ type: "play", cardId: card.id } as SchnapsenAction)}

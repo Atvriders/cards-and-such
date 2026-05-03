@@ -41,5 +41,10 @@ Score equals your final bankroll at session end.`,
   initialState: (seed: number, settings: DoubleBonusSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "betting" || state.phase === "settled") return { selector: '[data-testid="hint-target-double-bonus-poker-deal"]', pulses: 3 };
+      if (state.phase === "draw") return { selector: '[data-testid="hint-target-double-bonus-poker-draw"]', pulses: 3 };
+      return null;
+    },
   component: DoubleBonusPoker,
 };

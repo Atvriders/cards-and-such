@@ -38,5 +38,9 @@ Click a card to play it. Legal cards are highlighted.`,
   initialState: (seed: number, settings: FortyFivesSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-forty-fives-hand"]', pulses: 3 };
+      return null;
+    },
   component: FortyFives,
 };

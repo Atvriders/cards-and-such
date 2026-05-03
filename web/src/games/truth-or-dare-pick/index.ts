@@ -17,6 +17,11 @@ export const truthOrDarePickPlugin: GamePlugin<TruthOrDarePickState, TruthOrDare
   initialState: (seed: number, s: S) => initialState(seed, s as TruthOrDarePickSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "ask") return { selector: '[data-testid="hint-target-truth-or-dare-pick-primary"]', pulses: 3 };
+      if (state.phase === "feedback") return { selector: '[data-testid="hint-target-truth-or-dare-pick-next"]', pulses: 3 };
+      return null;
+    },
   component: TruthOrDarePickGame,
 };
 

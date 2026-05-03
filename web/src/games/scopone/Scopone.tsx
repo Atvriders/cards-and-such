@@ -46,7 +46,7 @@ export function Scopone({ state, dispatch, onGameOver }: GameProps<ScoponeState,
       <div className="scopone-status">{message}</div>
       <div className="scopone-player-area">
         <div className="scopone-label">Your Hand</div>
-        <div className="scopone-player-hand">
+        <div data-testid="hint-target-scopone-hand" className="scopone-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

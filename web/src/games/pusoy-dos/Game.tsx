@@ -60,7 +60,7 @@ export function PusoyDosGame({ state, dispatch, onGameOver }: GameProps<PusoyDos
             ))}
           </div>
           <div className="pusoy-actions">
-            <button className="pusoy-btn play" disabled={!canPlay}
+            <button data-testid="hint-target-pusoy-dos-play" className="pusoy-btn play" disabled={!canPlay}
               onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as PusoyDosAction); setSelected(new Set()); }}>
               Play ({selected.size})
             </button>

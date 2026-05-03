@@ -69,7 +69,7 @@ export function Tute({
       {!done && (
         <>
           <div className="tute-label">Your hand — click to play:</div>
-          <div className="tute-hand">
+          <div data-testid="hint-target-tute-hand" className="tute-hand">
             {playerHand.map(card => {
               const legal = legalIds.has(card.id);
               return (

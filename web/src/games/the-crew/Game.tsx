@@ -78,7 +78,7 @@ export function TheCrewGame({ state, dispatch }: GameProps<CrewState, Record<str
 
       <div className="crew-section">
         <h3>Your Hand {state.turnInTrick === 0 ? "(your turn — click twice to play)" : "(bots playing...)"}</h3>
-        <div className="crew-hand">
+        <div className="crew-hand" data-testid="hint-target-the-crew-primary">
           {playerHand.map(card => (
             <Card
               key={card.id}

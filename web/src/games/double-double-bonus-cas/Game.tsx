@@ -21,7 +21,7 @@ export function DoubleDoubleBonusCasGame({ state, dispatch, onGameOver }: GamePr
       {state.phase === "ready" && <button data-testid="hint-target-double-double-bonus-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as DoubleDoubleBonusCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DoubleDoubleBonusCasAction)}>Next</button>
+        <button data-testid="hint-target-double-double-bonus-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as DoubleDoubleBonusCasAction)}>Next</button>
       </>}
     </div>
   );

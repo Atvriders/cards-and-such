@@ -21,7 +21,7 @@ export function SuperTimesPayCasGame({ state, dispatch, onGameOver }: GameProps<
       {state.phase === "ready" && <button data-testid="hint-target-super-times-pay-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as SuperTimesPayCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as SuperTimesPayCasAction)}>Next</button>
+        <button data-testid="hint-target-super-times-pay-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as SuperTimesPayCasAction)}>Next</button>
       </>}
     </div>
   );

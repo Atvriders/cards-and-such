@@ -25,8 +25,8 @@ export function ProgressiveKnockoutTournamentGame({ state, dispatch, onGameOver 
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as ProgressiveKnockoutTournamentAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as ProgressiveKnockoutTournamentAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-progressive-knockout-tournament-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as ProgressiveKnockoutTournamentAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-progressive-knockout-tournament-next" className="g-btn" onClick={() => dispatch({ type: "next" } as ProgressiveKnockoutTournamentAction)}>Next Round</button>}
       </div>
     </div>
   );

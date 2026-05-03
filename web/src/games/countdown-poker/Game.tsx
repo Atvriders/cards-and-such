@@ -25,8 +25,8 @@ export function CountdownPokerGame({ state, dispatch, onGameOver }: GameProps<Co
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as CountdownPokerAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as CountdownPokerAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-countdown-poker-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as CountdownPokerAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-countdown-poker-next" className="g-btn" onClick={() => dispatch({ type: "next" } as CountdownPokerAction)}>Next Round</button>}
       </div>
     </div>
   );

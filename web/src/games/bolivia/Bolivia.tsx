@@ -40,7 +40,7 @@ export function Bolivia({ state, dispatch, onGameOver }: GameProps<BoliviaState,
         <div className="bolivia-pile">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0
-            ? <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as BoliviaAction)} />
+            ? <Card data-testid="hint-target-bolivia-primary" faceDown onClick={() => dispatch({ type: "draw-stock" } as BoliviaAction)} />
             : <div className="bolivia-card-back" style={{ opacity: 0.3 }} />}
         </div>
         <div className="bolivia-pile">

@@ -30,7 +30,7 @@ export function EzBaccaratCasGame({ state, dispatch, onGameOver }: GameProps<EzB
           <div className="ez-b-c-info">Banker ({state.bTotal}):</div>
           <div className="ez-b-c-row">{state.banker.map((c, i) => <div key={i} className={`ez-b-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
           <div className="ez-b-c-result">{state.result}</div>
-          <button className="ez-b-c-btn alt" onClick={() => dispatch({ type: "next" } as EzBaccaratCasAction)}>Next</button>
+          <button data-testid="hint-target-ez-baccarat-cas-secondary" className="ez-b-c-btn alt" onClick={() => dispatch({ type: "next" } as EzBaccaratCasAction)}>Next</button>
         </>
       )}
     </div>

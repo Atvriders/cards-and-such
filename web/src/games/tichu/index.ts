@@ -34,5 +34,9 @@ Strategy: coordinate with your partner. Let a teammate win the lead when possibl
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-tichu-play"]', pulses: 3 };
+      return null;
+    },
   component: TichuGame,
 };

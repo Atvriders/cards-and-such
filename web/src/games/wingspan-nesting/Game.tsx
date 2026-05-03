@@ -20,7 +20,7 @@ export function WingspanNestingGame({ state, dispatch, onGameOver }: GameProps<W
           <div className="dr-prompt">Pick a card:</div>
           <div className="dr-offer">
             {state.offer.map((c, i) => (
-              <button key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as WingspanNestingAction)}>
+              <button data-testid="hint-target-wingspan-nesting-primary" key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as WingspanNestingAction)}>
                 <div className="dr-rank">{rankName(c.rank)}</div>
                 <div className="dr-suit">{suitName(c.suit)}</div>
               </button>
@@ -31,7 +31,7 @@ export function WingspanNestingGame({ state, dispatch, onGameOver }: GameProps<W
       {state.phase === "round-done" && (
         <div className="dr-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as WingspanNestingAction)}>Next Round</button>
+          <button data-testid="hint-target-wingspan-nesting-next" onClick={() => dispatch({ type: "next" } as WingspanNestingAction)}>Next Round</button>
         </div>
       )}
       {state.phase === "done" && (

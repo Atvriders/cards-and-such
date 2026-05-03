@@ -61,7 +61,7 @@ export function TienLenGame({ state, dispatch, onGameOver }: GameProps<TienLenSt
             ))}
           </div>
           <div className="tienlen-actions">
-            <button className="tienlen-btn play" disabled={!canPlay}
+            <button data-testid="hint-target-tien-len-play" className="tienlen-btn play" disabled={!canPlay}
               onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as TienLenAction); setSelected(new Set()); }}>
               Play ({selected.size})
             </button>

@@ -21,7 +21,7 @@ export function LetItRideCasGame({ state, dispatch, onGameOver }: GameProps<LetI
       {state.phase === "ready" && <button data-testid="hint-target-let-it-ride-cas-primary" className="lir-c-btn" onClick={() => dispatch({ type: "play" } as LetItRideCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="lir-c-result">{state.result}</div>
-        <button className="lir-c-btn alt" onClick={() => dispatch({ type: "next" } as LetItRideCasAction)}>Next</button>
+        <button data-testid="hint-target-let-it-ride-cas-secondary" className="lir-c-btn alt" onClick={() => dispatch({ type: "next" } as LetItRideCasAction)}>Next</button>
       </>}
     </div>
   );

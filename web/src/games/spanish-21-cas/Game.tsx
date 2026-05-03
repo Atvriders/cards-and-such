@@ -31,7 +31,7 @@ export function Spanish21CasGame({ state, dispatch, onGameOver }: GameProps<Span
       </div>}
       {state.phase === "scored" && <>
         <div className="sp21-c-result">{state.result} — +{state.pts}</div>
-        <button className="sp21-c-btn alt" onClick={() => dispatch({ type: "next" } as Spanish21CasAction)}>Next</button>
+        <button data-testid="hint-target-spanish-21-cas-secondary" className="sp21-c-btn alt" onClick={() => dispatch({ type: "next" } as Spanish21CasAction)}>Next</button>
       </>}
     </div>
   );

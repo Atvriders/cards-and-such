@@ -6,7 +6,12 @@ import { CasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-const hint = (state: CasState): HintTarget | null => (state.phase === "ready" ? { selector: ".dm-btn", pulses: 3 } : null);
+const hint = (state: CasState): HintTarget | null => {
+  if (isTerminal(state)) return null;
+  if (state.phase === "ready") return { selector: '[data-testid="hint-target-heads-up-bj-primary"]', pulses: 3 };
+  if (state.phase === "scored") return { selector: '[data-testid="hint-target-heads-up-bj-secondary"]', pulses: 3 };
+  return null;
+};
 
 export const headsUpBjPlugin: GamePlugin<CasState, CasAction, typeof settings> = {
   id: "heads-up-bj",
@@ -17,5 +22,5 @@ export const headsUpBjPlugin: GamePlugin<CasState, CasAction, typeof settings> =
   howToPlay: "Heads-Up Blackjack is one-on-one Blackjack where you and the CPU each play a hand against a shared dealer hand — first to bust loses, otherwise the closest-to-twenty-one wins.\n\nIn this single-player adaptation you play twelve rounds. Press Play each round to deal two cards to you, two to the CPU, and a dealer up-card. The engine resolves all hands using standard Blackjack rules (dealer hits soft 17). Beating both the dealer and the CPU pays twelve; beating only one pays six; pushing pays four; busting or losing both pays zero. Press Next after each result.\n\nExpected score across twelve rounds is fifty to one hundred. Heads-Up Blackjack adds a competitive layer to standard Blackjack — even when you bust the CPU might still beat the dealer, denying you any payout. The game is popular in casino tournaments where multiple players race against a single dealer. Aim for the consistent 17-19 totals that beat both the dealer and a careless CPU.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CasSettings),
-  reducer, isTerminal, hint, component: CasGame,
+  reducer, isTerminal, hint: hint, component: CasGame,
 };

@@ -25,8 +25,8 @@ export function CincinnatiLamebrains({ state, dispatch, onGameOver }: GameProps<
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as CincinnatiLamebrainsAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as CincinnatiLamebrainsAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-cincinnati-lamebrains-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as CincinnatiLamebrainsAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-cincinnati-lamebrains-next" className="g-btn" onClick={() => dispatch({ type: "next" } as CincinnatiLamebrainsAction)}>Next Round</button>}
       </div>
     </div>
   );

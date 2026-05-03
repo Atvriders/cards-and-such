@@ -57,7 +57,7 @@ export function ContinentalRummy({ state, dispatch, onGameOver }: GameProps<Cont
         <div className="continental-pile">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0
-            ? <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as ContinentalRummyAction)} />
+            ? <Card data-testid="hint-target-continental-rummy-primary" faceDown onClick={() => dispatch({ type: "draw-stock" } as ContinentalRummyAction)} />
             : <div className="continental-card-back" style={{ opacity: 0.3 }} />}
         </div>
         <div className="continental-pile">
@@ -110,7 +110,7 @@ export function ContinentalRummy({ state, dispatch, onGameOver }: GameProps<Cont
             <button className="continental-btn" disabled={selected.length === 0} onClick={addGroup}>
               Add Group ({selected.length} cards)
             </button>
-            <button className="continental-btn" disabled={!contractMet} onClick={() => { dispatch({ type: "go-out", groups } as ContinentalRummyAction); setGroups([]); }}>
+            <button data-testid="hint-target-continental-rummy-primary" className="continental-btn" disabled={!contractMet} onClick={() => { dispatch({ type: "go-out", groups } as ContinentalRummyAction); setGroups([]); }}>
               Go Out!
             </button>
             {selected.length === 1 && (

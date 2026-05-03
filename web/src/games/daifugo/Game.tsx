@@ -78,7 +78,7 @@ export function DaifugoGame({ state, dispatch, onGameOver }: GameProps<DaifugoSt
             ))}
           </div>
           <div className="daifugo-actions">
-            <button className="daifugo-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as DaifugoAction); setSelected(new Set()); }} disabled={!canPlay}>
+            <button data-testid="hint-target-daifugo-play" className="daifugo-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as DaifugoAction); setSelected(new Set()); }} disabled={!canPlay}>
               Play ({selected.size})
             </button>
             <button className="daifugo-btn pass" onClick={() => { dispatch({ type: "pass" } as DaifugoAction); setSelected(new Set()); }} disabled={!canPass}>

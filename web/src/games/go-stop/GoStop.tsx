@@ -46,7 +46,7 @@ export function GoStop({ state, dispatch, onGameOver }: GameProps<GoStopState, o
       <div className="go-stop-status">{message}</div>
       <div className="go-stop-player-area">
         <div className="go-stop-label">Your Hand</div>
-        <div className="go-stop-player-hand">
+        <div data-testid="hint-target-go-stop-hand" className="go-stop-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

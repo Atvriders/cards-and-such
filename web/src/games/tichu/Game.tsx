@@ -82,7 +82,7 @@ export function TichuGame({ state, dispatch, onGameOver }: GameProps<TichuState,
             ))}
           </div>
           <div className="tichu-actions">
-            <button className="tichu-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as TichuAction); setSelected(new Set()); }} disabled={!canPlay}>
+            <button data-testid="hint-target-tichu-play" className="tichu-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as TichuAction); setSelected(new Set()); }} disabled={!canPlay}>
               Play ({selected.size})
             </button>
             <button className="tichu-btn pass" onClick={() => { dispatch({ type: "pass" } as TichuAction); setSelected(new Set()); }} disabled={!canPass}>

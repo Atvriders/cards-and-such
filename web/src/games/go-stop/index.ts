@@ -19,5 +19,9 @@ export const goStopCardPlugin: GamePlugin<GoStopState, GoStopAction, typeof goSt
   initialState: (seed: number, _settings: GoStopSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-go-stop-hand"]', pulses: 3 };
+      return null;
+    },
   component: GoStop,
 };

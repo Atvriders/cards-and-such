@@ -39,5 +39,9 @@ Controls: Click a highlighted card to play it. Your trump cards (clubs, queens, 
   initialState: (seed: number, settings: SheepsheadSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-sheepshead-hand"]', pulses: 3 };
+      return null;
+    },
   component: Sheepshead,
 };

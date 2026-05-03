@@ -25,7 +25,7 @@ export function CardRouletteGame({ state, dispatch, onGameOver }: GameProps<Card
       {state.phase === "result" && (
         <>
           <div className="rg-result">{state.lastWin ? `Correct! +${state.lastPts}` : "Wrong — 0"}</div>
-          <button className="rg-btn alt" onClick={() => dispatch({ type:"next" } as CardRouletteAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-card-roulette-next" className="rg-btn alt" onClick={() => dispatch({ type:"next" } as CardRouletteAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

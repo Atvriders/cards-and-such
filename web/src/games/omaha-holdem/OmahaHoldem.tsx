@@ -82,7 +82,7 @@ export function OmahaHoldem({
 
       <div className="oh-actions">
         {(phase === "waiting" || phase === "showdown") && !terminal && (
-          <button className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
+          <button data-testid="hint-target-omaha-holdem-primary" className="btn-deal" onClick={() => dis({ type: "deal" })}>Deal Hand</button>
         )}
         {isActive && playerTurn && (
           <>

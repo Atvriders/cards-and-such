@@ -19,5 +19,9 @@ export const foxInForestPlugin: GamePlugin<FoxInForestState, FoxInForestAction, 
   initialState: (seed: number, _settings: FoxInForestSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-fox-in-forest-hand"]', pulses: 3 };
+      return null;
+    },
   component: FoxInForest,
 };

@@ -93,7 +93,7 @@ export function MiniPokerGame({ state, dispatch, onGameOver }: GameProps<MiniPok
 
       <div className="pokermini-actions">
         {state.phase === "ante" && (
-          <button className="pokermini-btn primary" onClick={() => (dispatch as (a: MiniPokerAction) => void)({ type: "deal" })}>
+          <button data-testid="hint-target-mini-poker-primary" className="pokermini-btn primary" onClick={() => (dispatch as (a: MiniPokerAction) => void)({ type: "deal" })}>
             Ante ${ANTE} & Deal
           </button>
         )}

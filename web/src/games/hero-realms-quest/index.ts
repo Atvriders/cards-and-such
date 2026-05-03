@@ -16,5 +16,10 @@ export const heroRealmsQuestPlugin: GamePlugin<HeroRealmsQuestState, HeroRealmsQ
   initialState:(seed:number,s:S)=>initialState(seed,s as HeroRealmsQuestSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "play") return { selector: '[data-testid="hint-target-hero-realms-quest-primary"]', pulses: 3 };
+      if (state.phase === "buy") return { selector: '[data-testid="hint-target-hero-realms-quest-next"]', pulses: 3 };
+      return null;
+    },
   component:HeroRealmsQuestGame,
 };

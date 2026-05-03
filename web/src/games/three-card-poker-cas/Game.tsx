@@ -21,7 +21,7 @@ export function ThreeCardPokerCasGame({ state, dispatch, onGameOver }: GameProps
       {state.phase === "ready" && <button data-testid="hint-target-three-card-poker-cas-primary" className="tcp-c-btn" onClick={() => dispatch({ type: "play" } as ThreeCardPokerCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="tcp-c-result">{state.result}</div>
-        <button className="tcp-c-btn alt" onClick={() => dispatch({ type: "next" } as ThreeCardPokerCasAction)}>Next</button>
+        <button data-testid="hint-target-three-card-poker-cas-secondary" className="tcp-c-btn alt" onClick={() => dispatch({ type: "next" } as ThreeCardPokerCasAction)}>Next</button>
       </>}
     </div>
   );

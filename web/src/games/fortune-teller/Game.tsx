@@ -55,7 +55,7 @@ export function FortuneTeller({
       )}
 
       {!state.gameOver && (
-        <button className="ft-draw-btn" onClick={() => dispatch({ type: "draw" } as FortuneTellerAction)}>
+        <button data-testid="hint-target-fortune-teller-primary" className="ft-draw-btn" onClick={() => dispatch({ type: "draw" } as FortuneTellerAction)}>
           {card ? "Draw Next Card" : "Draw Your Fortune"}
         </button>
       )}
@@ -64,7 +64,7 @@ export function FortuneTeller({
         <div className="ft-game-over">
           <div>All fortunes revealed!</div>
           <div className="ft-score">Score: {terminal?.score}</div>
-          <button className="ft-draw-btn" onClick={() => dispatch({ type: "reset" } as FortuneTellerAction)}>
+          <button data-testid="hint-target-fortune-teller-reset" className="ft-draw-btn" onClick={() => dispatch({ type: "reset" } as FortuneTellerAction)}>
             New Reading
           </button>
         </div>

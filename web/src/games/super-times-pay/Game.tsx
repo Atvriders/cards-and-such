@@ -25,8 +25,8 @@ export function SuperTimesPay({ state, dispatch, onGameOver }: GameProps<SuperTi
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as SuperTimesPayAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as SuperTimesPayAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-super-times-pay-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as SuperTimesPayAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-super-times-pay-next" className="g-btn" onClick={() => dispatch({ type: "next" } as SuperTimesPayAction)}>Next Round</button>}
       </div>
     </div>
   );

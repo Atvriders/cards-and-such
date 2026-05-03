@@ -38,5 +38,9 @@ Winning: first to shed all cards scores 100. 2nd = 60, 3rd = 30, last = 0.`,
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-zheng-shangyou-play"]', pulses: 3 };
+      return null;
+    },
   component: ZhengGame,
 };

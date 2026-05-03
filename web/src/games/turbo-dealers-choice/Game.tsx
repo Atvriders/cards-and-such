@@ -25,8 +25,8 @@ export function TurboDealersChoiceGame({ state, dispatch, onGameOver }: GameProp
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as TurboDealersChoiceAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as TurboDealersChoiceAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-turbo-dealers-choice-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as TurboDealersChoiceAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-turbo-dealers-choice-next" className="g-btn" onClick={() => dispatch({ type: "next" } as TurboDealersChoiceAction)}>Next Round</button>}
       </div>
     </div>
   );

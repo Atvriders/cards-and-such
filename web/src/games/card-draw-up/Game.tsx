@@ -18,10 +18,10 @@ export function CardDrawUp({ state, dispatch, onGameOver }: GameProps<CardDrawUp
       {state.phase === "result" && <p className="ctf-msg" style={{color:state.bust?"#e74c3c":"#27ae60"}}>{state.bust ? `Bust! (${state.total}) — 0 pts` : `Stopped at ${state.total} — +${state.lastGain} pts`}</p>}
       <div className="ctf-actions">
         {state.phase === "drawing" && <>
-          <button className="ctf-btn" onClick={()=>dispatch({type:"draw"} as CardDrawUpAction)}>Draw</button>
+          <button data-testid="hint-target-card-draw-up-primary" className="ctf-btn" onClick={()=>dispatch({type:"draw"} as CardDrawUpAction)}>Draw</button>
           {state.drawn.length > 0 && <button className="ctf-btn" style={{background:"#27ae60"}} onClick={()=>dispatch({type:"stop"} as CardDrawUpAction)}>Stop</button>}
         </>}
-        {state.phase === "result" && <button className="ctf-btn" onClick={()=>dispatch({type:"next"} as CardDrawUpAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
+        {state.phase === "result" && <button data-testid="hint-target-card-draw-up-next" className="ctf-btn" onClick={()=>dispatch({type:"next"} as CardDrawUpAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
       </div>
     </div>
   );

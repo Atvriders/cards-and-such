@@ -22,10 +22,10 @@ export function FaceCollectorGame({ state, dispatch, onGameOver }: GameProps<Fac
         {state.draws.map((c, i) => <div key={i} className={`col-card ${isRed(c) ? "red" : "black"} ${state.hits[i] ? "hit" : ""}`}>{cardName(c)}</div>)}
       </div>
       {remaining > 0 && (
-        <button className="col-btn" onClick={() => dispatch({ type:"draw" } as FaceCollectorAction)}>Draw ({remaining} left)</button>
+        <button data-testid="hint-target-face-collector-draw" className="col-btn" onClick={() => dispatch({ type:"draw" } as FaceCollectorAction)}>Draw ({remaining} left)</button>
       )}
       {remaining === 0 && (
-        <button className="col-btn alt" onClick={() => dispatch({ type:"next" } as FaceCollectorAction)}>{state.round + 1 >= ROUNDS ? "Finish" : "Next Round"}</button>
+        <button data-testid="hint-target-face-collector-next" className="col-btn alt" onClick={() => dispatch({ type:"next" } as FaceCollectorAction)}>{state.round + 1 >= ROUNDS ? "Finish" : "Next Round"}</button>
       )}
     </div>
   );

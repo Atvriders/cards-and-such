@@ -21,18 +21,18 @@ export function CardStackStressGame({ state, dispatch, onGameOver }: GameProps<C
         <div className={`cs-card big ${isRed(state.current) ? "red" : "black"}`}>{cardName(state.current)}</div>
       )}
       {state.phase === "playing" && state.current === null && (
-        <button className="cs-btn alt" onClick={() => dispatch({ type: "draw" } as CardStackStressAction)}>Draw</button>
+        <button data-testid="hint-target-card-stack-stress-draw" className="cs-btn alt" onClick={() => dispatch({ type: "draw" } as CardStackStressAction)}>Draw</button>
       )}
       {state.phase === "playing" && state.current !== null && (
         <div className="cs-row">
-          <button className="cs-btn" onClick={() => dispatch({ type: "stack" } as CardStackStressAction)}>Stack</button>
+          <button data-testid="hint-target-card-stack-stress-stack" className="cs-btn" onClick={() => dispatch({ type: "stack" } as CardStackStressAction)}>Stack</button>
           <button className="cs-btn alt" onClick={() => dispatch({ type: "pass" } as CardStackStressAction)}>Pass</button>
         </div>
       )}
       {state.phase === "lost" && (
         <>
           <div className="cs-feedback no">Wrong! Stack reset.</div>
-          <button className="cs-btn alt" onClick={() => dispatch({ type: "next" } as CardStackStressAction)}>Try Again</button>
+          <button className="cs-btn alt" data-testid="hint-target-card-stack-stress-next" onClick={() => dispatch({ type: "next" } as CardStackStressAction)}>Try Again</button>
         </>
       )}
       {state.phase === "won" && (

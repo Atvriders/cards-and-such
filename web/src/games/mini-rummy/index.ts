@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiniRummyState, MiniRummyAction, MiniRummySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -16,5 +16,5 @@ Example: a hand with three 7s and a four-card run of hearts scores 20 + 20 + 10 
 There are six rounds. The expected per-round score is around 5-15 points; getting any meld at all in a 7-card hand is uncommon, so most runs total 30-80 points across all six rounds. Excellent runs above 100 points need real luck. There are no choices to agonize over — just deal, score, repeat.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniRummySettings),
-  reducer,isTerminal,component:MiniRummyGame,
+  reducer,isTerminal,hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-mini-rummy-primary"]', pulses: 3 }), component:MiniRummyGame,
 };

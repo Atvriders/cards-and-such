@@ -54,10 +54,10 @@ export function DeucesWild({ state, dispatch, onGameOver }: GameProps<DeucesWild
 
       <div className="dw-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-deuces-wild-deal" onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {phase === "draw" && (
-          <button onClick={() => dis({ type: "draw" })}>Draw</button>
+          <button data-testid="hint-target-deuces-wild-draw" onClick={() => dis({ type: "draw" })}>Draw</button>
         )}
         {terminal && <div className="dw-game-over">Game Over — Final: ${terminal.score}</div>}
       </div>

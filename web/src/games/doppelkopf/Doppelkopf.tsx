@@ -55,7 +55,7 @@ export function Doppelkopf({ state, dispatch, onGameOver }: GameProps<Doppelkopf
           <div className="doppelkopf-label">Your hand — click to play:</div>
           <div className="doppelkopf-hand">
             {playerHand.map(card => (
-              <div key={card.id}
+              <div data-testid="hint-target-doppelkopf-primary" key={card.id}
                 className={`doppelkopf-card${isTrump(card) ? " trump" : ""}`}
                 style={{ color: isRed(card.suit) ? "#c62828" : "#333" }}
                 onClick={() => dispatch({ type: "play", cardId: card.id } as DKAction)}

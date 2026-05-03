@@ -19,5 +19,9 @@ You get 12 plays total, win or lose, then the game ends. The maximum theoretical
 Skip wisely — preserving a strong card may pay off later.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardDominoSettings),
-  reducer, isTerminal, component: CardDominoGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-card-domino-skip"]', pulses: 3 };
+    }, component: CardDominoGame,
 };

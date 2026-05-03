@@ -16,5 +16,10 @@ export const dominionDeckPlugin: GamePlugin<DominionDeckState, DominionDeckActio
   initialState:(seed:number,s:S)=>initialState(seed,s as DominionDeckSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "play") return { selector: '[data-testid="hint-target-dominion-deck-primary"]', pulses: 3 };
+      if (state.phase === "buy") return { selector: '[data-testid="hint-target-dominion-deck-next"]', pulses: 3 };
+      return null;
+    },
   component:DominionDeckGame,
 };

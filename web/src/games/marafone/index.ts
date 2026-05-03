@@ -19,5 +19,9 @@ export const marafonePlugin: GamePlugin<MarafoneState, MarafoneAction, typeof ma
   initialState: (seed: number, _settings: MarafoneSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-marafone-hand"]', pulses: 3 };
+      return null;
+    },
   component: Marafone,
 };

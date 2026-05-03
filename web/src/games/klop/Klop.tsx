@@ -52,7 +52,7 @@ export function Klop({ state, dispatch, onGameOver }: GameProps<KlopState, KlopS
       <div className="kl-status">{message}</div>
       <div className="kl-player-area">
         <div className="kl-player-label">Your Hand — Tricks: {tricksWon[0]}</div>
-        <div className="kl-player-hand">
+        <div data-testid="hint-target-klop-hand" className="kl-player-hand">
           {hands[0]!.map(card => {
             const legal = legalIds.has(card.id);
             return legal

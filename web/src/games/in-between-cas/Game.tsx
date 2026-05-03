@@ -18,7 +18,7 @@ export function InBetweenCasGame({ state, dispatch, onGameOver }: GameProps<InBe
       {state.phase === "ready" && <button data-testid="hint-target-in-between-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as InBetweenCasAction)}>Deal</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as InBetweenCasAction)}>Next</button>
+        <button data-testid="hint-target-in-between-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as InBetweenCasAction)}>Next</button>
       </>}
     </div>
   );

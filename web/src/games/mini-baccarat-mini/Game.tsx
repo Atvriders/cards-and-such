@@ -18,10 +18,10 @@ export function MiniBaccaratMiniGame({ state, dispatch, onGameOver }: GameProps<
           <div className={`dm-card ${isRed(state.cardC) ? "red" : "black"}`}>{cardName(state.cardC)}</div>
         </div>
       )}
-      {state.phase === "ready" && <button className="dm-btn" onClick={() => dispatch({ type: "play" } as MiniBaccaratMiniAction)}>Play</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-mini-baccarat-mini-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as MiniBaccaratMiniAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as MiniBaccaratMiniAction)}>Next</button>
+        <button data-testid="hint-target-mini-baccarat-mini-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as MiniBaccaratMiniAction)}>Next</button>
       </>}
     </div>
   );

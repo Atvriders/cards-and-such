@@ -40,7 +40,7 @@ export function MysticValeCraftGame({ state, dispatch, onGameOver }: GameProps<M
         })}
       </div>
       {state.phase === "play" && (
-        <button className="myv-btn primary" onClick={() => dispatch({ type: "playAll" } as MysticValeCraftAction)}>Play All</button>
+        <button data-testid="hint-target-mystic-vale-craft-primary" className="myv-btn primary" onClick={() => dispatch({ type: "playAll" } as MysticValeCraftAction)}>Play All</button>
       )}
       {state.phase === "buy" && (
         <>
@@ -59,7 +59,7 @@ export function MysticValeCraftGame({ state, dispatch, onGameOver }: GameProps<M
           </div>
           <div className="myv-actions">
             {state.bought ? <div className="myv-feedback">Bought {cardById(state.bought).name}</div> : <div className="myv-feedback">Or pass on a buy</div>}
-            <button className="myv-btn" onClick={() => dispatch({ type: "endTurn" } as MysticValeCraftAction)}>End Turn</button>
+            <button data-testid="hint-target-mystic-vale-craft-next" className="myv-btn" onClick={() => dispatch({ type: "endTurn" } as MysticValeCraftAction)}>End Turn</button>
           </div>
         </>
       )}

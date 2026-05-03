@@ -6,7 +6,12 @@ import { CasGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
 
-const hint = (state: CasState): HintTarget | null => (state.phase === "ready" ? { selector: '[data-testid="hint-target-casino-faro-cas-primary"]', pulses: 3 } : null);
+const hint = (state: CasState): HintTarget | null => {
+  if (isTerminal(state)) return null;
+  if (state.phase === "ready") return { selector: '[data-testid="hint-target-casino-faro-cas-primary"]', pulses: 3 };
+  if (state.phase === "scored") return { selector: '[data-testid="hint-target-casino-faro-cas-secondary"]', pulses: 3 };
+  return null;
+};
 export const casinoFaroCasPlugin: GamePlugin<CasState, CasAction, typeof settings> = {
   id: "casino-faro-cas",
   title: "Casino Faro",
@@ -18,5 +23,5 @@ export const casinoFaroCasPlugin: GamePlugin<CasState, CasAction, typeof setting
   initialState: (seed: number, s: S) => initialState(seed, s as CasSettings),
   reducer,
   isTerminal,
-  hint, component: CasGame,
+  hint: hint, component: CasGame,
 };

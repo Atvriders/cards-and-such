@@ -64,7 +64,7 @@ export function Schafkopf({
         <div className="sk-player-label">
           Your Hand — Tricks: {tricks[0]} | Card-Points: {points[0]}
         </div>
-        <div className="sk-player-hand">
+        <div data-testid="hint-target-schafkopf-hand" className="sk-player-hand">
           {hands[0]!.map(card => {
             const legal = legalIds.has(card.id);
             return legal

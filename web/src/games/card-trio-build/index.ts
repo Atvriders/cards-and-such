@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { CardTrioBuildState, CardTrioBuildAction, CardTrioBuildSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CardTrioBuildGame } from "./Game.js";
@@ -19,5 +19,5 @@ Scoring: +30 per trio (max 6 trios = 180), -1 per discard. The 18-draw limit cap
 Click any card in your hand to discard it. Click Draw to fill in. Build when ready.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardTrioBuildSettings),
-  reducer, isTerminal, component: CardTrioBuildGame,
+  reducer, isTerminal, hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-card-trio-build-primary"]', pulses: 3 }), component: CardTrioBuildGame,
 };

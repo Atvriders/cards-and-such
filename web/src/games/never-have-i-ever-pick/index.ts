@@ -17,6 +17,11 @@ export const neverHaveIEverPickPlugin: GamePlugin<NeverHaveIEverPickState, Never
   initialState: (seed: number, s: S) => initialState(seed, s as NeverHaveIEverPickSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "ask") return { selector: '[data-testid="hint-target-never-have-i-ever-pick-primary"]', pulses: 3 };
+      if (state.phase === "feedback") return { selector: '[data-testid="hint-target-never-have-i-ever-pick-next"]', pulses: 3 };
+      return null;
+    },
   component: NeverHaveIEverPickGame,
 };
 

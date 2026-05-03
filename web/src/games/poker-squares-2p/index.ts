@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PokerSquares2PState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PokerSquares2PGame } from "./Game.js";
@@ -30,5 +30,9 @@ Strategy: plan ahead — placing a card early in one row can ruin another. Watch
   initialState,
   reducer,
   isTerminal,
+  hint: (state: PokerSquares2PState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-poker-squares-2p-primary"]', pulses: 3 };
+  },
   component: PokerSquares2PGame,
 };

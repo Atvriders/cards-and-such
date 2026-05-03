@@ -30,7 +30,7 @@ export function BanqueCasGame({ state, dispatch, onGameOver }: GameProps<BanqueC
           <div className="banq-c-info">Banker ({state.bTotal}):</div>
           <div className="banq-c-row">{state.banker.map((c, i) => <div key={i} className={`banq-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
           <div className="banq-c-result">{state.result}</div>
-          <button className="banq-c-btn alt" onClick={() => dispatch({ type: "next" } as BanqueCasAction)}>Next</button>
+          <button data-testid="hint-target-banque-cas-secondary" className="banq-c-btn alt" onClick={() => dispatch({ type: "next" } as BanqueCasAction)}>Next</button>
         </>
       )}
     </div>

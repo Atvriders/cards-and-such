@@ -25,8 +25,8 @@ export function AnacondaPass({ state, dispatch, onGameOver }: GameProps<Anaconda
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as AnacondaPassAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as AnacondaPassAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-anaconda-pass-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as AnacondaPassAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-anaconda-pass-next" className="g-btn" onClick={() => dispatch({ type: "next" } as AnacondaPassAction)}>Next Round</button>}
       </div>
     </div>
   );

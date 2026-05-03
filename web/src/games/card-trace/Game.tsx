@@ -25,7 +25,7 @@ export function CardTraceGame({ state, dispatch, onGameOver }: GameProps<CardTra
       {state.phase === "result" && (
         <>
           <div className="rg-result">{state.lastWin ? `Correct! +${state.lastPts}` : "Wrong — 0"}</div>
-          <button className="rg-btn alt" onClick={() => dispatch({ type:"next" } as CardTraceAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
+          <button data-testid="hint-target-card-trace-next" className="rg-btn alt" onClick={() => dispatch({ type:"next" } as CardTraceAction)}>{state.round >= TOTAL_ROUNDS ? "Finish" : "Next"}</button>
         </>
       )}
     </div>

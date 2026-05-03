@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardHoldEmState, CardHoldEmAction, CardHoldEmSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,10 @@ Each correct prediction scores 10 points. Wrong picks score 0. There are 12 roun
 Strategy: roughly 50% of all 2-card hands qualify as STRONG (any high pair, any unsuited big-card combo). With pure 50/50 odds, the math says you'll average around 60 points either way — so trust your gut and have fun guessing!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardHoldEmSettings),
-  reducer, isTerminal, component: CardHoldEmGame,
+  reducer, isTerminal,
+  hint: (state: CardHoldEmState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-card-hold-em-next"]', pulses: 3 };
+  },
+  component: CardHoldEmGame,
 };

@@ -46,7 +46,7 @@ export function Watten({ state, dispatch, onGameOver }: GameProps<WattenState, o
       <div className="watten-status">{message}</div>
       <div className="watten-player-area">
         <div className="watten-label">Your Hand</div>
-        <div className="watten-player-hand">
+        <div data-testid="hint-target-watten-hand" className="watten-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

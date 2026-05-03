@@ -16,5 +16,10 @@ export const mysticValeCraftPlugin: GamePlugin<MysticValeCraftState, MysticValeC
   initialState:(seed:number,s:S)=>initialState(seed,s as MysticValeCraftSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "play") return { selector: '[data-testid="hint-target-mystic-vale-craft-primary"]', pulses: 3 };
+      if (state.phase === "buy") return { selector: '[data-testid="hint-target-mystic-vale-craft-next"]', pulses: 3 };
+      return null;
+    },
   component:MysticValeCraftGame,
 };

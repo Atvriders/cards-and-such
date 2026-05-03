@@ -38,7 +38,7 @@ export function SlayTheDeck({ state, dispatch, onGameOver }: GameProps<SlayTheDe
         <>
           <div className="std-hand">
             {state.hand.map(c => (
-              <button key={c.id}
+              <button data-testid="hint-target-slay-the-deck-primary" key={c.id}
                 className={`std-card ${state.energy < c.cost ? "std-disabled" : ""}`}
                 disabled={state.energy < c.cost}
                 onClick={() => d({ type: "playCard", id: c.id })}>

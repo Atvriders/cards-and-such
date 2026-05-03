@@ -19,5 +19,9 @@ export const omnibusHeartsPlugin: GamePlugin<OmnibusHeartsState, OmnibusHeartsAc
   initialState: (seed: number, _settings: OmnibusHeartsSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-omnibus-hearts-hand"]', pulses: 3 };
+      return null;
+    },
   component: OmnibusHearts,
 };

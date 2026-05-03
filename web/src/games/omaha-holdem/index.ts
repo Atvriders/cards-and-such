@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OmahaState, OmahaAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -44,5 +44,9 @@ Settings: Starting Bankroll ($500/$1000/$5000), Blind Levels (2/4, 5/10, 10/20).
   initialState: (seed: number, settings: OmahaSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: OmahaState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-omaha-holdem-primary"]', pulses: 3 };
+  },
   component: OmahaHoldem,
 };

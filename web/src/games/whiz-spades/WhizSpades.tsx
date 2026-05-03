@@ -46,7 +46,7 @@ export function WhizSpades({ state, dispatch, onGameOver }: GameProps<WhizSpades
       <div className="whiz-spades-status">{message}</div>
       <div className="whiz-spades-player-area">
         <div className="whiz-spades-label">Your Hand</div>
-        <div className="whiz-spades-player-hand">
+        <div data-testid="hint-target-whiz-spades-hand" className="whiz-spades-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

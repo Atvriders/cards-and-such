@@ -50,7 +50,7 @@ export function CancellationHearts({ state, dispatch, onGameOver }: GameProps<Ca
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal
-              ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as CancellationHeartsAction)} />
+              ? <Card data-testid="hint-target-cancellation-hearts-primary" key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as CancellationHeartsAction)} />
               : <Card key={card.id} card={card} className={done ? "" : "dim"} />;
           })}
         </div>

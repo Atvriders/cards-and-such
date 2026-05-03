@@ -46,7 +46,7 @@ export function SpotHearts({ state, dispatch, onGameOver }: GameProps<SpotHearts
       <div className="spot-hearts-status">{message}</div>
       <div className="spot-hearts-player-area">
         <div className="spot-hearts-label">Your Hand</div>
-        <div className="spot-hearts-player-hand">
+        <div data-testid="hint-target-spot-hearts-hand" className="spot-hearts-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PresidentState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { President } from "./President.js";
@@ -33,5 +33,9 @@ Controls: click cards in your hand to select them (they lift up), then click Pla
   initialState,
   reducer,
   isTerminal,
+  hint: (state: PresidentState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-president-primary"]', pulses: 3 };
+  },
   component: President,
 };

@@ -56,7 +56,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<TrucoState, obje
       {!done && (
         <>
           <div className="truco-label">Your hand ({playerHand.length} cards) — click to play:</div>
-          <div className="truco-hand">
+          <div data-testid="hint-target-truco-hand" className="truco-hand">
             {playerHand.map(card => (
               <div
                 key={card.id}

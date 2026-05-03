@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BlackLadyState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -19,5 +19,9 @@ export const blackLadyPlugin: GamePlugin<BlackLadyState, BlackLadyAction, typeof
   initialState: (seed: number, _settings: BlackLadySettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: BlackLadyState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-black-lady-primary"]', pulses: 3 };
+  },
   component: BlackLady,
 };

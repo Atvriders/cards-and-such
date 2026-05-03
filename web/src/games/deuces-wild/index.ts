@@ -41,5 +41,10 @@ Your score equals your final bankroll at session end.`,
   initialState: (seed: number, settings: DeucesWildSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "betting" || state.phase === "settled") return { selector: '[data-testid="hint-target-deuces-wild-deal"]', pulses: 3 };
+      if (state.phase === "draw") return { selector: '[data-testid="hint-target-deuces-wild-draw"]', pulses: 3 };
+      return null;
+    },
   component: DeucesWild,
 };

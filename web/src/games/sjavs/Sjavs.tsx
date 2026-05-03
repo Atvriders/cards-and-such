@@ -53,7 +53,7 @@ export function Sjavs({ state, dispatch, onGameOver }: GameProps<SjavsState, Sja
       <div className="sj-status">{message}</div>
       <div className="sj-player-area">
         <div className="sj-player-label">Your Hand — Won: {tricks[0]}</div>
-        <div className="sj-player-hand">
+        <div data-testid="hint-target-sjavs-hand" className="sj-player-hand">
           {hands[0]!.map(card => {
             const legal = legalIds.has(card.id);
             return legal

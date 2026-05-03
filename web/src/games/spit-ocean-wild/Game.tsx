@@ -25,8 +25,8 @@ export function SpitOceanWild({ state, dispatch, onGameOver }: GameProps<SpitOce
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as SpitOceanWildAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as SpitOceanWildAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-spit-ocean-wild-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as SpitOceanWildAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-spit-ocean-wild-next" className="g-btn" onClick={() => dispatch({ type: "next" } as SpitOceanWildAction)}>Next Round</button>}
       </div>
     </div>
   );

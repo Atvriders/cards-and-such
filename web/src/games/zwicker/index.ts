@@ -5,7 +5,12 @@ import { initialState, reducer, isTerminal } from "./state.js";
 import { ZwickerGame } from "./Game.js";
 const settings = { dummy: { kind: "boolean" as const, label: "dummy", default: false } } as const;
 type S = SettingsOf<typeof settings>;
-const hint = (state: ZwickerState): HintTarget | null => (state.phase === "ready" ? { selector: ".dm-btn", pulses: 3 } : null);
+const hint = (state: ZwickerState): HintTarget | null => {
+  if (isTerminal(state)) return null;
+  if (state.phase === "ready") return { selector: '[data-testid="hint-target-zwicker-primary"]', pulses: 3 };
+  if (state.phase === "result") return { selector: '[data-testid="hint-target-zwicker-secondary"]', pulses: 3 };
+  return null;
+};
 
 export const zwickerPlugin: GamePlugin<ZwickerState, ZwickerAction, typeof settings> = {
   id: "zwicker", title: "Zwicker", category: "cards",
@@ -14,5 +19,5 @@ export const zwickerPlugin: GamePlugin<ZwickerState, ZwickerAction, typeof setti
   howToPlay: "Zwicker is a German member of the Casino card-game family with capture rules and a special \"zwick\" double-capture move. This mini-version compresses ten zwicks into a round-by-round high-card race.\n\nEach round, you and the CPU each draw one card. Higher rank wins. Aces are 1 (low) in Zwicker traditionally — but for this mini we treat them as high (13) for consistency with most card games. Suit is irrelevant.\n\nScoring: round win (zwick!) awards 10 points. Tie awards 4 sympathy points. Loss awards zero.\n\nTen rounds total. Expected score: 45-65 points; lucky runs cross 75.\n\nIn real Zwicker, capturing a same-rank table card simultaneously with a hand card creates the eponymous \"zwick\" — a small bonus and the right to lead next. This mini-version keeps the capture-and-lead rhythm without the table-card layout. Quick, strict, North-German feel.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ZwickerSettings),
-  reducer, isTerminal, hint, component: ZwickerGame,
+  reducer, isTerminal, hint: hint, component: ZwickerGame,
 };

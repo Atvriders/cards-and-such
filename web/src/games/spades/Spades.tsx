@@ -78,7 +78,7 @@ export function Spades({ state, dispatch, onGameOver }: GameProps<SpadesState, S
           <div className="spades-bid-label">Your bid (0 = Nil)</div>
           <div className="spades-bid-buttons">
             {Array.from({ length: 14 }, (_, i) => (
-              <button
+              <button data-testid="hint-target-spades-primary"
                 key={i}
                 className="spades-bid-btn"
                 aria-label={`Bid ${i === 0 ? "Nil" : i} ${i <= 9 ? `(key ${i})` : ""}`}

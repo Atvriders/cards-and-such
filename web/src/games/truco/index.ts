@@ -29,5 +29,9 @@ Strategy: Lead with mid-strength cards to gauge what the bot plays, saving your 
   initialState: (seed: number, _settings: TrucoSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "player-turn") return { selector: '[data-testid="hint-target-truco-hand"]', pulses: 3 };
+      return null;
+    },
   component: Game,
 };

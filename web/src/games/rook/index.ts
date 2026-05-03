@@ -19,5 +19,9 @@ export const rookPlugin: GamePlugin<RookState, RookAction, typeof rookSettings> 
   initialState: (seed: number, _settings: RookSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-rook-hand"]', pulses: 3 };
+      return null;
+    },
   component: Rook,
 };

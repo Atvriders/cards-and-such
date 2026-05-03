@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { KlaverjasState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -31,5 +31,9 @@ export const klaverjasPlugin: GamePlugin<KlaverjasState, KlaverjasAction, typeof
   initialState: (seed: number, _settings: KlaverjasSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: KlaverjasState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-klaverjas-primary"]', pulses: 3 };
+  },
   component: Klaverjas,
 };

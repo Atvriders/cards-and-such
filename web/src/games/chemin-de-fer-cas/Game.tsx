@@ -30,7 +30,7 @@ export function CheminDeFerCasGame({ state, dispatch, onGameOver }: GameProps<Ch
           <div className="cdf-c-info">Banker ({state.bTotal}):</div>
           <div className="cdf-c-row">{state.banker.map((c, i) => <div key={i} className={`cdf-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
           <div className="cdf-c-result">{state.result}</div>
-          <button className="cdf-c-btn alt" onClick={() => dispatch({ type: "next" } as CheminDeFerCasAction)}>Next</button>
+          <button data-testid="hint-target-chemin-de-fer-cas-secondary" className="cdf-c-btn alt" onClick={() => dispatch({ type: "next" } as CheminDeFerCasAction)}>Next</button>
         </>
       )}
     </div>

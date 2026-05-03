@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardStackStressState, CardStackStressAction, CardStackStressSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,10 @@ The catch: if you choose Stack with a card lower than the top of the stack, the 
 You get 5 attempts; only your best stack counts. Maximum score: 8 cards x 20 + 100 bonus = 260 points.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardStackStressSettings),
-  reducer, isTerminal, component: CardStackStressGame,
+  reducer, isTerminal,
+  hint: (state: CardStackStressState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-card-stack-stress-next"]', pulses: 3 };
+  },
+  component: CardStackStressGame,
 };

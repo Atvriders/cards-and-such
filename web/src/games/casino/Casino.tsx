@@ -93,7 +93,7 @@ export function Casino({
       {/* Actions */}
       {!done && turn === 0 && (
         <div className="casino-actions">
-          <button
+          <button data-testid="hint-target-casino-primary"
             className="casino-btn"
             disabled={!captureValid}
             onClick={handleCapture}

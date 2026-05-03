@@ -16,5 +16,10 @@ export const starRealmsDuelPlugin: GamePlugin<StarRealmsDuelState, StarRealmsDue
   initialState:(seed:number,s:S)=>initialState(seed,s as StarRealmsDuelSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "play") return { selector: '[data-testid="hint-target-star-realms-duel-primary"]', pulses: 3 };
+      if (state.phase === "buy") return { selector: '[data-testid="hint-target-star-realms-duel-next"]', pulses: 3 };
+      return null;
+    },
   component:StarRealmsDuelGame,
 };

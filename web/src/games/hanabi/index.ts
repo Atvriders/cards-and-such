@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { HanabiState, HanabiAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { HanabiGame } from "./Game.js";
@@ -22,5 +22,9 @@ Scoring: each completed firework contributes 1-5 points per card played in seque
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: HanabiState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-hanabi-primary"]', pulses: 3 };
+  },
   component: HanabiGame,
 };

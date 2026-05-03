@@ -20,7 +20,7 @@ export function SixCardStudCasGame({ state, dispatch, onGameOver }: GameProps<Si
         <div className="dm-info">CPU:</div>
         <div className="dm-row">{state.cpu.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
         <div className="dm-result">{state.result} — +{state.pts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as SixCardStudCasAction)}>Next</button>
+        <button data-testid="hint-target-six-card-stud-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as SixCardStudCasAction)}>Next</button>
       </>}
     </div>
   );

@@ -19,5 +19,9 @@ export const whizSpadesPlugin: GamePlugin<WhizSpadesState, WhizSpadesAction, typ
   initialState: (seed: number, _settings: WhizSpadesSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-whiz-spades-hand"]', pulses: 3 };
+      return null;
+    },
   component: WhizSpades,
 };

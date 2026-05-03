@@ -46,7 +46,7 @@ export function Sedma({ state, dispatch, onGameOver }: GameProps<SedmaState, obj
       <div className="sedma-status">{message}</div>
       <div className="sedma-player-area">
         <div className="sedma-label">Your Hand</div>
-        <div className="sedma-player-hand">
+        <div data-testid="hint-target-sedma-hand" className="sedma-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

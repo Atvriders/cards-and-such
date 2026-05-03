@@ -46,7 +46,7 @@ export function SixtySix({ state, dispatch, onGameOver }: GameProps<SixtySixStat
       <div className="sixty-six-status">{message}</div>
       <div className="sixty-six-player-area">
         <div className="sixty-six-label">Your Hand</div>
-        <div className="sixty-six-player-hand">
+        <div data-testid="hint-target-sixty-six-hand" className="sixty-six-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

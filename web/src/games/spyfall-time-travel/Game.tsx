@@ -38,10 +38,7 @@ export function SpyfallTimeTravelGame({ state, dispatch, onGameOver }: GameProps
             ? i === q.answer ? `${P}-choice ${P}-correct` : isSel ? `${P}-choice ${P}-wrong` : `${P}-choice`
             : `${P}-choice`;
           return (
-            <button
-              key={i}
-              className={cls}
-              disabled={state.phase !== "ask"}
+            <button data-testid="hint-target-spyfall-time-travel-primary" key={i} className={cls} disabled={state.phase !== "ask"}
               type="button"
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as SpyfallTimeTravelAction)}
             >{c}</button>
@@ -53,7 +50,7 @@ export function SpyfallTimeTravelGame({ state, dispatch, onGameOver }: GameProps
           <div className={`${P}-feedback ${state.lastCorrect ? P + "-good" : P + "-bad"}`}>
             {state.lastCorrect ? "Correct!" : `Answer: ${q.choices[q.answer]}`}
           </div>
-          <button className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as SpyfallTimeTravelAction)}>
+          <button data-testid="hint-target-spyfall-time-travel-next" className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as SpyfallTimeTravelAction)}>
             {state.current + 1 >= TOTAL_QUESTIONS ? "See Results" : "Next"}
           </button>
         </>

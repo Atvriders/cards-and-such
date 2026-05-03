@@ -17,6 +17,11 @@ export const twoTruthsLiePickPlugin: GamePlugin<TwoTruthsLiePickState, TwoTruths
   initialState: (seed: number, s: S) => initialState(seed, s as TwoTruthsLiePickSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "ask") return { selector: '[data-testid="hint-target-two-truths-lie-pick-primary"]', pulses: 3 };
+      if (state.phase === "feedback") return { selector: '[data-testid="hint-target-two-truths-lie-pick-next"]', pulses: 3 };
+      return null;
+    },
   component: TwoTruthsLiePickGame,
 };
 

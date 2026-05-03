@@ -50,7 +50,7 @@ export function Bower({ state, dispatch, onGameOver }: GameProps<BowerState, obj
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal
-              ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BowerAction)} />
+              ? <Card data-testid="hint-target-bower-primary" key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BowerAction)} />
               : <Card key={card.id} card={card} className={done ? "" : "dim"} />;
           })}
         </div>

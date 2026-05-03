@@ -46,7 +46,7 @@ export function Madrasso({ state, dispatch, onGameOver }: GameProps<MadrassoStat
       <div className="madrasso-status">{message}</div>
       <div className="madrasso-player-area">
         <div className="madrasso-label">Your Hand</div>
-        <div className="madrasso-player-hand">
+        <div data-testid="hint-target-madrasso-hand" className="madrasso-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

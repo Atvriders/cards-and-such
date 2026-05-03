@@ -17,5 +17,10 @@ export const wingspanAsiaFlockPlugin: GamePlugin<WingspanAsiaFlockState, Wingspa
   initialState: (seed: number, s: S) => initialState(seed, s as WingspanAsiaFlockSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "drafting") return { selector: '[data-testid="hint-target-wingspan-asia-flock-primary"]', pulses: 3 };
+      if (state.phase === "round-done") return { selector: '[data-testid="hint-target-wingspan-asia-flock-next"]', pulses: 3 };
+      return null;
+    },
   component: WingspanAsiaFlockGame,
 };

@@ -19,5 +19,9 @@ export const fortyFivePlugin: GamePlugin<FortyFiveState, FortyFiveAction, typeof
   initialState: (seed: number, _settings: FortyFiveSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-forty-five-hand"]', pulses: 3 };
+      return null;
+    },
   component: FortyFive,
 };

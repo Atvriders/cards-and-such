@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { MiniSpitState, MiniSpitAction, MiniSpitSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,13 @@ Each played card scores 5 points. Click any playable card in your hand — disab
 Five rounds total, 6 cards per round. Maximum theoretical score is 150 (all 30 cards played), but typical runs land around 50-80 due to dead-end hands. Quick pattern recognition is key: scan all six cards every time the top changes. Wraparound is the trickiest!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniSpitSettings),
-  reducer,isTerminal,component:MiniSpitGame,
+  reducer,isTerminal,
+  hint: (state: MiniSpitState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    if (state.phase === "ready" || state.phase === "stalemate") {
+      return { selector: '[data-testid="hint-target-mini-spit-primary"]', pulses: 3 };
+    }
+    return null;
+  },
+  component:MiniSpitGame,
 };

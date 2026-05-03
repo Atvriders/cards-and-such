@@ -19,5 +19,9 @@ export const scoponePlugin: GamePlugin<ScoponeState, ScoponeAction, typeof scopo
   initialState: (seed: number, _settings: ScoponeSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-scopone-hand"]', pulses: 3 };
+      return null;
+    },
   component: Scopone,
 };

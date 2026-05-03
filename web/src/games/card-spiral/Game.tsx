@@ -22,12 +22,12 @@ export function CardSpiralGame({ state, dispatch, onGameOver }: GameProps<CardSp
         <div className="csp-current">
           <div className="csp-card-big">{rankLabel(state.drawn.rank)}</div>
           <div className="csp-actions">
-            <button className="csp-btn keep" onClick={() => dispatch({ type:"keep" } as CardSpiralAction)}>Keep</button>
+            <button data-testid="hint-target-card-spiral-keep" className="csp-btn keep" onClick={() => dispatch({ type:"keep" } as CardSpiralAction)}>Keep</button>
             <button className="csp-btn skip" onClick={() => dispatch({ type:"discard" } as CardSpiralAction)}>Discard</button>
           </div>
         </div>
       ) : (
-        <button className="csp-btn draw" onClick={() => dispatch({ type:"draw" } as CardSpiralAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-spiral-primary" className="csp-btn draw" onClick={() => dispatch({ type:"draw" } as CardSpiralAction)}>Draw Card</button>
       )}
     </div>
   );

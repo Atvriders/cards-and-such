@@ -61,7 +61,7 @@ export function FortyFives({
 
       <div className="ff-player-area">
         <div className="ff-player-label">Your Hand — Tricks: {tricks[0]}</div>
-        <div className="ff-player-hand">
+        <div data-testid="hint-target-forty-fives-hand" className="ff-player-hand">
           {hands[0]!.map(card => {
             const legal = legalIds.has(card.id);
             return legal

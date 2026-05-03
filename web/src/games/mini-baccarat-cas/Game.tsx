@@ -30,7 +30,7 @@ export function MiniBaccaratCasGame({ state, dispatch, onGameOver }: GameProps<M
           <div className="mb-c-info">Banker ({state.bTotal}):</div>
           <div className="mb-c-row">{state.banker.map((c, i) => <div key={i} className={`mb-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
           <div className="mb-c-result">{state.result}</div>
-          <button className="mb-c-btn alt" onClick={() => dispatch({ type: "next" } as MiniBaccaratCasAction)}>Next</button>
+          <button data-testid="hint-target-mini-baccarat-cas-secondary" className="mb-c-btn alt" onClick={() => dispatch({ type: "next" } as MiniBaccaratCasAction)}>Next</button>
         </>
       )}
     </div>

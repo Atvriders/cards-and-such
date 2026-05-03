@@ -18,7 +18,7 @@ export function AceyDeuceyCasGame({ state, dispatch, onGameOver }: GameProps<Ace
       {state.phase === "ready" && <button data-testid="hint-target-acey-deucey-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as AceyDeuceyCasAction)}>Deal</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as AceyDeuceyCasAction)}>Next</button>
+        <button data-testid="hint-target-acey-deucey-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as AceyDeuceyCasAction)}>Next</button>
       </>}
     </div>
   );

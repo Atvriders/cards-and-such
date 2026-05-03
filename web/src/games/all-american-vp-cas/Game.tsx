@@ -21,7 +21,7 @@ export function AllAmericanVpCasGame({ state, dispatch, onGameOver }: GameProps<
       {state.phase === "ready" && <button data-testid="hint-target-all-american-vp-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "play" } as AllAmericanVpCasAction)}>Play</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.result}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as AllAmericanVpCasAction)}>Next</button>
+        <button data-testid="hint-target-all-american-vp-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as AllAmericanVpCasAction)}>Next</button>
       </>}
     </div>
   );

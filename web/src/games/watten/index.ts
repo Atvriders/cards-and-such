@@ -19,5 +19,9 @@ export const wattenPlugin: GamePlugin<WattenState, WattenAction, typeof wattenSe
   initialState: (seed: number, _settings: WattenSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-watten-hand"]', pulses: 3 };
+      return null;
+    },
   component: Watten,
 };

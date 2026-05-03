@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ContinentalRummyState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -48,5 +48,9 @@ Controls: Draw from stock or click discard. In the play phase, click cards to se
   initialState: (seed: number, s: ContinentalRummySettingsRaw) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: ContinentalRummyState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-continental-rummy-primary"]', pulses: 3 };
+  },
   component: ContinentalRummy,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HandAndFootState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -48,5 +48,9 @@ Controls: Click "Draw Stock" to draw 2 cards. Click cards in your hand to select
   initialState: (seed: number, s: HandAndFootSettingsRaw) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: HandAndFootState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-hand-and-foot-primary"]', pulses: 3 };
+  },
   component: HandAndFoot,
 };

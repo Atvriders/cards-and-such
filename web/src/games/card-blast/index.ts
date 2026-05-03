@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardBlastState, CardBlastAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,9 @@ Tips: don't discard too often — each discard wastes a round. Save five-card ha
   initialState: (seed: number, settings: CardBlastSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: CardBlastState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-card-blast-primary"]', pulses: 3 };
+  },
   component: CardBlast,
 };

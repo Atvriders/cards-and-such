@@ -81,7 +81,7 @@ export function ZhengGame({ state, dispatch, onGameOver }: GameProps<ZhengState,
             ))}
           </div>
           <div className="zheng-actions">
-            <button className="zheng-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as ZhengAction); setSelected(new Set()); }} disabled={!canPlay}>
+            <button data-testid="hint-target-zheng-shangyou-play" className="zheng-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as ZhengAction); setSelected(new Set()); }} disabled={!canPlay}>
               Play ({selected.size})
             </button>
             <button className="zheng-btn pass" onClick={() => { dispatch({ type: "pass" } as ZhengAction); setSelected(new Set()); }} disabled={!canPass}>

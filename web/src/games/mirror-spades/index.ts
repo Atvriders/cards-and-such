@@ -19,5 +19,9 @@ export const mirrorSpadesPlugin: GamePlugin<MirrorSpadesState, MirrorSpadesActio
   initialState: (seed: number, _settings: MirrorSpadesSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-mirror-spades-hand"]', pulses: 3 };
+      return null;
+    },
   component: MirrorSpades,
 };

@@ -16,7 +16,7 @@ export function HeadsUpHoldemCasGame({ state, dispatch, onGameOver }: GameProps<
       {state.phase === "deal" && <button data-testid="hint-target-heads-up-holdem-cas-primary" className="dm-btn" onClick={() => dispatch({ type: "deal" } as HeadsUpHoldemCasAction)}>Deal {CARDS_PER_HAND} cards</button>}
       {state.phase === "scored" && <>
         <div className="dm-result">{state.rank} — +{state.rankPts}</div>
-        <button className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HeadsUpHoldemCasAction)}>Next</button>
+        <button data-testid="hint-target-heads-up-holdem-cas-secondary" className="dm-btn alt" onClick={() => dispatch({ type: "next" } as HeadsUpHoldemCasAction)}>Next</button>
       </>}
     </div>
   );

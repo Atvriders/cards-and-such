@@ -25,8 +25,8 @@ export function ReEntryTournamentGame({ state, dispatch, onGameOver }: GameProps
       )}
       {state.phase === "dealt" && <div className="g-gain">+{state.lastGain} this hand</div>}
       <div className="g-controls">
-        {state.phase === "ready" && <button className="g-btn" onClick={() => dispatch({ type: "deal" } as ReEntryTournamentAction)}>Deal Hand</button>}
-        {state.phase === "dealt" && <button className="g-btn" onClick={() => dispatch({ type: "next" } as ReEntryTournamentAction)}>Next Round</button>}
+        {state.phase === "ready" && <button data-testid="hint-target-re-entry-tournament-deal" className="g-btn" onClick={() => dispatch({ type: "deal" } as ReEntryTournamentAction)}>Deal Hand</button>}
+        {state.phase === "dealt" && <button data-testid="hint-target-re-entry-tournament-next" className="g-btn" onClick={() => dispatch({ type: "next" } as ReEntryTournamentAction)}>Next Round</button>}
       </div>
     </div>
   );

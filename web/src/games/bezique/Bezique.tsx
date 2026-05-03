@@ -61,7 +61,7 @@ export function Bezique({
           {hands[0]!.map(card => {
             const legal = legalIds.has(card.id);
             return legal
-              ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BeziqueAction)} />
+              ? <Card data-testid="hint-target-bezique-primary" key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BeziqueAction)} />
               : <Card key={card.id} card={card} className="dim" />;
           })}
         </div>

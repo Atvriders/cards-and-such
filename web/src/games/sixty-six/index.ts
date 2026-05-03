@@ -19,5 +19,9 @@ export const sixtySixPlugin: GamePlugin<SixtySixState, SixtySixAction, typeof si
   initialState: (seed: number, _settings: SixtySixSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-sixty-six-hand"]', pulses: 3 };
+      return null;
+    },
   component: SixtySix,
 };

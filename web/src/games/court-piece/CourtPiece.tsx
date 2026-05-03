@@ -46,7 +46,7 @@ export function CourtPiece({ state, dispatch, onGameOver }: GameProps<CourtPiece
       <div className="court-piece-status">{message}</div>
       <div className="court-piece-player-area">
         <div className="court-piece-label">Your Hand</div>
-        <div className="court-piece-player-hand">
+        <div data-testid="hint-target-court-piece-hand" className="court-piece-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

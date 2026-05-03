@@ -56,7 +56,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<TrucoPaulistaSta
       {!done && (
         <>
           <div className="tp-label">Your hand — click to play:</div>
-          <div className="tp-hand">
+          <div data-testid="hint-target-truco-paulista-hand" className="tp-hand">
             {playerHand.map(card => {
               const isManilha = card.rank === 4;
               return (

@@ -17,5 +17,9 @@ Strategy is simple: read the suit glyph (or the colour — red for Hearts/Diamon
 A clean run earns 160 points. Lose a few cards to misfiles and you'll still post a respectable score, but speed plus accuracy is the path to the leaderboard.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardShovelSettings),
-  reducer, isTerminal, component: CardShovelGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-card-shovel-primary"]', pulses: 3 };
+    }, component: CardShovelGame,
 };

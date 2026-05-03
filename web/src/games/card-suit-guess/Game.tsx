@@ -21,7 +21,7 @@ export function CardSuitGuess({ state, dispatch, onGameOver }: GameProps<CardSui
     </div></div>}
     {isReveal&&<div>
       <p className={`result-msg ${state.lastResult}`}>{state.lastResult==="correct"?"+250 pts! Correct!":"Wrong!"} — {cardName(state.currentCard)} ({SUIT_NAMES[cardSuit(state.currentCard)]})</p>
-      <button className="bet-btn" onClick={()=>dispatch({type:"next"} as CardSuitGuessAction)}>Next</button>
+      <button data-testid="hint-target-card-suit-guess-next" className="bet-btn" onClick={()=>dispatch({type:"next"} as CardSuitGuessAction)}>Next</button>
     </div>}
   </div>;
 }

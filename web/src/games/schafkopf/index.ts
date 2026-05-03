@@ -40,5 +40,9 @@ Click a card to play it. Legal cards are highlighted.`,
   initialState: (seed: number, settings: SchafkopfSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-schafkopf-hand"]', pulses: 3 };
+      return null;
+    },
   component: Schafkopf,
 };

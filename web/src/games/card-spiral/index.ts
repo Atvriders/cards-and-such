@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget} from "../../platform/game-plugin/types.js";
 import type { CardSpiralState, CardSpiralAction, CardSpiralSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CardSpiralGame } from "./Game.js";
@@ -19,5 +19,5 @@ Strategy: discards are unlimited and free, so use them when a low card threatens
 Press Draw to begin and shape your spiral.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardSpiralSettings),
-  reducer, isTerminal, component: CardSpiralGame,
+  reducer, isTerminal, hint: (state): HintTarget | null => (state.phase === "done" ? null : { selector: '[data-testid="hint-target-card-spiral-primary"]', pulses: 3 }), component: CardSpiralGame,
 };

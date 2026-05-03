@@ -40,7 +40,7 @@ export function DominionDeckGame({ state, dispatch, onGameOver }: GameProps<Domi
         })}
       </div>
       {state.phase === "play" && (
-        <button className="dom-btn primary" onClick={() => dispatch({ type: "playAll" } as DominionDeckAction)}>Play All Treasures</button>
+        <button data-testid="hint-target-dominion-deck-primary" className="dom-btn primary" onClick={() => dispatch({ type: "playAll" } as DominionDeckAction)}>Play All Treasures</button>
       )}
       {state.phase === "buy" && (
         <>
@@ -63,7 +63,7 @@ export function DominionDeckGame({ state, dispatch, onGameOver }: GameProps<Domi
             ) : (
               <div className="dom-feedback">Or pass on a buy</div>
             )}
-            <button className="dom-btn" onClick={() => dispatch({ type: "endTurn" } as DominionDeckAction)}>End Turn</button>
+            <button data-testid="hint-target-dominion-deck-next" className="dom-btn" onClick={() => dispatch({ type: "endTurn" } as DominionDeckAction)}>End Turn</button>
           </div>
         </>
       )}

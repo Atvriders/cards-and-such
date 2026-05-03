@@ -50,7 +50,7 @@ export function BlackLady({ state, dispatch, onGameOver }: GameProps<BlackLadySt
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal
-              ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BlackLadyAction)} />
+              ? <Card data-testid="hint-target-black-lady-primary" key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BlackLadyAction)} />
               : <Card key={card.id} card={card} className={done ? "" : "dim"} />;
           })}
         </div>

@@ -19,5 +19,9 @@ export const sedmaPlugin: GamePlugin<SedmaState, SedmaAction, typeof sedmaSettin
   initialState: (seed: number, _settings: SedmaSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-sedma-hand"]', pulses: 3 };
+      return null;
+    },
   component: Sedma,
 };

@@ -49,7 +49,7 @@ export function HandAndFoot({ state, dispatch, onGameOver }: GameProps<HandAndFo
         <div className="haf-pile">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0 ? (
-            <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as HandAndFootAction)} />
+            <Card data-testid="hint-target-hand-and-foot-primary" faceDown onClick={() => dispatch({ type: "draw-stock" } as HandAndFootAction)} />
           ) : (
             <div className="haf-card-back" style={{ opacity: 0.3 }} />
           )}
@@ -101,9 +101,7 @@ export function HandAndFoot({ state, dispatch, onGameOver }: GameProps<HandAndFo
       <div className="haf-actions">
         {phase === "player-meld" && (
           <>
-            <button
-              className="haf-btn"
-              disabled={!canMeld}
+            <button data-testid="hint-target-hand-and-foot-primary" className="haf-btn" disabled={!canMeld}
               onClick={() => { dispatch({ type: "meld", cardIds: selected } as HandAndFootAction); setSelected([]); }}
             >
               Meld ({selected.length} cards)

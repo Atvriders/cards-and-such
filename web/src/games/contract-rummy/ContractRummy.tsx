@@ -54,7 +54,7 @@ export function ContractRummy({ state, dispatch, onGameOver }: GameProps<Contrac
         <div className="contract-pile">
           Stock ({stock.length})
           {phase === "player-draw" && stock.length > 0
-            ? <Card faceDown onClick={() => dispatch({ type: "draw-stock" } as ContractRummyAction)} />
+            ? <Card data-testid="hint-target-contract-rummy-primary" faceDown onClick={() => dispatch({ type: "draw-stock" } as ContractRummyAction)} />
             : <div className="contract-card-back" style={{ opacity: 0.3 }} />}
         </div>
         <div className="contract-pile">
@@ -123,7 +123,7 @@ export function ContractRummy({ state, dispatch, onGameOver }: GameProps<Contrac
             <button className="contract-btn" disabled={selected.length === 0} onClick={() => { setGroups(prev => [...prev, selected]); setSelected([]); }}>
               Add Group ({selected.length})
             </button>
-            <button className="contract-btn" disabled={!contractMet} onClick={() => { dispatch({ type: "open", groups } as ContractRummyAction); setGroups([]); }}>
+            <button data-testid="hint-target-contract-rummy-primary" className="contract-btn" disabled={!contractMet} onClick={() => { dispatch({ type: "open", groups } as ContractRummyAction); setGroups([]); }}>
               Open Contract
             </button>
           </>

@@ -7,8 +7,6 @@ const settings = {
   rounds: { kind: "enum" as const, label: "Rounds", options: ["10"] as const, default: "10" as const },
 } as const;
 
-const hint = (state: ProgressiveKnockoutTournamentState): HintTarget | null => ((state.phase === "ready" || state.phase === "dealt") ? { selector: ".g-btn", pulses: 3 } : null);
-
 export const progressiveKnockoutTournamentPlugin: GamePlugin<ProgressiveKnockoutTournamentState, ProgressiveKnockoutTournamentAction, typeof settings> = {
   id: "progressive-knockout-tournament",
   title: "Progressive Knockout Tournament",
@@ -26,5 +24,10 @@ Play continues for ten rounds, accumulating points. The deck reshuffles each rou
 The seed determines the entire shuffle sequence, so you can replay an identical run by entering the same seed. After ten rounds, your final score is locked in. Single-player only — no CPU opponent. A bite-sized poker variant perfect for short play sessions.`,
   settings,
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
-  reducer, isTerminal, hint, component: ProgressiveKnockoutTournamentGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-progressive-knockout-tournament-deal"]', pulses: 3 };
+    if (state.phase === "dealt") return { selector: '[data-testid="hint-target-progressive-knockout-tournament-next"]', pulses: 3 };
+    return null;
+  }, component: ProgressiveKnockoutTournamentGame,
 };

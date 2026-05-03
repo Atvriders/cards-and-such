@@ -22,7 +22,7 @@ export function CardBlast({ state, dispatch, onGameOver }: GameProps<CardBlastSt
 
       <div className="cb-hand">
         {state.hand.map(card => (
-          <button
+          <button data-testid="hint-target-card-blast-primary"
             key={card.id}
             className={`cb-card${state.selected.includes(card.id) ? " selected" : ""} ${RED_SUITS.has(card.suit) ? "red" : "black"}`}
             onClick={() => dispatch({ type: "toggle", id: card.id })}
@@ -39,7 +39,7 @@ export function CardBlast({ state, dispatch, onGameOver }: GameProps<CardBlastSt
 
       {!state.gameOver && (
         <div className="cb-actions">
-          <button
+          <button data-testid="hint-target-card-blast-blast"
             onClick={() => dispatch({ type: "blast" })}
             disabled={state.selected.length === 0}
           >

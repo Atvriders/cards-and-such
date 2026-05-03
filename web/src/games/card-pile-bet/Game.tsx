@@ -33,14 +33,14 @@ export function CardPileBet({ state, dispatch, onGameOver }: GameProps<CardPileB
       {!isReveal && <p style={{ fontSize: "0.9rem", color: "#888" }}>Will the next card be Red or Black?</p>}
       {!isReveal && (
         <div className="card-game-bets">
-          <button className="bet-btn" style={{ background: "#e74c3c" }} onClick={() => dispatch({ type: "bet", color: "red" } as CardPileBetAction)}>Red +20/-10</button>
+          <button data-testid="hint-target-card-pile-bet-red" className="bet-btn" style={{ background: "#e74c3c" }} onClick={() => dispatch({ type: "bet", color: "red" } as CardPileBetAction)}>Red +20/-10</button>
           <button className="bet-btn" style={{ background: "#2c3e50" }} onClick={() => dispatch({ type: "bet", color: "black" } as CardPileBetAction)}>Black +20/-10</button>
         </div>
       )}
       {isReveal && (
         <div>
           <p className={`result-msg ${state.result}`}>{state.result === "correct" ? "+20 pts!" : "-10 pts"}</p>
-          <button className="bet-btn" onClick={() => dispatch({ type: "next" } as CardPileBetAction)}>Next</button>
+          <button data-testid="hint-target-card-pile-bet-next" className="bet-btn" onClick={() => dispatch({ type: "next" } as CardPileBetAction)}>Next</button>
         </div>
       )}
     </div>

@@ -20,7 +20,7 @@ export function TeenPattiCasGame({ state, dispatch, onGameOver }: GameProps<Teen
         <div className="tp-c-info">CPU:</div>
         <div className="tp-c-row">{state.cpu.map((c, i) => <div key={i} className={`tp-c-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
         <div className="tp-c-result">{state.result} — +{state.pts}</div>
-        <button className="tp-c-btn alt" onClick={() => dispatch({ type: "next" } as TeenPattiCasAction)}>Next</button>
+        <button data-testid="hint-target-teen-patti-cas-secondary" className="tp-c-btn alt" onClick={() => dispatch({ type: "next" } as TeenPattiCasAction)}>Next</button>
       </>}
     </div>
   );

@@ -107,7 +107,7 @@ export function MiniRummyGame({ state, dispatch, onGameOver }: GameProps<MiniRum
         <div className="rummy-mini-actions">
           {state.phase === "draw" && state.turn === "player" && (
             <>
-              <button className="rummy-mini-btn primary" onClick={() => dispatch({ type: "drawDeck" } as MiniRummyAction)}>Draw deck</button>
+              <button data-testid="hint-target-mini-rummy-primary" className="rummy-mini-btn primary" onClick={() => dispatch({ type: "drawDeck" } as MiniRummyAction)}>Draw deck</button>
               <button className="rummy-mini-btn alt" disabled={!topDiscard} onClick={() => dispatch({ type: "drawDiscard" } as MiniRummyAction)}>Take discard</button>
             </>
           )}

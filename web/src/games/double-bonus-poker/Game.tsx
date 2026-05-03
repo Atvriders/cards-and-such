@@ -53,10 +53,10 @@ export function DoubleBonusPoker({ state, dispatch, onGameOver }: GameProps<Doub
 
       <div className="db-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button onClick={() => dis({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-double-bonus-poker-deal" onClick={() => dis({ type: "deal" })}>Deal</button>
         )}
         {phase === "draw" && (
-          <button onClick={() => dis({ type: "draw" })}>Draw</button>
+          <button data-testid="hint-target-double-bonus-poker-draw" onClick={() => dis({ type: "draw" })}>Draw</button>
         )}
         {terminal && <div className="db-game-over">Game Over — Final: ${terminal.score}</div>}
       </div>

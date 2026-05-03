@@ -117,7 +117,7 @@ export function HanabiGame({ state, dispatch }: GameProps<HanabiState, Record<st
       </div>
 
       <div className="hanabi-actions">
-        <button
+        <button data-testid="hint-target-hanabi-primary"
           className="hanabi-btn"
           disabled={selectedCard === null || terminal !== null}
           onClick={handlePlay}

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ContractRummyState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -57,5 +57,9 @@ Controls: Draw from stock or click discard. Click cards to select, "Add Group" t
   initialState: (seed: number, s: ContractRummySettingsRaw) => initialState(seed, { contractRound: s.contractRound - 1, numBots: s.numBots }),
   reducer,
   isTerminal,
+  hint: (state: ContractRummyState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-contract-rummy-primary"]', pulses: 3 };
+  },
   component: ContractRummy,
 };

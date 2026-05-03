@@ -19,5 +19,9 @@ export const preferencePlugin: GamePlugin<PreferenceState, PreferenceAction, typ
   initialState: (seed: number, _settings: PreferenceSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-preference-hand"]', pulses: 3 };
+      return null;
+    },
   component: Preference,
 };

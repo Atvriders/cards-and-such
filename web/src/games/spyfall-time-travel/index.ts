@@ -17,6 +17,11 @@ export const spyfallTimeTravelPlugin: GamePlugin<SpyfallTimeTravelState, Spyfall
   initialState: (seed: number, s: S) => initialState(seed, s as SpyfallTimeTravelSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "ask") return { selector: '[data-testid="hint-target-spyfall-time-travel-primary"]', pulses: 3 };
+      if (state.phase === "feedback") return { selector: '[data-testid="hint-target-spyfall-time-travel-next"]', pulses: 3 };
+      return null;
+    },
   component: SpyfallTimeTravelGame,
 };
 

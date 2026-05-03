@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BeziqueState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,9 @@ The highest score wins. Click a card to play it.`,
   initialState: (seed: number, settings: BeziqueSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BeziqueState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-bezique-primary"]', pulses: 3 };
+  },
   component: Bezique,
 };

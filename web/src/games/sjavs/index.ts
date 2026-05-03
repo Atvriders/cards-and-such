@@ -41,5 +41,9 @@ Click cards to play. Legal moves are highlighted.`,
   initialState: (seed: number, settings: SjavsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-sjavs-hand"]', pulses: 3 };
+      return null;
+    },
   component: Sjavs,
 };

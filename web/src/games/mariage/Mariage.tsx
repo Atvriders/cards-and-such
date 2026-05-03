@@ -66,7 +66,7 @@ export function Mariage({ state, dispatch, onGameOver }: GameProps<MariageState,
             {playerHand.map(card => {
               const isMarr = hasMarriagePartner(playerHand, card);
               return (
-                <div key={card.id}
+                <div data-testid="hint-target-mariage-primary" key={card.id}
                   className={`mariage-card${isTrump(card, trumpSuit) ? " trump" : ""}${isMarr ? " marriage" : ""}`}
                   style={{ color: isRed(card.suit) ? "#c62828" : "#333" }}
                   onClick={() => dispatch({ type: "play", cardId: card.id } as MariageAction)}

@@ -32,5 +32,9 @@ Strategy: save your 2s and Aces for when opponents play high. Try to control the
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-daifugo-play"]', pulses: 3 };
+      return null;
+    },
   component: DaifugoGame,
 };

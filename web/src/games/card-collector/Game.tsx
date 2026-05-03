@@ -22,10 +22,10 @@ export function CardCollectorGame({ state, dispatch, onGameOver }: GameProps<Car
         {state.draws.map((c, i) => <div key={i} className={`col-card ${isRed(c) ? "red" : "black"} ${state.hits[i] ? "hit" : ""}`}>{cardName(c)}</div>)}
       </div>
       {remaining > 0 && (
-        <button className="col-btn" onClick={() => dispatch({ type:"draw" } as CardCollectorAction)}>Draw ({remaining} left)</button>
+        <button data-testid="hint-target-card-collector-draw" className="col-btn" onClick={() => dispatch({ type:"draw" } as CardCollectorAction)}>Draw ({remaining} left)</button>
       )}
       {remaining === 0 && (
-        <button className="col-btn alt" onClick={() => dispatch({ type:"next" } as CardCollectorAction)}>{state.round + 1 >= ROUNDS ? "Finish" : "Next Round"}</button>
+        <button data-testid="hint-target-card-collector-next" className="col-btn alt" onClick={() => dispatch({ type:"next" } as CardCollectorAction)}>{state.round + 1 >= ROUNDS ? "Finish" : "Next Round"}</button>
       )}
     </div>
   );

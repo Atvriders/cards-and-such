@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CardDrawUpState, CardDrawUpAction, CardDrawUpSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -18,5 +18,10 @@ Strategy matters: is 17 safe enough to stop, or will the next card be a 3? Each 
 Play 5 or 10 rounds (selectable in Settings). Maximize your round scores without busting, then compare your final total to your best!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardDrawUpSettings),
-  reducer, isTerminal, component: CardDrawUp,
+  reducer, isTerminal,
+  hint: (state: CardDrawUpState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-card-draw-up-primary"]', pulses: 3 };
+  },
+  component: CardDrawUp,
 };

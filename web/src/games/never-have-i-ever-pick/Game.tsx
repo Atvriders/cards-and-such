@@ -38,10 +38,7 @@ export function NeverHaveIEverPickGame({ state, dispatch, onGameOver }: GameProp
             ? i === q.answer ? `${P}-choice ${P}-correct` : isSel ? `${P}-choice ${P}-wrong` : `${P}-choice`
             : `${P}-choice`;
           return (
-            <button
-              key={i}
-              className={cls}
-              disabled={state.phase !== "ask"}
+            <button data-testid="hint-target-never-have-i-ever-pick-primary" key={i} className={cls} disabled={state.phase !== "ask"}
               type="button"
               onClick={() => dispatch({ type: "answer", choice: i, elapsedMs: Date.now() - start } as NeverHaveIEverPickAction)}
             >{c}</button>
@@ -53,7 +50,7 @@ export function NeverHaveIEverPickGame({ state, dispatch, onGameOver }: GameProp
           <div className={`${P}-feedback ${state.lastCorrect ? P + "-good" : P + "-bad"}`}>
             {state.lastCorrect ? "Correct!" : `Answer: ${q.choices[q.answer]}`}
           </div>
-          <button className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as NeverHaveIEverPickAction)}>
+          <button data-testid="hint-target-never-have-i-ever-pick-next" className={`${P}-next`} type="button" onClick={() => dispatch({ type: "next" } as NeverHaveIEverPickAction)}>
             {state.current + 1 >= TOTAL_QUESTIONS ? "See Results" : "Next"}
           </button>
         </>

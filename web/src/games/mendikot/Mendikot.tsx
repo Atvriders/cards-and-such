@@ -46,7 +46,7 @@ export function Mendikot({ state, dispatch, onGameOver }: GameProps<MendikotStat
       <div className="mendikot-status">{message}</div>
       <div className="mendikot-player-area">
         <div className="mendikot-label">Your Hand</div>
-        <div className="mendikot-player-hand">
+        <div data-testid="hint-target-mendikot-hand" className="mendikot-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

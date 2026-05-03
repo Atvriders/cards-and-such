@@ -46,7 +46,7 @@ export function CutthroatSpades({ state, dispatch, onGameOver }: GameProps<Cutth
       <div className="cutthroat-spades-status">{message}</div>
       <div className="cutthroat-spades-player-area">
         <div className="cutthroat-spades-label">Your Hand</div>
-        <div className="cutthroat-spades-player-hand">
+        <div data-testid="hint-target-cutthroat-spades-hand" className="cutthroat-spades-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

@@ -20,7 +20,7 @@ export function TheEstatesBidGame({ state, dispatch, onGameOver }: GameProps<The
           <div className="dr-prompt">Pick a card:</div>
           <div className="dr-offer">
             {state.offer.map((c, i) => (
-              <button key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as TheEstatesBidAction)}>
+              <button data-testid="hint-target-the-estates-bid-primary" key={i} className="dr-card" onClick={() => dispatch({ type: "pick", idx: i } as TheEstatesBidAction)}>
                 <div className="dr-rank">{rankName(c.rank)}</div>
                 <div className="dr-suit">{suitName(c.suit)}</div>
               </button>
@@ -31,7 +31,7 @@ export function TheEstatesBidGame({ state, dispatch, onGameOver }: GameProps<The
       {state.phase === "round-done" && (
         <div className="dr-event">
           <div>{state.lastEvent}</div>
-          <button onClick={() => dispatch({ type: "next" } as TheEstatesBidAction)}>Next Round</button>
+          <button data-testid="hint-target-the-estates-bid-next" onClick={() => dispatch({ type: "next" } as TheEstatesBidAction)}>Next Round</button>
         </div>
       )}
       {state.phase === "done" && (

@@ -46,7 +46,7 @@ export function MirrorSpades({ state, dispatch, onGameOver }: GameProps<MirrorSp
       <div className="mirror-spades-status">{message}</div>
       <div className="mirror-spades-player-area">
         <div className="mirror-spades-label">Your Hand</div>
-        <div className="mirror-spades-player-hand">
+        <div data-testid="hint-target-mirror-spades-hand" className="mirror-spades-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

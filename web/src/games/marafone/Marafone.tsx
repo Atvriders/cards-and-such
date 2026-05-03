@@ -46,7 +46,7 @@ export function Marafone({ state, dispatch, onGameOver }: GameProps<MarafoneStat
       <div className="marafone-status">{message}</div>
       <div className="marafone-player-area">
         <div className="marafone-label">Your Hand</div>
-        <div className="marafone-player-hand">
+        <div data-testid="hint-target-marafone-hand" className="marafone-player-hand">
           {playerHand.map(card => {
             const isLegal = legalIds.has(card.id);
             return isLegal

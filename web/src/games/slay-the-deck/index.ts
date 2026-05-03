@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget} from "../../platform/game-plugin/types.js";
 import type { SlayTheDeckState, SlayTheDeckAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SlayTheDeck } from "./Game.js";
@@ -20,5 +20,6 @@ Your 10-card deck reshuffles automatically when the draw pile empties. Build up 
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: SlayTheDeckState, action: SlayTheDeckAction) => SlayTheDeckState,
   isTerminal,
+  hint: (state): HintTarget | null => (false ? null : { selector: '[data-testid="hint-target-slay-the-deck-primary"]', pulses: 3 }),
   component: SlayTheDeck,
 } as unknown as GamePlugin;

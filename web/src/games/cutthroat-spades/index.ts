@@ -19,5 +19,9 @@ export const cutthroatSpadesPlugin: GamePlugin<CutthroatSpadesState, CutthroatSp
   initialState: (seed: number, _settings: CutthroatSpadesSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-cutthroat-spades-hand"]', pulses: 3 };
+      return null;
+    },
   component: CutthroatSpades,
 };

@@ -48,10 +48,10 @@ export function MiniSpitGame({ state, dispatch, onGameOver }: GameProps<MiniSpit
         </div>
         <div className="spit-mini-spit">
           {state.phase === "ready" && (
-            <button className="spit-mini-btn primary" onClick={() => dispatch({ type: "spit" } as MiniSpitAction)}>SPIT!</button>
+            <button data-testid="hint-target-mini-spit-primary" className="spit-mini-btn primary" onClick={() => dispatch({ type: "spit" } as MiniSpitAction)}>SPIT!</button>
           )}
           {state.phase === "stalemate" && (
-            <button className="spit-mini-btn warn" onClick={() => dispatch({ type: "knockSlap" } as MiniSpitAction)}>KNOCK</button>
+            <button data-testid="hint-target-mini-spit-primary" className="spit-mini-btn warn" onClick={() => dispatch({ type: "knockSlap" } as MiniSpitAction)}>KNOCK</button>
           )}
           {state.phase === "playing" && <div className="spit-mini-tag">PLAY</div>}
         </div>

@@ -34,5 +34,9 @@ Controls: click cards to select (they lift), then press Play. Press Pass to skip
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "playing") return { selector: '[data-testid="hint-target-tien-len-play"]', pulses: 3 };
+      return null;
+    },
   component: TienLenGame,
 };

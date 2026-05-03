@@ -23,7 +23,7 @@ export function CardTrioBuildGame({ state, dispatch, onGameOver }: GameProps<Car
         ))}
       </div>
       <div className="ctb-actions">
-        <button className="ctb-btn draw" disabled={state.drew >= TOTAL_DRAWS || state.hand.length >= HAND_LIMIT} onClick={() => dispatch({ type:"draw" } as CardTrioBuildAction)}>Draw</button>
+        <button data-testid="hint-target-card-trio-build-primary" className="ctb-btn draw" disabled={state.drew >= TOTAL_DRAWS || state.hand.length >= HAND_LIMIT} onClick={() => dispatch({ type:"draw" } as CardTrioBuildAction)}>Draw</button>
         {buildable.map(r => (
           <button key={r} className="ctb-btn build" onClick={() => dispatch({ type:"build", rank: r } as CardTrioBuildAction)}>Build {rankLabel(r)} trio</button>
         ))}

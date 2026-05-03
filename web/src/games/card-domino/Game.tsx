@@ -21,7 +21,7 @@ export function CardDominoGame({ state, dispatch, onGameOver }: GameProps<CardDo
           <button key={c.id} className="cd-card" onClick={() => dispatch({ type:"play", cardId:c.id } as CardDominoAction)}>{rankLabel(c.rank)}</button>
         ))}
       </div>
-      <button className="cd-btn skip" onClick={() => dispatch({ type:"skip" } as CardDominoAction)}>Skip turn (-2)</button>
+      <button data-testid="hint-target-card-domino-skip" className="cd-btn skip" onClick={() => dispatch({ type:"skip" } as CardDominoAction)}>Skip turn (-2)</button>
     </div>
   );
 }
