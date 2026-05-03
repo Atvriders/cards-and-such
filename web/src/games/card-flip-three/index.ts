@@ -28,5 +28,10 @@ Tips: There is no strategy — every flip is a reveal — so enjoy the suspense 
   initialState: (seed: number, settings: S) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (Array.isArray(state.revealed) && state.revealed.every((b: boolean) => b)) return { selector: '[data-testid="hint-target-card-flip-three-next"]', pulses: 3 };
+    return null;
+  },
   component: CardFlipThree,
 };

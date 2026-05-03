@@ -18,5 +18,9 @@ A new candidate is dealt every round, so even if you keep a King, the next candi
 Strategy: trade aggressively when your current card is low. Keep when you already have a King or Ace. Maximum theoretical score is 60 points (12 trades x 5).`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardTradeUpSettings),
-  reducer, isTerminal, component: CardTradeUpGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "done") return null;
+    return { selector: '[data-testid="hint-target-card-trade-up-trade"]', pulses: 3 };
+  }, component: CardTradeUpGame,
 };

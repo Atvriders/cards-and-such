@@ -39,9 +39,9 @@ export function CardPairPick({ state, dispatch, onGameOver }: GameProps<CardPair
       )}
       <div className="card-game-bets">
         {!isResult && state.picks.length === 2 && (
-          <button className="bet-btn" onClick={() => dispatch({ type: "confirm" } as CardPairPickAction)}>Confirm Pick</button>
+          <button data-testid="hint-target-card-pair-pick-confirm" className="bet-btn" onClick={() => dispatch({ type: "confirm" } as CardPairPickAction)}>Confirm Pick</button>
         )}
-        {isResult && <button className="bet-btn" onClick={() => dispatch({ type: "next" } as CardPairPickAction)}>Next Round</button>}
+        {isResult && <button data-testid="hint-target-card-pair-pick-next" className="bet-btn" onClick={() => dispatch({ type: "next" } as CardPairPickAction)}>Next Round</button>}
       </div>
     </div>
   );

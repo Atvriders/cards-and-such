@@ -18,5 +18,9 @@ The catch: you can only reject once per slot. After one bounce, the next card fo
 There are 12 draws per game. Average accept value is around 8 (the mean rank), so a no-reject strategy averages roughly 96 points. Maximum theoretical is 12 x 14 = 168 points (all Aces). Smart use of rejections can lift solid runs to 110+ points.`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardBouncerSettings),
-  reducer, isTerminal, component: CardBouncerGame,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "done") return null;
+    return { selector: '[data-testid="hint-target-card-bouncer-accept"]', pulses: 3 };
+  }, component: CardBouncerGame,
 };

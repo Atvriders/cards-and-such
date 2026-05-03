@@ -33,8 +33,8 @@ export function CardSnap3({ state, dispatch, onGameOver }: GameProps<CardSnap3St
       )}
       {snappable && !state.lastSnap && <div className="cs3-alert">3 in a row! SNAP it!</div>}
       <div className="cs3-actions">
-        <button className="cs3-btn flip" onClick={() => dispatch({ type: "flip" } as CardSnap3Action)}>Flip</button>
-        <button className={`cs3-btn snap ${snappable ? "hot" : ""}`} onClick={() => dispatch({ type: "snap" } as CardSnap3Action)}>SNAP</button>
+        <button data-testid="hint-target-card-snap-3-flip" className="cs3-btn flip" onClick={() => dispatch({ type: "flip" } as CardSnap3Action)}>Flip</button>
+        <button data-testid="hint-target-card-snap-3-snap" className={`cs3-btn snap ${snappable ? "hot" : ""}`} onClick={() => dispatch({ type: "snap" } as CardSnap3Action)}>SNAP</button>
       </div>
     </div>
   );

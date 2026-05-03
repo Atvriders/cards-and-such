@@ -27,5 +27,10 @@ After the result is shown, the actual lowest card is highlighted in green and th
 Use Settings to choose 8, 10, or 12 rounds. Final score is shown at the end. Can you read three cards and call it perfectly every time?`,
   settings: cardLowHigh3Settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardLowHigh3Settings),
-  reducer, isTerminal, component: CardLowHigh3,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-card-low-high-3-next"]', pulses: 3 };
+    return null;
+  }, component: CardLowHigh3,
 };

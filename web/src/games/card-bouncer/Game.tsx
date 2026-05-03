@@ -19,8 +19,8 @@ export function CardBouncerGame({ state, dispatch, onGameOver }: GameProps<CardB
         <>
           <div className={`cb-card ${isRed(state.current) ? "red" : "black"}`}>{cardName(state.current)}<div className="cb-rank">+{rankOf(state.current)}</div></div>
           <div className="cb-row">
-            <button className="cb-btn" onClick={() => dispatch({ type: "accept" } as CardBouncerAction)}>Accept</button>
-            <button className="cb-btn alt" disabled={state.bounceCount >= 1} onClick={() => dispatch({ type: "reject" } as CardBouncerAction)}>Reject</button>
+            <button data-testid="hint-target-card-bouncer-accept" className="cb-btn" onClick={() => dispatch({ type: "accept" } as CardBouncerAction)}>Accept</button>
+            <button data-testid="hint-target-card-bouncer-reject" className="cb-btn alt" disabled={state.bounceCount >= 1} onClick={() => dispatch({ type: "reject" } as CardBouncerAction)}>Reject</button>
           </div>
         </>
       )}

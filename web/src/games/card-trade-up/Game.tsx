@@ -25,8 +25,8 @@ export function CardTradeUpGame({ state, dispatch, onGameOver }: GameProps<CardT
         </div>
       </div>
       <div className="ctu-row">
-        <button className="ctu-btn" onClick={() => dispatch({ type: "trade" } as CardTradeUpAction)}>Trade</button>
-        <button className="ctu-btn alt" onClick={() => dispatch({ type: "keep" } as CardTradeUpAction)}>Keep</button>
+        <button data-testid="hint-target-card-trade-up-trade" className="ctu-btn" onClick={() => dispatch({ type: "trade" } as CardTradeUpAction)}>Trade</button>
+        <button data-testid="hint-target-card-trade-up-keep" className="ctu-btn alt" onClick={() => dispatch({ type: "keep" } as CardTradeUpAction)}>Keep</button>
       </div>
     </div>
   );

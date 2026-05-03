@@ -34,7 +34,7 @@ export function CardFlipThree({ state, dispatch, onGameOver }: GameProps<CardFli
             })}
           </div>
           {state.revealed.every(Boolean) && (
-            <button className="cft-next" onClick={() => dispatch({ type: "next" })}>
+            <button data-testid="hint-target-card-flip-three-next" className="cft-next" onClick={() => dispatch({ type: "next" })}>
               {state.round < state.totalRounds ? "Next Round" : "Finish"}
             </button>
           )}

@@ -29,5 +29,16 @@ The suits do not matter, only the ranks. With only four cards of each rank in th
   initialState: (seed: number, settings: CardSnap3SettingsType) => initialState(seed, settings as CardSnap3Settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    const h = state.history; const n = h?.length ?? 0;
+    if (n >= 3 && h[n-1] !== undefined && h[n-2] !== undefined && h[n-3] !== undefined) {
+      const r = (c: number) => c % 13;
+      if (r(h[n-1]) === r(h[n-2]) && r(h[n-2]) === r(h[n-3])) {
+        return { selector: '[data-testid="hint-target-card-snap-3-snap"]', pulses: 3 };
+      }
+    }
+    return { selector: '[data-testid="hint-target-card-snap-3-flip"]', pulses: 3 };
+  },
   component: CardSnap3,
 };

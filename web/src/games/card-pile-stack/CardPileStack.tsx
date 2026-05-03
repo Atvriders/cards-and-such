@@ -29,8 +29,8 @@ export function CardPileStack({ state, dispatch, onGameOver }: GameProps<CardPil
           </div>
           {bust && <p style={{ color: "#dc3545", fontWeight: "bold" }}>Bust! Round lost.</p>}
           <div className="cps-btns">
-            <button className="cps-btn draw" disabled={bust} onClick={() => dispatch({ type: "draw" })}>Draw Card</button>
-            <button className="cps-btn bank" disabled={state.pile.length === 0 || bust} onClick={() => dispatch({ type: "bank" })}>Bank {total > 0 ? `(+${total})` : ""}</button>
+            <button data-testid="hint-target-card-pile-stack-draw" className="cps-btn draw" disabled={bust} onClick={() => dispatch({ type: "draw" })}>Draw Card</button>
+            <button data-testid="hint-target-card-pile-stack-bank" className="cps-btn bank" disabled={state.pile.length === 0 || bust} onClick={() => dispatch({ type: "bank" })}>Bank {total > 0 ? `(+${total})` : ""}</button>
           </div>
         </>
       ) : (

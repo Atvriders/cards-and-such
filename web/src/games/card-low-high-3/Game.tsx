@@ -54,7 +54,7 @@ export function CardLowHigh3({ state, dispatch, onGameOver }: GameProps<CardLowH
         <div>
           <p className={`result-msg ${state.result}`}>{state.result === "correct" ? "+30 pts! Correct call!" : "Wrong! No points."}</p>
           <p style={{ fontSize: "0.85rem", color: "#888" }}>Low: {state.cards.filter(c => c % 13 === minRank).map(cardName).join(", ")} | High: {state.cards.filter(c => c % 13 === maxRank).map(cardName).join(", ")}</p>
-          <button className="bet-btn" onClick={() => dispatch({ type: "next" } as CardLowHigh3Action)}>Next</button>
+          <button data-testid="hint-target-card-low-high-3-next" className="bet-btn" onClick={() => dispatch({ type: "next" } as CardLowHigh3Action)}>Next</button>
         </div>
       )}
     </div>

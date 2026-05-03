@@ -18,5 +18,10 @@ Play over 10 or 20 rounds, accumulating points. The player who makes smart decis
 Settings let you choose the number of rounds. A different seed means a different deck order each game!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardDiscardBetSettings),
-  reducer, isTerminal, component: CardDiscardBet,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-card-discard-bet-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-card-discard-bet-keep"]', pulses: 3 };
+  }, component: CardDiscardBet,
 };

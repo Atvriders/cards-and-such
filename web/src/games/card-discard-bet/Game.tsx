@@ -18,10 +18,10 @@ export function CardDiscardBet({ state, dispatch, onGameOver }: GameProps<CardDi
       {state.phase === "result" && <p className="ctf-msg">{state.discarded ? `Discarded → next card: +${state.lastGain} pts (doubled!)` : `Kept → +${state.lastGain} pts`}</p>}
       <div className="ctf-actions">
         {state.phase === "decide" && <>
-          <button className="ctf-btn" onClick={() => dispatch({ type:"keep" } as CardDiscardBetAction)}>Keep (+rank pts)</button>
-          <button className="ctf-btn" style={{background:"#e74c3c"}} onClick={() => dispatch({ type:"discard" } as CardDiscardBetAction)}>Discard (2× next)</button>
+          <button data-testid="hint-target-card-discard-bet-keep" className="ctf-btn" onClick={() => dispatch({ type:"keep" } as CardDiscardBetAction)}>Keep (+rank pts)</button>
+          <button data-testid="hint-target-card-discard-bet-discard" className="ctf-btn" style={{background:"#e74c3c"}} onClick={() => dispatch({ type:"discard" } as CardDiscardBetAction)}>Discard (2× next)</button>
         </>}
-        {state.phase === "result" && <button className="ctf-btn" onClick={() => dispatch({ type:"next" } as CardDiscardBetAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>}
+        {state.phase === "result" && <button data-testid="hint-target-card-discard-bet-next" className="ctf-btn" onClick={() => dispatch({ type:"next" } as CardDiscardBetAction)}>{state.round >= state.maxRounds ? "Finish" : "Next"}</button>}
       </div>
     </div>
   );

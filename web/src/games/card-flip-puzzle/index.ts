@@ -20,5 +20,9 @@ Study the positions of revealed cards as they flip back: that is how you reduce 
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.gameOver) return null;
+    return { selector: '[data-testid="hint-target-card-flip-puzzle-grid"]', pulses: 3 };
+  },
   component: CardFlipPuzzle,
 } as unknown as GamePlugin;

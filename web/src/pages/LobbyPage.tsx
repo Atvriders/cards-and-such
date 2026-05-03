@@ -573,6 +573,34 @@ function writePersistedFilter(filter: Filter): void {
   } catch { /* ignore */ }
 }
 
+/**
+ * localStorage key persisting the user'''s manual drag-reorder of favorite
+ * tiles. Stored as a JSON array of stable entry ids (game-<id> for an
+ * un-grouped game, fam-<id> for a family tile). Entries not present in
+ * the saved order keep their default insertion order, appended after the
+ * ordered ones so newly favorited tiles surface predictably without
+ * forcing the user to re-drag.
+ */
+const FAVORITES_ORDER_KEY = "cards-favorites-order";
+
+function readFavoritesOrder(): string[] {
+  try {
+    if (typeof localStorage === "undefined") return [];
+    const raw = localStorage.getItem(FAVORITES_ORDER_KEY);
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter((v): v is string => typeof v === "string");
+  } catch { return []; }
+}
+
+function writeFavoritesOrder(order: string[]): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(FAVORITES_ORDER_KEY, JSON.stringify(order));
+  } catch { /* ignore */ }
+}
+
 const CATEGORY_ORDER: GameCategory[] = ["solitaire", "cards", "dice", "board", "arcade"];
 const CATEGORY_LABELS: Record<GameCategory, string> = {
   solitaire: t("lobby.cat.solitaire"),
@@ -651,6 +679,17 @@ type GameEntry = {
 };
 type LobbyEntry = FamilyEntry | GameEntry;
 
+/**
+ * Stable string id for a lobby entry. Used as the persistence key in
+ * cards-favorites-order so the same tile reorders consistently across
+ * reloads even though the in-memory LobbyEntry instance is recreated on
+ * every mount. Family vs. game ids share separate namespaces so we
+ * prefix accordingly.
+ */
+function entryDragId(e: LobbyEntry): string {
+  return e.kind === "game" ? `game-${e.game.id}` : `fam-${e.family.id}`;
+}
+
 export default function LobbyPage(): JSX.Element {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>(() => readPersistedFilter());
@@ -666,6 +705,14 @@ export default function LobbyPage(): JSX.Element {
   const [openFamilyId, setOpenFamilyId] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>(() => readRatings());
   const [favSet, setFavSet] = useState<Set<string>>(() => readFavorites());
+  // Manual drag-reorder of the favorites list. Only consulted when the
+  // active filter is "favorites"; other filters keep their intrinsic
+  // sort. Entries not present here keep their default (insertion)
+  // position and are appended after the ordered ones.
+  const [favOrder, setFavOrder] = useState<string[]>(() => readFavoritesOrder());
+  // Drag-id of the tile currently being dragged. null outside of an
+  // active drag.
+  const [draggingFavId, setDraggingFavId] = useState<string | null>(null);
   const [hiddenSet, setHiddenSet] = useState<Set<string>>(() => readHiddenGames());
   const [lastPlayed, setLastPlayed] = useState<Record<string, number>>(() => {
     try { return getLastPlayed(); } catch { return {}; }
@@ -1098,6 +1145,22 @@ export default function LobbyPage(): JSX.Element {
             : e.members.some((m) => favSet.has(m.id))
         ),
       );
+      // Apply the user'''s manual drag-reorder. Entries with a saved
+      // index sort by that index ascending; everything else keeps its
+      // default (alphabetical) position by sorting after ordered entries
+      // with a stable secondary tie-breaker on sortKey.
+      const orderIndex = new Map<string, number>();
+      favOrder.forEach((id, i) => orderIndex.set(id, i));
+      const HIGH = Number.MAX_SAFE_INTEGER;
+      list = list.slice().sort((a, b) => {
+        const ai = orderIndex.get(entryDragId(a)) ?? HIGH;
+        const bi = orderIndex.get(entryDragId(b)) ?? HIGH;
+        if (ai !== bi) return ai - bi;
+        return compareTitles(a.sortKey, b.sortKey);
+      });
+      // Mark this branch as having an intrinsic sort so the generic
+      // sort-mode block below doesn'''t override our drag order.
+      usesIntrinsicSort = true;
     } else if (filter === "recently-played") {
       // Keep only entries that have at least one member with a non-zero
       // last-played stamp; sort by most-recent stamp descending so the
@@ -1167,7 +1230,7 @@ export default function LobbyPage(): JSX.Element {
       });
     }
     return list;
-  }, [allEntries, filter, deferredQuery, entryRating, favSet, lastPlayed, isEntryHidden, sortMode, stats, registryIndex]);
+  }, [allEntries, filter, deferredQuery, entryRating, favSet, favOrder, lastPlayed, isEntryHidden, sortMode, stats, registryIndex]);
 
   // Reset window + page + close any open picker when filter or query changes.
   useEffect(() => {
@@ -1426,6 +1489,88 @@ export default function LobbyPage(): JSX.Element {
     const start = (safePage - 1) * PAGE_SIZE;
     return filtered.slice(start, start + PAGE_SIZE);
   }, [filtered, visibleCount, listMode, safePage]);
+
+  // -----------------------------------------------------------------
+  // Drag-reorder of favorite tiles (only active in favorites filter).
+  // Implemented as event delegation on the lobby grid:
+  //   - dragstart records the source tile'''s stable drag-id
+  //   - dragover preventDefault enables the drop target
+  //   - drop reorders cards-favorites-order and writes through to
+  //     localStorage. Click navigation is untouched — a real drag
+  //     suppresses the synthetic click on every modern browser, and
+  //     the underlying <Link>/<button> still fires onClick for clicks.
+  // We stamp draggable=true and data-fav-drag-id on each visible tile
+  // via DOM rather than threading new props through GameCard /
+  // FamilyCard so other filters''' tiles stay completely unaffected.
+  // -----------------------------------------------------------------
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const tiles = grid.querySelectorAll<HTMLElement>(".tile");
+    const enable = filter === "favorites";
+    tiles.forEach((tile, i) => {
+      const entry = visible[i];
+      if (enable && entry) {
+        tile.setAttribute("draggable", "true");
+        tile.setAttribute("data-fav-drag-id", entryDragId(entry));
+      } else {
+        tile.removeAttribute("draggable");
+        tile.removeAttribute("data-fav-drag-id");
+      }
+    });
+  }, [filter, visible]);
+
+  const onFavDragStart = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    if (filter !== "favorites") return;
+    const tile = (e.target as HTMLElement | null)?.closest<HTMLElement>(".tile");
+    if (!tile) return;
+    const id = tile.getAttribute("data-fav-drag-id");
+    if (!id) return;
+    setDraggingFavId(id);
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = "move";
+      try { e.dataTransfer.setData("text/plain", id); } catch { /* ignore */ }
+    }
+  }, [filter]);
+
+  const onFavDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    if (filter !== "favorites" || draggingFavId == null) return;
+    // Prevent default so the drop event fires.
+    e.preventDefault();
+    if (e.dataTransfer) e.dataTransfer.dropEffect = "move";
+  }, [filter, draggingFavId]);
+
+  const onFavDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    if (filter !== "favorites") return;
+    const src = draggingFavId;
+    setDraggingFavId(null);
+    if (!src) return;
+    const tile = (e.target as HTMLElement | null)?.closest<HTMLElement>(".tile");
+    const dst = tile?.getAttribute("data-fav-drag-id") ?? null;
+    if (!dst || dst === src) return;
+    e.preventDefault();
+    // Build the next order from the current visible favorites order so
+    // entries the user has never touched still get persisted into
+    // favOrder on first drag.
+    const grid = gridRef.current;
+    if (!grid) return;
+    const currentIds = Array.from(grid.querySelectorAll<HTMLElement>(".tile"))
+      .map((t) => t.getAttribute("data-fav-drag-id"))
+      .filter((v): v is string => Boolean(v));
+    const fromIdx = currentIds.indexOf(src);
+    const toIdx = currentIds.indexOf(dst);
+    if (fromIdx < 0 || toIdx < 0) return;
+    const next = currentIds.slice();
+    const [moved] = next.splice(fromIdx, 1);
+    if (moved !== undefined) next.splice(toIdx, 0, moved);
+    setFavOrder(next);
+    writeFavoritesOrder(next);
+  }, [filter, draggingFavId]);
+
+  const onFavDragEnd = useCallback(() => {
+    setDraggingFavId(null);
+  }, []);
+
   // "More to load" is only meaningful in infinite-scroll mode — the
   // pagination footer never short-circuits the Prev/Next controls.
   const hasMore = listMode === "infinite" && visibleCount < filtered.length;
@@ -2029,7 +2174,17 @@ export default function LobbyPage(): JSX.Element {
           )
         ) : (
           <>
-            <div className="lobby-grid" data-density={density} data-view={viewMode} ref={gridRef} onKeyDown={onGridKeyDown}>
+            <div
+              className="lobby-grid"
+              data-density={density}
+              data-view={viewMode}
+              ref={gridRef}
+              onKeyDown={onGridKeyDown}
+              onDragStart={onFavDragStart}
+              onDragOver={onFavDragOver}
+              onDrop={onFavDrop}
+              onDragEnd={onFavDragEnd}
+            >
               {visible.map((entry) =>
                 entry.kind === "game" ? (
                   <GameCard
@@ -2662,6 +2817,11 @@ function GameCard({
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
+      <span
+        className="tile-drag-handle"
+        data-testid={`tile-drag-handle-${g.id}`}
+        aria-hidden="true"
+      >⋮⋮</span>
       {badgeKind && (
         <span className="tile-badge-slot">
           <Badge kind={badgeKind} testId={`tile-badge-${g.id}`} />
@@ -2878,6 +3038,11 @@ function FamilyCard({
     >
       <span className="tile-stripe" aria-hidden="true" />
       <span className="tile-sheen" aria-hidden="true" />
+      <span
+        className="tile-drag-handle"
+        data-testid={`tile-drag-handle-${family.id}`}
+        aria-hidden="true"
+      >⋮⋮</span>
       {badgeKind && (
         <span className="tile-badge-slot">
           <Badge kind={badgeKind} testId={`tile-badge-${family.id}`} />

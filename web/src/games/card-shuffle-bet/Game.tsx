@@ -33,8 +33,8 @@ export function CardShuffleBet({ state, dispatch, onGameOver }: GameProps<CardSh
           </button>
         ))}
       </div>
-      {isMemorize && <button className="bet-btn" onClick={() => dispatch({ type: "ready" } as CardShuffleBetAction)}>Shuffle!</button>}
-      {isResult && <button className="bet-btn" onClick={() => dispatch({ type: "next" } as CardShuffleBetAction)}>Next</button>}
+      {isMemorize && <button data-testid="hint-target-card-shuffle-bet-ready" className="bet-btn" onClick={() => dispatch({ type: "ready" } as CardShuffleBetAction)}>Shuffle!</button>}
+      {isResult && <button data-testid="hint-target-card-shuffle-bet-next" className="bet-btn" onClick={() => dispatch({ type: "next" } as CardShuffleBetAction)}>Next</button>}
     </div>
   );
 }

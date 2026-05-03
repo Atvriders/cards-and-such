@@ -64,14 +64,14 @@ export function CardShuffleProGame({
             <div className="csp-prompt">
               <p>Predict the color of the next card from the shuffled deck:</p>
               <div className="csp-buttons">
-                <button
+                <button data-testid="hint-target-card-shuffle-pro-red"
                   type="button"
                   className="csp-btn csp-btn--red"
                   onClick={() => dispatch({ type: "guess", color: "red" })}
                 >
                   Red
                 </button>
-                <button
+                <button data-testid="hint-target-card-shuffle-pro-black"
                   type="button"
                   className="csp-btn csp-btn--black"
                   onClick={() => dispatch({ type: "guess", color: "black" })}
@@ -87,7 +87,7 @@ export function CardShuffleProGame({
                 <strong>{colorOf(state.next)}</strong>.{" "}
                 {colorOf(state.next) === state.guess ? "Correct!" : "Wrong."}
               </p>
-              <button
+              <button data-testid="hint-target-card-shuffle-pro-next"
                 type="button"
                 className="csp-btn csp-btn--primary"
                 onClick={() => dispatch({ type: "next" })}

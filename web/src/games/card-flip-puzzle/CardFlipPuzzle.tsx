@@ -26,7 +26,7 @@ export function CardFlipPuzzle({
         <span>Moves: <b>{state.moves}</b></span>
       </div>
 
-      <div className="cfp-grid">
+      <div data-testid="hint-target-card-flip-puzzle-grid" className="cfp-grid">
         {state.cards.map((val, i) => {
           const isRevealed = state.revealed[i];
           const isMatched = state.matched[i];

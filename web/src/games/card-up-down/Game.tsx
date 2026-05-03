@@ -26,14 +26,14 @@ export function CardUpDown({ state, dispatch, onGameOver }: GameProps<CardUpDown
       <p style={{ color: "#555", fontSize: "0.95rem" }}>Will the next card rank higher or lower?</p>
       {!isReveal && (
         <div className="card-game-bets">
-          <button className="bet-btn" style={{ background: "#27ae60" }} onClick={() => dispatch({ type: "guess", dir: "up" } as CardUpDownAction)}>Higher</button>
-          <button className="bet-btn" style={{ background: "#e74c3c" }} onClick={() => dispatch({ type: "guess", dir: "down" } as CardUpDownAction)}>Lower</button>
+          <button data-testid="hint-target-card-up-down-up" className="bet-btn" style={{ background: "#27ae60" }} onClick={() => dispatch({ type: "guess", dir: "up" } as CardUpDownAction)}>Higher</button>
+          <button data-testid="hint-target-card-up-down-down" className="bet-btn" style={{ background: "#e74c3c" }} onClick={() => dispatch({ type: "guess", dir: "down" } as CardUpDownAction)}>Lower</button>
         </div>
       )}
       {isReveal && (
         <div>
           <p className={`result-msg ${state.lastResult}`}>{state.lastResult === "correct" ? `Correct! +${10 + state.streak * 2} pts` : "Wrong!"}</p>
-          <button className="bet-btn" onClick={() => dispatch({ type: "next" } as CardUpDownAction)}>Next</button>
+          <button data-testid="hint-target-card-up-down-next" className="bet-btn" onClick={() => dispatch({ type: "next" } as CardUpDownAction)}>Next</button>
         </div>
       )}
     </div>

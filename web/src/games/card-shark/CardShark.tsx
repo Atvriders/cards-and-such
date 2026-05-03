@@ -59,13 +59,13 @@ export function CardShark({
 
       {!state.over && (
         <div className="cs-controls">
-          <button
+          <button data-testid="hint-target-card-shark-higher"
             className="cs-btn cs-btn-higher"
             onClick={() => dispatch({ type: "higher" } as CardSharkAction)}
           >
             Higher
           </button>
-          <button
+          <button data-testid="hint-target-card-shark-lower"
             className="cs-btn cs-btn-lower"
             onClick={() => dispatch({ type: "lower" } as CardSharkAction)}
           >

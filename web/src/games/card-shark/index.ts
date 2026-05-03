@@ -42,5 +42,9 @@ Play for 10, 20, or 30 rounds. With one deck there are more high cards later aft
   initialState: (seed: number, settings: CardSharkSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.over) return null;
+    return { selector: '[data-testid="hint-target-card-shark-higher"]', pulses: 3 };
+  },
   component: CardShark,
 };

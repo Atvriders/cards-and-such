@@ -27,5 +27,11 @@ After the result is shown, press Next to see three fresh cards and start again.
 Use Settings to choose 6, 8, or 10 rounds. Your final score is displayed at the end. Perfect recall scores a maximum of 400 points!`,
   settings: cardShuffleBetSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardShuffleBetSettings),
-  reducer, isTerminal, component: CardShuffleBet,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "memorize") return { selector: '[data-testid="hint-target-card-shuffle-bet-ready"]', pulses: 3 };
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-card-shuffle-bet-next"]', pulses: 3 };
+    return null;
+  }, component: CardShuffleBet,
 };

@@ -35,5 +35,9 @@ export const cardShuffleProPlugin: GamePlugin<
   initialState: (seed: number, s: CSPSettingsType) => initialState(seed, coerce(s)),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.revealed) return { selector: '[data-testid="hint-target-card-shuffle-pro-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-card-shuffle-pro-red"]', pulses: 3 };
+  },
   component: CardShuffleProGame,
 };

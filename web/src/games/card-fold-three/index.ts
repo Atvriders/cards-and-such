@@ -18,5 +18,10 @@ Over 10 or 20 rounds, small consistent gains from folding bad hands and standing
 Cards are dealt sequentially from a shuffled 52-card deck. Use Settings to choose your round count and chase your best score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as CardFoldThreeSettings),
-  reducer, isTerminal, component: CardFoldThree,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-card-fold-three-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-card-fold-three-stand"]', pulses: 3 };
+  }, component: CardFoldThree,
 };

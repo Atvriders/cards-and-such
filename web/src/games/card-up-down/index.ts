@@ -27,5 +27,10 @@ Use Settings to play 10 or 20 rounds. The deck is freshly shuffled each game. Tr
 Think carefully as the game progresses: if you have seen many high cards, the next is more likely to be low. Final score and streak are shown at game over. How high can you build your streak?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardUpDownSettings),
-  reducer, isTerminal, component: CardUpDown,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "reveal") return { selector: '[data-testid="hint-target-card-up-down-next"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-card-up-down-up"]', pulses: 3 };
+  }, component: CardUpDown,
 };

@@ -17,10 +17,10 @@ export function CardFoldThree({ state, dispatch, onGameOver }: GameProps<CardFol
       {state.phase === "result" && <p className="ctf-msg">{state.choice === "fold" ? `Folded — scored lowest: +${state.lastScore} pts` : `Stood — scored highest: +${state.lastScore} pts`}</p>}
       <div className="ctf-actions">
         {state.phase === "decide" && <>
-          <button className="ctf-btn" style={{background:"#e74c3c"}} onClick={()=>dispatch({type:"fold"} as CardFoldThreeAction)}>Fold (score lowest)</button>
-          <button className="ctf-btn" onClick={()=>dispatch({type:"stand"} as CardFoldThreeAction)}>Stand (score highest)</button>
+          <button data-testid="hint-target-card-fold-three-fold" className="ctf-btn" style={{background:"#e74c3c"}} onClick={()=>dispatch({type:"fold"} as CardFoldThreeAction)}>Fold (score lowest)</button>
+          <button data-testid="hint-target-card-fold-three-stand" className="ctf-btn" onClick={()=>dispatch({type:"stand"} as CardFoldThreeAction)}>Stand (score highest)</button>
         </>}
-        {state.phase === "result" && <button className="ctf-btn" onClick={()=>dispatch({type:"next"} as CardFoldThreeAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
+        {state.phase === "result" && <button data-testid="hint-target-card-fold-three-next" className="ctf-btn" onClick={()=>dispatch({type:"next"} as CardFoldThreeAction)}>{state.round>=state.maxRounds?"Finish":"Next"}</button>}
       </div>
     </div>
   );

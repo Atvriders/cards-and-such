@@ -27,5 +27,11 @@ The game guarantees exactly one matching pair among the six cards each round, so
 Use Settings to choose 6, 8, or 10 rounds. Your final score is shown at the end. Can you find every pair for a perfect score?`,
   settings: cardPairPickSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardPairPickSettings),
-  reducer, isTerminal, component: CardPairPick,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "gameover") return null;
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-card-pair-pick-next"]', pulses: 3 };
+    if (Array.isArray(state.picks) && state.picks.length === 2) return { selector: '[data-testid="hint-target-card-pair-pick-confirm"]', pulses: 3 };
+    return null;
+  }, component: CardPairPick,
 };
