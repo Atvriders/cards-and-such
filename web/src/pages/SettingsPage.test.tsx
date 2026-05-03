@@ -1,9 +1,22 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+
+// Mock the platform sounds module so the Test-sounds panel tests can
+// assert that `playSound()` is invoked without firing Web Audio in jsdom.
+// We preserve every other export (constants like LS_SOUND_ON, types) so
+// SettingsPage's other imports continue to resolve.
+vi.mock("../platform/sounds.js", async () => {
+  const actual = await vi.importActual<typeof import("../platform/sounds.js")>(
+    "../platform/sounds.js",
+  );
+  return { ...actual, playSound: vi.fn() };
+});
+
 import SettingsPage, { _buildExportSnapshot } from "./SettingsPage.js";
 import { KNOWN_KEYS } from "../platform/userdata.js";
 import { applyLightMode } from "../platform/lightMode.js";
+import { playSound } from "../platform/sounds.js";
 
 // Helper: stub window.matchMedia so the SettingsPage's mobile detection
 // can be flipped per-test. jsdom doesn't ship a matchMedia implementation,
@@ -410,5 +423,49 @@ describe("SettingsPage mobile accordion", () => {
     expect(screen.getByTestId("sound-toggle")).toBeInTheDocument();
     expect(screen.getByTestId("settings-auto-move")).toBeInTheDocument();
     expect(screen.getByTestId("settings-export")).toBeInTheDocument();
+  });
+});
+
+// W214 — Audio "Test sounds" panel: each preview button should render,
+// click should fan out to playSound(), and the buttons must mirror the
+// master sound toggle's disabled state so a muted user never hears a
+// surprise sample.
+describe("SettingsPage Test sounds panel (W214)", () => {
+  const TEST_BUTTON_IDS = [
+    "settings-test-card-deal",
+    "settings-test-card-flip",
+    "settings-test-card-place",
+    "settings-test-card-shuffle",
+    "settings-test-win",
+    "settings-test-win-fanfare",
+  ] as const;
+
+  beforeEach(() => {
+    localStorage.clear();
+    vi.mocked(playSound).mockClear();
+  });
+
+  it("renders a test-sound button for every preview category", () => {
+    renderPage();
+    expect(screen.getByTestId("settings-test-sounds")).toBeInTheDocument();
+    for (const id of TEST_BUTTON_IDS) {
+      expect(screen.getByTestId(id)).toBeInTheDocument();
+    }
+  });
+
+  it("clicking settings-test-card-place invokes playSound('card-place')", () => {
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-test-card-place"));
+    expect(playSound).toHaveBeenCalledTimes(1);
+    expect(playSound).toHaveBeenCalledWith("card-place");
+  });
+
+  it("disables every test-sound button when the master sound toggle is off", () => {
+    localStorage.setItem("cards-sound-on", "false");
+    renderPage();
+    for (const id of TEST_BUTTON_IDS) {
+      const btn = screen.getByTestId(id) as HTMLButtonElement;
+      expect(btn.disabled).toBe(true);
+    }
   });
 });
