@@ -1,6 +1,7 @@
 import { describe, expect, it, beforeEach } from "vitest";
+import type { JSX } from "react";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
 /**
@@ -161,5 +162,70 @@ describe("LobbyPage — hide-tile + Hidden chip + reset (W574)", () => {
     // wiped set — a stale count would expose a regression where the
     // listener forgets to recompute `hiddenCount` alongside the set.
     expect(screen.getByTestId("chip-hidden")).toHaveTextContent("0");
+  });
+});
+
+/**
+ * W248 — LobbyTileMenu Play action routes to /play/<id>.
+ *
+ * The right-click context menu's first item (`tile-menu-play`) must
+ * invoke `onMenuPlay`, which calls `navigate(`/play/${g.id}`)`. We
+ * exercise the user-visible outcome by mounting a sibling
+ * `LocationProbe` inside the same `MemoryRouter` and asserting the
+ * router's pathname after the click — pinning the actual URL change
+ * rather than spying on `navigate` internals. `texas-holdem` is reused
+ * here for the same reason as the W574 hide tests above: it is a
+ * canonical standalone (non-family) game id whose `tile-<id>` resolves
+ * to a `GameCard` that opens the context menu on right-click.
+ */
+describe("LobbyPage — LobbyTileMenu Play action routes (W248)", () => {
+  const STANDALONE_ID = "texas-holdem";
+
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("right-click then tile-menu-play navigates to /play/<id>", async () => {
+    function LocationProbe(): JSX.Element {
+      const loc = useLocation();
+      return <div data-testid="loc-probe">{loc.pathname}</div>;
+    }
+
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <LobbyPage />
+        <LocationProbe />
+      </MemoryRouter>,
+    );
+
+    // Baseline: still on the lobby root before any interaction.
+    expect(screen.getByTestId("loc-probe").textContent).toBe("/");
+
+    // Narrow the grid to the target tile via the search input — see the
+    // W574 test above for why this is required (PAGE_SIZE pagination).
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "texas hold" } });
+
+    const tile = await waitFor(() =>
+      screen.getByTestId(`tile-${STANDALONE_ID}`),
+    );
+
+    // Right-click opens the LobbyTileMenu popover; `tile-menu-play` is
+    // the first item and runs `navigate(`/play/${g.id}`)` via run().
+    fireEvent.contextMenu(tile);
+    const playItem = await screen.findByTestId("tile-menu-play");
+    fireEvent.click(playItem);
+
+    // The router location now reflects the play route for this id —
+    // exact pathname pin (not a regex) so a regression that routes to
+    // the wrong id or a different prefix is caught.
+    await waitFor(() => {
+      expect(screen.getByTestId("loc-probe").textContent).toBe(
+        `/play/${STANDALONE_ID}`,
+      );
+    });
+    // The menu auto-closes after run() — confirms the click flowed
+    // through the menu's command runner rather than a stray handler.
+    expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
   });
 });
