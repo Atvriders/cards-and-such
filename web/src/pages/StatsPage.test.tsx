@@ -1220,6 +1220,24 @@ describe("StatsPage", () => {
       expect(within(row1).getByText("3")).toBeTruthy();
     });
 
+    // W615: Each rendered most-hinted row exposes a `Play` Link whose `href`
+    // round-trips through React Router as `/play/<gameId>`, giving users a
+    // one-click jump from the stats dashboard back into the game they've
+    // hinted on most. Pins the per-row Link contract so any drift in the
+    // route shape (or accidental swap to a non-routed <a>) surfaces here.
+    it("W615: each row exposes a Play Link with href /play/<id>", () => {
+      seedStats({ totalPlayed: 1 });
+      localStorage.setItem("cards-hints-used", JSON.stringify({ klondike: 7, spider: 3 }));
+      renderPage();
+      const panel = screen.getByTestId("stats-most-hinted");
+      const row0 = within(panel).getByTestId("stats-most-hinted-row-0");
+      const row1 = within(panel).getByTestId("stats-most-hinted-row-1");
+      const play0 = within(row0).getByRole("link", { name: "Play" });
+      const play1 = within(row1).getByRole("link", { name: "Play" });
+      expect(play0.getAttribute("href")).toBe("/play/klondike");
+      expect(play1.getAttribute("href")).toBe("/play/spider");
+    });
+
     it("shows empty-state copy when no hints have been used", () => {
       seedStats({ totalPlayed: 1 });
       renderPage();
