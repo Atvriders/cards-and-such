@@ -1115,6 +1115,44 @@ describe("StatsPage", () => {
     });
   });
 
+  // W156: Achievement progress bars expose ARIA progressbar semantics so
+  // assistive tech can announce "halfway there". The Card Shark achievement
+  // tracks unique games played with a goal of 50; seeding 25 distinct
+  // `perGame` keys must yield a progressbar with aria-valuenow=25,
+  // aria-valuemin=0, aria-valuemax=50 (i.e. 50% progress) and the bucket
+  // must classify as "in-progress" (not unlocked, not locked) so the card
+  // renders regardless of the show-locked toggle default.
+  it("W156: Card Shark achievement renders progressbar at aria-valuenow=25 / aria-valuemax=50 when 25 unique games are seeded", () => {
+    // Build 25 distinct perGame entries — Card Shark's `cur` is
+    // `Object.keys(s.perGame).length` clamped to 50, so 25 keys → cur=25.
+    const perGame: Record<string, { played: number; wins: number; best: number }> = {};
+    for (let i = 0; i < 25; i++) {
+      perGame[`game-${i}`] = { played: 1, wins: 0, best: 0 };
+    }
+    seedStats({ totalPlayed: 25, perGame });
+    renderPage();
+
+    // Card itself must be in-progress — neither unlocked (cur < goal) nor
+    // hidden behind the locked-toggle gate (cur > 0 puts it in the
+    // in-progress bucket which is always visible).
+    const card = screen.getByTestId("achievement-card-shark");
+    expect(card).toBeInTheDocument();
+    expect(card.getAttribute("data-state")).toBe("in-progress");
+
+    // Progressbar carries the canonical ARIA values: now=25, min=0, max=50.
+    const progressWrap = within(card).getByTestId("achievement-progress-card-shark");
+    const bar = progressWrap.querySelector('[role="progressbar"]') as HTMLElement;
+    expect(bar).not.toBeNull();
+    expect(bar.getAttribute("aria-valuenow")).toBe("25");
+    expect(bar.getAttribute("aria-valuemin")).toBe("0");
+    expect(bar.getAttribute("aria-valuemax")).toBe("50");
+    // data-pct mirrors the rounded percent — pin 50 so any drift in the
+    // pct formula (e.g. floor vs round) surfaces here, not just visually.
+    expect(bar.getAttribute("data-pct")).toBe("50");
+    // Human-readable cur/goal label matches the ARIA contract.
+    expect(progressWrap.textContent).toContain("25/50");
+  });
+
   // W244: Most-hinted games card. Reads `cards-hints-used` directly and ranks
   // the top 5 by hint count, descending. Empty / missing blob shows the
   // "No hints used yet" empty state with a nudge to the lightbulb button.
