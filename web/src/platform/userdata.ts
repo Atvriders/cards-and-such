@@ -34,6 +34,7 @@ export const KNOWN_KEYS: readonly string[] = [
   "cards-lobby-filter",
   "cards-daily-completions",
   "cards-daily-streak",
+  "cards-daily-shield",
   // appearance / preferences
   "cards-bg-theme",
   "cards-theme-custom",
@@ -230,6 +231,112 @@ export function recordDailyPlayed(stamp: string): DailyStreak {
     }
   } catch { /* ignore */ }
   return next;
+}
+
+/* ----------------------------------------------------------------------
+ * Streak shield
+ *
+ * Persisted under `cards-daily-shield` as JSON: { lastUsed: "YYYY-MM-DD" }.
+ * The user gets one shield per rolling 7-day window — when they miss exactly
+ * one day, the shield is consumed silently and their streak survives. We do
+ * not refund the shield, and we never grant more than one per week. The
+ * `lastUsed` field stores the stamp on which the shield was burned (the
+ * missed-day stamp) so it round-trips through export/import.
+ * -------------------------------------------------------------------- */
+
+const DAILY_SHIELD_KEY = "cards-daily-shield";
+/** Cooldown window between shield uses, in days. */
+export const SHIELD_COOLDOWN_DAYS = 7;
+
+export interface DailyShield {
+  /** YYYY-MM-DD stamp of the most recent shield use, or "" if never used. */
+  lastUsed: string;
+}
+
+/** Read the shield record. Returns a zeroed record if missing/corrupt. */
+export function getShield(): DailyShield {
+  try {
+    if (typeof localStorage === "undefined") return { lastUsed: "" };
+    const raw = localStorage.getItem(DAILY_SHIELD_KEY);
+    if (!raw) return { lastUsed: "" };
+    const parsed = JSON.parse(raw) as Partial<DailyShield>;
+    const lastUsed = typeof parsed.lastUsed === "string" ? parsed.lastUsed : "";
+    return { lastUsed };
+  } catch {
+    return { lastUsed: "" };
+  }
+}
+
+/**
+ * True if the shield is currently available to absorb a missed day relative
+ * to `todayStamp`. Available when never used, or when the last use is at
+ * least {@link SHIELD_COOLDOWN_DAYS} days ago.
+ */
+export function isShieldAvailable(todayStamp: string): boolean {
+  const today = parseDayIndex(todayStamp);
+  if (Number.isNaN(today)) return false;
+  const s = getShield();
+  if (!s.lastUsed) return true;
+  const last = parseDayIndex(s.lastUsed);
+  if (Number.isNaN(last)) return true;
+  return today - last >= SHIELD_COOLDOWN_DAYS;
+}
+
+/** Persist `stamp` as the most recent shield-use date. Best-effort. */
+function writeShieldUsed(stamp: string): void {
+  try {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(DAILY_SHIELD_KEY, JSON.stringify({ lastUsed: stamp }));
+  } catch { /* ignore */ }
+}
+
+/**
+ * Shield-aware version of {@link recordDailyPlayed}. If the user is recording
+ * a play exactly two day-indices after their last played day AND a shield is
+ * currently available, the missed day is treated as covered: the streak
+ * increments instead of resetting and the shield is consumed (its
+ * `lastUsed` set to the missed-day stamp). Otherwise behaves identically to
+ * {@link recordDailyPlayed}. Returns the updated streak record alongside a
+ * `usedShield` flag for callers that want to flash a "shield consumed" hint.
+ */
+export function recordDailyPlayedWithShield(
+  stamp: string,
+): { streak: DailyStreak; usedShield: boolean } {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(stamp)) {
+    return { streak: getStreak(), usedShield: false };
+  }
+  const cur = getStreak();
+  if (cur.lastDate === stamp) return { streak: cur, usedShield: false };
+
+  const today = parseDayIndex(stamp);
+  const last = cur.lastDate ? parseDayIndex(cur.lastDate) : Number.NaN;
+  const gap = !Number.isNaN(last) && !Number.isNaN(today) ? today - last : -1;
+  const wouldBreak = gap === 2 && isShieldAvailable(stamp);
+
+  if (!wouldBreak) {
+    return { streak: recordDailyPlayed(stamp), usedShield: false };
+  }
+
+  // Burn the shield: backfill the missed (yesterday) stamp into the played
+  // set so the calendar shows it as covered, then advance the streak by 1
+  // for today's play. The covered day is not double-counted toward the
+  // streak counter.
+  const missedIdx = today - 1;
+  const missedStamp = new Date(missedIdx * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  const current = cur.current + 1;
+  const longest = Math.max(cur.longest, current);
+  const days = Array.from(new Set([...cur.days, missedStamp, stamp])).sort();
+  const trimmed = days.slice(Math.max(0, days.length - DAILY_DAYS_LIMIT));
+  const next: DailyStreak = { current, longest, lastDate: stamp, days: trimmed };
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(DAILY_STREAK_KEY, JSON.stringify(next));
+    }
+  } catch { /* ignore */ }
+  writeShieldUsed(missedStamp);
+  return { streak: next, usedShield: true };
 }
 
 /**
