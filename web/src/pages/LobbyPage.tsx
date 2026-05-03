@@ -2097,115 +2097,194 @@ export default function LobbyPage(): JSX.Element {
               </span>
             )}
           </h2>
-          {/* Two-state icon toggle for grid vs list view. Persisted in
-              localStorage under `cards-lobby-view`; mirrored as
-              `data-view` on `.lobby-grid` so the layout switch is
-              CSS-driven (see `.lobby-grid[data-view="list"]`). */}
+          {/* Toolbar row hosting the section-level controls. On wide
+              viewports each toggle sits inline with consistent gap; on
+              narrow viewports (<700px) the less-used density + view
+              controls collapse behind ".lobby-overflow" popover. */}
           <div
-            className="lobby-view-toggle"
+            className="lobby-toolbar"
             role="group"
-            aria-label="Lobby view"
-            data-testid="lobby-view-toggle"
+            aria-label="Lobby toolbar"
+            data-testid="lobby-toolbar"
           >
-            <button
-              type="button"
-              className={`lobby-view-toggle-btn${viewMode === "grid" ? " is-active" : ""}`}
-              aria-pressed={viewMode === "grid"}
-              aria-label="Grid view"
-              title="Grid view"
-              onClick={() => setViewMode("grid")}
-              data-testid="lobby-view-grid"
+            {/* Two-state icon toggle for grid vs list view. Persisted in
+                localStorage under `cards-lobby-view`; mirrored as
+                `data-view` on `.lobby-grid` so the layout switch is
+                CSS-driven (see `.lobby-grid[data-view="list"]`). */}
+            <div
+              className="lobby-view-toggle lobby-toolbar-secondary"
+              role="group"
+              aria-label="Lobby view"
+              data-testid="lobby-view-toggle"
             >
-              <svg
-                className="lobby-view-toggle-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="3" y="3" width="7" height="7" rx="1" />
-                <rect x="14" y="3" width="7" height="7" rx="1" />
-                <rect x="3" y="14" width="7" height="7" rx="1" />
-                <rect x="14" y="14" width="7" height="7" rx="1" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              className={`lobby-view-toggle-btn${viewMode === "list" ? " is-active" : ""}`}
-              aria-pressed={viewMode === "list"}
-              aria-label="List view"
-              title="List view"
-              onClick={() => setViewMode("list")}
-              data-testid="lobby-view-list"
-            >
-              <svg
-                className="lobby-view-toggle-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="8" y1="6" x2="21" y2="6" />
-                <line x1="8" y1="12" x2="21" y2="12" />
-                <line x1="8" y1="18" x2="21" y2="18" />
-                <circle cx="4" cy="6" r="1" />
-                <circle cx="4" cy="12" r="1" />
-                <circle cx="4" cy="18" r="1" />
-              </svg>
-            </button>
-          </div>
-          {/* Three-state pill toggle for grid density (compact/comfortable/
-              spacious). Persisted in localStorage; mirrored as
-              `data-density` on `.lobby-grid` so all sizing is CSS-driven. */}
-          <div
-            className="lobby-density-toggle"
-            role="group"
-            aria-label="Grid density"
-            data-testid="lobby-density-toggle"
-          >
-            {DENSITY_MODES.map((mode) => (
               <button
-                key={mode}
                 type="button"
-                className={`lobby-density-toggle-btn${density === mode ? " is-active" : ""}`}
-                aria-pressed={density === mode}
-                onClick={() => setDensity(mode)}
-                data-testid={`lobby-density-${mode}`}
-              >{DENSITY_LABELS[mode]}</button>
-            ))}
-          </div>
-          {/* Two-state pill toggle for the list-walking strategy.
-              Persisted in localStorage; default = pagination. */}
-          <div
-            className="lobby-mode-toggle"
-            role="group"
-            aria-label="List browsing mode"
-            data-testid="lobby-mode-toggle"
-          >
-            <button
-              type="button"
-              className={`lobby-mode-toggle-btn${listMode === "pagination" ? " is-active" : ""}`}
-              aria-pressed={listMode === "pagination"}
-              onClick={() => setListMode("pagination")}
-              data-testid="lobby-mode-pagination"
-            >Pagination</button>
-            <button
-              type="button"
-              className={`lobby-mode-toggle-btn${listMode === "infinite" ? " is-active" : ""}`}
-              aria-pressed={listMode === "infinite"}
-              onClick={() => setListMode("infinite")}
-              data-testid="lobby-mode-infinite"
-            >Infinite scroll</button>
+                className={`lobby-view-toggle-btn${viewMode === "grid" ? " is-active" : ""}`}
+                aria-pressed={viewMode === "grid"}
+                aria-label="Grid view"
+                title="Grid view"
+                onClick={() => setViewMode("grid")}
+                data-testid="lobby-view-grid"
+              >
+                <svg
+                  className="lobby-view-toggle-icon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className={`lobby-view-toggle-btn${viewMode === "list" ? " is-active" : ""}`}
+                aria-pressed={viewMode === "list"}
+                aria-label="List view"
+                title="List view"
+                onClick={() => setViewMode("list")}
+                data-testid="lobby-view-list"
+              >
+                <svg
+                  className="lobby-view-toggle-icon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="8" y1="6" x2="21" y2="6" />
+                  <line x1="8" y1="12" x2="21" y2="12" />
+                  <line x1="8" y1="18" x2="21" y2="18" />
+                  <circle cx="4" cy="6" r="1" />
+                  <circle cx="4" cy="12" r="1" />
+                  <circle cx="4" cy="18" r="1" />
+                </svg>
+              </button>
+            </div>
+            {/* Three-state pill toggle for grid density (compact/comfortable/
+                spacious). Persisted in localStorage; mirrored as
+                `data-density` on `.lobby-grid` so all sizing is CSS-driven. */}
+            <div
+              className="lobby-density-toggle lobby-toolbar-secondary"
+              role="group"
+              aria-label="Grid density"
+              data-testid="lobby-density-toggle"
+            >
+              {DENSITY_MODES.map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  className={`lobby-density-toggle-btn${density === mode ? " is-active" : ""}`}
+                  aria-pressed={density === mode}
+                  onClick={() => setDensity(mode)}
+                  data-testid={`lobby-density-${mode}`}
+                >{DENSITY_LABELS[mode]}</button>
+              ))}
+            </div>
+            {/* Two-state pill toggle for the list-walking strategy.
+                Persisted in localStorage; default = pagination. */}
+            <div
+              className="lobby-mode-toggle"
+              role="group"
+              aria-label="List browsing mode"
+              data-testid="lobby-mode-toggle"
+            >
+              <button
+                type="button"
+                className={`lobby-mode-toggle-btn${listMode === "pagination" ? " is-active" : ""}`}
+                aria-pressed={listMode === "pagination"}
+                onClick={() => setListMode("pagination")}
+                data-testid="lobby-mode-pagination"
+              >Pagination</button>
+              <button
+                type="button"
+                className={`lobby-mode-toggle-btn${listMode === "infinite" ? " is-active" : ""}`}
+                aria-pressed={listMode === "infinite"}
+                onClick={() => setListMode("infinite")}
+                data-testid="lobby-mode-infinite"
+              >Infinite scroll</button>
+            </div>
+            {/* Mobile-only "•••" overflow trigger. Hidden via CSS on wide
+                viewports; on narrow viewports (<700px) the secondary
+                controls (density + view) are also hidden inline and re-
+                surfaced inside this popover. */}
+            <div
+              className="lobby-overflow-wrap"
+              ref={overflowRef}
+            >
+              <button
+                type="button"
+                className="lobby-overflow-btn"
+                aria-label="More toolbar options"
+                aria-haspopup="true"
+                aria-expanded={overflowOpen}
+                onClick={() => setOverflowOpen((v) => !v)}
+                data-testid="lobby-overflow"
+              >&#x2022;&#x2022;&#x2022;</button>
+              {overflowOpen && (
+                <div
+                  className="lobby-overflow-pop"
+                  role="dialog"
+                  aria-label="More toolbar options"
+                  data-testid="lobby-overflow-pop"
+                >
+                  <div className="lobby-overflow-row">
+                    <span className="lobby-overflow-label">View</span>
+                    <div
+                      className="lobby-view-toggle"
+                      role="group"
+                      aria-label="Lobby view"
+                    >
+                      <button
+                        type="button"
+                        className={`lobby-view-toggle-btn${viewMode === "grid" ? " is-active" : ""}`}
+                        aria-pressed={viewMode === "grid"}
+                        aria-label="Grid view"
+                        onClick={() => setViewMode("grid")}
+                      >Grid</button>
+                      <button
+                        type="button"
+                        className={`lobby-view-toggle-btn${viewMode === "list" ? " is-active" : ""}`}
+                        aria-pressed={viewMode === "list"}
+                        aria-label="List view"
+                        onClick={() => setViewMode("list")}
+                      >List</button>
+                    </div>
+                  </div>
+                  <div className="lobby-overflow-row">
+                    <span className="lobby-overflow-label">Density</span>
+                    <div
+                      className="lobby-density-toggle"
+                      role="group"
+                      aria-label="Grid density"
+                    >
+                      {DENSITY_MODES.map((mode) => (
+                        <button
+                          key={mode}
+                          type="button"
+                          className={`lobby-density-toggle-btn${density === mode ? " is-active" : ""}`}
+                          aria-pressed={density === mode}
+                          onClick={() => setDensity(mode)}
+                        >{DENSITY_LABELS[mode]}</button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

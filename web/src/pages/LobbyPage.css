@@ -2146,3 +2146,11 @@ button.tile {
 .tile[data-fav-drag-id]:focus-visible .tile-drag-handle {
   opacity: 1;
 }
+/* Reduced-motion users keep the handle at full opacity so the
+   affordance is still discoverable without the fade-in. */
+@media (prefers-reduced-motion: reduce) {
+  .tile-drag-handle {
+    transition: none;
+    opacity: 1;
+  }
+}
