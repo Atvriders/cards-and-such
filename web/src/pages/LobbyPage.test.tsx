@@ -416,3 +416,144 @@ describe("LobbyPage — toolbar overflow popover (W419)", () => {
     expect(view).toBeInTheDocument();
   });
 });
+
+/**
+ * Drag-reorder of favorite tiles (W397) — when the user is on the
+ * "favorites" lobby filter, every tile becomes draggable and dragging
+ * one onto another reorders them in place. The new order is persisted
+ * under `cards-favorites-order` (a JSON array of stable entry ids in
+ * `game-<id>` / `fam-<id>` form) so the layout survives reloads. These
+ * tests assert the three load-bearing contracts of that feature:
+ *   1. The favorites filter is the only filter that opts tiles in to
+ *      drag — other filters must keep `draggable` unset so a stray
+ *      drag never reshuffles the All grid.
+ *   2. A complete dragstart→dragover→drop sequence rewrites the
+ *      `cards-favorites-order` blob to reflect the visible move.
+ *   3. Hydrating a fresh LobbyPage with that blob in localStorage
+ *      reproduces the same DOM order — i.e. the persisted order
+ *      genuinely round-trips and isn't reset by anything on mount.
+ *
+ * `klondike`, `freecell`, and `spider` are the three canonical solitaire
+ * family ids (see `web/src/games/families.ts`); favoriting any member
+ * surfaces the matching family tile in the favorites filter. We address
+ * tiles via the `data-fav-drag-id` attribute (stable `fam-<id>` /
+ * `game-<id>` form) rather than testid because the featured strip and
+ * the main grid both render their own copies of the same tile and the
+ * canonical `tile-<id>` testid swaps between the two depending on
+ * whether the family is in `FEATURED_IDS` — a brittle coupling we'd
+ * rather not encode into the assertion surface here.
+ */
+describe("LobbyPage — favorites drag-reorder (W397)", () => {
+  const FAV_IDS = ["klondike", "freecell", "spider"] as const;
+
+  beforeEach(() => {
+    localStorage.clear();
+    // Seed the favorites blob and pre-select the favorites filter so
+    // LobbyPage mounts directly into the drag-enabled state without
+    // requiring a chip click (chip click would also work, but we want
+    // these tests to focus on the drag pathway, not chip wiring).
+    localStorage.setItem("cards-favorites", JSON.stringify(FAV_IDS));
+    localStorage.setItem("cards-lobby-filter", "favorites");
+  });
+
+  /**
+   * Resolve the currently rendered favorite-grid tile elements in
+   * actual DOM order (NOT FAV_IDS iteration order — the persisted-
+   * reorder assertion requires the on-screen sequence to verify the
+   * sort actually moved tiles). We restrict to the non-featured
+   * `.lobby-grid` so the optional featured strip's tiles don't leak in,
+   * and filter to elements carrying the `data-fav-drag-id` stamp (only
+   * applied while filter==="favorites") so non-favorite siblings can't.
+   */
+  function favTiles(): HTMLElement[] {
+    const grid = document.querySelector(
+      ".lobby-grid:not(.lobby-grid--featured)",
+    );
+    if (!grid) return [];
+    return Array.from(
+      grid.querySelectorAll<HTMLElement>(".tile[data-fav-drag-id]"),
+    );
+  }
+
+  it("stamps draggable=true on tiles only while the favorites filter is active", async () => {
+    renderAt("/");
+    // The DOM-stamping useEffect runs after render — wait until at
+    // least one tile has been marked draggable so we're not racing the
+    // effect's first commit.
+    await waitFor(() => {
+      expect(favTiles().length).toBeGreaterThanOrEqual(FAV_IDS.length);
+    });
+    const tiles = favTiles();
+    for (const tile of tiles) {
+      expect(tile.getAttribute("draggable")).toBe("true");
+      // The stable drag-id must match the persistence key shape so a
+      // reorder writes ids the post-reload sort can read back.
+      expect(tile.getAttribute("data-fav-drag-id")).toMatch(/^(fam|game)-/);
+    }
+
+    // Now flip the chip to "all" — every previously-draggable favorite
+    // tile must shed both `draggable` and `data-fav-drag-id` so the
+    // drag pathway is fully gated on the favorites filter. Using the
+    // `data-fav-drag-id` selector makes this an existence check
+    // independent of how many All-grid tiles render.
+    fireEvent.click(screen.getByTestId("chip-all"));
+    await waitFor(() => {
+      expect(favTiles()).toHaveLength(0);
+    });
+  });
+
+  it("persists the new order to cards-favorites-order after a drag-drop", async () => {
+    renderAt("/");
+    await waitFor(() => {
+      expect(favTiles().length).toBeGreaterThanOrEqual(FAV_IDS.length);
+    });
+    // Default sort is alphabetical on the family label, so the visible
+    // order is freecell → klondike → spider. Drag spider onto freecell
+    // to move spider to the front; the persisted blob should then read
+    // [fam-spider, fam-freecell, fam-klondike].
+    const initial = favTiles().map((t) => t.getAttribute("data-fav-drag-id"));
+    expect(initial).toEqual(["fam-freecell", "fam-klondike", "fam-spider"]);
+
+    const tiles = favTiles();
+    const source = tiles[2]; // fam-spider
+    const target = tiles[0]; // fam-freecell
+    // jsdom's DataTransfer is intentionally minimal — provide a tiny
+    // stub so the dragstart handler's setData/effectAllowed calls
+    // don't throw inside the try/catch, and the dragover/drop handlers
+    // can set/read dropEffect without exploding.
+    const dataTransfer = {
+      effectAllowed: "",
+      dropEffect: "",
+      setData: vi.fn(),
+      getData: vi.fn(() => ""),
+    };
+    fireEvent.dragStart(source, { dataTransfer });
+    fireEvent.dragOver(target, { dataTransfer });
+    fireEvent.drop(target, { dataTransfer });
+
+    expect(localStorage.getItem("cards-favorites-order")).toBe(
+      JSON.stringify(["fam-spider", "fam-freecell", "fam-klondike"]),
+    );
+  });
+
+  it("rehydrates the persisted order on the next render (survives reload)", async () => {
+    // Stash a non-default order — reverse of the alphabetical default
+    // — so the assertion fails loudly if the page falls back to the
+    // intrinsic sort instead of honoring `cards-favorites-order`.
+    // Default visible order is freecell → klondike → spider; reversed
+    // is spider → klondike → freecell.
+    const persisted = ["fam-spider", "fam-klondike", "fam-freecell"];
+    localStorage.setItem(
+      "cards-favorites-order",
+      JSON.stringify(persisted),
+    );
+    renderAt("/");
+    // Wait for the DOM-stamping effect so `data-fav-drag-id` is
+    // available to read back in actual DOM order.
+    await waitFor(() => {
+      expect(favTiles().length).toBeGreaterThanOrEqual(FAV_IDS.length);
+    });
+    const order = favTiles().map((t) => t.getAttribute("data-fav-drag-id"));
+    expect(order).toEqual(persisted);
+  });
+});
