@@ -227,6 +227,17 @@ describe("StatsPage", () => {
     expect(undos.textContent).toContain("5");
   });
 
+  it("clicking the same bar twice toggles the drill-down panel closed", () => {
+    seedRichStats();
+    renderPage();
+    // First click opens the panel for the targeted bar.
+    fireEvent.click(screen.getByTestId("stats-drill-klondike"));
+    expect(screen.getByTestId("stats-drill-panel")).toBeInTheDocument();
+    // Second click on the same bar closes it (toggle), rather than re-mounting.
+    fireEvent.click(screen.getByTestId("stats-drill-klondike"));
+    expect(screen.queryByTestId("stats-drill-panel")).toBeNull();
+  });
+
   it("reset stats button shows confirm dialog and clears on confirm", async () => {
     seedRichStats();
     renderPage();
