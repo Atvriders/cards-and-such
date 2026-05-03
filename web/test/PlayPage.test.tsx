@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -543,5 +543,59 @@ describe("PlayPage achievement toast", () => {
     fireEvent.click(screen.getByTestId("win-counter-inc"));
 
     expect(screen.queryByTestId("play-achievement-toast")).toBeNull();
+  });
+});
+
+/**
+ * W581 — Share-seed button copies a deep link to the clipboard. Reuses the
+ * hoisted `counterPlugin` registry mock so PlayPage mounts deterministically,
+ * with a `?seed=42` param so the URL placed on the clipboard is predictable.
+ *
+ * Stubs navigator.clipboard.writeText to capture the call (jsdom ships no
+ * Clipboard API by default) and asserts both the URL shape — `${origin}/play/
+ * <id>?seed=<seed>` — and that the toolbar surfaces the "Copied!" affordance
+ * via the button's data-tooltip after a successful write.
+ */
+describe("PlayPage seed share", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    useAuth.setState({
+      username: "alice",
+      token: "t.t.t",
+      expiresAt: Date.now() + 1000 * 60,
+    });
+  });
+
+  it("clicking share-seed-btn copies the deep link to the clipboard and surfaces the Copied affordance", async () => {
+    const writeText = vi.fn(async () => {});
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+
+    render(
+      <MemoryRouter initialEntries={["/play/test-undo-game?seed=42"]}>
+        <App />
+      </MemoryRouter>,
+    );
+    fireEvent.click(screen.getByTestId("start-game"));
+
+    const btn = screen.getByTestId("share-seed-btn");
+    fireEvent.click(btn);
+
+    // shareSeed is async — wait for writeText + the setShareStatus("copied")
+    // commit to flush before asserting on the toolbar's "Copied!" affordance.
+    await waitFor(() => {
+      expect(writeText).toHaveBeenCalledTimes(1);
+    });
+    expect(writeText).toHaveBeenCalledWith(
+      `${window.location.origin}/play/test-undo-game?seed=42`,
+    );
+    await waitFor(() => {
+      expect(screen.getByTestId("share-seed-btn")).toHaveAttribute(
+        "data-tooltip",
+        "Copied!",
+      );
+    });
   });
 });
