@@ -9,6 +9,7 @@ import {
 
 const STATS_KEY = "cards-and-such:stats:v1";
 const LAST_PLAYED_KEY = "cards-last-played";
+const RATINGS_KEY = "cards-ratings";
 
 function renderPage(): void {
   render(
@@ -164,6 +165,100 @@ describe("LeaderboardPage tabs", () => {
       URL.createObjectURL = origCreate;
       URL.revokeObjectURL = origRevoke;
     }
+  });
+
+  it("Hall of Fame carousel shows the top 5 games ranked by (rating × plays)", async () => {
+    // Seed 6 games with strictly-decreasing (rating × plays) scores so the
+    // top-5 ordering is unambiguous and the 6th entry must be excluded.
+    // Scores: klondike=50, spider=40, freecell=30, pyramid=20, tripeaks=10,
+    // yukon=5 (must be dropped).
+    localStorage.setItem(
+      STATS_KEY,
+      JSON.stringify({
+        perGame: {
+          klondike: { played: 10, wins: 0, best: 1 },
+          spider: { played: 10, wins: 0, best: 1 },
+          freecell: { played: 10, wins: 0, best: 1 },
+          pyramid: { played: 10, wins: 0, best: 1 },
+          tripeaks: { played: 10, wins: 0, best: 1 },
+          yukon: { played: 5, wins: 0, best: 1 },
+        },
+      }),
+    );
+    localStorage.setItem(
+      RATINGS_KEY,
+      JSON.stringify({
+        klondike: 5,
+        spider: 4,
+        freecell: 3,
+        pyramid: 2,
+        tripeaks: 1,
+        yukon: 1,
+      }),
+    );
+
+    renderPage();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("tab", { name: /my ladder/i }));
+    });
+
+    // The Hall of Fame heading should mount once the ladder is non-empty.
+    const hofHeading = await screen.findByText(/Hall of Fame/i);
+    // The all-games <ul> below also renders <li> rows, so scope listitem
+    // queries to the Hall of Fame <section>.
+    const hofSection = hofHeading.closest("section") as HTMLElement;
+    expect(hofSection).not.toBeNull();
+
+    // role=list / role=listitem: exactly 5 cards, in score-descending order.
+    const cards = Array.from(
+      hofSection.querySelectorAll('[role="listitem"]'),
+    ) as HTMLElement[];
+    expect(cards).toHaveLength(5);
+
+    const orderedIds = ["klondike", "spider", "freecell", "pyramid", "tripeaks"];
+    cards.forEach((card, i) => {
+      // Each card is an <a> rendered by react-router's <Link>; assert the
+      // href and the rank badge so ordering is locked in.
+      expect(card.getAttribute("href")).toBe(`/play/${orderedIds[i]}`);
+      expect(card.textContent).toMatch(new RegExp(`#${i + 1}`));
+    });
+
+    // The 6th-place game (yukon, score 5) must be excluded from Hall of Fame.
+    expect(
+      cards.some((c) => c.getAttribute("href") === "/play/yukon"),
+    ).toBe(false);
+  });
+
+  it("Hall of Fame card links to /play/<id> so clicks navigate to that game", async () => {
+    localStorage.setItem(
+      STATS_KEY,
+      JSON.stringify({
+        perGame: { klondike: { played: 7, wins: 2, best: 9000 } },
+      }),
+    );
+    localStorage.setItem(RATINGS_KEY, JSON.stringify({ klondike: 5 }));
+
+    renderPage();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("tab", { name: /my ladder/i }));
+    });
+
+    await screen.findByText(/Hall of Fame/i);
+
+    // Find the Hall of Fame card by its accessible label (rank #1, klondike).
+    const card = screen.getByLabelText(/Hall of Fame #1: klondike/i);
+    // It's a react-router <Link>, which renders as an <a href="…">. Asserting
+    // on href is the canonical way to verify navigation target without
+    // mounting a full router with routes.
+    expect(card.tagName).toBe("A");
+    expect(card.getAttribute("href")).toBe("/play/klondike");
+
+    // A click on the link element shouldn't throw inside MemoryRouter (the
+    // router intercepts it); confirm the assertion holds before and after.
+    await act(async () => {
+      fireEvent.click(card);
+    });
+    expect(card.getAttribute("href")).toBe("/play/klondike");
   });
 
   it("My Ladder rows render relative time correctly when cards-last-played is set", async () => {
