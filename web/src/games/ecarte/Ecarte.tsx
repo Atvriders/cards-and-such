@@ -67,14 +67,14 @@ export function Ecarte({ state, dispatch, onGameOver }: GameProps<EcarteState, E
 
       {phase === "propose" && (
         <div className="ec-action-row">
-          <button className="ec-btn" onClick={() => dispatch({ type: "propose" } as EcarteAction)}>Propose Exchange</button>
-          <button className="ec-btn" onClick={() => dispatch({ type: "refuse" } as EcarteAction)}>Refuse & Play</button>
+          <button data-testid="hint-target-ecarte-propose" className="ec-btn" onClick={() => dispatch({ type: "propose" } as EcarteAction)}>Propose Exchange</button>
+          <button data-testid="hint-target-ecarte-refuse" className="ec-btn" onClick={() => dispatch({ type: "refuse" } as EcarteAction)}>Refuse & Play</button>
         </div>
       )}
 
       {phase === "exchange" && (
         <div className="ec-action-row">
-          <button className="ec-btn" onClick={() => { dispatch({ type: "exchange", ids: selected } as EcarteAction); setSelected([]); }}>
+          <button data-testid="hint-target-ecarte-exchange" className="ec-btn" onClick={() => { dispatch({ type: "exchange", ids: selected } as EcarteAction); setSelected([]); }}>
             Confirm Exchange ({selected.length})
           </button>
         </div>

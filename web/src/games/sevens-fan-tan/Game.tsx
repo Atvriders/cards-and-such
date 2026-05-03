@@ -11,10 +11,10 @@ export function SevensFanTanGame({ state, dispatch, onGameOver }: GameProps<Seve
       <div className="sevens-fan-tan-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
       <div className="sevens-fan-tan-score">{state.score} pts</div>
       <div className="sevens-fan-tan-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
-      {state.phase === "ready" && <button className="sevens-fan-tan-btn" onClick={() => dispatch({ type: "play" } as SevensFanTanAction)}>Play Round</button>}
+      {state.phase === "ready" && <button data-testid="hint-target-sevens-fan-tan-play" className="sevens-fan-tan-btn" onClick={() => dispatch({ type: "play" } as SevensFanTanAction)}>Play Round</button>}
       {state.phase === "scored" && <>
         <div className="sevens-fan-tan-result">{state.result}</div>
-        <button className="sevens-fan-tan-btn alt" onClick={() => dispatch({ type: "next" } as SevensFanTanAction)}>Next</button>
+        <button data-testid="hint-target-sevens-fan-tan-next" className="sevens-fan-tan-btn alt" onClick={() => dispatch({ type: "next" } as SevensFanTanAction)}>Next</button>
       </>}
     </div>
   );

@@ -760,6 +760,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     setFinalScore(null);
     setElapsed(0);
     setShowConfetti(false);
+    replayBufferRef.current = [];
+    setReplaySaved(false);
     setSettingsAtGameStart(JSON.stringify(settings));
     setPhase("playing");
     track("game.start", { gameId: plugin.id, seed, quickstart: true });
@@ -784,6 +786,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       setFinalScore(null);
       setElapsed(0);
       setShowConfetti(false);
+      replayBufferRef.current = [];
+      setReplaySaved(false);
       setIsNewRecord(false);
       setPreviousBest(null);
       setBannerDismissed(false);
@@ -1124,6 +1128,17 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const dispatch = useCallback(
     (action: unknown) => {
       actionCountRef.current += 1;
+      // Push every dispatched action into the replay ring buffer (cap
+      // REPLAY_RING_CAP). Done unconditionally — even reducer no-ops
+      // are recorded so the saved replay matches the user's actual
+      // input stream.
+      {
+        const buf = replayBufferRef.current;
+        buf.push(action);
+        if (buf.length > REPLAY_RING_CAP) {
+          buf.splice(0, buf.length - REPLAY_RING_CAP);
+        }
+      }
       const label = describeAction(action);
       if (label) pushToast(label);
       // Append to the rolling action log (cap = 10) regardless of whether

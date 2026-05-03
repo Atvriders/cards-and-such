@@ -96,14 +96,14 @@ export function CaliforniaSpeed({ state, dispatch, onGameOver }: GameProps<CalSp
       </div>
 
       <div className="calspeed-actions">
-        <button
+        <button data-testid="hint-target-california-speed-flip"
           className="calspeed-btn"
           onClick={() => dis({ type: "flip" })}
           disabled={state.phase !== "waiting" || state.playerDeck.length === 0}
         >
           Flip Card ({state.playerDeck.length})
         </button>
-        <button
+        <button data-testid="hint-target-california-speed-slap"
           className="calspeed-btn slap"
           onClick={() => dis({ type: "slap" })}
           disabled={state.phase !== "slap-window"}

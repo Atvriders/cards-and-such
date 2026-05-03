@@ -78,10 +78,10 @@ export function BigTwoGame({ state, dispatch, onGameOver }: GameProps<BigTwoStat
             ))}
           </div>
           <div className="bigtwo-actions">
-            <button className="bigtwo-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as BigTwoAction); setSelected(new Set()); }} disabled={!canPlay}>
+            <button data-testid="hint-target-big-two-play" className="bigtwo-btn play" onClick={() => { dispatch({ type: "play", cardIds: [...selected] } as BigTwoAction); setSelected(new Set()); }} disabled={!canPlay}>
               Play ({selected.size})
             </button>
-            <button className="bigtwo-btn pass" onClick={() => { dispatch({ type: "pass" } as BigTwoAction); setSelected(new Set()); }} disabled={!canPass}>
+            <button data-testid="hint-target-big-two-pass" className="bigtwo-btn pass" onClick={() => { dispatch({ type: "pass" } as BigTwoAction); setSelected(new Set()); }} disabled={!canPass}>
               Pass
             </button>
           </div>

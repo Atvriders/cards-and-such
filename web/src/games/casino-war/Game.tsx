@@ -66,7 +66,7 @@ export function CasinoWar({ state, dispatch, onGameOver }: Props) {
             <button className="cw-btn secondary" onClick={() => dispatch({ type: "surrender" } as CasinoWarAction)}>
               Surrender (−${Math.floor(ante / 2)})
             </button>
-            <button
+            <button data-testid="hint-target-casino-war-war"
               className="cw-btn primary"
               onClick={() => dispatch({ type: "go-to-war" } as CasinoWarAction)}
               disabled={state.bankroll < ante}
@@ -81,7 +81,7 @@ export function CasinoWar({ state, dispatch, onGameOver }: Props) {
         <div className="cw-section">
           {state.lastResult && <div className="cw-result">{state.lastResult}</div>}
           <div className="cw-actions">
-            <button
+            <button data-testid="hint-target-casino-war-deal"
               className="cw-btn deal"
               onClick={() => dispatch({ type: "deal" } as CasinoWarAction)}
               disabled={state.bankroll < ante || state.handsPlayed >= state.settings.handsPerSession}

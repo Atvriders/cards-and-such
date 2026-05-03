@@ -50,7 +50,7 @@ export function Tarock({ state, dispatch, onGameOver }: GameProps<TarockState, T
         </div>
       </div>
       <div className="tk-status">{message}</div>
-      <div className="tk-player-area">
+      <div data-testid="hint-target-tarock-primary" className="tk-player-area">
         <div className="tk-player-label">Your Hand — Tricks: {tricksWon[0]}</div>
         <div className="tk-player-hand">
           {hands[0]!.map(card => {

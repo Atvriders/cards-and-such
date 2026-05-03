@@ -62,7 +62,7 @@ export function Agram({ state, dispatch, onGameOver }: GameProps<AgramState, Rec
 
       <div className="agram-status">{message}</div>
 
-      <div className="agram-player-area">
+      <div data-testid="hint-target-agram-primary" className="agram-player-area">
         <div className="agram-player-label">Your Hand ({hands[0]!.length} cards)</div>
         <div className="agram-player-hand">
           {hands[0]!

@@ -35,5 +35,11 @@ Match: first player to reach the target score (5, 7, or 10) wins the match.`,
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "drawing") return { selector: '[data-testid="hint-target-california-jack-collect"]', pulses: 3 };
+    if (state.phase === "scoring") return { selector: '[data-testid="hint-target-california-jack-next"]', pulses: 3 };
+    if (state.phase === "playing") return { selector: '[data-testid="hint-target-california-jack-play"]', pulses: 3 };
+    return null;
+  },
   component: CaliforniaJackGame,
 };

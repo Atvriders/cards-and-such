@@ -92,10 +92,10 @@ export function BS({
             <strong>{rankName(currentClaimRank!)}</strong>s.
           </div>
           <div className="bs-calling-actions">
-            <button className="bs-btn bs-btn" onClick={callBS}>
+            <button data-testid="hint-target-bs-call" className="bs-btn bs-btn" onClick={callBS}>
               Call BS!
             </button>
-            <button className="bs-btn pass-btn" onClick={pass}>
+            <button data-testid="hint-target-bs-believe" className="bs-btn pass-btn" onClick={pass}>
               Believe It
             </button>
           </div>
@@ -125,7 +125,7 @@ export function BS({
 
           {isMyTurn && (
             <div className="bs-actions">
-              <button
+              <button data-testid="hint-target-bs-play"
                 className="bs-btn play-btn"
                 onClick={play}
                 disabled={selected.size === 0}

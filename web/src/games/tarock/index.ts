@@ -37,5 +37,10 @@ Click cards to play. Legal plays are highlighted — you must follow suit or tru
   initialState: (seed: number, settings: TarockSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "done") return null;
+    if (state.turn !== 0) return null;
+    return { selector: '[data-testid="hint-target-tarock-primary"]', pulses: 3 };
+  },
   component: Tarock,
 };

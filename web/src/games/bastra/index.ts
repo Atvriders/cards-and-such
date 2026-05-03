@@ -41,5 +41,10 @@ Controls: Click a card in your hand to select it, then click table cards for cap
     initialState(seed, { placeholder: "none" }),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "done") return null;
+    if (state.turn !== 0) return null;
+    return { selector: '[data-testid="hint-target-bastra-trail"]', pulses: 3 };
+  },
   component: Bastra,
 };

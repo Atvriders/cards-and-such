@@ -48,5 +48,9 @@ Settings: Choose the number of decks (6 or 8), your bet size per hand, and how m
   initialState: (seed: number, settings: BaccaratSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "betting" || state.phase === "settled") return { selector: '[data-testid="hint-target-baccarat-deal"]', pulses: 3 };
+    return null;
+  },
   component: Baccarat,
 };

@@ -55,14 +55,14 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
 
       <div className="war-center">
         {state.phase === "ready" && (
-          <button className="war-btn primary" aria-label="Flip card (F)" onClick={() => dispatch({ type: "flip" } as MiniWarAction)}>
+          <button data-testid="hint-target-mini-war-flip" className="war-btn primary" aria-label="Flip card (F)" onClick={() => dispatch({ type: "flip" } as MiniWarAction)}>
             Flip!
           </button>
         )}
         {state.phase === "war" && (
           <>
             <div className="war-banner">⚔ WAR! depth {state.warDepth}</div>
-            <button className="war-btn danger" aria-label="Battle (B)" onClick={() => dispatch({ type: "warFlip" } as MiniWarAction)}>
+            <button data-testid="hint-target-mini-war-battle" className="war-btn danger" aria-label="Battle (B)" onClick={() => dispatch({ type: "warFlip" } as MiniWarAction)}>
               Battle (3 down, 1 up)
             </button>
           </>
@@ -74,7 +74,7 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
               {state.result === "cpu" && "CPU takes the round."}
               {state.result === "tie" && "Tie."}
             </div>
-            <button className="war-btn primary" aria-label="Next round (N)" onClick={() => dispatch({ type: "next" } as MiniWarAction)}>
+            <button data-testid="hint-target-mini-war-next" className="war-btn primary" aria-label="Next round (N)" onClick={() => dispatch({ type: "next" } as MiniWarAction)}>
               Next round
             </button>
           </>

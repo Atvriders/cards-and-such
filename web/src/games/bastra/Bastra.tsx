@@ -101,10 +101,10 @@ export function Bastra({ state, dispatch, onGameOver }: GameProps<BastraState, R
 
       {myTurn && selectedHandCard && (
         <div className="bastra-actions">
-          <button className="bastra-btn" onClick={doCapture} disabled={!canCapt}>
+          <button data-testid="hint-target-bastra-capture" className="bastra-btn" onClick={doCapture} disabled={!canCapt}>
             Capture ({selectedTableCards.map(c => `${rankLabel(c.rank)}${c.suit}`).join(", ") || "none selected"})
           </button>
-          <button className="bastra-btn" onClick={doTrail}>
+          <button data-testid="hint-target-bastra-trail" className="bastra-btn" onClick={doTrail}>
             Trail {rankLabel(selectedHandCard.rank)}{selectedHandCard.suit}
           </button>
         </div>

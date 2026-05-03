@@ -39,5 +39,9 @@ First decide: Stay In or Fold. Then click cards to play. Legal moves are highlig
   initialState: (seed: number, settings: BourreSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "fold-or-play" && state.turn === 0) return { selector: '[data-testid="hint-target-bourre-stay"]', pulses: 3 };
+    return null;
+  },
   component: Bourre,
 };

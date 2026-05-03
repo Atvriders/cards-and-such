@@ -7,6 +7,7 @@ import { GAMES } from "../games/registry.js";
 import { downloadSvg } from "../platform/svgShare.js";
 import { useConfirm } from "../platform/ConfirmDialog.js";
 import { TIME_HISTORY_KEY_PREFIX, readTimeHistory } from "../platform/userdata.js";
+import { loadReplays } from "../platform/replays.js";
 import "./StatsPage.css";
 
 /**
@@ -970,6 +971,9 @@ export default function StatsPage(): JSX.Element {
   const [range, setRange] = useState<RangeOption>(14);
   const [search, setSearch] = useState<string>("");
   const [drillId, setDrillId] = useState<string | null>(null);
+  // Saved replays (newest-first, capped REPLAY_CAP). Read once at mount;
+  // the Replays panel is informational and doesn't write to this store.
+  const replays = useMemo(() => loadReplays().slice().reverse(), []);
 
   // Live refs to each chart's <svg> DOM node — used by the Export buttons to
   // serialize whatever the user is currently looking at, including any
@@ -1500,6 +1504,42 @@ export default function StatsPage(): JSX.Element {
               </>
             );
           })()}
+        </div>
+
+        <div className="stats-card" data-testid="stats-replays-panel">
+          <h2>Replays</h2>
+          <p className="stats-chart-label">Last {replays.length === 0 ? 0 : replays.length} saved replay{replays.length === 1 ? "" : "s"} (max 5)</p>
+          {replays.length === 0 ? (
+            <p className="stats-empty" data-testid="stats-replays-empty">
+              No replays saved yet — finish a game and tap "Save replay" on the win banner.
+            </p>
+          ) : (
+            <ul className="stats-replays-list">
+              {replays.map((r, idx) => {
+                const plug = GAMES.find((g) => g.id === r.gameId);
+                const title = plug?.title ?? r.gameId;
+                return (
+                  <li
+                    key={r.id}
+                    className="stats-replay-row"
+                    data-testid={`stats-replay-${idx}`}
+                  >
+                    <span className="stats-replay-title">{title}</span>
+                    <span className="stats-replay-meta">
+                      seed <code>{r.seed}</code> · {r.actions.length} action{r.actions.length === 1 ? "" : "s"}
+                    </span>
+                    <Link
+                      to={`/play/${r.gameId}?seed=${r.seed}`}
+                      className="stats-replay-play"
+                      data-testid={`stats-replay-${idx}-play`}
+                    >
+                      Play
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
 
         <div className="stats-card" data-testid="stats-achievements">

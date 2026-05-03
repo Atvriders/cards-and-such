@@ -39,5 +39,10 @@ Tips: lying is tempting, but the bigger the pile, the riskier a failed BS call i
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "calling" && state.currentPlaySeat !== 0) return { selector: '[data-testid="hint-target-bs-call"]', pulses: 3 };
+    if (state.phase === "playing" && state.turn === 0) return { selector: '[data-testid="hint-target-bs-play"]', pulses: 3 };
+    return null;
+  },
   component: BS,
 };

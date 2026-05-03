@@ -56,5 +56,10 @@ Settings: Choose starting bankroll, ante size, and how many hands to play per se
   initialState: (seed: number, settings: CasinoWarSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "tie-decision") return { selector: '[data-testid="hint-target-casino-war-war"]', pulses: 3 };
+    if (state.phase === "betting" || state.phase === "settled") return { selector: '[data-testid="hint-target-casino-war-deal"]', pulses: 3 };
+    return null;
+  },
   component: CasinoWar,
 };

@@ -31,5 +31,10 @@ Controls: Click a highlighted card to play it. Dimmed cards cannot be played thi
     initialState(seed, { placeholder: "none" }),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "done") return null;
+    if (state.turn !== 0) return null;
+    return { selector: '[data-testid="hint-target-agram-primary"]', pulses: 3 };
+  },
   component: Agram,
 };

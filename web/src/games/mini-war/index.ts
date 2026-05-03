@@ -20,5 +20,11 @@ There are twelve battles total. Press Battle to draw the next pair, see the resu
 Mini War is pure entertainment — no decisions to make, just watch the cards land. Good for a quick game while waiting for coffee.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniWarSettings),
-  reducer,isTerminal,component:MiniWarGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "war") return { selector: '[data-testid="hint-target-mini-war-battle"]', pulses: 3 };
+    if (state.phase === "reveal") return { selector: '[data-testid="hint-target-mini-war-next"]', pulses: 3 };
+    if (state.phase === "ready") return { selector: '[data-testid="hint-target-mini-war-flip"]', pulses: 3 };
+    return null;
+  },component:MiniWarGame,
 };

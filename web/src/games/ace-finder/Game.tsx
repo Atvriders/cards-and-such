@@ -31,12 +31,12 @@ export function AceFinder({ state, dispatch, onGameOver }: GameProps<AceFinderSt
         ))}
       </div>
       {isPicking && !state.hintUsed && (
-        <button className="bet-btn" style={{ background: "#f39c12", marginTop: "8px" }} onClick={() => dispatch({ type: "hint" } as AceFinderAction)}>Hint (-5 pts)</button>
+        <button data-testid="hint-target-ace-finder-hint" className="bet-btn" style={{ background: "#f39c12", marginTop: "8px" }} onClick={() => dispatch({ type: "hint" } as AceFinderAction)}>Hint (-5 pts)</button>
       )}
       {state.phase === "result" && (
         <div>
           <p className={`result-msg ${win ? "win" : "lose"}`}>{win ? `Found the Ace! +${state.hintUsed ? 20 : 25} pts` : `Missed! Ace was at position ${state.acePos + 1}`}</p>
-          <button className="bet-btn" onClick={() => dispatch({ type: "next" } as AceFinderAction)}>Next</button>
+          <button data-testid="hint-target-ace-finder-next" className="bet-btn" onClick={() => dispatch({ type: "next" } as AceFinderAction)}>Next</button>
         </div>
       )}
     </div>

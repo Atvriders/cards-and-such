@@ -42,5 +42,10 @@ Tips: keep your eyes on the table, not on your hand. Matches can appear on cards
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "slap-window") return { selector: '[data-testid="hint-target-california-speed-slap"]', pulses: 3 };
+    if (state.phase === "waiting") return { selector: '[data-testid="hint-target-california-speed-flip"]', pulses: 3 };
+    return null;
+  },
   component: CaliforniaSpeed,
 };

@@ -75,7 +75,7 @@ export function Baccarat({
 
       <div className="bac-actions">
         {!terminal && (phase === "betting" || phase === "settled") && (
-          <button onClick={() => dis({ type: "deal" })}>
+          <button data-testid="hint-target-baccarat-deal" onClick={() => dis({ type: "deal" })}>
             Deal Hand
           </button>
         )}

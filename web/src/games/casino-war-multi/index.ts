@@ -47,5 +47,10 @@ Your score equals your final bankroll at session end.`,
   initialState: (seed: number, settings: CasinoWarMultiSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "tie-decision") return { selector: '[data-testid="hint-target-casino-war-multi-war"]', pulses: 3 };
+    if (state.phase === "betting" || state.phase === "settled") return { selector: '[data-testid="hint-target-casino-war-multi-deal"]', pulses: 3 };
+    return null;
+  },
   component: CasinoWarMulti,
 };

@@ -32,5 +32,11 @@ Controls: click cards to select them (they lift), then press Play. Press Pass to
   initialState,
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase !== "playing") return null;
+    if (state.turn !== 0) return null;
+    if (state.lastPlay) return { selector: '[data-testid="hint-target-big-two-pass"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-big-two-play"]', pulses: 3 };
+  },
   component: BigTwoGame,
 };

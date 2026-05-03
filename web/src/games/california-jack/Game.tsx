@@ -61,7 +61,7 @@ export function CaliforniaJackGame({ state, dispatch, onGameOver }: GameProps<Ca
       </div>
 
       {phase === "drawing" && (
-        <button className="cj-btn" onClick={() => dispatch({ type: "collectTrick" } as CaliforniaJackAction)}>
+        <button data-testid="hint-target-california-jack-collect" className="cj-btn" onClick={() => dispatch({ type: "collectTrick" } as CaliforniaJackAction)}>
           Collect Trick
         </button>
       )}
@@ -70,7 +70,7 @@ export function CaliforniaJackGame({ state, dispatch, onGameOver }: GameProps<Ca
         <div className="cj-scoring">
           <div className="cj-scoring-result">{roundResult}</div>
           <div>Score: You {playerScore} – Bot {botScore}</div>
-          <button className="cj-btn" onClick={() => dispatch({ type: "nextRound" } as CaliforniaJackAction)}>
+          <button data-testid="hint-target-california-jack-next" className="cj-btn" onClick={() => dispatch({ type: "nextRound" } as CaliforniaJackAction)}>
             Next Round
           </button>
         </div>
@@ -91,7 +91,7 @@ export function CaliforniaJackGame({ state, dispatch, onGameOver }: GameProps<Ca
               </div>
             ))}
           </div>
-          <button className="cj-btn" disabled={!selectedCard || !canPlay} onClick={play}>
+          <button data-testid="hint-target-california-jack-play" className="cj-btn" disabled={!selectedCard || !canPlay} onClick={play}>
             Play Card
           </button>
         </>

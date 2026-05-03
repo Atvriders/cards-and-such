@@ -75,13 +75,13 @@ export function CasinoWarMulti({ state, dispatch, onGameOver }: GameProps<Casino
 
       <div className="cwm-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button className="deal" onClick={() => dispatch({ type: "deal" })}>
+          <button data-testid="hint-target-casino-war-multi-deal" className="deal" onClick={() => dispatch({ type: "deal" })}>
             Deal ({numHands} hands, ${ante * numHands} total)
           </button>
         )}
         {phase === "tie-decision" && (
           <>
-            <button className="war" onClick={() => dispatch({ type: "go-to-war" })}>
+            <button data-testid="hint-target-casino-war-multi-war" className="war" onClick={() => dispatch({ type: "go-to-war" })}>
               Go to War ({tieHandIndexes.length} tie{tieHandIndexes.length > 1 ? "s" : ""})
             </button>
             <button className="surr" onClick={() => dispatch({ type: "surrender-all" })}>

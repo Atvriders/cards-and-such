@@ -56,10 +56,10 @@ export function Bourre({
         <div className="br-fold-area">
           <div className="br-label">Stay in or fold?</div>
           <div className="br-fold-buttons">
-            <button className="br-btn stay" onClick={() => dispatch({ type: "stay" } as BourreAction)}>
+            <button data-testid="hint-target-bourre-stay" className="br-btn stay" onClick={() => dispatch({ type: "stay" } as BourreAction)}>
               Stay In
             </button>
-            <button className="br-btn fold" onClick={() => dispatch({ type: "fold" } as BourreAction)}>
+            <button data-testid="hint-target-bourre-fold" className="br-btn fold" onClick={() => dispatch({ type: "fold" } as BourreAction)}>
               Fold
             </button>
           </div>

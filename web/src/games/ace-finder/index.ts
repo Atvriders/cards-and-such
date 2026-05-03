@@ -27,5 +27,10 @@ Use Settings to play 5 or 10 rounds. The cards are freshly randomized each round
 Can you spot the Ace every time without using the hint? Score is totaled at the end — try for a perfect run!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AceFinderSettings),
-  reducer, isTerminal, component: AceFinder,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "result") return { selector: '[data-testid="hint-target-ace-finder-next"]', pulses: 3 };
+    if (state.phase === "picking" && !state.hintUsed) return { selector: '[data-testid="hint-target-ace-finder-hint"]', pulses: 3 };
+    return null;
+  }, component: AceFinder,
 };

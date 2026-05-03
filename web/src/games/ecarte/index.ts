@@ -42,5 +42,10 @@ Click "Propose Exchange" to swap cards, or "Refuse & Play" to play your hand as 
   initialState: (seed: number, settings: EcarteSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (state.phase === "propose") return { selector: '[data-testid="hint-target-ecarte-propose"]', pulses: 3 };
+    if (state.phase === "exchange") return { selector: '[data-testid="hint-target-ecarte-exchange"]', pulses: 3 };
+    return null;
+  },
   component: Ecarte,
 };
