@@ -699,6 +699,30 @@ export default function LobbyPage(): JSX.Element {
   const [sortMode, setSortMode] = useState<SortMode>(() => readPersistedSort());
   const [density, setDensity] = useState<DensityMode>(() => readPersistedDensity());
   const [viewMode, setViewMode] = useState<ViewMode>(() => readPersistedView());
+  // Whether the mobile-only ".lobby-overflow" popover is currently open.
+  // The overflow button only renders below 700px (CSS media query) and
+  // hosts the less-frequently-used density + view controls there to keep
+  // the toolbar uncluttered on phones.
+  const [overflowOpen, setOverflowOpen] = useState(false);
+  const overflowRef = useRef<HTMLDivElement | null>(null);
+  // Close the overflow popover when clicking outside of it or pressing
+  // Escape. Mirrors the small-popover affordance used elsewhere.
+  useEffect(() => {
+    if (!overflowOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      const root = overflowRef.current;
+      if (root && !root.contains(e.target as Node)) setOverflowOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOverflowOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [overflowOpen]);
   // Infinite-scroll high-water mark (number of entries appended so far);
   // pagination mode ignores this and slices by `page` instead.
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
