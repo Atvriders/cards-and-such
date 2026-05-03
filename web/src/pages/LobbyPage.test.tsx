@@ -1187,6 +1187,91 @@ describe("LobbyPage — tile hover-tooltip 500ms delay (W197)", () => {
       screen.queryByTestId("tile-tooltip-klondike"),
     ).not.toBeInTheDocument();
   });
+
+  /**
+   * W197 — lazy-hydration after the FIRST hover ends (mouseLeave).
+   *
+   * Two prior W197 tests pin the post-hover, post-500ms mount path;
+   * this test pins the next moment in the lifecycle: once a tile's
+   * engine has been hydrated by hover, leaving the tile (mouseLeave
+   * before the 500ms threshold) must NOT mount the floating tooltip
+   * node, AND the engine itself must remain hydrated for that single
+   * tile only — never splashed across siblings.
+   *
+   * Why this matters: a real user who skims tiles with the cursor
+   * generates dozens of hover→leave pairs in rapid succession. The
+   * lazy-hydration contract has to hold across that interaction
+   * pattern, not just the steady-state hover. A regression that
+   * cancels the timer correctly on leave but accidentally hydrates
+   * sibling engines (e.g. via a stray `setActivated(true)` in the
+   * wrong handler) would silently double the per-tile React commit
+   * cost the perf work was meant to avoid.
+   *
+   * The pre-hover invariant (no tile-tooltip-* anywhere in the DOM
+   * across many tiles) is asserted here too, mirroring the sibling
+   * tests so this single test stands alone as a complete W197
+   * lifecycle check.
+   */
+  it("W197: hover-then-leave before 500ms keeps the tooltip unmounted but hydrates only the touched engine", () => {
+    renderAt("/");
+
+    // Sanity: many tiles render — the same 50+ floor used by the
+    // sibling W197 tests for consistent failure mode.
+    const tiles = document.querySelectorAll('[data-testid^="tile-"]');
+    expect(tiles.length).toBeGreaterThanOrEqual(50);
+
+    // Pre-hover invariant: zero tile-tooltip-* nodes — the engine
+    // stays dormant for every one of the 50+ tiles.
+    expect(
+      document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
+    ).toBe(0);
+
+    const target = screen.getByTestId("tile-klondike");
+    fireEvent.mouseEnter(target);
+    // Advance partway — well short of the 500ms threshold so the
+    // visible node has not yet mounted.
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    // Engine has hydrated (aria-describedby stamped) but the floating
+    // node is still absent — the timer is mid-flight.
+    expect(target.getAttribute("aria-describedby")).toBe(
+      "tile-tooltip-klondike",
+    );
+    expect(
+      screen.queryByTestId("tile-tooltip-klondike"),
+    ).not.toBeInTheDocument();
+
+    // Leave the tile — the engine's clearTimer cancels the in-flight
+    // 500ms timer so show() never fires. After the cancellation, we
+    // can advance past 500ms safely; nothing should mount.
+    fireEvent.mouseLeave(target);
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+
+    // Floating node still absent — the cancelled timer never called
+    // show(). This is the load-bearing assertion: "leave before
+    // threshold ⇒ no tooltip, ever, for this hover sequence".
+    expect(
+      screen.queryByTestId("tile-tooltip-klondike"),
+    ).not.toBeInTheDocument();
+    expect(
+      document.querySelectorAll('[data-testid^="tile-tooltip-"]').length,
+    ).toBe(0);
+
+    // The engine for ONLY this one tile remains hydrated — exactly
+    // one element in the DOM still advertises a tile-tooltip-*
+    // aria-describedby. A regression that splash-hydrated siblings
+    // during the hover would leave this count above 1 after the
+    // leave, since aria-describedby is a hydration-time stamp that
+    // doesn't get cleared on leave.
+    const described = document.querySelectorAll(
+      '[aria-describedby^="tile-tooltip-"]',
+    );
+    expect(described.length).toBe(1);
+    expect(described[0]?.getAttribute("data-testid")).toBe("tile-klondike");
+  });
 });
 
 /**
