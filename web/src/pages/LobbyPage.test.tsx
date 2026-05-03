@@ -136,3 +136,68 @@ describe("LobbyPage — keyboard shortcut tip", () => {
     expect(screen.queryByTestId("lobby-kbd-tip")).not.toBeInTheDocument();
   });
 });
+
+/**
+ * Post-tutorial onboarding coachmark (W193) — a one-shot tooltip that
+ * appears on the lobby right after the welcome carousel is dismissed.
+ * It is gated on:
+ *   - `cards-onboard-coachmark` === "pending" (set by the welcome flow)
+ *   - the user having zero recorded plays (returning users skip it)
+ * Any tile click, the X button, Esc, or navigation flips the key to
+ * "done" so the hint never re-arms on its own.
+ */
+describe("LobbyPage — onboarding coachmark (W193)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("only renders for first-time users with the coachmark pending", () => {
+    // Returning user (totalPlayed > 0) — must NOT see the coachmark even
+    // when the pending flag is somehow still set.
+    localStorage.setItem("cards-onboard-coachmark", "pending");
+    localStorage.setItem(
+      "cards-and-such:stats:v1",
+      JSON.stringify({ totalPlayed: 3, perGame: {}, perCategory: {} }),
+    );
+    renderAt("/");
+    expect(screen.queryByTestId("coachmark")).not.toBeInTheDocument();
+
+    // Also: pending flag absent (e.g., default fresh state without the
+    // welcome flow having run) — coachmark should stay hidden.
+    localStorage.clear();
+    renderAt("/");
+    expect(screen.queryByTestId("coachmark")).not.toBeInTheDocument();
+
+    // Finally: pending + zero plays — the coachmark renders.
+    localStorage.clear();
+    localStorage.setItem("cards-onboard-coachmark", "pending");
+    renderAt("/");
+    expect(screen.getByTestId("coachmark")).toBeInTheDocument();
+  });
+
+  it("dismisses and persists 'done' when a lobby tile is clicked", () => {
+    localStorage.setItem("cards-onboard-coachmark", "pending");
+    renderAt("/");
+    expect(screen.getByTestId("coachmark")).toBeInTheDocument();
+
+    // Any element matching `.tile` or `.lobby-tile-wrap` triggers the
+    // capture-phase document listener — pick the first rendered tile.
+    const tile = document.querySelector(".tile");
+    expect(tile).not.toBeNull();
+    fireEvent.click(tile as Element);
+
+    expect(screen.queryByTestId("coachmark")).not.toBeInTheDocument();
+    expect(localStorage.getItem("cards-onboard-coachmark")).toBe("done");
+  });
+
+  it("dismisses and persists 'done' when the X button is clicked", () => {
+    localStorage.setItem("cards-onboard-coachmark", "pending");
+    renderAt("/");
+    expect(screen.getByTestId("coachmark")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("coachmark-dismiss"));
+
+    expect(screen.queryByTestId("coachmark")).not.toBeInTheDocument();
+    expect(localStorage.getItem("cards-onboard-coachmark")).toBe("done");
+  });
+});
