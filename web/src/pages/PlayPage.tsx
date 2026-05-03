@@ -16,7 +16,7 @@ import { StarRating, readRating, writeRating } from "../platform/StarRating.js";
 import { StatsPanel } from "../platform/StatsPanel.js";
 import { ProgressBar, deriveProgress } from "../platform/ProgressBar.js";
 import { recordPlayed } from "../platform/quickstart.js";
-import { appendTimeHistory, readTimeHistory, type TimeHistoryEntry } from "../platform/userdata.js";
+import { appendTimeHistory, readTimeHistory, toggleFavorite, type TimeHistoryEntry } from "../platform/userdata.js";
 import { useFocusTrap } from "../platform/useFocusTrap.js";
 import { t } from "../platform/i18n.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
@@ -142,6 +142,14 @@ const LS_HINTS_USED = "cards-hints-used";
  *  can surface "Undos used" alongside hints. */
 const LS_UNDOS_USED = "cards-undos-used";
 const LS_HINTS_ENABLED = "cards-hints-enabled";
+/** Settings → Gameplay toggle: when on, the Hint button enforces a short
+ *  cooldown between successive presses to discourage accidental spamming.
+ *  Default on — power users can disable it from the settings page. */
+const LS_HINT_COOLDOWN = "cards-hint-cooldown";
+/** Cooldown window applied between successive Hint presses, in milliseconds.
+ *  Kept tight enough to not feel punitive but long enough to suppress
+ *  accidental double-clicks and speed-runners hammering the button. */
+const HINT_COOLDOWN_MS = 3000;
 /** Tiny global counter — bumped each time the user copies a friend-mode
  *  link. Pure stats fun, no behavior keys off it. */
 const LS_FRIEND_SESSIONS = "cards-friend-sessions";
@@ -171,6 +179,19 @@ function readHintsEnabled(): boolean {
   try {
     if (typeof localStorage === "undefined") return true;
     const v = localStorage.getItem(LS_HINTS_ENABLED);
+    return v === null ? true : v === "true";
+  } catch {
+    return true;
+  }
+}
+
+/** Read the "Hint cooldown" preference from Settings → Gameplay. When on
+ *  (the default), successive hint presses are throttled by HINT_COOLDOWN_MS
+ *  and the button shows a countdown while disabled. */
+function readHintCooldownEnabled(): boolean {
+  try {
+    if (typeof localStorage === "undefined") return true;
+    const v = localStorage.getItem(LS_HINT_COOLDOWN);
     return v === null ? true : v === "true";
   } catch {
     return true;
@@ -544,6 +565,15 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // Whether the user has enabled hints in Settings → Gameplay. Read once
   // up-front; settings changes don't take effect mid-game.
   const hintsEnabled = useMemo(() => readHintsEnabled(), []);
+  // Whether the user has the hint-button cooldown enabled in Settings →
+  // Gameplay. Read once up-front so toggling mid-game doesn't yank the
+  // throttle out from under an in-flight countdown. Default true.
+  const hintCooldownEnabled = useMemo(() => readHintCooldownEnabled(), []);
+  // Remaining seconds on the hint cooldown, or 0 when the button is ready
+  // to fire. We store seconds (not ms) so the rendered label is a clean
+  // integer without extra rounding in the JSX. Driven by a 1Hz interval
+  // started when `showHint` triggers.
+  const [hintCooldown, setHintCooldown] = useState(0);
 
   useFocusTrap(infoPopoverRef, infoOpen);
   useFocusTrap(settingsModalRef, settingsModalOpen);
@@ -623,6 +653,18 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     }, 1000);
     return () => clearInterval(id);
   }, [phase, paused]);
+
+  // Hint-button cooldown ticker. Only mounted while a cooldown is active
+  // so we don't run a 1Hz interval for the entire session. Each tick
+  // decrements the remaining seconds; the effect re-arms naturally on the
+  // state change and tears itself down when we hit zero.
+  useEffect(() => {
+    if (hintCooldown <= 0) return;
+    const id = setInterval(() => {
+      setHintCooldown((s) => (s <= 1 ? 0 : s - 1));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [hintCooldown]);
 
   const tutorialSteps = useMemo(() => tutorialFor(plugin.id), [plugin.id]);
 
@@ -778,6 +820,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (!hintsEnabled) return;
     if (!plugin.hint) return;
     if (phase !== "playing") return;
+    // Throttle successive presses when the user has the cooldown toggle on.
+    // The button is also rendered as `disabled` while a cooldown is active,
+    // but we double-guard here so any keyboard / programmatic invocation
+    // honours the same window.
+    if (hintCooldownEnabled && hintCooldown > 0) return;
     let target: ReturnType<NonNullable<typeof plugin.hint>>;
     try {
       target = plugin.hint(state);
@@ -801,6 +848,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     }
     bumpHintsUsed(plugin.id);
     track("play.hint", { gameId: plugin.id });
+    // Arm the cooldown only on a hint that actually fires — failed lookups
+    // (no target / unmounted selector) above bail before this point so the
+    // user isn't punished for a no-op press.
+    if (hintCooldownEnabled) {
+      setHintCooldown(Math.ceil(HINT_COOLDOWN_MS / 1000));
+    }
     // Stagger the pulse if other targets are already animating so a
     // burst of simultaneous hints doesn't flash on the same frame.
     const concurrentBefore = document.querySelectorAll(".hint-pulse").length;
@@ -869,7 +922,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         /* element may have unmounted */
       }
     }, ms + concurrentBefore * 120);
-  }, [hintsEnabled, plugin, phase, state, pushToast]);
+  }, [hintsEnabled, hintCooldownEnabled, hintCooldown, plugin, phase, state, pushToast]);
 
   const friendMode = searchParams.get("friend") === "1";
 
@@ -1145,7 +1198,37 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     phase === "playing" && JSON.stringify(settings) !== settingsAtGameStart;
 
   const isWin = phase === "ended" && finalScore !== null && finalScore > 0;
+  // A finished round that didn't qualify as a "win" — score 0 or, by
+  // convention here, a draw. We treat it as a loss so we can surface an
+  // encouragement banner with the same Replay / Lobby affordances as the
+  // win path. Anything not a win after the round ends counts.
+  const isLoss = phase === "ended" && finalScore !== null && !isWin;
   const showWinBanner = isWin && !bannerDismissed;
+  const showLossBanner = isLoss && !bannerDismissed;
+
+  // Rotating pool of encouragement lines for the loss/draw banner. The
+  // pick is a stable hash of `${gameId}:${seed}` so the same finished
+  // round always shows the same line — no flicker on re-render — but a
+  // new game (new seed) produces a new line. Eight phrases keeps the
+  // tone varied without becoming gimmicky.
+  const lossEncouragement = useMemo(() => {
+    const lines = [
+      "So close — give it another shot.",
+      "Tough break! The next deal is yours.",
+      "Every loss sharpens the next win.",
+      "Shuffle it off — you've got this.",
+      "Not this time, but you're learning the deck.",
+      "The cards turn — try again.",
+      "One more hand could be the one.",
+      "Don't fold now — replay and rally.",
+    ];
+    const key = `${plugin.id}:${seed}`;
+    let h = 0;
+    for (let i = 0; i < key.length; i++) {
+      h = (h * 31 + key.charCodeAt(i)) | 0;
+    }
+    return lines[Math.abs(h) % lines.length];
+  }, [plugin.id, seed]);
 
   const shareToTwitter = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -1216,6 +1299,25 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [showWinBanner, startWithSeed]);
 
+  // Loss/draw banner keyboard parity: Esc dismisses, Enter replays the
+  // *same* seed so the user can immediately retry the round they just
+  // lost. Mirrors the win-banner handler above so behaviour stays
+  // consistent across end states.
+  useEffect(() => {
+    if (!showLossBanner) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setBannerDismissed(true);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        startWithSeed(seed);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showLossBanner, startWithSeed, seed]);
+
   // Esc closes the info popover (taking precedence over pause toggle so
   // the popover always wins when both are dismissable).
   useEffect(() => {
@@ -1252,11 +1354,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   }, [phase, showWinBanner, infoOpen, helpOpen, tutorialOpen, settingsModalOpen, togglePause]);
 
   // Power-user shortcuts: N (new game), R (restart), Shift+R (random seed),
-  // D (daily), F (fullscreen), I (info popover), T (settings popover),
-  // = (seed picker). Each handler ignores when typing into a form field or
-  // contenteditable surface, when a modifier we don't expect is pressed, and
-  // when a modal/banner is already eating keys. R intentionally skips the
-  // "dice" category so it doesn't fight the per-game Roll binding.
+  // D (daily), F (toggle favorite for this game), Shift+F (fullscreen),
+  // I (info popover), T (settings popover), = (seed picker). Each handler
+  // ignores when typing into a form field or contenteditable surface, when
+  // a modifier we don't expect is pressed, and when a modal/banner is
+  // already eating keys. R intentionally skips the "dice" category so it
+  // doesn't fight the per-game Roll binding.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       // Ctrl/Cmd/Alt combos belong to the dedicated undo/redo handler or the
@@ -1268,7 +1371,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       if (tag === "input" || tag === "textarea" || tag === "select") return;
       if (target?.isContentEditable) return;
       // Don't fight modal/overlay surfaces — they own their own keys.
-      if (showWinBanner || helpOpen || tutorialOpen || settingsModalOpen) return;
+      if (showWinBanner || showLossBanner || helpOpen || tutorialOpen || settingsModalOpen) return;
       const key = e.key;
       const lower = key.length === 1 ? key.toLowerCase() : key;
       if (lower === "n" && !e.shiftKey) {
@@ -1293,9 +1396,16 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         applyPickedSeed(hashStamp(todayStamp()));
         return;
       }
-      if (lower === "f" && !e.shiftKey) {
+      if (lower === "f" && e.shiftKey) {
         e.preventDefault();
         toggleFullscreen();
+        return;
+      }
+      if (lower === "f" && !e.shiftKey) {
+        e.preventDefault();
+        const nowFav = toggleFavorite(plugin.id);
+        track("play.favorite", { gameId: plugin.id, favorited: nowFav });
+        pushToast(nowFav ? "Added to favorites" : "Removed from favorites");
         return;
       }
       if (lower === "i" && !e.shiftKey) {
@@ -1320,7 +1430,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [
     plugin.category,
+    plugin.id,
     showWinBanner,
+    showLossBanner,
     helpOpen,
     tutorialOpen,
     settingsModalOpen,
@@ -1330,6 +1442,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     replay,
     applyPickedSeed,
     toggleFullscreen,
+    pushToast,
   ]);
 
   // Delegated sparkle handler — only primary action surfaces (.btn-primary,
@@ -1746,9 +1859,19 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               type="button"
               className="play-iconbtn play-hint-btn"
               onClick={showHint}
-              disabled={!plugin.hint}
-              title={plugin.hint ? "Hint" : "No hint available for this game"}
-              aria-label="Hint"
+              disabled={!plugin.hint || (hintCooldownEnabled && hintCooldown > 0)}
+              title={
+                plugin.hint
+                  ? hintCooldownEnabled && hintCooldown > 0
+                    ? `Hint (ready in ${hintCooldown}s)`
+                    : "Hint"
+                  : "No hint available for this game"
+              }
+              aria-label={
+                hintCooldownEnabled && hintCooldown > 0
+                  ? `Hint, available in ${hintCooldown} seconds`
+                  : "Hint"
+              }
               data-tooltip="Hint"
               data-testid="play-hint-btn"
             >
@@ -1757,7 +1880,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 <path d="M10 22h4"></path>
                 <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-1.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"></path>
               </svg>
-              <span className="play-hint-btn-label">Hint</span>
+              <span className="play-hint-btn-label">
+                {hintCooldownEnabled && hintCooldown > 0 ? `${hintCooldown}s` : "Hint"}
+              </span>
             </button>
           )}
           {(plugin.howToPlay || tutorialSteps) && phase === "playing" && (
@@ -2213,14 +2338,23 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         />
       )}
 
+      {showLossBanner && (
+        <div
+          className="win-banner-backdrop loss-banner-backdrop"
+          data-testid="loss-banner-backdrop"
+          onClick={() => setBannerDismissed(true)}
+          role="presentation"
+        />
+      )}
+
       {phase === "ended" && finalScore !== null && (
         <section
-          className={`end-panel${isWin ? " end-panel--win" : ""}${showWinBanner ? " end-panel--banner" : ""}`}
+          className={`end-panel${isWin ? " end-panel--win" : ""}${isLoss ? " end-panel--loss" : ""}${(showWinBanner || showLossBanner) ? " end-panel--banner" : ""}`}
           data-testid="end-panel"
           data-win={isWin ? "true" : "false"}
-          role={showWinBanner ? "dialog" : undefined}
-          aria-modal={showWinBanner ? "true" : undefined}
-          aria-label={showWinBanner ? "You won" : undefined}
+          role={(showWinBanner || showLossBanner) ? "dialog" : undefined}
+          aria-modal={(showWinBanner || showLossBanner) ? "true" : undefined}
+          aria-label={showWinBanner ? "You won" : showLossBanner ? "Game over" : undefined}
           onClick={(e) => e.stopPropagation()}
         >
           {isWin ? (
@@ -2230,7 +2364,20 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               <span className="win-banner-emoji" aria-hidden="true">🎉</span>
             </div>
           ) : (
-            <h2>{t("hud.game_over")}</h2>
+            <div
+              className="loss-banner-headline"
+              data-testid="end-banner-loss"
+              role="status"
+              aria-live="polite"
+            >
+              <h2 className="loss-banner-title">{t("hud.game_over")}</h2>
+              <p
+                className="loss-banner-encouragement"
+                data-testid="end-banner-loss-encouragement"
+              >
+                {lossEncouragement}
+              </p>
+            </div>
           )}
 
           <div
@@ -2345,6 +2492,14 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
           {showWinBanner && (
             <p className="win-banner-hint" data-testid="win-banner-hint">
               Press <kbd>Enter</kbd> to play again, <kbd>Esc</kbd> to dismiss
+            </p>
+          )}
+          {showLossBanner && (
+            <p
+              className="win-banner-hint loss-banner-hint"
+              data-testid="loss-banner-hint"
+            >
+              Press <kbd>Enter</kbd> to replay, <kbd>Esc</kbd> to dismiss
             </p>
           )}
         </section>
