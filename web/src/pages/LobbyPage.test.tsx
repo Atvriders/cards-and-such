@@ -3,6 +3,21 @@ import { act, fireEvent, render, screen, waitFor, within } from "@testing-librar
 import { MemoryRouter } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
+// W579 — capture navigate() calls so the surprise-me button test can assert
+// the destination URL shape without mounting a real /play/<id> route. Other
+// describe blocks in this file never trigger navigate(), so the spy is a
+// no-op for them.
+const navigateSpy = vi.fn();
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual<typeof import("react-router-dom")>(
+    "react-router-dom",
+  );
+  return {
+    ...actual,
+    useNavigate: () => navigateSpy,
+  };
+});
+
 /**
  * `klondike` is a stable, well-known family id (see
  * `web/src/games/families.ts`) — used here so the deep-link assertion
@@ -1142,5 +1157,55 @@ describe("LobbyPage — list-mode toggle pagination/infinite (W183/W582)", () =>
     expect(screen.queryByTestId("lobby-pager-prev")).not.toBeInTheDocument();
     expect(screen.queryByTestId("lobby-pager-next")).not.toBeInTheDocument();
     expect(screen.getByTestId("lobby-mode-pagination")).toBeInTheDocument();
+  });
+});
+
+/**
+ * W579 — the "Surprise me" button on the lobby toolbar (rendered with the
+ * canonical `lobby-surprise` testid alongside the category stat-strip)
+ * must navigate the user to a random `/play/<id>` route when clicked.
+ * This pins the contract that:
+ *   1. The button is reachable by its stable testid.
+ *   2. Clicking it invokes `navigate()` from react-router-dom exactly once.
+ *   3. The destination is shaped `/play/<non-empty-id>` — the random pick
+ *      MUST resolve to some game in the GAMES registry, never an empty
+ *      string and never a different prefix.
+ *
+ * `Math.random` is stubbed to a deterministic constant so the test does
+ * not depend on which game the picker happens to land on while still
+ * exercising the same code path real users hit.
+ */
+describe("LobbyPage — surprise me button (W579)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    navigateSpy.mockReset();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("clicking lobby-surprise navigates to a random /play/<id> route", () => {
+    // Pin Math.random so the picker's `Math.floor(Math.random() * pool.length)`
+    // resolves deterministically — we don't care which game gets picked,
+    // only that the navigate target has the `/play/<id>` shape.
+    vi.spyOn(Math, "random").mockReturnValue(0);
+
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <LobbyPage />
+      </MemoryRouter>,
+    );
+
+    const btn = screen.getByTestId("lobby-surprise");
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+
+    expect(navigateSpy).toHaveBeenCalledTimes(1);
+    const target = navigateSpy.mock.calls[0]?.[0] as string;
+    expect(typeof target).toBe("string");
+    // `/play/` prefix + at least one id char — the random pick must
+    // resolve to a real game id, never an empty suffix.
+    expect(target).toMatch(/^\/play\/.+/);
   });
 });
