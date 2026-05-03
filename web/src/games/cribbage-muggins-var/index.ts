@@ -17,5 +17,6 @@ export const cribbageMugginsVarPlugin: GamePlugin<CribbageMugginsVarState, Cribb
   initialState: (seed: number, s: S) => initialState(seed, s as CribbageMugginsVarSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-cribbage-muggins-var-action"]', pulses: 3 }; },
   component: CribbageMugginsVarGame,
 };

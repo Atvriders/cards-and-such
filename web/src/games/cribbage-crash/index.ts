@@ -17,5 +17,6 @@ export const cribbageCrashPlugin: GamePlugin<CribbageCrashState, CribbageCrashAc
   initialState: (seed: number, s: S) => initialState(seed, s as CribbageCrashSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-cribbage-crash-action"]', pulses: 3 }; },
   component: CribbageCrashGame,
 };

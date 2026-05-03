@@ -17,5 +17,6 @@ export const darts301ClassicPlugin: GamePlugin<Darts301ClassicState, Darts301Cla
   initialState: (seed: number, s: S) => initialState(seed, s as Darts301ClassicSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-darts-301-classic-action"]', pulses: 3 }; },
   component: Darts301ClassicGame,
 };

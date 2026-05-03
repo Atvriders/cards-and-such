@@ -41,7 +41,7 @@ export function CribbageShotgunGame({ state, dispatch, onGameOver }: GameProps<C
       </div>
       <div className="crisho-actions">
         {state.phase === "rolling" && (
-          <button className="crisho-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageShotgunAction)}>Roll</button>
+          <button data-testid="hint-target-cribbage-shotgun-action" className="crisho-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageShotgunAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="crisho-btn alt" onClick={() => dispatch({ type: "next" } as CribbageShotgunAction)}>Next</button>

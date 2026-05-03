@@ -41,7 +41,7 @@ export function CoinDribblePubGame({ state, dispatch, onGameOver }: GameProps<Co
       </div>
       <div className="codrpu-actions">
         {state.phase === "rolling" && (
-          <button className="codrpu-btn primary" onClick={() => dispatch({ type: "roll" } as CoinDribblePubAction)}>Roll</button>
+          <button data-testid="hint-target-coin-dribble-pub-action" className="codrpu-btn primary" onClick={() => dispatch({ type: "roll" } as CoinDribblePubAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="codrpu-btn alt" onClick={() => dispatch({ type: "next" } as CoinDribblePubAction)}>Next</button>

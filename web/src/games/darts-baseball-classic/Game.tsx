@@ -41,7 +41,7 @@ export function DartsBaseballClassicGame({ state, dispatch, onGameOver }: GamePr
       </div>
       <div className="dabacl-actions">
         {state.phase === "rolling" && (
-          <button className="dabacl-btn primary" onClick={() => dispatch({ type: "roll" } as DartsBaseballClassicAction)}>Roll</button>
+          <button data-testid="hint-target-darts-baseball-classic-action" className="dabacl-btn primary" onClick={() => dispatch({ type: "roll" } as DartsBaseballClassicAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="dabacl-btn alt" onClick={() => dispatch({ type: "next" } as DartsBaseballClassicAction)}>Next</button>

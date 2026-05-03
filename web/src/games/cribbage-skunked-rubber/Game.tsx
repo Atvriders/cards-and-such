@@ -41,7 +41,7 @@ export function CribbageSkunkedRubberGame({ state, dispatch, onGameOver }: GameP
       </div>
       <div className="crskru-actions">
         {state.phase === "rolling" && (
-          <button className="crskru-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageSkunkedRubberAction)}>Roll</button>
+          <button data-testid="hint-target-cribbage-skunked-rubber-action" className="crskru-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageSkunkedRubberAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="crskru-btn alt" onClick={() => dispatch({ type: "next" } as CribbageSkunkedRubberAction)}>Next</button>

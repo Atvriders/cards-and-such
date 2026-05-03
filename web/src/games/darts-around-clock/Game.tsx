@@ -41,7 +41,7 @@ export function DartsAroundClockGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="daarcl-actions">
         {state.phase === "rolling" && (
-          <button className="daarcl-btn primary" onClick={() => dispatch({ type: "roll" } as DartsAroundClockAction)}>Roll</button>
+          <button data-testid="hint-target-darts-around-clock-action" className="daarcl-btn primary" onClick={() => dispatch({ type: "roll" } as DartsAroundClockAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="daarcl-btn alt" onClick={() => dispatch({ type: "next" } as DartsAroundClockAction)}>Next</button>

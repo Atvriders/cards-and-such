@@ -41,7 +41,7 @@ export function Darts301ClassicGame({ state, dispatch, onGameOver }: GameProps<D
       </div>
       <div className="da30cl-actions">
         {state.phase === "rolling" && (
-          <button className="da30cl-btn primary" onClick={() => dispatch({ type: "roll" } as Darts301ClassicAction)}>Roll</button>
+          <button data-testid="hint-target-darts-301-classic-action" className="da30cl-btn primary" onClick={() => dispatch({ type: "roll" } as Darts301ClassicAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="da30cl-btn alt" onClick={() => dispatch({ type: "next" } as Darts301ClassicAction)}>Next</button>

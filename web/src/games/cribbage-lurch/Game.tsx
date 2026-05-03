@@ -41,7 +41,7 @@ export function CribbageLurchGame({ state, dispatch, onGameOver }: GameProps<Cri
       </div>
       <div className="crilur-actions">
         {state.phase === "rolling" && (
-          <button className="crilur-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageLurchAction)}>Roll</button>
+          <button data-testid="hint-target-cribbage-lurch-action" className="crilur-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageLurchAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="crilur-btn alt" onClick={() => dispatch({ type: "next" } as CribbageLurchAction)}>Next</button>

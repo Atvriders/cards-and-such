@@ -41,7 +41,7 @@ export function CribbageSkunkGame({ state, dispatch, onGameOver }: GameProps<Cri
       </div>
       <div className="crisku-actions">
         {state.phase === "rolling" && (
-          <button className="crisku-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageSkunkAction)}>Roll</button>
+          <button data-testid="hint-target-cribbage-skunk-action" className="crisku-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageSkunkAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="crisku-btn alt" onClick={() => dispatch({ type: "next" } as CribbageSkunkAction)}>Next</button>

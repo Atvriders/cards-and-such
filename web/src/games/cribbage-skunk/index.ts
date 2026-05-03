@@ -17,5 +17,6 @@ export const cribbageSkunkPlugin: GamePlugin<CribbageSkunkState, CribbageSkunkAc
   initialState: (seed: number, s: S) => initialState(seed, s as CribbageSkunkSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-cribbage-skunk-action"]', pulses: 3 }; },
   component: CribbageSkunkGame,
 };

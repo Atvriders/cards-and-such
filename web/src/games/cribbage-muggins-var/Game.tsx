@@ -41,7 +41,7 @@ export function CribbageMugginsVarGame({ state, dispatch, onGameOver }: GameProp
       </div>
       <div className="crmuva-actions">
         {state.phase === "rolling" && (
-          <button className="crmuva-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageMugginsVarAction)}>Roll</button>
+          <button data-testid="hint-target-cribbage-muggins-var-action" className="crmuva-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageMugginsVarAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="crmuva-btn alt" onClick={() => dispatch({ type: "next" } as CribbageMugginsVarAction)}>Next</button>

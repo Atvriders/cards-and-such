@@ -41,7 +41,7 @@ export function CribbageDoubleSkunkGame({ state, dispatch, onGameOver }: GamePro
       </div>
       <div className="crdosk-actions">
         {state.phase === "rolling" && (
-          <button className="crdosk-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageDoubleSkunkAction)}>Roll</button>
+          <button data-testid="hint-target-cribbage-double-skunk-action" className="crdosk-btn primary" onClick={() => dispatch({ type: "roll" } as CribbageDoubleSkunkAction)}>Roll</button>
         )}
         {state.phase === "rolled" && (
           <button className="crdosk-btn alt" onClick={() => dispatch({ type: "next" } as CribbageDoubleSkunkAction)}>Next</button>
