@@ -94,7 +94,7 @@ export function RepeatAfterMe({
         ))}
       </div>
       {(state.phase === "idle" || state.phase === "complete" || state.phase === "failed") && !terminal && (
-        <button className="ram-start-btn" onClick={() => dispatch({ type: "start" })}>
+        <button data-testid="hint-target-repeat-after-me-action" className="ram-start-btn" onClick={() => dispatch({ type: "start" })}>
           {state.phase === "idle" ? "Start" : state.phase === "complete" ? "Next Round" : "Try Again"}
         </button>
       )}

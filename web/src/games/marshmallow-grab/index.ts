@@ -12,5 +12,7 @@ export const marshmallowGrabPlugin: GamePlugin<MarshmallowGrabState, Marshmallow
   howToPlay:`Marshmallow Grab challenges your precision. Each round a hidden target power determines the ideal grab speed. Set your grab speed with the slider and press Grab! The closer to the target, the more points up to 100. Ten rounds of marshmallow madness. Check the diff after each grab and fine-tune your next attempt. A perfect 1000-point game means hitting every target exactly. Soft precision is your goal!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MarshmallowGrabSettings),
-  reducer,isTerminal,component:MarshmallowGrabGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-marshmallow-grab-action"]', pulses: 3 }; },
+  component:MarshmallowGrabGame,
 };

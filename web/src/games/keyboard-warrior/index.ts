@@ -27,5 +27,6 @@ Try all three difficulty levels: 5 characters is a quick warm-up, 10 is standard
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-keyboard-warrior-action"]', pulses: 3 }; },
   component: KeyboardWarrior,
 };

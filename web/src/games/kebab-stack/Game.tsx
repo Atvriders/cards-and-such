@@ -20,7 +20,7 @@ export function KebabStackGame({ state, dispatch, onGameOver }: GameProps<KebabS
           <input className="kebab-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as KebabStackAction)} />
           <div className="kebab-info">Power: {state.power}</div>
-          <button className="kebab-btn" onClick={() => dispatch({ type:"throw" } as KebabStackAction)}>Go!</button>
+          <button data-testid="hint-target-kebab-stack-action" className="kebab-btn" onClick={() => dispatch({ type:"throw" } as KebabStackAction)}>Go!</button>
         </>
       ) : (
         <>

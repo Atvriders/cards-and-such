@@ -111,7 +111,7 @@ export function CupFlip({
             {state.correct ? `Correct! +${state.lastPts} pts` : "Wrong cup!"}
           </div>
           {state.round < state.maxRounds && (
-            <button className="cf-btn" onClick={() => dispatch({ type: "next" })}>
+            <button data-testid="hint-target-cup-flip-action" className="cf-btn" onClick={() => dispatch({ type: "next" })}>
               Next Round
             </button>
           )}

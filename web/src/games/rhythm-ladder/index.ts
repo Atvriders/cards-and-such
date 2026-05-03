@@ -22,5 +22,6 @@ Think of the ladder as a musical scale — each rung is a beat descending in a r
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-rhythm-ladder-action"]', pulses: 3 }; },
   component: RhythmLadder,
 };

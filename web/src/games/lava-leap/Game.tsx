@@ -29,7 +29,7 @@ export function LavaLeap({ state, dispatch, onGameOver }: GameProps<LavaLeapStat
       </div>
       <p className="ll-hint">Jump when power fills to the orange zone (gap: {state.gapSize}–{state.gapSize + 25})</p>
       {state.phase === "result" && <div className={`ll-feedback ${state.lastPoints >= 100 ? "great" : state.lastPoints > 0 ? "ok" : "lava"}`}>{state.lastPoints >= 100 ? `Perfect! +100` : state.lastPoints > 0 ? `Cleared! +${state.lastPoints}` : "Into the lava!"}</div>}
-      {state.phase === "charging" && <button className="ll-btn" onClick={() => dispatch({ type: "jump" } as LavaLeapAction)}>JUMP!</button>}
+      {state.phase === "charging" && <button data-testid="hint-target-lava-leap-action" className="ll-btn" onClick={() => dispatch({ type: "jump" } as LavaLeapAction)}>JUMP!</button>}
       {state.phase === "result" && <button className="ll-btn next" onClick={() => dispatch({ type: "next" } as LavaLeapAction)}>Next Leap</button>}
     </div>
   );

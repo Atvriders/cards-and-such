@@ -63,7 +63,7 @@ export function RgbMixer({
                   <span className="rgb-slider-val">{state.b}</span>
                 </div>
               </div>
-              <button className="rgb-submit-btn" onClick={() => dispatch({ type: "submit" })}>
+              <button data-testid="hint-target-rgb-mixer-action" className="rgb-submit-btn" onClick={() => dispatch({ type: "submit" })}>
                 Lock In
               </button>
             </>

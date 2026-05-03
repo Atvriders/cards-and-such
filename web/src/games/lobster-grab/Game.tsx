@@ -20,7 +20,7 @@ export function LobsterGrabGame({ state, dispatch, onGameOver }: GameProps<Lobst
           <input className="lobster-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as LobsterGrabAction)} />
           <div className="lobster-info">Power: {state.power}</div>
-          <button className="lobster-btn" onClick={() => dispatch({ type:"throw" } as LobsterGrabAction)}>Go!</button>
+          <button data-testid="hint-target-lobster-grab-action" className="lobster-btn" onClick={() => dispatch({ type:"throw" } as LobsterGrabAction)}>Go!</button>
         </>
       ) : (
         <>

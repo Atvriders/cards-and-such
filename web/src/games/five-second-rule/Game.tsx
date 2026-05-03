@@ -49,7 +49,7 @@ export function FiveSecondRule({ state, dispatch, onGameOver }: GameProps<FiveSe
         <div className={`fsr-result ${state.lastResult === "success" ? "success" : "fail"}`}>
           {state.lastResult === "success" ? "Got it! +1" : "Time's up or passed!"}
         </div>
-        <button className="fsr-next-btn" onClick={() => dispatch({ type: "next" } as FiveSecAction)}>
+        <button data-testid="hint-target-five-second-rule-action" className="fsr-next-btn" onClick={() => dispatch({ type: "next" } as FiveSecAction)}>
           {state.currentIndex + 1 >= state.prompts.length ? "Finish" : "Next Prompt"}
         </button>
       </div>

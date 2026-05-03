@@ -80,7 +80,7 @@ export function PizzaRushGame({
           </div>
           <div className="pr-topping-btns">
             {toppings.map(t => (
-              <button key={t} className="pr-top-btn"
+              <button data-testid="hint-target-pizza-rush-action" key={t} className="pr-top-btn"
                 onClick={() => dispatch({ type: "add-topping", topping: t })}>
                 {TOPPING_EMOJI[t]}
               </button>

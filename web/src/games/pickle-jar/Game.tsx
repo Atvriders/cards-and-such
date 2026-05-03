@@ -24,7 +24,7 @@ export function PickleJar({ state, dispatch, onGameOver }: GameProps<PickleJarSt
     <div className="pj-wrap"><div className="pj-done">
       <h2>Jar {state.jar - 1} Opened!</h2>
       <p>{state.score} pts so far</p>
-      <button className="pj-btn" onClick={() => dispatch({ type: "next" } as PickleJarAction)}>Next Jar</button>
+      <button data-testid="hint-target-pickle-jar-action" className="pj-btn" onClick={() => dispatch({ type: "next" } as PickleJarAction)}>Next Jar</button>
     </div></div>
   );
 

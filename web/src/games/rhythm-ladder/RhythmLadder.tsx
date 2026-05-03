@@ -77,7 +77,7 @@ export function RhythmLadder({
       {state.phase === "input" && !terminal && (
         <div className="rl-color-buttons">
           {RUNG_COLORS.map((color) => (
-            <button
+            <button data-testid="hint-target-rhythm-ladder-action"
               key={color}
               className="rl-color-btn"
               style={{ background: RUNG_COLOR_MAP[color] }}

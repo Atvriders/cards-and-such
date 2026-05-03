@@ -83,7 +83,7 @@ export function TowerBuilderGame({
       </div>
 
       {state.phase === "swing" && (
-        <button className="tb-drop-btn" onClick={() => d({ type: "drop" })}>
+        <button data-testid="hint-target-tower-builder-action" className="tb-drop-btn" onClick={() => d({ type: "drop" })}>
           Drop! (Space)
         </button>
       )}

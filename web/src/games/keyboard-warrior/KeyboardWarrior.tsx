@@ -42,7 +42,7 @@ export function KeyboardWarrior({
           <div className="kw-instructions">
             Press any key to start, then type the sequence below.
           </div>
-          <button className="kw-start-btn" onClick={() => dispatch({ type: "start", time: Date.now() })}>
+          <button data-testid="hint-target-keyboard-warrior-action" className="kw-start-btn" onClick={() => dispatch({ type: "start", time: Date.now() })}>
             Start
           </button>
         </>

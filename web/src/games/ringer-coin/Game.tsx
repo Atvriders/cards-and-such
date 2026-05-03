@@ -43,7 +43,7 @@ export function RingerCoin({ state, dispatch, onGameOver }: GameProps<RingerCoin
         <circle cx={nx} cy={ny} r={8} fill="#f39c12" />
       </svg>
       {state.phase === "result" && <div className={`rc-feedback ${state.lastResult}`}>{state.lastResult === "ring" ? `Ringer! +${state.lastPoints}` : state.lastResult === "close" ? `Close! +${state.lastPoints}` : "Miss!"}</div>}
-      {state.phase === "aiming" && <button className="rc-btn" onClick={() => dispatch({ type: "toss" } as RingerCoinAction)}>TOSS</button>}
+      {state.phase === "aiming" && <button data-testid="hint-target-ringer-coin-action" className="rc-btn" onClick={() => dispatch({ type: "toss" } as RingerCoinAction)}>TOSS</button>}
       {state.phase === "result" && <button className="rc-btn next" onClick={() => dispatch({ type: "next" } as RingerCoinAction)}>Next Toss</button>}
       <p className="rc-hint">Toss when the marker hits the orange zone</p>
     </div>

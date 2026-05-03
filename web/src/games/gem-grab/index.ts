@@ -27,5 +27,7 @@ New gems appear every two seconds. Up to 6 can be falling at once. Keep your eye
 Use Settings to choose 20, 30, or 45 seconds. Final score, gems collected, and gems lost are shown at the end. Can you fill your vault with every last gem?`,
   settings: gemGrabPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as GemGrabSettings),
-  reducer, isTerminal, component: GemGrab,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-gem-grab-action"]', pulses: 3 }; },
+  component: GemGrab,
 };

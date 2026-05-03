@@ -109,7 +109,7 @@ export function SeesawBalance({
       {!state.pendingBall && !state.over && (
         <div className="seesaw-feedback">
           <div className="seesaw-message">{state.message}</div>
-          <button
+          <button data-testid="hint-target-seesaw-balance-action"
             className="seesaw-btn"
             onClick={() => dispatch({ type: "next" } as SeesawBalanceAction)}
           >

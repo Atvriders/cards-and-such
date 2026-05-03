@@ -42,5 +42,6 @@ Choose 5, 7, or 10 seconds depending on difficulty, and 10 to 20 rounds dependin
   initialState: (seed: number, settings: FiveSecSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-five-second-rule-action"]', pulses: 3 }; },
   component: FiveSecondRule,
 };

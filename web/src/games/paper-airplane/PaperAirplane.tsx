@@ -76,7 +76,7 @@ export function PaperAirplane({
           <div className="pa-angle-bar">
             <div className="pa-angle-fill" style={{ width: `${angleBarPct}%` }} />
           </div>
-          <button className="pa-btn" onClick={() => dispatch({ type: "launch" })}>
+          <button data-testid="hint-target-paper-airplane-action" className="pa-btn" onClick={() => dispatch({ type: "launch" })}>
             Launch! ({Math.round(state.angle)}°)
           </button>
           <div className="pa-hint">Aim for the target — press Space or click</div>

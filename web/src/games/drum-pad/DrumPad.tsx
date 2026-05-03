@@ -98,7 +98,7 @@ export function DrumPad({
         ))}
       </div>
       {(state.phase === "idle" || state.phase === "complete" || state.phase === "failed") && !terminal && (
-        <button className="dp-start-btn" onClick={() => dispatch({ type: "start" })}>
+        <button data-testid="hint-target-drum-pad-action" className="dp-start-btn" onClick={() => dispatch({ type: "start" })}>
           {state.phase === "idle" ? "Start" : state.phase === "complete" ? "Next Round" : "Try Again"}
         </button>
       )}

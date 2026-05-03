@@ -46,7 +46,7 @@ export function DicePrediction({
               <div className="dp-predict-label">Predict the die:</div>
               <div className="dp-face-buttons">
                 {FACES.map(f => (
-                  <button
+                  <button data-testid="hint-target-dice-prediction-action"
                     key={f}
                     className="dp-face-btn"
                     onClick={() => dispatch({ type: "predict", face: f })}

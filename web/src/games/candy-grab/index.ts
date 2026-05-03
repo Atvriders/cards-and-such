@@ -27,5 +27,7 @@ New candies spawn every two seconds. Up to 6 can be falling at once, so scan the
 Use Settings to choose 20, 30, or 45 seconds. Final score and stats are shown at the end. Can you grab every last piece of candy?`,
   settings: candyGrabPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CandyGrabSettings),
-  reducer, isTerminal, component: CandyGrab,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-candy-grab-action"]', pulses: 3 }; },
+  component: CandyGrab,
 };

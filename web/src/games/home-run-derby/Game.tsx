@@ -45,7 +45,7 @@ export function HomeRunDerby({ state, dispatch, onGameOver }: GameProps<HomeRunD
             <input type="range" min={0} max={1} step={0.01} value={state.power}
               onChange={(e) => dispatch({ type: "set-power", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="hrd-btn" onClick={() => dispatch({ type: "swing" })}>Swing!</button>
+          <button data-testid="hint-target-home-run-derby-action" className="hrd-btn" onClick={() => dispatch({ type: "swing" })}>Swing!</button>
         </div>
       )}
 

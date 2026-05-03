@@ -50,7 +50,7 @@ export function Curling({ state, dispatch, onGameOver }: GameProps<CurlingState,
             <input type="range" min={0} max={1} step={0.01} value={state.sweep}
               onChange={(e) => dispatch({ type: "set-sweep", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="crl-btn" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
+          <button data-testid="hint-target-curling-action" className="crl-btn" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
         </div>
       )}
 

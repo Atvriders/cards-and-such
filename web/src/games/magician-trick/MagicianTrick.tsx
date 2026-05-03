@@ -44,7 +44,7 @@ export function MagicianTrick({ state, dispatch, onGameOver }: GameProps<Magicia
       </div>
 
       {state.phase === "reveal" && (
-        <button className="mt-btn" onClick={() => dispatch({ type: "startShuffle" })}>
+        <button data-testid="hint-target-magician-trick-action" className="mt-btn" onClick={() => dispatch({ type: "startShuffle" })}>
           🎩 Start Shuffle
         </button>
       )}

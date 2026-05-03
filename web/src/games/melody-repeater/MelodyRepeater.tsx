@@ -95,7 +95,7 @@ export function MelodyRepeater({
         ))}
       </div>
       {(state.phase === "idle" || state.phase === "complete" || state.phase === "failed") && !terminal && (
-        <button className="mr-start-btn" onClick={() => dispatch({ type: "start" })}>
+        <button data-testid="hint-target-melody-repeater-action" className="mr-start-btn" onClick={() => dispatch({ type: "start" })}>
           {state.phase === "idle" ? "Start" : state.phase === "complete" ? "Next Round" : "Try Again"}
         </button>
       )}

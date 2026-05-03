@@ -13,7 +13,7 @@ export function TopSpinGame({ state, dispatch, onGameOver }: GameProps<TopSpinSt
       <div className="arc-display">🌀</div>
       {state.phase==="aiming" && <>
         <div className="arc-slider-row"><span className="arc-slider-label">Spin Rate</span><input type="range" className="arc-slider" min={0} max={100} value={state.power} onChange={e=>dispatch({type:"setPower",value:+e.target.value} as TopSpinAction)}/><span className="arc-slider-value">{state.power}</span></div>
-        <button className="arc-btn" onClick={()=>dispatch({type:"throw"} as TopSpinAction)}>Go!</button>
+        <button data-testid="hint-target-top-spin-action" className="arc-btn" onClick={()=>dispatch({type:"throw"} as TopSpinAction)}>Go!</button>
       </>}
       {state.phase==="result" && <><div className="arc-result">+{state.lastPts} pts (off by {state.lastDiff})</div><button className="arc-btn" onClick={()=>dispatch({type:"next"} as TopSpinAction)}>Next</button></>}
     </div>

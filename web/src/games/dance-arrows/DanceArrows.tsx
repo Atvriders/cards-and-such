@@ -98,7 +98,7 @@ export function DanceArrows({
         </div>
       </div>
       {(state.phase === "idle" || state.phase === "complete" || state.phase === "failed") && !terminal && (
-        <button className="da-start-btn" onClick={() => dispatch({ type: "start" })}>
+        <button data-testid="hint-target-dance-arrows-action" className="da-start-btn" onClick={() => dispatch({ type: "start" })}>
           {state.phase === "idle" ? "Start" : state.phase === "complete" ? "Next Round" : "Try Again"}
         </button>
       )}

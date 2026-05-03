@@ -32,5 +32,6 @@ Each game has 5, 7, or 10 rounds. Observe where your shot lands relative to the 
   initialState: (seed: number, settings: CannonShotSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-cannon-shot-action"]', pulses: 3 }; },
   component: CannonShot,
 };

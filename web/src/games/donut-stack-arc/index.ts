@@ -12,5 +12,7 @@ export const donutStackArcPlugin: GamePlugin<DonutStackArcState, DonutStackArcAc
   howToPlay: `Donut Stack Arcade challenges your power control. Each round set the slider and toss a donut at a vertical pole. The closer your power to the hidden target, the more perfectly it lands and the higher your score. 10 rounds of glazed challenge — can you build the perfect donut tower?`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as DonutStackArcSettings),
-  reducer, isTerminal, component: DonutStackArcGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-donut-stack-arc-action"]', pulses: 3 }; },
+  component: DonutStackArcGame,
 };

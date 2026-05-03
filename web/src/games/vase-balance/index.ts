@@ -12,5 +12,7 @@ export const vaseBalancePlugin: GamePlugin<VaseBalanceState, VaseBalanceAction, 
   howToPlay: `Vase Balance is a delicate precision challenge. Each round, a decorative vase sits on a narrow shelf. You control how much ballast weight to add to keep it balanced. Too little and it tips; too much and it cracks.\n\nAdjust the Weight slider to match the hidden balance point for each vase. The ideal balance changes every round as the vase shape and shelf angle vary.\n\nScore depends on accuracy. 10 rounds per game. A steady hand and careful observation of each round's feedback will guide you to a perfect balance — and a perfect score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as VaseBalanceSettings),
-  reducer, isTerminal, component: VaseBalanceGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-vase-balance-action"]', pulses: 3 }; },
+  component: VaseBalanceGame,
 };

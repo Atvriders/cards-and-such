@@ -44,7 +44,7 @@ export function PingPongRally({ state, dispatch, onGameOver }: GameProps<PingPon
             <input type="range" min={0} max={1} step={0.01} value={localTiming}
               onChange={(e) => setLocalTiming(parseFloat(e.target.value))} />
           </label>
-          <button className="ppr-btn" onClick={() => dispatch({ type: "hit", timing: localTiming })}>Hit!</button>
+          <button data-testid="hint-target-ping-pong-rally-action" className="ppr-btn" onClick={() => dispatch({ type: "hit", timing: localTiming })}>Hit!</button>
         </div>
       )}
 

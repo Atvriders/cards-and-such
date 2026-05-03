@@ -29,7 +29,7 @@ export function GemGrab({ state, dispatch, onGameOver }: GameProps<GemGrabState,
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#6c5ce7,#a29bfe)" }}>
         {state.items.map(item => (
-          <button key={item.id} className="banana-btn"
+          <button data-testid="hint-target-gem-grab-action" key={item.id} className="banana-btn"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as GemGrabAction)}>
             {item.points >= 20 ? "💎💎" : "💎"}

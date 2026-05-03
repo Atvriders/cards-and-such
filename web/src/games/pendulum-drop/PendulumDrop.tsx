@@ -116,7 +116,7 @@ export function PendulumDrop({
           </div>
         )}
       </div>
-      <button
+      <button data-testid="hint-target-pendulum-drop-action"
         className="pend-release-btn"
         disabled={state.released || state.over}
         onClick={() => dispatch({ type: "release" } as PendulumDropAction)}>

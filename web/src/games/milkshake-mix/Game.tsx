@@ -20,7 +20,7 @@ export function MilkshakeMixGame({ state, dispatch, onGameOver }: GameProps<Milk
           <input className="milkshake-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as MilkshakeMixAction)} />
           <div className="milkshake-info">Power: {state.power}</div>
-          <button className="milkshake-btn" onClick={() => dispatch({ type:"throw" } as MilkshakeMixAction)}>Go!</button>
+          <button data-testid="hint-target-milkshake-mix-action" className="milkshake-btn" onClick={() => dispatch({ type:"throw" } as MilkshakeMixAction)}>Go!</button>
         </>
       ) : (
         <>

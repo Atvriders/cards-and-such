@@ -14,7 +14,7 @@ export function SpringJumpGame({ state, dispatch, onGameOver }: GameProps<Spring
       <div className="arc-display">🐸</div>
       {state.phase==="aiming" && <>
         <div className="arc-slider-row"><span className="arc-slider-label">Tension</span><input type="range" className="arc-slider" min={1} max={100} value={state.tension} onChange={e=>dispatch({type:"setTension",value:+e.target.value} as SpringJumpAction)}/><span className="arc-slider-value">{state.tension}</span></div>
-        <button className="arc-btn" onClick={()=>dispatch({type:"jump"} as SpringJumpAction)}>Jump!</button>
+        <button data-testid="hint-target-spring-jump-action" className="arc-btn" onClick={()=>dispatch({type:"jump"} as SpringJumpAction)}>Jump!</button>
       </>}
       {state.phase==="jumped" && last && <><div className="arc-result">Distance: {last.distance.toFixed(1)} — +{last.pts} pts</div><button className="arc-btn" onClick={()=>dispatch({type:"next"} as SpringJumpAction)}>Next</button></>}
       <div className="arc-history">{state.results.map((r,i)=><div key={i} className={`arc-dot${r.pts<20?" miss":""}`}/>)}</div>

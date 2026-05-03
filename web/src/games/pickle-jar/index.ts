@@ -29,5 +29,6 @@ Use Settings to choose 3 or 5 jars per game. Maximum score with 3 jars is around
   initialState: (seed: number, settings: PickleJarSettingsType) => initialState(seed, settings as PickleJarSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pickle-jar-action"]', pulses: 3 }; },
   component: PickleJar,
 };

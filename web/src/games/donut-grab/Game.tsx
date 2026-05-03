@@ -29,7 +29,7 @@ export function DonutGrab({ state, dispatch, onGameOver }: GameProps<DonutGrabSt
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#fdcb6e,#fd79a8)" }}>
         {state.items.map(item => (
-          <button key={item.id} className="banana-btn"
+          <button data-testid="hint-target-donut-grab-action" key={item.id} className="banana-btn"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as DonutGrabAction)}>
             {item.points >= 20 ? "🍩🍩" : "🍩"}

@@ -79,7 +79,7 @@ export function KitchenChaosGame({
           <div className="kc-workbench-title">Adding to Order #{active.id}</div>
           <div className="kc-ingredients">
             {ALL_ING.map(ing => (
-              <button key={ing} className="kc-ing-btn" onClick={() => dispatch({ type: "add-ingredient", ingredient: ing })}>
+              <button data-testid="hint-target-kitchen-chaos-action" key={ing} className="kc-ing-btn" onClick={() => dispatch({ type: "add-ingredient", ingredient: ing })}>
                 {ING_EMOJI[ing]} {ing}
               </button>
             ))}

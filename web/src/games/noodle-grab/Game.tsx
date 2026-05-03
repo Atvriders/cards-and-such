@@ -20,7 +20,7 @@ export function NoodleGrabGame({ state, dispatch, onGameOver }: GameProps<Noodle
           <input className="noodle-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as NoodleGrabAction)} />
           <div className="noodle-info">Power: {state.power}</div>
-          <button className="noodle-btn" onClick={() => dispatch({ type:"throw" } as NoodleGrabAction)}>Go!</button>
+          <button data-testid="hint-target-noodle-grab-action" className="noodle-btn" onClick={() => dispatch({ type:"throw" } as NoodleGrabAction)}>Go!</button>
         </>
       ) : (
         <>

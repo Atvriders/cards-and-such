@@ -25,5 +25,6 @@ Scoring is based on your best legal distance relative to the 65m Olympic qualify
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-discus-action"]', pulses: 3 }; },
   component: Discus,
 };

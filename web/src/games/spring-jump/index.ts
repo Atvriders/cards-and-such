@@ -18,5 +18,7 @@ Subtle wind variations affect each jump differently — what worked for jump 3 m
 Study your results after each jump and fine-tune your tension for the next. Consistent performance across all 10 jumps will yield the highest total score. Can you master the spring?`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as SpringJumpSettings),
-  reducer, isTerminal, component: SpringJumpGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-spring-jump-action"]', pulses: 3 }; },
+  component: SpringJumpGame,
 };

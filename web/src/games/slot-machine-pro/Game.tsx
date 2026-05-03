@@ -41,7 +41,7 @@ export function SlotMachineProGame({
       {state.phase === "idle" && (
         <div>
           <div className="slot-bet-row">
-            <button className="slot-bet-btn" onClick={() => d({ type: "setBet", amount: state.bet - 1 })}>−</button>
+            <button data-testid="hint-target-slot-machine-pro-action" className="slot-bet-btn" onClick={() => d({ type: "setBet", amount: state.bet - 1 })}>−</button>
             <span className="slot-bet-label">Bet:</span>
             <span className="slot-bet-val">{state.bet}</span>
             <button className="slot-bet-btn" onClick={() => d({ type: "setBet", amount: state.bet + 1 })}>+</button>

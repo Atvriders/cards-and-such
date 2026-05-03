@@ -36,5 +36,6 @@ Tips: instead of tracking the ball directly, track the cup position using its re
   initialState: (seed: number, settings: MagicianTrickSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-magician-trick-action"]', pulses: 3 }; },
   component: MagicianTrick,
 };

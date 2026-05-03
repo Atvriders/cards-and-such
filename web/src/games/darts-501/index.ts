@@ -25,5 +25,6 @@ Scoring: fewer darts equals a higher score. The legendary nine-dart finish (9 da
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-darts-501-action"]', pulses: 3 }; },
   component: Darts501,
 };

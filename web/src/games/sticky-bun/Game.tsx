@@ -14,7 +14,7 @@ export function StickyBunGame({ state, dispatch, onGameOver }: GameProps<StickyB
       <p style={{fontSize:"0.9rem",color:"#888"}}>Adjust stickiness and toss!</p>
       {state.phase==="aiming" && <>
         <div className="arc-slider-row"><span className="arc-slider-label">Stickiness</span><input type="range" className="arc-slider" min={0} max={100} value={state.power} onChange={e=>dispatch({type:"setPower",value:+e.target.value} as StickyBunAction)}/><span className="arc-slider-value">{state.power}</span></div>
-        <button className="arc-btn" onClick={()=>dispatch({type:"throw"} as StickyBunAction)}>Toss!</button>
+        <button data-testid="hint-target-sticky-bun-action" className="arc-btn" onClick={()=>dispatch({type:"throw"} as StickyBunAction)}>Toss!</button>
       </>}
       {state.phase==="result" && <><div className="arc-result">+{state.lastPts} pts (off by {state.lastDiff})</div><button className="arc-btn" onClick={()=>dispatch({type:"next"} as StickyBunAction)}>Next</button></>}
     </div>

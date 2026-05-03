@@ -12,5 +12,7 @@ export const eclairGrabPlugin: GamePlugin<EclairGrabState, EclairGrabAction, typ
   howToPlay: `Eclair Grab puts delicious chocolate eclairs on a moving display. Each round, set your grab power and press Go! to reach for an eclair. The closer your power to the target, the more completely you grab the eclair and the higher your score. 10 rounds of pastry precision!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as EclairGrabSettings),
-  reducer, isTerminal, component: EclairGrabGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-eclair-grab-action"]', pulses: 3 }; },
+  component: EclairGrabGame,
 };

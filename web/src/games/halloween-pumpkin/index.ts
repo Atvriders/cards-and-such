@@ -30,5 +30,6 @@ Settings let you choose 4×4, 5×5, or 6×6 grids. Larger grids are harder to ma
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-halloween-pumpkin-action"]', pulses: 3 }; },
   component: HalloweenPumpkinGame,
 };

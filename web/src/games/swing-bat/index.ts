@@ -12,5 +12,7 @@ export const swingBatPlugin: GamePlugin<SwingBatState, SwingBatAction, typeof se
   howToPlay: `Swing Bat challenges you to time your swing with precise accuracy. A ball is pitched toward you and you control the timing of your swing.\n\nAdjust the Timing slider to represent when in the pitch sequence you swing. Hit too early or too late and you miss. Find the sweet spot and earn up to 100 points per swing.\n\n10 swings per game. The target timing shifts slightly each round based on pitch variation. Use your results to calibrate the next swing and build up the highest cumulative score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as SwingBatSettings),
-  reducer, isTerminal, component: SwingBatGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-swing-bat-action"]', pulses: 3 }; },
+  component: SwingBatGame,
 };

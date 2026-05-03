@@ -27,5 +27,6 @@ Use Settings to choose 5 or 10 tosses. Maximum score is 500 or 1,000 with all ri
   initialState: (seed: number, settings: RingerCoinSettingsType) => initialState(seed, settings as RingerCoinSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-ringer-coin-action"]', pulses: 3 }; },
   component: RingerCoin,
 };

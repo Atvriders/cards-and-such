@@ -27,5 +27,7 @@ New bananas spawn every two seconds. Keep clicking! Up to 6 bananas can be on sc
 Use Settings to choose 20, 30, or 45 seconds. Final score, catch count, and miss count are shown at the end. Can you catch every banana and keep all 3 lives?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MonkeyBananaSettings),
-  reducer, isTerminal, component: MonkeyBanana,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-monkey-banana-action"]', pulses: 3 }; },
+  component: MonkeyBanana,
 };

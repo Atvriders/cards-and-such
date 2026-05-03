@@ -58,7 +58,7 @@ export function HalloweenPumpkinGame({
       </div>
 
       {!state.over && (
-        <button className="hp-btn" onClick={() => dispatch({ type: "submit" })}>
+        <button data-testid="hint-target-halloween-pumpkin-action" className="hp-btn" onClick={() => dispatch({ type: "submit" })}>
           Submit Carving
         </button>
       )}

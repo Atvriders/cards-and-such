@@ -29,7 +29,7 @@ export function LadderClimb({ state, dispatch, onGameOver }: GameProps<LadderCli
       </div>
       <p className="lc-hint">Grip zone: center 40–60%</p>
       {state.phase === "result" && <div className={`lc-feedback ${state.lastSuccess ? "ok" : "fall"}`}>{state.lastSuccess ? `Grabbed! +${20 * (state.rung - 1)}` : "Slipped! -1 rung"}</div>}
-      {state.phase === "climbing" && <button className="lc-btn" onClick={() => dispatch({ type: "grab" } as LadderClimbAction)}>GRAB</button>}
+      {state.phase === "climbing" && <button data-testid="hint-target-ladder-climb-action" className="lc-btn" onClick={() => dispatch({ type: "grab" } as LadderClimbAction)}>GRAB</button>}
       {state.phase === "result" && <button className="lc-btn next" onClick={() => dispatch({ type: "next" } as LadderClimbAction)}>Next</button>}
     </div>
   );

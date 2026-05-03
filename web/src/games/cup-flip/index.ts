@@ -27,5 +27,6 @@ Tips: Pick one cup at the start and never take your eyes off it. Don't track the
   initialState: (seed: number, _settings: CFSettingsType) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-cup-flip-action"]', pulses: 3 }; },
   component: CupFlip,
 };

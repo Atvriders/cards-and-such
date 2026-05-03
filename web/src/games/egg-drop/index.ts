@@ -27,5 +27,7 @@ New eggs drop every two seconds. Up to 6 can be falling at once, so keep scannin
 Use Settings to choose 20, 30, or 45 seconds. Final score, eggs caught, and eggs broken are shown at the end. Can you keep every egg safe?`,
   settings: eggDropPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as EggDropSettings),
-  reducer, isTerminal, component: EggDrop,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-egg-drop-action"]', pulses: 3 }; },
+  component: EggDrop,
 };

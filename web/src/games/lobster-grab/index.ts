@@ -12,5 +12,7 @@ export const lobsterGrabPlugin: GamePlugin<LobsterGrabState, LobsterGrabAction, 
   howToPlay:`Lobster Grab is a speed-precision arcade game. Each round a hidden target power determines ideal grab speed. Set the slider and press Grab! Points are based on proximity to target up to 100 per round. Ten rounds, 1000 max. Use diff feedback to calibrate. The closer you get every round, the bigger your final score. Become the ultimate lobster wrangler!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LobsterGrabSettings),
-  reducer,isTerminal,component:LobsterGrabGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-lobster-grab-action"]', pulses: 3 }; },
+  component:LobsterGrabGame,
 };

@@ -22,5 +22,6 @@ Click Drop (or press Space) to release the swinging block. After each drop, clic
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: TowerBuilderState, action: TowerAction) => TowerBuilderState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-tower-builder-action"]', pulses: 3 }; },
   component: TowerBuilderGame,
 } as unknown as GamePlugin;

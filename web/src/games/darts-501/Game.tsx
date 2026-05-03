@@ -58,7 +58,7 @@ export function Darts501({ state, dispatch, onGameOver }: GameProps<Darts501Stat
             <input type="range" min={0} max={1} step={0.01} value={state.power}
               onChange={(e) => dispatch({ type: "set-power", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="d501-btn" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
+          <button data-testid="hint-target-darts-501-action" className="d501-btn" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
         </div>
       )}
 

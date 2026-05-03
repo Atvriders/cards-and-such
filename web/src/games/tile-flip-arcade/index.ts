@@ -12,5 +12,7 @@ export const tileFlipArcadePlugin: GamePlugin<TileFlipArcadeState, TileFlipArcad
   howToPlay: `Tile Flip Arcade is a speed-based precision game. Each round, set the flip speed and trigger the tile sequence. Too fast and tiles blur; too slow and the pattern breaks. Find the sweet spot.\n\nAdjust the Speed slider, press Go!, and earn points based on how close your speed is to the target. The ideal speed changes each round.\n\n10 rounds per game. Feedback after each round tells you how far off you were. Use it to dial in your timing and maximize your total score!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as TileFlipArcadeSettings),
-  reducer, isTerminal, component: TileFlipArcadeGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-tile-flip-arcade-action"]', pulses: 3 }; },
+  component: TileFlipArcadeGame,
 };

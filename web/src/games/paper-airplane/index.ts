@@ -27,5 +27,6 @@ Tips: The angle gauge sweeps at a predictable speed, so you can time it. Aim to 
   initialState: (seed: number, _settings: PASettingsType) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-paper-airplane-action"]', pulses: 3 }; },
   component: PaperAirplane,
 };

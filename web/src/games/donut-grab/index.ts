@@ -27,5 +27,7 @@ New donuts drop every two seconds. Up to 6 can be falling at once so stay alert!
 Use Settings to choose 20, 30, or 45 seconds. Final score, catch count, and miss count are shown at the end. Can you grab every donut and keep all 3 lives?`,
   settings: donutGrabPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as DonutGrabSettings),
-  reducer, isTerminal, component: DonutGrab,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-donut-grab-action"]', pulses: 3 }; },
+  component: DonutGrab,
 };

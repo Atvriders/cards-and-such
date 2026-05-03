@@ -78,7 +78,7 @@ export function WizardSpellCastGame({
       </div>
 
       {(state.phase === "win" || state.phase === "fail") && (
-        <button
+        <button data-testid="hint-target-wizard-spell-cast-action"
           className="wsc-next-btn"
           onClick={() => dispatch({ type: "next-round" })}
         >

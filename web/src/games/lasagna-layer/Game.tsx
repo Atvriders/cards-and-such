@@ -20,7 +20,7 @@ export function LasagnaLayerGame({ state, dispatch, onGameOver }: GameProps<Lasa
           <input className="lasagna-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as LasagnaLayerAction)} />
           <div className="lasagna-info">Power: {state.power}</div>
-          <button className="lasagna-btn" onClick={() => dispatch({ type:"throw" } as LasagnaLayerAction)}>Go!</button>
+          <button data-testid="hint-target-lasagna-layer-action" className="lasagna-btn" onClick={() => dispatch({ type:"throw" } as LasagnaLayerAction)}>Go!</button>
         </>
       ) : (
         <>

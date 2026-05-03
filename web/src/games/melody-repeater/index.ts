@@ -22,5 +22,6 @@ Tips: Try humming or quietly saying the note names aloud as they light up — "C
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-melody-repeater-action"]', pulses: 3 }; },
   component: MelodyRepeater,
 };

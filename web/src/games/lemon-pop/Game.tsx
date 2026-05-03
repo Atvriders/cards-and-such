@@ -20,7 +20,7 @@ export function LemonPopGame({ state, dispatch, onGameOver }: GameProps<LemonPop
           <input className="lemonpop-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as LemonPopAction)} />
           <div className="lemonpop-info">Power: {state.power}</div>
-          <button className="lemonpop-btn" onClick={() => dispatch({ type:"throw" } as LemonPopAction)}>Go!</button>
+          <button data-testid="hint-target-lemon-pop-action" className="lemonpop-btn" onClick={() => dispatch({ type:"throw" } as LemonPopAction)}>Go!</button>
         </>
       ) : (
         <>

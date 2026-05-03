@@ -27,5 +27,7 @@ New hoops drop every two seconds. Up to 6 can be falling at once, so keep scanni
 Use Settings to choose 20, 30, or 45 seconds. Final score, hoops caught, and hoops missed are shown at the end. Can you keep every hoop spinning?`,
   settings: hulaHoopPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as HulaHoopSettings),
-  reducer, isTerminal, component: HulaHoop,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-hula-hoop-action"]', pulses: 3 }; },
+  component: HulaHoop,
 };

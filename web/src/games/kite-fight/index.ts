@@ -24,5 +24,6 @@ Score 30 points per cut and a 100-point bonus for eliminating all opponents. Str
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: KiteFightState, action: KiteAction) => KiteFightState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-kite-fight-action"]', pulses: 3 }; },
   component: KiteFight,
 } as unknown as GamePlugin;

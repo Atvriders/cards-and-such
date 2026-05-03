@@ -135,7 +135,7 @@ export function CannonShot({
           <input type="range" min={10} max={100} value={state.power}
             onChange={e => dispatch({ type: "setPower", power: parseInt(e.target.value) } as CannonShotAction)} />
         </label>
-        <button className="cannon-fire-btn" disabled={!!state.projectile || state.over}
+        <button data-testid="hint-target-cannon-shot-action" className="cannon-fire-btn" disabled={!!state.projectile || state.over}
           onClick={() => dispatch({ type: "fire" } as CannonShotAction)}>
           FIRE!
         </button>

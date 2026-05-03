@@ -12,5 +12,7 @@ export const lemonPopPlugin: GamePlugin<LemonPopState, LemonPopAction, typeof se
   howToPlay:`Lemon Pop is an aiming arcade game. Each round set the slider power and press Pop! to squeeze a lemon. The secret target determines ideal power. Closer to target means more points up to 100 per round. Ten rounds of lemon-popping action. Adjust after each round based on diff feedback. A perfect 1000 score means hitting every target exactly. Sour precision is the name of the game!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LemonPopSettings),
-  reducer,isTerminal,component:LemonPopGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-lemon-pop-action"]', pulses: 3 }; },
+  component:LemonPopGame,
 };

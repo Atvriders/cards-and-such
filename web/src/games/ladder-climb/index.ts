@@ -29,5 +29,6 @@ Use Settings to choose 5 or 10 rungs. Reaching the top rung earns a total score 
   initialState: (seed: number, settings: LadderClimbSettingsType) => initialState(seed, settings as LadderClimbSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-ladder-climb-action"]', pulses: 3 }; },
   component: LadderClimb,
 };

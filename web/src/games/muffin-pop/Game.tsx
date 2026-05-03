@@ -20,7 +20,7 @@ export function MuffinPopGame({ state, dispatch, onGameOver }: GameProps<MuffinP
           <input className="muffin-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as MuffinPopAction)} />
           <div className="muffin-info">Power: {state.power}</div>
-          <button className="muffin-btn" onClick={() => dispatch({ type:"throw" } as MuffinPopAction)}>Go!</button>
+          <button data-testid="hint-target-muffin-pop-action" className="muffin-btn" onClick={() => dispatch({ type:"throw" } as MuffinPopAction)}>Go!</button>
         </>
       ) : (
         <>

@@ -22,5 +22,6 @@ The number of tiles in the pattern grows with each round, starting at 3 tiles an
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-mosaic-copy-action"]', pulses: 3 }; },
   component: MosaicCopy,
 };

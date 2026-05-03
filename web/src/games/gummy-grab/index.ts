@@ -12,5 +12,7 @@ export const gummyGrabPlugin: GamePlugin<GummyGrabState, GummyGrabAction, typeof
   howToPlay: `Gummy Grab has you reaching into a jar of gummy bears. Each round set the power slider — too light and you get few gummies, too strong and you knock the jar. The closer to the sweet spot, the more gummies (points) you grab. 10 rounds of sticky-fingered fun!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as GummyGrabSettings),
-  reducer, isTerminal, component: GummyGrabGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-gummy-grab-action"]', pulses: 3 }; },
+  component: GummyGrabGame,
 };

@@ -47,7 +47,7 @@ export function MagicWandCast({ state, dispatch, onGameOver }: GameProps<MagicWa
       </div>
       {state.phase === "timeout" && <p style={{ color: "#e74c3c", fontWeight: 700 }}>Time out! 0 pts for this spell.</p>}
       {state.phase === "success" && <p style={{ color: "#27ae60", fontWeight: 700 }}>Spell cast!</p>}
-      {!isCasting && <button className="wand-btn" onClick={() => dispatch({ type: "next" } as MagicWandCastAction)}>Next Spell</button>}
+      {!isCasting && <button data-testid="hint-target-magic-wand-cast-action" className="wand-btn" onClick={() => dispatch({ type: "next" } as MagicWandCastAction)}>Next Spell</button>}
       {isCasting && (
         <div className="wand-btns">
           {COLORS.map(c => (

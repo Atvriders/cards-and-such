@@ -27,5 +27,7 @@ New coins pop in every two seconds. Up to 6 can be falling at once. Keep scannin
 Use Settings to choose 20, 30, or 45 seconds. Final score, collection count, and misses are shown at the end. Can you collect every coin for a perfect sweep?`,
   settings: coinPopPluginSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CoinPopSettings),
-  reducer, isTerminal, component: CoinPop,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-coin-pop-action"]', pulses: 3 }; },
+  component: CoinPop,
 };

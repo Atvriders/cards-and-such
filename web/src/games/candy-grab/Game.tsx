@@ -29,7 +29,7 @@ export function CandyGrab({ state, dispatch, onGameOver }: GameProps<CandyGrabSt
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#fd79a8,#e17055)" }}>
         {state.items.map(item => (
-          <button key={item.id} className="banana-btn"
+          <button data-testid="hint-target-candy-grab-action" key={item.id} className="banana-btn"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as CandyGrabAction)}>
             {item.points >= 20 ? "🍭" : "🍬"}

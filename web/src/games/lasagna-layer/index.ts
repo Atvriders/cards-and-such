@@ -12,5 +12,7 @@ export const lasagnaLayerPlugin: GamePlugin<LasagnaLayerState, LasagnaLayerActio
   howToPlay:`Lasagna Layer challenges you to lay each pasta sheet at the ideal thickness. A hidden target power is set each round. Use the slider then press Layer! to lay it. Points depend on closeness to target — up to 100 per round. Ten rounds, max 1000 total. Adjust using the post-round diff feedback. Perfect layers score 100; large misses score low. Aim for a perfect 1000!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as LasagnaLayerSettings),
-  reducer,isTerminal,component:LasagnaLayerGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-lasagna-layer-action"]', pulses: 3 }; },
+  component:LasagnaLayerGame,
 };

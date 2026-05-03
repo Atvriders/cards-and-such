@@ -56,7 +56,7 @@ export function LongJump({ state, dispatch, onGameOver }: GameProps<LongJumpStat
             <input type="range" min={0} max={1} step={0.01} value={state.timing}
               onChange={(e) => dispatch({ type: "set-timing", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="lj-btn" onClick={() => dispatch({ type: "jump" })}>Jump!</button>
+          <button data-testid="hint-target-long-jump-action" className="lj-btn" onClick={() => dispatch({ type: "jump" })}>Jump!</button>
         </div>
       )}
 

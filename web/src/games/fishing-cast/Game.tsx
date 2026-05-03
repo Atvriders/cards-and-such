@@ -30,7 +30,7 @@ export function FishingCast({ state, dispatch, onGameOver }: GameProps<FishingCa
       </div>
       <div className="fc-labels"><span>0</span><span>Target zone ({state.targetMin}–{state.targetMax})</span><span>100</span></div>
       {state.phase === "result" && <div className={`fc-feedback ${state.lastPoints >= 100 ? "great" : state.lastPoints > 0 ? "ok" : "miss"}`}>{state.lastPoints >= 100 ? `In the zone! +${state.lastPoints}` : state.lastPoints > 0 ? `Close! +${state.lastPoints}` : "Too far!"}</div>}
-      {state.phase === "casting" && <button className="fc-btn" onClick={() => dispatch({ type: "release" } as FishingCastAction)}>Cast!</button>}
+      {state.phase === "casting" && <button data-testid="hint-target-fishing-cast-action" className="fc-btn" onClick={() => dispatch({ type: "release" } as FishingCastAction)}>Cast!</button>}
       {state.phase === "result" && <button className="fc-btn next" onClick={() => dispatch({ type: "next" } as FishingCastAction)}>Next Cast</button>}
     </div>
   );

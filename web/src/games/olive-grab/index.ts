@@ -12,5 +12,7 @@ export const oliveGrabPlugin: GamePlugin<OliveGrabState, OliveGrabAction, typeof
   howToPlay:`Olive Grab is a precision picking arcade game. Each round a hidden target power determines the ideal olive-picking speed. Set the slider and press Grab! Points are awarded based on how close your power is to the target up to 100 each round. Ten rounds, 1000 max. Watch the diff feedback carefully after each grab and adjust. Perfect olive-grabbing precision earns the maximum score. Are you the ultimate olive wrangler?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as OliveGrabSettings),
-  reducer,isTerminal,component:OliveGrabGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-olive-grab-action"]', pulses: 3 }; },
+  component:OliveGrabGame,
 };

@@ -13,7 +13,7 @@ export function SwingBatGame({ state, dispatch, onGameOver }: GameProps<SwingBat
       <div className="arc-display">🏏</div>
       {state.phase==="aiming" && <>
         <div className="arc-slider-row"><span className="arc-slider-label">Timing</span><input type="range" className="arc-slider" min={0} max={100} value={state.power} onChange={e=>dispatch({type:"setPower",value:+e.target.value} as SwingBatAction)}/><span className="arc-slider-value">{state.power}</span></div>
-        <button className="arc-btn" onClick={()=>dispatch({type:"throw"} as SwingBatAction)}>Go!</button>
+        <button data-testid="hint-target-swing-bat-action" className="arc-btn" onClick={()=>dispatch({type:"throw"} as SwingBatAction)}>Go!</button>
       </>}
       {state.phase==="result" && <><div className="arc-result">+{state.lastPts} pts (off by {state.lastDiff})</div><button className="arc-btn" onClick={()=>dispatch({type:"next"} as SwingBatAction)}>Next</button></>}
     </div>

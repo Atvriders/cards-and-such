@@ -12,5 +12,7 @@ export const kebabStackPlugin: GamePlugin<KebabStackState, KebabStackAction, typ
   howToPlay:`Kebab Stack is a precision arcade game. Each round a secret target power is set. Adjust the slider to your desired power and press Go! to stack the next skewer. The closer your power is to the hidden target, the more points you earn up to 100 per round. Ten rounds total. Watch the diff feedback and adjust each attempt. A perfect game scores 1000 points — nail every target!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as KebabStackSettings),
-  reducer,isTerminal,component:KebabStackGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-kebab-stack-action"]', pulses: 3 }; },
+  component:KebabStackGame,
 };

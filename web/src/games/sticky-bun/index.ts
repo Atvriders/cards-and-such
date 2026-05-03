@@ -18,5 +18,7 @@ After each toss you see how far off you were. Use that feedback to calibrate you
 10 rounds per game. Precision and pattern recognition are your tools. The player who reads the subtle clues and adjusts most efficiently will score highest!`,
   settings,
   initialState: (seed:number, s:S) => initialState(seed, s as StickyBunSettings),
-  reducer, isTerminal, component: StickyBunGame,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-sticky-bun-action"]', pulses: 3 }; },
+  component: StickyBunGame,
 };

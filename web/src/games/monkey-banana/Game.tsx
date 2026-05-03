@@ -36,7 +36,7 @@ export function MonkeyBanana({ state, dispatch, onGameOver }: GameProps<MonkeyBa
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena">
         {state.bananas.map(b => (
-          <button key={b.id} className="banana-btn"
+          <button data-testid="hint-target-monkey-banana-action" key={b.id} className="banana-btn"
             style={{ left: `${b.x}%`, top: `${Math.min(b.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: b.id } as MonkeyBananaAction)}>
             {b.points >= 20 ? "🍌🍌" : "🍌"}

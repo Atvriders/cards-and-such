@@ -27,5 +27,7 @@ Spells grow slightly longer as the game progresses (from 3 colors up to 5). Use 
 The game ends after all spells are attempted. Can you cast every spell perfectly on the first try?`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MagicWandCastSettings),
-  reducer, isTerminal, component: MagicWandCast,
+  reducer, isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-magic-wand-cast-action"]', pulses: 3 }; },
+  component: MagicWandCast,
 };

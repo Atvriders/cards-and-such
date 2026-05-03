@@ -20,7 +20,7 @@ export function MarshmallowGrabGame({ state, dispatch, onGameOver }: GameProps<M
           <input className="marshmallow-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as MarshmallowGrabAction)} />
           <div className="marshmallow-info">Power: {state.power}</div>
-          <button className="marshmallow-btn" onClick={() => dispatch({ type:"throw" } as MarshmallowGrabAction)}>Go!</button>
+          <button data-testid="hint-target-marshmallow-grab-action" className="marshmallow-btn" onClick={() => dispatch({ type:"throw" } as MarshmallowGrabAction)}>Go!</button>
         </>
       ) : (
         <>

@@ -54,7 +54,7 @@ export function SoccerPenalty({ state, dispatch, onGameOver }: GameProps<SoccerP
             <input type="range" min={0} max={1} step={0.01} value={state.power}
               onChange={(e) => dispatch({ type: "set-power", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="spk-btn" onClick={() => dispatch({ type: "kick" })}>Kick!</button>
+          <button data-testid="hint-target-soccer-penalty-action" className="spk-btn" onClick={() => dispatch({ type: "kick" })}>Kick!</button>
         </div>
       )}
 

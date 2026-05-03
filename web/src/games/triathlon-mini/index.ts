@@ -24,5 +24,6 @@ Your total score is the sum of event scores — each based on how quickly you co
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: TriathlonState, action: TriathlonAction) => TriathlonState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-triathlon-mini-action"]', pulses: 3 }; },
   component: TriathlonMini,
 } as unknown as GamePlugin;

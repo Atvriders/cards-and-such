@@ -34,5 +34,6 @@ Strategy matters: if your left side is currently heavier, place the next ball on
   initialState: (seed: number, settings: SeesawBalanceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-seesaw-balance-action"]', pulses: 3 }; },
   component: SeesawBalance,
 };

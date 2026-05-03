@@ -22,5 +22,6 @@ The game ends when you run out of spins or credits hit zero. Your final score is
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: SlotMachineProState, action: SlotAction) => SlotMachineProState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-slot-machine-pro-action"]', pulses: 3 }; },
   component: SlotMachineProGame,
 } as unknown as GamePlugin;

@@ -27,5 +27,6 @@ Watch the keeper position indicator carefully — smart placement beats raw powe
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-soccer-penalty-action"]', pulses: 3 }; },
   component: SoccerPenalty,
 };

@@ -20,7 +20,7 @@ export function OliveGrabGame({ state, dispatch, onGameOver }: GameProps<OliveGr
           <input className="olive-slider" type="range" min={0} max={100} value={state.power}
             onChange={e => dispatch({ type:"setPower", value:Number(e.target.value) } as OliveGrabAction)} />
           <div className="olive-info">Power: {state.power}</div>
-          <button className="olive-btn" onClick={() => dispatch({ type:"throw" } as OliveGrabAction)}>Go!</button>
+          <button data-testid="hint-target-olive-grab-action" className="olive-btn" onClick={() => dispatch({ type:"throw" } as OliveGrabAction)}>Go!</button>
         </>
       ) : (
         <>

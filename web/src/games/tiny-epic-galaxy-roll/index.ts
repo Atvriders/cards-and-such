@@ -18,5 +18,6 @@ export const tinyEpicGalaxyRollPlugin: GamePlugin<TinyEpicGalaxyRollState, TinyE
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-tiny-epic-galaxy-roll-action"]', pulses: 3 }; },
   component: TinyEpicGalaxyRoll,
 };

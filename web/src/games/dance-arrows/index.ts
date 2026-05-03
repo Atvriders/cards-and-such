@@ -22,5 +22,6 @@ Strategy tips: Break the sequence into short chunks of 2 or 3 arrows. Try saying
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-dance-arrows-action"]', pulses: 3 }; },
   component: DanceArrows,
 };

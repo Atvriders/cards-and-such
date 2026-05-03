@@ -82,7 +82,7 @@ export function MosaicCopy({
         ))}
       </div>
       {state.phase === "input" && !terminal && (
-        <button
+        <button data-testid="hint-target-mosaic-copy-action"
           className="mc-submit-btn"
           onClick={() => dispatch({ type: "submit" })}
           disabled={state.playerFilled.length === 0}

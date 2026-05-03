@@ -30,5 +30,6 @@ Settings: choose spell lengths of 4, 6, or 8 runes. Longer spells are exponentia
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-wizard-spell-cast-action"]', pulses: 3 }; },
   component: WizardSpellCastGame,
 };

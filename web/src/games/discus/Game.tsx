@@ -58,7 +58,7 @@ export function Discus({ state, dispatch, onGameOver }: GameProps<DiscusState, D
             <input type="range" min={0} max={1} step={0.01} value={state.release}
               onChange={(e) => dispatch({ type: "set-release", value: parseFloat(e.target.value) })} />
           </label>
-          <button className="dsc-btn" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
+          <button data-testid="hint-target-discus-action" className="dsc-btn" onClick={() => dispatch({ type: "throw" })}>Throw!</button>
         </div>
       )}
 

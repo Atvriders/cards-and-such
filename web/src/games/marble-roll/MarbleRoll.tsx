@@ -126,7 +126,7 @@ export function MarbleRoll({
           <div className={`mr-result ${state.lastPts > 0 ? "scored" : "miss"}`}>
             {state.lastPts > 0 ? `In the hole! +${state.lastPts} pts` : "Time up!"}
           </div>
-          <button className="mr-btn" onClick={() => dispatch({ type: "next" })}>Next Round</button>
+          <button data-testid="hint-target-marble-roll-action" className="mr-btn" onClick={() => dispatch({ type: "next" })}>Next Round</button>
         </>
       )}
 

@@ -70,7 +70,7 @@ export function TriathlonMini({
             <span>Speed: {state.speed.toFixed(1)}</span>
             <span>Combo: {state.combo}x</span>
           </div>
-          <button className="tri-tap-btn" onClick={() => d({ type: "tap" })}>
+          <button data-testid="hint-target-triathlon-mini-action" className="tri-tap-btn" onClick={() => d({ type: "tap" })}>
             {EVENT_ICONS[state.phase] ?? ""} TAP — {EVENT_LABELS[state.phase] ?? state.phase}
           </button>
         </>

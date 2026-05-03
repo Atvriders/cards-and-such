@@ -39,7 +39,7 @@ export function HappySalmonMini({ state, dispatch, onGameOver }: GameProps<Happy
         })}
       </div>
       {state.phase === "answered" && (
-        <button className="g-btn" onClick={() => dispatch({ type: "next" } as HappySalmonMiniAction)}>Next</button>
+        <button data-testid="hint-target-happy-salmon-mini-action" className="g-btn" onClick={() => dispatch({ type: "next" } as HappySalmonMiniAction)}>Next</button>
       )}
     </div>
   );
