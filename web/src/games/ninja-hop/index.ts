@@ -34,5 +34,6 @@ Three speed settings adjust how fast gravity and movement work. Slow gives plent
   initialState: (seed: number, settings: NinjaHopSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".nh-player", pulses: 3 }; },
   component: NinjaHop,
 };

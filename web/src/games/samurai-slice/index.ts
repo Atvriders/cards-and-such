@@ -40,5 +40,6 @@ Tips: Start by identifying the bombs before slicing. Bombs look distinctly diffe
   initialState: (seed: number, settings: SamuraiSliceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".ss-target", pulses: 3 }; },
   component: SamuraiSlice,
 };

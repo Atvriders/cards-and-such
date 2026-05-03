@@ -32,5 +32,6 @@ Choose 5, 10, or 15 arrows per game. Maximum possible score equals arrows × 10.
   initialState: (seed: number, settings: ArcheryTargetSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".archery-canvas", pulses: 3 }; },
   component: ArcheryTarget,
 };

@@ -40,5 +40,6 @@ Tips: Anticipate where the next egg will fall rather than reacting at the last m
   initialState: (seed: number, settings: EggCatcherSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".ec-basket", pulses: 3 }; },
   component: EggCatcher,
 };

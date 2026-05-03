@@ -34,5 +34,6 @@ Tips: Focus on the hit zone, not the falling blocks higher up. Keep your fingers
   initialState: (seed: number, settings: ColorMatchSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".cmd-button", pulses: 3 }; },
   component: ColorMatchDash,
 };

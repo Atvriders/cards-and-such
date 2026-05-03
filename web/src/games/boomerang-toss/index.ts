@@ -34,5 +34,6 @@ On easy difficulty the boomerang travels slowly, giving you time to track it. Ha
   initialState: (seed: number, settings: BoomerangTossSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".boomerang-field", pulses: 3 }; },
   component: BoomerangToss,
 };

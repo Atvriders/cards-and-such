@@ -18,5 +18,7 @@ There is no penalty for missing — just keep clicking! The faster you identify 
 Targets are spread around the play area and replace themselves instantly, so you are always busy. The key is rapid scanning and clicking. Choose 60 seconds for a longer session with higher potential scores. Ready, aim, spray!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as WaterPistolSettings),
-  reducer, isTerminal, component:WaterPistol,
+  reducer, isTerminal, 
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".arcade-wrap svg", pulses: 3 }; },
+  component:WaterPistol,
 };

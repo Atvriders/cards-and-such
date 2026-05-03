@@ -40,5 +40,6 @@ Tips: Rather than following the target with your mouse before clicking, move you
   initialState: (seed: number, settings: AimTrainerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".at-target", pulses: 3 }; },
   component: AimTrainer,
 };

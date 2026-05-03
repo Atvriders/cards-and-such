@@ -34,5 +34,6 @@ Tips: Try not to overcorrect. A common mistake is holding thrust too long and sl
   initialState: (seed: number, settings: CaveFlyerSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".cf-player", pulses: 3 }; },
   component: CaveFlyer,
 };

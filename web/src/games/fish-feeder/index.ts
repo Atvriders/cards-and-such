@@ -34,5 +34,6 @@ Tips: Target fish that are clearly smaller than you and coming from the side. Ne
   initialState: (seed: number, settings: FishFeederSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".ff-player", pulses: 3 }; },
   component: FishFeeder,
 };

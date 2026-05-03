@@ -34,5 +34,6 @@ Lose all three lives and the game ends. Your final score equals the total number
   initialState: (seed: number, settings: TrampolineBounceSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".trampoline-mat", pulses: 3 }; },
   component: TrampolineBounce,
 };

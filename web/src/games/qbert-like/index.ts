@@ -22,5 +22,6 @@ Tips: Work methodically row by row. Watch where enemies are heading before makin
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".qjump-canvas-wrap", pulses: 3 }; },
   component: QJump,
 };

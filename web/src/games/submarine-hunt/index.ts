@@ -40,5 +40,6 @@ Larger ocean grids and more submarines extend the challenge significantly. A per
   initialState: (seed: number, settings: SubmarineHuntSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".sub-cell", pulses: 3 }; },
   component: SubmarineHunt,
 };

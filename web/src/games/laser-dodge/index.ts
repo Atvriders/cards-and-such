@@ -34,5 +34,6 @@ Tips: Identify safe corridors between laser sweeps and position yourself inside 
   initialState: (seed: number, settings: LaserDodgeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".ld-player", pulses: 3 }; },
   component: LaserDodge,
 };

@@ -34,5 +34,6 @@ Escaping earns a large score bonus. Getting caught still scores points based on 
   initialState: (seed: number, settings: GhostMazeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".ghost-maze-svg", pulses: 3 }; },
   component: GhostMazeGame,
 };

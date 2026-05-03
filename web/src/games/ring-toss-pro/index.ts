@@ -18,5 +18,7 @@ Rings that miss all pegs score nothing. With 10 rings and perfect accuracy, the 
 Use Settings to choose 5 or 10 rings. Strategy: aim directly at the center peg for the jackpot, or target the reliable 200-point corner pegs if you want more consistent scoring. Can you master the jitter and ring every peg?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RingTossProSettings),
-  reducer, isTerminal, component:RingTossPro,
+  reducer, isTerminal, 
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".arcade-wrap svg", pulses: 3 }; },
+  component:RingTossPro,
 };

@@ -18,5 +18,7 @@ With 10 or 20 arrows (configurable in Settings), your goal is to hit as many tar
 The archer is positioned at the bottom center. The key skill is reading the target's position and clicking precisely at the correct horizontal position. Bullseye hits (all 150 pts) with 20 arrows = 3000 pts maximum. Can you be a paper archery champion?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PaperArrowSettings),
-  reducer, isTerminal, component:PaperArrow,
+  reducer, isTerminal, 
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".arcade-wrap svg", pulses: 3 }; },
+  component:PaperArrow,
 };

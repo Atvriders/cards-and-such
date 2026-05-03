@@ -40,5 +40,6 @@ Choose 3, 5, or 7 starting lives. More lives means you can afford a few misses, 
   initialState: (seed: number, settings: ParachuteDropSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".pd-zone", pulses: 3 }; },
   component: ParachuteDrop,
 };

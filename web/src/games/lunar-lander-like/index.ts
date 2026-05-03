@@ -22,5 +22,6 @@ Score: 500 base points for a successful landing plus 5 points per remaining fuel
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".lunardescent-playfield", pulses: 3 }; },
   component: LunarDescent,
 };

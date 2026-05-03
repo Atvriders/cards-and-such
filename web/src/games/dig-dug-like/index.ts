@@ -22,5 +22,6 @@ Tips: Dig routes that connect enemy zones so you can corner them. Pump from a de
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".tunneldig-cell", pulses: 3 }; },
   component: TunnelDig,
 };

@@ -18,5 +18,7 @@ The target moves faster and farther as the game progresses, challenging you to t
 After all balls are thrown, your final score and dunk count are shown. A perfect game would dunk every time! With 10 balls and perfect accuracy you could score 1500 points. Can you read the target's movement and land every throw?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DunkTankSettings),
-  reducer, isTerminal, component:DunkTank,
+  reducer, isTerminal, 
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".arcade-wrap svg", pulses: 3 }; },
+  component:DunkTank,
 };

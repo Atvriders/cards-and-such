@@ -32,5 +32,6 @@ Choose 3, 6, or 9 darts per game. The maximum score is 50 × number of darts (al
   initialState: (seed: number, settings: DartThrowSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".dart-canvas", pulses: 3 }; },
   component: DartThrow,
 };

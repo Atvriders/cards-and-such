@@ -18,5 +18,7 @@ You start with 10 darts (or 5 on the short setting). The game ends when you run 
 Balloons are placed randomly each game with varying sizes. Larger balloons are easier to hit but show up less often. Aim precisely at the center of each balloon for the highest score. Can you pop all 12 balloons with just 10 darts?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as BalloonDartsSettings),
-  reducer, isTerminal, component:BalloonDarts,
+  reducer, isTerminal, 
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".arcade-wrap svg circle", pulses: 3 }; },
+  component:BalloonDarts,
 };

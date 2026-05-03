@@ -34,5 +34,6 @@ Tips: Read two or three words ahead as you type so your fingers can prepare. Typ
   initialState: (seed: number, settings: TypingQuotesSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any)?.phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any)?.gameOver === true || (s as any)?.done === true) return null; return { selector: ".tq-input", pulses: 3 }; },
   component: TypingQuotes,
 };
