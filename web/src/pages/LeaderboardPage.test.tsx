@@ -101,6 +101,38 @@ describe("LeaderboardPage tabs", () => {
     expect(screen.queryByTestId("lb-row-klondike")).not.toBeInTheDocument();
   });
 
+  it("tab switching mounts Top Players then My Ladder by data-testid presence", async () => {
+    // Seed a stat so My Ladder renders a `lb-row-*` row when activated;
+    // mock leaderboard so Top Players reliably mounts its panel container.
+    localStorage.setItem(LEADERBOARD_MOCK_KEY, "true");
+    localStorage.setItem(
+      STATS_KEY,
+      JSON.stringify({
+        perGame: { klondike: { played: 4, wins: 2, best: 777 } },
+      }),
+    );
+
+    renderPage();
+
+    // Click Top Players → `lb-top-players` panel mounts; ladder rows must not
+    // be present while a different tab is active.
+    await act(async () => {
+      fireEvent.click(screen.getByRole("tab", { name: /top players/i }));
+    });
+    expect(screen.getByTestId("lb-top-players")).toBeInTheDocument();
+    expect(screen.queryByTestId("lb-row-klondike")).not.toBeInTheDocument();
+
+    // Click My Ladder → at least one `lb-row-*` mounts and the Top Players
+    // panel is fully unmounted (conditional rendering, not just hidden).
+    await act(async () => {
+      fireEvent.click(screen.getByRole("tab", { name: /my ladder/i }));
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId("lb-row-klondike")).toBeInTheDocument();
+    });
+    expect(screen.queryByTestId("lb-top-players")).not.toBeInTheDocument();
+  });
+
   it("Friends tab renders 5 mock friends when the friends toggle is on", async () => {
     // Enable mock friends so getFriendsClient resolves to FriendsClient,
     // which seeds a deterministic 10-name roster with klondike scores.
