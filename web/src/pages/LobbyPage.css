@@ -2102,3 +2102,47 @@ button.tile {
   .lobby-drawer-link,
   .lobby-drawer-toggle { transition: none; }
 }
+
+/* ----------------------------------------------------------------------
+ * Drag-reorder visual cue for the favorites filter (W414).
+ *
+ * The `data-fav-drag-id` attribute is stamped on a tile only while the
+ * favorites filter is active (see useEffect in LobbyPage.tsx that wires
+ * up draggable + the persisted reorder). We piggy-back on that single
+ * attribute as the gate so the cue is auto-correct in every other
+ * filter — no extra state to keep in sync.
+ *
+ * The handle itself is permanently rendered inside each card but kept
+ * `display: none` and `pointer-events: none` so it never intercepts the
+ * existing click-to-play / click-to-pick navigation. When the gating
+ * attribute appears we flip `display` and add the grab cursor on the
+ * whole tile so the affordance reads at a glance.
+ * -------------------------------------------------------------------- */
+.tile-drag-handle {
+  display: none;
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-size: 0.78rem;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--muted, rgba(255, 255, 255, 0.55));
+  opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  transition: opacity 160ms var(--ease-out-expo, ease-out);
+}
+.tile[data-fav-drag-id] {
+  cursor: grab;
+}
+.tile[data-fav-drag-id]:active {
+  cursor: grabbing;
+}
+.tile[data-fav-drag-id] .tile-drag-handle {
+  display: inline-block;
+}
+.tile[data-fav-drag-id]:hover .tile-drag-handle,
+.tile[data-fav-drag-id]:focus-visible .tile-drag-handle {
+  opacity: 1;
+}

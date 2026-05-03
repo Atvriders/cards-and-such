@@ -2823,6 +2823,27 @@ function EndRatingBlock({
 }
 
 /**
+ * Pool of bite-sized "tip of the day" lines surfaced under the loading
+ * skeleton. Twelve entries so a date-seeded index lands on a stable choice
+ * for the whole calendar day — refreshing the page won't churn the tip
+ * mid-load and confuse anyone who was reading it.
+ */
+const PLAY_LOADING_TIPS: readonly string[] = [
+  "Tip: Press ? on most games to peek the rules without leaving play.",
+  "Tip: Star a game from the lobby to pin it to your favorites row.",
+  "Tip: Daily challenges share the same seed worldwide — race friends fairly.",
+  "Tip: Most games remember your last settings — tweak once, play often.",
+  "Tip: Replays auto-save locally; revisit them from the Stats panel.",
+  "Tip: Tap and hold a card in many games for a closer look.",
+  "Tip: Hit Esc to bail out of a turn and rethink without losing progress.",
+  "Tip: Achievements unlock as you play — check the Stats panel for hints.",
+  "Tip: Use the share button to challenge a friend with the same setup.",
+  "Tip: Sound effects can be muted from the gear icon if you're at work.",
+  "Tip: Many race games support keyboard shortcuts — try arrow keys first.",
+  "Tip: Your time history graphs trends so you can chase a personal best.",
+];
+
+/**
  * Suspense fallback shown while a lazily-loaded game component is fetching.
  *
  * Sized to roughly mirror a real play panel — header line, status row,
@@ -2833,9 +2854,25 @@ function EndRatingBlock({
  * case for routed plays — the URL gameId is resolved against the
  * registry before this skeleton renders) we surface it so the user
  * sees which game is being prepared rather than a generic stand-in.
+ *
+ * Below the deck we surface a tip line (rotated daily via `todayStamp`'s
+ * hash) and a "Still loading…" notice that flips on after 3s if the
+ * plugin still hasn't mounted — a gentle reassurance for slow networks
+ * without spamming the screen during the common fast-path.
  */
 function GameLoadingSkeleton({ gameTitle }: { gameTitle?: string }): JSX.Element {
   const caption = gameTitle ? `Loading ${gameTitle}…` : "Loading game…";
+  const tip = useMemo(() => {
+    // Seed by date so the tip is stable across reloads within a day —
+    // hashStamp is already used for daily-pick determinism elsewhere.
+    const idx = hashStamp(todayStamp()) % PLAY_LOADING_TIPS.length;
+    return PLAY_LOADING_TIPS[idx];
+  }, []);
+  const [stuck, setStuck] = useState(false);
+  useEffect(() => {
+    const id = window.setTimeout(() => setStuck(true), 3000);
+    return () => window.clearTimeout(id);
+  }, []);
   return (
     <div
       className="play-game-loading"
@@ -2855,6 +2892,18 @@ function GameLoadingSkeleton({ gameTitle }: { gameTitle?: string }): JSX.Element
         <Skeleton variant="text-line" width={80} />
         <Skeleton variant="text-line" width={80} />
       </div>
+      <div className="play-game-loading-tip" data-testid="play-loading-tip">
+        {tip}
+      </div>
+      {stuck && (
+        <div
+          className="play-game-loading-stuck"
+          data-testid="play-loading-stuck"
+          role="alert"
+        >
+          Still loading…
+        </div>
+      )}
     </div>
   );
 }

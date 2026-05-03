@@ -774,6 +774,27 @@
 .play-game-loading-card--mid   { transform: translate(-50%, -50%) rotate(0deg);  opacity: 0.78; }
 .play-game-loading-card--front { transform: translate(-50%, -50%) rotate(9deg);  opacity: 1; }
 
+/* "Tip of the day" line under the loading deck. Quiet, smaller-than-body
+   so it reads as supplementary copy rather than competing with the
+   capitalised loading caption above the deck. */
+.play-game-loading-tip {
+  max-width: 360px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--text-300, #cbd5e1);
+  opacity: 0.8;
+}
+
+/* "Still loading…" notice that appears 3s in if the plugin hasn't
+   mounted. Coloured to read as a gentle alert (warm amber) without
+   looking like an error — we don't actually know anything is wrong yet. */
+.play-game-loading-stuck {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-amber, #fbbf24);
+}
+
 /* ---------- Win / Game-over banner ---------- */
 
 /* Backdrop dims the page so the win panel pops. Sits below the panel

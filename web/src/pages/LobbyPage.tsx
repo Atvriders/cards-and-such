@@ -43,6 +43,8 @@ const TITLE_HIGHLIGHT_MIN_LEN = 2;
 
 /** localStorage key persisting the active lobby filter chip across reloads. */
 const FILTER_STORAGE_KEY = "cards-lobby-filter";
+/** localStorage key persisting whether the new-user keyboard tip is dismissed. */
+const KBD_TIP_DISMISSED_KEY = "cards-lobby-kbd-tip-dismissed";
 /** localStorage key persisting the lobby list pagination mode. */
 const LIST_MODE_STORAGE_KEY = "cards-lobby-list-mode";
 /** localStorage key persisting the desktop left-drawer collapsed state. */
@@ -801,6 +803,27 @@ export default function LobbyPage(): JSX.Element {
     }
   });
   const [coachmarkPos, setCoachmarkPos] = useState<{ top: number; left: number } | null>(null);
+  // Inline keyboard-shortcut tip — shown only to brand-new users (zero
+  // games played) on the empty default view, and dismissible. The
+  // dismissal flag is persisted under `cards-lobby-kbd-tip-dismissed`
+  // so the tip stays gone across reloads even if the user hasn't yet
+  // played a game.
+  const [kbdTipDismissed, setKbdTipDismissed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return window.localStorage.getItem(KBD_TIP_DISMISSED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+  const dismissKbdTip = useCallback(() => {
+    setKbdTipDismissed(true);
+    try {
+      window.localStorage.setItem(KBD_TIP_DISMISSED_KEY, "1");
+    } catch {
+      /* localStorage unavailable — tip stays gone for this session. */
+    }
+  }, []);
   const navigate = useNavigate();
   const location = useLocation();
   // Track which family id (if any) was opened via a `?family=<id>` deep
@@ -990,6 +1013,11 @@ export default function LobbyPage(): JSX.Element {
     }
   }, [favSet, ratings, lastPlayed]);
   const totalPlays = stats.totalPlayed ?? 0;
+  // Inline keyboard-tip visibility — gated to brand-new users on the
+  // empty default view (no filter, no search). Once dismissed, stays
+  // hidden via the persisted flag handled above.
+  const showKbdTip =
+    !kbdTipDismissed && !query && filter === "all" && totalPlays === 0;
   const recommendations = useMemo(() => {
     if (totalPlays < 3) return [] as GamePlugin[];
     const all = GAMES.filter((g): g is GamePlugin => g != null);
@@ -1831,6 +1859,26 @@ export default function LobbyPage(): JSX.Element {
           </button>
         </div>
       </header>
+
+      {showKbdTip && (
+        <div
+          className="lobby-kbd-tip"
+          data-testid="lobby-kbd-tip"
+          role="note"
+          aria-label="Keyboard shortcut tip"
+        >
+          <span className="lobby-kbd-tip-text">
+            Press <kbd>G</kbd> <kbd>H</kbd> to come back here, <kbd>?</kbd> for shortcuts
+          </span>
+          <button
+            type="button"
+            className="lobby-kbd-tip-dismiss"
+            data-testid="lobby-kbd-tip-dismiss"
+            onClick={dismissKbdTip}
+            aria-label="Dismiss keyboard shortcut tip"
+          >×</button>
+        </div>
+      )}
 
       <div className="lobby-controls">
         <div className="lobby-search">
