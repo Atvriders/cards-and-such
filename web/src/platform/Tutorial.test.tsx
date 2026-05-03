@@ -166,32 +166,42 @@ describe("Settings → Show coachmarks reset", () => {
     });
   });
 
-  it("clears cards-tutorial-seen and dispatches the open event", async () => {
-    // Pre-seed the welcome-seen flag so we can observe it being cleared.
-    markWelcomeTutorialSeen();
-    expect(hasSeenWelcomeTutorial()).toBe(true);
+  // SettingsPage is ~1.5k LOC with a deep transitive graph (themes, sounds,
+  // userdata, leaderboard, etc.). Mounting it in jsdom under CI load can
+  // easily blow past the 5s default `testTimeout` while React commits the
+  // initial render — that's the W511 flake. Bump just this test; the
+  // smaller WelcomeTutorial cases stay on the default budget so genuine
+  // hangs there still surface quickly.
+  it(
+    "clears cards-tutorial-seen and dispatches the open event",
+    async () => {
+      // Pre-seed the welcome-seen flag so we can observe it being cleared.
+      markWelcomeTutorialSeen();
+      expect(hasSeenWelcomeTutorial()).toBe(true);
 
-    // Mirror AppShell's listener so we can assert the open event fires.
-    const onOpen = vi.fn();
-    window.addEventListener(
-      "cards:open-welcome-tutorial",
-      onOpen as EventListener,
-    );
+      // Mirror AppShell's listener so we can assert the open event fires.
+      const onOpen = vi.fn();
+      window.addEventListener(
+        "cards:open-welcome-tutorial",
+        onOpen as EventListener,
+      );
 
-    render(
-      <MemoryRouter>
-        <SettingsPage />
-      </MemoryRouter>,
-    );
+      render(
+        <MemoryRouter>
+          <SettingsPage />
+        </MemoryRouter>,
+      );
 
-    fireEvent.click(screen.getByTestId("settings-show-coachmarks"));
+      fireEvent.click(screen.getByTestId("settings-show-coachmarks"));
 
-    expect(hasSeenWelcomeTutorial()).toBe(false);
-    expect(onOpen).toHaveBeenCalledTimes(1);
+      expect(hasSeenWelcomeTutorial()).toBe(false);
+      expect(onOpen).toHaveBeenCalledTimes(1);
 
-    window.removeEventListener(
-      "cards:open-welcome-tutorial",
-      onOpen as EventListener,
-    );
-  });
+      window.removeEventListener(
+        "cards:open-welcome-tutorial",
+        onOpen as EventListener,
+      );
+    },
+    60_000,
+  );
 });
