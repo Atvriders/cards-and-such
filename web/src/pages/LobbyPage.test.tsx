@@ -379,6 +379,39 @@ describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
     // rename regression breaking every desktop user's saved layout.
     expect(localStorage.getItem("cards-lobby-drawer-width")).toBe("9999");
   });
+
+  // W625 — clicking the drawer toggle must (1) flip the visible
+  // `data-collapsed` attribute on the aside in the same render, and
+  // (2) persist the collapsed sentinel under `cards-lobby-drawer-collapsed`
+  // so a reload rehydrates the same compact state. A regression that
+  // splits the toggle from the persistence (or renames the storage key)
+  // would silently bounce the drawer back open on every page load — a
+  // class of bug the existing W227 coverage doesn't pin down end-to-end.
+  it("W625: clicking the toggle flips data-collapsed and persists the sentinel", () => {
+    renderAt("/");
+    const drawer = screen.getByTestId("lobby-drawer");
+    const toggle = screen.getByTestId("lobby-drawer-toggle");
+
+    // Default-hydrated state: expanded. The mount-time persist effect
+    // writes the canonical "0" sentinel so a subsequent reader (different
+    // tab, etc.) sees an explicit not-collapsed value rather than absence.
+    expect(drawer.getAttribute("data-collapsed")).toBe("false");
+    expect(toggle.getAttribute("aria-expanded")).toBe("true");
+    expect(localStorage.getItem("cards-lobby-drawer-collapsed")).toBe("0");
+
+    fireEvent.click(toggle);
+
+    // The DOM and persistence must update in lockstep.
+    expect(drawer.getAttribute("data-collapsed")).toBe("true");
+    expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    expect(localStorage.getItem("cards-lobby-drawer-collapsed")).toBe("1");
+
+    // Toggling back must un-set the collapsed flag (write "0", not "1").
+    fireEvent.click(toggle);
+    expect(drawer.getAttribute("data-collapsed")).toBe("false");
+    expect(toggle.getAttribute("aria-expanded")).toBe("true");
+    expect(localStorage.getItem("cards-lobby-drawer-collapsed")).toBe("0");
+  });
 });
 
 /**
