@@ -2050,6 +2050,9 @@ export default function LobbyPage(): JSX.Element {
                 to={`/play/${g.id}`}
                 className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured`}
                 data-testid={`rec-tile-${g.id}`}
+                aria-label={`${g.title}, recommended, ${CATEGORY_LABELS[g.category]}, ${
+                  favSet.has(g.id) ? "favorited" : "not favorited"
+                }`}
               >
                 <span className="tile-stripe" aria-hidden="true" />
                 <span className="tile-sheen" aria-hidden="true" />
@@ -2370,6 +2373,10 @@ export default function LobbyPage(): JSX.Element {
                     isFavorite={entry.members.some((m) => favSet.has(m.id))}
                     onToggleFavorite={onToggleFavorite}
                     highlightQuery={deferredQuery}
+                    playCount={entry.members.reduce(
+                      (sum, m) => sum + (stats.perGame[m.id]?.played ?? 0),
+                      0,
+                    )}
                   />
                 ),
               )}
@@ -2948,6 +2955,15 @@ function GameCard({
     pushToast("success", "Hidden from lobby");
   }, [onHideGame, g.id, pushToast]);
 
+  // Rich aria-label: title, category, plays, favorite-state.
+  // Mirrors the visible chrome so screen-reader users get the same
+  // at-a-glance summary sighted users get from the tile chrome.
+  const playsLabel =
+    playCount > 0
+      ? `${playCount} ${playCount === 1 ? "play" : "plays"}`
+      : "no plays yet";
+  const favLabel = isFavorite ? "favorited" : "not favorited";
+  const tileAriaLabel = `${g.title}, ${CATEGORY_LABELS[g.category]}, ${playsLabel}, ${favLabel}`;
   return (
     <div className="lobby-tile-wrap">
     <Link
@@ -2955,6 +2971,7 @@ function GameCard({
       className={`tile tile--cat-${CATEGORY_TAG[g.category]}${pressed ? " tile--pressed" : ""}`}
       data-testid={`tile-${g.id}`}
       aria-haspopup="menu"
+      aria-label={tileAriaLabel}
       onMouseDown={startPress}
       onMouseUp={endPress}
       onMouseLeave={endPress}
@@ -3149,6 +3166,7 @@ function FamilyCard({
   isFavorite = false,
   onToggleFavorite,
   highlightQuery,
+  playCount = 0,
 }: {
   family: GameFamily;
   category: GameCategory;
@@ -3161,6 +3179,11 @@ function FamilyCard({
   isFavorite?: boolean | undefined;
   onToggleFavorite?: ((id: string) => void) | undefined;
   highlightQuery?: string | undefined;
+  /**
+   * Aggregate plays across all variants in the family — surfaced in the
+   * aria-label only (no visible badge on family tiles).
+   */
+  playCount?: number | undefined;
 }): JSX.Element {
   // Family badge: NEW wins outright, otherwise CHALLENGING/QUICK if any
   // member is curated, otherwise POPULAR by best-rating threshold.
@@ -3193,7 +3216,11 @@ function FamilyCard({
       className={`tile tile--cat-${CATEGORY_TAG[category]} tile--family`}
       data-testid={testIdOverride ?? `tile-${family.id}`}
       aria-haspopup="dialog"
-      aria-label={`${family.label} — ${memberCount} variants`}
+      aria-label={`${family.label}, ${CATEGORY_LABELS[category]}, ${memberCount} variant${memberCount === 1 ? "" : "s"}, ${
+        playCount > 0
+          ? `${playCount} ${playCount === 1 ? "play" : "plays"}`
+          : "no plays yet"
+      }, ${isFavorite ? "favorited" : "not favorited"}`}
       {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />
@@ -3344,6 +3371,9 @@ function FeaturedTile({
         className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured tile--family`}
         data-testid={`tile-${familyId}`}
         aria-haspopup="dialog"
+        aria-label={`${g.title}, featured, ${CATEGORY_LABELS[g.category]}, multiple variants, ${
+          isFavorite ? "favorited" : "not favorited"
+        }`}
         {...handlers}
       >
         <span className="tile-stripe" aria-hidden="true" />
@@ -3400,6 +3430,9 @@ function FeaturedTile({
       to={`/play/${g.id}`}
       className={`tile tile--cat-${CATEGORY_TAG[g.category]} tile--featured`}
       data-testid={`feat-tile-${g.id}`}
+      aria-label={`${g.title}, featured, ${CATEGORY_LABELS[g.category]}, ${
+        isFavorite ? "favorited" : "not favorited"
+      }`}
       {...handlers}
     >
       <span className="tile-stripe" aria-hidden="true" />
