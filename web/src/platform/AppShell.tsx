@@ -25,6 +25,8 @@ import {
 import { searchAll, type SearchHit } from "./search.js";
 import { decodeChallenge } from "./friendCode.js";
 import { track } from "./analytics.js";
+import { getStreak } from "./userdata.js";
+import { todayStamp } from "../pages/dailyPicker.js";
 import "./AppShell.css";
 
 const CHANGELOG: Array<{ title: string; detail: string }> = [
@@ -314,6 +316,54 @@ export default function AppShell(): JSX.Element {
       window.clearInterval(handle);
     };
   }, [username]);
+
+  // PWA app badge: surface a "1" on the installed-app icon when today's
+  // daily challenge hasn't been played yet, and clear it once it has. Guarded
+  // by feature-detection so non-supporting browsers (Firefox, Safari < 16.4
+  // on iOS, etc.) silently no-op. Re-evaluates on focus, visibility change,
+  // and cross-tab storage writes so playing the daily in another tab clears
+  // the badge here without a refresh.
+  useEffect(() => {
+    if (typeof navigator === "undefined") return;
+    if (!("setAppBadge" in navigator)) return;
+    type BadgeNav = Navigator & {
+      setAppBadge?: (n?: number) => Promise<void> | void;
+      clearAppBadge?: () => Promise<void> | void;
+    };
+    const nav = navigator as BadgeNav;
+
+    const apply = (): void => {
+      try {
+        const today = todayStamp();
+        const streak = getStreak();
+        const played = streak.days.includes(today) || streak.lastDate === today;
+        if (played) {
+          if (typeof nav.clearAppBadge === "function") {
+            void Promise.resolve(nav.clearAppBadge()).catch(() => {});
+          } else if (typeof nav.setAppBadge === "function") {
+            void Promise.resolve(nav.setAppBadge(0)).catch(() => {});
+          }
+        } else if (typeof nav.setAppBadge === "function") {
+          void Promise.resolve(nav.setAppBadge(1)).catch(() => {});
+        }
+      } catch {
+        /* badge is best-effort — never throw into render */
+      }
+    };
+
+    apply();
+    const onStorage = (e: StorageEvent): void => {
+      if (e.key === null || e.key === "cards-daily-streak") apply();
+    };
+    window.addEventListener("focus", apply);
+    document.addEventListener("visibilitychange", apply);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("focus", apply);
+      document.removeEventListener("visibilitychange", apply);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, [location.pathname]);
 
   const onQuickStart = (): void => {
     const pick = pickQuickstart();
