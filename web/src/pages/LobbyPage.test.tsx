@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach, vi } from "vitest";
+import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
@@ -640,5 +640,174 @@ describe("LobbyPage — favorites drag-reorder (W397)", () => {
     expect(localStorage.getItem("cards-favorites-order")).toBe(
       JSON.stringify(["fam-klondike", "fam-spider", "fam-freecell"]),
     );
+  });
+});
+
+/**
+ * W545 — main lobby grid 2D arrow-key navigation (roving tabindex).
+ *
+ * The grid handler in `onGridKeyDown` derives column count at keydown
+ * time by reading `getBoundingClientRect()` on each tile and counting
+ * tiles whose `top` matches the first tile's `top`. jsdom returns a
+ * zeroed rect for every element by default, which would collapse the
+ * grid to a single row of N columns and make ArrowDown a no-op. We
+ * stub `getBoundingClientRect` per tile so the layout looks like a
+ * desktop-width grid with COLS columns — large enough that PageDown
+ * (skip 5 rows) lands in a deterministic, well-inside-bounds tile.
+ *
+ * `matchMedia` is mocked for desktop width so any responsive density
+ * hooks resolve to wide-viewport behavior, matching how real users
+ * trigger this 2D nav (mobile collapses to a single column).
+ */
+describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
+  const COLS = 5;
+  // 8 rows of 5 cols = 40 simulated tiles; PageDown from row 0 should
+  // land on row 5 — comfortably inside bounds and far enough that a
+  // bug treating PageDown as ArrowDown would clearly fail.
+  const ROWS = 8;
+  const TILE_W = 200;
+  const TILE_H = 240;
+  let restoreRect: () => void;
+
+  beforeEach(() => {
+    localStorage.clear();
+    // Desktop matchMedia — keeps the page out of the mobile single-column
+    // path and lets the drawer/grid hydrate at their wide-viewport widths.
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: /min-width:\s*1024/.test(query),
+        media: query,
+        onchange: null,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+
+    // Stub Element.getBoundingClientRect so each `.tile` inside the
+    // main `.lobby-grid` reports a deterministic position on a COLS
+    // grid. The handler in onGridKeyDown computes columns by counting
+    // tiles whose `top` matches the first tile's `top` (1px tolerance);
+    // without realistic rects, jsdom's zero-everywhere default would
+    // make every tile share top=0 and cols would equal tiles.length —
+    // collapsing 2D nav to a single row.
+    const original = Element.prototype.getBoundingClientRect;
+    Element.prototype.getBoundingClientRect = function (this: Element): DOMRect {
+      // Only stub tiles inside the main, non-featured grid — leave
+      // featured strip / drawer rows alone so nothing else regresses.
+      const grid = document.querySelector(
+        ".lobby-grid:not(.lobby-grid--featured)",
+      );
+      if (grid && this.classList.contains("tile") && grid.contains(this)) {
+        const tiles = Array.from(
+          grid.querySelectorAll<HTMLElement>(".tile"),
+        );
+        const idx = tiles.indexOf(this as HTMLElement);
+        if (idx >= 0) {
+          const row = Math.floor(idx / COLS);
+          const col = idx % COLS;
+          const top = row * TILE_H;
+          const left = col * TILE_W;
+          return {
+            top,
+            left,
+            right: left + TILE_W,
+            bottom: top + TILE_H,
+            width: TILE_W,
+            height: TILE_H,
+            x: left,
+            y: top,
+            toJSON: () => ({}),
+          } as DOMRect;
+        }
+      }
+      return original.call(this);
+    };
+    restoreRect = () => {
+      Element.prototype.getBoundingClientRect = original;
+    };
+  });
+
+  afterEach(() => {
+    restoreRect?.();
+  });
+
+  /**
+   * Resolve tiles inside the main grid (not the featured strip) in DOM
+   * order. The grid handler operates on `grid.querySelectorAll(".tile")`
+   * so this mirrors the production traversal exactly.
+   */
+  function gridTiles(): HTMLElement[] {
+    const grid = document.querySelector(
+      ".lobby-grid:not(.lobby-grid--featured)",
+    );
+    if (!grid) return [];
+    return Array.from(grid.querySelectorAll<HTMLElement>(".tile"));
+  }
+
+  it("ArrowRight/Down/Left/Up move focus across the 2D grid by one cell", async () => {
+    renderAt("/");
+    // Wait for the post-render roving-tabindex effect to stamp tabIndex
+    // values. The first tile is the canonical entry point.
+    await waitFor(() => {
+      expect(gridTiles().length).toBeGreaterThanOrEqual(COLS * 2 + 1);
+    });
+    const tiles = gridTiles();
+    const grid = tiles[0].parentElement as HTMLElement;
+    expect(grid.classList.contains("lobby-grid")).toBe(true);
+
+    tiles[0].focus();
+    expect(document.activeElement).toBe(tiles[0]);
+
+    // ArrowRight → next column (idx 1).
+    fireEvent.keyDown(grid, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(tiles[1]);
+
+    // ArrowDown → next row, same column (idx 1 + COLS).
+    fireEvent.keyDown(grid, { key: "ArrowDown" });
+    expect(document.activeElement).toBe(tiles[1 + COLS]);
+
+    // ArrowLeft → previous column on same row.
+    fireEvent.keyDown(grid, { key: "ArrowLeft" });
+    expect(document.activeElement).toBe(tiles[COLS]);
+
+    // ArrowUp → back to the top row.
+    fireEvent.keyDown(grid, { key: "ArrowUp" });
+    expect(document.activeElement).toBe(tiles[0]);
+
+    // Roving-tabindex contract: the focused tile is the only tab stop.
+    expect(tiles[0].tabIndex).toBe(0);
+    for (let i = 1; i < tiles.length; i++) {
+      expect(tiles[i].tabIndex).toBe(-1);
+    }
+  });
+
+  it("PageDown / PageUp jump focus by 5 rows at a time", async () => {
+    renderAt("/");
+    await waitFor(() => {
+      expect(gridTiles().length).toBeGreaterThanOrEqual(COLS * (ROWS - 1));
+    });
+    const tiles = gridTiles();
+    const grid = tiles[0].parentElement as HTMLElement;
+
+    tiles[0].focus();
+    expect(document.activeElement).toBe(tiles[0]);
+
+    // PageDown from row 0 → row 5 (idx 0 + 5*COLS).
+    fireEvent.keyDown(grid, { key: "PageDown" });
+    expect(document.activeElement).toBe(tiles[5 * COLS]);
+
+    // PageUp returns to the top row at the same column.
+    fireEvent.keyDown(grid, { key: "PageUp" });
+    expect(document.activeElement).toBe(tiles[0]);
+
+    // PageUp from the top row clamps at 0 (does not wrap or move into
+    // negative indices) — pins the Math.max(0, …) guard in the handler.
+    fireEvent.keyDown(grid, { key: "PageUp" });
+    expect(document.activeElement).toBe(tiles[0]);
   });
 });

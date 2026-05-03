@@ -537,7 +537,48 @@ export function loadStats(): StatsState {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyState();
     const parsed = JSON.parse(raw) as Partial<StatsState>;
-    return { ...emptyState(), ...parsed };
+    // Defensive merge: a corrupt blob (user-edited localStorage, an old
+    // schema, partial write) must never crash consumers. Each field falls
+    // back to the empty default when its shape is wrong, so callers can
+    // rely on `Object.entries(s.perGame)`, `s.daysPlayed.includes(...)`,
+    // `s.unlocked.includes(...)`, etc., without runtime guards.
+    const empty = emptyState();
+    const num = (v: unknown, d: number): number =>
+      typeof v === "number" && Number.isFinite(v) ? v : d;
+    const arrOfStrings = (v: unknown): string[] =>
+      Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
+    const recOfNumbers = (v: unknown): Record<string, number> => {
+      if (!v || typeof v !== "object" || Array.isArray(v)) return {};
+      const out: Record<string, number> = {};
+      for (const [k, val] of Object.entries(v as Record<string, unknown>)) {
+        if (typeof val === "number" && Number.isFinite(val)) out[k] = val;
+      }
+      return out;
+    };
+    const recOfPerGame = (v: unknown): Record<string, PerGameStats> => {
+      if (!v || typeof v !== "object" || Array.isArray(v)) return {};
+      const out: Record<string, PerGameStats> = {};
+      for (const [k, val] of Object.entries(v as Record<string, unknown>)) {
+        if (!val || typeof val !== "object") continue;
+        const g = val as Record<string, unknown>;
+        out[k] = {
+          played: num(g.played, 0),
+          wins: num(g.wins, 0),
+          best: num(g.best, 0),
+        };
+      }
+      return out;
+    };
+    return {
+      totalPlayed: num(parsed.totalPlayed, empty.totalPlayed),
+      totalWins: num(parsed.totalWins, empty.totalWins),
+      longestStreak: num(parsed.longestStreak, empty.longestStreak),
+      currentStreak: num(parsed.currentStreak, empty.currentStreak),
+      perGame: recOfPerGame(parsed.perGame),
+      perCategory: recOfNumbers(parsed.perCategory),
+      daysPlayed: arrOfStrings(parsed.daysPlayed),
+      unlocked: arrOfStrings(parsed.unlocked),
+    };
   } catch {
     return emptyState();
   }
