@@ -295,3 +295,81 @@ describe("PlayPage undo/redo", () => {
     expect(getCount()).toBe(5);
   });
 });
+
+/**
+ * Session info popover (W164). The button lives in the play header and
+ * is wired to a `role="dialog"` popover that surfaces seed, session start
+ * time, and plays-this-session counter, plus a focus-trap and Esc-to-close.
+ *
+ * Reuses the hoisted `counterPlugin` registry mock above so PlayPage mounts
+ * deterministically with a known seed/session shape.
+ */
+describe("PlayPage info popover", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    useAuth.setState({
+      username: "alice",
+      token: "t.t.t",
+      expiresAt: Date.now() + 1000 * 60,
+    });
+  });
+
+  function mountPlayPage(): void {
+    render(
+      <MemoryRouter initialEntries={["/play/test-undo-game"]}>
+        <App />
+      </MemoryRouter>,
+    );
+  }
+
+  it("opens on click and shows seed, start-time, and plays-this-session rows", () => {
+    mountPlayPage();
+    expect(screen.queryByTestId("play-info-popover")).toBeNull();
+
+    fireEvent.click(screen.getByTestId("play-info-btn"));
+
+    const popover = screen.getByTestId("play-info-popover");
+    expect(popover).toBeInTheDocument();
+    expect(popover).toHaveTextContent("Seed");
+    expect(popover).toHaveTextContent("Started");
+    expect(popover).toHaveTextContent("Plays this session");
+  });
+
+  it("traps focus inside the popover when opened", () => {
+    mountPlayPage();
+    fireEvent.click(screen.getByTestId("play-info-btn"));
+
+    const popover = screen.getByTestId("play-info-popover");
+    // The trap moves focus into the popover on activation — the active
+    // element should now be the first focusable inside (or the popover
+    // itself if no focusables existed). The Close button always exists.
+    expect(popover.contains(document.activeElement)).toBe(true);
+
+    // Tab from the last focusable wraps back to the first — that's the
+    // observable focus-trap invariant. Find the last focusable, focus it,
+    // then dispatch Tab and confirm focus stayed inside the popover.
+    const focusables = popover.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    const last = focusables[focusables.length - 1]!;
+    last.focus();
+    expect(document.activeElement).toBe(last);
+
+    // The trap listens at capture phase on document. fireEvent.keyDown on
+    // the focused element bubbles up through document, hitting that listener.
+    fireEvent.keyDown(last, { key: "Tab", code: "Tab" });
+    expect(popover.contains(document.activeElement)).toBe(true);
+  });
+
+  it("closes when Escape is pressed and restores focus to the trigger", () => {
+    mountPlayPage();
+    const trigger = screen.getByTestId("play-info-btn");
+    fireEvent.click(trigger);
+    expect(screen.getByTestId("play-info-popover")).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "Escape", code: "Escape" });
+
+    expect(screen.queryByTestId("play-info-popover")).toBeNull();
+    expect(document.activeElement).toBe(trigger);
+  });
+});
