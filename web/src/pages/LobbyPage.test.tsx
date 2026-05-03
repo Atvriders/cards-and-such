@@ -1954,3 +1954,53 @@ describe("LobbyPage — category chip filter (W624)", () => {
     }
   });
 });
+
+/**
+ * Recently-played chip filter (W227) — the chip surfaces only entries
+ * whose member ids carry a non-zero stamp in the `cards-last-played`
+ * map, sorted most-recent first by intrinsic timestamp ordering. We
+ * seed two well-known family heads (`klondike` is "now",  `spider` is
+ * one day older) and assert the surviving grid is exactly those two
+ * tiles in that order. The featured strip is suppressed for any
+ * non-"all" filter, so the canonical `tile-<familyId>` testids are
+ * unambiguous in the main grid.
+ */
+describe("LobbyPage — recently-played chip filter (W227)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("filters tiles to the seeded last-played games only", () => {
+    const now = Date.now();
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    localStorage.setItem(
+      "cards-last-played",
+      JSON.stringify({ klondike: now, spider: now - oneDayMs }),
+    );
+
+    renderAt("/");
+
+    const chip = screen.getByTestId("chip-recently-played");
+    expect(chip).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(chip);
+
+    expect(chip).toHaveAttribute("aria-pressed", "true");
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("recently-played");
+
+    // The two seeded family tiles must both be present.
+    expect(screen.getByTestId("tile-klondike")).toBeInTheDocument();
+    expect(screen.getByTestId("tile-spider")).toBeInTheDocument();
+
+    // Scope to the lobby grid (skips the suppressed featured strip and
+    // any unrelated tile-shaped nodes); the surviving set must be
+    // exactly those two family tiles, klondike before spider per the
+    // recently-played intrinsic descending-timestamp sort.
+    const tileIds = Array.from(
+      document.querySelectorAll<HTMLElement>('[class*="tile--cat-"]'),
+    )
+      .map((t) => t.getAttribute("data-testid"))
+      .filter((id): id is string => id != null && id.startsWith("tile-"));
+    expect(tileIds).toEqual(["tile-klondike", "tile-spider"]);
+  });
+});
