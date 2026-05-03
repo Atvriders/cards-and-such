@@ -234,6 +234,38 @@ function undosTotal(): number {
   return total;
 }
 
+/** Sum the `time` field across every `cards-time-history:*` entry in
+ *  localStorage. Walks all keys so newly-played games (whose ids may not yet
+ *  appear in the in-memory `stats` snapshot) still contribute. Tolerates
+ *  corrupt blobs the same way the rest of this file does. Returns total
+ *  seconds (history `time` is stored in seconds — see {@link readTimeHistory}). */
+function totalTimePlayedSeconds(): number {
+  if (typeof localStorage === "undefined") return 0;
+  let total = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith(TIME_HISTORY_KEY_PREFIX)) continue;
+    const entries = progressJSON<unknown>(k);
+    if (!Array.isArray(entries)) continue;
+    for (const e of entries) {
+      if (!e || typeof e !== "object") continue;
+      const t = (e as { time?: unknown }).time;
+      if (typeof t === "number" && Number.isFinite(t) && t > 0) total += t;
+    }
+  }
+  return total;
+}
+
+/** Format a total-time-played duration as "Hh Mm Ss" (e.g. "2h 5m 9s"). All
+ *  three components are always rendered so the card width stays stable. */
+function formatTotalTimePlayed(seconds: number): string {
+  const safe = Number.isFinite(seconds) && seconds > 0 ? Math.floor(seconds) : 0;
+  const h = Math.floor(safe / 3600);
+  const m = Math.floor((safe % 3600) / 60);
+  const s = safe % 60;
+  return `${h}h ${m}m ${s}s`;
+}
+
 /** Per-game undo usage. Mirror of {@link hintsUsedFor} for the
  *  `cards-undos-used` blob written by PlayPage's `undo()` callback. */
 function undosUsedFor(id: string): number {
@@ -1337,6 +1369,7 @@ export default function StatsPage(): JSX.Element {
             <div className="stat-card" data-testid="stat-total-wins"><div className="stat-label">Total wins</div><div className="stat-value">{category === "all" ? stats.totalWins : totalsForFilter.wins}</div></div>
             <div className="stat-card" data-testid="stat-total-hints"><div className="stat-label">Total hints used</div><div className="stat-value">{hintsTotal()}</div></div>
             <div className="stat-card" data-testid="stat-total-undos"><div className="stat-label">Total undos used</div><div className="stat-value">{undosTotal()}</div></div>
+            <div className="stat-card" data-testid="stats-total-time"><div className="stat-label">Total time played</div><div className="stat-value">{formatTotalTimePlayed(totalTimePlayedSeconds())}</div></div>
           </div>
           <div className="stats-range-row">
             <div className="stats-chart-label">Last {range} days</div>
