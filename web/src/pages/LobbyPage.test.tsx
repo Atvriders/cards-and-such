@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
@@ -809,5 +809,166 @@ describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
     // negative indices) — pins the Math.max(0, …) guard in the handler.
     fireEvent.keyDown(grid, { key: "PageUp" });
     expect(document.activeElement).toBe(tiles[0]);
+  });
+});
+
+/**
+ * W267 — chip-strip Active state must stay synchronized with the
+ * underlying `filter` state and its persisted twin
+ * `cards-lobby-filter`. The `aria-pressed` attribute is the screen-
+ * reader contract that exposes which chip is currently the active
+ * filter; it must flip from "false" → "true" on the chip the user
+ * tapped, and from "true" → "false" on whichever chip was previously
+ * pressed. localStorage persistence of the chosen filter is what lets
+ * a reload land the user back on the same view, so we pin both the
+ * aria-pressed flip AND the persistence side-effect together.
+ */
+describe("LobbyPage — chip-strip Active state syncing (W267)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking chip-favorites flips aria-pressed=true and persists 'favorites' to cards-lobby-filter", () => {
+    renderAt("/");
+    const all = screen.getByTestId("chip-all");
+    const favorites = screen.getByTestId("chip-favorites");
+    // Default lands on "all" — that chip is pressed, favorites is not.
+    expect(all).toHaveAttribute("aria-pressed", "true");
+    expect(favorites).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(favorites);
+
+    // Active state has moved to favorites; the previously-pressed
+    // "all" chip must release its aria-pressed flag in the same tick.
+    expect(favorites).toHaveAttribute("aria-pressed", "true");
+    expect(all).toHaveAttribute("aria-pressed", "false");
+    // URL/localStorage persistence — `cards-lobby-filter` is the
+    // canonical key the page reads on hydrate to rehydrate the chip.
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("favorites");
+  });
+
+  it("clicking chip-all from the favorites filter flips aria-pressed back and persists 'all'", () => {
+    // Start mounted directly on the favorites filter so the click on
+    // chip-all exercises the reverse direction of the sync contract.
+    localStorage.setItem("cards-lobby-filter", "favorites");
+    renderAt("/");
+    const all = screen.getByTestId("chip-all");
+    const favorites = screen.getByTestId("chip-favorites");
+    expect(favorites).toHaveAttribute("aria-pressed", "true");
+    expect(all).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(all);
+
+    expect(all).toHaveAttribute("aria-pressed", "true");
+    expect(favorites).toHaveAttribute("aria-pressed", "false");
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("all");
+  });
+});
+
+/**
+ * W197 — lobby tile tooltips are lazy-hydrated. Hovering a tile must
+ * NOT mount the floating tooltip immediately; the heavy
+ * `<TileTooltipEngine>` schedules a 500ms hover-intent timer and only
+ * then commits the `tile-tooltip-<id>` node into the DOM. These two
+ * tests pin both halves of that contract using vitest fake timers so
+ * the delay can be advanced deterministically without real wall-clock
+ * waits.
+ *
+ * `klondike` is the same canonical family id used elsewhere in this
+ * file — its `tile-klondike` testid is rendered by the family tile
+ * regardless of category filter or sort, so the lookup is stable.
+ */
+describe("LobbyPage — tile hover-tooltip 500ms delay (W197)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("does not mount the tooltip immediately on hover", () => {
+    renderAt("/");
+    const tile = screen.getByTestId("tile-klondike");
+    // Sanity: the floating tooltip is absent before any interaction —
+    // pre-hydration the engine isn't even in the DOM.
+    expect(
+      screen.queryByTestId("tile-tooltip-klondike"),
+    ).not.toBeInTheDocument();
+
+    // Hovering hydrates the engine (activated → true) and starts the
+    // 500ms hover-intent timer, but the tooltip itself must NOT yet be
+    // visible. Advance just under the threshold to prove the delay is
+    // honoured rather than the tooltip happening to be absent for an
+    // unrelated reason.
+    fireEvent.mouseEnter(tile);
+    act(() => {
+      vi.advanceTimersByTime(499);
+    });
+    expect(
+      screen.queryByTestId("tile-tooltip-klondike"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("mounts the tooltip after the 500ms hover-intent timer fires", () => {
+    renderAt("/");
+    const tile = screen.getByTestId("tile-klondike");
+
+    fireEvent.mouseEnter(tile);
+    // Cross the 500ms threshold — the engine's setTimeout callback
+    // calls show(), which flips visible=true and renders the floating
+    // `tile-tooltip-klondike` node into the DOM.
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(screen.getByTestId("tile-tooltip-klondike")).toBeInTheDocument();
+  });
+});
+
+/**
+ * W566 — lobby search title `<mark>` highlighting.
+ *
+ * Typing a query at least `TITLE_HIGHLIGHT_MIN_LEN` (=2) characters long
+ * into the lobby search input must wrap the matched substring of every
+ * visible tile's title in a `<mark>` element via `highlightMatch`. This
+ * pins the contract that the lobby tile rendering threads `query` down
+ * as `highlightQuery` and that the threshold gate fires for the canonical
+ * "klondike" search — the most-searched solitaire family. A regression
+ * that drops the prop, raises the threshold above 8, or replaces `<mark>`
+ * with a plain span would surface here.
+ */
+describe("LobbyPage — search title <mark> highlight (W566)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("wraps the matched substring of the klondike tile title in <mark>", async () => {
+    renderAt("/");
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "klondike" } });
+
+    // The klondike family tile must still be in the DOM after filtering
+    // — searching for the family id is the trivial path that should
+    // never accidentally drop the matching tile from the grid.
+    const tile = await waitFor(() => screen.getByTestId("tile-klondike"));
+
+    // Locate the title span (the `lobby-tile-title` element) and assert
+    // it contains a `<mark>` wrapping the matched text. We compare on
+    // lowercased innerHTML so the assertion mirrors the spec literal
+    // `<mark>klondike</mark>` substring even though the rendered family
+    // label is the title-cased "Klondike".
+    const title = tile.querySelector(".lobby-tile-title") as HTMLElement;
+    expect(title).not.toBeNull();
+    expect(title.innerHTML.toLowerCase()).toContain("<mark>klondike</mark>");
+
+    // Belt-and-suspenders: assert via the DOM that exactly one <mark>
+    // is rendered inside the title and its text matches the query
+    // case-insensitively — guards against a future change that emits a
+    // different highlight tag (e.g. <span class="hl">) but still happens
+    // to contain the substring in some unrelated attribute.
+    const marks = title.querySelectorAll("mark");
+    expect(marks.length).toBe(1);
+    expect(marks[0]?.textContent?.toLowerCase()).toBe("klondike");
   });
 });

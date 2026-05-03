@@ -2654,6 +2654,7 @@ function Chip({ active, count, testId, onClick, glyph, children }: ChipProps): J
       type="button"
       role="tab"
       aria-selected={active}
+      aria-pressed={active}
       className={`lobby-chip${active ? " is-active" : ""}`}
       onClick={onClick}
       data-testid={testId}
