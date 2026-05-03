@@ -307,6 +307,54 @@ describe("StatsPage", () => {
     expect(localStorage.getItem("cards-stats-exported")).toBe("true");
   });
 
+  // W564 — CSV export shape. Two pinning tests:
+  //   1. The Download CSV button renders alongside the other export controls.
+  //   2. Clicking it invokes URL.createObjectURL with a text/csv Blob whose
+  //      payload starts with the canonical header and emits one row per
+  //      game in stats.perGame.
+  it("W564: stats-export-csv button renders", () => {
+    seedRichStats();
+    renderPage();
+    const csv = screen.getByTestId("stats-export-csv");
+    expect(csv).toBeInTheDocument();
+    expect(csv.textContent).toMatch(/CSV/);
+  });
+
+  it("W564: clicking stats-export-csv calls URL.createObjectURL with a text/csv Blob whose payload has the canonical header + a row per game", async () => {
+    seedRichStats();
+    // Capture the Blob handed to URL.createObjectURL so we can read its text.
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-csv"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    // Blob type carries the text/csv MIME (with charset); spreadsheet tools
+    // key off the major/minor type so we pin "text/csv" explicitly.
+    expect(blob.type).toMatch(/^text\/csv/);
+
+    // jsdom's Blob doesn't implement .text(); read it via FileReader so we
+    // stay portable across the project's vitest environment.
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+    const lines = text.split(/\r\n|\n/).filter((l) => l.length > 0);
+    // Header row matches the documented column contract exactly — any drift
+    // would silently break downstream pivot tables / scripts.
+    expect(lines[0]).toBe(
+      "gameId,plays,wins,winRate,bestTime,bestScore,rating,hintsUsed,undosUsed",
+    );
+    // seedRichStats seeds 4 games (agram, balut, klondike, spider) sorted
+    // alphabetically by buildStatsCsv → exactly 4 data rows after the header.
+    expect(lines.length).toBe(1 + 4);
+    const gameIds = lines.slice(1).map((row) => row.split(",")[0]);
+    expect(gameIds).toEqual(["agram", "balut", "klondike", "spider"]);
+  });
+
   it("most-hinted rows render an inline sparkline per game", () => {
     seedRichStats();
     renderPage();
