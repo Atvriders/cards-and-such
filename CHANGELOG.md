@@ -1,5 +1,57 @@
 # Changelog
 
+## 2026-05-03 Milestone
+- 51c17774 test(play): hint pulse class lifecycle
+- 7982c1b2 test(route): RouteTransition basic coverage
+- fd924251 test(kbd): footer button + section coverage
+- 6cb9d422 test(header): search popover keyboard nav
+- d6880f55 test(play): achievement toast
+- 91ca3308 test(confirm): edge cases (requireText, focus restore, backdrop)
+- 31572a2d test(audio): test-sounds panel
+- 4903681d polish(a11y): focus rings on remaining pages
+- ad74d303 test(e2e): playpage keyboard shortcuts
+- 7094547b test(e2e): share-handler smoke spec
+- d6b32c6f fix(tests): repair regressions from hint sweeps
+- 807c9b57 test(e2e): /replays smoke spec
+- 0522df93 test(offline): unit tests
+- a0a08f3b test(share): handler page unit tests
+- 64ff7584 test(replays): unit tests
+- 31976571 test(play): info popover behavior
+- 137d8c33 feat(stats): session counter
+- 960dcca5 test(404): unit tests
+- 15916df6 polish(lobby): compact list view columns
+- 17a8480c test(about): unit tests
+- b8eeaccf polish(play): unified focus rings
+- 7a429c5d feat(stats): total time played aggregate
+- cda3e4b8 feat(nav): /replays link in stats + footer
+- 4c391cb5 test(e2e): per-category render smoke
+- fdcdde06 docs: 100% hint coverage milestone
+- 205ff92b test(settings): reset isolation tests
+- 850ff4f3 feat(stats): per-category personal records
+- 2c13e64c perf(build): manual chunks for vendors + engines
+- 9eef07c4 feat(replays): dedicated /replays page
+- b1b22b58 feat(a11y): lobby tile aria-label richness
+- 3a4c2b9d test(registry): sanity assertions for 100% coverage
+- 46eef29a fix(hints): selector quality pass
+- 3d51292a polish(lobby): unify control styling + focus rings
+- a6973973 polish(about): copy + visual hierarchy
+- bded3f11 polish(play): toolbar grouping + mobile overflow
+- 602fe45b feat(offline): most-played fallback list
+- 15686a6a feat(hints): board 100% close
+- b2c7fb4f polish(stats): responsive card grid
+- e5f6917f feat(hints): dice 100% close
+- a751e996 docs(hints): coverage audit refresh v2
+- c23b8182 feat(hints): graphical board residuals
+- a91ddc25 docs(hints): coverage audit refresh
+- 3bd4f0c5 feat(hints): cards eighth pass
+- 7ccf2552 feat(hints): arcade sixth pass
+- 1e27ffdf feat(hints): board sixth pass
+- 031ad9d5 feat(hints): board fourth pass
+- a2146a30 feat(hints): arcade fifth pass
+- 08e2c258 feat(hints): another residual batch
+- 73fd4aed feat(hints): yet another residual batch
+- 0e28bbdb feat(hints): board major residual batch
+
 ## 2026-05-02
 - 3723534a feat(about): What's new section from git log at build time
 - 0c3b209f feat(pwa): share_target manifest + handler route
