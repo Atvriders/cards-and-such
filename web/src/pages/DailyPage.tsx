@@ -2,7 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageHead } from "../platform/PageHead.js";
 import { loadStats } from "../platform/stats.js";
-import { getStreak, recordDailyPlayed, type DailyStreak } from "../platform/userdata.js";
+import {
+  getStreak,
+  recordDailyPlayed,
+  recordDailyPlayedWithShield,
+  isShieldAvailable,
+  SHIELD_COOLDOWN_DAYS,
+  type DailyStreak,
+} from "../platform/userdata.js";
 import { buildShareCardSvg, downloadSvg } from "../platform/svgShare.js";
 import { track } from "../platform/analytics.js";
 import {
@@ -26,6 +33,19 @@ const DAILY_NOTIFY_KEY = "cards-daily-notify";
  * unused now (the streak machinery is keyed only on dates).
  */
 export function recordDailyCompletion(_gameId: string, stamp: string): void {
+  // Shield-aware: silently consumes the once-per-7-days streak shield when
+  // the user is returning after exactly one missed day, so the streak
+  // survives. Falls through to the unconditional path otherwise. The
+  // legacy non-shield helper is re-exported below for tests / callers
+  // that want the strict behavior.
+  recordDailyPlayedWithShield(stamp);
+}
+
+/** Strict (non-shield) variant — kept for tests and explicit callers. */
+export function recordDailyCompletionStrict(
+  _gameId: string,
+  stamp: string,
+): void {
   recordDailyPlayed(stamp);
 }
 
@@ -42,14 +62,61 @@ function prettyDate(stamp: string): string {
   });
 }
 
-/** Build a list of the last 30 day stamps ending at `now`, oldest -> newest. */
-function last30Stamps(now: Date = new Date()): string[] {
-  const out: string[] = [];
-  for (let i = 29; i >= 0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
-    out.push(formatDateStamp(d));
+/**
+ * Build the calendar grid for the month containing `now`.
+ *
+ * Returns a flat list of cells, padded so the first row starts on Sunday and
+ * the last row ends on Saturday. Cells outside the active month are marked
+ * with `inMonth=false` and have no stamp/day — they exist only to keep the
+ * 7-column grid aligned. Cells past today (`isFuture=true`) are non-interactive
+ * placeholders.
+ */
+interface CalendarCell {
+  /** YYYY-MM-DD stamp for cells inside the month, otherwise empty string. */
+  stamp: string;
+  /** Day-of-month (1-31) for cells inside the month, otherwise 0. */
+  day: number;
+  /** True for cells that belong to the active month. */
+  inMonth: boolean;
+  /** True when this cell is today. */
+  isToday: boolean;
+  /** True when this cell is strictly after today (not yet playable). */
+  isFuture: boolean;
+}
+
+function buildMonthGrid(now: Date = new Date()): {
+  year: number;
+  month: number; // 0-11
+  cells: CalendarCell[];
+} {
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const todayStr = formatDateStamp(now);
+
+  const firstOfMonth = new Date(year, month, 1);
+  const startOffset = firstOfMonth.getDay(); // 0 (Sun) - 6 (Sat)
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Total cells = whole weeks covering all days of the month.
+  const total = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+  const cells: CalendarCell[] = [];
+  for (let i = 0; i < total; i++) {
+    const dayNum = i - startOffset + 1;
+    if (dayNum < 1 || dayNum > daysInMonth) {
+      cells.push({ stamp: "", day: 0, inMonth: false, isToday: false, isFuture: false });
+      continue;
+    }
+    const d = new Date(year, month, dayNum);
+    const stamp = formatDateStamp(d);
+    cells.push({
+      stamp,
+      day: dayNum,
+      inMonth: true,
+      isToday: stamp === todayStr,
+      isFuture: stamp > todayStr,
+    });
   }
-  return out;
+  return { year, month, cells };
 }
 
 /** Build the last 7 day stamps ending at `now`, newest -> oldest. */
@@ -111,14 +178,53 @@ export default function DailyPage(): JSX.Element {
   const todayMinutes = estimatedMinutes(todays.game);
   const todayBest = stats.perGame[todays.game.id]?.best ?? 0;
 
-  // Streak is "alive" only if the user played today or yesterday.
-  const streakAlive = streak.lastDate === today || streak.lastDate === yesterday;
+  // Day-before-yesterday (YYYY-MM-DD) — used to detect the one-missed-day
+  // case where the streak shield can still keep things alive.
+  const dayBeforeYesterday = useMemo(() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 2);
+    return formatDateStamp(d);
+  }, []);
+  const shieldAvailable = useMemo(() => isShieldAvailable(today), [today]);
+  // Streak is "alive" if the user played today, yesterday, or — when a
+  // shield is in their pocket — the day before yesterday. The shield isn't
+  // burned until they actually play again (handled in recordDailyCompletion).
+  const streakAlive =
+    streak.lastDate === today
+    || streak.lastDate === yesterday
+    || (streak.lastDate === dayBeforeYesterday && shieldAvailable);
   const currentStreak = streakAlive ? streak.current : 0;
   const showEmpty = streak.current === 0 && streak.days.length === 0;
 
-  // Heatmap: 30 cells, opacity driven by "played" set.
+  // Played-days set used by both the calendar and the 7-day history list.
   const playedSet = useMemo(() => new Set(streak.days), [streak.days]);
-  const heatStamps = useMemo(() => last30Stamps(), []);
+
+  // Full-month calendar grid for the current month.
+  const calendar = useMemo(() => buildMonthGrid(), []);
+  const monthLabel = useMemo(() => {
+    const d = new Date(calendar.year, calendar.month, 1);
+    return d.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  }, [calendar.year, calendar.month]);
+  const inMonthCells = useMemo(
+    () => calendar.cells.filter((c) => c.inMonth),
+    [calendar.cells],
+  );
+  const playedThisMonth = useMemo(
+    () => inMonthCells.filter((c) => playedSet.has(c.stamp)).length,
+    [inMonthCells, playedSet],
+  );
+
+  // Selected past/today calendar cell — shows that day's pick details inline.
+  const [selectedStamp, setSelectedStamp] = useState<string | null>(null);
+  const selectedPick = useMemo(
+    () => (selectedStamp ? pickDailyGame(selectedStamp) : null),
+    [selectedStamp],
+  );
+  const selectedPlayed = selectedStamp ? playedSet.has(selectedStamp) : false;
+  const handleCellClick = (cell: CalendarCell): void => {
+    if (!cell.inMonth || cell.isFuture) return;
+    setSelectedStamp((prev) => (prev === cell.stamp ? null : cell.stamp));
+  };
 
   // 7-day history: newest -> oldest, with the picked game and a completion
   // signal pulled from the streak's `days` set (the canonical "played daily"
@@ -234,7 +340,49 @@ export default function DailyPage(): JSX.Element {
           </header>
           <div className="daily-streak-row">
             <div className="daily-streak-stat">
-              <span className="daily-streak-num">{currentStreak}</span>
+              <span className="daily-streak-num-row">
+                <span className="daily-streak-num">{currentStreak}</span>
+                <span
+                  className={
+                    shieldAvailable
+                      ? "daily-streak-shield is-ready"
+                      : "daily-streak-shield is-spent"
+                  }
+                  data-testid="daily-streak-shield"
+                  role="img"
+                  aria-label={
+                    shieldAvailable
+                      ? "Streak shield ready: missing one day this week won't break your streak"
+                      : `Streak shield spent: recharges in up to ${SHIELD_COOLDOWN_DAYS} days`
+                  }
+                  title={
+                    shieldAvailable
+                      ? `Streak shield ready - once every ${SHIELD_COOLDOWN_DAYS} days, missing a day won't break your streak.`
+                      : "Streak shield used - recharging."
+                  }
+                >
+                  {/* Inline SVG shield so the icon stays crisp at any DPR. */}
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                    <path
+                      d="M8 1.2 2.5 3.2v4.4c0 3.2 2.3 5.9 5.5 7.2 3.2-1.3 5.5-4 5.5-7.2V3.2L8 1.2Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      strokeWidth="0.6"
+                      strokeLinejoin="round"
+                    />
+                    {shieldAvailable && (
+                      <path
+                        d="M5.6 8.1 7.3 9.8l3.1-3.4"
+                        fill="none"
+                        stroke="#fff"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    )}
+                  </svg>
+                </span>
+              </span>
               <span className="daily-streak-lbl">current</span>
             </div>
             <div className="daily-streak-stat">
@@ -294,37 +442,89 @@ export default function DailyPage(): JSX.Element {
       </section>
 
       <section
-        className="daily-heatmap"
-        data-testid="daily-heatmap"
-        aria-label="Last 30 days played"
+        className="daily-calendar"
+        data-testid="daily-calendar"
+        aria-label={`Daily activity for ${monthLabel}`}
       >
-        <header className="daily-heatmap-head">
-          <h3>Last 30 days</h3>
-          <span className="daily-heatmap-count">{streak.days.filter((d) => heatStamps.includes(d)).length} / 30</span>
+        <header className="daily-calendar-head">
+          <h3>{monthLabel}</h3>
+          <span className="daily-calendar-count">
+            {playedThisMonth} / {inMonthCells.length}
+          </span>
         </header>
-        <svg
-          className="daily-heatmap-svg"
-          viewBox="0 0 320 56"
-          role="img"
-          aria-label="Daily activity heatmap"
-        >
-          {heatStamps.map((s, i) => {
-            const played = playedSet.has(s);
-            const cx = 8 + i * 10;
+        <div className="daily-calendar-dow" aria-hidden="true">
+          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
+            <span key={d} className="daily-calendar-dow-cell">{d}</span>
+          ))}
+        </div>
+        <div className="daily-calendar-grid" role="grid">
+          {calendar.cells.map((cell, i) => {
+            if (!cell.inMonth) {
+              return (
+                <span
+                  key={`pad-${i}`}
+                  className="daily-cal-cell daily-cal-pad"
+                  aria-hidden="true"
+                />
+              );
+            }
+            const played = playedSet.has(cell.stamp);
+            const isSelected = selectedStamp === cell.stamp;
+            const classes = [
+              "daily-cal-cell",
+              played ? "is-played" : "is-empty",
+              cell.isToday ? "is-today" : "",
+              cell.isFuture ? "is-future" : "",
+              isSelected ? "is-selected" : "",
+            ].filter(Boolean).join(" ");
+            const aria = `${cell.stamp}${played ? ", played" : ""}${cell.isToday ? ", today" : ""}`;
             return (
-              <circle
-                key={s}
-                cx={cx}
-                cy={28}
-                r={played ? 4 : 2.5}
-                className={played ? "daily-heat-on" : "daily-heat-off"}
-                data-stamp={s}
+              <button
+                type="button"
+                key={cell.stamp}
+                data-testid={`daily-cal-cell-${cell.stamp}`}
+                data-stamp={cell.stamp}
+                className={classes}
+                onClick={() => handleCellClick(cell)}
+                disabled={cell.isFuture}
+                aria-label={aria}
+                aria-pressed={isSelected}
               >
-                <title>{s}{played ? " · played" : ""}</title>
-              </circle>
+                <span className="daily-cal-day">{cell.day}</span>
+                {played && <span className="daily-cal-check" aria-hidden="true">✓</span>}
+              </button>
             );
           })}
-        </svg>
+        </div>
+        {selectedPick && (
+          <div
+            className="daily-calendar-detail"
+            data-testid="daily-cal-detail"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="daily-calendar-detail-row">
+              <span className="daily-calendar-detail-date">{prettyDate(selectedPick.stamp)}</span>
+              <span
+                className={
+                  selectedPlayed
+                    ? "daily-calendar-detail-status ok"
+                    : "daily-calendar-detail-status dim"
+                }
+              >
+                {selectedPlayed ? "✓ Played" : "Not played"}
+              </span>
+            </div>
+            <p className="daily-calendar-detail-title">{selectedPick.game.title}</p>
+            <p className="daily-calendar-detail-meta">
+              <span>{selectedPick.game.category}</span>
+              <span className="daily-calendar-detail-seed">seed #{selectedPick.seed}</span>
+            </p>
+            {selectedPick.game.description && (
+              <p className="daily-calendar-detail-desc">{selectedPick.game.description}</p>
+            )}
+          </div>
+        )}
       </section>
 
       <section

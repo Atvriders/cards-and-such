@@ -101,13 +101,53 @@ describe("DailyPage", () => {
     localStorage.clear();
   });
 
-  it("renders the seeded pick, streak, recap and heatmap", () => {
+  it("renders the seeded pick, streak, recap and calendar", () => {
     renderPage();
     expect(screen.getByTestId("daily-pick")).toBeInTheDocument();
     expect(screen.getByTestId("daily-streak")).toBeInTheDocument();
     expect(screen.getByTestId("daily-recap")).toBeInTheDocument();
-    expect(screen.getByTestId("daily-heatmap")).toBeInTheDocument();
+    expect(screen.getByTestId("daily-calendar")).toBeInTheDocument();
+    expect(screen.getByTestId(`daily-cal-cell-${todayStamp()}`)).toBeInTheDocument();
     expect(screen.getByTestId("daily-play-btn")).toBeInTheDocument();
+  });
+
+  it("calendar marks today's cell with ✓ after recordDailyPlayed and never renders future-day check", () => {
+    const today = todayStamp();
+    recordDailyPlayed(today);
+    renderPage();
+    const cell = screen.getByTestId(`daily-cal-cell-${today}`);
+    expect(cell.textContent ?? "").toContain("✓");
+    // Compute tomorrow's stamp; if it falls outside the current month it just
+    // won't have a test id at all — either way it must not exist as a cell.
+    const now = new Date();
+    const t = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const tomorrow = formatDateStamp(t);
+    const tomorrowCell = screen.queryByTestId(`daily-cal-cell-${tomorrow}`);
+    if (tomorrowCell) {
+      expect(tomorrowCell.textContent ?? "").not.toContain("✓");
+      expect((tomorrowCell as HTMLButtonElement).disabled).toBe(true);
+    }
+  });
+
+  it("clicking a past calendar cell shows that day's pick info without launching play", () => {
+    renderPage();
+    // Find any non-today, non-future calendar cell to click.
+    const today = todayStamp();
+    const cells = document.querySelectorAll<HTMLButtonElement>("[data-testid^='daily-cal-cell-']");
+    const past = Array.from(cells).find((c) => {
+      const stamp = c.getAttribute("data-stamp") ?? "";
+      return stamp && stamp < today && !c.disabled;
+    });
+    // If the run lands on day-1 of a month there are no past in-month cells —
+    // skip the assertion in that edge case rather than fail spuriously.
+    if (!past) return;
+    const stamp = past.getAttribute("data-stamp")!;
+    fireEvent.click(past);
+    const detail = screen.getByTestId("daily-cal-detail");
+    expect(detail).toBeInTheDocument();
+    const expectedPick = pickDailyGame(stamp);
+    expect(detail.textContent ?? "").toContain(expectedPick.game.title);
+    expect(detail.textContent ?? "").toContain("Not played");
   });
 
   it("Play Daily button links to /play/<id>?seed=<n>&daily=1", () => {
