@@ -1890,7 +1890,7 @@ export default function LobbyPage(): JSX.Element {
         </div>
 
         {filterPending ? (
-          <div className="lobby-grid" data-density={density} data-testid="lobby-skeleton-grid" aria-busy="true">
+          <div className="lobby-grid" data-density={density} data-view={viewMode} data-testid="lobby-skeleton-grid" aria-busy="true">
             {Array.from({ length: 6 }).map((_, i) => (
               <SkeletonTile key={`sk-${i}`} />
             ))}
@@ -1926,7 +1926,7 @@ export default function LobbyPage(): JSX.Element {
           )
         ) : (
           <>
-            <div className="lobby-grid" data-density={density} ref={gridRef} onKeyDown={onGridKeyDown}>
+            <div className="lobby-grid" data-density={density} data-view={viewMode} ref={gridRef} onKeyDown={onGridKeyDown}>
               {visible.map((entry) =>
                 entry.kind === "game" ? (
                   <GameCard

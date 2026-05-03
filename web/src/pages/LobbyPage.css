@@ -1419,6 +1419,117 @@ button.tile {
   color: var(--accent-fg, #fff);
 }
 
+/* View toggle (grid/list). Same pill chrome as the density + mode
+   toggles, but each button is icon-only since the two layouts are
+   easier to recognise visually than to label. */
+.lobby-view-toggle {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--surface-2, rgba(148,163,184,0.12));
+  border: 1px solid var(--border, rgba(148,163,184,0.30));
+  border-radius: 999px;
+  padding: 2px;
+  margin-right: 0.5rem;
+}
+.lobby-view-toggle-btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--text-400);
+  font: inherit;
+  padding: 4px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lobby-view-toggle-btn:hover { color: var(--text); }
+.lobby-view-toggle-btn.is-active {
+  background: var(--accent, #5b6cff);
+  color: var(--accent-fg, #fff);
+}
+.lobby-view-toggle-icon {
+  display: block;
+}
+
+/* List view — single-column rows with a horizontal layout. Each tile
+   reads as: small category-coloured "icon" stripe at the leading edge,
+   then the title, then a meta line, with the favourite heart anchored
+   at the trailing edge. The featured rail keeps its bespoke grid; only
+   the main `.lobby-grid` (non-featured) opts into list mode. */
+.lobby-grid[data-view="list"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  grid-template-columns: none;
+}
+.lobby-grid[data-view="list"] .tile {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 0.9rem 0.55rem 1.1rem;
+  min-height: 0;
+}
+.lobby-grid[data-view="list"] .tile-sheen,
+.lobby-grid[data-view="list"] .tile-cta,
+.lobby-grid[data-view="list"] .tile-desc,
+.lobby-grid[data-view="list"] .tile-badge,
+.lobby-grid[data-view="list"] .tile-howto {
+  display: none;
+}
+.lobby-grid[data-view="list"] .tile-stripe {
+  opacity: 1;
+  transform: scaleY(1);
+  width: 4px;
+}
+.lobby-grid[data-view="list"] .tile-meta {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  order: 0;
+}
+.lobby-grid[data-view="list"] .tile-title,
+.lobby-grid[data-view="list"] .lobby-tile-title {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  order: 1;
+}
+.lobby-grid[data-view="list"] .tile-foot {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-400);
+  order: 2;
+}
+.lobby-grid[data-view="list"] .tile-players {
+  white-space: nowrap;
+}
+.lobby-grid[data-view="list"] .tile-fav {
+  order: 3;
+  margin-left: auto;
+  position: static;
+}
+.lobby-grid[data-view="list"] .tile-stars {
+  order: 2;
+  position: static;
+  margin: 0;
+}
+@media (max-width: 540px) {
+  .lobby-grid[data-view="list"] .tile-foot {
+    display: none;
+  }
+}
+
 .lobby-loaded-count {
   text-align: center;
   font-size: 0.78rem;
