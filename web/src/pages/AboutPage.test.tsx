@@ -83,6 +83,29 @@ describe("AboutPage", () => {
     expect(families).toHaveTextContent(FAMILIES.length.toLocaleString());
   });
 
+  it("renders Stack section chips for React, TypeScript, Vite, Vitest, etc.", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { name: "Stack" });
+    const section = heading.closest("section");
+    expect(section).not.toBeNull();
+    const stack = section as HTMLElement;
+    const chips = stack.querySelectorAll(".about-chip");
+    const chipTexts = Array.from(chips).map((c) => c.textContent ?? "");
+    for (const expected of [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Vitest",
+      "Zustand",
+      "react-router",
+      "PWA",
+    ]) {
+      expect(chipTexts).toContain(expected);
+    }
+    // Verify by querying for "React" text within the stack section.
+    expect(stack.textContent).toContain("React");
+  });
+
   it(
     "shows 'Build info unavailable' fallback when commits array is empty",
     async () => {
