@@ -31,5 +31,6 @@ Tips: Often you need to use walls as intermediate stopping points to reposition 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-tilt-maze-action"]', pulses: 3 }; },
   component: TiltMaze,
 };

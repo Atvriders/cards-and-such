@@ -16,5 +16,7 @@ Press Draw Card to reveal your next card. The score updates with each draw. Afte
 There are no strategic choices — it's pure red-suit luck. Cheer for the Hearts and hope your stadium is full of fans! The home team always brings the points.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardStadiumSettings),
-  reducer,isTerminal,component:CardStadiumGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-card-stadium-action"]', pulses: 3 }; },
+  component:CardStadiumGame,
 };

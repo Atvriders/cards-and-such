@@ -70,7 +70,7 @@ export function SnakesAndLadders({
       <div className="snl-die-row">
         {state.die > 0 && <div className="die-face">{state.die}</div>}
         {canRoll && (
-          <button className="roll-btn" onClick={() => dispatch({ type: "roll" } satisfies SnakesAction)}>
+          <button data-testid="hint-target-snakes-and-ladders-action" className="roll-btn" onClick={() => dispatch({ type: "roll" } satisfies SnakesAction)}>
             Roll Die
           </button>
         )}

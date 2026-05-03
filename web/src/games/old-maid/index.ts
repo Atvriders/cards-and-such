@@ -35,5 +35,6 @@ Settings: choose 2, 3, or 4 total players (you plus 1–3 bots).`,
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-old-maid-action"]', pulses: 3 }; },
   component: OldMaid,
 };

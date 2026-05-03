@@ -44,5 +44,6 @@ Tips: focus on getting your 1s to center fast — they unlock the whole color se
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-ligretto-action"]', pulses: 3 }; },
   component: Ligretto,
 };

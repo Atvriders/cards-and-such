@@ -76,7 +76,7 @@ export function Slapjack({
 
       {!gameOver && (
         <div className="slapjack-actions">
-          <button
+          <button data-testid="hint-target-slapjack-action"
             className="slapjack-btn flip-btn"
             onClick={() => dis({ type: "flip" })}
             disabled={phase !== "flipping"}

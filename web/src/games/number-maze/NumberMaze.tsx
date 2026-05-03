@@ -63,7 +63,7 @@ export function NumberMaze({
             Move <strong>{puzzle.grid[row]?.[col] ?? 0}</strong> step{(puzzle.grid[row]?.[col] ?? 0) !== 1 ? "s" : ""} in a direction
           </div>
           <div className="nm-arrow-pad">
-            <button
+            <button data-testid="hint-target-number-maze-action"
               className="nm-arrow up"
               disabled={!legalDirs.includes("up")}
               onClick={() => dispatch({ type: "move", dir: "up" })}

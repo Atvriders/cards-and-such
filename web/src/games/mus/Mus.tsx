@@ -92,7 +92,7 @@ export function Mus({
         <div className="mus-bid-area">
           <div className="mus-label">Place your Juego bid (how confident are you in your hand?):</div>
           <div className="mus-bid-row">
-            <button className="mus-bid-btn pass" onClick={() => dispatch({ type: "bid", amount: 0 } as MusAction)}>
+            <button data-testid="hint-target-mus-action" className="mus-bid-btn pass" onClick={() => dispatch({ type: "bid", amount: 0 } as MusAction)}>
               Pass (0)
             </button>
             {bidOptions.slice(1).map(amt => (

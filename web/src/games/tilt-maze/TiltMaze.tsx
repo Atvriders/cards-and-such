@@ -101,7 +101,7 @@ export function TiltMaze({
 
       <div className="tilt-maze-controls">
         <div className="tilt-btn empty-slot" />
-        <button className="tilt-btn" onClick={() => tilt("up")} disabled={state.won} aria-label="tilt up">▲</button>
+        <button data-testid="hint-target-tilt-maze-action" className="tilt-btn" onClick={() => tilt("up")} disabled={state.won} aria-label="tilt up">▲</button>
         <div className="tilt-btn empty-slot" />
         <button className="tilt-btn" onClick={() => tilt("left")} disabled={state.won} aria-label="tilt left">◀</button>
         <div className="tilt-btn empty-slot" />

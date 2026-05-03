@@ -34,5 +34,6 @@ Play with 1 card for a focused single-card challenge, 2 cards to double your cha
   initialState: (seed: number, settings: CardBingoProSettings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-card-bingo-pro-action"]', pulses: 3 }; },
   component: CardBingoProGame,
 };

@@ -87,7 +87,7 @@ export function Snap({
 
       {!gameOver && (
         <div className="snap-actions">
-          <button
+          <button data-testid="hint-target-snap-action"
             className="snap-btn snap-btn-flip"
             onClick={() => dis({ type: "flip" })}
             disabled={phase !== "flipping"}

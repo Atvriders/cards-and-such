@@ -12,5 +12,7 @@ export const tripleTownMiniPlugin: GamePlugin<TripleTownMiniState, TripleTownMin
   howToPlay:"Triple Town Mini is a sixty-second town-themed match-three. The six-by-six grid is filled with progression-themed tiles: grass, bushes, trees, houses, castles, and crowns — each step grander than the last. Click adjacent tiles to swap them. When a swap creates three or more matching tiles in a row or column, those tiles clear for ten points each, and new tiles fall in from above. Cascade chains are common and pay big bonuses. Invalid swaps cancel without using a turn. While the original Triple Town has a different upgrade mechanic, this match-three variant celebrates that town-building flavor with progression-themed visuals. The clock counts down sixty seconds at the top. Average runs net 300-380 points; cascade hunters chasing castle and crown clears top 500. When the timer expires, your final score locks. Build your town, one match at a time!",
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as TripleTownMiniSettings),
-  reducer,isTerminal,component:TripleTownMiniGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-triple-town-mini-action"]', pulses: 3 }; },
+  component:TripleTownMiniGame,
 };

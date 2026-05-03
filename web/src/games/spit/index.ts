@@ -41,5 +41,6 @@ Tips: scan both center piles after every play — a card blocked on one pile may
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-spit-action"]', pulses: 3 }; },
   component: Spit,
 };

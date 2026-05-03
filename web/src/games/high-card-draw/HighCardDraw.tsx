@@ -78,7 +78,7 @@ export function HighCardDraw({
       )}
 
       {!state.done && (
-        <button className="hcd-draw-btn" onClick={() => dispatch({ type: "draw" })}>
+        <button data-testid="hint-target-high-card-draw-action" className="hcd-draw-btn" onClick={() => dispatch({ type: "draw" })}>
           Draw Cards
         </button>
       )}

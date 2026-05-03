@@ -12,5 +12,7 @@ export const pizzaCutPlugin:GamePlugin<PizzaCutState,PizzaCutAction,typeof pizza
   howToPlay:`Pizza Cut is a fun tapping arcade game. Each round a pizza arrives and needs to be cut into a target number of slices. Tap the cutter button once for each slice. Watch the cut counter and stop at the target. Finishing a pizza earns 10 points. A new pizza with a fresh slice count appears each round. Play 5, 10, or 15 rounds. Tips: Pizzas need 3 to 8 cuts depending on how many slices are ordered. Count carefully — nobody wants a pizza with the wrong number of slices! Keep a steady tapping rhythm and watch the counter to hit the target exactly every round.`,
   settings:pizzaCutSettings,
   initialState:(seed:number,settings:S)=>initialState(seed,settings),
-  reducer,isTerminal,component:PizzaCut,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-pizza-cut-action"]', pulses: 3 }; },
+  component:PizzaCut,
 };

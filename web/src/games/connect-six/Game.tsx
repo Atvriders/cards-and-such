@@ -34,7 +34,7 @@ export function ConnectSixGame({
           const tr = topRow(state.board, c);
           const disabled = tr < 0 || state.phase === "done" || state.turn !== "P";
           return (
-            <button
+            <button data-testid="hint-target-connect-six-action"
               key={c}
               className="c6-col-btn"
               type="button"

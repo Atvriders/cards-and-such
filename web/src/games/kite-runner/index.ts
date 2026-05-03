@@ -12,5 +12,7 @@ export const kiteRunnerPlugin:GamePlugin<KiteRunnerState,KiteRunnerAction,typeof
   howToPlay:`Kite Runner puts you in control of a kite on a windy day. Each round a target number of reels is set — representing how many times you must pull the string to guide your kite through a gust. Tap the button repeatedly until you reach the target. Completing a reel earns 10 points. After each round, a new target is randomly set. Play 5, 10, or 15 rounds. Tips: Count your taps — hitting the target exactly completes the round. Stay focused on the counter and keep a steady rhythm. Longer targets require more taps but earn the same base points.`,
   settings:kiteRunnerSettings,
   initialState:(seed:number,settings:S)=>initialState(seed,settings),
-  reducer,isTerminal,component:KiteRunner,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-kite-runner-action"]', pulses: 3 }; },
+  component:KiteRunner,
 };

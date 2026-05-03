@@ -12,5 +12,7 @@ export const melonSmashPlugin:GamePlugin<MelonSmashState,MelonSmashAction,typeof
   howToPlay:`Melon Smash is a fun tapping arcade game. Each round a watermelon appears and you must hit it a target number of times to smash it completely. Tap the button repeatedly to rack up hits until you reach the target count. Smashing a melon earns 10 points. A fresh melon with a new target arrives each round. Play 5, 10, or 15 rounds. Tips: Melons need 3 to 8 hits depending on their size this round. Watch the hit counter carefully. Consistent rhythmic tapping is the key to accurately hitting each target. Summer arcade fun at its finest!`,
   settings:melonSmashSettings,
   initialState:(seed:number,settings:S)=>initialState(seed,settings),
-  reducer,isTerminal,component:MelonSmash,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-melon-smash-action"]', pulses: 3 }; },
+  component:MelonSmash,
 };

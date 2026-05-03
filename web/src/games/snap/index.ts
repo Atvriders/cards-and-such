@@ -35,5 +35,6 @@ Tips: keep your eyes on the rank in the centre — not the suit. Stay alert for 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-snap-action"]', pulses: 3 }; },
   component: Snap,
 };

@@ -34,5 +34,6 @@ Tip: ties are relatively rare in a 52-card deck (about a 7.7% chance per round),
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-high-card-draw-action"]', pulses: 3 }; },
   component: HighCardDraw,
 };

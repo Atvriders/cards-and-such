@@ -30,7 +30,7 @@ export function TripleTownMiniGame({ state, dispatch, onGameOver }: GameProps<Tr
       </div>
       <div className="tttwn-grid">
         {state.grid.map((row, r) => row.map((v, c) => (
-          <button key={`${r}-${c}`} className="tttwn-cell"
+          <button data-testid="hint-target-triple-town-mini-action" key={`${r}-${c}`} className="tttwn-cell"
             disabled={v !== 0}
             style={{ background: v ? TIER_COLOR[v] : "#f1f5f9" }}
             onClick={() => dispatch({ type: "place", row: r, col: c } as TripleTownMiniAction)}>

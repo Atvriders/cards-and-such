@@ -55,7 +55,7 @@ export function CardBingoProGame({
       </div>
 
       {!state.gameOver && (
-        <button className="cbp-draw-btn" onClick={() => dispatch({ type: "draw" })}>
+        <button data-testid="hint-target-card-bingo-pro-action" className="cbp-draw-btn" onClick={() => dispatch({ type: "draw" })}>
           Draw Number
         </button>
       )}

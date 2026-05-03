@@ -37,7 +37,7 @@ export function GridRogue({ state, dispatch, onGameOver }: GameProps<GridRogueSt
       </div>
 
       <div className="gr-controls">
-        <div className="gr-row"><button className="gr-btn" onClick={() => move("up")}>▲</button></div>
+        <div className="gr-row"><button data-testid="hint-target-grid-rogue-action" className="gr-btn" onClick={() => move("up")}>▲</button></div>
         <div className="gr-row">
           <button className="gr-btn" onClick={() => move("left")}>◄</button>
           <button className="gr-btn" onClick={() => move("down")}>▼</button>

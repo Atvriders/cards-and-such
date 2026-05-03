@@ -28,5 +28,6 @@ Tips: longer threats need more support — you may need to build up multiple sto
   initialState: (seed: number, s: S) => initialState(seed, s as ConnectSixSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-connect-six-action"]', pulses: 3 }; },
   component: ConnectSixGame,
 };

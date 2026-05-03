@@ -28,5 +28,6 @@ Tip: control the centre columns — they're part of more winning lines than the 
   initialState: (seed: number, s: S) => initialState(seed, s as ConnectFiveSettings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-connect-five-action"]', pulses: 3 }; },
   component: ConnectFiveGame,
 };

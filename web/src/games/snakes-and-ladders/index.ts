@@ -33,5 +33,6 @@ There are 10 ladders and 10 snakes on the board. Bots roll automatically after y
   initialState: (seed: number, settings: SnakesSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-snakes-and-ladders-action"]', pulses: 3 }; },
   component: SnakesAndLadders,
 };

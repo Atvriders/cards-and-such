@@ -70,7 +70,7 @@ export function OldMaid({
               </div>
               <div className="old-maid-facedown-row">
                 {leftHand.map((_, idx) => (
-                  <button
+                  <button data-testid="hint-target-old-maid-action"
                     key={idx}
                     className="old-maid-facedown-btn"
                     onClick={() => dispatch({ type: "draw", cardIndex: idx } as OldMaidAction)}

@@ -63,7 +63,7 @@ export function Plinko({
         </div>
       )}
 
-      <button
+      <button data-testid="hint-target-plinko-action"
         className="plinko-drop-btn"
         onClick={() => dispatch({ type: "drop" })}
         disabled={!!terminal || state.chipsUsed >= state.totalChips}

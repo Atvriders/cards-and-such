@@ -98,7 +98,7 @@ export function EgyptianRatscrew({
 
       {!gameOver && (
         <div className="ers-actions">
-          <button
+          <button data-testid="hint-target-egyptian-ratscrew-action"
             className="ers-btn flip-btn"
             onClick={() => dis({ type: "flip" })}
             disabled={phase !== "flipping" && !(phase === "tribute" && tributePayer === 0)}

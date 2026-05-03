@@ -20,7 +20,7 @@ export function CardZooGame({ state, dispatch, onGameOver }: GameProps<CardZooSt
         </div>
       )}
       {state.phase === "drawing" && (
-        <button className="czo-btn" onClick={() => dispatch({ type:"draw" } as CardZooAction)}>Draw Card</button>
+        <button data-testid="hint-target-card-zoo-action" className="czo-btn" onClick={() => dispatch({ type:"draw" } as CardZooAction)}>Draw Card</button>
       )}
     </div>
   );

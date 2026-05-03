@@ -22,5 +22,6 @@ Tip: clear enemies before heading for the exit so you don't get caught from behi
   initialState: (seed: number) => initialState(seed),
   reducer: reducer as (state: GridRogueState, action: GridRogueAction) => GridRogueState,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-grid-rogue-action"]', pulses: 3 }; },
   component: GridRogue,
 } as unknown as GamePlugin;

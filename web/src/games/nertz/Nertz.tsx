@@ -171,7 +171,7 @@ export function Nertz({ state, dispatch, onGameOver }: GameProps<NertzState, Ner
       </div>
 
       {terminal && (
-        <button className="nertz-btn primary" onClick={() => dis({ type: "restart" })}>Play Again</button>
+        <button data-testid="hint-target-nertz-action" className="nertz-btn primary" onClick={() => dis({ type: "restart" })}>Play Again</button>
       )}
     </div>
   );

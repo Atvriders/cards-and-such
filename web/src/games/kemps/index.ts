@@ -45,5 +45,6 @@ Tips: aim for the rank you already have most of in your opening hand. Watch the 
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-kemps-action"]', pulses: 3 }; },
   component: Kemps,
 };

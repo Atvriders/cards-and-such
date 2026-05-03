@@ -69,7 +69,7 @@ export function Kemps({ state, dispatch, onGameOver }: GameProps<KempsState, Kem
         <div className="kemps-round-over">
           {state.roundMessage}
           <div style={{ marginTop: "0.5rem" }}>
-            <button className="kemps-btn next" onClick={() => dis({ type: "next-round" })}>Next Round</button>
+            <button data-testid="hint-target-kemps-action" className="kemps-btn next" onClick={() => dis({ type: "next-round" })}>Next Round</button>
           </div>
         </div>
       )}

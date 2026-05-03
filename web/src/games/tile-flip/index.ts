@@ -34,5 +34,6 @@ Strategy: Because each flip cycles through four colors, clicking a cell four tim
   initialState: (seed: number, settings: TileFlipSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-tile-flip-action"]', pulses: 3 }; },
   component: TileFlip,
 };

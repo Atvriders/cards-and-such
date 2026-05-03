@@ -129,7 +129,7 @@ export function Ligretto({ state, dispatch, onGameOver }: GameProps<LigrettoStat
       </div>
 
       {terminal && (
-        <button className="lig-btn primary" onClick={() => dis({ type: "restart" })}>Play Again</button>
+        <button data-testid="hint-target-ligretto-action" className="lig-btn primary" onClick={() => dis({ type: "restart" })}>Play Again</button>
       )}
     </div>
   );

@@ -49,7 +49,7 @@ export function MathBingo({
       <div className="mb-info">Problems drawn: {state.problemsDrawn} / 30</div>
 
       {!state.done && (
-        <button className="mb-draw-btn" onClick={() => dispatch({ type: "draw" })}>
+        <button data-testid="hint-target-math-bingo-action" className="mb-draw-btn" onClick={() => dispatch({ type: "draw" })}>
           Draw Problem
         </button>
       )}

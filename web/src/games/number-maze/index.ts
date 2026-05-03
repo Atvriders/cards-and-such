@@ -32,5 +32,6 @@ Strategy: trace the path backwards from EXIT to find where you need to be one mo
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-number-maze-action"]', pulses: 3 }; },
   component: NumberMaze,
 };

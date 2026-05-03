@@ -14,7 +14,7 @@ export function LeafRake({ state, dispatch, onGameOver }:GameProps<LeafRakeState
         <div className="arc-target">Tap {state.target} times!</div>
         <div style={{fontSize:"1.5rem",fontWeight:"bold",color:"#4a6fa5"}}>{state.current}/{state.target}</div>
         {state.feedback && <div className="arc-feedback good">{state.feedback}</div>}
-        <button className="arc-btn" onClick={()=>dispatch({type:"tap"})}>Tap!</button>
+        <button data-testid="hint-target-leaf-rake-action" className="arc-btn" onClick={()=>dispatch({type:"tap"})}>Tap!</button>
       </>):(<div className="arc-done"><h2>Game Over!</h2><div className="arc-final">Score: {state.score}</div></div>)}
     </div>
   );

@@ -34,5 +34,6 @@ Strategy: Bid aggressively when you have Juego (31+), especially if your value i
   initialState: (seed: number, _settings: MusSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-mus-action"]', pulses: 3 }; },
   component: Mus,
 };

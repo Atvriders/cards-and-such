@@ -70,7 +70,7 @@ export function CubeRoll({
 
       <div className="cube-roll-controls">
         <div className="cube-roll-btn empty-btn" />
-        <button className="cube-roll-btn" onClick={() => move("up")} disabled={state.won} aria-label="up">▲</button>
+        <button data-testid="hint-target-cube-roll-action" className="cube-roll-btn" onClick={() => move("up")} disabled={state.won} aria-label="up">▲</button>
         <div className="cube-roll-btn empty-btn" />
         <button className="cube-roll-btn" onClick={() => move("left")} disabled={state.won} aria-label="left">◀</button>
         <div className="cube-roll-btn empty-btn" />

@@ -58,7 +58,7 @@ export function BingoCall({
         <div className="bc-gameover">All numbers called — no bingo.</div>
       )}
 
-      <button
+      <button data-testid="hint-target-bingo-call-action"
         className="bc-btn"
         onClick={() => dispatch({ type: "call" } as BingoCallAction)}
         disabled={state.gameOver}

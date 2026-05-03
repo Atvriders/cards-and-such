@@ -38,7 +38,7 @@ export function TileFlip({
           <div className="tile-flip-grid" style={{ gridTemplateColumns: cols }}>
             {Array.from({ length: state.size }, (_, row) =>
               Array.from({ length: state.size }, (_, col) => (
-                <button
+                <button data-testid="hint-target-tile-flip-action"
                   key={`${row}-${col}`}
                   className="tile-flip-cell"
                   data-v={state.grid[row * state.size + col]}

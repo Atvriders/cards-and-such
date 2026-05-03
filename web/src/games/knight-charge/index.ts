@@ -12,5 +12,7 @@ export const knightChargePlugin:GamePlugin<KnightChargeState,KnightChargeAction,
   howToPlay:`Knight Charge is a rapid-tap arcade game. Each round your knight must charge across the battlefield, requiring a specific number of taps to cover the distance. Watch the progress counter and keep tapping until you reach the target. Completing a charge earns 10 points. A new charge target is set for the next round. Play 5, 10, or 15 rounds. Tips: Charge distances vary each round from 3 to 8 taps. Maintain a consistent tapping rhythm rather than frantically mashing. Count your taps carefully to finish each charge at exactly the right moment.`,
   settings:knightChargeSettings,
   initialState:(seed:number,settings:S)=>initialState(seed,settings),
-  reducer,isTerminal,component:KnightCharge,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-knight-charge-action"]', pulses: 3 }; },
+  component:KnightCharge,
 };

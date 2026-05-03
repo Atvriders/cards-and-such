@@ -46,5 +46,6 @@ Tips: always check if your Nertz top card can go straight to center — that's t
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-nertz-action"]', pulses: 3 }; },
   component: Nertz,
 };

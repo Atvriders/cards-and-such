@@ -20,7 +20,7 @@ export function DiceUpDownGame({ state, dispatch, onGameOver }: GameProps<DiceUp
           </div>
           {state.lastCorrect !== null && <div className="dg-result" style={{color:state.lastCorrect?"#28a745":"#dc3545"}}>{state.lastCorrect ? "Correct!" : "Wrong!"}</div>}
           <div style={{display:"flex",gap:12}}>
-            <button className="dg-btn" style={{background:"#28a745"}} onClick={() => dispatch({ type: "guess", dir: "up" })}>Higher ▲</button>
+            <button data-testid="hint-target-dice-up-down-game-action" className="dg-btn" style={{background:"#28a745"}} onClick={() => dispatch({ type: "guess", dir: "up" })}>Higher ▲</button>
             <button className="dg-btn" style={{background:"#dc3545"}} onClick={() => dispatch({ type: "guess", dir: "down" })}>Lower ▼</button>
           </div>
         </>

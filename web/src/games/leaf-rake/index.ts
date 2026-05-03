@@ -12,5 +12,7 @@ export const leafRakePlugin:GamePlugin<LeafRakeState,LeafRakeAction,typeof leafR
   howToPlay:`Leaf Rake is a satisfying tap-based arcade game. Each round a pile of scattered leaves must be raked together. The target shows how many rake strokes are needed to collect them all. Tap the button repeatedly for each stroke until you reach the count. Completing the pile earns 10 points. After each round, a new pile with a different count is ready. Play 5, 10, or 15 rounds. Tips: Leaf piles range from 3 to 8 strokes. Watch the progress counter and stop exactly at the target. Fast steady tapping builds a good rhythm. Autumn leaves never rake themselves!`,
   settings:leafRakeSettings,
   initialState:(seed:number,settings:S)=>initialState(seed,settings),
-  reducer,isTerminal,component:LeafRake,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-leaf-rake-action"]', pulses: 3 }; },
+  component:LeafRake,
 };

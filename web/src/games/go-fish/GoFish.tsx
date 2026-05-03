@@ -138,7 +138,7 @@ export function GoFish({
                 </button>
               );
             })}
-            <button className="gf-cancel-btn" onClick={() => setSelectedRank(null)}>
+            <button data-testid="hint-target-go-fish-action" className="gf-cancel-btn" onClick={() => setSelectedRank(null)}>
               Cancel
             </button>
           </div>

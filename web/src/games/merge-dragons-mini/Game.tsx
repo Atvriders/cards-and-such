@@ -30,7 +30,7 @@ export function MergeDragonsMiniGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       <div className="mrgdrg-grid">
         {state.grid.map((row, r) => row.map((v, c) => (
-          <button key={`${r}-${c}`} className="mrgdrg-cell"
+          <button data-testid="hint-target-merge-dragons-mini-action" key={`${r}-${c}`} className="mrgdrg-cell"
             disabled={v !== 0}
             style={{ background: v ? TIER_COLOR[v] : "#f1f5f9" }}
             onClick={() => dispatch({ type: "place", row: r, col: c } as MergeDragonsMiniAction)}>

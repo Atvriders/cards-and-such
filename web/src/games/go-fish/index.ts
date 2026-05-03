@@ -23,5 +23,6 @@ Tips: ask for ranks where you already hold 2 or 3 cards — the odds of a hit ar
   initialState,
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-go-fish-action"]', pulses: 3 }; },
   component: GoFish,
 };

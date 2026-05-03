@@ -49,7 +49,7 @@ export function CandyLand({ state, dispatch, onGameOver }: GameProps<CandyState,
       </div>
 
       {canDraw && (
-        <button className="cl-draw-btn" onClick={() => dispatch({ type: "draw" } satisfies CandyAction)}>
+        <button data-testid="hint-target-candy-land-action" className="cl-draw-btn" onClick={() => dispatch({ type: "draw" } satisfies CandyAction)}>
           Draw Card
         </button>
       )}

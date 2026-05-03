@@ -34,7 +34,7 @@ export function ConnectFiveGame({
           const tr = topRow(state.board, c);
           const disabled = tr < 0 || state.phase === "done" || state.turn !== "P";
           return (
-            <button
+            <button data-testid="hint-target-connect-five-action"
               key={c}
               className="c5-col-btn"
               type="button"

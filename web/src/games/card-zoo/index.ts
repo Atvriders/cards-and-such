@@ -16,5 +16,7 @@ Press Draw Card to reveal each card. With each draw the score updates and after 
 There are no decisions — just enjoy the trip and see what wildlife shows up. Lions, tigers, and bears (er, Jacks, Queens, and Kings) — oh my!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardZooSettings),
-  reducer,isTerminal,component:CardZooGame,
+  reducer,isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-card-zoo-action"]', pulses: 3 }; },
+  component:CardZooGame,
 };

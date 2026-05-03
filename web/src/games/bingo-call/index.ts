@@ -20,5 +20,6 @@ The card is randomly generated each seed so every game is unique. Strategy is mi
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (s: any) => { const p = (s as any).phase; if (p === "gameover" || p === "done" || p === "ended" || (s as any).gameOver) return null; return { selector: '[data-testid="hint-target-bingo-call-action"]', pulses: 3 }; },
   component: BingoCall,
 } as unknown as GamePlugin;

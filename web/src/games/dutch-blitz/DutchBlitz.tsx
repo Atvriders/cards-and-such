@@ -237,7 +237,7 @@ export function DutchBlitz({
       </div>
 
       {terminal && (
-        <button className="db-btn primary" onClick={() => dis({ type: "restart" })}>Play Again</button>
+        <button data-testid="hint-target-dutch-blitz-action" className="db-btn primary" onClick={() => dis({ type: "restart" })}>Play Again</button>
       )}
     </div>
   );

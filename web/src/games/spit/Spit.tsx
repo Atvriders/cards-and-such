@@ -86,7 +86,7 @@ export function Spit({ state, dispatch, onGameOver }: GameProps<SpitState, SpitS
           <SCard card={top0} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-          <button className="spit-btn spit" onClick={() => dis({ type: "spit" })} disabled={state.phase !== "spit-ready"}>
+          <button data-testid="hint-target-spit-action" className="spit-btn spit" onClick={() => dis({ type: "spit" })} disabled={state.phase !== "spit-ready"}>
             SPIT!
           </button>
           <div style={{ fontSize: "0.7rem", color: "#ffcdd2", textAlign: "center" }}>
