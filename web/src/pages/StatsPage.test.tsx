@@ -1074,4 +1074,38 @@ describe("StatsPage", () => {
       expect(localStorage.getItem("cards-stats-show-locked")).toBe("false");
     });
   });
+
+  // W244: Most-hinted games card. Reads `cards-hints-used` directly and ranks
+  // the top 5 by hint count, descending. Empty / missing blob shows the
+  // "No hints used yet" empty state with a nudge to the lightbulb button.
+  describe("most-hinted card (W244)", () => {
+    it("renders top 5 with klondike first when seeded {klondike:7, spider:3}", () => {
+      // Stats blob is required so the page hydrates past the loader; the
+      // most-hinted memo derives purely from cards-hints-used.
+      seedStats({ totalPlayed: 1 });
+      localStorage.setItem("cards-hints-used", JSON.stringify({ klondike: 7, spider: 3 }));
+      renderPage();
+      const panel = screen.getByTestId("stats-most-hinted");
+      expect(within(panel).getByText("Most-hinted games")).toBeTruthy();
+      // Two seeded entries → exactly two rendered rows (top-5 cap unchanged).
+      const row0 = within(panel).getByTestId("stats-most-hinted-row-0");
+      const row1 = within(panel).getByTestId("stats-most-hinted-row-1");
+      expect(within(panel).queryByTestId("stats-most-hinted-row-2")).toBeNull();
+      // klondike (7) outranks spider (3).
+      expect(within(row0).getByText("Klondike Solitaire")).toBeTruthy();
+      expect(within(row0).getByText("7")).toBeTruthy();
+      expect(within(row1).getByText("Spider Solitaire")).toBeTruthy();
+      expect(within(row1).getByText("3")).toBeTruthy();
+    });
+
+    it("shows empty-state copy when no hints have been used", () => {
+      seedStats({ totalPlayed: 1 });
+      renderPage();
+      const panel = screen.getByTestId("stats-most-hinted");
+      expect(
+        within(panel).getByText("No hints used yet — try the lightbulb button on a game!"),
+      ).toBeTruthy();
+      expect(within(panel).queryByTestId("stats-most-hinted-row-0")).toBeNull();
+    });
+  });
 });
