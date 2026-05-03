@@ -13,7 +13,5 @@ export const zammaAfricanPlugin: GamePlugin<ZammaAfricanState, ZammaAfricanActio
   howToPlay: "Zamma is a North African capture game in the Alquerque family, played across the Maghreb region especially in Morocco and Algeria. The full game uses a 9x9 lined board (or 11x11 in some variants) with diagonal capture rules similar to checkers. This 4x4 placement adaptation captures the territorial spirit. Across 12 turns you and a random CPU alternate placing pieces on empty squares. Click an empty cell. The CPU plays uniformly random. After twelve moves whoever has more pieces wins. Final scoreboard: 100 for a win, 25 for a tie. Zamma boards are often scratched into clay or cement floors at village squares; the game travelled from medieval Spain to Morocco with the Reconquista refugees. Like Alquerque, Zamma has long-distance king pieces. The placement reduction here preserves only the early-game territorial sense; the full Zamma rewards multi-jump captures and king flights. Zamma remains popular at Marrakech tea houses where elders teach grandchildren.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ZammaAfricanSettings),
-  reducer,
-  isTerminal,
-  component: ZammaAfricanGame,
+  reducer, isTerminal, hint: (state: ZammaAfricanState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: ZammaAfricanGame,
 };

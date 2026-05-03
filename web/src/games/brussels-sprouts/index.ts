@@ -15,7 +15,5 @@ export const brusselsSproutsPlugin: GamePlugin<AbsState, AbsAction, typeof setti
   howToPlay: "Brussels Sprouts is a topology variant of John Conway's Sprouts where crosses replace dots and edges connect cross-arms. In this 5x5 placement adaptation across 14 turns (7 each), you place 'crosses' on the grid; the CPU plays randomly. Click an empty cell. After 14 moves the higher count wins. Full Brussels Sprouts starts with several crosses and players draw curves that connect cross-tips. The last player able to draw a curve wins. The game is provably finite (always ends after a fixed number of moves regardless of strategy) and is a classic illustration of Euler-formula topology. Sprouts (regular dots) was invented by Conway and Michael Paterson in 1967 at Cambridge. Strategy: contest centre and edges in the placement version. Final scoreboard: 100 points for the win, 25 for a tie. The pure mathematical elegance of full Brussels Sprouts is preserved in academic graph-theory courses worldwide.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AbsSettings),
-  reducer,
-  isTerminal,
-  component: AbsGame,
+  reducer, isTerminal, hint: (state: AbsState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: AbsGame,
 };

@@ -15,7 +15,5 @@ export const yinshRingsPlugin: GamePlugin<AbsState, AbsAction, typeof settings> 
   howToPlay: "YINSH is Kris Burm's Project Gipf abstract where rings move around the board, leaving markers behind. In this 5x5 placement adaptation across 14 turns (7 each), you and a random CPU place markers on intersections. The CPU plays randomly. Click an empty cell to place. After 14 moves whoever has more markers wins. The full YINSH game has rings that can move, flip, and form 5-in-a-row, but this simplification preserves the core placement mechanic. YINSH won the Mensa Select award in 2003; the original is widely considered one of the finest connection games ever published. The 5x5 reduction creates fast 30-second rounds. Tactically, claim corners and edges first; the centre tightens late. Final scoreboard: 100 points for the win, 25 for a tie. Rings movement is a future-version expansion. The abstract simplicity here lets you grasp YINSH's place-and-displace logic before tackling the full hex board.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AbsSettings),
-  reducer,
-  isTerminal,
-  component: AbsGame,
+  reducer, isTerminal, hint: (state: AbsState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: AbsGame,
 };

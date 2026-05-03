@@ -13,7 +13,5 @@ export const dvonnStackPlugin: GamePlugin<DvonnStackState, DvonnStackAction, typ
   howToPlay: "Dvonn is the second game in Kris Burm's Project Gipf series — a stacking-stones abstract where you build towers and try to disconnect opposing groups from the red 'Dvonn' anchor stones. The full game uses a 49-cell hexagonal board with a setup phase placing 23 white, 23 black, and 3 red stones, then movement and stacking. This 5x5 placement adaptation captures the territorial setup phase. Across 14 turns you and a random CPU alternate placing pieces on empty squares. Click an empty cell. The CPU plays uniformly random. After fourteen moves the player with more pieces wins. Final scoreboard: 100 for a win, 25 for a tie. Dvonn won the 2002 Mensa Select award; many abstract enthusiasts rank it the deepest of the Gipf project. The full stacking and disconnection rules require detailed simulation; the placement reduction captures only the 'who claims more squares' essence. Burm designed Dvonn after the success of his 1997 Gipf opener.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as DvonnStackSettings),
-  reducer,
-  isTerminal,
-  component: DvonnStackGame,
+  reducer, isTerminal, hint: (state: DvonnStackState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: DvonnStackGame,
 };

@@ -15,7 +15,5 @@ export const tzaarStackPlugin: GamePlugin<AbsState, AbsAction, typeof settings> 
   howToPlay: "TZAAR is Kris Burm's capture-stack abstract where pieces of three types form towers when stacked. In this 5x5 placement adaptation across 14 turns (7 each), you place pieces on intersections; the CPU plays randomly. Click an empty cell. After 14 moves the higher count wins. Full TZAAR is far richer with three piece types (Tzaars, Tzarras, Totts) and a strict stacking-capture rule, but this version uses the placement-and-counting core. TZAAR is widely considered the deepest of the Project Gipf abstracts; tournaments are concentrated in the Netherlands and Belgium. Strategy: contest the centre and don't let the CPU dominate one side. Final scoreboard: 100 points for the win, 25 for a tie. The full TZAAR rewards multi-step stacking plans; this simplified version provides quick placement-counting rounds without the capture strategy depth.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AbsSettings),
-  reducer,
-  isTerminal,
-  component: AbsGame,
+  reducer, isTerminal, hint: (state: AbsState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: AbsGame,
 };

@@ -15,7 +15,5 @@ export const carromFlickPlugin: GamePlugin<AbsState, AbsAction, typeof settings>
   howToPlay: "Carrom is the South Asian flick-and-strike board game where players flick a striker disc to pocket coins. In this 5x5 placement adaptation across 14 turns (7 each), you place coin-pieces on the grid representing flick targets; the CPU plays randomly. Click an empty cell. After 14 moves the higher coin-count wins. Full Carrom has nine white coins, nine black, one red queen, and a striker; players flick their striker with a single fingernail to pocket their coins (and the queen). The queen is special — captured but must be 'covered' by a normal coin or returned. Carrom is hugely popular in India, Pakistan, Bangladesh, Sri Lanka, and Nepal; international tournaments are organized by the International Carrom Federation. Strategy: spread your placements. Final scoreboard: 100 points for the win, 25 for a tie. The flick-and-pocket physics is reduced here to placement; the full board game requires real fingertip control.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as AbsSettings),
-  reducer,
-  isTerminal,
-  component: AbsGame,
+  reducer, isTerminal, hint: (state: AbsState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: AbsGame,
 };

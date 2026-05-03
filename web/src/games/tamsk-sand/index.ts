@@ -13,7 +13,5 @@ export const tamskSandPlugin: GamePlugin<TamskSandState, TamskSandAction, typeof
   howToPlay: "Tamsk is the second Gipf-Project game by Kris Burm, famous for its timed sandglass mechanism: each piece carries a small sand timer that runs out unless moved. The full game uses a 19-cell hexagonal board and physical hourglasses. This 4x4 placement adaptation captures only the territorial layout. Across 12 turns you and a random CPU alternate placing pieces on empty squares. Click an empty cell. The CPU plays uniformly random. After twelve moves whoever has more pieces wins. Final scoreboard: 100 for a win, 25 for a tie. Tamsk's hourglass innovation is unique among abstracts — physical time pressure on each individual piece. Burm sourced specially-made glass timers for the production run; original Tamsk sets are now collector pieces. The placement reduction can't simulate the hourglass tension, but it preserves the territory-claim intuition. The full Tamsk rewards quick movements; this variant rewards careful planning. Tamsk pre-dates the wider Project Gipf success of Yinsh and Dvonn.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as TamskSandSettings),
-  reducer,
-  isTerminal,
-  component: TamskSandGame,
+  reducer, isTerminal, hint: (state: TamskSandState): HintTarget | null => ((state.phase === "playing" && state.turn === "P") ? { selector: ".ab-cell:not(.p):not(.c)", pulses: 3 } : null), component: TamskSandGame,
 };
