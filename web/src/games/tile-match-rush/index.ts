@@ -1,4 +1,5 @@
 import type { TileMatchRushState, TileMatchRushAction } from "./state.js";
+import type { HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TileMatchRush } from "./TileMatchRush.js";
 
@@ -36,5 +37,6 @@ Tips: Scan for easy adjacent matches first to build your combo, then tackle isol
   initialState,
   reducer,
   isTerminal,
+  hint: (): HintTarget | null => (typeof document !== "undefined" && document.querySelector(".tmr-grid")) ? { selector: ".tmr-grid", pulses: 3 } : null,
   component: TileMatchRush,
 };
