@@ -4,14 +4,17 @@ import { PageHead } from "../platform/PageHead.js";
 import { searchAll, type SearchHit } from "../platform/search.js";
 import { highlightMatch } from "../platform/highlight.js";
 import { track } from "../platform/analytics.js";
+import { GAMES } from "../games/registry.js";
+import type { GameCategory, GamePlugin } from "../platform/game-plugin/types.js";
 import "./SearchPage.css";
 
 /**
- * Dedicated full-page search at `/search?q=...`. Goes deeper than the
- * AppShell's inline search box: scores against title, description,
- * howToPlay, family ids, and category names; groups results into
- * Top match / Games / Families / Categories; supports keyboard nav,
- * recent searches, and inline highlighting via <mark>.
+ * Dedicated full-page search at `/search?q=...&cat=...&filter=...`. Goes
+ * deeper than the AppShell's inline search box: scores against title,
+ * description, howToPlay, family ids, and category names; groups results
+ * into Top match / Games / Families / Categories; supports keyboard nav,
+ * recent searches, inline highlighting via <mark>, and a row of result
+ * filter chips that narrow the Games group post-scoring.
  *
  * The scoring/grouping itself lives in `../platform/search.ts` so the
  * AppShell's live-preview popover can share the exact same ranking.
@@ -20,6 +23,78 @@ import "./SearchPage.css";
 const RECENT_KEY = "cards-recent-searches";
 const RECENT_MAX = 10;
 const SUGGESTED: ReadonlyArray<string> = ["klondike", "poker", "wordle", "dice"];
+
+/**
+ * Result-filter chip definitions. The order here is the visual order in
+ * the chip row directly above the result sections. Each chip narrows the
+ * "Games" group of the result set; "all" is the no-op identity filter.
+ *
+ * "quick" / "challenging" use coarse heuristics derived from the plugin
+ * registry — see `gamePassesFilter` below — because the GamePlugin type
+ * does not (yet) carry an explicit difficulty/length tag.
+ */
+type FilterKey
+  = "all"
+  | GameCategory
+  | "multiplayer"
+  | "single-player"
+  | "quick"
+  | "challenging";
+
+const FILTERS: ReadonlyArray<{ key: FilterKey; label: string }> = [
+  { key: "all", label: "All" },
+  { key: "solitaire", label: "Solitaire" },
+  { key: "cards", label: "Cards" },
+  { key: "dice", label: "Dice" },
+  { key: "board", label: "Board" },
+  { key: "arcade", label: "Arcade" },
+  { key: "multiplayer", label: "Multiplayer" },
+  { key: "single-player", label: "Single-player" },
+  { key: "quick", label: "Quick" },
+  { key: "challenging", label: "Challenging" },
+];
+
+const FILTER_KEYS: ReadonlySet<string> = new Set(FILTERS.map((f) => f.key));
+
+const CATEGORY_FILTERS: ReadonlySet<FilterKey> = new Set([
+  "solitaire", "cards", "dice", "board", "arcade",
+]);
+
+/**
+ * Quick = short-session games. Heuristics:
+ *   - id/title contains "quick"/"mini"/"flash"/"speed", OR
+ *   - howToPlay text is short (<= 600 chars), OR
+ *   - category is "arcade" (arcade games are designed for ~30s loops).
+ *
+ * Challenging = games with deep rules / long playtime. Heuristics:
+ *   - howToPlay text is long (>= 1500 chars), OR
+ *   - id/title/howToPlay mentions "challenging"/"strategy"/"tournament", OR
+ *   - category is "board" (typically deeper rule sets).
+ */
+function gamePassesFilter(g: GamePlugin, filter: FilterKey): boolean {
+  if (filter === "all") return true;
+  if (CATEGORY_FILTERS.has(filter)) return g.category === filter;
+  if (filter === "multiplayer") return g.players.multiplayer === true;
+  if (filter === "single-player") return g.players.multiplayer !== true;
+  const blob = `${g.id} ${g.title} ${g.howToPlay ?? ""}`.toLowerCase();
+  const hp = g.howToPlay ?? "";
+  if (filter === "quick") {
+    if (/\b(quick|mini|flash|speed)\b/.test(blob)) return true;
+    if (g.category === "arcade") return true;
+    return hp.length > 0 && hp.length <= 600;
+  }
+  if (filter === "challenging") {
+    if (/\b(challenging|strategy|tournament|advanced)\b/.test(blob)) return true;
+    if (g.category === "board") return true;
+    return hp.length >= 1500;
+  }
+  return true;
+}
+
+function parseFilter(raw: string | null): FilterKey {
+  if (raw && FILTER_KEYS.has(raw)) return raw as FilterKey;
+  return "all";
+}
 
 function readRecent(): string[] {
   try {
@@ -54,13 +129,17 @@ export default function SearchPage(): JSX.Element {
   const [debounced, setDebounced] = useState(initial);
   const [selected, setSelected] = useState(0);
   const [recent, setRecent] = useState<string[]>(() => readRecent());
+  const [filter, setFilter] = useState<FilterKey>(() => parseFilter(params.get("filter")));
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Keep input in sync if the URL `?q=` changes externally (e.g. browser
-  // back/forward, or AppShell submit while already on /search).
+  // back/forward, or AppShell submit while already on /search). Also
+  // re-parse the filter chip selection from `?filter=` so that hitting
+  // back/forward restores the previously-active chip.
   useEffect(() => {
     const next = params.get("q") ?? "";
     setQuery(next);
+    setFilter(parseFilter(params.get("filter")));
   }, [params]);
 
   // Debounce the query→`debounced` propagation by 200ms so the heavy
@@ -70,14 +149,21 @@ export default function SearchPage(): JSX.Element {
     return () => window.clearTimeout(handle);
   }, [query]);
 
-  // Sync the URL whenever the debounced query changes — but only when it
-  // diverges from `?q=`, otherwise we'd cause a redundant history entry.
+  // Sync the URL whenever the debounced query or filter changes.
+  // Preserves any `cat` param that callers may pre-seed for category-
+  // scoped searches (e.g. arriving from the lobby category rail).
   useEffect(() => {
-    const current = params.get("q") ?? "";
-    if (debounced === current) return;
-    if (debounced) setParams({ q: debounced }, { replace: true });
-    else setParams({}, { replace: true });
-  }, [debounced, params, setParams]);
+    const currentQ = params.get("q") ?? "";
+    const currentFilter = params.get("filter") ?? "";
+    const currentCat = params.get("cat") ?? "";
+    const desiredFilter = filter === "all" ? "" : filter;
+    if (debounced === currentQ && desiredFilter === currentFilter) return;
+    const next: Record<string, string> = {};
+    if (debounced) next.q = debounced;
+    if (currentCat) next.cat = currentCat;
+    if (desiredFilter) next.filter = desiredFilter;
+    setParams(next, { replace: true });
+  }, [debounced, filter, params, setParams]);
 
   // Persist debounced query to recent searches once it stabilises (>=2
   // chars to avoid recording every single typed letter).
@@ -97,10 +183,42 @@ export default function SearchPage(): JSX.Element {
   const lowered = debounced.trim().toLowerCase();
   // Shared scoring/grouping lives in platform/search.ts so the AppShell
   // header popover can rank with the exact same weights.
-  const { topMatch, games, families, categories } = useMemo(
+  const { topMatch: rawTopMatch, games: rawGames, families, categories } = useMemo(
     () => searchAll(lowered),
     [lowered],
   );
+
+  // Apply the active filter chip. Filtering is purely a post-scoring
+  // narrowing pass: a game must (a) match the search query at all
+  // (already enforced by buildHits) AND (b) pass the chip predicate.
+  // Looking up the GamePlugin by id is O(GAMES.length) per hit which is
+  // fine for our catalog size; if it ever grows, swap to a Map cache.
+  const gameById = useMemo(() => {
+    const m = new Map<string, GamePlugin>();
+    for (const g of GAMES) if (g != null) m.set(g.id, g);
+    return m;
+  }, []);
+
+  const passesGameFilter = (hit: SearchHit): boolean => {
+    if (hit.kind !== "game") return true;
+    const g = gameById.get(hit.id);
+    if (!g) return filter === "all";
+    return gamePassesFilter(g, filter);
+  };
+
+  const games = useMemo(
+    () => rawGames.filter(passesGameFilter),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [rawGames, filter, gameById],
+  );
+
+  // If the chosen top match is itself a game that doesn't pass the
+  // active filter, hide it so the chip selection feels honest. The
+  // promoted top-match logic in searchAll also strips it from the games
+  // group, so we don't need to worry about double-counting.
+  const topMatch: SearchHit | null = rawTopMatch && passesGameFilter(rawTopMatch)
+    ? rawTopMatch
+    : null;
 
   // Flat list used for keyboard navigation — top match first, then
   // games, families, categories in display order.
@@ -112,7 +230,7 @@ export default function SearchPage(): JSX.Element {
   }, [topMatch, games, families, categories]);
 
   // Reset selection when the result set changes.
-  useEffect(() => { setSelected(0); }, [lowered]);
+  useEffect(() => { setSelected(0); }, [lowered, filter]);
 
   // ↑/↓ to move, Enter to navigate. Only fires when the input is focused
   // and the query has produced at least one hit.
@@ -172,6 +290,35 @@ export default function SearchPage(): JSX.Element {
           />
         </form>
       </header>
+
+      {/* Filter chip row — visible whenever a query is active so users
+          can quickly narrow the result set without retyping. Hidden on
+          the empty state because it would be ambiguous what "filtering
+          nothing" means. */}
+      {!isEmpty && (
+        <nav
+          className="search-filters"
+          aria-label="Filter results"
+          role="group"
+        >
+          <ul className="search-chips search-chips--filters">
+            {FILTERS.map((f) => {
+              const active = filter === f.key;
+              return (
+                <li key={`filter-${f.key}`}>
+                  <button
+                    type="button"
+                    className={`search-chip search-chip--filter${active ? " is-active" : ""}`}
+                    data-testid={`search-filter-${f.key}`}
+                    aria-pressed={active}
+                    onClick={() => setFilter(f.key)}
+                  >{f.label}</button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      )}
 
       {isEmpty ? (
         <div className="search-empty">

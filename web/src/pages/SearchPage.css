@@ -80,6 +80,34 @@
   opacity: 0.95;
 }
 
+/* Filter chip row sits directly under the search input. Uses the same
+   pill shape as recent/suggested chips so the visual language stays
+   consistent; only the active state diverges (filled accent). */
+.search-filters {
+  margin-top: 1rem;
+}
+
+.search-chips--filters {
+  gap: 0.4rem;
+}
+
+.search-chip--filter {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.search-chip--filter.is-active {
+  background: var(--accent, #5b6cff);
+  color: var(--bg-base, #0f1115);
+  border-color: var(--accent, #5b6cff);
+  font-weight: 600;
+}
+
+.search-chip--filter:focus-visible {
+  outline: 2px solid var(--accent, #5b6cff);
+  outline-offset: 2px;
+}
+
 .search-no-results {
   margin-top: 2rem;
   padding: 1.5rem;

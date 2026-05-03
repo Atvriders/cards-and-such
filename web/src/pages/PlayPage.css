@@ -969,11 +969,84 @@
 
 @media (prefers-reduced-motion: reduce) {
   .end-panel--win,
+  .end-panel--loss,
   .win-banner-emoji,
   .win-banner-title,
   .final-score--win,
   .end-stats-record,
-  .win-banner-backdrop {
+  .win-banner-backdrop,
+  .loss-banner-backdrop,
+  .loss-banner-headline,
+  .loss-banner-title,
+  .loss-banner-encouragement {
+    animation: none;
+  }
+}
+
+/* ---------- Loss / draw end-banner ---------- */
+/* Echoes the win banner shape so the end-state UI feels consistent —
+   same backdrop dim, same modal panel, but a calmer palette so the user
+   reads "tough round" instead of "celebration". The encouragement line
+   rotates from a pool of 8 phrases (see PlayPage.tsx). */
+.loss-banner-backdrop {
+  background: rgba(7, 8, 15, 0.5);
+}
+
+.end-panel--loss {
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 24px 60px -22px rgba(99, 102, 241, 0.35),
+    0 12px 28px -10px rgba(0, 0, 0, 0.55);
+  animation: loss-panel-rise 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes loss-panel-rise {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.loss-banner-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.55rem;
+  animation: loss-headline-fade 360ms ease-out both;
+}
+
+@keyframes loss-headline-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.loss-banner-title {
+  margin: 0;
+  font-size: clamp(1.45rem, 1.1rem + 1.3vw, 2.05rem);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: #e2e8f0;
+}
+
+.loss-banner-encouragement {
+  margin: 0;
+  max-width: 28ch;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #c7cdfe;
+  text-align: center;
+  animation: loss-encouragement-fade 480ms 100ms ease-out both;
+}
+
+@keyframes loss-encouragement-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .end-panel--loss,
+  .loss-banner-headline,
+  .loss-banner-encouragement {
     animation: none;
   }
 }
