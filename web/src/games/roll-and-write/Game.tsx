@@ -20,12 +20,12 @@ export function RollAndWriteGame({ state, dispatch, onGameOver }: GameProps<Roll
         <div className="dm-row">{state.dice.map((d, i) => <div key={i} className="dm-die">{d}</div>)}</div>
       )}
       {state.phase === "rolling" && (
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as RollAndWriteAction)}>Roll 4</button>
+        <button data-testid="hint-target-roll-and-write-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as RollAndWriteAction)}>Roll 4</button>
       )}
       {state.phase === "choosing" && (
         <div className="dm-row">
-          {CATEGORIES.map(cat => (
-            <button key={cat} className="dm-btn alt" disabled={state.used[cat]} onClick={() => dispatch({ type:"choose", cat } as RollAndWriteAction)}>
+          {CATEGORIES.map((cat, ci) => (
+            <button key={cat} {...(ci === 0 ? { "data-testid": "hint-target-roll-and-write-choose" } : {})} className="dm-btn alt" disabled={state.used[cat]} onClick={() => dispatch({ type:"choose", cat } as RollAndWriteAction)}>
               {CAT_LABEL[cat]} ({categoryScore(state.dice, cat)})
             </button>
           ))}

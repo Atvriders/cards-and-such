@@ -35,10 +35,10 @@ export function QwixxDeluxeGame({ state, dispatch, onGameOver }: GameProps<Qwixx
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="qdx-btn" onClick={() => dispatch({ type: "roll" } as QwixxDeluxeAction)}>Roll</button>
+        <button data-testid="hint-target-qwixx-deluxe-roll" className="qdx-btn" onClick={() => dispatch({ type: "roll" } as QwixxDeluxeAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="qdx-btn qdx-alt" onClick={() => dispatch({ type: "skip" } as QwixxDeluxeAction)}>Skip</button>
+        <button data-testid="hint-target-qwixx-deluxe-skip" className="qdx-btn qdx-alt" onClick={() => dispatch({ type: "skip" } as QwixxDeluxeAction)}>Skip</button>
       )}
     </div>
   );

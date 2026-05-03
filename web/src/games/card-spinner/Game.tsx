@@ -87,8 +87,8 @@ export function CardSpinner({
           <div className="cs-bet-group">
             <div className="cs-bet-label">Color (cost: {BET_COSTS.color}, pays: {BET_PAYOUTS.color})</div>
             <div className="cs-bet-row">
-              {["red", "black"].map(c => (
-                <button key={c} className={`cs-bet-btn color-${c}`} onClick={() => addBet("color", c)}>
+              {["red", "black"].map((c, ci) => (
+                <button key={c} {...(ci === 0 ? { "data-testid": "hint-target-card-spinner-bet" } : {})} className={`cs-bet-btn color-${c}`} onClick={() => addBet("color", c)}>
                   {c}
                 </button>
               ))}
@@ -115,6 +115,7 @@ export function CardSpinner({
             </div>
           </div>
           <button
+            data-testid="hint-target-card-spinner-spin"
             className="cs-spin-btn"
             onClick={() => dispatch({ type: "spin" } as CardSpinnerAction)}
           >
@@ -124,7 +125,7 @@ export function CardSpinner({
       )}
 
       {roundDone && !state.gameOver && (
-        <button className="cs-next-btn" onClick={handleNextRound}>
+        <button data-testid="hint-target-card-spinner-next" className="cs-next-btn" onClick={handleNextRound}>
           Next Round
         </button>
       )}

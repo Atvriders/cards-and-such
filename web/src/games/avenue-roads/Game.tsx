@@ -35,10 +35,10 @@ export function avenueRoadsGame({ state, dispatch, onGameOver }: GameProps<avenu
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as avenueRoadsAction)}>Roll</button>
+        <button data-testid="hint-target-avenue-roads-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as avenueRoadsAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as avenueRoadsAction)}>Skip</button>
+        <button data-testid="hint-target-avenue-roads-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as avenueRoadsAction)}>Skip</button>
       )}
     </div>
   );

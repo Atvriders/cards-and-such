@@ -23,5 +23,11 @@ Each button shows that category's potential score for the current roll, so you c
 Maximum score is 24 per category x 4 = 96, but realistic top scores are around 50-60. Plan ahead!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as RollAndWriteSettings),
-  reducer,isTerminal,component:RollAndWriteGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-roll-and-write-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-roll-and-write-choose"]', pulses: 3 };
+  },
+  component:RollAndWriteGame,
 };

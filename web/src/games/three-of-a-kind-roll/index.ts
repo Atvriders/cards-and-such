@@ -18,5 +18,14 @@ Scoring rewards speed: three of a kind on the first roll earns 500 points, on th
 The probability of rolling three of a kind is 1/36 on the first try. By keeping pairs and rerolling singles, you can improve your odds significantly. Use Settings to play 5 or 10 rounds. Maximum possible score is 2500 pts (all first-roll threes in 5 rounds). Good luck!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as ThreeOfAKindRollSettings),
-  reducer, isTerminal, component:ThreeOfAKindRoll,
+  reducer, isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover") return null;
+    if ((state as any).phase === "result") return { selector: '[data-testid="hint-target-three-of-a-kind-roll-next"]', pulses: 3 };
+    if ((state as any).gotThree || ((state as any).attempts === ((state as any).maxAttempts - 1))) {
+      return { selector: '[data-testid="hint-target-three-of-a-kind-roll-bank"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-three-of-a-kind-roll-roll"]', pulses: 3 };
+  },
+  component:ThreeOfAKindRoll,
 };

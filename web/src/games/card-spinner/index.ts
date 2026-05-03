@@ -37,5 +37,12 @@ Tips: color bets are the safest and most consistent. Suit bets are negative-expe
   initialState: (seed: number, s: CardSpinnerSettings) => initialState(seed, s),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).gameOver) return null;
+    if ((state as any).spunCard !== null) return { selector: '[data-testid="hint-target-card-spinner-next"]', pulses: 3 };
+    const bets = (state as any).bets ?? [];
+    if (bets.length === 0) return { selector: '[data-testid="hint-target-card-spinner-bet"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-card-spinner-spin"]', pulses: 3 };
+  },
   component: CardSpinner,
 };

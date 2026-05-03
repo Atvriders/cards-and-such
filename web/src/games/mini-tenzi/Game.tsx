@@ -81,7 +81,7 @@ export function MiniTenziGame({ state, dispatch, onGameOver }: GameProps<MiniTen
       </div>
 
       <div className="tenzi-controls">
-        <button className="tenzi-btn" onClick={() => dispatch({ type: "roll", nowMs: Date.now() } as MiniTenziAction)}>
+        <button data-testid="hint-target-mini-tenzi-roll" className="tenzi-btn" onClick={() => dispatch({ type: "roll", nowMs: Date.now() } as MiniTenziAction)}>
           Roll Unheld
         </button>
       </div>

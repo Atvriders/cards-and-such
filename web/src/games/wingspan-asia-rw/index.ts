@@ -15,5 +15,10 @@ export const wingspanAsiaRwPlugin: GamePlugin<WingspanAsiaRwState, WingspanAsiaR
   initialState: (seed: number, s: S) => initialState(seed, s as WingspanAsiaRwSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-wingspan-asia-rw-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-wingspan-asia-rw-skip"]', pulses: 3 };
+  },
   component: WingspanAsiaRwGame,
 };

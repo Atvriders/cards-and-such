@@ -25,7 +25,7 @@ export function CardSpinPick({ state, dispatch, onGameOver }: GameProps<CardSpin
       <p className="csp-hint">{isSpun ? (state.spinResult === state.playerPick ? "Match! +100" : `Spinner chose ${state.spinResult! + 1} — +10`) : "Pick a card, then Spin!"}</p>
       <div className="csp-cards">
         {state.rowCards.map((card, i) => (
-          <button key={i} className={`csp-card ${state.playerPick === i ? "picked" : ""} ${isSpun && state.spinResult === i ? "spun" : ""}`}
+          <button key={i} {...(i === 0 ? { "data-testid": "hint-target-card-spin-pick-pick" } : {})} className={`csp-card ${state.playerPick === i ? "picked" : ""} ${isSpun && state.spinResult === i ? "spun" : ""}`}
             onClick={() => !isSpun && dispatch({ type: "pick", index: i } as CardSpinPickAction)}
             disabled={isSpun}>
             {isSpun ? cardName(card) : state.playerPick === i ? "★" : "?"}
@@ -34,10 +34,10 @@ export function CardSpinPick({ state, dispatch, onGameOver }: GameProps<CardSpin
         ))}
       </div>
       {!isSpun && (
-        <button className="csp-btn spin" disabled={state.playerPick === null} onClick={() => dispatch({ type: "spin" } as CardSpinPickAction)}>Spin!</button>
+        <button data-testid="hint-target-card-spin-pick-spin" className="csp-btn spin" disabled={state.playerPick === null} onClick={() => dispatch({ type: "spin" } as CardSpinPickAction)}>Spin!</button>
       )}
       {isSpun && (
-        <button className="csp-btn next" onClick={() => dispatch({ type: "next" } as CardSpinPickAction)}>
+        <button data-testid="hint-target-card-spin-pick-next" className="csp-btn next" onClick={() => dispatch({ type: "next" } as CardSpinPickAction)}>
           {state.round >= state.maxRounds ? "Finish" : "Next"}
         </button>
       )}

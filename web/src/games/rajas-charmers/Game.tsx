@@ -35,10 +35,10 @@ export function RajasCharmersGame({ state, dispatch, onGameOver }: GameProps<Raj
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as RajasCharmersAction)}>Roll</button>
+        <button data-testid="hint-target-rajas-charmers-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as RajasCharmersAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as RajasCharmersAction)}>Skip</button>
+        <button data-testid="hint-target-rajas-charmers-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as RajasCharmersAction)}>Skip</button>
       )}
     </div>
   );

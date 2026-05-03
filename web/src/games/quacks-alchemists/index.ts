@@ -15,5 +15,10 @@ export const quacksAlchemistsPlugin: GamePlugin<quacksAlchemistsState, quacksAlc
   initialState: (seed: number, s: S) => initialState(seed, s as quacksAlchemistsSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-quacks-alchemists-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-quacks-alchemists-skip"]', pulses: 3 };
+  },
   component: quacksAlchemistsGame,
 };

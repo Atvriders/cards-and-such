@@ -35,10 +35,10 @@ export function cartographersRollPlayerGame({ state, dispatch, onGameOver }: Gam
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as cartographersRollPlayerAction)}>Roll</button>
+        <button data-testid="hint-target-cartographers-roll-player-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as cartographersRollPlayerAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as cartographersRollPlayerAction)}>Skip</button>
+        <button data-testid="hint-target-cartographers-roll-player-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as cartographersRollPlayerAction)}>Skip</button>
       )}
     </div>
   );

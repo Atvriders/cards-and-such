@@ -19,12 +19,12 @@ export function ThreeOfAKindRoll({ state, dispatch, onGameOver }: GameProps<Thre
     {!isResult&&hasThree&&<p style={{color:"#27ae60",fontWeight:700}}>Three of a Kind!</p>}
     {!isResult&&<p style={{fontSize:"0.85rem",color:"#888"}}>Click to keep dice. Early success = more points!</p>}
     {!isResult&&<div style={{display:"flex",gap:"12px"}}>
-      {state.attempts<state.maxAttempts&&<button className="dice-btn" onClick={()=>dispatch({type:"roll"} as ThreeOfAKindRollAction)}>Reroll Unkept</button>}
-      <button className="dice-btn" style={{background:"#27ae60"}} onClick={()=>dispatch({type:"bank"} as ThreeOfAKindRollAction)}>Score Now</button>
+      {state.attempts<state.maxAttempts&&<button data-testid="hint-target-three-of-a-kind-roll-roll" className="dice-btn" onClick={()=>dispatch({type:"roll"} as ThreeOfAKindRollAction)}>Reroll Unkept</button>}
+      <button data-testid="hint-target-three-of-a-kind-roll-bank" className="dice-btn" style={{background:"#27ae60"}} onClick={()=>dispatch({type:"bank"} as ThreeOfAKindRollAction)}>Score Now</button>
     </div>}
     {isResult&&<div>
       <p style={{fontWeight:700,fontSize:"1.3rem",color:state.gotThree?"#27ae60":"#e74c3c"}}>{state.gotThree?`Three of a Kind! +${state.score} pts`:"No three of a kind — 0 pts"}</p>
-      <button className="dice-btn" onClick={()=>dispatch({type:"next"} as ThreeOfAKindRollAction)}>Next Round</button>
+      <button data-testid="hint-target-three-of-a-kind-roll-next" className="dice-btn" onClick={()=>dispatch({type:"next"} as ThreeOfAKindRollAction)}>Next Round</button>
     </div>}
   </div>;
 }

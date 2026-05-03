@@ -37,10 +37,10 @@ export function MicromacroCrimeRollGame({ state, dispatch, onGameOver }: GamePro
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as MicromacroCrimeRollAction)}>Roll</button>
+        <button data-testid="hint-target-micromacro-crime-roll-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as MicromacroCrimeRollAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as MicromacroCrimeRollAction)}>Skip</button>
+        <button data-testid="hint-target-micromacro-crime-roll-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as MicromacroCrimeRollAction)}>Skip</button>
       )}
     </div>
   );

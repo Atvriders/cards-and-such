@@ -16,5 +16,12 @@ Twenty-five rolls average a sum of 87.5 (since each die averages 3.5), so rollin
 Two buttons: Roll to add another die, or Stop to lock in your current sum. The game ends after 25 rolls or when you stop. A score of 90+ is excellent; a perfect 100 is a 1-in-many feat. Push that luck!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CentipedeRollSettings),
-  reducer,isTerminal,component:CentipedeRollGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    const sum = (state as any).sum ?? 0;
+    if (sum >= 90) return { selector: '[data-testid="hint-target-centipede-roll-stop"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-centipede-roll-roll"]', pulses: 3 };
+  },
+  component:CentipedeRollGame,
 };

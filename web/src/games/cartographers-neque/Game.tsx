@@ -35,10 +35,10 @@ export function cartographersNequeGame({ state, dispatch, onGameOver }: GameProp
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as cartographersNequeAction)}>Roll</button>
+        <button data-testid="hint-target-cartographers-neque-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as cartographersNequeAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as cartographersNequeAction)}>Skip</button>
+        <button data-testid="hint-target-cartographers-neque-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as cartographersNequeAction)}>Skip</button>
       )}
     </div>
   );

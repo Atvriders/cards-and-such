@@ -35,10 +35,10 @@ export function FleetEngineGame({ state, dispatch, onGameOver }: GameProps<Fleet
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as FleetEngineAction)}>Roll</button>
+        <button data-testid="hint-target-fleet-engine-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as FleetEngineAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as FleetEngineAction)}>Skip</button>
+        <button data-testid="hint-target-fleet-engine-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as FleetEngineAction)}>Skip</button>
       )}
     </div>
   );

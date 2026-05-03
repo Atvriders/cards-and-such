@@ -16,5 +16,15 @@ After each roll, you decide: bank your round and lock in the points, or roll the
 You have 8 rounds. The optimal stopping point is the classic Farkle dilemma: every re-roll multiplies risk against reward. Bank early for safety, push hard for glory. A typical run lands between 800 and 1500 points, with daring strategies climbing higher (or busting hard). Roll on!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as FarkleMiniSettings),
-  reducer,isTerminal,component:FarkleMiniGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "scored") return { selector: '[data-testid="hint-target-farkle-mini-next"]', pulses: 3 };
+    if ((state as any).phase === "decide") {
+      const total = ((state as any).roundBank ?? 0) + ((state as any).pendingScore ?? 0);
+      if (total >= 300) return { selector: '[data-testid="hint-target-farkle-mini-bank"]', pulses: 3 };
+    }
+    return { selector: '[data-testid="hint-target-farkle-mini-roll"]', pulses: 3 };
+  },
+  component:FarkleMiniGame,
 };

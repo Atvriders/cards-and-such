@@ -37,10 +37,10 @@ export function CityOfHorrorRwGame({ state, dispatch, onGameOver }: GameProps<Ci
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as CityOfHorrorRwAction)}>Roll</button>
+        <button data-testid="hint-target-city-of-horror-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as CityOfHorrorRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as CityOfHorrorRwAction)}>Skip</button>
+        <button data-testid="hint-target-city-of-horror-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as CityOfHorrorRwAction)}>Skip</button>
       )}
     </div>
   );

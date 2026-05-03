@@ -18,5 +18,12 @@ Strategy is everything. Each roll has a 1-in-6 chance of busting your turn total
 You have up to 30 turns to reach the target. Reach 100 and the game ends; otherwise, your final banked score is whatever you accumulated. Good luck — and don't get too greedy!`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as PigClassicSettings),
-  reducer,isTerminal,component:PigClassicGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    const tt = (state as any).turnTotal ?? 0;
+    if (tt >= 20) return { selector: '[data-testid="hint-target-pig-classic-bank"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-pig-classic-roll"]', pulses: 3 };
+  },
+  component:PigClassicGame,
 };

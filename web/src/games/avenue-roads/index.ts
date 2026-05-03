@@ -15,5 +15,10 @@ export const avenueRoadsPlugin: GamePlugin<avenueRoadsState, avenueRoadsAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as avenueRoadsSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-avenue-roads-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-avenue-roads-skip"]', pulses: 3 };
+  },
   component: avenueRoadsGame,
 };

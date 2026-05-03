@@ -37,10 +37,10 @@ export function ArchitectsArtisansRwGame({ state, dispatch, onGameOver }: GamePr
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as ArchitectsArtisansRwAction)}>Roll</button>
+        <button data-testid="hint-target-architects-artisans-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as ArchitectsArtisansRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as ArchitectsArtisansRwAction)}>Skip</button>
+        <button data-testid="hint-target-architects-artisans-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as ArchitectsArtisansRwAction)}>Skip</button>
       )}
     </div>
   );

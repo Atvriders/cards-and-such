@@ -110,13 +110,14 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
 
       <div className="farkle-controls">
         {state.phase === "rollReady" && (
-          <button className="farkle-btn farkle-btn-primary" onClick={() => dispatch({ type: "roll" } as FarkleMiniAction)}>
+          <button data-testid="hint-target-farkle-mini-roll" className="farkle-btn farkle-btn-primary" onClick={() => dispatch({ type: "roll" } as FarkleMiniAction)}>
             Roll 6 Dice
           </button>
         )}
         {state.phase === "decide" && (
           <>
             <button
+              data-testid="hint-target-farkle-mini-roll"
               className="farkle-btn farkle-btn-primary"
               disabled={!canRoll}
               onClick={() => dispatch({ type: "roll" } as FarkleMiniAction)}
@@ -124,6 +125,7 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
               Set aside &amp; roll {Math.max(1, remainingDice - state.dice.filter((d) => d.status === "picked").length)}
             </button>
             <button
+              data-testid="hint-target-farkle-mini-bank"
               className="farkle-btn farkle-btn-bank"
               disabled={!canBank}
               onClick={() => dispatch({ type: "bank" } as FarkleMiniAction)}
@@ -137,7 +139,7 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
             <div className={`farkle-result ${state.lastFarkle ? "farkle-result-bust" : "farkle-result-win"}`}>
               {state.lastFarkle ? "FARKLE — round lost" : `Banked ${state.lastBanked}`}
             </div>
-            <button className="farkle-btn farkle-btn-primary" onClick={() => dispatch({ type: "next" } as FarkleMiniAction)}>
+            <button data-testid="hint-target-farkle-mini-next" className="farkle-btn farkle-btn-primary" onClick={() => dispatch({ type: "next" } as FarkleMiniAction)}>
               {state.round >= TOTAL_ROUNDS ? "Finish" : `Round ${state.round + 1}`}
             </button>
           </>

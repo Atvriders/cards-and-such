@@ -18,5 +18,11 @@ If you cannot make any combination summing to your roll, the game ends — your 
 Strategy: shut the high tiles (7, 8, 9) early when possible — they're worth the most if left open. Sums of 6, 7, and 8 give the most flexibility. With smart play, scores above 35 are achievable; perfect 100s are rare.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniShutBoxSettings),
-  reducer,isTerminal,component:MiniShutBoxGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-mini-shut-box-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-mini-shut-box-submit"]', pulses: 3 };
+  },
+  component:MiniShutBoxGame,
 };

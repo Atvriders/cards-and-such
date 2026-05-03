@@ -37,10 +37,10 @@ export function WingspanAsiaRwGame({ state, dispatch, onGameOver }: GameProps<Wi
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as WingspanAsiaRwAction)}>Roll</button>
+        <button data-testid="hint-target-wingspan-asia-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as WingspanAsiaRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as WingspanAsiaRwAction)}>Skip</button>
+        <button data-testid="hint-target-wingspan-asia-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as WingspanAsiaRwAction)}>Skip</button>
       )}
     </div>
   );

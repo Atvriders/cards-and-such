@@ -29,5 +29,11 @@ Can you match the spinner every single round? A perfect game scores 800 or 1,200
   initialState: (seed: number, settings: CardSpinPickSettingsType) => initialState(seed, settings as CardSpinPickSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "gameover") return null;
+    if ((state as any).phase === "spun") return { selector: '[data-testid="hint-target-card-spin-pick-next"]', pulses: 3 };
+    if ((state as any).playerPick === null) return { selector: '[data-testid="hint-target-card-spin-pick-pick"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-card-spin-pick-spin"]', pulses: 3 };
+  },
   component: CardSpinPick,
 };

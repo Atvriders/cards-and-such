@@ -15,5 +15,10 @@ export const architectsRollAnnexPlugin: GamePlugin<ArchitectsRollAnnexState, Arc
   initialState: (seed: number, s: S) => initialState(seed, s as ArchitectsRollAnnexSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-architects-roll-annex-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-architects-roll-annex-skip"]', pulses: 3 };
+  },
   component: ArchitectsRollAnnexGame,
 };

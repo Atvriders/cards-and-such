@@ -15,5 +15,10 @@ export const cartographersRollPlayerPlugin: GamePlugin<cartographersRollPlayerSt
   initialState: (seed: number, s: S) => initialState(seed, s as cartographersRollPlayerSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-cartographers-roll-player-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-cartographers-roll-player-skip"]', pulses: 3 };
+  },
   component: cartographersRollPlayerGame,
 };

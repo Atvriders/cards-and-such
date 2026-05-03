@@ -15,5 +15,10 @@ export const zooVadisRwPlugin: GamePlugin<ZooVadisRwState, ZooVadisRwAction, typ
   initialState: (seed: number, s: S) => initialState(seed, s as ZooVadisRwSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-zoo-vadis-rw-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-zoo-vadis-rw-skip"]', pulses: 3 };
+  },
   component: ZooVadisRwGame,
 };

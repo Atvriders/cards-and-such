@@ -37,10 +37,10 @@ export function PandemicHotZoneRwGame({ state, dispatch, onGameOver }: GameProps
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as PandemicHotZoneRwAction)}>Roll</button>
+        <button data-testid="hint-target-pandemic-hot-zone-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as PandemicHotZoneRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as PandemicHotZoneRwAction)}>Skip</button>
+        <button data-testid="hint-target-pandemic-hot-zone-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as PandemicHotZoneRwAction)}>Skip</button>
       )}
     </div>
   );

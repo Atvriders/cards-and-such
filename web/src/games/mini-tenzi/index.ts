@@ -18,5 +18,10 @@ You have up to 30 rolls; if you run out, you score partial credit (5 points per 
 Average completion is around 12 rolls; lucky games finish in 5; unlucky droughts can take 20+. Don't unhold dice unless you're switching targets.`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as MiniTenziSettings),
-  reducer,isTerminal,component:MiniTenziGame,
+  reducer,isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase !== "play") return null;
+    return { selector: '[data-testid="hint-target-mini-tenzi-roll"]', pulses: 3 };
+  },
+  component:MiniTenziGame,
 };

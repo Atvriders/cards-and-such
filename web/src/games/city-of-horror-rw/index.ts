@@ -15,5 +15,10 @@ export const cityOfHorrorRwPlugin: GamePlugin<CityOfHorrorRwState, CityOfHorrorR
   initialState: (seed: number, s: S) => initialState(seed, s as CityOfHorrorRwSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-city-of-horror-rw-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-city-of-horror-rw-skip"]', pulses: 3 };
+  },
   component: CityOfHorrorRwGame,
 };

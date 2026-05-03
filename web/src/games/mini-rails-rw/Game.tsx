@@ -35,10 +35,10 @@ export function MiniRailsRwGame({ state, dispatch, onGameOver }: GameProps<MiniR
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as MiniRailsRwAction)}>Roll</button>
+        <button data-testid="hint-target-mini-rails-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as MiniRailsRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as MiniRailsRwAction)}>Skip</button>
+        <button data-testid="hint-target-mini-rails-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as MiniRailsRwAction)}>Skip</button>
       )}
     </div>
   );

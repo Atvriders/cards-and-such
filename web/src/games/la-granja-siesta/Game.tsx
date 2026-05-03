@@ -35,10 +35,10 @@ export function LaGranjaSiestaGame({ state, dispatch, onGameOver }: GameProps<La
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as LaGranjaSiestaAction)}>Roll</button>
+        <button data-testid="hint-target-la-granja-siesta-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as LaGranjaSiestaAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as LaGranjaSiestaAction)}>Skip</button>
+        <button data-testid="hint-target-la-granja-siesta-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as LaGranjaSiestaAction)}>Skip</button>
       )}
     </div>
   );

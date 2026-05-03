@@ -35,10 +35,10 @@ export function quacksAlchemistsGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as quacksAlchemistsAction)}>Roll</button>
+        <button data-testid="hint-target-quacks-alchemists-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as quacksAlchemistsAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as quacksAlchemistsAction)}>Skip</button>
+        <button data-testid="hint-target-quacks-alchemists-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as quacksAlchemistsAction)}>Skip</button>
       )}
     </div>
   );

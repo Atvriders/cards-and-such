@@ -37,10 +37,10 @@ export function ArchitectsRollAnnexGame({ state, dispatch, onGameOver }: GamePro
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as ArchitectsRollAnnexAction)}>Roll</button>
+        <button data-testid="hint-target-architects-roll-annex-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as ArchitectsRollAnnexAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as ArchitectsRollAnnexAction)}>Skip</button>
+        <button data-testid="hint-target-architects-roll-annex-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as ArchitectsRollAnnexAction)}>Skip</button>
       )}
     </div>
   );

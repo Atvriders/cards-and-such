@@ -15,5 +15,10 @@ export const architectsArtisansRwPlugin: GamePlugin<ArchitectsArtisansRwState, A
   initialState: (seed: number, s: S) => initialState(seed, s as ArchitectsArtisansRwSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-architects-artisans-rw-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-architects-artisans-rw-skip"]', pulses: 3 };
+  },
   component: ArchitectsArtisansRwGame,
 };

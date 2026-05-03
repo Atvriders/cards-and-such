@@ -41,7 +41,7 @@ export function MiniRoulette({ state, dispatch, onGameOver }: GameProps<MiniRoul
       </div>
 
       <div className="mr-outside">
-        <button onClick={() => phase === "betting" && dispatch({ type: "place-bet", betType: "color", numbers: [1,3,5,7,9,11] })}
+        <button data-testid="hint-target-mini-roulette-bet" onClick={() => phase === "betting" && dispatch({ type: "place-bet", betType: "color", numbers: [1,3,5,7,9,11] })}
           title="Red (1:1)">Red (1:1)</button>
         <button onClick={() => phase === "betting" && dispatch({ type: "place-bet", betType: "color", numbers: [2,4,6,8,10,12] })}
           title="Black (1:1)">Black (1:1)</button>
@@ -67,12 +67,12 @@ export function MiniRoulette({ state, dispatch, onGameOver }: GameProps<MiniRoul
       <div className="mr-actions">
         {phase === "betting" && (
           <>
-            <button className="spin" onClick={() => dispatch({ type: "spin" })} disabled={!canSpin}>Spin</button>
+            <button data-testid="hint-target-mini-roulette-spin" className="spin" onClick={() => dispatch({ type: "spin" })} disabled={!canSpin}>Spin</button>
             <button className="clear" onClick={() => dispatch({ type: "clear-bets" })} disabled={bets.length === 0}>Clear</button>
           </>
         )}
         {phase === "settled" && !terminal && (
-          <button className="next" onClick={() => dispatch({ type: "spin" })}>Next Spin</button>
+          <button data-testid="hint-target-mini-roulette-next" className="next" onClick={() => dispatch({ type: "spin" })}>Next Spin</button>
         )}
         {terminal && <div className="mr-game-over">Game Over — Final: ${terminal.score}</div>}
       </div>

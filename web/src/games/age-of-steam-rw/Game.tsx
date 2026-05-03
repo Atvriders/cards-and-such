@@ -35,10 +35,10 @@ export function AgeOfSteamRwGame({ state, dispatch, onGameOver }: GameProps<AgeO
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as AgeOfSteamRwAction)}>Roll</button>
+        <button data-testid="hint-target-age-of-steam-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as AgeOfSteamRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as AgeOfSteamRwAction)}>Skip</button>
+        <button data-testid="hint-target-age-of-steam-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as AgeOfSteamRwAction)}>Skip</button>
       )}
     </div>
   );

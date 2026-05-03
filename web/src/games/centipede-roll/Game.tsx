@@ -18,8 +18,8 @@ export function CentipedeRollGame({ state, dispatch, onGameOver }: GameProps<Cen
         {state.rolls.slice(-12).map((d, i) => <div key={i} className="dm-die" style={{ fontSize:"1.6rem", padding:"6px 10px", minWidth:"40px" }}>{d}</div>)}
       </div>
       <div className="dm-row">
-        <button className="dm-btn" onClick={() => dispatch({ type:"roll" } as CentipedeRollAction)}>Roll</button>
-        <button className="dm-btn alt" onClick={() => dispatch({ type:"stop" } as CentipedeRollAction)}>Stop</button>
+        <button data-testid="hint-target-centipede-roll-roll" className="dm-btn" onClick={() => dispatch({ type:"roll" } as CentipedeRollAction)}>Roll</button>
+        <button data-testid="hint-target-centipede-roll-stop" className="dm-btn alt" onClick={() => dispatch({ type:"stop" } as CentipedeRollAction)}>Stop</button>
       </div>
     </div>
   );

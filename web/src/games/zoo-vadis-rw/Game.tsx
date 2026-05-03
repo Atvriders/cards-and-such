@@ -37,10 +37,10 @@ export function ZooVadisRwGame({ state, dispatch, onGameOver }: GameProps<ZooVad
         ))}
       </div>
       {state.phase === "rolling" && (
-        <button className="rw-btn" onClick={() => dispatch({ type: "roll" } as ZooVadisRwAction)}>Roll</button>
+        <button data-testid="hint-target-zoo-vadis-rw-roll" className="rw-btn" onClick={() => dispatch({ type: "roll" } as ZooVadisRwAction)}>Roll</button>
       )}
       {state.phase === "marking" && (
-        <button className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as ZooVadisRwAction)}>Skip</button>
+        <button data-testid="hint-target-zoo-vadis-rw-skip" className="rw-btn alt" onClick={() => dispatch({ type: "skip" } as ZooVadisRwAction)}>Skip</button>
       )}
     </div>
   );

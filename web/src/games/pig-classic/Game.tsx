@@ -86,10 +86,11 @@ export function PigClassicGame({ state, dispatch, onGameOver }: GameProps<PigCla
       </div>
 
       <div className="pig-controls">
-        <button className="pig-btn pig-btn-roll" aria-label="Roll die (R)" onClick={() => dispatch({ type: "roll" } as PigClassicAction)}>
+        <button data-testid="hint-target-pig-classic-roll" className="pig-btn pig-btn-roll" aria-label="Roll die (R)" onClick={() => dispatch({ type: "roll" } as PigClassicAction)}>
           Roll Die
         </button>
         <button
+          data-testid="hint-target-pig-classic-bank"
           className="pig-btn pig-btn-bank"
           aria-label={`Bank ${state.turnTotal} points (B)`}
           disabled={state.turnTotal === 0}

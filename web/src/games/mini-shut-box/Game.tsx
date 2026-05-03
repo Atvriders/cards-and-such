@@ -83,13 +83,14 @@ export function MiniShutBoxGame({ state, dispatch, onGameOver }: GameProps<MiniS
 
       <div className="shutbox-controls">
         {state.phase === "rolling" && (
-          <button className="shutbox-btn shutbox-btn-primary" onClick={() => dispatch({ type: "roll" } as MiniShutBoxAction)}>
+          <button data-testid="hint-target-mini-shut-box-roll" className="shutbox-btn shutbox-btn-primary" onClick={() => dispatch({ type: "roll" } as MiniShutBoxAction)}>
             Roll Dice
           </button>
         )}
         {state.phase === "selecting" && (
           <>
             <button
+              data-testid="hint-target-mini-shut-box-submit"
               className="shutbox-btn shutbox-btn-primary"
               disabled={selSum !== state.sum}
               onClick={() => dispatch({ type: "submit" } as MiniShutBoxAction)}

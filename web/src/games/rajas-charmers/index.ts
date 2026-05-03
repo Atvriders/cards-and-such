@@ -15,5 +15,10 @@ export const rajasCharmersPlugin: GamePlugin<RajasCharmersState, RajasCharmersAc
   initialState: (seed: number, s: S) => initialState(seed, s as RajasCharmersSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-rajas-charmers-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-rajas-charmers-skip"]', pulses: 3 };
+  },
   component: RajasCharmersGame,
 };

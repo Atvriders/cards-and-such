@@ -41,5 +41,12 @@ Strategy: Outside bets give the highest hit frequency. Straights offer big wins 
   initialState: (seed: number, settings: MiniRouletteSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if (isTerminal(state)) return null;
+    if ((state as any).phase === "settled") return { selector: '[data-testid="hint-target-mini-roulette-next"]', pulses: 3 };
+    const bets = (state as any).bets ?? [];
+    if (bets.length === 0) return { selector: '[data-testid="hint-target-mini-roulette-bet"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-mini-roulette-spin"]', pulses: 3 };
+  },
   component: MiniRoulette,
 };

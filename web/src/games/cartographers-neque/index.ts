@@ -15,5 +15,10 @@ export const cartographersNequePlugin: GamePlugin<cartographersNequeState, carto
   initialState: (seed: number, s: S) => initialState(seed, s as cartographersNequeSettings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+    if ((state as any).phase === "done") return null;
+    if ((state as any).phase === "rolling") return { selector: '[data-testid="hint-target-cartographers-neque-roll"]', pulses: 3 };
+    return { selector: '[data-testid="hint-target-cartographers-neque-skip"]', pulses: 3 };
+  },
   component: cartographersNequeGame,
 };
