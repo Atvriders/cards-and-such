@@ -309,10 +309,17 @@
   padding: 4px 8px;
   font: inherit;
   cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
 }
+.lobby-sort-select:hover { border-color: var(--border-focus); color: var(--text-100); }
 .lobby-sort-select:focus-visible {
-  outline: 2px solid var(--accent, #a78bfa);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 .lobby-search {
@@ -374,6 +381,12 @@
   transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
 }
 .lobby-search-clear:hover { background: var(--surface-2); color: var(--text-100); }
+.lobby-search-clear:focus-visible {
+  outline: none;
+  background: var(--surface-2);
+  color: var(--text-100);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 
 /* Chips — horizontally scrollable strip with fade-mask edges. The
    `.lobby-chips-wrap` is a positioning context for the gradient pseudo
@@ -457,6 +470,12 @@
   transition: color var(--dur-fast) var(--ease-out-quart), border-color var(--dur-fast) var(--ease-out-quart), background var(--dur-fast) var(--ease-out-quart);
 }
 .lobby-chips-arrow:hover { color: var(--text-100); border-color: var(--border-focus); }
+.lobby-chips-arrow:focus-visible {
+  outline: none;
+  color: var(--text-100);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 .lobby-chips-arrow--left  { left: -4px; }
 .lobby-chips-arrow--right { right: -4px; }
 .lobby-chips-arrow[hidden] { display: none; }
@@ -1204,6 +1223,12 @@ button.tile {
   transition: background var(--dur-fast) var(--ease-out-quart), color var(--dur-fast) var(--ease-out-quart);
 }
 .lobby-picker-search-clear:hover { background: var(--surface-2); color: var(--text-100); }
+.lobby-picker-search-clear:focus-visible {
+  outline: none;
+  background: var(--surface-2);
+  color: var(--text-100);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 
 /* Sort row: 3 small radio-style chips. Tabular numerics for the
    counter so it doesn't twitch as the search filter narrows. */
@@ -1413,8 +1438,20 @@ button.tile {
   border-radius: 999px;
   cursor: pointer;
   letter-spacing: 0.01em;
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
 }
-.lobby-mode-toggle-btn:hover { color: var(--text); }
+.lobby-mode-toggle-btn:hover {
+  color: var(--text-100);
+  background: var(--surface-2, rgba(255, 255, 255, 0.06));
+}
+.lobby-mode-toggle-btn:focus-visible {
+  outline: none;
+  color: var(--text-100);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 .lobby-mode-toggle-btn.is-active {
   background: var(--accent, #5b6cff);
   color: var(--accent-fg, #fff);
@@ -1442,8 +1479,20 @@ button.tile {
   border-radius: 999px;
   cursor: pointer;
   letter-spacing: 0.01em;
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
 }
-.lobby-density-toggle-btn:hover { color: var(--text); }
+.lobby-density-toggle-btn:hover {
+  color: var(--text-100);
+  background: var(--surface-2, rgba(255, 255, 255, 0.06));
+}
+.lobby-density-toggle-btn:focus-visible {
+  outline: none;
+  color: var(--text-100);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 .lobby-density-toggle-btn.is-active {
   background: var(--accent, #5b6cff);
   color: var(--accent-fg, #fff);
@@ -1467,14 +1516,26 @@ button.tile {
   border: 0;
   color: var(--text-400);
   font: inherit;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    background var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-fast) var(--ease-out-quart);
 }
-.lobby-view-toggle-btn:hover { color: var(--text); }
+.lobby-view-toggle-btn:hover {
+  color: var(--text-100);
+  background: var(--surface-2, rgba(255, 255, 255, 0.06));
+}
+.lobby-view-toggle-btn:focus-visible {
+  outline: none;
+  color: var(--text-100);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
 .lobby-view-toggle-btn.is-active {
   background: var(--accent, #5b6cff);
   color: var(--accent-fg, #fff);
@@ -1879,10 +1940,10 @@ button.tile {
   background: rgba(244, 114, 182, 0.25);
 }
 .tile-fav:focus-visible {
-  outline: 2px solid var(--primary, #6366f1);
-  outline-offset: 2px;
+  outline: none;
   opacity: 1;
   transform: translateY(0);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 .tile-fav.is-active {
   color: #f43f5e;
@@ -1974,11 +2035,17 @@ button.tile {
     color var(--dur-fast, 140ms) var(--ease-out-quart, ease),
     border-color var(--dur-fast, 140ms) var(--ease-out-quart, ease);
 }
-.lobby-coachmark-close:hover,
-.lobby-coachmark-close:focus-visible {
+.lobby-coachmark-close:hover {
   background: var(--surface-2, rgba(255, 255, 255, 0.06));
   color: var(--text-100, #f8fafc);
   border-color: var(--border-focus, var(--accent, #5b6cff));
+}
+.lobby-coachmark-close:focus-visible {
+  outline: none;
+  background: var(--surface-2, rgba(255, 255, 255, 0.06));
+  color: var(--text-100, #f8fafc);
+  border-color: var(--border-focus, var(--accent, #5b6cff));
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 @keyframes lobby-coachmark-in {
   from { opacity: 0; transform: translateY(-4px); }
@@ -2038,11 +2105,17 @@ button.tile {
     cursor: pointer;
     transition: background var(--dur-fast, 160ms) ease, color var(--dur-fast, 160ms) ease;
   }
-  .lobby-drawer-toggle:hover,
-  .lobby-drawer-toggle:focus-visible {
+  .lobby-drawer-toggle:hover {
     background: var(--surface-2, rgba(255, 255, 255, 0.06));
     color: var(--text-100, #f8fafc);
+    border-color: var(--border-focus);
+  }
+  .lobby-drawer-toggle:focus-visible {
     outline: none;
+    background: var(--surface-2, rgba(255, 255, 255, 0.06));
+    color: var(--text-100, #f8fafc);
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--primary-soft);
   }
   .lobby-drawer[data-collapsed="true"] .lobby-drawer-toggle {
     align-self: center;
@@ -2074,8 +2147,9 @@ button.tile {
     color: var(--text-100, #f8fafc);
   }
   .lobby-drawer-link:focus-visible {
-    outline: 2px solid var(--border-focus, #5b6cff);
-    outline-offset: 1px;
+    outline: none;
+    border-color: var(--border-focus, #5b6cff);
+    box-shadow: 0 0 0 3px var(--primary-soft);
   }
   .lobby-drawer-link.is-active {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(56, 189, 248, 0.16) 100%);
@@ -2249,9 +2323,15 @@ button.tile {
     color var(--dur-fast, 140ms) var(--ease-out-quart, ease),
     border-color var(--dur-fast, 140ms) var(--ease-out-quart, ease);
 }
-.lobby-kbd-tip-dismiss:hover,
-.lobby-kbd-tip-dismiss:focus-visible {
+.lobby-kbd-tip-dismiss:hover {
   background: var(--surface-2, rgba(255, 255, 255, 0.06));
   color: var(--text-100, #f8fafc);
   border-color: var(--border-focus, var(--accent, #5b6cff));
+}
+.lobby-kbd-tip-dismiss:focus-visible {
+  outline: none;
+  background: var(--surface-2, rgba(255, 255, 255, 0.06));
+  color: var(--text-100, #f8fafc);
+  border-color: var(--border-focus, var(--accent, #5b6cff));
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
