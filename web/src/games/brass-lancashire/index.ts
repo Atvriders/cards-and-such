@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BrassLancashireState, BrassLancashireAction, BrassLancashireSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BrassLancashireGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const brassLancashirePlugin: GamePlugin<BrassLancashireState, BrassLancas
   initialState: (seed: number, s: S) => initialState(seed, s as BrassLancashireSettings),
   reducer,
   isTerminal,
+  hint: (state: BrassLancashireState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-brass-lancashire-primary"]', pulses: 3 } : null),
   component: BrassLancashireGame,
 };

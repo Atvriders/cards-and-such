@@ -19,7 +19,7 @@ export function MythicEmulatorOracleGame({ state, dispatch, onGameOver }: GamePr
       <div className="meo-prompt">{p.prompt}</div>
       <div className="meo-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`meo-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as MythicEmulatorOracleAction)}>
+          <button data-testid={i===0?"hint-target-mythic-emulator-oracle-primary":undefined} key={i} className={`meo-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as MythicEmulatorOracleAction)}>
             <span className="meo-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PonziCollapseState, PonziCollapseAction, PonziCollapseSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PonziCollapseGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const ponziCollapsePlugin: GamePlugin<PonziCollapseState, PonziCollapseAc
   initialState: (seed: number, s: S) => initialState(seed, s as PonziCollapseSettings),
   reducer,
   isTerminal,
+  hint: (state: PonziCollapseState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-ponzi-collapse-primary"]', pulses: 3 } : null),
   component: PonziCollapseGame,
 };

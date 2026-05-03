@@ -76,7 +76,7 @@ export function NumberBondsGame({ state, dispatch, onGameOver }: GameProps<Numbe
           placeholder="?"
           autoComplete="off"
         />
-        <button type="submit" className="nb-btn">Enter</button>
+        <button data-testid="hint-target-number-bonds-primary" type="submit" className="nb-btn">Enter</button>
       </form>
     </div>
   );

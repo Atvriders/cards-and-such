@@ -120,7 +120,7 @@ export function CribbageMiniGame({
         )}
         {state.phase === "show" && (
           <button
-            className="crib-mini-btn"
+            className="crib-mini-btn" data-testid="hint-target-cribbage-mini-next"
             onClick={() => dispatch({ type: "next" } as CribbageMiniAction)}
           >
             Next deal

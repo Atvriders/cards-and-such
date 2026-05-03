@@ -19,7 +19,7 @@ export function RemnantsFragmentsGame({ state, dispatch, onGameOver }: GameProps
       <div className="rmf-prompt">{p.prompt}</div>
       <div className="rmf-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`rmf-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as RemnantsFragmentsAction)}>
+          <button data-testid={i===0?"hint-target-remnants-fragments-primary":undefined} key={i} className={`rmf-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as RemnantsFragmentsAction)}>
             <span className="rmf-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

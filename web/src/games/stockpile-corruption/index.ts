@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { StockpileCorruptionState, StockpileCorruptionAction, StockpileCorruptionSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { StockpileCorruptionGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const stockpileCorruptionPlugin: GamePlugin<StockpileCorruptionState, Sto
   initialState: (seed: number, s: S) => initialState(seed, s as StockpileCorruptionSettings),
   reducer,
   isTerminal,
+  hint: (state: StockpileCorruptionState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-stockpile-corruption-primary"]', pulses: 3 } : null),
   component: StockpileCorruptionGame,
 };

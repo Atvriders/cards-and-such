@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RideTheBusState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RideTheBusGame } from "./Game.js";
@@ -37,5 +37,9 @@ Strategy: pay attention to which cards have already appeared — it shifts the p
   initialState,
   reducer,
   isTerminal,
+  hint: (state: RideTheBusState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-ride-the-bus-primary"]', pulses: 3 };
+  },
   component: RideTheBusGame,
 };

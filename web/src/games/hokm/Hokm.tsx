@@ -48,7 +48,7 @@ export function Hokm({ state, dispatch, onGameOver }: GameProps<HokmState, HokmS
           <div className="hk-label">You are Hakem — choose trump suit:</div>
           <div className="hk-trump-buttons">
             {SUITS.map(suit => (
-              <button key={suit} className="hk-btn" onClick={() => dispatch({ type: "chooseTrump", suit } as HokmAction)}>
+              <button data-testid="hint-target-hokm-primary" key={suit} className="hk-btn" onClick={() => dispatch({ type: "chooseTrump", suit } as HokmAction)}>
                 {suit}
               </button>
             ))}

@@ -99,7 +99,7 @@ export function StopTheBusGame({ state, dispatch, onGameOver }: GameProps<StopTh
             onClick={() => { dispatch({ type: "swapAll" } as StopTheBusAction); setSelectedHand(null); setSelectedPool(null); }}>
             Swap All 3
           </button>
-          <button className="stopbus-btn pass" disabled={!isMyTurn}
+          <button data-testid="hint-target-stop-the-bus-primary" className="stopbus-btn pass" disabled={!isMyTurn}
             onClick={() => dispatch({ type: "pass" } as StopTheBusAction)}>
             Pass
           </button>

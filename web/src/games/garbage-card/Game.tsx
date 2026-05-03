@@ -51,7 +51,7 @@ export function GarbageGame({ state, dispatch, onGameOver }: GameProps<GarbageSt
           <div className="gc-current-label">Card in hand: {isWild(cc.rank) ? "WILD" : isGarbage(cc.rank) ? "GARBAGE" : `Slot ${cc.rank}`}</div>
           <Card card={cc} />
           {isGarbage(cc.rank) && isPlayerTurn && (
-            <button className="gc-btn secondary" onClick={() => dispatch({ type: "discard" })}>Discard</button>
+            <button data-testid="hint-target-garbage-card-primary" className="gc-btn secondary" onClick={() => dispatch({ type: "discard" })}>Discard</button>
           )}
           {isWild(cc.rank) && isPlayerTurn && (
             <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>Click any empty slot to place the wild.</div>

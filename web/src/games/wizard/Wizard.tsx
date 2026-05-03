@@ -70,7 +70,7 @@ export function Wizard({ state, dispatch, onGameOver }: GameProps<WizardState, W
           <h3>Your bid (0–10 tricks)</h3>
           <div className="wizard-bid-buttons">
             {Array.from({ length: 11 }, (_, i) => (
-              <button
+              <button data-testid="hint-target-wizard-primary"
                 key={i}
                 className="wizard-bid-btn"
                 onClick={() => dispatch({ type: "bid", amount: i } as WizardAction)}

@@ -19,7 +19,7 @@ export function ScarletHeroesQuestGame({ state, dispatch, onGameOver }: GameProp
       <div className="shq-prompt">{p.prompt}</div>
       <div className="shq-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`shq-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ScarletHeroesQuestAction)}>
+          <button data-testid={i===0?"hint-target-scarlet-heroes-quest-primary":undefined} key={i} className={`shq-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ScarletHeroesQuestAction)}>
             <span className="shq-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

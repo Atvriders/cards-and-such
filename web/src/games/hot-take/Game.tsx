@@ -40,7 +40,7 @@ export function HotTake({ state, dispatch, onGameOver }: GameProps<HotTakeState,
         {take}
       </div>
       <div className="ht-buttons">
-        <button className="ht-btn-agree" onClick={() => dispatch({ type: "agree" } as HotTakeAction)}>
+        <button data-testid="hint-target-hot-take-primary" className="ht-btn-agree" onClick={() => dispatch({ type: "agree" } as HotTakeAction)}>
           Agree
         </button>
         <button className="ht-btn-disagree" onClick={() => dispatch({ type: "disagree" } as HotTakeAction)}>

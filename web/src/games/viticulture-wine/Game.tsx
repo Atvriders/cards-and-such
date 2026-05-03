@@ -18,7 +18,7 @@ export function ViticultureWineGame({ state, dispatch, onGameOver }: GameProps<V
       </div>
       {state.phase === "choosing" && (
         <div className="bz-vwn-actions">
-          <button onClick={() => dispatch({ type: "invest" } as ViticultureWineAction)}>Buy Vine (${ASSET_COST})</button>
+          <button data-testid="hint-target-viticulture-wine-primary" onClick={() => dispatch({ type: "invest" } as ViticultureWineAction)}>Buy Vine (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ViticultureWineAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ViticultureWineAction)}>Hire Visitor (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as ViticultureWineAction)}>Sell Vine</button>

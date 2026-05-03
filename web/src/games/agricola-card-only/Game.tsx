@@ -18,7 +18,7 @@ export function AgricolaCardOnlyGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-aco-actions">
-          <button onClick={() => dispatch({ type: "invest" } as AgricolaCardOnlyAction)}>Buy Field (${ASSET_COST})</button>
+          <button data-testid="hint-target-agricola-card-only-primary" onClick={() => dispatch({ type: "invest" } as AgricolaCardOnlyAction)}>Buy Field (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as AgricolaCardOnlyAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as AgricolaCardOnlyAction)}>Hire Occupation (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as AgricolaCardOnlyAction)}>Sell Field</button>

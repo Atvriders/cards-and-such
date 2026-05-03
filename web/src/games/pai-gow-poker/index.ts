@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PaiGowPokerState, PaiGowPokerAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -46,5 +46,9 @@ Settings: Choose your starting bankroll and ante size. Play continues until you 
   initialState: (seed: number, settings: PaiGowSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PaiGowPokerState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-pai-gow-poker-primary"]', pulses: 3 };
+  },
   component: PaiGowPoker,
 };

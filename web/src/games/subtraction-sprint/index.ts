@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SubtractionSprintState, SubtractionSprintAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SubtractionSprintGame } from "./Game.js";
@@ -40,5 +39,6 @@ Tips: Subtraction is inverse addition — if you know 7 + 8 = 15, you instantly 
   initialState: (seed: number, settings: SubtractionSprintSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: SubtractionSprintState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-subtraction-sprint-primary"]', pulses: 3 } : null),
   component: SubtractionSprintGame,
 };

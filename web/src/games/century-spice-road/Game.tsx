@@ -18,7 +18,7 @@ export function CenturySpiceRoadGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-csr-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CenturySpiceRoadAction)}>Buy Spice (${ASSET_COST})</button>
+          <button data-testid="hint-target-century-spice-road-primary" onClick={() => dispatch({ type: "invest" } as CenturySpiceRoadAction)}>Buy Spice (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CenturySpiceRoadAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CenturySpiceRoadAction)}>Hire Caravan (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CenturySpiceRoadAction)}>Sell Spice</button>

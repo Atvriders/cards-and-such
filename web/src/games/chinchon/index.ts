@@ -37,5 +37,9 @@ Winning: The player with lower deadwood wins. If the stock runs out, the player 
   initialState: (seed: number, _settings: ChinchonSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "draw") return { selector: '[data-testid="hint-target-chinchon-primary"]', pulses: 3 };
+      return null;
+    },
   component: Game,
 };

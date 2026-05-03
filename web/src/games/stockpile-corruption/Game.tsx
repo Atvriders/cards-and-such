@@ -18,7 +18,7 @@ export function StockpileCorruptionGame({ state, dispatch, onGameOver }: GamePro
       </div>
       {state.phase === "choosing" && (
         <div className="bz-scp-actions">
-          <button onClick={() => dispatch({ type: "invest" } as StockpileCorruptionAction)}>Buy Shares (${ASSET_COST})</button>
+          <button data-testid="hint-target-stockpile-corruption-primary" onClick={() => dispatch({ type: "invest" } as StockpileCorruptionAction)}>Buy Shares (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as StockpileCorruptionAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as StockpileCorruptionAction)}>Hire Insider (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as StockpileCorruptionAction)}>Sell Shares</button>

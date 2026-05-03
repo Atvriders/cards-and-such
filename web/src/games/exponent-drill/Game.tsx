@@ -69,7 +69,7 @@ export function ExponentDrillGame({ state, dispatch, onGameOver }: GameProps<Exp
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="ed-btn">Enter</button>
+        <button data-testid="hint-target-exponent-drill-primary" type="submit" className="ed-btn">Enter</button>
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type GarbageState, type GarbageAction } from "./state.js";
 import { GarbageGame } from "./Game.js";
 
@@ -25,5 +25,9 @@ Score 200 points per round you win; 50 per round you win even in a loss.`,
   initialState,
   reducer,
   isTerminal,
+  hint: (state: GarbageState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-garbage-card-primary"]', pulses: 3 };
+  },
   component: GarbageGame,
 };

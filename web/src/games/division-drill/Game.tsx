@@ -67,7 +67,7 @@ export function DivisionDrillGame({ state, dispatch, onGameOver }: GameProps<Div
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="dd-btn">Enter</button>
+        <button data-testid="hint-target-division-drill-primary" type="submit" className="dd-btn">Enter</button>
       </form>
     </div>
   );

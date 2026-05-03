@@ -42,5 +42,10 @@ Pass the device clockwise after each round. There is no winner — just a group 
   initialState: (seed: number, settings: TODSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "pick") return { selector: '[data-testid="hint-target-truth-or-dare-primary"]', pulses: 3 };
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-truth-or-dare-next"]', pulses: 3 };
+    },
   component: TruthOrDare,
 };

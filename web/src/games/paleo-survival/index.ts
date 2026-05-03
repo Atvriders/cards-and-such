@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PaleoSurvivalState, PaleoSurvivalAction, PaleoSurvivalSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PaleoSurvivalGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const paleoSurvivalPlugin: GamePlugin<PaleoSurvivalState, PaleoSurvivalAc
   initialState: (seed: number, s: S) => initialState(seed, s as PaleoSurvivalSettings),
   reducer,
   isTerminal,
+  hint: (state: PaleoSurvivalState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-paleo-survival-primary"]', pulses: 3 } : null),
   component: PaleoSurvivalGame,
 };

@@ -19,7 +19,7 @@ export function DeadAreComingLogGame({ state, dispatch, onGameOver }: GameProps<
       <div className="dac-prompt">{p.prompt}</div>
       <div className="dac-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`dac-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as DeadAreComingLogAction)}>
+          <button data-testid={i===0?"hint-target-dead-are-coming-log-primary":undefined} key={i} className={`dac-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as DeadAreComingLogAction)}>
             <span className="dac-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

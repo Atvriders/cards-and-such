@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { ConquianState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -38,5 +38,9 @@ Strategy: Track what the bot passes on. If the bot passes a card, it probably do
   initialState: (seed: number, _settings: ConquianSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: ConquianState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-conquian-primary"]', pulses: 3 };
+  },
   component: Conquian,
 };

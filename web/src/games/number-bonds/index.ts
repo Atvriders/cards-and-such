@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NumberBondsState, NumberBondsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NumberBondsGame } from "./Game.js";
@@ -42,5 +41,6 @@ Practice tip: Quiz yourself in both directions. If 4 + 6 = 10, cover the 4 and q
   initialState: (seed: number, settings: NumberBondsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: NumberBondsState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-number-bonds-primary"]', pulses: 3 } : null),
   component: NumberBondsGame,
 };

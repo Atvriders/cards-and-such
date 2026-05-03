@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FarmageddonCropsState, FarmageddonCropsAction, FarmageddonCropsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FarmageddonCropsGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const farmageddonCropsPlugin: GamePlugin<FarmageddonCropsState, Farmagedd
   initialState: (seed: number, s: S) => initialState(seed, s as FarmageddonCropsSettings),
   reducer,
   isTerminal,
+  hint: (state: FarmageddonCropsState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-farmageddon-crops-primary"]', pulses: 3 } : null),
   component: FarmageddonCropsGame,
 };

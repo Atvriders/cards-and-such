@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CoffeeTradersMiniState, CoffeeTradersMiniAction, CoffeeTradersMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CoffeeTradersMiniGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const coffeeTradersMiniPlugin: GamePlugin<CoffeeTradersMiniState, CoffeeT
   initialState: (seed: number, s: S) => initialState(seed, s as CoffeeTradersMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: CoffeeTradersMiniState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-coffee-traders-mini-primary"]', pulses: 3 } : null),
   component: CoffeeTradersMiniGame,
 };

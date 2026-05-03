@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PowerGridCardState, PowerGridCardAction, PowerGridCardSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PowerGridCardGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const powerGridCardPlugin: GamePlugin<PowerGridCardState, PowerGridCardAc
   initialState: (seed: number, s: S) => initialState(seed, s as PowerGridCardSettings),
   reducer,
   isTerminal,
+  hint: (state: PowerGridCardState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-power-grid-card-primary"]', pulses: 3 } : null),
   component: PowerGridCardGame,
 };

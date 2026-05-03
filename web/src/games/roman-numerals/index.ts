@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RomanNumeralsState, RomanNumeralsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RomanNumeralsGame } from "./Game.js";
@@ -46,5 +45,6 @@ Each correct answer scores 10 points. Wrong answers display the correct conversi
   initialState: (seed: number, settings: RomanNumeralsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: RomanNumeralsState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-roman-numerals-primary"]', pulses: 3 } : null),
   component: RomanNumeralsGame,
 };

@@ -67,7 +67,7 @@ export function TimesTablesGame({ state, dispatch, onGameOver }: GameProps<Times
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="tt-btn">Enter</button>
+        <button data-testid="hint-target-times-tables-primary" type="submit" className="tt-btn">Enter</button>
       </form>
     </div>
   );

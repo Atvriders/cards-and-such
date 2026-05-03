@@ -71,7 +71,7 @@ export function Euchre({
       {/* Trump selection actions */}
       {phase === "trump-select-1" && turn === 0 && (
         <div className="euchre-trump-actions">
-          <button className="euchre-btn" onClick={() => dispatch({ type: "order-up" } as EuchreAction)}>
+          <button data-testid="hint-target-euchre-primary" className="euchre-btn" onClick={() => dispatch({ type: "order-up" } as EuchreAction)}>
             Order Up {upCard.suit}
           </button>
           <button className="euchre-btn" onClick={() => dispatch({ type: "pass" } as EuchreAction)}>

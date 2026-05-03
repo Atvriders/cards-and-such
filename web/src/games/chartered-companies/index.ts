@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CharteredCompaniesState, CharteredCompaniesAction, CharteredCompaniesSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CharteredCompaniesGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const charteredCompaniesPlugin: GamePlugin<CharteredCompaniesState, Chart
   initialState: (seed: number, s: S) => initialState(seed, s as CharteredCompaniesSettings),
   reducer,
   isTerminal,
+  hint: (state: CharteredCompaniesState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-chartered-companies-primary"]', pulses: 3 } : null),
   component: CharteredCompaniesGame,
 };

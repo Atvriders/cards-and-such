@@ -19,7 +19,7 @@ export function ForTheCrownSagaGame({ state, dispatch, onGameOver }: GameProps<F
       <div className="ftc-prompt">{p.prompt}</div>
       <div className="ftc-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`ftc-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ForTheCrownSagaAction)}>
+          <button data-testid={i===0?"hint-target-for-the-crown-saga-primary":undefined} key={i} className={`ftc-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ForTheCrownSagaAction)}>
             <span className="ftc-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

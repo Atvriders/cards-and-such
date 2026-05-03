@@ -19,7 +19,7 @@ export function WretchedLogGame({ state, dispatch, onGameOver }: GameProps<Wretc
       <div className="wrl-prompt">{p.prompt}</div>
       <div className="wrl-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`wrl-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedLogAction)}>
+          <button data-testid={i===0?"hint-target-wretched-log-primary":undefined} key={i} className={`wrl-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedLogAction)}>
             <span className="wrl-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

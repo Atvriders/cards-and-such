@@ -45,7 +45,7 @@ export function Pidro({ state, dispatch, onGameOver }: GameProps<PidroState, Pid
           <div className="pid-label">Bid 2-6 or Pass (0). High bid={highBid} by {SEAT_NAMES[highBidder]}</div>
           <div className="pid-bid-buttons">
             {[0, 2, 3, 4, 5, 6].map(i => (
-              <button key={i} className="pid-btn" onClick={() => dispatch({ type: "bid", amount: i } as PidroAction)}>
+              <button data-testid="hint-target-pidro-primary" key={i} className="pid-btn" onClick={() => dispatch({ type: "bid", amount: i } as PidroAction)}>
                 {i === 0 ? "Pass" : i}
               </button>
             ))}

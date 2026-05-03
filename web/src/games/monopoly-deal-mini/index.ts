@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MonopolyDealMiniState, MonopolyDealMiniAction, MonopolyDealMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MonopolyDealMiniGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const monopolyDealMiniPlugin: GamePlugin<MonopolyDealMiniState, MonopolyD
   initialState: (seed: number, s: S) => initialState(seed, s as MonopolyDealMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: MonopolyDealMiniState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-monopoly-deal-mini-primary"]', pulses: 3 } : null),
   component: MonopolyDealMiniGame,
 };

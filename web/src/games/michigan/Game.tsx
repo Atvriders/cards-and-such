@@ -75,7 +75,7 @@ export function MichiganGame({ state, dispatch, onGameOver }: GameProps<Michigan
           <div style={{ fontSize: ".85rem", opacity: .8 }}>Choose a new suit to lead:</div>
           <div className="michigan-suit-picker">
             {SUITS.map(s => (
-              <button key={s} className="michigan-suit-btn"
+              <button data-testid="hint-target-michigan-primary" key={s} className="michigan-suit-btn"
                 disabled={!suitsWithCards.includes(s)}
                 onClick={() => dispatch({ type: "changeSuit", suit: s } as MichiganAction)}>
                 {s}

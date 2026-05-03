@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { WizardState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -41,5 +41,9 @@ Controls: During bidding, click the number of tricks you predict. During play, c
   initialState: (seed: number, settings: WizardSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: WizardState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-wizard-primary"]', pulses: 3 };
+  },
   component: Wizard,
 };

@@ -68,7 +68,7 @@ export function PrimeFactorGame({ state, dispatch, onGameOver }: GameProps<Prime
           placeholder="Prime"
           autoComplete="off"
         />
-        <button type="submit" className="pf-btn">Enter</button>
+        <button data-testid="hint-target-prime-factor-primary" type="submit" className="pf-btn">Enter</button>
       </form>
     </div>
   );

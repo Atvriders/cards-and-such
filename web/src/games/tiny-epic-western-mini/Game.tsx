@@ -18,7 +18,7 @@ export function TinyEpicWesternGame({ state, dispatch, onGameOver }: GameProps<T
       </div>
       {state.phase === "choosing" && (
         <div className="bz-tew-actions">
-          <button onClick={() => dispatch({ type: "invest" } as TinyEpicWesternAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-tiny-epic-western-mini-primary" onClick={() => dispatch({ type: "invest" } as TinyEpicWesternAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as TinyEpicWesternAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as TinyEpicWesternAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as TinyEpicWesternAction)}>Trade Saloons</button>

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SuburbiaIncState, SuburbiaIncAction, SuburbiaIncSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SuburbiaIncGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const suburbiaIncPlugin: GamePlugin<SuburbiaIncState, SuburbiaIncAction, 
   initialState: (seed: number, s: S) => initialState(seed, s as SuburbiaIncSettings),
   reducer,
   isTerminal,
+  hint: (state: SuburbiaIncState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-suburbia-inc-primary"]', pulses: 3 } : null),
   component: SuburbiaIncGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PresidentsState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PresidentsGame } from "./Game.js";
@@ -35,5 +35,9 @@ Strategy: watch which ranks opponents hold and try to exhaust suits that force t
   initialState,
   reducer,
   isTerminal,
+  hint: (state: PresidentsState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-presidents-primary"]', pulses: 3 };
+  },
   component: PresidentsGame,
 };

@@ -40,5 +40,9 @@ There is no winner or loser — the score simply reflects how many of the statem
   initialState: (seed: number, settings: NHIESettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-never-have-i-ever-primary"]', pulses: 3 };
+    },
   component: NeverHaveIEver,
 };

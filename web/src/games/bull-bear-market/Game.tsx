@@ -18,7 +18,7 @@ export function BullBearMarketGame({ state, dispatch, onGameOver }: GameProps<Bu
       </div>
       {state.phase === "choosing" && (
         <div className="bz-bbm-actions">
-          <button onClick={() => dispatch({ type: "invest" } as BullBearMarketAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-bull-bear-market-primary" onClick={() => dispatch({ type: "invest" } as BullBearMarketAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as BullBearMarketAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as BullBearMarketAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as BullBearMarketAction)}>Trade Stocks</button>

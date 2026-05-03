@@ -18,7 +18,7 @@ export function SuburbiaIncGame({ state, dispatch, onGameOver }: GameProps<Subur
       </div>
       {state.phase === "choosing" && (
         <div className="bz-actions">
-          <button onClick={() => dispatch({ type: "invest" } as SuburbiaIncAction)}>Buy Tile (${ASSET_COST})</button>
+          <button data-testid="hint-target-suburbia-inc-primary" onClick={() => dispatch({ type: "invest" } as SuburbiaIncAction)}>Buy Tile (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as SuburbiaIncAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as SuburbiaIncAction)}>Hire Bonus (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as SuburbiaIncAction)}>Sell Tile</button>

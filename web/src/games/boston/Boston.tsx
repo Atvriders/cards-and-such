@@ -51,7 +51,7 @@ export function Boston({
           <div className="bt-label">Bid (1–13 tricks):</div>
           <div className="bt-bid-buttons">
             {Array.from({ length: 13 }, (_, i) => i + 1).map(n => (
-              <button key={n} className="bt-btn"
+              <button data-testid="hint-target-boston-primary" key={n} className="bt-btn"
                 onClick={() => dispatch({ type: "bid", amount: n } as BostonAction)}>
                 {n}
               </button>

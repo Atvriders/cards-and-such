@@ -18,7 +18,7 @@ export function BaronsEngineGame({ state, dispatch, onGameOver }: GameProps<Baro
       </div>
       {state.phase === "choosing" && (
         <div className="bz-ben-actions">
-          <button onClick={() => dispatch({ type: "invest" } as BaronsEngineAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-barons-engine-primary" onClick={() => dispatch({ type: "invest" } as BaronsEngineAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as BaronsEngineAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as BaronsEngineAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as BaronsEngineAction)}>Trade Mines</button>

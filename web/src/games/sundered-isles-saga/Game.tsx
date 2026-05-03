@@ -19,7 +19,7 @@ export function SunderedIslesSagaGame({ state, dispatch, onGameOver }: GameProps
       <div className="sis-prompt">{p.prompt}</div>
       <div className="sis-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`sis-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as SunderedIslesSagaAction)}>
+          <button data-testid={i===0?"hint-target-sundered-isles-saga-primary":undefined} key={i} className={`sis-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as SunderedIslesSagaAction)}>
             <span className="sis-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

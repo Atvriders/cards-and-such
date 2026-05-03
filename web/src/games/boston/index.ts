@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { BostonState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,9 @@ Choose your bid wisely — count your trumps and high cards before committing!`,
   initialState: (seed: number, settings: BostonSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: BostonState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-boston-primary"]', pulses: 3 };
+  },
   component: Boston,
 };

@@ -122,7 +122,7 @@ export function Conquian({
           <div className="conquian-actions">
             {phase === "player-draw" && (
               <>
-                <button className="conquian-btn" onClick={() => dispatch({ type: "take" } as ConquianAction)}>
+                <button data-testid="hint-target-conquian-primary" className="conquian-btn" onClick={() => dispatch({ type: "take" } as ConquianAction)}>
                   Take discard
                 </button>
                 <button className="conquian-btn secondary" onClick={() => dispatch({ type: "pass" } as ConquianAction)}>

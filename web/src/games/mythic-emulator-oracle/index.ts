@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MythicEmulatorOracleState, MythicEmulatorOracleAction, MythicEmulatorOracleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MythicEmulatorOracleGame } from "./Game.js";
@@ -14,5 +13,5 @@ export const mythicEmulatorOraclePlugin: GamePlugin<MythicEmulatorOracleState, M
   howToPlay: "Mythic Emulator: Oracle is a solo journaling homage to Tana Pigeon's Mythic Game Master Emulator, where probability-based yes/no oracle questions drive scene-by-scene narrative under a chaos factor that tilts toward the unexpected.\n\nAcross ten oracle queries you ask a question and pick one of four interpretations of the result. Each prompt offers four weighted choices (A-D); your pick assigns a base reward plus 0-20 of mulberry32 variance. The point is not to predict the future but to discover what your character would do once each answer arrived.\n\nThe original Mythic uses 2d10 fate checks, event tables, and a chaos meter. This solo digital homage compresses those rolls into prompt-and-roll while preserving the question-driven, scene-emergent tone of running a game with no other GM.\n\nThe oracle does not lie. But the oracle is fond of detours.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as MythicEmulatorOracleSettings),
-  reducer, isTerminal, component: MythicEmulatorOracleGame,
+  reducer, isTerminal, hint: (state: MythicEmulatorOracleState): HintTarget | null => (state.phase === "choose" ? { selector: '[data-testid="hint-target-mythic-emulator-oracle-primary"]', pulses: 3 } : null), component: MythicEmulatorOracleGame,
 };

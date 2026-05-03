@@ -19,7 +19,7 @@ export function AloneAmongStarsTaleGame({ state, dispatch, onGameOver }: GamePro
       <div className="aast-prompt">{p.prompt}</div>
       <div className="aast-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`aast-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as AloneAmongStarsTaleAction)}>
+          <button data-testid={i===0?"hint-target-alone-among-stars-tale-primary":undefined} key={i} className={`aast-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as AloneAmongStarsTaleAction)}>
             <span className="aast-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

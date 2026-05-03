@@ -19,7 +19,7 @@ export function NotoriousBountyGame({ state, dispatch, onGameOver }: GameProps<N
       <div className="nbn-prompt">{p.prompt}</div>
       <div className="nbn-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`nbn-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as NotoriousBountyAction)}>
+          <button data-testid={i===0?"hint-target-notorious-bounty-primary":undefined} key={i} className={`nbn-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as NotoriousBountyAction)}>
             <span className="nbn-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

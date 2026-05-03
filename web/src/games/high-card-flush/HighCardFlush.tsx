@@ -97,7 +97,7 @@ export function HighCardFlush({
       {!gameOver && (
         <div className="hcf-actions">
           {state.phase === "deal" && (
-            <button onClick={() => dispatch({ type: "deal" })}>Deal Cards</button>
+            <button data-testid="hint-target-high-card-flush-primary" onClick={() => dispatch({ type: "deal" })}>Deal Cards</button>
           )}
           {state.phase === "reveal" && (
             <button onClick={() => dispatch({ type: "next-round" })}>Next Round</button>

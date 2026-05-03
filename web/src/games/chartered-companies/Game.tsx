@@ -18,7 +18,7 @@ export function CharteredCompaniesGame({ state, dispatch, onGameOver }: GameProp
       </div>
       {state.phase === "choosing" && (
         <div className="bz-chc-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CharteredCompaniesAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-chartered-companies-primary" onClick={() => dispatch({ type: "invest" } as CharteredCompaniesAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CharteredCompaniesAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CharteredCompaniesAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CharteredCompaniesAction)}>Trade Charters</button>

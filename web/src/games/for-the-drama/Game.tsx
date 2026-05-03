@@ -19,7 +19,7 @@ export function ForTheDramaGame({ state, dispatch, onGameOver }: GameProps<ForTh
       <div className="ftd-prompt">{p.prompt}</div>
       <div className="ftd-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`ftd-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ForTheDramaAction)}>
+          <button data-testid={i===0?"hint-target-for-the-drama-primary":undefined} key={i} className={`ftd-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ForTheDramaAction)}>
             <span className="ftd-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

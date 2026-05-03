@@ -84,7 +84,7 @@ export function SequencePredictorGame({ state, dispatch, onGameOver }: GameProps
           placeholder="Next number"
           autoComplete="off"
         />
-        <button type="submit" className="sp-btn">Enter</button>
+        <button data-testid="hint-target-sequence-predictor-primary" type="submit" className="sp-btn">Enter</button>
       </form>
     </div>
   );

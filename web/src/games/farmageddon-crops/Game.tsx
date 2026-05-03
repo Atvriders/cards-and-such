@@ -18,7 +18,7 @@ export function FarmageddonCropsGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-fmc-actions">
-          <button onClick={() => dispatch({ type: "invest" } as FarmageddonCropsAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-farmageddon-crops-primary" onClick={() => dispatch({ type: "invest" } as FarmageddonCropsAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as FarmageddonCropsAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as FarmageddonCropsAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as FarmageddonCropsAction)}>Trade Crops</button>

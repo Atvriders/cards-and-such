@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PidroState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -39,5 +39,9 @@ Click a bid number or Pass during the auction, then click cards to play. Legal m
   initialState: (seed: number, settings: PidroSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PidroState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-pidro-primary"]', pulses: 3 };
+  },
   component: Pidro,
 };

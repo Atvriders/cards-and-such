@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TinyEpicWesternState, TinyEpicWesternAction, TinyEpicWesternSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TinyEpicWesternGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const tinyEpicWesternPlugin: GamePlugin<TinyEpicWesternState, TinyEpicWes
   initialState: (seed: number, s: S) => initialState(seed, s as TinyEpicWesternSettings),
   reducer,
   isTerminal,
+  hint: (state: TinyEpicWesternState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-tiny-epic-western-mini-primary"]', pulses: 3 } : null),
   component: TinyEpicWesternGame,
 };

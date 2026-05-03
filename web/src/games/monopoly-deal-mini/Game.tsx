@@ -18,7 +18,7 @@ export function MonopolyDealMiniGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-mdm-actions">
-          <button onClick={() => dispatch({ type: "invest" } as MonopolyDealMiniAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-monopoly-deal-mini-primary" onClick={() => dispatch({ type: "invest" } as MonopolyDealMiniAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as MonopolyDealMiniAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as MonopolyDealMiniAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as MonopolyDealMiniAction)}>Trade Properties</button>

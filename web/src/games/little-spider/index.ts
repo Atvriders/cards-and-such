@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LittleSpiderState, LittleSpiderAction, LittleSpiderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { LittleSpider } from "./LittleSpider.js";
@@ -28,5 +28,9 @@ Tip: During early rows, prioritize freeing Aces to start red foundations and Kin
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: LittleSpiderState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-little-spider-primary"]', pulses: 3 };
+  },
   component: LittleSpider,
 };

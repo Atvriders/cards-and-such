@@ -47,7 +47,7 @@ export function LittleSpider({
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/52</span>
         <span>Stock: {stockLen}</span>
-        <button
+        <button data-testid="hint-target-little-spider-primary"
           className="deal-btn"
           onClick={() => dispatch({ type: "deal-row" } as LittleSpiderAction)}
           disabled={stockLen === 0}

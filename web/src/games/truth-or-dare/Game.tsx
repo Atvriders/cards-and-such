@@ -30,7 +30,7 @@ export function TruthOrDare({ state, dispatch, onGameOver }: GameProps<TODState,
         </div>
         <div className="tod-pick-label">Choose your fate:</div>
         <div className="tod-pick-buttons">
-          <button className="tod-btn-truth" onClick={() => dispatch({ type: "pick", choice: "truth" } as TODAction)}>
+          <button data-testid="hint-target-truth-or-dare-primary" className="tod-btn-truth" onClick={() => dispatch({ type: "pick", choice: "truth" } as TODAction)}>
             Truth
           </button>
           <button className="tod-btn-dare" onClick={() => dispatch({ type: "pick", choice: "dare" } as TODAction)}>
@@ -53,7 +53,7 @@ export function TruthOrDare({ state, dispatch, onGameOver }: GameProps<TODState,
         <span className="tod-card-type">{isTruth ? "Truth" : "Dare"}</span>
         {card.text}
       </div>
-      <button className="tod-next-btn" onClick={() => dispatch({ type: "next" } as TODAction)}>
+      <button data-testid="hint-target-truth-or-dare-next" className="tod-next-btn" onClick={() => dispatch({ type: "next" } as TODAction)}>
         {state.currentIndex + 1 >= state.cards.length ? "Finish" : "Done — Next Player"}
       </button>
     </div>

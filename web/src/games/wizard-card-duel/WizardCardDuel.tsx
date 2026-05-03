@@ -31,7 +31,7 @@ export function WizardCardDuel({ state, dispatch, onGameOver }: GameProps<Wizard
 
       <div className="wcd-hand">
         {state.playerHand.map((card, idx) => (
-          <button
+          <button data-testid="hint-target-wizard-card-duel-primary"
             key={card.id}
             className={`wcd-card${state.selectedIdx === idx ? " selected" : ""}`}
             onClick={() => dispatch({ type: "select", idx })}

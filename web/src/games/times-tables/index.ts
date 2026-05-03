@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TimesTablesState, TimesTablesAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { TimesTablesGame } from "./Game.js";
@@ -40,5 +39,6 @@ Tips: Learn the commutative property — if you know 6 × 7, you also know 7 × 
   initialState: (seed: number, settings: TimesTablesSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: TimesTablesState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-times-tables-primary"]', pulses: 3 } : null),
   component: TimesTablesGame,
 };

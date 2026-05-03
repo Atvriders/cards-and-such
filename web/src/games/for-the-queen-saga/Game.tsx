@@ -19,7 +19,7 @@ export function ForTheQueenSagaGame({ state, dispatch, onGameOver }: GameProps<F
       <div className="ftq-prompt">{p.prompt}</div>
       <div className="ftq-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`ftq-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ForTheQueenSagaAction)}>
+          <button data-testid={i===0?"hint-target-for-the-queen-saga-primary":undefined} key={i} className={`ftq-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ForTheQueenSagaAction)}>
             <span className="ftq-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

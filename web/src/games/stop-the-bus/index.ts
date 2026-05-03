@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { StopTheBusState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { StopTheBusGame } from "./Game.js";
@@ -38,5 +38,9 @@ Strategy: aim for 31 or a flush sum above 28 before stopping. If your hand is we
   initialState,
   reducer,
   isTerminal,
+  hint: (state: StopTheBusState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-stop-the-bus-primary"]', pulses: 3 };
+  },
   component: StopTheBusGame,
 };

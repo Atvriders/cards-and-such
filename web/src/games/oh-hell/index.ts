@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { OhHellState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,9 @@ Click a number to make your bid. Then click cards to play them — legal plays a
   initialState: (seed: number, settings: OhHellSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: OhHellState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-oh-hell-primary"]', pulses: 3 };
+  },
   component: OhHell,
 };

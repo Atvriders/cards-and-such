@@ -19,7 +19,7 @@ export function WretchedForestGame({ state, dispatch, onGameOver }: GameProps<Wr
       <div className="wrf-prompt">{p.prompt}</div>
       <div className="wrf-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`wrf-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedForestAction)}>
+          <button data-testid={i===0?"hint-target-wretched-forest-primary":undefined} key={i} className={`wrf-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedForestAction)}>
             <span className="wrf-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

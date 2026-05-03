@@ -59,7 +59,7 @@ export function PresidentsGame({ state, dispatch, onGameOver }: GameProps<Presid
                   </div>
                 ))}
               </div>
-              <button className="presidents-btn confirm" disabled={swapCardsSelected.length !== 1}
+              <button data-testid="hint-target-presidents-primary" className="presidents-btn confirm" disabled={swapCardsSelected.length !== 1}
                 onClick={() => dispatch({ type: "confirmSwap" } as PresidentsAction)}>
                 Confirm Swap ({swapCardsSelected.length}/1)
               </button>

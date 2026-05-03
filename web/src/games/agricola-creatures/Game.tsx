@@ -18,7 +18,7 @@ export function AgricolaCreaturesGame({ state, dispatch, onGameOver }: GameProps
       </div>
       {state.phase === "choosing" && (
         <div className="bz-agc-actions">
-          <button onClick={() => dispatch({ type: "invest" } as AgricolaCreaturesAction)}>Buy Livestock (${ASSET_COST})</button>
+          <button data-testid="hint-target-agricola-creatures-primary" onClick={() => dispatch({ type: "invest" } as AgricolaCreaturesAction)}>Buy Livestock (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as AgricolaCreaturesAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as AgricolaCreaturesAction)}>Hire Shepherd (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as AgricolaCreaturesAction)}>Sell Livestock</button>

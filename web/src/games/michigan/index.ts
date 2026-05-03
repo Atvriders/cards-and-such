@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MichiganState } from "./state.js";
 import type { Suit } from "../../engines/deck/index.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -35,5 +35,9 @@ The game is a classic "stops" game — sequences stop when the holding is in the
   initialState,
   reducer,
   isTerminal,
+  hint: (state: MichiganState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-michigan-primary"]', pulses: 3 };
+  },
   component: MichiganGame,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BullBearMarketState, BullBearMarketAction, BullBearMarketSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BullBearMarketGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const bullBearMarketPlugin: GamePlugin<BullBearMarketState, BullBearMarke
   initialState: (seed: number, s: S) => initialState(seed, s as BullBearMarketSettings),
   reducer,
   isTerminal,
+  hint: (state: BullBearMarketState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-bull-bear-market-primary"]', pulses: 3 } : null),
   component: BullBearMarketGame,
 };

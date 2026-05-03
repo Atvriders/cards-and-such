@@ -63,7 +63,7 @@ export function Belote({ state, dispatch, onGameOver }: GameProps<BeloteState, o
 
       {phase === "bidding" && (
         <div className="belote-bid-btns">
-          <button className="belote-btn" onClick={() => dispatch({ type: "accept" } as BeloteAction)}>
+          <button data-testid="hint-target-belote-primary" className="belote-btn" onClick={() => dispatch({ type: "accept" } as BeloteAction)}>
             Accept {turnUpCard.suit} as trump
           </button>
           <button className="belote-btn pass" onClick={() => dispatch({ type: "pass" } as BeloteAction)}>

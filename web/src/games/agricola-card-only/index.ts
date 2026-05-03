@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AgricolaCardOnlyState, AgricolaCardOnlyAction, AgricolaCardOnlySettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AgricolaCardOnlyGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const agricolaCardOnlyPlugin: GamePlugin<AgricolaCardOnlyState, AgricolaC
   initialState: (seed: number, s: S) => initialState(seed, s as AgricolaCardOnlySettings),
   reducer,
   isTerminal,
+  hint: (state: AgricolaCardOnlyState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-agricola-card-only-primary"]', pulses: 3 } : null),
   component: AgricolaCardOnlyGame,
 };

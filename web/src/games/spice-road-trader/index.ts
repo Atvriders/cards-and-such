@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SpiceRoadTraderState, SpiceRoadTraderAction, SpiceRoadTraderSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SpiceRoadTraderGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const spiceRoadTraderPlugin: GamePlugin<SpiceRoadTraderState, SpiceRoadTr
   initialState: (seed: number, s: S) => initialState(seed, s as SpiceRoadTraderSettings),
   reducer,
   isTerminal,
+  hint: (state: SpiceRoadTraderState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-spice-road-trader-primary"]', pulses: 3 } : null),
   component: SpiceRoadTraderGame,
 };

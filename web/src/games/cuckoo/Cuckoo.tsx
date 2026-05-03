@@ -77,7 +77,7 @@ export function Cuckoo({ state, dispatch, onGameOver }: GameProps<CuckooState, R
           </div>
 
           <div className="cuckoo-actions">
-            <button
+            <button data-testid="hint-target-cuckoo-primary"
               className="cuckoo-btn"
               onClick={() => dispatch({ type: "keep" })}
             >

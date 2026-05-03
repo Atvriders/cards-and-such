@@ -18,7 +18,7 @@ export function FoodChainMagnateGame({ state, dispatch, onGameOver }: GameProps<
       </div>
       {state.phase === "choosing" && (
         <div className="bz-fcm-actions">
-          <button onClick={() => dispatch({ type: "invest" } as FoodChainMagnateAction)}>Buy Restaurant (${ASSET_COST})</button>
+          <button data-testid="hint-target-food-chain-magnate-primary" onClick={() => dispatch({ type: "invest" } as FoodChainMagnateAction)}>Buy Restaurant (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as FoodChainMagnateAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as FoodChainMagnateAction)}>Hire Manager (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as FoodChainMagnateAction)}>Sell Restaurant</button>

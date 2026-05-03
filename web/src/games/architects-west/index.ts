@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ArchitectsWestState, ArchitectsWestAction, ArchitectsWestSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ArchitectsWestGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const architectsWestPlugin: GamePlugin<ArchitectsWestState, ArchitectsWes
   initialState: (seed: number, s: S) => initialState(seed, s as ArchitectsWestSettings),
   reducer,
   isTerminal,
+  hint: (state: ArchitectsWestState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-architects-west-primary"]', pulses: 3 } : null),
   component: ArchitectsWestGame,
 };

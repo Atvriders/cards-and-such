@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AcquireHotelsState, AcquireHotelsAction, AcquireHotelsSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AcquireHotelsGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const acquireHotelsPlugin: GamePlugin<AcquireHotelsState, AcquireHotelsAc
   initialState: (seed: number, s: S) => initialState(seed, s as AcquireHotelsSettings),
   reducer,
   isTerminal,
+  hint: (state: AcquireHotelsState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-acquire-hotels-primary"]', pulses: 3 } : null),
   component: AcquireHotelsGame,
 };

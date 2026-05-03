@@ -19,7 +19,7 @@ export function ExNovoMapmakerGame({ state, dispatch, onGameOver }: GameProps<Ex
       <div className="enm-prompt">{p.prompt}</div>
       <div className="enm-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`enm-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ExNovoMapmakerAction)}>
+          <button data-testid={i===0?"hint-target-ex-novo-mapmaker-primary":undefined} key={i} className={`enm-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ExNovoMapmakerAction)}>
             <span className="enm-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

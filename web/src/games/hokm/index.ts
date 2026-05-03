@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HokmState } from "./state.js";
 import type { Suit } from "../../engines/deck/index.js";
@@ -40,5 +40,9 @@ Click a suit symbol to choose trump, then click cards to play.`,
   initialState: (seed: number, settings: HokmSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: HokmState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-hokm-primary"]', pulses: 3 };
+  },
   component: Hokm,
 };

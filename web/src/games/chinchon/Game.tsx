@@ -53,7 +53,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<ChinchonState, o
 
       {!done && phase === "draw" && (
         <div className="chinchon-draw-actions">
-          <button className="chinchon-btn" onClick={() => dispatch({ type: "draw-stock" } as ChinchonAction)}>
+          <button data-testid="hint-target-chinchon-primary" className="chinchon-btn" onClick={() => dispatch({ type: "draw-stock" } as ChinchonAction)}>
             Draw from Stock ({stockPile.length})
           </button>
           {topDiscard && (

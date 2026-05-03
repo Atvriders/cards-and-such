@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { RedDogState, RedDogAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -49,5 +49,9 @@ Settings: Choose starting bankroll and ante size. Play continues as long as you 
   initialState: (seed: number, settings: RedDogSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: RedDogState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-red-dog-primary"]', pulses: 3 };
+  },
   component: RedDog,
 };

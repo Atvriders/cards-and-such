@@ -19,7 +19,7 @@ export function WretchedMagusGame({ state, dispatch, onGameOver }: GameProps<Wre
       <div className="wrm-prompt">{p.prompt}</div>
       <div className="wrm-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`wrm-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedMagusAction)}>
+          <button data-testid={i===0?"hint-target-wretched-magus-primary":undefined} key={i} className={`wrm-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedMagusAction)}>
             <span className="wrm-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

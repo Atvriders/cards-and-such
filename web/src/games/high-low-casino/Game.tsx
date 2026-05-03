@@ -46,7 +46,7 @@ export function HighLowCasino({ state, dispatch, onGameOver }: GameProps<HighLow
 
       <div className="hl-actions">
         {(phase === "betting" || phase === "settled") && !terminal && (
-          <button className="deal" onClick={() => dispatch({ type: "deal" })}>Deal</button>
+          <button data-testid="hint-target-high-low-casino-primary" className="deal" onClick={() => dispatch({ type: "deal" })}>Deal</button>
         )}
         {phase === "decision" && (
           <>

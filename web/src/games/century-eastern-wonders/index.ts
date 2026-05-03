@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CenturyEasternWondersState, CenturyEasternWondersAction, CenturyEasternWondersSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CenturyEasternWondersGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const centuryEasternWondersPlugin: GamePlugin<CenturyEasternWondersState,
   initialState: (seed: number, s: S) => initialState(seed, s as CenturyEasternWondersSettings),
   reducer,
   isTerminal,
+  hint: (state: CenturyEasternWondersState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-century-eastern-wonders-primary"]', pulses: 3 } : null),
   component: CenturyEasternWondersGame,
 };

@@ -19,7 +19,7 @@ export function TslSoloQuestGame({ state, dispatch, onGameOver }: GameProps<TslS
       <div className="tsl-prompt">{p.prompt}</div>
       <div className="tsl-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`tsl-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as TslSoloQuestAction)}>
+          <button data-testid={i===0?"hint-target-tsl-solo-quest-primary":undefined} key={i} className={`tsl-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as TslSoloQuestAction)}>
             <span className="tsl-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

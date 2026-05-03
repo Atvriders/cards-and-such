@@ -71,7 +71,7 @@ export function FiveHundred({ state, dispatch, onGameOver }: GameProps<FiveHundr
           <h3>Your Bid</h3>
           <div className="fivehundred-bid-buttons">
             {VALID_BIDS.map((bid, i) => (
-              <button
+              <button data-testid="hint-target-five-hundred-primary"
                 key={i}
                 className="fivehundred-bid-btn"
                 onClick={() => dispatch({ type: "bid", bidIndex: i } as FiveHundredAction)}

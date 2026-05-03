@@ -36,7 +36,7 @@ export function LetItRide({ state, dispatch, onGameOver }: Props) {
         <div className="lir-section">
           {state.lastResult && <div className="lir-result">{state.lastResult}</div>}
           <div className="lir-actions">
-            <button
+            <button data-testid="hint-target-let-it-ride-primary"
               className="lir-btn primary"
               onClick={() => dispatch({ type: "deal" } as LetItRideAction)}
               disabled={state.bankroll < ante * 3 || state.handsPlayed >= state.settings.handsPerSession}

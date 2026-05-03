@@ -81,7 +81,7 @@ export function PaiGowPoker({ state, dispatch, onGameOver }: Props) {
             >
               Set Hands ({selectedIndices.size}/2 for Low)
             </button>
-            <button className="pai-gow-btn" onClick={() => dispatch({ type: "auto-split" } as PaiGowPokerAction)} style={{ background: "#888" }}>
+            <button data-testid="hint-target-pai-gow-poker-primary" className="pai-gow-btn" onClick={() => dispatch({ type: "auto-split" } as PaiGowPokerAction)} style={{ background: "#888" }}>
               House Way
             </button>
           </div>

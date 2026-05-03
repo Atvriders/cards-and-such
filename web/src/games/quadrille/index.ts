@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { QuadrilleState, QuadrilleAction, QuadrilleSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { Quadrille } from "./Quadrille.js";
@@ -28,5 +28,9 @@ Tip: Because you can only access one card at a time, it pays to plan which cards
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: QuadrilleState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-quadrille-primary"]', pulses: 3 };
+  },
   component: Quadrille,
 };

@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CenturyGolemEditionState, CenturyGolemEditionAction, CenturyGolemEditionSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CenturyGolemEditionGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const centuryGolemEditionPlugin: GamePlugin<CenturyGolemEditionState, Cen
   initialState: (seed: number, s: S) => initialState(seed, s as CenturyGolemEditionSettings),
   reducer,
   isTerminal,
+  hint: (state: CenturyGolemEditionState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-century-golem-edition-primary"]', pulses: 3 } : null),
   component: CenturyGolemEditionGame,
 };

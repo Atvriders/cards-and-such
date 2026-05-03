@@ -58,7 +58,7 @@ export function SnipSnapGame({ state, dispatch, onGameOver }: GameProps<SnipSnap
         <div className="ss-hand-label">Your hand ({playerHand.length}) — blue = playable</div>
         <div className="ss-cards">
           {[...playerHand].sort((a, b) => a.rank - b.rank || a.suit.localeCompare(b.suit)).map(c => (
-            <button
+            <button data-testid="hint-target-snip-snap-snorem-primary"
               key={c.id}
               className={`ss-card-btn${playableIds.has(c.id) ? " playable" : ""}`}
               disabled={!isPlayerTurn || !playableIds.has(c.id)}

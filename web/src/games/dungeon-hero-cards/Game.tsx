@@ -19,7 +19,7 @@ export function DungeonHeroCardsGame({ state, dispatch, onGameOver }: GameProps<
       <div className="dhc-prompt">{p.prompt}</div>
       <div className="dhc-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`dhc-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as DungeonHeroCardsAction)}>
+          <button data-testid={i===0?"hint-target-dungeon-hero-cards-primary":undefined} key={i} className={`dhc-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as DungeonHeroCardsAction)}>
             <span className="dhc-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

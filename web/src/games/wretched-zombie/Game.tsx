@@ -19,7 +19,7 @@ export function WretchedZombieGame({ state, dispatch, onGameOver }: GameProps<Wr
       <div className="wrz-prompt">{p.prompt}</div>
       <div className="wrz-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`wrz-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedZombieAction)}>
+          <button data-testid={i===0?"hint-target-wretched-zombie-primary":undefined} key={i} className={`wrz-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedZombieAction)}>
             <span className="wrz-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

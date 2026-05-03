@@ -72,7 +72,7 @@ export function RomanNumeralsGame({ state, dispatch, onGameOver }: GameProps<Rom
           placeholder={toRoman ? "e.g. XIV" : "e.g. 14"}
           autoComplete="off"
         />
-        <button type="submit" className="rn-btn">Enter</button>
+        <button data-testid="hint-target-roman-numerals-primary" type="submit" className="rn-btn">Enter</button>
       </form>
     </div>
   );

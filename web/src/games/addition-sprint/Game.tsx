@@ -67,7 +67,7 @@ export function AdditionSprintGame({ state, dispatch, onGameOver }: GameProps<Ad
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="as-btn">Enter</button>
+        <button data-testid="hint-target-addition-sprint-primary" type="submit" className="as-btn">Enter</button>
       </form>
     </div>
   );

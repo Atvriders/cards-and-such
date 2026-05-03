@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type SnipSnapState, type SnipSnapAction } from "./state.js";
 import { SnipSnapGame } from "./Game.js";
 
@@ -27,5 +27,9 @@ Score 500 for a win; partial credit based on how many cards you played if you lo
   initialState,
   reducer,
   isTerminal,
+  hint: (state: SnipSnapState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-snip-snap-snorem-primary"]', pulses: 3 };
+  },
   component: SnipSnapGame,
 };

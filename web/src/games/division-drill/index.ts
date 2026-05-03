@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { DivisionDrillState, DivisionDrillAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { DivisionDrillGame } from "./Game.js";
@@ -40,5 +39,6 @@ Tips: Division is the inverse of multiplication, so if you know your times table
   initialState: (seed: number, settings: DivisionDrillSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: DivisionDrillState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-division-drill-primary"]', pulses: 3 } : null),
   component: DivisionDrillGame,
 };

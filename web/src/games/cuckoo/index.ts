@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { CuckooState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -35,5 +35,9 @@ Strategy: Swap low cards to pass the problem along. Watch for Kings that block s
     initialState(seed, { placeholder: "none" }),
   reducer,
   isTerminal,
+  hint: (state: CuckooState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-cuckoo-primary"]', pulses: 3 };
+  },
   component: Cuckoo,
 };

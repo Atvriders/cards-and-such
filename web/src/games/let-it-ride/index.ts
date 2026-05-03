@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { LetItRideState, LetItRideAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -59,5 +59,9 @@ Settings: Choose starting bankroll, ante size, and hands per session.`,
   initialState: (seed: number, settings: LetItRideSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: LetItRideState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-let-it-ride-primary"]', pulses: 3 };
+  },
   component: LetItRide,
 };

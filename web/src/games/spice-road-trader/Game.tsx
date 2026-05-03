@@ -18,7 +18,7 @@ export function SpiceRoadTraderGame({ state, dispatch, onGameOver }: GameProps<S
       </div>
       {state.phase === "choosing" && (
         <div className="bz-srt-actions">
-          <button onClick={() => dispatch({ type: "invest" } as SpiceRoadTraderAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-spice-road-trader-primary" onClick={() => dispatch({ type: "invest" } as SpiceRoadTraderAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as SpiceRoadTraderAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as SpiceRoadTraderAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as SpiceRoadTraderAction)}>Trade Spices</button>

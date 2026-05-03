@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type ParliamentState, type ParliamentAction } from "./state.js";
 import { ParliamentGame } from "./Game.js";
 
@@ -25,5 +25,9 @@ Score 500 for a win. If you lose, score 10 points for each card you managed to p
   initialState,
   reducer,
   isTerminal,
+  hint: (state: ParliamentState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-parliament-primary"]', pulses: 3 };
+  },
   component: ParliamentGame,
 };

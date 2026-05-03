@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CenturySpiceRoadState, CenturySpiceRoadAction, CenturySpiceRoadSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CenturySpiceRoadGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const centurySpiceRoadPlugin: GamePlugin<CenturySpiceRoadState, CenturySp
   initialState: (seed: number, s: S) => initialState(seed, s as CenturySpiceRoadSettings),
   reducer,
   isTerminal,
+  hint: (state: CenturySpiceRoadState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-century-spice-road-primary"]', pulses: 3 } : null),
   component: CenturySpiceRoadGame,
 };

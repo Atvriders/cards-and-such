@@ -18,7 +18,7 @@ export function StockpileSharesGame({ state, dispatch, onGameOver }: GameProps<S
       </div>
       {state.phase === "choosing" && (
         <div className="bz-ss-actions">
-          <button onClick={() => dispatch({ type: "invest" } as StockpileSharesAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-stockpile-shares-primary" onClick={() => dispatch({ type: "invest" } as StockpileSharesAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as StockpileSharesAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as StockpileSharesAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as StockpileSharesAction)}>Trade Shares</button>

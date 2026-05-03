@@ -45,7 +45,7 @@ export function Ulti({ state, dispatch, onGameOver }: GameProps<UltiState, UltiS
           <div className="ul-label">Bid tricks (1-10):</div>
           <div className="ul-bid-buttons">
             {Array.from({ length: 10 }, (_, i) => i + 1).map(i => (
-              <button key={i} className="ul-btn" onClick={() => dispatch({ type: "bid", amount: i } as UltiAction)}>{i}</button>
+              <button data-testid="hint-target-ulti-primary" key={i} className="ul-btn" onClick={() => dispatch({ type: "bid", amount: i } as UltiAction)}>{i}</button>
             ))}
           </div>
         </div>

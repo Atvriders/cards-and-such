@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ViticultureWineState, ViticultureWineAction, ViticultureWineSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ViticultureWineGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const viticultureWinePlugin: GamePlugin<ViticultureWineState, Viticulture
   initialState: (seed: number, s: S) => initialState(seed, s as ViticultureWineSettings),
   reducer,
   isTerminal,
+  hint: (state: ViticultureWineState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-viticulture-wine-primary"]', pulses: 3 } : null),
   component: ViticultureWineGame,
 };

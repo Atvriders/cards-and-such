@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { PrefState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -34,5 +34,9 @@ export const preferansPlugin: GamePlugin<PrefState, PrefAction, typeof preferans
   initialState: (seed: number, _settings: PrefSettings) => initialState(seed),
   reducer,
   isTerminal,
+  hint: (state: PrefState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-preferans-primary"]', pulses: 3 };
+  },
   component: Preferans,
 };

@@ -19,7 +19,7 @@ export function AloneAmongStarsCardGame({ state, dispatch, onGameOver }: GamePro
       <div className="aasc-prompt">{p.prompt}</div>
       <div className="aasc-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`aasc-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as AloneAmongStarsCardAction)}>
+          <button data-testid={i===0?"hint-target-alone-among-stars-card-primary":undefined} key={i} className={`aasc-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as AloneAmongStarsCardAction)}>
             <span className="aasc-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

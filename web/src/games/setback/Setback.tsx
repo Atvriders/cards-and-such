@@ -90,7 +90,7 @@ export function Setback({
         <>
           <div className="setback-label">Your bid:</div>
           <div className="setback-bid-row">
-            <button className="setback-bid-btn pass" onClick={() => dispatch({ type: "bid", amount: 0 } as SetbackAction)}>Pass</button>
+            <button data-testid="hint-target-setback-primary" className="setback-bid-btn pass" onClick={() => dispatch({ type: "bid", amount: 0 } as SetbackAction)}>Pass</button>
             <button className="setback-bid-btn" onClick={() => dispatch({ type: "bid", amount: 2 } as SetbackAction)}>2</button>
             <button className="setback-bid-btn" onClick={() => dispatch({ type: "bid", amount: 3 } as SetbackAction)}>3</button>
             <button className="setback-bid-btn" onClick={() => dispatch({ type: "bid", amount: 4 } as SetbackAction)}>4</button>

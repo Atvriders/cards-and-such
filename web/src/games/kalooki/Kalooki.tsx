@@ -107,7 +107,7 @@ export function Kalooki({ state, dispatch, onGameOver }: GameProps<KalookiState,
               </button>
             )}
             {notMeldedYet && playerHand.length <= 1 && (
-              <button className="kalooki-btn kalooki-special" onClick={() => dispatch({ type: "kalooki" } as KalookiAction)}>
+              <button data-testid="hint-target-kalooki-primary" className="kalooki-btn kalooki-special" onClick={() => dispatch({ type: "kalooki" } as KalookiAction)}>
                 Kalooki!
               </button>
             )}

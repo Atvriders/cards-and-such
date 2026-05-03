@@ -27,7 +27,7 @@ export function Quadrille({
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/52</span>
         <span>Stock: {state.stock.length}</span>
-        <button
+        <button data-testid="hint-target-quadrille-primary"
           className="recycle-btn"
           onClick={() => dispatch({ type: "recycle" } as QuadrilleAction)}
           disabled={state.stock.length > 0 || state.recyclesLeft <= 0}

@@ -61,7 +61,7 @@ export function FifteensGame({ state, dispatch, onGameOver }: GameProps<Fifteens
 
       <div className="fifteens-controls">
         {state.phase === "playing" && (
-          <button disabled={!isValid} onClick={() => dispatch({ type: "remove" })}>
+          <button data-testid="hint-target-fifteens-primary" disabled={!isValid} onClick={() => dispatch({ type: "remove" })}>
             Remove (sum = 15)
           </button>
         )}

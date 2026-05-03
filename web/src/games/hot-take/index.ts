@@ -36,5 +36,9 @@ Works brilliantly as a dinner party conversation starter. Pair with beverages fo
   initialState: (seed: number, settings: HotTakeSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: any) => {
+      if (state.phase === "done") return null;
+      return { selector: '[data-testid="hint-target-hot-take-primary"]', pulses: 3 };
+    },
   component: HotTake,
 };

@@ -49,7 +49,7 @@ export function ParliamentGame({ state, dispatch, onGameOver }: GameProps<Parlia
         <div className="parl-hand-label">Your hand ({playerHand.length} cards)</div>
         <div className="parl-cards">
           {[...playerHand].sort((a, b) => a.suit.localeCompare(b.suit) || a.rank - b.rank).map(c => (
-            <button
+            <button data-testid="hint-target-parliament-primary"
               key={c.id}
               className={`parl-card-btn${playableIds.has(c.id) ? " playable" : ""}`}
               disabled={!isPlayerTurn || !playableIds.has(c.id)}

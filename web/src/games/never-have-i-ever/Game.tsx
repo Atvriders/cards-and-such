@@ -39,7 +39,7 @@ export function NeverHaveIEver({ state, dispatch, onGameOver }: GameProps<NHIESt
         >
           I've Done It!
         </button>
-        <button
+        <button data-testid="hint-target-never-have-i-ever-primary"
           className="nhie-btn nhie-btn-never"
           onClick={() => dispatch({ type: "never" } as NHIEAction)}
         >

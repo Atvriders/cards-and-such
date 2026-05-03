@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SequencePredictorState, SequencePredictorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { SequencePredictorGame } from "./Game.js";
@@ -40,5 +39,6 @@ Tips: For arithmetic, subtract any two consecutive terms to find the step. For g
   initialState: (seed: number, settings: SequencePredictorSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: SequencePredictorState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-sequence-predictor-primary"]', pulses: 3 } : null),
   component: SequencePredictorGame,
 };

@@ -19,7 +19,7 @@ export function WanderhomeJourneyGame({ state, dispatch, onGameOver }: GameProps
       <div className="whj-prompt">{p.prompt}</div>
       <div className="whj-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`whj-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WanderhomeJourneyAction)}>
+          <button data-testid={i===0?"hint-target-wanderhome-journey-primary":undefined} key={i} className={`whj-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WanderhomeJourneyAction)}>
             <span className="whj-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

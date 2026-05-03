@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { FifteensState, FifteensAction, FifteensSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { FifteensGame } from "./Game.js";
@@ -26,5 +26,9 @@ The game ends when the deck is empty and no face-up cards remain (you win), or w
   initialState: (seed, settings) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: FifteensState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-fifteens-primary"]', pulses: 3 };
+  },
   component: FifteensGame,
 };

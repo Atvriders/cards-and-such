@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NewmarketState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NewmarketGame } from "./Game.js";
@@ -33,5 +33,9 @@ Winning: the first to empty their hand wins. Collect boodle chips to build your 
   initialState,
   reducer,
   isTerminal,
+  hint: (state: NewmarketState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-newmarket-primary"]', pulses: 3 };
+  },
   component: NewmarketGame,
 };

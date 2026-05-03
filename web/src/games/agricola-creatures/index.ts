@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AgricolaCreaturesState, AgricolaCreaturesAction, AgricolaCreaturesSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AgricolaCreaturesGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const agricolaCreaturesPlugin: GamePlugin<AgricolaCreaturesState, Agricol
   initialState: (seed: number, s: S) => initialState(seed, s as AgricolaCreaturesSettings),
   reducer,
   isTerminal,
+  hint: (state: AgricolaCreaturesState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-agricola-creatures-primary"]', pulses: 3 } : null),
   component: AgricolaCreaturesGame,
 };

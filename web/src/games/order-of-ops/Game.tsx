@@ -68,7 +68,7 @@ export function OrderOfOpsGame({ state, dispatch, onGameOver }: GameProps<OrderO
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="oo-btn">Enter</button>
+        <button data-testid="hint-target-order-of-ops-primary" type="submit" className="oo-btn">Enter</button>
       </form>
     </div>
   );

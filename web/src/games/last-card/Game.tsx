@@ -107,7 +107,7 @@ export function LastCardGame({ state, dispatch, onGameOver }: GameProps<LastCard
                 Play 8 (choose suit)
               </button>
             )}
-            <button className="lastcard-btn draw" onClick={() => dispatch({ type: "draw" } as LastCardAction)} disabled={!isMyTurn}>
+            <button data-testid="hint-target-last-card-primary" className="lastcard-btn draw" onClick={() => dispatch({ type: "draw" } as LastCardAction)} disabled={!isMyTurn}>
               {drawPending > 0 ? `Draw ${drawPending}` : "Draw"}
             </button>
             {myHand.length === 2 && (

@@ -58,7 +58,7 @@ export function OhHell({
           <div className="oh-label">Your bid (0–{HAND_SIZE}):</div>
           <div className="oh-bid-buttons">
             {Array.from({ length: HAND_SIZE + 1 }, (_, i) => (
-              <button key={i} className="oh-btn" onClick={() => dispatch({ type: "bid", amount: i } as OhHellAction)}>
+              <button data-testid="hint-target-oh-hell-primary" key={i} className="oh-btn" onClick={() => dispatch({ type: "bid", amount: i } as OhHellAction)}>
                 {i}
               </button>
             ))}

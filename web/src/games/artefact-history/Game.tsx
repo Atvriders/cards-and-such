@@ -19,7 +19,7 @@ export function ArtefactHistoryGame({ state, dispatch, onGameOver }: GameProps<A
       <div className="ath-prompt">{p.prompt}</div>
       <div className="ath-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`ath-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ArtefactHistoryAction)}>
+          <button data-testid={i===0?"hint-target-artefact-history-primary":undefined} key={i} className={`ath-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ArtefactHistoryAction)}>
             <span className="ath-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

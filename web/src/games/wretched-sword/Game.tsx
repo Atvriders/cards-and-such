@@ -19,7 +19,7 @@ export function WretchedSwordGame({ state, dispatch, onGameOver }: GameProps<Wre
       <div className="wrs-prompt">{p.prompt}</div>
       <div className="wrs-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`wrs-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedSwordAction)}>
+          <button data-testid={i===0?"hint-target-wretched-sword-primary":undefined} key={i} className={`wrs-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as WretchedSwordAction)}>
             <span className="wrs-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

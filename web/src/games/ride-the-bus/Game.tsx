@@ -55,7 +55,7 @@ export function RideTheBusGame({ state, dispatch, onGameOver }: GameProps<RideTh
           <div className="rtb-q-label">Question {currentQuestion + 1}: <strong>{qLabel}</strong></div>
           <div className="rtb-answers">
             {answers.map(a => (
-              <button key={a} className="rtb-answer-btn"
+              <button data-testid="hint-target-ride-the-bus-primary" key={a} className="rtb-answer-btn"
                 onClick={() => dispatch({ type: "guess", value: a } as RideTheBusAction)}>
                 {ANSWER_LABELS[a] ?? a}
               </button>

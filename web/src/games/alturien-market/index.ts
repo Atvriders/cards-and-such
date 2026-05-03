@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlturienMarketState, AlturienMarketAction, AlturienMarketSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AlturienMarketGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const alturienMarketPlugin: GamePlugin<AlturienMarketState, AlturienMarke
   initialState: (seed: number, s: S) => initialState(seed, s as AlturienMarketSettings),
   reducer,
   isTerminal,
+  hint: (state: AlturienMarketState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-alturien-market-primary"]', pulses: 3 } : null),
   component: AlturienMarketGame,
 };

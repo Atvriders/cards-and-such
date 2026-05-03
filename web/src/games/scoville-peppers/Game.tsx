@@ -18,7 +18,7 @@ export function ScovillePeppersGame({ state, dispatch, onGameOver }: GameProps<S
       </div>
       {state.phase === "choosing" && (
         <div className="bz-scv-actions">
-          <button onClick={() => dispatch({ type: "invest" } as ScovillePeppersAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-scoville-peppers-primary" onClick={() => dispatch({ type: "invest" } as ScovillePeppersAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ScovillePeppersAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ScovillePeppersAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as ScovillePeppersAction)}>Trade Peppers</button>

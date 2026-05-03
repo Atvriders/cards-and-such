@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import { initialState, reducer, isTerminal, type HCFState, type HCFAction } from "./state.js";
 import { HighCardFlush } from "./HighCardFlush.js";
 
@@ -25,5 +25,9 @@ Tips: flushes of 4+ cards are strong; three-card flushes are beatable. There's n
   initialState,
   reducer,
   isTerminal,
+  hint: (state: HCFState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-high-card-flush-primary"]', pulses: 3 };
+  },
   component: HighCardFlush,
 };

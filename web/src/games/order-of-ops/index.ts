@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { OrderOfOpsState, OrderOfOpsAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { OrderOfOpsGame } from "./Game.js";
@@ -44,5 +43,6 @@ Tip: Write out the steps on paper — mark which operation to do first, draw a c
   initialState: (seed: number, settings: OrderOfOpsSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: OrderOfOpsState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-order-of-ops-primary"]', pulses: 3 } : null),
   component: OrderOfOpsGame,
 };

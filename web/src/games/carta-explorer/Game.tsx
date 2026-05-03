@@ -19,7 +19,7 @@ export function CartaExplorerGame({ state, dispatch, onGameOver }: GameProps<Car
       <div className="ctx-prompt">{p.prompt}</div>
       <div className="ctx-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`ctx-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as CartaExplorerAction)}>
+          <button data-testid={i===0?"hint-target-carta-explorer-primary":undefined} key={i} className={`ctx-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as CartaExplorerAction)}>
             <span className="ctx-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

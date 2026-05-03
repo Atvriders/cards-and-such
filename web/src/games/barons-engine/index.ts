@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { BaronsEngineState, BaronsEngineAction, BaronsEngineSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { BaronsEngineGame } from "./Game.js";
@@ -17,5 +17,6 @@ export const baronsEnginePlugin: GamePlugin<BaronsEngineState, BaronsEngineActio
   initialState: (seed: number, s: S) => initialState(seed, s as BaronsEngineSettings),
   reducer,
   isTerminal,
+  hint: (state: BaronsEngineState): HintTarget | null => (state.phase === "choosing" ? { selector: '[data-testid="hint-target-barons-engine-primary"]', pulses: 3 } : null),
   component: BaronsEngineGame,
 };

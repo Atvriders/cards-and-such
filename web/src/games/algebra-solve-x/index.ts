@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AlgebraSolveXState, AlgebraSolveXAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AlgebraSolveXGame } from "./Game.js";
@@ -40,5 +39,6 @@ Tips: Always check your answer by plugging x back into the equation. If 3 × 5 +
   initialState: (seed: number, settings: AlgebraSolveXSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: AlgebraSolveXState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-algebra-solve-x-primary"]', pulses: 3 } : null),
   component: AlgebraSolveXGame,
 };

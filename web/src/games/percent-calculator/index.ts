@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PercentCalculatorState, PercentCalculatorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PercentCalculatorGame } from "./Game.js";
@@ -38,5 +37,6 @@ Tips: The 10% shortcut — move the decimal point one place left. 15% = 10% + 5%
   initialState: (seed: number, settings: PercentCalculatorSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PercentCalculatorState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-percent-calculator-primary"]', pulses: 3 } : null),
   component: PercentCalculatorGame,
 };

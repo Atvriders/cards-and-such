@@ -18,7 +18,7 @@ export function ArchitectsWestGame({ state, dispatch, onGameOver }: GameProps<Ar
       </div>
       {state.phase === "choosing" && (
         <div className="bz-aw-actions">
-          <button onClick={() => dispatch({ type: "invest" } as ArchitectsWestAction)}>Buy Stone (${ASSET_COST})</button>
+          <button data-testid="hint-target-architects-west-primary" onClick={() => dispatch({ type: "invest" } as ArchitectsWestAction)}>Buy Stone (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as ArchitectsWestAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as ArchitectsWestAction)}>Hire Apprentice (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as ArchitectsWestAction)}>Sell Stone</button>

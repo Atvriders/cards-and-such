@@ -19,7 +19,7 @@ export function QuillLettersGame({ state, dispatch, onGameOver }: GameProps<Quil
       <div className="qll-prompt">{p.prompt}</div>
       <div className="qll-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`qll-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as QuillLettersAction)}>
+          <button data-testid={i===0?"hint-target-quill-letters-primary":undefined} key={i} className={`qll-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as QuillLettersAction)}>
             <span className="qll-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

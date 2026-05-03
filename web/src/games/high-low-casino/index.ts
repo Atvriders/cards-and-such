@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
 import type { HighLowState, HighLowAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -43,5 +43,9 @@ Your score equals your final bankroll.`,
   initialState: (seed: number, settings: HighLowSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: HighLowState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-high-low-casino-primary"]', pulses: 3 };
+  },
   component: HighLowCasino,
 };

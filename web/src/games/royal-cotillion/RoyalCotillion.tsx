@@ -67,7 +67,7 @@ export function RoyalCotillion({
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/104</span>
         <span>Stock: {state.stock.length}</span>
-        <button
+        <button data-testid="hint-target-royal-cotillion-primary"
           className="recycle-btn"
           onClick={() => dispatch({ type: "recycle" } as RoyalCotillionAction)}
           disabled={state.stock.length > 0 || state.recyclesLeft <= 0}

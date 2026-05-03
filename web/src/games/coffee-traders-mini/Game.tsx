@@ -18,7 +18,7 @@ export function CoffeeTradersMiniGame({ state, dispatch, onGameOver }: GameProps
       </div>
       {state.phase === "choosing" && (
         <div className="bz-ctm-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CoffeeTradersMiniAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-coffee-traders-mini-primary" onClick={() => dispatch({ type: "invest" } as CoffeeTradersMiniAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CoffeeTradersMiniAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CoffeeTradersMiniAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CoffeeTradersMiniAction)}>Trade Beans</button>

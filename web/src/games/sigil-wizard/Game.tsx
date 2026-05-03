@@ -19,7 +19,7 @@ export function SigilWizardGame({ state, dispatch, onGameOver }: GameProps<Sigil
       <div className="sgw-prompt">{p.prompt}</div>
       <div className="sgw-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`sgw-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as SigilWizardAction)}>
+          <button data-testid={i===0?"hint-target-sigil-wizard-primary":undefined} key={i} className={`sgw-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as SigilWizardAction)}>
             <span className="sgw-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

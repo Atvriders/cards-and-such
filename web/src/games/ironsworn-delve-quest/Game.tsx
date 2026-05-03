@@ -19,7 +19,7 @@ export function IronswornDelveQuestGame({ state, dispatch, onGameOver }: GamePro
       <div className="idq-prompt">{p.prompt}</div>
       <div className="idq-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`idq-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as IronswornDelveQuestAction)}>
+          <button data-testid={i===0?"hint-target-ironsworn-delve-quest-primary":undefined} key={i} className={`idq-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as IronswornDelveQuestAction)}>
             <span className="idq-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

@@ -40,7 +40,7 @@ export function RedDog({ state, dispatch, onGameOver }: Props) {
         <div className="rd-section">
           {state.lastResult && <div className="rd-result">{state.lastResult}</div>}
           <div className="rd-actions">
-            <button
+            <button data-testid="hint-target-red-dog-primary"
               className="rd-btn primary"
               onClick={() => dispatch({ type: "deal" } as RedDogAction)}
               disabled={state.bankroll < ante}

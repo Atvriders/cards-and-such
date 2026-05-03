@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { RoyalCotillionState, RoyalCotillionAction, RoyalCotillionSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { RoyalCotillion } from "./RoyalCotillion.js";
@@ -26,5 +26,9 @@ Tip: The reserve exposes three cards per column — be selective about which car
   initialState: (seed: number) => initialState(seed, {}),
   reducer,
   isTerminal,
+  hint: (state: RoyalCotillionState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-royal-cotillion-primary"]', pulses: 3 };
+  },
   component: RoyalCotillion,
 };

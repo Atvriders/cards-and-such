@@ -19,7 +19,7 @@ export function ThousandYearVampireGame({ state, dispatch, onGameOver }: GamePro
       <div className="tyv-prompt">{p.prompt}</div>
       <div className="tyv-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`tyv-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ThousandYearVampireAction)}>
+          <button data-testid={i===0?"hint-target-thousand-year-vampire-primary":undefined} key={i} className={`tyv-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as ThousandYearVampireAction)}>
             <span className="tyv-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

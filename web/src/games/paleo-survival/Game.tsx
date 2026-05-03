@@ -18,7 +18,7 @@ export function PaleoSurvivalGame({ state, dispatch, onGameOver }: GameProps<Pal
       </div>
       {state.phase === "choosing" && (
         <div className="bz-plo-actions">
-          <button onClick={() => dispatch({ type: "invest" } as PaleoSurvivalAction)}>Buy Tool (${ASSET_COST})</button>
+          <button data-testid="hint-target-paleo-survival-primary" onClick={() => dispatch({ type: "invest" } as PaleoSurvivalAction)}>Buy Tool (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as PaleoSurvivalAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as PaleoSurvivalAction)}>Hire Tribesmate (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as PaleoSurvivalAction)}>Sell Tool</button>

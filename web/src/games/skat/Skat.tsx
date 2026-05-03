@@ -59,7 +59,7 @@ export function Skat({ state, dispatch, onGameOver }: GameProps<SkatState, objec
 
       {phase === "bidding" && (
         <div className="skat-bid-btns">
-          <button className="skat-btn" onClick={() => dispatch({ type: "bid", bid: 18 } as SkatAction)}>Bid 18</button>
+          <button data-testid="hint-target-skat-primary" className="skat-btn" onClick={() => dispatch({ type: "bid", bid: 18 } as SkatAction)}>Bid 18</button>
           <button className="skat-btn" onClick={() => dispatch({ type: "bid", bid: 20 } as SkatAction)}>Bid 20</button>
           <button className="skat-btn" onClick={() => dispatch({ type: "bid", bid: 22 } as SkatAction)}>Bid 22</button>
           <button className="skat-btn pass" onClick={() => dispatch({ type: "bid", bid: 0 } as SkatAction)}>Pass</button>

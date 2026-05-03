@@ -47,7 +47,7 @@ export function NewmarketGame({ state, dispatch, onGameOver }: GameProps<Newmark
           <p>Place your bet to add chips to the boodle pots!</p>
           <p style={{ fontSize: ".85rem", opacity: .8 }}>Each boodle card already has 2 chips from the house.</p>
           <div className="newmarket-actions">
-            <button className="newmarket-btn bet" onClick={() => dispatch({ type: "placeBet", amount: 1 } as NewmarketAction)}>
+            <button data-testid="hint-target-newmarket-primary" className="newmarket-btn bet" onClick={() => dispatch({ type: "placeBet", amount: 1 } as NewmarketAction)}>
               Bet 1 chip
             </button>
             <button className="newmarket-btn bet" onClick={() => dispatch({ type: "placeBet", amount: 0 } as NewmarketAction)}>

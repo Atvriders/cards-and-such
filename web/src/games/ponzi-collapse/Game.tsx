@@ -18,7 +18,7 @@ export function PonziCollapseGame({ state, dispatch, onGameOver }: GameProps<Pon
       </div>
       {state.phase === "choosing" && (
         <div className="bz-pcz-actions">
-          <button onClick={() => dispatch({ type: "invest" } as PonziCollapseAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-ponzi-collapse-primary" onClick={() => dispatch({ type: "invest" } as PonziCollapseAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as PonziCollapseAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as PonziCollapseAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as PonziCollapseAction)}>Trade Investors</button>

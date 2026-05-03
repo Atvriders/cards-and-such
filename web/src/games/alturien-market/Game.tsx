@@ -18,7 +18,7 @@ export function AlturienMarketGame({ state, dispatch, onGameOver }: GameProps<Al
       </div>
       {state.phase === "choosing" && (
         <div className="bz-alt-actions">
-          <button onClick={() => dispatch({ type: "invest" } as AlturienMarketAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-alturien-market-primary" onClick={() => dispatch({ type: "invest" } as AlturienMarketAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as AlturienMarketAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as AlturienMarketAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as AlturienMarketAction)}>Trade Goods</button>

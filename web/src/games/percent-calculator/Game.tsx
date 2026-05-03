@@ -83,7 +83,7 @@ export function PercentCalculatorGame({ state, dispatch, onGameOver }: GameProps
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="pc-btn">Enter</button>
+        <button data-testid="hint-target-percent-calculator-primary" type="submit" className="pc-btn">Enter</button>
       </form>
     </div>
   );

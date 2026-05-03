@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { MaoState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { MaoGame } from "./Game.js";
@@ -33,5 +33,9 @@ Winning: the first player to empty their hand wins. In the traditional game, you
   initialState,
   reducer,
   isTerminal,
+  hint: (state: MaoState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-mao-primary"]', pulses: 3 };
+  },
   component: MaoGame,
 };

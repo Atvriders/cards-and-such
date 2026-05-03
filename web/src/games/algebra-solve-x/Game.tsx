@@ -68,7 +68,7 @@ export function AlgebraSolveXGame({ state, dispatch, onGameOver }: GameProps<Alg
           placeholder="x = ?"
           autoComplete="off"
         />
-        <button type="submit" className="ax-btn">Enter</button>
+        <button data-testid="hint-target-algebra-solve-x-primary" type="submit" className="ax-btn">Enter</button>
       </form>
     </div>
   );

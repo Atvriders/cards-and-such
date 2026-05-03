@@ -97,7 +97,7 @@ export function HanafudaKoiKoiGame({ state, dispatch, onGameOver }: GameProps<Ha
       <div className="hkk-log">{state.log}</div>
 
       {state.phase === "result" && (
-        <button className="hkk-btn primary" onClick={() => dispatch({ type: "next" } as HanafudaKoiKoiAction)}>Next Round</button>
+        <button className="hkk-btn primary" data-testid="hint-target-hanafuda-koi-koi-next" onClick={() => dispatch({ type: "next" } as HanafudaKoiKoiAction)}>Next Round</button>
       )}
 
       {state.phase === "done" && (

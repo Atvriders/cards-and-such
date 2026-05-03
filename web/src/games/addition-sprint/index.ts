@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { AdditionSprintState, AdditionSprintAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { AdditionSprintGame } from "./Game.js";
@@ -40,5 +39,6 @@ Tips for improving: Group numbers to round tens — if you see 47 + 36, think 47
   initialState: (seed: number, settings: AdditionSprintSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: AdditionSprintState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-addition-sprint-primary"]', pulses: 3 } : null),
   component: AdditionSprintGame,
 };

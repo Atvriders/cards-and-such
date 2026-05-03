@@ -97,7 +97,7 @@ export function Scat({ state, dispatch, onGameOver }: GameProps<ScatState, Recor
 
       {canAct && (
         <div className="scat-actions">
-          <button
+          <button data-testid="hint-target-scat-primary"
             className="scat-btn"
             onClick={() => dispatch({ type: "draw-stock" } as ScatAction)}
             disabled={stock.length === 0}

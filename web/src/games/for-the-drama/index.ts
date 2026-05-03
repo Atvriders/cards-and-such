@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { ForTheDramaState, ForTheDramaAction, ForTheDramaSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ForTheDramaGame } from "./Game.js";
@@ -14,5 +13,5 @@ export const forTheDramaPlugin: GamePlugin<ForTheDramaState, ForTheDramaAction, 
   howToPlay: "For the Drama is a solo journaling homage to Alex Roberts' For the Queen, here flavored as a telenovela where you serve at the heart of a passionate household. The original For the Queen is a co-op storytelling game where players answer prompts about loyalty and betrayal; the last card reveals whose hand spilled the wine.\n\nAcross ten dramatic prompts you confess scenes — secret letters, missed embraces, lipstick on collars, doors slammed in courtyards. Each prompt offers four weighted choices (A-D); your pick assigns a base reward plus 0-20 of mulberry32 variance.\n\nThis solo digital homage compresses the round table into one diary, preserving the soap-operatic tension of obligation versus desire. There are no wrong answers — only revealing ones.\n\nWrite the scenes you'd never confess aloud. The drama earns more weight when it costs you something.",
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as ForTheDramaSettings),
-  reducer, isTerminal, component: ForTheDramaGame,
+  reducer, isTerminal, hint: (state: ForTheDramaState): HintTarget | null => (state.phase === "choose" ? { selector: '[data-testid="hint-target-for-the-drama-primary"]', pulses: 3 } : null), component: ForTheDramaGame,
 };

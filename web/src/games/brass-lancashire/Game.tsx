@@ -18,7 +18,7 @@ export function BrassLancashireGame({ state, dispatch, onGameOver }: GameProps<B
       </div>
       {state.phase === "choosing" && (
         <div className="bz-bla-actions">
-          <button onClick={() => dispatch({ type: "invest" } as BrassLancashireAction)}>Buy Mill (${ASSET_COST})</button>
+          <button data-testid="hint-target-brass-lancashire-primary" onClick={() => dispatch({ type: "invest" } as BrassLancashireAction)}>Buy Mill (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as BrassLancashireAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as BrassLancashireAction)}>Hire Engineer (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as BrassLancashireAction)}>Sell Mill</button>

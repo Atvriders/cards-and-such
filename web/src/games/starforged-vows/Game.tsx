@@ -19,7 +19,7 @@ export function StarforgedVowsGame({ state, dispatch, onGameOver }: GameProps<St
       <div className="sfv-prompt">{p.prompt}</div>
       <div className="sfv-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`sfv-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as StarforgedVowsAction)}>
+          <button data-testid={i===0?"hint-target-starforged-vows-primary":undefined} key={i} className={`sfv-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as StarforgedVowsAction)}>
             <span className="sfv-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

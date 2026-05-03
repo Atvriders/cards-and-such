@@ -18,7 +18,7 @@ export function PowerGridCardGame({ state, dispatch, onGameOver }: GameProps<Pow
       </div>
       {state.phase === "choosing" && (
         <div className="bz-pgc-actions">
-          <button onClick={() => dispatch({ type: "invest" } as PowerGridCardAction)}>Buy Plant (${ASSET_COST})</button>
+          <button data-testid="hint-target-power-grid-card-primary" onClick={() => dispatch({ type: "invest" } as PowerGridCardAction)}>Buy Plant (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as PowerGridCardAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as PowerGridCardAction)}>Hire Engineer (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as PowerGridCardAction)}>Sell Plant</button>

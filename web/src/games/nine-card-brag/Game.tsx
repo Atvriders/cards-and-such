@@ -67,7 +67,7 @@ export function NineCardBragGame({ state, dispatch, onGameOver }: GameProps<Nine
 
           <div className="brag-arrange-actions">
             {currentGroup < 3 && (
-              <button className="brag-btn confirm" disabled={selected.length !== 3}
+              <button data-testid="hint-target-nine-card-brag-primary" className="brag-btn confirm" disabled={selected.length !== 3}
                 onClick={() => dispatch({ type: "confirmGroup" } as NineCardBragAction)}>
                 Confirm Hand {currentGroup + 1}
               </button>

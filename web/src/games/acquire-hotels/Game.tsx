@@ -18,7 +18,7 @@ export function AcquireHotelsGame({ state, dispatch, onGameOver }: GameProps<Acq
       </div>
       {state.phase === "choosing" && (
         <div className="bz-ahq-actions">
-          <button onClick={() => dispatch({ type: "invest" } as AcquireHotelsAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-acquire-hotels-primary" onClick={() => dispatch({ type: "invest" } as AcquireHotelsAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as AcquireHotelsAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as AcquireHotelsAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as AcquireHotelsAction)}>Trade Hotels</button>

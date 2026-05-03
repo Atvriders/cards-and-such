@@ -67,7 +67,7 @@ export function SubtractionSprintGame({ state, dispatch, onGameOver }: GameProps
           placeholder="Answer"
           autoComplete="off"
         />
-        <button type="submit" className="ss-btn">Enter</button>
+        <button data-testid="hint-target-subtraction-sprint-primary" type="submit" className="ss-btn">Enter</button>
       </form>
     </div>
   );

@@ -50,7 +50,7 @@ export function Preferans({ state, dispatch, onGameOver }: GameProps<PrefState, 
             ))}
           </div>
           <div className="preferans-bid-btns">
-            <button className="preferans-btn" onClick={() => dispatch({ type: "bid" } as PrefAction)}>
+            <button data-testid="hint-target-preferans-primary" className="preferans-btn" onClick={() => dispatch({ type: "bid" } as PrefAction)}>
               Bid (become declarer)
             </button>
             <button className="preferans-btn pass" onClick={() => dispatch({ type: "pass" } as PrefAction)}>

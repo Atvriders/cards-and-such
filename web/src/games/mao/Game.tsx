@@ -70,7 +70,7 @@ export function MaoGame({ state, dispatch, onGameOver }: GameProps<MaoState, Mao
           <p style={{ fontWeight: 700 }}>Penalty!</p>
           <p>{penaltyMessage}</p>
           <p style={{ fontSize: ".8rem", opacity: .8 }}>You drew a card as penalty.</p>
-          <button className="mao-penalty-btn" onClick={() => dispatch({ type: "acknowledgePenalty" } as MaoAction)}>
+          <button data-testid="hint-target-mao-primary" className="mao-penalty-btn" onClick={() => dispatch({ type: "acknowledgePenalty" } as MaoAction)}>
             OK, continue
           </button>
         </div>

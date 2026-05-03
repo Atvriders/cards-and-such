@@ -18,7 +18,7 @@ export function BrassCanalsGame({ state, dispatch, onGameOver }: GameProps<Brass
       </div>
       {state.phase === "choosing" && (
         <div className="bz-bca-actions">
-          <button onClick={() => dispatch({ type: "invest" } as BrassCanalsAction)}>Invest (${ASSET_COST})</button>
+          <button data-testid="hint-target-brass-canals-primary" onClick={() => dispatch({ type: "invest" } as BrassCanalsAction)}>Invest (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as BrassCanalsAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as BrassCanalsAction)}>Hire (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as BrassCanalsAction)}>Trade Mills</button>

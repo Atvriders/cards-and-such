@@ -54,7 +54,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<TonkState, objec
 
       {!done && isDrawPhase && (
         <div className="tonk-draw-actions">
-          <button className="tonk-btn" onClick={() => dispatch({ type: "draw-stock" } as TonkAction)}>
+          <button data-testid="hint-target-tonk-primary" className="tonk-btn" onClick={() => dispatch({ type: "draw-stock" } as TonkAction)}>
             Draw Stock ({stockPile.length})
           </button>
           {topDiscard && (

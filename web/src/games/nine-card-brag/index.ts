@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { NineCardBragState } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { NineCardBragGame } from "./Game.js";
@@ -37,5 +37,9 @@ Strategy: you may sacrifice one hand to strengthen the other two. A Prial in one
   initialState,
   reducer,
   isTerminal,
+  hint: (state: NineCardBragState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-nine-card-brag-primary"]', pulses: 3 };
+  },
   component: NineCardBragGame,
 };

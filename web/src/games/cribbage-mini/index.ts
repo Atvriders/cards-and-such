@@ -1,4 +1,4 @@
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf , HintTarget } from "../../platform/game-plugin/types.js";
 import type { CribbageMiniState, CribbageMiniAction, CribbageMiniSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { CribbageMiniGame } from "./Game.js";
@@ -34,5 +34,9 @@ Tips: keep card pairs and pairs that sum to 15. The starter is unknown, so prefe
   initialState: (seed: number, s: S) => initialState(seed, s as CribbageMiniSettings),
   reducer,
   isTerminal,
+  hint: (state: CribbageMiniState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-cribbage-mini-next"]', pulses: 3 };
+  },
   component: CribbageMiniGame,
 };

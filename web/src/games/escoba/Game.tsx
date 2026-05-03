@@ -75,7 +75,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<EscobaState, obj
           {selectedCard && isPlayerTurn && (
             <div className="escoba-actions">
               {captureSet && (
-                <button className="escoba-btn" onClick={() => dispatch({ type: "capture", tableCardIds: captureSetIds } as EscobaAction)}>
+                <button data-testid="hint-target-escoba-primary" className="escoba-btn" onClick={() => dispatch({ type: "capture", tableCardIds: captureSetIds } as EscobaAction)}>
                   Capture ({captureSet.map(c => faceValue(c.rank)).join("+")} = {needed})
                 </button>
               )}

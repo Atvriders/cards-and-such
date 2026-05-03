@@ -1,4 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget } from "../../platform/game-plugin/types.js";
 import type { LastCardState } from "./state.js";
 import type { Suit } from "../../engines/deck/index.js";
 import { initialState, reducer, isTerminal } from "./state.js";
@@ -40,5 +40,9 @@ Winning: first player to shed all cards wins. Score 100 for a win, 0 for a loss.
   initialState,
   reducer,
   isTerminal,
+  hint: (state: LastCardState): HintTarget | null => {
+    if (isTerminal(state)) return null;
+    return { selector: '[data-testid="hint-target-last-card-primary"]', pulses: 3 };
+  },
   component: LastCardGame,
 };

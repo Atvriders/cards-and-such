@@ -1,5 +1,4 @@
-import type { GamePlugin } from "../../platform/game-plugin/types.js";
-import type { SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { PrimeFactorState, PrimeFactorAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { PrimeFactorGame } from "./Game.js";
@@ -42,5 +41,6 @@ Tips: Always try 2 first (the fastest check). Then 3, then 5. These three primes
   initialState: (seed: number, settings: PrimeFactorSettingsType) => initialState(seed, settings),
   reducer,
   isTerminal,
+  hint: (state: PrimeFactorState): HintTarget | null => (state.phase === "playing" ? { selector: '[data-testid="hint-target-prime-factor-primary"]', pulses: 3 } : null),
   component: PrimeFactorGame,
 };

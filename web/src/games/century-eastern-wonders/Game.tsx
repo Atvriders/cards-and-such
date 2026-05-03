@@ -18,7 +18,7 @@ export function CenturyEasternWondersGame({ state, dispatch, onGameOver }: GameP
       </div>
       {state.phase === "choosing" && (
         <div className="bz-cew-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CenturyEasternWondersAction)}>Buy Ship (${ASSET_COST})</button>
+          <button data-testid="hint-target-century-eastern-wonders-primary" onClick={() => dispatch({ type: "invest" } as CenturyEasternWondersAction)}>Buy Ship (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CenturyEasternWondersAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CenturyEasternWondersAction)}>Hire Outpost (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CenturyEasternWondersAction)}>Sell Ship</button>

@@ -19,7 +19,7 @@ export function StarforgedSagaGame({ state, dispatch, onGameOver }: GameProps<St
       <div className="sfs-prompt">{p.prompt}</div>
       <div className="sfs-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`sfs-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as StarforgedSagaAction)}>
+          <button data-testid={i===0?"hint-target-starforged-saga-primary":undefined} key={i} className={`sfs-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as StarforgedSagaAction)}>
             <span className="sfs-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

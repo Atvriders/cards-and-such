@@ -18,7 +18,7 @@ export function CenturyGolemEditionGame({ state, dispatch, onGameOver }: GamePro
       </div>
       {state.phase === "choosing" && (
         <div className="bz-cge-actions">
-          <button onClick={() => dispatch({ type: "invest" } as CenturyGolemEditionAction)}>Buy Crystal (${ASSET_COST})</button>
+          <button data-testid="hint-target-century-golem-edition-primary" onClick={() => dispatch({ type: "invest" } as CenturyGolemEditionAction)}>Buy Crystal (${ASSET_COST})</button>
           <button onClick={() => dispatch({ type: "save" } as CenturyGolemEditionAction)}>Save (5%)</button>
           <button onClick={() => dispatch({ type: "hire" } as CenturyGolemEditionAction)}>Hire Apprentice (${HIRE_COST})</button>
           <button onClick={() => dispatch({ type: "trade" } as CenturyGolemEditionAction)}>Sell Crystal</button>

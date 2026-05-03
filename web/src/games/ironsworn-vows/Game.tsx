@@ -19,7 +19,7 @@ export function IronswornVowsGame({ state, dispatch, onGameOver }: GameProps<Iro
       <div className="iv-prompt">{p.prompt}</div>
       <div className="iv-choices">
         {p.choices.map((c, i) => (
-          <button key={i} className={`iv-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as IronswornVowsAction)}>
+          <button data-testid={i===0?"hint-target-ironsworn-vows-primary":undefined} key={i} className={`iv-choice${state.selected === i ? " selected" : ""}`} disabled={isResult} onClick={() => dispatch({ type:"choose", choice:i } as IronswornVowsAction)}>
             <span className="iv-choice-letter">{LABELS[i]}</span>{c}
           </button>
         ))}

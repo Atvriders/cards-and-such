@@ -50,7 +50,7 @@ export function HachiHachiGame({ state, dispatch, onGameOver }: GameProps<HachiH
       <div className="hh88-log">{state.log}</div>
 
       {state.phase === "result" && (
-        <button className="hh88-btn" onClick={() => dispatch({ type: "next" } as HachiHachiAction)}>Next Round</button>
+        <button className="hh88-btn" data-testid="hint-target-hachi-hachi-next" onClick={() => dispatch({ type: "next" } as HachiHachiAction)}>Next Round</button>
       )}
 
       {state.phase === "done" && (
