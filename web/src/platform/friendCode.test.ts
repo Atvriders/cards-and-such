@@ -48,4 +48,67 @@ describe("friendCode", () => {
     const truncDecoded = decodeChallenge(truncCode as string);
     expect(truncDecoded?.seed).toBe(42);
   });
+
+  it("round-trips 1000 random (gameId, seed) pairs", () => {
+    // Property-style sweep: every supported game with a random 16-bit seed
+    // must encode then decode back to the exact same pair.
+    const supported = GAMES.filter(
+      (g, i): g is NonNullable<typeof g> =>
+        i < 0x100 && g != null && typeof g.id === "string",
+    );
+    expect(supported.length).toBeGreaterThan(0);
+    for (let i = 0; i < 1000; i++) {
+      const game = supported[Math.floor(Math.random() * supported.length)] as
+        (typeof supported)[number];
+      const seed = Math.floor(Math.random() * (MAX_FRIEND_SEED + 1));
+      const code = encodeChallenge({ gameId: game.id, seed });
+      expect(code, `encode failed for ${game.id}/${seed}`).not.toBeNull();
+      const decoded = decodeChallenge(code as string);
+      expect(decoded, `decode failed for ${code} (${game.id}/${seed})`).toEqual({
+        gameId: game.id,
+        seed,
+      });
+    }
+  });
+
+  it("treats O/0 and I/L/1 as Crockford confusables when decoding", () => {
+    // Sweep seeds until we find a code that contains both a '0' and a '1'
+    // so we can substitute every confusable variant in one go.
+    let seed = 0;
+    let baseCode: string | null = null;
+    while (seed <= MAX_FRIEND_SEED) {
+      const c = encodeChallenge({ gameId: "klondike", seed });
+      if (c && c.includes("0") && c.includes("1")) {
+        baseCode = c;
+        break;
+      }
+      seed++;
+    }
+    expect(baseCode, "expected at least one code containing both 0 and 1").not.toBeNull();
+    const expected = { gameId: "klondike", seed };
+    expect(decodeChallenge(baseCode as string)).toEqual(expected);
+    // Swap every '0' -> 'O' and alternate '1' -> 'I' / 'L' across positions.
+    let swapped = "";
+    let oneSeen = 0;
+    for (const ch of baseCode as string) {
+      if (ch === "0") swapped += "O";
+      else if (ch === "1") {
+        swapped += oneSeen++ % 2 === 0 ? "I" : "L";
+      } else swapped += ch;
+    }
+    expect(swapped).not.toBe(baseCode);
+    expect(decodeChallenge(swapped)).toEqual(expected);
+    // Lowercase confusables also normalise (decoder uppercases first).
+    expect(decodeChallenge(swapped.toLowerCase())).toEqual(expected);
+  });
+
+  it("ignores spaces and lowercase characters anywhere in the code", () => {
+    const code = encodeChallenge({ gameId: "klondike", seed: 4242 });
+    expect(code).not.toBeNull();
+    const lowered = (code as string).toLowerCase();
+    // Inject a space between every character, plus leading/trailing whitespace.
+    const spaced = `  ${lowered.split("").join(" \t ")}\n`;
+    expect(decodeChallenge(spaced)).toEqual({ gameId: "klondike", seed: 4242 });
+    expect(isValidFriendCode(spaced)).toBe(true);
+  });
 });
