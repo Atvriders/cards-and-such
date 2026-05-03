@@ -570,6 +570,73 @@ describe("StatsPage", () => {
     expect(dataRow).toBe('"evil""game,name",1,0,0.0000,,0,,0,0');
   });
 
+  // W655 — JSON export shape. Clicking stats-export-json must hand
+  // URL.createObjectURL a Blob with the application/json MIME, and the
+  // payload must parse to an object whose top-level shape matches the
+  // documented StatsJsonExport schema (version=1, app/kind tags, an ISO
+  // exportedAt, and the full set of side-table keys). Anchors the public
+  // contract for power-user backups + bug-report attachments.
+  it("W655: clicking stats-export-json downloads a JSON blob matching the stats schema", async () => {
+    seedRichStats();
+    localStorage.setItem("cards-ratings", JSON.stringify({ klondike: 4 }));
+    localStorage.setItem("cards-favorites", JSON.stringify(["klondike"]));
+    localStorage.setItem("cards-best-times", JSON.stringify({ klondike: 120 }));
+
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-json"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    // MIME pinned to application/json so browsers offer a sensible default
+    // handler when the user opens the downloaded file.
+    expect(blob.type).toMatch(/^application\/json/);
+
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+    const parsed = JSON.parse(text) as Record<string, unknown>;
+
+    // Top-level schema tags — version/app/kind are the discriminators that
+    // future importers will key off, so any drift here is a breaking change.
+    expect(parsed.version).toBe(1);
+    expect(parsed.app).toBe("cards-and-such");
+    expect(parsed.kind).toBe("stats");
+    expect(typeof parsed.exportedAt).toBe("string");
+    expect(() => new Date(parsed.exportedAt as string).toISOString()).not.toThrow();
+
+    // Side-table keys all present (null is allowed for missing blobs, but
+    // the keys themselves must be there so consumers can rely on the shape).
+    for (const key of [
+      "stats",
+      "bestTimes",
+      "ratings",
+      "favorites",
+      "hintsUsed",
+      "undosUsed",
+      "timeHistory",
+    ]) {
+      expect(parsed).toHaveProperty(key);
+    }
+
+    // The seeded side-tables round-trip into the export payload verbatim.
+    expect(parsed.bestTimes).toEqual({ klondike: 120 });
+    expect(parsed.ratings).toEqual({ klondike: 4 });
+    expect(parsed.favorites).toEqual(["klondike"]);
+    expect(parsed.hintsUsed).toEqual({ klondike: 7, spider: 3 });
+    expect(parsed.undosUsed).toEqual({ klondike: 5, spider: 2 });
+
+    // Nested stats blob carries the seeded perGame map so importers can
+    // restore the exact aggregate snapshot the user had at export time.
+    const stats = parsed.stats as { perGame: Record<string, unknown> };
+    expect(stats.perGame).toHaveProperty("klondike");
+    expect(stats.perGame).toHaveProperty("spider");
+  });
+
   it("most-hinted rows render an inline sparkline per game", () => {
     seedRichStats();
     renderPage();

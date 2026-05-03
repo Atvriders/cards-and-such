@@ -118,6 +118,27 @@ describe("UpdateBanner", () => {
     expect(screen.queryByTestId("update-banner")).toBeNull();
   });
 
+  it("W657: clicking refresh posts SKIP_WAITING to the registration.waiting from the dispatched event", () => {
+    // W657 contract: the SKIP_WAITING handshake MUST target the exact
+    // `waiting` worker from the registration carried in the
+    // cards:sw-update-ready CustomEvent — not some other reference. This
+    // pins down the wiring between the event payload and refresh().
+    const { registration, postMessage } = makeFakeRegistration();
+    render(<UpdateBanner />);
+
+    fireUpdateReady(registration);
+
+    fireEvent.click(screen.getByTestId("update-refresh"));
+
+    expect(postMessage).toHaveBeenCalledTimes(1);
+    expect(postMessage).toHaveBeenCalledWith({ type: "SKIP_WAITING" });
+    // Sanity: the call really went through registration.waiting, not a stray mock.
+    expect(registration.waiting).not.toBeNull();
+    expect(
+      (registration.waiting as ServiceWorker).postMessage,
+    ).toBe(postMessage);
+  });
+
   it("dismiss is sticky: even a brand-new registration in the same session stays dismissed", () => {
     // Session-memory contract: once the user clicks "Later" we don't pester
     // them again until the next page load, regardless of how many additional
