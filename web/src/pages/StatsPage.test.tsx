@@ -250,4 +250,39 @@ describe("StatsPage", () => {
     expect(hintsCard.textContent).toContain("10");
     expect(undosCard.textContent).toContain("7");
   });
+
+  it("this-week comparison card shows current and prior 7-day windows with deltas", () => {
+    seedRichStats();
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // Seed klondike with 4 plays in the current week (3 wins, times 60/80/100/120s)
+    // and 2 plays in the prior week (1 win, times 200/240s) so we get a clear
+    // up-direction delta on plays/wins and a down-direction delta on avg time.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60, score: 100 },
+        { ts: now - 2 * dayMs, time: 80, score: 200 },
+        { ts: now - 3 * dayMs, time: 100, score: 0 },
+        { ts: now - 6 * dayMs, time: 120, score: 50 },
+        { ts: now - 9 * dayMs, time: 200, score: 75 },
+        { ts: now - 12 * dayMs, time: 240, score: 0 },
+      ]),
+    );
+    renderPage();
+    const card = screen.getByTestId("stats-this-week");
+    expect(card).toBeInTheDocument();
+    // Current week: 4 plays, 3 wins.
+    expect(card.textContent).toContain("4");
+    expect(card.textContent).toContain("3");
+    // Prior block has 2 plays, 1 win.
+    const prior = screen.getByTestId("stats-prev-week");
+    expect(prior.textContent).toContain("2");
+    expect(prior.textContent).toContain("1");
+    // Plays delta: (4-2)/2 = 100% up.
+    expect(card.textContent).toMatch(/100%/);
+    // At least one delta should render with up direction.
+    const ups = card.querySelectorAll('[data-direction="up"]');
+    expect(ups.length).toBeGreaterThan(0);
+  });
 });
