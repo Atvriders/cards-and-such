@@ -162,6 +162,29 @@ describe("StatsPage", () => {
     expect(r14.getAttribute("aria-pressed")).toBe("false");
   });
 
+  // W626 — Range selector exclusivity for the 90-day window. Clicking
+  // `stats-range-90d` must flip aria-pressed=true on itself AND leave every
+  // other range button (7d, 14d, 30d) with aria-pressed=false, so the toggle
+  // group always has exactly one pressed button. Extends the W180 contract to
+  // the widest range option, which the existing 7↔14 and 14↔30 tests miss.
+  it("W626: clicking stats-range-90d flips aria-pressed exclusively (7/14/30 all false)", () => {
+    seedRichStats();
+    renderPage();
+    const r7 = screen.getByTestId("stats-range-7d");
+    const r14 = screen.getByTestId("stats-range-14d");
+    const r30 = screen.getByTestId("stats-range-30d");
+    const r90 = screen.getByTestId("stats-range-90d");
+    // Default is 14 — pressed; 90 starts unpressed.
+    expect(r14.getAttribute("aria-pressed")).toBe("true");
+    expect(r90.getAttribute("aria-pressed")).toBe("false");
+    fireEvent.click(r90);
+    // Exclusivity: only 90d is pressed; the others all flip to unpressed.
+    expect(r90.getAttribute("aria-pressed")).toBe("true");
+    expect(r7.getAttribute("aria-pressed")).toBe("false");
+    expect(r14.getAttribute("aria-pressed")).toBe("false");
+    expect(r30.getAttribute("aria-pressed")).toBe("false");
+  });
+
   it("achievement search filters the cards", () => {
     seedRichStats();
     // Show-locked toggle defaults off; streak achievements are locked under
@@ -182,6 +205,30 @@ describe("StatsPage", () => {
     // Empty-state when no match.
     fireEvent.change(search, { target: { value: "zzznotathing" } });
     expect(screen.getByTestId("stats-search-empty")).toBeInTheDocument();
+  });
+
+  // W180 — Achievement search filters cards by *title* match. The existing
+  // "streak" assertion exercises the description-includes branch (several
+  // achievement descriptions contain the word "streak"); this test pins the
+  // title-includes branch by searching for "shark", which appears only in
+  // the title "Card Shark" — no description contains it. Keeps both halves
+  // of the `title || description` predicate covered.
+  it("W180: typing in stats-search filters achievement cards by name (title match)", () => {
+    seedRichStats();
+    // Card Shark is locked under the rich fixture — keep it visible so the
+    // title-match filter assertion isn't masked by the show-locked gate.
+    localStorage.setItem("cards-stats-show-locked", "true");
+    renderPage();
+    // Sanity: target card and a non-matching neighbor both render initially.
+    expect(screen.getByTestId("achievement-card-shark")).toBeInTheDocument();
+    expect(screen.getByTestId("achievement-first-win")).toBeInTheDocument();
+
+    const search = screen.getByTestId("stats-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "shark" } });
+    // Only "Card Shark" survives; "First Win" and "10 Wins" filtered out.
+    expect(screen.getByTestId("achievement-card-shark")).toBeInTheDocument();
+    expect(screen.queryByTestId("achievement-first-win")).toBeNull();
+    expect(screen.queryByTestId("achievement-ten-wins")).toBeNull();
   });
 
   it("show-locked toggle defaults off, hides locked cards, persists to localStorage", () => {
@@ -994,6 +1041,56 @@ describe("StatsPage", () => {
     // At least one delta should render with up direction.
     const ups = card.querySelectorAll('[data-direction="up"]');
     expect(ups.length).toBeGreaterThan(0);
+  });
+
+  // W633: focused regression for the "Plays" row delta direction on the
+  // this-week comparison card. Seed exactly 4 plays in the current 7d
+  // window and 2 plays in the prior 7d window — pctDelta = (4-2)/2 = 100%
+  // and the direction must render as "up" (▲ glyph + is-up class) on the
+  // stats-this-week card. Guards against an inverted-direction regression
+  // where a positive delta would erroneously render as "down" or "flat".
+  it("this-week plays delta points up with 100% when current=4 vs prior=2 (W633)", () => {
+    seedRichStats();
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // 4 plays inside [now-7d, now] vs 2 plays inside [now-14d, now-7d).
+    // Wins are zeroed (score:0) so the wins-row delta is null and can't
+    // accidentally satisfy the up-direction assertion below.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60, score: 0 },
+        { ts: now - 2 * dayMs, time: 60, score: 0 },
+        { ts: now - 4 * dayMs, time: 60, score: 0 },
+        { ts: now - 6 * dayMs, time: 60, score: 0 },
+        { ts: now - 9 * dayMs, time: 60, score: 0 },
+        { ts: now - 12 * dayMs, time: 60, score: 0 },
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-this-week");
+    expect(card).toBeInTheDocument();
+
+    // The Plays row is the first <li> in the current-week list.
+    const list = within(card).getByTestId("stats-this-week-list");
+    const playsRow = list.querySelectorAll("li")[0];
+    expect(playsRow).toBeDefined();
+    expect(playsRow!.textContent).toContain("4");
+
+    // Direction MUST be "up" — the ▲ glyph and is-up class come from the
+    // d > 0 branch of renderDelta. A flat/down render here is a regression.
+    const playsDelta = playsRow!.querySelector(".stats-week-delta");
+    expect(playsDelta).not.toBeNull();
+    expect(playsDelta!.getAttribute("data-direction")).toBe("up");
+    expect(playsDelta!.classList.contains("is-up")).toBe(true);
+    expect(playsDelta!.textContent).toContain("▲");
+    expect(playsDelta!.textContent).toContain("100%");
+
+    // Prior block confirms the 2-play baseline is what the delta divided by.
+    const prior = screen.getByTestId("stats-prev-week");
+    const priorPlays = prior.querySelectorAll("li")[0];
+    expect(priorPlays!.textContent).toContain("2");
   });
 
   // W537: defensive rendering against extreme localStorage corruption.
