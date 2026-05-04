@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
 
@@ -2543,55 +2543,71 @@ describe("LobbyPage — per-tile rating display (W682)", () => {
 });
 
 /**
- * W713 — family tiles render a visible variant-count badge with the
- * canonical `fam-count-<family.id>` testid. The badge text MUST follow
- * the production contract: "<N> variant" for N=1, "<N> variants" for
- * N!=1, where N is the number of resolved family members. Sibling W662
- * pinned the chip-style "+N variants" affordance; this companion locks
- * the upper-right count badge at `fam-count-klondike` so a refactor
- * that drops or renames the badge surfaces here.
+ * W713 — family tiles stamp a visible variant-count badge inside the
+ * FamilyCard's tile-meta strip with the canonical `fam-count-<family.id>`
+ * testid. The badge text follows the production contract: "<N> variant"
+ * for N === 1, otherwise "<N> variants" (see LobbyPage.tsx, FamilyCard).
+ * Sibling tests cover the FamilyPicker search filter (W609) and the
+ * `?family=` deep-link auto-open. This test pins the per-tile count
+ * surface so a refactor that drops the badge, renames the testid, or
+ * mis-pluralises the label surfaces here.
  *
- * `klondike` is the canonical multi-variant family used throughout this
- * file (see `web/src/games/families.ts`); it ships with several resolved
- * members, so the badge MUST report a count of at least 2. We assert
- * the structural shape (testid + matching label format) rather than a
- * brittle exact number, so adding/removing a klondike variant in the
- * registry doesn't churn this test — the contract is "the count badge
- * mirrors the family size", not "klondike has exactly K variants".
+ * We use the same search-narrowing pattern as W566 to bring klondike's
+ * main-grid family card into view in a single render: default
+ * pagination caps page 1 at PAGE_SIZE entries and `klondike` sorts past
+ * the cutoff alphabetically. Typing "klondike" into the search input
+ * collapses the visible set; the featured strip is suppressed under
+ * any active query, so the FamilyCard renders with the demoted
+ * `grid-tile-klondike` outer testid while the inner count badge keeps
+ * the canonical `fam-count-klondike` testid.
+ *
+ * The shape assertion (`/^\d+ variants$/` with N >= 2) is deliberate:
+ * klondike is a multi-variant family by definition (see
+ * `web/src/games/families.ts`), so any drop to 0/1 indicates the family
+ * collapsed or the resolver dropped every member — both regressions get
+ * caught without coupling to a brittle exact count.
  */
 describe("LobbyPage — family-tile variant count badge (W713)", () => {
   beforeEach(() => {
     localStorage.clear();
   });
 
-  it("renders fam-count-klondike with a '<N> variants' label where N >= 2", () => {
+  it("renders fam-count-klondike with a '<N> variants' label where N >= 2", async () => {
     renderAt("/");
+    // Narrow the visible pool to klondike so the main-grid family card
+    // is reachable on page 1 regardless of the alphabetical pagination
+    // cutoff. Mirrors the W566 highlight test's setup.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "klondike" } });
 
-    // The family tile is always present in the main grid for klondike
-    // (a featured family), so a synchronous query is sufficient — the
-    // sibling W663 test confirms tile-* children paint on the initial
-    // mount.
-    const countBadge = screen.getByTestId(`fam-count-${FAMILY_ID}`);
+    // The featured strip is suppressed under an active query, so the
+    // main-grid FamilyCard (with `grid-tile-klondike` override) is the
+    // sole klondike tile — and the only place that stamps the
+    // `fam-count-klondike` badge.
+    const tile = await waitFor(() =>
+      screen.getByTestId(`grid-tile-${FAMILY_ID}`),
+    );
+    const countBadge = within(tile).getByTestId(`fam-count-${FAMILY_ID}`);
     expect(countBadge).toBeInTheDocument();
 
-    // Production contract: badge text is "<N> variant" or "<N> variants"
-    // (the leading glyph "≡" is aria-hidden but still appears in
-    // textContent — accept it before the count to keep the regex tight
-    // without coupling to the exact glyph character).
+    // Production contract: badge text ends with "<N> variant" (N === 1)
+    // or "<N> variants" (N !== 1). The leading aria-hidden "≡" glyph is
+    // included in textContent but the trailing label is the regression
+    // surface — anchor on the tail to ignore the glyph character.
     const text = countBadge.textContent ?? "";
     const match = text.match(/(\d+)\s+variants?$/);
     expect(match).not.toBeNull();
     const count = Number(match?.[1] ?? "0");
 
-    // Klondike is a multi-variant family by definition — a count of 0
-    // or 1 means either the family collapsed to a standalone tile (no
-    // longer a family) or the resolver dropped every member but one.
-    // Both regressions are caught by pinning N >= 2.
+    // Klondike is a multi-variant family by definition — N < 2 means
+    // either the family collapsed to a standalone tile or the resolver
+    // dropped every member but one. Both regressions are caught here.
     expect(count).toBeGreaterThanOrEqual(2);
 
     // Pluralisation contract: "1 variant" (no s) when N === 1, otherwise
-    // "<N> variants" (with s). Since we just asserted N >= 2, the badge
-    // MUST use the plural form.
+    // "<N> variants" (with trailing s). Since N >= 2 above, the badge
+    // MUST use the plural form — pinning this catches a regression that
+    // inverted the `=== 1 ? "" : "s"` ternary.
     expect(text).toMatch(/\d+\s+variants$/);
   });
 });
@@ -2772,5 +2788,66 @@ describe("LobbyPage — drag-handle aria-hidden (W712)", () => {
     expect(handle).not.toHaveAttribute("role");
     expect(handle).not.toHaveAttribute("aria-label");
     expect(handle).not.toHaveAttribute("tabindex");
+  });
+});
+
+/**
+ * W735 — the hand-curated Featured strip (`section.lobby-featured` with
+ * the `aria-label="Featured games"` landmark) is gated on the default
+ * "all" filter view. Switching the chip filter to any non-"all" sentinel
+ * (here: `top-rated`) MUST suppress the strip entirely so the filtered
+ * view is unambiguous — a featured game whose category does not match
+ * the active chip would otherwise confusingly appear above the filtered
+ * grid. Clicking chip-all again MUST bring the strip back in the same
+ * tick, exercising the symmetric reset path. The render gate lives at
+ * `LobbyPage.tsx:2000` (`{!query && filter === "all" && featured.length
+ * > 0 && (...)}`); this test pins the `filter === "all"` half of that
+ * predicate independently of the `query` half (which is implicitly
+ * covered by the W624-era highlight test).
+ */
+describe("LobbyPage — featured strip gated on chip-all (W735)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("hides the featured strip when filter flips off 'all' and restores it on chip-all", () => {
+    renderAt("/");
+    // Default mount: empty localStorage hydrates to filter="all", so the
+    // Featured-games landmark MUST be present in the first commit. The
+    // FEATURED_IDS list is non-empty in the registry, so the strip is
+    // unconditionally rendered under the default filter.
+    const stripBefore = document.querySelector(
+      'section.lobby-featured[aria-label="Featured games"]',
+    );
+    expect(stripBefore).not.toBeNull();
+
+    // Flip to a non-"all" chip — top-rated is the safest target because
+    // it is always rendered regardless of seeded play history (no
+    // pre-condition setup needed) and its filter sentinel is distinct
+    // from any category sentinel that could share a chip-id collision.
+    fireEvent.click(screen.getByTestId("chip-top-rated"));
+
+    // The render gate at LobbyPage.tsx:2000 must drop the entire
+    // <section.lobby-featured> wrapper — not just hide its children —
+    // so a regression that swaps the gate for a CSS-only `display: none`
+    // would still trip the assertion. We query the document root rather
+    // than `screen` so the absence is verified at the DOM level.
+    expect(
+      document.querySelector(
+        'section.lobby-featured[aria-label="Featured games"]',
+      ),
+    ).toBeNull();
+
+    // Symmetric reset path — clicking chip-all returns the filter to
+    // "all" and the same render gate must re-mount the strip in the
+    // same tick. Pinning both directions in one test guards against an
+    // asymmetric regression where only the hide-half (or only the
+    // show-half) of the predicate is wired.
+    fireEvent.click(screen.getByTestId("chip-all"));
+    expect(
+      document.querySelector(
+        'section.lobby-featured[aria-label="Featured games"]',
+      ),
+    ).not.toBeNull();
   });
 });

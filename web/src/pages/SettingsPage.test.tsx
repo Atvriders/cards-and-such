@@ -82,6 +82,29 @@ describe("SettingsPage", () => {
     expect(localStorage.getItem("cards-card-back")).toBe("red-weave");
   });
 
+  // W743 — the visible card-back gallery (`cardback-gallery-<id>`) is the
+  // user-facing swatch picker; older tests only exercise the hidden legacy
+  // buttons (`card-back-<id>`) and assert localStorage. This covers the
+  // visual selection state: the default tile (bicycle-weave) starts with
+  // aria-checked=true, and clicking a different gallery tile both flips
+  // aria-checked on the tiles AND writes the new id to `cards-card-back`.
+  // Catches regressions where the gallery onClick disconnects from
+  // setCardBack or the selected/aliasMatch logic stops marking the active
+  // tile.
+  it("gallery swatch click flips aria-checked and persists the new card-back", () => {
+    renderPage();
+    const defaultTile = screen.getByTestId("cardback-gallery-bicycle-weave");
+    const tartanTile = screen.getByTestId("cardback-gallery-tartan");
+    // Default render — bicycle-weave is the active tile, tartan is not.
+    expect(defaultTile.getAttribute("aria-checked")).toBe("true");
+    expect(tartanTile.getAttribute("aria-checked")).toBe("false");
+    fireEvent.click(tartanTile);
+    // localStorage was rewritten and selection moved to the clicked tile.
+    expect(localStorage.getItem("cards-card-back")).toBe("tartan");
+    expect(tartanTile.getAttribute("aria-checked")).toBe("true");
+    expect(defaultTile.getAttribute("aria-checked")).toBe("false");
+  });
+
   it("theme picker persists choice to localStorage and applies data-theme to root", () => {
     // Mount on the default theme ("midnight"); the persistence effect
     // writes that id to storage on first render. Clicking a different
