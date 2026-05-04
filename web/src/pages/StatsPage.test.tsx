@@ -2541,4 +2541,40 @@ describe("StatsPage", () => {
     expect(heading).toBeTruthy();
     expect(heading.tagName).toBe("H2");
   });
+
+  // W860 — The "Plays by category × day-of-week" section heading must render
+  // as an h2. W828/W833/W841/W846/W847/W851/W852/W854/W859 pinned "Top played",
+  // "Activity", "Personal records", "Achievements", "This week", "Records",
+  // "Plays by hour of day", "Most-hinted games", and "Personal records by
+  // category"; this extends the section-heading audit to the heatmap card so
+  // a regression that drops the h2, downgrades it to a div/h3, or rewrites
+  // the copy (e.g. swaps the U+00D7 multiplication sign for an ASCII "x" or
+  // renames to "Category heatmap") fails loudly. Section h2's give assistive
+  // tech a stable outline of the page.
+  it("W860: stats page renders 'Plays by category × day-of-week' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", {
+      level: 2,
+      name: "Plays by category × day-of-week",
+    });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
+
+  // W862 — The "Replays" section heading must render as an h2. W828/W833/
+  // W841/W846/W847/W851/W852/W854/W859/W860 pinned "Top played", "Activity",
+  // "Personal records", "Achievements", "This week", "Records", "Plays by
+  // hour of day", "Most-hinted games", "Personal records by category", and
+  // "Plays by category × day-of-week"; this extends the section-heading
+  // audit to the replays card so a regression that drops the h2, downgrades
+  // it to a div/h3, or rewrites the copy (e.g. to "Saved replays" or "Replay
+  // history") fails loudly. Section h2's give assistive tech a stable outline
+  // of the page. W513/W745/W752 cover the panel's row contents and header
+  // pluralization but never assert the h2 element itself.
+  it("W862: stats page renders 'Replays' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Replays" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
 });
