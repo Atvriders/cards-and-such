@@ -715,6 +715,39 @@ describe("SettingsPage show-tutorial link (W561)", () => {
   });
 });
 
+// W746: Settings UI side of the card-font picker. Existing coverage pins
+// the card-back gallery (W743) and the theme picker (W668), but the Card
+// font radiogroup (`card-font-serif` / `card-font-modern`) had no visible-
+// state assertions until now. This test pins the contract: clicking the
+// non-default tile (Serif) writes "serif" to `cards-card-font` AND moves
+// aria-checked / is-selected to the clicked tile, with the previously-
+// selected Modern tile losing both markers. Catches regressions where the
+// onClick disconnects from setCardFont or the selected-class logic stops
+// tracking the active option.
+describe("SettingsPage card-font picker (W746)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking the serif tile flips aria-checked and persists cards-card-font", () => {
+    renderPage();
+    const modernTile = screen.getByTestId("card-font-modern");
+    const serifTile = screen.getByTestId("card-font-serif");
+    // Default render — modern is the active tile, serif is not.
+    expect(modernTile.getAttribute("aria-checked")).toBe("true");
+    expect(serifTile.getAttribute("aria-checked")).toBe("false");
+    expect(modernTile.className).toContain("is-selected");
+    expect(serifTile.className).not.toContain("is-selected");
+    fireEvent.click(serifTile);
+    // localStorage was rewritten and selection moved to the clicked tile.
+    expect(localStorage.getItem("cards-card-font")).toBe("serif");
+    expect(serifTile.getAttribute("aria-checked")).toBe("true");
+    expect(modernTile.getAttribute("aria-checked")).toBe("false");
+    expect(serifTile.className).toContain("is-selected");
+    expect(modernTile.className).not.toContain("is-selected");
+  });
+});
+
 // W702: Settings UI side of the hint-cooldown contract. PlayPage tests
 // W692 / W698 cover the runtime side (the cooldown actually throttles,
 // or doesn't, based on the stored flag). This test pins the SettingsPage
