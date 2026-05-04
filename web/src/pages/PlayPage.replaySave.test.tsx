@@ -79,6 +79,55 @@ afterEach(() => {
 });
 
 describe("PlayPage replay save persists (W392)", () => {
+  it("evicts the oldest cards-replays entry when saving while five already exist (W699)", async () => {
+    const { default: PlayPage } = await import("./PlayPage.js");
+    const { REPLAYS_KEY, REPLAY_CAP } = await import("../platform/replays.js");
+
+    // Pre-seed storage with REPLAY_CAP entries from prior sessions. They
+    // are deliberately tagged "old-0".."old-4" so the eviction order is
+    // observable: saving a sixth via the PlayPage UI must drop "old-0"
+    // and leave the new fixture entry tail-most.
+    const preseed = Array.from({ length: REPLAY_CAP }, (_, i) => ({
+      id: `pre-${i}`,
+      gameId: `old-${i}`,
+      seed: i,
+      actions: [i],
+      savedAt: 1_000 + i,
+    }));
+    localStorage.setItem(REPLAYS_KEY, JSON.stringify(preseed));
+
+    render(
+      <MemoryRouter
+        initialEntries={[`/play/${hoisted.TEST_GAME_ID}?quickstart=1`]}
+      >
+        <Routes>
+          <Route path="/play/:gameId" element={<PlayPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByTestId("fx-win"));
+    fireEvent.click(screen.getByTestId("play-save-replay"));
+
+    const raw = localStorage.getItem(REPLAYS_KEY);
+    expect(raw).not.toBeNull();
+    const parsed = JSON.parse(raw as string) as Array<{
+      gameId: string;
+      seed: number;
+      actions: unknown[];
+    }>;
+
+    // Cap is honoured: still exactly REPLAY_CAP entries.
+    expect(parsed).toHaveLength(REPLAY_CAP);
+
+    // Oldest pre-seed entry has been evicted; the four newer pre-seeds
+    // remain in their original FIFO order; the fixture's save is tail-most.
+    const ids = parsed.map((r) => r.gameId);
+    expect(ids).not.toContain("old-0");
+    expect(ids.slice(0, 4)).toEqual(["old-1", "old-2", "old-3", "old-4"]);
+    expect(ids[ids.length - 1]).toBe(hoisted.TEST_GAME_ID);
+  });
+
   it("appends a single cards-replays entry with seed/actions/gameId on click", async () => {
     const { default: PlayPage } = await import("./PlayPage.js");
 
