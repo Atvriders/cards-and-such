@@ -2671,4 +2671,31 @@ describe("StatsPage", () => {
       "This will clear every play count, win, best score, and history entry. This cannot be undone.",
     );
   });
+
+  // W931 — The page header is a single `.stats-page-head` wrapper that groups
+  // the page-level h1 ("Your stats") with the `.stats-export-actions` button
+  // cluster (Export all / Download stats / Download CSV). The header pairs
+  // title + export controls visually; the CSS that lays them out as a flex
+  // row depends on them being siblings inside `.stats-page-head`. No existing
+  // test pins this wrapper — W823 only asserts the h1 text, and the export
+  // buttons are reached individually via testid. A refactor that flattens the
+  // wrapper or pulls the export cluster outside of it would silently break
+  // the header layout without any other assertion failing. Pin the wrapper
+  // class, the h1 nesting, and the export-actions sibling so the structural
+  // grouping the CSS hangs off cannot drift.
+  it("W931: stats-page-head wrapper groups h1 and stats-export-actions as siblings", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 1, name: "Your stats" });
+    const head = heading.parentElement;
+    expect(head).not.toBeNull();
+    expect(head?.classList.contains("stats-page-head")).toBe(true);
+    // The export-actions cluster must live inside the same wrapper so the
+    // flex row can align them with the heading.
+    const actions = head?.querySelector(":scope > .stats-export-actions");
+    expect(actions).not.toBeNull();
+    // Sanity: each of the three export buttons resolves under that cluster.
+    expect(actions?.querySelector('[data-testid="stats-export-all"]')).not.toBeNull();
+    expect(actions?.querySelector('[data-testid="stats-export-json"]')).not.toBeNull();
+    expect(actions?.querySelector('[data-testid="stats-export-csv"]')).not.toBeNull();
+  });
 });
