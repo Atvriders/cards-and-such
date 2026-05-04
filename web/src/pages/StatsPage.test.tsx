@@ -2526,4 +2526,19 @@ describe("StatsPage", () => {
     expect(heading).toBeTruthy();
     expect(heading.tagName).toBe("H2");
   });
+
+  // W859 — The "Personal records by category" section heading must render
+  // as an h2. W828/W833/W841/W846/W847/W851/W852/W854 pinned "Top played",
+  // "Activity", "Personal records", "Achievements", "This week", "Records",
+  // "Plays by hour of day", and "Most-hinted games"; this extends the
+  // section-heading audit to the per-category PR card so a regression that
+  // drops the h2, downgrades it to a div/h3, or rewrites the copy (e.g. to
+  // "PRs by category" or "Records by category") fails loudly. Section h2's
+  // give assistive tech a stable outline of the page.
+  it("W859: stats page renders 'Personal records by category' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Personal records by category" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
 });
