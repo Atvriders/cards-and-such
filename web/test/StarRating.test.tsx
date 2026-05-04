@@ -90,4 +90,32 @@ describe("StarRating storage helpers", () => {
     localStorage.setItem("cards-ratings", "not-json{");
     expect(readRatings()).toEqual({});
   });
+
+  it("removing one rating leaves siblings intact (W677)", () => {
+    // Seed three games at distinct values so we can detect any
+    // collateral damage when one is cleared. writeRating mutates the
+    // shared `cards-ratings` object in-place — a buggy implementation
+    // that wrote `{ [gameId]: 0 }` instead of deleting the key would
+    // either nuke the other entries or leave a `0` behind that
+    // readRating would still report as 0 (mimicking deletion) while
+    // readRatings would expose the bug as an extra key.
+    writeRating("klondike", 5);
+    writeRating("freecell", 3);
+    writeRating("spider", 2);
+
+    // Sanity: all three present before the delete.
+    expect(readRatings()).toEqual({ klondike: 5, freecell: 3, spider: 2 });
+
+    // 0 is the documented "remove" sentinel — exercise the delete path.
+    writeRating("freecell", 0);
+
+    // The deleted key is fully gone (not stored as 0), and the other
+    // two ratings retain their original values untouched.
+    const after = readRatings();
+    expect(after).toEqual({ klondike: 5, spider: 2 });
+    expect("freecell" in after).toBe(false);
+    expect(readRating("klondike")).toBe(5);
+    expect(readRating("spider")).toBe(2);
+    expect(readRating("freecell")).toBe(0);
+  });
 });
