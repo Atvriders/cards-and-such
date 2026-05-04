@@ -86,6 +86,40 @@ describe("WelcomeTutorial", () => {
     expect(screen.getByTestId("tut-step-3")).toBeTruthy();
   });
 
+  // --------------------------------------------------------------------
+  // W693: the Back button is the mouse-only counterpart to ArrowLeft.
+  // After advancing past step 1, clicking `tut-back` must walk the
+  // carousel one step backwards and re-enable/disable correctly when we
+  // land on step 1 again. Existing tests only verify Back is disabled on
+  // the first step (line 47) and ArrowLeft for keyboard — neither
+  // exercises the click handler on `tut-back` itself.
+  // --------------------------------------------------------------------
+  it("Back button click walks the carousel backwards (W693)", () => {
+    const onComplete = vi.fn();
+    const onSkip = vi.fn();
+    render(<WelcomeTutorial onComplete={onComplete} onSkip={onSkip} />);
+
+    // Advance to step 3 via two Next clicks.
+    fireEvent.click(screen.getByTestId("tut-next"));
+    fireEvent.click(screen.getByTestId("tut-next"));
+    expect(screen.getByTestId("tut-step-3")).toBeTruthy();
+    // Back is enabled past step 1.
+    expect((screen.getByTestId("tut-back") as HTMLButtonElement).disabled).toBe(false);
+
+    // Click Back → step 2.
+    fireEvent.click(screen.getByTestId("tut-back"));
+    expect(screen.getByTestId("tut-step-2")).toBeTruthy();
+
+    // Click Back again → step 1; Back becomes disabled.
+    fireEvent.click(screen.getByTestId("tut-back"));
+    expect(screen.getByTestId("tut-step-1")).toBeTruthy();
+    expect((screen.getByTestId("tut-back") as HTMLButtonElement).disabled).toBe(true);
+
+    // Back must not complete or skip the carousel.
+    expect(onComplete).not.toHaveBeenCalled();
+    expect(onSkip).not.toHaveBeenCalled();
+  });
+
   it("backdrop click on step 1 prompts confirm; later steps skip immediately", () => {
     const onSkip = vi.fn();
     render(<WelcomeTutorial onComplete={vi.fn()} onSkip={onSkip} />);
