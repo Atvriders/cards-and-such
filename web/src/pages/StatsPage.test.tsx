@@ -2900,4 +2900,76 @@ describe("StatsPage", () => {
     expect(text).toContain("Activity over last");
     expect(text).not.toContain("Cards &amp; Such — Stats");
   });
+
+  // W1176 — Sibling-test partner to W1164 (line export click). The
+  // aria-label test (W1148) pins the accessible name of the bar export
+  // icon, but doesn't exercise the click handler — so a refactor that
+  // wires the bar button to the JSON exporter, or that silently drops
+  // the SVG MIME, would slip past. Pin the click-time behavior of the
+  // single-chart `stats-export-bar` button: clicking it must hand
+  // `URL.createObjectURL` exactly one Blob carrying the `image/svg+xml`
+  // MIME and a payload that begins with the standard SVG XML prolog.
+  // We further assert the payload is the SOLO bar-chart export
+  // (carrying the live BarChart's `aria-label="Games played per
+  // category"`) and is NOT the combined bundle (`buildCombinedSvg`
+  // emits the "Cards & Such — Stats" header — its absence here proves
+  // we routed through the single-chart `chartToStandaloneSvg` path).
+  it("W1176: clicking stats-export-bar downloads an image/svg+xml Blob carrying just the top-played bar chart", async () => {
+    seedRichStats();
+    // Re-spy locally so we own the calls list for this test even though
+    // the beforeEach hook already installed a default spy on
+    // URL.createObjectURL.
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-bar"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    // MIME pinned to image/svg+xml (`downloadSvg` in svgShare.ts) so the
+    // browser opens the file in its SVG viewer rather than as plain text.
+    expect(blob.type).toMatch(/svg/);
+    expect(blob.type).toMatch(/^image\/svg\+xml/);
+
+    // Read the blob via FileReader (jsdom Blob lacks .text()).
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+
+    // Standard SVG document prolog + root element.
+    expect(text).toMatch(/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
+    expect(text).toContain("<svg");
+    // Single-chart payload — carries the BarChart's aria-label, NOT the
+    // combined-bundle header that `buildCombinedSvg` emits. Together
+    // these pin that we routed through
+    // `chartToStandaloneSvg(barRef.current, …)`.
+    expect(text).toContain("Games played per category");
+    expect(text).not.toContain("Cards &amp; Such — Stats");
+  });
+
+  // W1171 — The category × day-of-week heatmap card surfaces a subtitle
+  // empty-state copy ("No plays recorded in the last 30 days yet") when
+  // `heatmapData.total === 0` (no `cards-time-history:*` entries within
+  // the last 30-day window). The non-empty branch is pinned by W798's
+  // "<n> plays in the last 30 days" counter — this test pins the mirror
+  // empty-branch copy so a refactor that swaps the string (e.g. "No
+  // recent plays") or accidentally renders the populated subtitle with
+  // a "0 plays" count is caught here.
+  it("W1171: stats-cat-heatmap-card renders 'No plays recorded in the last 30 days yet' empty subtitle when no time history exists", () => {
+    seedStats({ totalPlayed: 0, totalWins: 0 });
+    renderPage();
+    const card = screen.getByTestId("stats-cat-heatmap-card");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText(
+      "No plays recorded in the last 30 days yet",
+    );
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+    // The populated-branch counter copy must NOT appear in the empty branch —
+    // the ternary in StatsPage.tsx is mutually exclusive.
+    expect(card.textContent).not.toMatch(/plays in the last 30 days$/);
+  });
 });
