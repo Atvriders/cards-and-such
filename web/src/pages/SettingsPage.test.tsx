@@ -147,6 +147,69 @@ describe("SettingsPage", () => {
     }
   });
 
+  // W750 — the snapshot test above only exercises the synchronous helper.
+  // This covers the actual user-driven export click flow: the
+  // `settings-export` button must invoke handleExport -> downloadExport,
+  // which builds an application/json Blob via URL.createObjectURL and
+  // triggers a synthetic anchor download. Catches regressions where the
+  // button onClick disconnects from downloadExport, the Blob's MIME type
+  // changes, or stored user data (favorites/best-times) stops landing in
+  // the exported payload.
+  it("clicking settings-export creates a JSON Blob download containing user data", async () => {
+    // Seed two well-known user-data keys so the exported Blob payload
+    // has something distinctive to assert on.
+    localStorage.setItem("cards-favorites", '["klondike","freecell"]');
+    localStorage.setItem("cards-best-times", '{"freecell":120}');
+
+    // jsdom doesn't implement URL.createObjectURL/revokeObjectURL —
+    // capture the Blob argument so we can verify the export payload, and
+    // stub the synthetic anchor click so jsdom doesn't try to navigate.
+    let capturedBlob: Blob | null = null;
+    const createObj = vi.fn((blob: Blob) => {
+      capturedBlob = blob;
+      return "blob:mock-export-url";
+    });
+    const revokeObj = vi.fn();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (URL as any).createObjectURL = createObj;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (URL as any).revokeObjectURL = revokeObj;
+    const clickSpy = vi
+      .spyOn(HTMLAnchorElement.prototype, "click")
+      .mockImplementation(() => {});
+
+    renderPage();
+
+    act(() => {
+      fireEvent.click(screen.getByTestId("settings-export"));
+    });
+
+    // downloadExport: one Blob URL, one synthetic anchor click.
+    expect(createObj).toHaveBeenCalledTimes(1);
+    expect(clickSpy).toHaveBeenCalledTimes(1);
+
+    // Inspect the Blob: application/json MIME tag, with the seeded user
+    // data round-tripped through JSON.stringify(exportAll()).
+    expect(capturedBlob).not.toBeNull();
+    const blob = capturedBlob as unknown as Blob;
+    expect(blob.type).toContain("application/json");
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result ?? ""));
+      reader.onerror = () => reject(reader.error);
+      reader.readAsText(blob);
+    });
+    const parsed = JSON.parse(text) as {
+      app: string;
+      data: Record<string, string>;
+    };
+    expect(parsed.app).toBe("cards-and-such");
+    expect(parsed.data["cards-favorites"]).toBe('["klondike","freecell"]');
+    expect(parsed.data["cards-best-times"]).toBe('{"freecell":120}');
+
+    clickSpy.mockRestore();
+  });
+
   it("clear-all aborts when the user cancels the confirm dialog", async () => {
     localStorage.setItem("cards-ratings", '{"klondike":4}');
     renderPage();
@@ -745,6 +808,41 @@ describe("SettingsPage card-font picker (W746)", () => {
     expect(modernTile.getAttribute("aria-checked")).toBe("false");
     expect(serifTile.className).toContain("is-selected");
     expect(modernTile.className).not.toContain("is-selected");
+  });
+});
+
+// W751: Settings UI side of the Gameplay → Animations picker. The three
+// pill tiles (`animations-full` / `animations-reduced` / `animations-off`)
+// drive the global `data-animations` attribute on <html> and persist the
+// choice to `cards-animations`. Sibling pickers W743 (card-back gallery)
+// and W746 (card-font) pin their own aria-checked / is-selected contracts;
+// this completes the Settings picker triad. Catches regressions where the
+// onClick disconnects from setAnimations or the selected-class logic stops
+// tracking the active option.
+describe("SettingsPage animations picker (W751)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking the reduced tile flips aria-checked and persists cards-animations", () => {
+    renderPage();
+    const fullTile = screen.getByTestId("animations-full");
+    const reducedTile = screen.getByTestId("animations-reduced");
+    const offTile = screen.getByTestId("animations-off");
+    // Default render — full is the active tile, reduced + off are not.
+    expect(fullTile.getAttribute("aria-checked")).toBe("true");
+    expect(reducedTile.getAttribute("aria-checked")).toBe("false");
+    expect(offTile.getAttribute("aria-checked")).toBe("false");
+    expect(fullTile.className).toContain("is-selected");
+    expect(reducedTile.className).not.toContain("is-selected");
+    fireEvent.click(reducedTile);
+    // localStorage was rewritten and selection moved to the clicked tile.
+    expect(localStorage.getItem("cards-animations")).toBe("reduced");
+    expect(reducedTile.getAttribute("aria-checked")).toBe("true");
+    expect(fullTile.getAttribute("aria-checked")).toBe("false");
+    expect(offTile.getAttribute("aria-checked")).toBe("false");
+    expect(reducedTile.className).toContain("is-selected");
+    expect(fullTile.className).not.toContain("is-selected");
   });
 });
 
