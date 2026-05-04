@@ -3128,4 +3128,42 @@ describe("StatsPage", () => {
     const labels = Array.from(dowLabels).map((n) => n.textContent);
     expect(labels).toEqual(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
   });
+
+  // W1206 — Each data cell of the category × day-of-week heatmap is wired
+  // with the `stats-heatmap-cell` className. That class is the sole CSS hook
+  // for cell-level styling (sizing, borders, accent-tinted background, hover
+  // affordances) — every other cell-level concern (data-count, opacity,
+  // title) has been pinned by W1187/W1188/W1192 but the className itself is
+  // not asserted anywhere. A refactor that renames the class (or drops it
+  // when extracting a `<HeatmapCell>` subcomponent) would currently leave
+  // every cell unstyled with no test failing. Pin the exact className on a
+  // representative cell so any rename or accidental drop fails loudly here.
+  it("W1206: stats-cat-heatmap cell carries the stats-heatmap-cell className for CSS styling hooks", () => {
+    renderPage();
+    const grid = screen.getByTestId("stats-cat-heatmap");
+    // 5 categories × 7 days = 35 data cells; every one must carry the class.
+    const cells = grid.querySelectorAll('[data-testid^="stats-cat-heatmap-"]');
+    expect(cells.length).toBe(35);
+    for (const cell of Array.from(cells)) {
+      expect((cell as HTMLElement).className).toBe("stats-heatmap-cell");
+    }
+  });
+
+  // W1203 — The "Top played" card renders a `.stats-chart-label` subtitle
+  // ("Click a bar to see details") that hints to the user the bars are
+  // interactive drill-down triggers. Without this copy, the bars look like a
+  // static chart and the drill-down panel goes undiscovered. No test pins
+  // the exact subtitle string or its containment within the
+  // `stats-categories` card, so a copy rewrite (e.g. "Tap a bar...") or a
+  // hoist of the subtitle to a card outside `stats-categories` would slip
+  // through silently.
+  it("W1203: stats-categories renders 'Click a bar to see details' subtitle as a stats-chart-label", () => {
+    seedRichStats();
+    renderPage();
+    const card = screen.getByTestId("stats-categories");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText("Click a bar to see details");
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+  });
 });
