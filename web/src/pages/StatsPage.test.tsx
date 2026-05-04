@@ -1879,4 +1879,31 @@ describe("StatsPage", () => {
       expect(activity.classList.contains("stats-card")).toBe(true);
     }
   });
+
+  // W738: stat-total-played + stat-total-wins recompute from per-game sums
+  // when a category filter is active. Distinct from the "all" view which
+  // reads stats.totalPlayed/Wins directly. seedRichStats: klondike (12p/5w)
+  // + spider (8p/3w) are solitaire => 20p/8w. agram (3p/1w) is cards.
+  // balut (2p/1w) is dice. The unfiltered totals (25/10) must NOT bleed
+  // through after switching to the solitaire filter.
+  it("W738: stat-total-played + stat-total-wins reflect per-game sums when category filter active", () => {
+    seedRichStats();
+    renderPage();
+    // Sanity: "All" view shows the raw stats.totalPlayed / totalWins.
+    expect(screen.getByTestId("stat-total-played").textContent).toContain("25");
+    expect(screen.getByTestId("stat-total-wins").textContent).toContain("10");
+    // Switch filter to Solitaire — only klondike (12) + spider (8) match.
+    fireEvent.click(screen.getByTestId("stats-cat-filter-solitaire"));
+    const played = screen.getByTestId("stat-total-played");
+    const wins = screen.getByTestId("stat-total-wins");
+    expect(played.textContent).toContain("20");
+    expect(wins.textContent).toContain("8");
+    // Must not echo the unfiltered totals after the filter is applied.
+    expect(played.textContent).not.toContain("25");
+    expect(wins.textContent).not.toContain("10");
+    // Switch to Cards — only agram (3p/1w) matches.
+    fireEvent.click(screen.getByTestId("stats-cat-filter-cards"));
+    expect(screen.getByTestId("stat-total-played").textContent).toContain("3");
+    expect(screen.getByTestId("stat-total-wins").textContent).toContain("1");
+  });
 });
