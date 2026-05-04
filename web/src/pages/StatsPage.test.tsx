@@ -1906,4 +1906,75 @@ describe("StatsPage", () => {
     expect(screen.getByTestId("stat-total-played").textContent).toContain("3");
     expect(screen.getByTestId("stat-total-wins").textContent).toContain("1");
   });
+
+  // W741: The personal-records card flags a row as a brand-new PR by
+  // rendering a `stats-pr-new-<id>` badge inside its title cell. The
+  // `isFresh` predicate (StatsPage.tsx ~L1199) requires (a) `cards-best-times`
+  // matches the latest `cards-time-history:<id>` entry within 0.05s AND
+  // (b) the latest entry beats the second-best by > 0.05s. This pins both
+  // halves: when an older slow run plus a fresh fast run align with the
+  // best-time blob, the NEW badge appears for that game and ONLY for that
+  // game (a stale-only entry must NOT light up the badge).
+  it("W741: stats-pr-new badge renders for a freshly-set PR but not for a tied/stale one", () => {
+    seedStats({ totalPlayed: 5 });
+    // klondike: latest entry (120s) beats prior (300s) and matches
+    // cards-best-times → fresh PR. spider: latest entry equals prior best
+    // (200s ties 200s), so isFresh stays false (no strict improvement).
+    localStorage.setItem(
+      "cards-best-times",
+      JSON.stringify({ klondike: 120, spider: 200 }),
+    );
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: 1_000, time: 300 },
+        { ts: 2_000, time: 120 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:spider",
+      JSON.stringify([
+        { ts: 1_000, time: 200 },
+        { ts: 2_000, time: 200 },
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-personal-records");
+    // Fresh PR for klondike: badge renders inside the row.
+    const klondikeBadge = within(card).getByTestId("stats-pr-new-klondike");
+    expect(klondikeBadge).toBeInTheDocument();
+    expect(klondikeBadge.textContent).toMatch(/NEW/i);
+    // Spider tied its prior best — no strict improvement, so no NEW badge.
+    expect(within(card).queryByTestId("stats-pr-new-spider")).not.toBeInTheDocument();
+  });
+
+  // W745: The replays panel renders an empty-state copy block
+  // (`stats-replays-empty`) with the "No replays saved yet …" hint when the
+  // `cards-replays` localStorage blob is missing or holds an empty array.
+  // This is the dual of W513 (which pins the populated path); together they
+  // prove the panel's two branches are mutually exclusive. The "Last 0 saved
+  // replays" header copy and the always-on "View all replays" link must
+  // also render so the empty state never becomes a dead-end for new users.
+  it("W745: stats-replays-empty renders 'No replays saved yet' copy when cards-replays is empty", () => {
+    seedStats({ totalPlayed: 1 });
+    // Explicit empty array → forces the `replays.length === 0` branch even
+    // if a stray defensive default happened to coerce missing → []. Belt
+    // and suspenders: also clear in case beforeEach didn't.
+    localStorage.setItem("cards-replays", JSON.stringify([]));
+    renderPage();
+
+    const panel = screen.getByTestId("stats-replays-panel");
+    const empty = within(panel).getByTestId("stats-replays-empty");
+    expect(empty).toBeInTheDocument();
+    expect(empty.textContent).toMatch(/No replays saved yet/i);
+    // Populated branch must NOT render any replay rows.
+    expect(within(panel).queryByTestId("stats-replay-0")).not.toBeInTheDocument();
+    // Header reflects the zero count with pluralized "replays".
+    expect(panel.textContent).toMatch(/Last 0 saved replays/);
+    // The view-all link must remain present even in the empty state so the
+    // /replays route stays reachable from the dashboard.
+    const viewAll = within(panel).getByTestId("view-all-replays");
+    expect(viewAll.getAttribute("href")).toBe("/replays");
+  });
 });
