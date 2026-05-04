@@ -429,6 +429,45 @@ describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
     // Mounted in the persisted-collapsed state on the very first render.
     expect(drawer.getAttribute("data-collapsed")).toBe("true");
   });
+
+  // W644 — the desktop drawer category rows are a parallel control surface
+  // for the chip strip: both write to the same `filter` state, so a click
+  // on `lobby-drawer-cat-solitaire` must flip the row's `aria-selected`
+  // AND mark `chip-solitaire` active in the same render. A regression that
+  // wired the drawer onClick to a separate piece of state would silently
+  // desync the two surfaces — users would see the drawer highlight one
+  // category while the chip strip and the visible game grid filtered by
+  // another, with no test catching the divergence.
+  it("W644: clicking a drawer category flips active state and syncs the chip filter", () => {
+    renderAt("/");
+    const drawerCat = screen.getByTestId("lobby-drawer-cat-solitaire");
+    const chip = screen.getByTestId("chip-solitaire");
+
+    // Pre-click sanity: neither surface is the active filter (default
+    // is "all"). Both expose `aria-selected` so the assertion is symmetric.
+    expect(drawerCat.getAttribute("aria-selected")).toBe("false");
+    expect(drawerCat.className).not.toContain("is-active");
+    expect(chip.getAttribute("aria-selected")).toBe("false");
+    expect(chip.className).not.toContain("is-active");
+
+    fireEvent.click(drawerCat);
+
+    // The drawer row itself flips active and stamps aria-current — the
+    // half a chip-side test would never observe.
+    expect(drawerCat.getAttribute("aria-selected")).toBe("true");
+    expect(drawerCat.getAttribute("aria-current")).toBe("true");
+    expect(drawerCat.className).toContain("is-active");
+
+    // And — the load-bearing assertion for W644 — the chip strip sees
+    // the same filter change, mirroring a direct chip click.
+    expect(chip.getAttribute("aria-selected")).toBe("true");
+    expect(chip.className).toContain("is-active");
+
+    // The canonical "all" anchors must have given up active state so
+    // the two surfaces are not both lit up at once.
+    expect(screen.getByTestId("lobby-drawer-cat-all").getAttribute("aria-selected")).toBe("false");
+    expect(screen.getByTestId("chip-all").getAttribute("aria-selected")).toBe("false");
+  });
 });
 
 /**
