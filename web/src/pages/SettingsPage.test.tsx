@@ -155,6 +155,40 @@ describe("SettingsPage", () => {
     ).toBeInTheDocument();
   });
 
+  // W918 — focused coverage of the Appearance <section>'s aria-labelledby
+  // wiring. Final landmark companion to W899 (Gameplay) and W909 (Audio);
+  // the Appearance card is a
+  // <section aria-labelledby="settings-appearance-heading">, which gives it
+  // an implicit role="region" with an accessible name resolved from the
+  // referenced h2's text ("Appearance"). W891 pins the h2 itself; this pins
+  // the resolved accessible name on the parent <section>. A regression that
+  // drops the aria-labelledby attribute or renames the heading id would
+  // break this landmark relationship without changing the visible text —
+  // getByRole("region", { name: "Appearance" }) catches that contract drift.
+  it("exposes the Appearance section as a region named via aria-labelledby", () => {
+    renderPage();
+    expect(
+      screen.getByRole("region", { name: "Appearance" }),
+    ).toBeInTheDocument();
+  });
+
+  // W919 — focused coverage of the Your data <section>'s aria-labelledby
+  // wiring. Final landmark companion to W899 (Gameplay), W909 (Audio), and
+  // W918 (Appearance); the Your data card is a
+  // <section aria-labelledby="settings-data-heading">, which gives it an
+  // implicit role="region" with an accessible name resolved from the
+  // referenced h2's text ("Your data"). W894 pins the h2 itself; this pins
+  // the resolved accessible name on the parent <section>. A regression that
+  // drops the aria-labelledby attribute or renames the heading id would
+  // break this landmark relationship without changing the visible text —
+  // getByRole("region", { name: "Your data" }) catches that contract drift.
+  it("exposes the Your data section as a region named via aria-labelledby", () => {
+    renderPage();
+    expect(
+      screen.getByRole("region", { name: "Your data" }),
+    ).toBeInTheDocument();
+  });
+
   // W894 — focused coverage of the Your data section's H2 sub-heading. Final
   // companion to W885 (Audio), W891 (Appearance), and W893 (Gameplay); the
   // Your data card's <section> uses `aria-labelledby="settings-data-heading"`,
