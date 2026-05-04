@@ -126,6 +126,52 @@ describe("PlayPage info popover action log (W208)", () => {
     );
     expect(codes).toEqual(["move-card", "flip-card", "draw-card"]);
   });
+
+  it("caps the action log at 10 entries (oldest fall off when more are dispatched)", async () => {
+    const { default: PlayPage } = await import("./PlayPage.js");
+
+    render(
+      <MemoryRouter initialEntries={[`/play/${hoisted.TEST_GAME_ID}?seed=1`]}>
+        <Routes>
+          <Route path="/play/:gameId" element={<PlayPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByTestId("start-game"));
+
+    // Dispatch a known sequence of 12 actions: 6 draws, then 6 flips. With a
+    // cap of 10 the two oldest "draw-card" entries should fall off the front.
+    // Newest-first rendering means the visible order is: 6 flips, 4 draws.
+    for (let i = 0; i < 6; i++) fireEvent.click(screen.getByTestId("fx-draw"));
+    for (let i = 0; i < 6; i++) fireEvent.click(screen.getByTestId("fx-flip"));
+
+    fireEvent.click(screen.getByTestId("play-info-btn"));
+    expect(screen.getByTestId("play-info-popover")).toBeTruthy();
+
+    const log = screen.getByTestId("play-action-log");
+    const codes = Array.from(log.querySelectorAll("li code")).map(
+      (el) => el.textContent?.trim() ?? "",
+    );
+    // Exactly 10 entries (cap), newest first: 6 flips then the 4 most-recent draws.
+    expect(codes).toHaveLength(10);
+    expect(codes).toEqual([
+      "flip-card",
+      "flip-card",
+      "flip-card",
+      "flip-card",
+      "flip-card",
+      "flip-card",
+      "draw-card",
+      "draw-card",
+      "draw-card",
+      "draw-card",
+    ]);
+
+    // The <summary> reflects the capped count, not the dispatch count.
+    const summary = log.parentElement?.querySelector("summary");
+    expect(summary?.textContent ?? "").toContain("Action log (10)");
+  });
 });
 
 // React reference keeps this an unambiguous JSX module under strict
