@@ -1,5 +1,5 @@
 /**
- * Unit test for the PlayPage info popover aria-modal="true" attribute (W995).
+ * Unit test for the PlayPage info popover aria-modal="true" attribute (W990).
  *
  * Observable behavior:
  *   PlayPage.tsx (~line 1687-1696) renders the session-info popover as a
@@ -76,7 +76,7 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe("PlayPage info popover aria-modal=\"true\" (W995)", () => {
+describe("PlayPage info popover aria-modal=\"true\" (W990)", () => {
   it("exposes aria-modal=\"true\" on the play-info-popover element when opened", async () => {
     const { default: PlayPage } = await import("./PlayPage.js");
 
