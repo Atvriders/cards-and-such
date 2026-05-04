@@ -979,6 +979,33 @@ describe("SettingsPage show-tutorial link (W561)", () => {
   });
 });
 
+// W849 — the `settings-show-tutorial` button replays the welcome carousel
+// only; it must NOT arm the lobby Featured-strip coachmark. That's a
+// separate concern owned by `settings-show-coachmarks` (W843). W561 pins
+// the welcome-flag clear + event dispatch but doesn't assert what the
+// button leaves alone — a regression that copy-pasted `setCoachmarkPending()`
+// into the show-tutorial handler would slip through W561 unnoticed because
+// neither side of the existing `__welcome__` / event assertions cares about
+// `cards-onboard-coachmark`. Pre-seeding the coachmark key as "seen" and
+// asserting it survives the click pins the negative contract.
+describe("SettingsPage show-tutorial button leaves coachmark untouched (W849)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("does not write cards-onboard-coachmark when replaying the welcome tutorial", () => {
+    // Pre-seed the coachmark key with the post-dismiss "seen" sentinel.
+    // If the show-tutorial handler ever started arming the coachmark
+    // (by calling setCoachmarkPending()), this would flip to "pending".
+    localStorage.setItem("cards-onboard-coachmark", "seen");
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-show-tutorial"));
+    // Coachmark key must be exactly what we put there — show-tutorial
+    // owns only the welcome-tutorial flag, not the coachmark state.
+    expect(localStorage.getItem("cards-onboard-coachmark")).toBe("seen");
+  });
+});
+
 // W746: Settings UI side of the card-font picker. Existing coverage pins
 // the card-back gallery (W743) and the theme picker (W668), but the Card
 // font radiogroup (`card-font-serif` / `card-font-modern`) had no visible-
