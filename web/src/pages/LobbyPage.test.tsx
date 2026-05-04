@@ -2873,52 +2873,175 @@ describe("LobbyPage — featured strip gated on chip-all (W735)", () => {
  * — typing a single character (length === 1) flows down through
  * `deferredQuery` as `highlightQuery`, but the `highlightQuery.length
  * >= TITLE_HIGHLIGHT_MIN_LEN` gate at LobbyPage.tsx:3022/3260/3404/3469
- * MUST suppress the `highlightMatch` call so the title renders as a
- * plain string with zero `<mark>` children.
+ * MUST suppress the `highlightMatch` call so titles render as plain
+ * text with zero `<mark>` children across the entire visible grid.
  *
  * Without this guard, a future change that lowered the constant to 1
  * (or accidentally dropped the gate while keeping the prop wired) would
  * cause every tile whose title contains the typed letter to flash a
  * single-character highlight on every keystroke — visually noisy and
- * not the documented contract. We use "k" since klondike's title
- * obviously contains it; the assertion is that NO `<mark>` is rendered
- * inside the tile's title span despite the substring match.
+ * not the documented contract. We assert against ALL `lobby-tile-title`
+ * elements in the document rather than a single canonical tile, since
+ * the filter is a permissive `.includes(q)` substring match and which
+ * specific tiles end up on page 1 of the filtered grid depends on the
+ * registry ordering (which we do not want to encode here). The gate is
+ * wired identically for every tile renderer (GameCard / FamilyCard /
+ * FeaturedTile) so any rendered title is a sufficient witness.
  */
 describe("LobbyPage — single-char query suppresses highlight (W742)", () => {
   beforeEach(() => {
     localStorage.clear();
   });
 
-  it("does not wrap matches in <mark> when query length is 1", async () => {
+  it("does not wrap any tile title in <mark> when query length is 1", async () => {
     renderAt("/");
     const search = screen.getByTestId("lobby-search") as HTMLInputElement;
     // A single-character query — well below TITLE_HIGHLIGHT_MIN_LEN=2.
-    // The lowercase "k" is a substring of the klondike title so the
-    // family tile remains in the filtered grid (the filter logic uses
-    // a plain `.includes(q)` substring check, not the highlight gate).
-    fireEvent.change(search, { target: { value: "k" } });
+    // The lowercase "e" is a substring of nearly every English word so
+    // it guarantees the filtered grid is non-empty and the highlight
+    // prop receives a non-empty value (an empty string would short-
+    // circuit the gate trivially via the falsy check, masking a
+    // regression that lowered the threshold to 1).
+    fireEvent.change(search, { target: { value: "e" } });
 
-    // The klondike family tile must still be present — single-char
-    // queries DO filter the grid, they just don't decorate matches.
-    // Use the post-search testid (`grid-tile-klondike`) per W566.
-    const tile = await waitFor(() =>
-      screen.getByTestId("grid-tile-klondike"),
-    );
-    const title = tile.querySelector(".lobby-tile-title") as HTMLElement;
-    expect(title).not.toBeNull();
+    // Wait for the deferred filter to flush — at least one tile must
+    // be visible so the assertion is non-vacuous. The featured strip
+    // is suppressed while a query is active (per LobbyPage.tsx:2000),
+    // so any rendered tile-title belongs to the main filtered grid.
+    await waitFor(() => {
+      expect(
+        document.querySelectorAll(".lobby-tile-title").length,
+      ).toBeGreaterThan(0);
+    });
 
-    // Core assertion: the title must NOT contain a `<mark>` element.
-    // We check via a DOM querySelectorAll rather than innerHTML string
-    // matching so a regression that emits a different highlight tag
-    // would still be caught by the W566 positive test (which pins the
-    // tag name) while THIS test specifically pins the threshold gate.
-    expect(title.querySelectorAll("mark").length).toBe(0);
+    // Core assertion: NO tile title in the document may contain a
+    // `<mark>` element while the query length is 1. A regression that
+    // lowered TITLE_HIGHLIGHT_MIN_LEN to 1 (or dropped the gate) would
+    // cause every visible tile whose haystack contains "e" to render
+    // at least one `<mark>` around the matched letter, surfacing here
+    // as a non-zero count. We tally across all titles rather than
+    // sampling one so a partial regression (e.g. only the GameCard
+    // gate dropped, FamilyCard gate intact) still fails this test.
+    const titles = document.querySelectorAll(".lobby-tile-title");
+    let totalMarks = 0;
+    titles.forEach((t) => {
+      totalMarks += t.querySelectorAll("mark").length;
+    });
+    expect(totalMarks).toBe(0);
+  });
+});
 
-    // Belt-and-suspenders: the title's textContent must equal the raw
-    // family label (no zero-width wrappers, no split text nodes around
-    // a hidden mark element). Using a case-insensitive comparison so
-    // the "Klondike" title-cased label is accepted regardless of how
-    // the renderer normalises display casing.
-    expect(title.textContent?.toLowerCase()).toBe("klondike");
+/**
+ * W747 — main lobby grid `End` key jumps focus to the LAST tile in
+ * the filtered grid. The W545 block above pins ArrowRight/Left/Up/Down
+ * + PageUp/PageDown + Home (via drawer test) but `End` on the lobby
+ * grid itself was never exercised — the handler in `onGridKeyDown`
+ * implements `case "End": next = tiles.length - 1` and a regression
+ * that flipped it to `current + 1` (or dropped the case entirely)
+ * would silently break keyboard users who rely on End to skip past
+ * the entire catalog in one keystroke.
+ *
+ * Setup mirrors the W545 grid test: stub `getBoundingClientRect` so
+ * tiles report a deterministic 5-column layout (otherwise jsdom's
+ * zero rects make column derivation degenerate, but End ignores cols
+ * anyway — we keep the stub for parity with the rest of this file's
+ * grid tests so the test stays robust if the handler ever cross-
+ * checks columns before processing End).
+ */
+describe("LobbyPage — grid End jumps focus to last tile (W747)", () => {
+  const COLS = 5;
+  const TILE_W = 200;
+  const TILE_H = 240;
+  let restoreRect: () => void;
+
+  beforeEach(() => {
+    localStorage.clear();
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: /min-width:\s*1024/.test(query),
+        media: query,
+        onchange: null,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+    const original = Element.prototype.getBoundingClientRect;
+    Element.prototype.getBoundingClientRect = function (this: Element): DOMRect {
+      const grid = document.querySelector(
+        ".lobby-grid:not(.lobby-grid--featured)",
+      );
+      if (grid && this.classList.contains("tile") && grid.contains(this)) {
+        const tiles = Array.from(
+          grid.querySelectorAll<HTMLElement>(".tile"),
+        );
+        const idx = tiles.indexOf(this as HTMLElement);
+        if (idx >= 0) {
+          const row = Math.floor(idx / COLS);
+          const col = idx % COLS;
+          const top = row * TILE_H;
+          const left = col * TILE_W;
+          return {
+            top,
+            left,
+            right: left + TILE_W,
+            bottom: top + TILE_H,
+            width: TILE_W,
+            height: TILE_H,
+            x: left,
+            y: top,
+            toJSON: () => ({}),
+          } as DOMRect;
+        }
+      }
+      return original.call(this);
+    };
+    restoreRect = () => {
+      Element.prototype.getBoundingClientRect = original;
+    };
+  });
+
+  afterEach(() => {
+    restoreRect?.();
+  });
+
+  it("End from the first tile moves focus & roving tab-stop to the last tile", async () => {
+    renderAt("/");
+    // Wait until the main grid has hydrated with a meaningful tile
+    // count — the canonical traversal target (`tiles[length-1]`) is
+    // only meaningful once the catalog has actually rendered.
+    await waitFor(() => {
+      const grid = document.querySelector(
+        ".lobby-grid:not(.lobby-grid--featured)",
+      );
+      const tiles = grid
+        ? Array.from(grid.querySelectorAll<HTMLElement>(".tile"))
+        : [];
+      expect(tiles.length).toBeGreaterThanOrEqual(2);
+    });
+    const grid = document.querySelector(
+      ".lobby-grid:not(.lobby-grid--featured)",
+    ) as HTMLElement;
+    const tiles = Array.from(grid.querySelectorAll<HTMLElement>(".tile"));
+    const last = tiles[tiles.length - 1];
+
+    // Land focus on the first tile (the default roving tab-stop) and
+    // confirm the precondition before firing End.
+    tiles[0].focus();
+    expect(document.activeElement).toBe(tiles[0]);
+
+    // The keystroke under test — End must jump straight to the last
+    // tile regardless of the current column or row.
+    fireEvent.keyDown(grid, { key: "End" });
+
+    // Focus moved to the last tile, and the roving-tabindex contract
+    // followed: only the now-focused tile is in the tab sequence.
+    expect(document.activeElement).toBe(last);
+    expect(last.tabIndex).toBe(0);
+    expect(tiles[0].tabIndex).toBe(-1);
   });
 });
