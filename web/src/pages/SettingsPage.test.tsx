@@ -17,6 +17,7 @@ import SettingsPage, { _buildExportSnapshot } from "./SettingsPage.js";
 import { KNOWN_KEYS } from "../platform/userdata.js";
 import { applyLightMode } from "../platform/lightMode.js";
 import { playSound } from "../platform/sounds.js";
+import { clearEvents } from "../platform/analytics.js";
 
 // Helper: stub window.matchMedia so the SettingsPage's mobile detection
 // can be flipped per-test. jsdom doesn't ship a matchMedia implementation,
@@ -1457,5 +1458,38 @@ describe("SettingsPage hint-count slider (W864)", () => {
     expect(localStorage.getItem("cards-hint-count")).toBe("7");
     // The "<n>" meta span next to the label re-renders with the new count.
     expect(screen.getByText("7", { selector: ".settings-meta" })).toBeInTheDocument();
+  });
+});
+
+describe("SettingsPage analytics event-log toggle (W1132)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // The analytics ring buffer is module-scoped — wipe it so other tests
+    // can't pre-populate it before this one mounts the page.
+    clearEvents();
+  });
+
+  it("toggles the analytics panel open/closed and flips aria-expanded + label", () => {
+    renderPage();
+    // Panel starts collapsed: the toggle exposes aria-expanded=false and the
+    // panel itself is unmounted so its testid resolves to null.
+    const toggle = screen.getByTestId("analytics-toggle");
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveTextContent("Show event log");
+    expect(screen.queryByTestId("analytics-panel")).toBeNull();
+
+    // First click opens the panel + flips aria-expanded; the label swaps to
+    // the closing verb so a screen reader announces the new affordance.
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    expect(toggle).toHaveTextContent("Hide event log");
+    expect(screen.getByTestId("analytics-panel")).toBeInTheDocument();
+
+    // Second click collapses again — verifies the toggle is a true toggle
+    // rather than a one-shot reveal.
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveTextContent("Show event log");
+    expect(screen.queryByTestId("analytics-panel")).toBeNull();
   });
 });
