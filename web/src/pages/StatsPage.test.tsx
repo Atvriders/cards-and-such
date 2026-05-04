@@ -2599,4 +2599,27 @@ describe("StatsPage", () => {
     // note can't drift to a different region without this test noticing.
     expect(within(footer as HTMLElement).getByTestId("stats-reset")).toBeTruthy();
   });
+
+  // W895 — The stats-reset confirm dialog renders an exact title prompt
+  // ("Reset all stats?") that asks the user to acknowledge the destructive
+  // intent. Existing tests (W612, W650, W690) pin the side-effects of the
+  // reset path — clear isolation, cancel safety, time-history wipe — but
+  // none assert the dialog *copy* the user actually sees before they make
+  // that destructive decision. A regression that abbreviates the title
+  // (e.g. "Reset stats?") or drops the question mark would silently weaken
+  // the consent UX. Pins the title text + the labelledby wiring that the
+  // ConfirmDialog uses for screen-reader announcement, so the prompt can't
+  // drift to weaker copy or lose its a11y association without this test
+  // failing.
+  it("W895: stats-reset confirm dialog renders exact 'Reset all stats?' title with labelledby wiring", async () => {
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const dialog = await screen.findByTestId("confirm-dialog");
+    // The dialog's accessible name is wired via aria-labelledby → the
+    // <h2 id="confirm-dialog-title"> element rendered with `title`.
+    expect(dialog.getAttribute("aria-labelledby")).toBe("confirm-dialog-title");
+    const titleEl = within(dialog).getByText("Reset all stats?");
+    expect(titleEl.tagName).toBe("H2");
+    expect(titleEl.id).toBe("confirm-dialog-title");
+  });
 });
