@@ -268,6 +268,44 @@ describe("ConfirmDialog", () => {
     expect(document.activeElement).toBe(trigger);
   });
 
+  it("W672 requireText input is cleared when the dialog reopens after a previous session", () => {
+    function Rerenderer({ open }: { open: boolean }): JSX.Element {
+      return (
+        <ConfirmDialog
+          open={open}
+          title="Clear all"
+          message="really?"
+          requireText="DELETE"
+          onConfirm={() => {}}
+          onCancel={() => {}}
+        />
+      );
+    }
+
+    const { rerender } = render(<Rerenderer open={true} />);
+
+    // First session: type something into the requireText input.
+    const firstInput = screen.getByTestId("confirm-input") as HTMLInputElement;
+    fireEvent.change(firstInput, { target: { value: "DEL" } });
+    expect(firstInput.value).toBe("DEL");
+    expect(
+      (screen.getByTestId("confirm-yes") as HTMLButtonElement).disabled,
+    ).toBe(true);
+
+    // Close the dialog (e.g. user cancelled).
+    rerender(<Rerenderer open={false} />);
+    expect(screen.queryByTestId("confirm-dialog")).toBeNull();
+
+    // Reopen — the input must reset to "" so the prior partial entry can't
+    // unexpectedly enable confirm or expose stale text.
+    rerender(<Rerenderer open={true} />);
+    const reopenedInput = screen.getByTestId("confirm-input") as HTMLInputElement;
+    expect(reopenedInput.value).toBe("");
+    expect(
+      (screen.getByTestId("confirm-yes") as HTMLButtonElement).disabled,
+    ).toBe(true);
+  });
+
   it("backdrop click cancels without ever invoking onConfirm", () => {
     let confirmed = 0;
     let cancelled = 0;
