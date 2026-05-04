@@ -242,6 +242,59 @@ describe("Settings → Show coachmarks reset", () => {
 });
 
 // ----------------------------------------------------------------------
+// W704: dismissing the welcome carousel must restore focus to the element
+// that was focused before it opened. `useFocusTrap` records
+// `document.activeElement` on activation and re-focuses it on cleanup —
+// this is the WCAG 2.4.3 / 3.2.1 contract for modal dialogs. Existing
+// a11y tests cover `role`/`aria-modal`/`aria-labelledby` and the Tab-wrap
+// trap, but none observe focus *return* on dismiss.
+// ----------------------------------------------------------------------
+describe("WelcomeTutorial focus restoration on dismiss (W704)", () => {
+  it("returns focus to the triggering element after Skip unmounts the carousel", () => {
+    function FocusRestoreHarness(): JSX.Element {
+      const [open, setOpen] = useState(false);
+      return (
+        <div>
+          <button
+            type="button"
+            data-testid="open-tutorial"
+            onClick={() => setOpen(true)}
+          >
+            open
+          </button>
+          {open && (
+            <WelcomeTutorial
+              onComplete={() => setOpen(false)}
+              onSkip={() => setOpen(false)}
+            />
+          )}
+        </div>
+      );
+    }
+
+    render(<FocusRestoreHarness />);
+    const trigger = screen.getByTestId("open-tutorial") as HTMLButtonElement;
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+
+    // Open the carousel — useFocusTrap moves focus into the dialog.
+    act(() => {
+      fireEvent.click(trigger);
+    });
+    expect(screen.getByTestId("tut-step-1")).toBeTruthy();
+    expect(document.activeElement).not.toBe(trigger);
+
+    // Dismiss via Skip — the trap cleanup must restore focus to the
+    // trigger that was focused at activation time.
+    act(() => {
+      fireEvent.click(screen.getByTestId("tut-skip"));
+    });
+    expect(screen.queryByTestId("tut-step-1")).toBeNull();
+    expect(document.activeElement).toBe(trigger);
+  });
+});
+
+// ----------------------------------------------------------------------
 // W680: dismissing the welcome carousel must persist across a full unmount
 // + remount. AppShell gates the carousel on `hasSeenWelcomeTutorial()` at
 // initial-render time, so the contract under test is: after clicking Skip,
