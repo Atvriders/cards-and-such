@@ -3674,99 +3674,173 @@ describe("LobbyPage — infinite-mode loaded-count caption (W800)", () => {
 });
 
 /**
- * W812 — long-press touch gesture on a lobby tile must open the same
- * `tile-menu` context menu that right-click triggers, after the 600ms
- * threshold elapses. Sibling W248 / W766 / W789 / W803 / W697 tests
- * pin the right-click (`fireEvent.contextMenu`) entry-point and the
- * individual menu-item actions, but the touch-driven long-press path
- * (LobbyPage.tsx ~L2854 `onTileTouchStart`) is otherwise untested.
+ * W812 — Space key on a focused drawer category row activates the row,
+ * exactly like Enter or click. The drawer keyboard handler
+ * (LobbyPage.tsx ~L772 `onDrawerKeyDown`) explicitly intercepts
+ * `Space`/`Spacebar`/`" "` and synthesizes a click on the focused row
+ * (so the page doesn't scroll while the drawer holds focus). Sibling
+ * tests in this file pin the drawer's:
+ *   - existence at desktop viewports (W227)
+ *   - roving tabindex Arrow-key navigation (W295/W355)
+ *   - Home/End focus jumps (W295/W355)
+ *   - drag-resize / collapsed-state persistence (W374/W625/W659/W653)
+ *   - mouse-click chip-filter sync (W644)
  *
- * On a touch device the user holds a tile for >= 600ms; the
- * `setTimeout(..., 600)` then sets `menuPos` and the popover renders.
- * We use `vi.useFakeTimers()` so the test doesn't actually wait, and
- * dispatch a `touchstart` with a populated `touches` list so the
- * handler captures a real coordinate.
+ * What none of those exercise is the *Space-key activation* branch —
+ * the `key === " " || key === "Spacebar"` arm of `onDrawerKeyDown`
+ * that (a) calls `e.preventDefault()` to suppress the page-scroll and
+ * (b) synthesizes a click on the focused row (which then routes
+ * through the same chip-filter sync the W644 mouse-click test pins).
+ * This test fills exactly that gap.
  *
- * The menu's testid is `tile-menu` (LobbyTileMenu.tsx L194), shared
- * with the right-click flow — proving the long-press routes through
- * the same rendering surface as right-click is the load-bearing
- * contract here.
+ * Approach: focus the `solitaire` drawer row, dispatch Space, and
+ * assert the active drawer row is solitaire AND the chip strip
+ * mirrors it (`chip-solitaire` is pressed) — same observable contract
+ * W644 pins for mouse-clicks, here driven through the keyboard branch.
+ *
+ * (W812 was previously claimed by a long-press touch context-menu test
+ * that was removed because `GameCard`'s JSX spreads `{...handlers}`
+ * AFTER `onTouchStart={onTileTouchStart}`, so the spread clobbers the
+ * long-press handler and the 600ms timer never arms in production —
+ * a production-side bug, out of scope for a test-only commit. This
+ * drawer-Space test reuses the W812 slot for an actually-reachable
+ * untested behaviour.)
  */
-describe("LobbyPage — long-press touch opens tile context menu (W812)", () => {
+describe("LobbyPage — drawer Space activates focused row (W812)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // Mirror the W227 / W644 drawer tests: drawer is desktop-only, so
+    // we have to widen jsdom's viewport above the 1024px breakpoint
+    // before render.
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      writable: true,
+      value: 1280,
+    });
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("Space on a focused drawer category row syncs the chip strip filter", () => {
+    renderAt("/");
+
+    // Sanity: drawer mounted. The W227 sibling pins this; we assert it
+    // here too so a drawer-removal regression fails fast inside this
+    // describe rather than masquerading as a missing-row error below.
+    expect(screen.getByTestId("lobby-drawer")).toBeInTheDocument();
+
+    // Pre-state: the `all` chip starts pressed (default filter), and
+    // the `solitaire` chip is NOT pressed. The W267 / W644 sibling
+    // tests pin this default-pressed shape; we lean on it as our
+    // pre-condition so the post-Space assertion below is unambiguous.
+    expect(screen.getByTestId("chip-all")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByTestId("chip-solitaire")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+
+    // Locate the drawer's solitaire row — same testid pattern the W644
+    // mouse-click test uses (`lobby-drawer-cat-<category>`).
+    const row = screen.getByTestId(
+      "lobby-drawer-cat-solitaire",
+    ) as HTMLButtonElement;
+
+    // Focus the row first — `onDrawerKeyDown` reads `document.activeElement`
+    // off the focused row to decide which entry to activate. Without an
+    // explicit focus the handler would fall back to `drawerFocusIdx=0`
+    // (the first row), and Space would activate the wrong category.
+    row.focus();
+    expect(document.activeElement).toBe(row);
+
+    // Dispatch Space on the focused row. React's keyDown bubbles from
+    // the focused row up to the nav, where `onDrawerKeyDown` runs in
+    // the bubble phase and reads `document.activeElement` (still the
+    // row).
+    fireEvent.keyDown(row, { key: " " });
+
+    // Post-Space contract — same observable shape as W644's mouse-click
+    // path: the drawer row flips its active state and the chip strip
+    // mirrors it because both surfaces share the same `filter` state.
+    expect(row).toHaveAttribute("aria-current", "true");
+    expect(screen.getByTestId("chip-solitaire")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    // And the previously-pressed `all` chip flips back to false. This
+    // mirrors W267's "exclusive chip-strip" contract: the filter is a
+    // single-select, not a toggle.
+    expect(screen.getByTestId("chip-all")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+  });
+});
+
+/**
+ * W857 — "EDITOR'S PICK" badge on hand-curated featured tiles.
+ *
+ * `pickBadgeKind` (web/src/platform/gameTags.ts) returns "editors-pick" when
+ * an id appears in the lobby-local FEATURED_IDS list AND nothing
+ * higher-priority fired (NEW > CHALLENGING > QUICK > POPULAR >
+ * EDITORS-PICK). W784 pins NEW, W806 pins QUICK, W824 pins CHALLENGING and
+ * W838 pins POPULAR; this test pins the lowest-priority EDITORS-PICK path
+ * so a regression that drops the FEATURED_IDS check (or breaks the lobby's
+ * threading of featuredIds into pickBadgeKind's options bag) still surfaces.
+ *
+ * `klondike` is the only stable FEATURED_IDS entry that is NOT preempted
+ * by a higher-priority badge:
+ *  - sits near the head of the GAMES registry (well outside the
+ *    NEW_GAME_WINDOW=60 tail), so isNew is false and NEW won't preempt
+ *  - is NOT in CHALLENGING_GAME_IDS, so CHALLENGING won't preempt
+ *    (freecell, spider and holdem — the other featured ids — are, which
+ *    is why they cannot stand in for this assertion)
+ *  - is NOT in QUICK_GAME_IDS, so QUICK won't preempt (wordle-mini, the
+ *    other featured candidate, is, so it cannot stand in either)
+ *  - has no localStorage rating seed (cleared in beforeEach), so
+ *    userRating === 0 and POPULAR won't preempt
+ *
+ * The badge must be read from the FEATURED STRIP, not the main grid: the
+ * lobby's FamilyCard intentionally never assigns `editors-pick` (its badge
+ * resolver only walks new/challenging/quick/popular), so the bare `klondike`
+ * editor's-pick badge only ever surfaces through the FeaturedTile path,
+ * which stamps `tile-badge-<familyId>` for family-rooted featured ids.
+ * No search query is issued so the featured strip remains mounted; the
+ * main-grid family tile for klondike has no badge and so cannot collide on
+ * the testid.
+ */
+describe("LobbyPage — EDITORS-PICK badge on hand-curated featured tiles (W857)", () => {
   beforeEach(() => {
     localStorage.clear();
   });
 
   afterEach(() => {
-    vi.useRealTimers();
     cleanup();
   });
 
-  it("touchstart held for 600ms surfaces the same tile-menu as right-click", () => {
-    // `texas-holdem` mirrors the standalone-game id reused across the
-    // sibling W574/W697/W766/W789/W803 menu tests — it's NOT absorbed
-    // by any family in `web/src/games/families.ts`, so its
-    // `tile-texas-holdem` testid resolves to a `GameCard` whose
-    // `onTouchStart` arms the long-press timer.
-    const STANDALONE_ID = "texas-holdem";
+  it("stamps tile-badge-klondike with the EDITOR'S PICK label and badge--editors-pick class", async () => {
     renderAt("/");
 
-    // Narrow the visible pool: alphabetical sort + PAGE_SIZE=80
-    // pushes "Texas Hold'em" past page 1, so search to bring it
-    // onto the rendered grid deterministically. Mirrors W803.
-    // Important: do this BEFORE swapping in fake timers so the
-    // search input's synchronous render path isn't entangled with
-    // any debounce/scheduler timer the fake clock would freeze.
-    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
-    fireEvent.change(search, { target: { value: "texas hold" } });
-    const tile = screen.getByTestId(`tile-${STANDALONE_ID}`);
+    // No search — the featured strip only mounts when query is empty AND
+    // filter === "all". `tile-badge-klondike` is unambiguous because
+    // FamilyCard never emits an editors-pick badge for the same family
+    // id, so the only producer of this testid is the FeaturedTile.
+    const badge = await waitFor(() => screen.getByTestId("tile-badge-klondike"));
+    expect(badge).toBeInTheDocument();
 
-    // Pre-condition: no menu in the DOM. `menuPos` starts null and
-    // the popover is gated on `menuPos !== null`.
-    expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
-
-    // Now switch to fake timers — only the 600ms long-press
-    // setTimeout below needs to be fast-forwarded.
-    vi.useFakeTimers();
-
-    // Dispatch a `touchstart` with one populated touch — the handler
-    // reads `e.touches[0].clientX/Y`. fireEvent.touchStart accepts a
-    // `touches` array directly and synthesizes a TouchEvent that
-    // satisfies the React event normalisation.
-    fireEvent.touchStart(tile, {
-      touches: [{ clientX: 50, clientY: 80 }],
-    });
-
-    // Just under the 600ms threshold — the timer must NOT have fired
-    // yet. This pins the *delay* contract so a regression that drops
-    // the threshold (or fires synchronously) is caught here.
-    act(() => {
-      vi.advanceTimersByTime(599);
-    });
-    expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
-
-    // Cross the threshold — the setTimeout callback flips
-    // `longPressFired` and writes `menuPos`, mounting the popover.
-    act(() => {
-      vi.advanceTimersByTime(1);
-    });
-    const menu = screen.getByTestId("tile-menu");
-    expect(menu).toBeInTheDocument();
-    // The same menu surface as the right-click path: it must carry
-    // role=menu and the per-game aria-label so AT users get the same
-    // discoverability whether they reached it via right-click,
-    // 3-dot, or long-press.
-    expect(menu).toHaveAttribute("role", "menu");
-    expect(menu).toHaveAttribute(
-      "aria-label",
-      `Actions for ${STANDALONE_ID}`,
-    );
-    // And the canonical menu-item set is present — the same five
-    // testids the right-click sibling tests assert on. We probe a
-    // couple of stable ones so this stays a focused long-press test
-    // rather than re-asserting the full LobbyTileMenu shape (which
-    // is already exhaustively covered by LobbyTileMenu.test.tsx).
-    expect(screen.getByTestId("tile-menu-play")).toBeInTheDocument();
-    expect(screen.getByTestId("tile-menu-hide")).toBeInTheDocument();
+    // Production contract: EDITOR'S PICK label/aria pins that
+    // `pickBadgeKind` actually returned "editors-pick" — and that the
+    // lobby threaded FEATURED_IDS (not isNew, not the curated lists, not
+    // the rating) into the lowest-priority featured branch.
+    expect(badge).toHaveTextContent("EDITOR'S PICK");
+    expect(badge).toHaveAttribute("aria-label", "EDITOR'S PICK");
+    // The colour-pill modifier locks the kind→class mapping in Badge.tsx
+    // so a regression that swapped the kind arg while keeping the
+    // testid intact still trips the assertion.
+    expect(badge.className).toMatch(/\bbadge--editors-pick\b/);
   });
 });
