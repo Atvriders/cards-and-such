@@ -60,6 +60,21 @@ describe("SettingsPage", () => {
     expect(screen.getByTestId("settings-section-data")).toBeInTheDocument();
   });
 
+  // W880 — focused coverage of the page-level H1. SettingsPage renders an
+  // accessible title via `<h1>{t("settings.title")}</h1>` inside the
+  // `.settings-header` block (i18n key resolves to "Settings"). Every
+  // other test in this suite reaches into section-scoped controls via
+  // testids and the H2 sub-section headings, so a regression that lost
+  // the page-level H1 (e.g. a layout refactor that moved the title into
+  // the global app shell) would slip through unnoticed. Pinning the H1
+  // by role + level keeps the document outline contract explicit.
+  it("renders an h1 page heading with the settings title", () => {
+    renderPage();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Settings" }),
+    ).toBeInTheDocument();
+  });
+
   it("exposes export / import / clear actions", () => {
     renderPage();
     expect(screen.getByTestId("settings-export")).toBeInTheDocument();
