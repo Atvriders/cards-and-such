@@ -1,4 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
+import { useState } from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { WelcomeTutorial, DEFAULT_WELCOME_STEPS } from "./Tutorial.js";
@@ -204,4 +205,60 @@ describe("Settings → Show coachmarks reset", () => {
     },
     60_000,
   );
+});
+
+// ----------------------------------------------------------------------
+// W680: dismissing the welcome carousel must persist across a full unmount
+// + remount. AppShell gates the carousel on `hasSeenWelcomeTutorial()` at
+// initial-render time, so the contract under test is: after clicking Skip,
+// the seen-flag is written, and a fresh mount of the same gating wrapper
+// no longer renders the carousel. This guards the first-run flow against
+// regressions where the flag is read but never written (or vice versa).
+// ----------------------------------------------------------------------
+describe("WelcomeTutorial dismiss persists across remount (W680)", () => {
+  it("Skip writes the seen-flag and a fresh remount no longer renders the carousel", () => {
+    // Mirror AppShell's gating: read the seen-flag at mount time, render
+    // the carousel only when unseen, and persist on dismiss. This is the
+    // exact contract AppShell.tsx implements (see lines 66-73, 1163-1180).
+    function FirstRunGate(): JSX.Element | null {
+      const [open, setOpen] = useState<boolean>(() => !hasSeenWelcomeTutorial());
+      if (!open) return null;
+      return (
+        <WelcomeTutorial
+          onComplete={() => {
+            markWelcomeTutorialSeen();
+            setOpen(false);
+          }}
+          onSkip={() => {
+            markWelcomeTutorialSeen();
+            setOpen(false);
+          }}
+        />
+      );
+    }
+
+    // Fresh storage → carousel must appear on first mount.
+    localStorage.clear();
+    expect(hasSeenWelcomeTutorial()).toBe(false);
+
+    const first = render(<FirstRunGate />);
+    expect(first.getByTestId("tut-step-1")).toBeTruthy();
+
+    // Dismiss via Skip — the production dismiss action.
+    fireEvent.click(first.getByTestId("tut-skip"));
+
+    // localStorage now records the carousel as seen.
+    expect(hasSeenWelcomeTutorial()).toBe(true);
+    expect(localStorage.getItem("cards-tutorial-seen")).toContain("__welcome__");
+
+    // Tearing down the tree must not lose the persisted flag.
+    first.unmount();
+    expect(hasSeenWelcomeTutorial()).toBe(true);
+
+    // Remount: gate reads the persisted flag and skips the carousel.
+    const second = render(<FirstRunGate />);
+    expect(second.queryByTestId("tut-step-1")).toBeNull();
+    expect(second.queryByTestId("tut-skip")).toBeNull();
+    second.unmount();
+  });
 });
