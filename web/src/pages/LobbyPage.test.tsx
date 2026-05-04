@@ -2353,3 +2353,73 @@ describe("LobbyPage — cards-hidden-games filters main grid (W673)", () => {
     expect(screen.getByTestId("tile-klondike")).toBeInTheDocument();
   });
 });
+
+/**
+ * W656 — when an active category chip + a non-matching search query
+ * collapse the grid to zero tiles, the lobby renders an empty-state
+ * with a "Clear filters" button (LobbyPage.tsx ~line 2326). The
+ * button's onClick wires both `setQuery("")` and `setFilter("all")` in
+ * one step, and this test pins exactly that contract: clicking it
+ * must reset both pieces of state, evidenced by (a) the empty-state
+ * node un-mounting, (b) the search input emptying, and (c) the
+ * chip-all aria-pressed flag flipping to "true" while the previously-
+ * active chip flips to "false". Asserting all three together (rather
+ * than just one) prevents a regression that resets only the query OR
+ * only the filter.
+ */
+describe("LobbyPage — clear filters empty state (W656)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking Clear filters from the empty state resets both query and filter", () => {
+    renderAt("/");
+
+    // Activate a non-default chip filter ("solitaire") so the eventual
+    // reset has something non-trivial to flip back. We pair this with
+    // a gibberish search query so even within the solitaire subset the
+    // grid collapses to zero, guaranteeing the empty-state branch.
+    const solitaireChip = screen.getByTestId("chip-solitaire");
+    fireEvent.click(solitaireChip);
+    expect(solitaireChip).toHaveAttribute("aria-pressed", "true");
+
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "zzz-no-such-game" } });
+    expect(search.value).toBe("zzz-no-such-game");
+
+    // Empty-state pinned by data-testid — its presence is what gates
+    // the Clear filters button being mounted at all.
+    const empty = screen.getByTestId("lobby-no-results");
+    expect(empty).toBeInTheDocument();
+
+    // Resolve the button by accessible name (the production string
+    // from the i18n key `lobby.clear_filters` -> "Clear filters").
+    // Scoped via `within(empty)` so we don't accidentally pick up a
+    // same-named affordance elsewhere on the page.
+    const clearBtn = within(empty).getByRole("button", {
+      name: /clear filters/i,
+    });
+    fireEvent.click(clearBtn);
+
+    // 1) Empty-state node un-mounts because the unfiltered grid is no
+    //    longer empty (state reset took effect downstream).
+    expect(screen.queryByTestId("lobby-no-results")).not.toBeInTheDocument();
+    // 2) Query was cleared — the controlled input element evidences
+    //    the `setQuery("")` half of the dual reset.
+    expect((screen.getByTestId("lobby-search") as HTMLInputElement).value).toBe(
+      "",
+    );
+    // 3) Filter flipped back to "all": chip-all is pressed, the
+    //    previously-active solitaire chip is no longer pressed, and
+    //    the persisted filter key is reset.
+    expect(screen.getByTestId("chip-all")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByTestId("chip-solitaire")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("all");
+  });
+});
