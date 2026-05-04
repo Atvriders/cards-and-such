@@ -308,6 +308,27 @@ describe("LobbyTileMenu", () => {
     }
   });
 
+  it("clamps menu position inward when the cursor is near the viewport edge (W811)", () => {
+    // W811: a right-click near the right/bottom edge of the viewport must
+    // not push menu items off-screen. The component clamps `left`/`top` so
+    // the popover stays at least 4px from the edge after reserving its
+    // approximate width (200) and height (220). We pass coordinates that
+    // would otherwise overflow the jsdom default viewport (1024x768) and
+    // assert the inline style was nudged inward.
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    renderMenu({ x: vw + 500, y: vh + 500 });
+    const menu = screen.getByTestId("tile-menu");
+    // MENU_WIDTH = 200, MENU_HEIGHT = 220, padding = 4
+    const expectedLeft = vw - 200 - 4;
+    const expectedTop = vh - 220 - 4;
+    expect(menu.style.left).toBe(`${expectedLeft}px`);
+    expect(menu.style.top).toBe(`${expectedTop}px`);
+    // Sanity: clamping must never push the popover off the leading edge.
+    expect(parseInt(menu.style.left, 10)).toBeGreaterThanOrEqual(4);
+    expect(parseInt(menu.style.top, 10)).toBeGreaterThanOrEqual(4);
+  });
+
   it("tile aria-expanded toggles as the menu opens and closes", async () => {
     render(<TileWithMenu />);
     const tile = screen.getByTestId("tile-klondike");
