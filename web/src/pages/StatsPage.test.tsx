@@ -2443,4 +2443,17 @@ describe("StatsPage", () => {
     expect(playsDelta!.textContent).not.toContain("▲");
     expect(playsDelta!.textContent).not.toContain("▼");
   });
+
+  // W841 — The "Personal records" section heading must render as an h2.
+  // W828 pinned "Top played" and W833 pinned "Activity"; this extends the
+  // section-heading audit to the personal-records card so a regression
+  // that drops the h2, downgrades it to a div/h3, or rewrites the copy
+  // (e.g. to "Best times" or "PRs") fails loudly. Section h2's give
+  // assistive tech a stable outline of the page.
+  it("W841: stats page renders 'Personal records' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Personal records" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
 });
