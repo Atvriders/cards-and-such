@@ -1035,4 +1035,34 @@ describe("SettingsPage hint-cooldown toggle (W702)", () => {
     expect(toggle.checked).toBe(true);
     expect(localStorage.getItem("cards-hint-cooldown")).toBe("true");
   });
+
+  // W802 — focused coverage of the Data > Use mock friends toggle. The
+  // existing tests cover sound, auto-move, hints, hint-cooldown, and the
+  // accordion / search filter, but nothing exercises the mock-friends
+  // devmode switch. The toggle defaults to off (isMockFriendsEnabled()
+  // returns false when unset) and writes `cards-leaderboard-friends`. We
+  // verify the default-off render, a click flipping the checkbox + the
+  // visible "On"/"Off" label while persisting "true", and a return click
+  // that round-trips back to "false". Catches regressions where the
+  // onChange disconnects from setMockFriends or the persistence useEffect
+  // stops mirroring state through setMockFriendsEnabled().
+  it("toggles mock-friends preference, updates the visible label, and persists in both directions", () => {
+    renderPage();
+    const toggle = screen.getByTestId(
+      "settings-mock-friends",
+    ) as HTMLInputElement;
+    // Default: mock-friends is off when nothing is in storage.
+    expect(toggle.checked).toBe(false);
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // off → on — checkbox flips, label re-renders, storage rewrites.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-leaderboard-friends")).toBe("true");
+    expect(toggle.closest("label")?.textContent).toContain("On");
+    // on → off — full round-trip.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-leaderboard-friends")).toBe("false");
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+  });
 });
