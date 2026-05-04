@@ -2783,4 +2783,39 @@ describe("StatsPage", () => {
     // screen readers hit the same target the tooltip does.
     expect(screen.getByRole("button", { name: "Download activity chart as SVG" })).toBe(btn);
   });
+
+  // W1148 — Sibling pin to W1136 for the top-played bar chart export. The
+  // bar button shares the same icon-only render shape as the line button,
+  // so its accessible name is carried entirely by `aria-label`. Pin the
+  // exact label so a copy-edit that only touches one of the three chart
+  // export buttons still gets caught here.
+  it("W1148: stats-export-bar button exposes 'Download top-played bar chart as SVG' aria-label", () => {
+    seedRichStats();
+    renderPage();
+    const btn = screen.getByTestId("stats-export-bar");
+    expect(btn).toBeInTheDocument();
+    expect(btn.getAttribute("aria-label")).toBe("Download top-played bar chart as SVG");
+    // Resolves via role+name lookup so screen readers hit the same node.
+    expect(screen.getByRole("button", { name: "Download top-played bar chart as SVG" })).toBe(btn);
+  });
+
+  // W1145 — The Personal Records card surfaces a `stats-empty` placeholder
+  // when `cards-best-times` is missing / empty so the layout doesn't shift
+  // and the user gets a nudge to finish a timed game. Pin the exact copy
+  // so a refactor that swaps the empty-state string (or accidentally
+  // renders the empty <ul> instead) is caught here.
+  it("W1145: stats-personal-records renders 'No best times recorded yet — finish a timed game!' empty copy when cards-best-times is missing", () => {
+    seedStats({ totalPlayed: 1 });
+    renderPage();
+    const card = screen.getByTestId("stats-personal-records");
+    expect(card).toBeInTheDocument();
+    const empty = within(card).getByText(
+      "No best times recorded yet — finish a timed game!",
+    );
+    expect(empty).toBeInTheDocument();
+    expect(empty.className).toContain("stats-empty");
+    // No PR rows should render in the empty branch — the two halves of
+    // the card are mutually exclusive.
+    expect(within(card).queryByTestId("stats-pr-row-0")).toBeNull();
+  });
 });
