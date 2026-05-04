@@ -1192,3 +1192,47 @@ describe("SettingsPage hint-cooldown toggle (W702)", () => {
     expect(cardFontRow.hidden).toBe(false);
   });
 });
+
+// W843 — focused coverage of the "Show coachmarks" button in the Gameplay
+// section. The button arms `setCoachmarkPending()` (writes
+// cards-onboard-coachmark = "pending"), then calls `resetWelcomeTutorial()`
+// to clear the `__welcome__` flag, and dispatches the
+// `cards:open-welcome-tutorial` event so the carousel re-opens. Existing
+// W561 coverage pins the show-tutorial button, but `settings-show-coachmarks`
+// is a *separate* control that additionally writes the coachmark state key.
+// A regression that disconnected its onClick from setCoachmarkPending would
+// silently slip through — nothing else exercises this single-click contract.
+describe("SettingsPage show-coachmarks button (W843)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("arms the coachmark, clears __welcome__, and dispatches the open-welcome event", () => {
+    // Pre-seed: the welcome flag must be cleared, an unrelated tutorial-seen
+    // entry must survive, and the coachmark key starts unset.
+    localStorage.setItem(
+      "cards-tutorial-seen",
+      JSON.stringify({ __welcome__: true, klondike: true }),
+    );
+    expect(localStorage.getItem("cards-onboard-coachmark")).toBeNull();
+    const handler = vi.fn();
+    window.addEventListener("cards:open-welcome-tutorial", handler);
+    try {
+      renderPage();
+      fireEvent.click(screen.getByTestId("settings-show-coachmarks"));
+
+      // Coachmark is armed for the next lobby visit.
+      expect(localStorage.getItem("cards-onboard-coachmark")).toBe("pending");
+      // Welcome flag cleared, sibling game flag preserved.
+      const map = JSON.parse(
+        localStorage.getItem("cards-tutorial-seen") as string,
+      ) as Record<string, boolean>;
+      expect(map.__welcome__).toBeUndefined();
+      expect(map.klondike).toBe(true);
+      // Carousel re-open event was dispatched exactly once.
+      expect(handler).toHaveBeenCalledTimes(1);
+    } finally {
+      window.removeEventListener("cards:open-welcome-tutorial", handler);
+    }
+  });
+});
