@@ -2076,4 +2076,68 @@ describe("StatsPage", () => {
     // "100%" (regression that ignores cur/goal ratio).
     expect(fill.style.width).toBe("50%");
   });
+
+  // W760: The "view-all-replays" affordance must render as a real anchor
+  // element (React Router's <Link> compiles to <a>) with the literal copy
+  // "View all replays →" — including the trailing right-arrow glyph that
+  // signals forward navigation to sighted users. W513 and W745 already pin
+  // the href contract on both populated and empty branches; this test pins
+  // the *element type* and *visible label* so a regression that swaps Link
+  // for a <button onClick={navigate}> (which would break right-click → "Open
+  // in new tab", middle-click, and Cmd-click flows) or strips the arrow for
+  // a plain "View all" rename gets caught at the dashboard boundary.
+  it("W760: view-all-replays renders as anchor with 'View all replays →' label in populated state", () => {
+    seedStats({ totalPlayed: 1 });
+    localStorage.setItem(
+      "cards-replays",
+      JSON.stringify([
+        { id: "r-only", gameId: "klondike", seed: 7, actions: ["a"], savedAt: 1 },
+      ]),
+    );
+    renderPage();
+
+    const panel = screen.getByTestId("stats-replays-panel");
+    const viewAll = within(panel).getByTestId("view-all-replays");
+    // Element type: must be an <a> tag (Link → anchor), NOT a <button>.
+    // This guarantees native browser navigation semantics (new-tab, copy
+    // link address, etc.) rather than a JS-only click handler.
+    expect(viewAll.tagName).toBe("A");
+    // Literal visible copy including the trailing arrow glyph (U+2192).
+    // textContent collapses to the exact string the user reads.
+    expect(viewAll.textContent).toBe("View all replays →");
+  });
+
+  // W764: Each achievement card renders the human-readable `title` and
+  // `description` from the achievement metadata as the two prominent visual
+  // text rows the user actually reads — `.achievement-title` carries the
+  // proper-noun name ("Card Shark") and `.achievement-desc` carries the
+  // imperative goal copy ("Play 50 unique games."). W156 / W755 / W749 pin
+  // the progress bar, fill width, and status label respectively, but none
+  // touch the title / description text rows. A regression that swaps title
+  // for id (so users see "card-shark" instead of "Card Shark"), drops the
+  // description div entirely, or renders the wrong achievement's metadata
+  // into the card would silently make the grid unreadable while the ARIA
+  // / progress assertions stay green. Pin both child div text contents to
+  // the exact strings sourced from the static ACHIEVEMENTS array.
+  it("W764: card-shark card renders '.achievement-title' as 'Card Shark' and '.achievement-desc' as 'Play 50 unique games.'", () => {
+    // 25 unique perGame keys puts card-shark in the "in-progress" bucket
+    // (cur=25, goal=50) so the card is visible regardless of the
+    // show-locked toggle default — same fixture pattern used by W156/W755.
+    const perGame: Record<string, { played: number; wins: number; best: number }> = {};
+    for (let i = 0; i < 25; i++) {
+      perGame[`game-${i}`] = { played: 1, wins: 0, best: 0 };
+    }
+    seedStats({ totalPlayed: 25, perGame });
+    renderPage();
+
+    const card = screen.getByTestId("achievement-card-shark");
+    // Title row: must be the proper-noun human name, not the id slug.
+    const title = card.querySelector(".achievement-title") as HTMLElement;
+    expect(title).not.toBeNull();
+    expect(title.textContent).toBe("Card Shark");
+    // Description row: imperative goal copy verbatim (note trailing period).
+    const desc = card.querySelector(".achievement-desc") as HTMLElement;
+    expect(desc).not.toBeNull();
+    expect(desc.textContent).toBe("Play 50 unique games.");
+  });
 });
