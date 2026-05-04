@@ -257,4 +257,23 @@ describe("sounds: live volume CustomEvent + mute-on-hidden visibility", () => {
 
     expect(sharedPeaks.length).toBeGreaterThan(0);
   });
+
+  // W709: playSound's first guard is `if (!isSoundOn()) return;`. When the
+  // user has explicitly disabled sound via the Settings toggle, the function
+  // must short-circuit *before* ever touching effectiveGainFactor, the
+  // AudioContext, or the recipe table — even when volume is cranked to 100
+  // and the tab is visible. Verifies no oscillator gain ramps are emitted.
+  it("playSound is a no-op when cards-sound-on is false even at full volume", () => {
+    localStorage.setItem("cards-sound-on", "false");
+    localStorage.setItem(LS_SOUND_VOLUME, "100");
+    localStorage.setItem(LS_MUTE_ON_HIDDEN, "false");
+    _refreshAudioState();
+
+    playSound("button-click");
+    playSound("win-fanfare");
+
+    // Both calls should have returned at the isSoundOn() guard, so the fake
+    // AudioContext's createGain → exponentialRampToValueAtTime never runs.
+    expect(sharedPeaks).toHaveLength(0);
+  });
 });
