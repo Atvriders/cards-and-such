@@ -106,6 +106,24 @@ describe("AboutPage", () => {
     expect(stack.textContent).toContain("React");
   });
 
+  it("opens external links safely with target=_blank and rel noopener noreferrer", () => {
+    const { container } = render(
+      <MemoryRouter>
+        <AboutPage />
+      </MemoryRouter>,
+    );
+    const externalAnchors = Array.from(
+      container.querySelectorAll('a[href^="http"]'),
+    ) as HTMLAnchorElement[];
+    expect(externalAnchors.length).toBeGreaterThan(0);
+    for (const a of externalAnchors) {
+      expect(a.getAttribute("target")).toBe("_blank");
+      const rel = a.getAttribute("rel") ?? "";
+      expect(rel).toContain("noopener");
+      expect(rel).toContain("noreferrer");
+    }
+  });
+
   it(
     "shows 'Build info unavailable' fallback when commits array is empty",
     async () => {
