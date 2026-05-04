@@ -2852,4 +2852,52 @@ describe("StatsPage", () => {
     // the card are mutually exclusive.
     expect(within(card).queryByTestId("stats-bar-chart")).toBeNull();
   });
+
+  // W1164 — Sibling-test partner to W950 (stats-export-all combined bundle).
+  // The aria-label tests (W1136/W1148/W1156) pin the accessible name of each
+  // per-chart export icon, but they don't exercise the click handler — so a
+  // refactor that wires the line button to (say) the JSON exporter, or that
+  // silently downgrades the MIME from `image/svg+xml` to a plain text Blob,
+  // would slip past the existing suite. Pin the click-time behavior of the
+  // single-chart `stats-export-line` button: clicking it must hand
+  // `URL.createObjectURL` exactly one Blob carrying the `image/svg+xml` MIME
+  // and a payload that begins with the standard SVG XML prolog. We further
+  // assert the payload is the SOLO line-chart export (carrying the live
+  // chart's `aria-label="Activity over last …"` from `LineChart`) and is NOT
+  // the combined bundle (`buildCombinedSvg` emits the "Cards & Such — Stats"
+  // header — its absence here proves we routed through the single-chart
+  // `chartToStandaloneSvg` path).
+  it("W1164: clicking stats-export-line downloads an image/svg+xml Blob carrying just the activity line chart", async () => {
+    seedRichStats();
+    // Re-spy locally so we own the calls list for this test even though the
+    // beforeEach hook already installed a default spy on URL.createObjectURL.
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-line"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    // MIME pinned to image/svg+xml (`downloadSvg` in svgShare.ts) so the
+    // browser opens the file in its SVG viewer rather than as plain text.
+    expect(blob.type).toMatch(/svg/);
+    expect(blob.type).toMatch(/^image\/svg\+xml/);
+
+    // Read the blob via FileReader (jsdom Blob lacks .text()).
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+
+    // Standard SVG document prolog + root element.
+    expect(text).toMatch(/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
+    expect(text).toContain("<svg");
+    // Single-chart payload — carries the LineChart's aria-label, NOT the
+    // combined-bundle header that `buildCombinedSvg` emits. Together these
+    // pin that we routed through `chartToStandaloneSvg(lineRef.current, …)`.
+    expect(text).toContain("Activity over last");
+    expect(text).not.toContain("Cards &amp; Such — Stats");
+  });
 });
