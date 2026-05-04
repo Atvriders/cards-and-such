@@ -589,6 +589,37 @@ describe("SettingsPage volume slider (W679)", () => {
   });
 });
 
+// W688: the Audio → "Sound effects" master toggle must persist its new
+// value to the `cards-sound-on` localStorage key on click. Unlike the
+// volume slider (W679) which fans out a `cards:volume-change` CustomEvent,
+// the sound on/off toggle relies on the React state + storage path alone
+// — sounds.ts re-reads `cards-sound-on` lazily on the next playSound()
+// call, so no same-tab broadcast is needed. This test pins the bidirectional
+// persistence contract: off → on as well as on → off, since the existing
+// "toggles sound preference" test only covers one direction.
+describe("SettingsPage sound toggle (W688)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("persists the new value to cards-sound-on across both directions", () => {
+    // Seed the muted state so the first click drives off → on. This
+    // complements the default-on case covered by the older test.
+    localStorage.setItem("cards-sound-on", "false");
+    renderPage();
+    const toggle = screen.getByTestId("sound-toggle") as HTMLInputElement;
+    expect(toggle.checked).toBe(false);
+    // off → on
+    fireEvent.click(toggle);
+    expect(localStorage.getItem("cards-sound-on")).toBe("true");
+    expect(toggle.checked).toBe(true);
+    // on → off (round-trip the same control)
+    fireEvent.click(toggle);
+    expect(localStorage.getItem("cards-sound-on")).toBe("false");
+    expect(toggle.checked).toBe(false);
+  });
+});
+
 // W170 + W493: the Gameplay → "Welcome tutorial → Show again" link must
 // clear only the `__welcome__` slot inside the `cards-tutorial-seen`
 // SeenMap (preserving any other game-specific tutorial-seen flags) and
