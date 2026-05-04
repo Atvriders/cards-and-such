@@ -177,6 +177,50 @@ describe("PlayPage post-win rating flow (W169)", () => {
     expect(screen.queryByTestId("end-rating-stars-readonly")).toBeNull();
     expect(screen.queryByTestId("end-rating-update")).toBeNull();
   });
+
+  // W821 — re-clicking the already-selected star is the StarRating
+  // toggle-off gesture, and PlayPage's `onRate` forwards the resulting
+  // 0 straight into `writeRating(plugin.id, 0)`. The localStorage
+  // helper deletes the gameId entry on a 0 write rather than storing
+  // a literal `0`, so the post-click `cards-ratings` blob should
+  // contain an empty object — not a `{ [gameId]: 0 }` entry.
+  it("W821 re-clicking the selected star clears the rating from cards-ratings", async () => {
+    // Pre-seed rating=4 so PlayPage hydrates `rating` state from disk
+    // and renders the read-only display + Update button. (The fresh
+    // post-rate flow keeps the editor open mid-toast, but mounting
+    // with an existing rating skips that branch — exactly the path
+    // we need to exercise re-click clearing on a previously-saved
+    // rating, which is what the on-disk lifecycle actually does.)
+    localStorage.setItem(
+      "cards-ratings",
+      JSON.stringify({ [hoisted.TEST_GAME_ID]: 4 }),
+    );
+
+    await mountAtWinBanner();
+
+    // Reveal the interactive editor first — the read-only variant
+    // disables its star buttons, so we have to step through Update
+    // before the toggle-off click can land.
+    act(() => {
+      fireEvent.click(screen.getByTestId("end-rating-update"));
+    });
+
+    // Click star 4 (the currently-selected one). StarRating treats
+    // `onClick` on `value === n` as a clear and fires `onChange(0)`.
+    act(() => {
+      fireEvent.click(screen.getByTestId("end-rating-stars-star-4"));
+    });
+
+    // `writeRating(_, 0)` removes the gameId key from the JSON map
+    // rather than writing `0`, so the blob should now be `{}`. We
+    // assert the parsed shape rather than the raw string so a future
+    // representation change (e.g. removing the empty key entirely)
+    // doesn't fail this test for an unrelated reason.
+    const raw = localStorage.getItem("cards-ratings");
+    expect(raw).not.toBeNull();
+    const parsed = JSON.parse(raw as string) as Record<string, number>;
+    expect(parsed[hoisted.TEST_GAME_ID]).toBeUndefined();
+  });
 });
 
 // Reference React so the file is unambiguously a JSX module under
