@@ -2261,4 +2261,51 @@ describe("StatsPage", () => {
     expect(subtitle).not.toBeNull();
     expect(subtitle?.textContent).toBe("3 plays in the last 30 days");
   });
+
+  // W820: complement to W633 (which exercised the up-direction branch). When
+  // the current 7-day window has FEWER plays than the prior 7-day window, the
+  // Plays delta must render with the down-direction styling (is-down class,
+  // ▼ glyph, data-direction="down") and the absolute percent magnitude. This
+  // pins the d < 0 branch of renderDelta so a future refactor that swaps the
+  // up/down branches fails loudly here instead of shipping inverted arrows.
+  it("W820: stats-this-week Plays delta renders is-down with ▼ glyph when current<prior", () => {
+    seedRichStats();
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // 2 plays in current window vs 4 in prior window → -50% delta.
+    // Score=0 keeps wins at 0/0 so wins-row delta is null and can't shadow
+    // the down-direction assertion below.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60, score: 0 },
+        { ts: now - 3 * dayMs, time: 60, score: 0 },
+        { ts: now - 8 * dayMs, time: 60, score: 0 },
+        { ts: now - 9 * dayMs, time: 60, score: 0 },
+        { ts: now - 11 * dayMs, time: 60, score: 0 },
+        { ts: now - 13 * dayMs, time: 60, score: 0 },
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-this-week");
+    const list = within(card).getByTestId("stats-this-week-list");
+    const playsRow = list.querySelectorAll("li")[0];
+    expect(playsRow).toBeDefined();
+    expect(playsRow!.textContent).toContain("2");
+
+    const playsDelta = playsRow!.querySelector(".stats-week-delta");
+    expect(playsDelta).not.toBeNull();
+    expect(playsDelta!.getAttribute("data-direction")).toBe("down");
+    expect(playsDelta!.classList.contains("is-down")).toBe(true);
+    expect(playsDelta!.textContent).toContain("▼");
+    // Magnitude is rendered as the absolute value (no leading "-").
+    expect(playsDelta!.textContent).toContain("50%");
+    expect(playsDelta!.textContent).not.toContain("-50%");
+
+    // Inversion-immunity: the same span must NOT carry up/flat styling.
+    expect(playsDelta!.classList.contains("is-up")).toBe(false);
+    expect(playsDelta!.classList.contains("is-flat")).toBe(false);
+    expect(playsDelta!.textContent).not.toContain("▲");
+  });
 });
