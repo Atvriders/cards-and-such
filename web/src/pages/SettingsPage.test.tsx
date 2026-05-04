@@ -82,6 +82,19 @@ describe("SettingsPage", () => {
     expect(localStorage.getItem("cards-card-back")).toBe("red-weave");
   });
 
+  it("theme picker persists choice to localStorage and applies data-theme to root", () => {
+    // Mount on the default theme ("midnight"); the persistence effect
+    // writes that id to storage on first render. Clicking a different
+    // theme chip must rewrite `cards-bg-theme` and stamp
+    // `<html data-theme="...">` so engine CSS picks up the new vars.
+    renderPage();
+    expect(localStorage.getItem("cards-bg-theme")).toBe("midnight");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("midnight");
+    fireEvent.click(screen.getByTestId("theme-row-emerald"));
+    expect(localStorage.getItem("cards-bg-theme")).toBe("emerald");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("emerald");
+  });
+
   it("per-section reset reverts that section to defaults without touching others", () => {
     localStorage.setItem("cards-sound-on", "false");
     localStorage.setItem("cards-card-back", "red-weave");
