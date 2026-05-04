@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 // Mock the platform sounds module so the Test-sounds panel tests can
@@ -74,6 +74,36 @@ describe("SettingsPage", () => {
     expect(toggle.checked).toBe(true);
     fireEvent.click(toggle);
     expect(localStorage.getItem("cards-sound-on")).toBe("false");
+  });
+
+  // W762 — focused coverage of the Gameplay > Auto-move toggle. Other
+  // tests only assert the testid exists (accordion) or that the storage
+  // key gets cleared on per-section reset; nothing exercises the
+  // checkbox's two-way interactive behavior. This test verifies the
+  // default-on render, an Off click that flips both the checkbox state
+  // and the visible "On"/"Off" label while persisting "false" to
+  // `cards-auto-move`, and a second click that flips it back to On with
+  // the inverse persisted value. Catches regressions where the onChange
+  // disconnects from setAutoMove or the persistence useEffect stops
+  // mirroring state to localStorage.
+  it("toggles auto-move preference, updates the visible label, and persists in both directions", () => {
+    renderPage();
+    const toggle = screen.getByTestId("settings-auto-move") as HTMLInputElement;
+    // Default: auto-move is on. The mount effect mirrors that to storage.
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-auto-move")).toBe("true");
+    // The sibling .settings-toggle-label should reflect the live state.
+    expect(toggle.closest("label")?.textContent).toContain("On");
+    // Click off — checkbox flips, label re-renders, storage rewrites.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-auto-move")).toBe("false");
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // Click back on — full round-trip.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-auto-move")).toBe("true");
+    expect(toggle.closest("label")?.textContent).toContain("On");
   });
 
   it("changes the card-back swatch and persists it", () => {
@@ -237,8 +267,16 @@ describe("SettingsPage", () => {
         "not-a-known-key": "ignored",
       },
     };
-    const file = new File([JSON.stringify(payload)], "backup.json", {
+    const json = JSON.stringify(payload);
+    const file = new File([json], "backup.json", {
       type: "application/json",
+    });
+    // jsdom 24's File doesn't ship a working `.text()` (handleImportFile
+    // uses `await file.text()`); pin the read to our seeded payload so
+    // the production code path resolves in the test environment.
+    Object.defineProperty(file, "text", {
+      configurable: true,
+      value: () => Promise.resolve(json),
     });
 
     const input = screen.getByTestId(
@@ -254,6 +292,12 @@ describe("SettingsPage", () => {
       fireEvent.click(yes);
     });
 
+    // The handler is async — file.text() + importAll() resolve in
+    // microtasks after the click. waitFor polls until the achievement
+    // flag (the last write in handleImportFile) is stamped.
+    await waitFor(() =>
+      expect(localStorage.getItem("cards-data-imported")).toBe("true"),
+    );
     // Recognized keys round-tripped verbatim into localStorage.
     expect(localStorage.getItem("cards-favorites")).toBe(
       '["klondike","freecell"]',
@@ -262,8 +306,6 @@ describe("SettingsPage", () => {
     expect(localStorage.getItem("cards-best-times")).toBe('{"freecell":120}');
     // Unknown keys silently skipped — they must not pollute storage.
     expect(localStorage.getItem("not-a-known-key")).toBeNull();
-    // Achievement flag stamped after a successful import.
-    expect(localStorage.getItem("cards-data-imported")).toBe("true");
   });
 
   it("clear-all aborts when the user cancels the confirm dialog", async () => {
