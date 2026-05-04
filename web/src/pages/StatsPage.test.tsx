@@ -2183,4 +2183,75 @@ describe("StatsPage", () => {
     expect(row2.textContent).toContain("Spider");
     expect(row3.textContent).toContain("Yahtzee");
   });
+
+  // W786: The `stats-personal-records` per-game best-times card caps the rendered
+  // list at 10 rows (`rows.slice(0, 10)` in StatsPage.tsx). W768 covers the sort
+  // order; this complements it by asserting the cap itself — seeding 13 valid
+  // best-times must yield exactly 10 rendered rows, with the 11th-fastest entry
+  // (chess at 110s) absent from the DOM.
+  it("W786: stats-personal-records caps at 10 rows when 13+ entries are seeded", () => {
+    seedStats({ totalPlayed: 13 });
+    // 13 valid game ids in strictly ascending best-time order. Top 10 by speed
+    // should render; chess (110s), checkers (120s), pinochle (130s) must be
+    // dropped by the slice(0, 10) cap.
+    localStorage.setItem(
+      "cards-best-times",
+      JSON.stringify({
+        klondike: 10,
+        spider: 20,
+        agram: 30,
+        balut: 40,
+        yahtzee: 50,
+        "texas-holdem": 60,
+        hearts: 70,
+        euchre: 80,
+        whist: 90,
+        sudoku: 100,
+        chess: 110,    // 11th-fastest — must NOT render
+        checkers: 120, // 12th — must NOT render
+        pinochle: 130, // 13th — must NOT render
+      }),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-personal-records");
+    const rows = card.querySelectorAll('[data-testid^="stats-pr-row-"]');
+    expect(rows.length).toBe(10);
+    // The fastest entry (klondike, 10s) lands at row 0; the 10th-fastest
+    // (sudoku, 100s) lands at row 9; the cap drops chess/checkers/pinochle.
+    expect(within(card).getByTestId("stats-pr-row-0").textContent).toContain("Klondike");
+    expect(within(card).getByTestId("stats-pr-row-9").textContent).toContain("Sudoku");
+    expect(card.querySelector('[data-testid="stats-pr-row-10"]')).toBeNull();
+    expect(card.textContent).not.toContain("Chess");
+    expect(card.textContent).not.toContain("Checkers");
+    expect(card.textContent).not.toContain("Pinochle");
+  });
+
+  // W798: the stats-cat-heatmap-card renders a subtitle with a running count of
+  // total plays in the last 30 days (e.g. "5 plays in the last 30 days"). The
+  // counter is derived from cards-time-history:* timestamps within the 30-day
+  // window — verify it matches the seeded entry count rather than total entries.
+  it("W798: stats-cat-heatmap-card subtitle renders '<n> plays in the last 30 days' counter", () => {
+    seedStats({ totalPlayed: 4 });
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // 3 plays inside the 30-day window (klondike is solitaire), 1 outside (40d ago)
+    // — the counter should report 3, not 4. Plus a non-categorized id to confirm
+    // that uncategorized history doesn't pollute the visible counter total.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 90, score: 100 },
+        { ts: now - 5 * dayMs, time: 120, score: 200 },
+        { ts: now - 15 * dayMs, time: 60, score: 50 },
+        { ts: now - 40 * dayMs, time: 30, score: 25 }, // outside window
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-cat-heatmap-card");
+    const subtitle = card.querySelector(".stats-chart-label");
+    expect(subtitle).not.toBeNull();
+    expect(subtitle?.textContent).toBe("3 plays in the last 30 days");
+  });
 });
