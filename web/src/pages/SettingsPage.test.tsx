@@ -555,6 +555,40 @@ describe("SettingsPage Show hidden games (W616)", () => {
   });
 });
 
+// W679: the Audio → Volume range slider must persist its value to the
+// `cards-sound-volume` localStorage key on change AND fan out a same-tab
+// `cards:volume-change` CustomEvent (whose `detail` carries the new
+// integer 0..100) so sounds.ts can update its module-scope cache without
+// waiting for a `storage` event (which doesn't fire in the writing tab).
+// The visible "% meta" label adjacent to the field must also reflect the
+// new value so the user sees the change immediately.
+describe("SettingsPage volume slider (W679)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("persists the new volume to cards-sound-volume and dispatches cards:volume-change", () => {
+    const handler = vi.fn();
+    window.addEventListener("cards:volume-change", handler as EventListener);
+    try {
+      renderPage();
+      const slider = screen.getByTestId("settings-volume") as HTMLInputElement;
+      fireEvent.change(slider, { target: { value: "37" } });
+      // Persisted to localStorage on the 0..100 integer scale.
+      expect(localStorage.getItem("cards-sound-volume")).toBe("37");
+      // Visible "%" meta label tracks the new value.
+      expect(screen.getByText("37%")).toBeInTheDocument();
+      // Same-tab CustomEvent fired exactly once with detail=37.
+      expect(handler).toHaveBeenCalledTimes(1);
+      const evt = handler.mock.calls[0][0] as CustomEvent<number>;
+      expect(evt.type).toBe("cards:volume-change");
+      expect(evt.detail).toBe(37);
+    } finally {
+      window.removeEventListener("cards:volume-change", handler as EventListener);
+    }
+  });
+});
+
 // W170 + W493: the Gameplay → "Welcome tutorial → Show again" link must
 // clear only the `__welcome__` slot inside the `cards-tutorial-seen`
 // SeenMap (preserving any other game-specific tutorial-seen flags) and
