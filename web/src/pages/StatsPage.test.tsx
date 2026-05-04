@@ -2483,4 +2483,47 @@ describe("StatsPage", () => {
     expect(heading).toBeTruthy();
     expect(heading.tagName).toBe("H2");
   });
+
+  // W851 — The "Records" section heading must render as an h2.
+  // W828/W833/W841/W846/W847 pinned "Top played", "Activity",
+  // "Personal records", "Achievements", and "This week"; this extends
+  // the section-heading audit to the global-records card so a
+  // regression that drops the h2, downgrades it to a div/h3, or
+  // rewrites the copy (e.g. to "Stats" or "Highlights") fails loudly.
+  // Section h2's give assistive tech a stable outline of the page.
+  it("W851: stats page renders 'Records' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Records" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
+
+  // W852 — The "Plays by hour of day" section heading must render as an h2.
+  // W828/W833/W841/W846/W847/W851 pinned "Top played", "Activity",
+  // "Personal records", "Achievements", "This week", and "Records"; this
+  // extends the section-heading audit to the hour-of-day histogram card so
+  // a regression that drops the h2, downgrades it to a div/h3, or rewrites
+  // the copy (e.g. to "Hourly plays" or "Plays by hour") fails loudly.
+  // Section h2's give assistive tech a stable outline of the page.
+  it("W852: stats page renders 'Plays by hour of day' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Plays by hour of day" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
+
+  // W854 — The "Most-hinted games" section heading must render as an h2.
+  // W828/W833/W841/W846/W847/W851/W852 pinned "Top played", "Activity",
+  // "Personal records", "Achievements", "This week", "Records", and
+  // "Plays by hour of day"; this extends the section-heading audit to
+  // the most-hinted-games card so a regression that drops the h2,
+  // downgrades it to a div/h3, or rewrites the copy (e.g. to "Hint usage"
+  // or "Hinted games") fails loudly. Section h2's give assistive tech a
+  // stable outline of the page.
+  it("W854: stats page renders 'Most-hinted games' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Most-hinted games" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
 });
