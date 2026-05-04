@@ -91,3 +91,34 @@ describe("Confetti reduced-motion short-circuit (W648)", () => {
     expect(onDone).toHaveBeenCalledTimes(1);
   });
 });
+
+/**
+ * W706 lifecycle: the 3-second `onDone` timer must be cleared on unmount so a
+ * caller that tears the celebration overlay down early (e.g. user navigates
+ * away mid-animation) does not see a stray `onDone` fire afterwards. Guards
+ * against the classic "setTimeout without clearTimeout in effect cleanup"
+ * leak.
+ */
+describe("Confetti unmount cancels duration timer (W706)", () => {
+  afterEach(() => {
+    cleanup();
+    vi.useRealTimers();
+  });
+
+  it("does not call onDone if unmounted before the duration elapses", () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const onDone = vi.fn();
+    const { unmount } = render(<Confetti onDone={onDone} />);
+
+    // Advance partway through the 3000ms duration, then unmount.
+    vi.advanceTimersByTime(1500);
+    expect(onDone).not.toHaveBeenCalled();
+
+    unmount();
+
+    // Advance well past the original 3000ms timeout; the cleanup should have
+    // cleared it so onDone never fires.
+    vi.advanceTimersByTime(5000);
+    expect(onDone).not.toHaveBeenCalled();
+  });
+});
