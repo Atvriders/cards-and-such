@@ -1193,6 +1193,75 @@ describe("StatsPage", () => {
     expect(chart.querySelectorAll('[data-peak="true"]').length).toBe(1);
   });
 
+  // W715 — Per-bar data-count exposes the exact hour bucket counts. Distinct
+  // from W353 (which only checks data-peak on the winning bar): here we seed
+  // an asymmetric distribution across THREE different hours and verify every
+  // one of the 24 bars exists and reports the correct count via data-count.
+  // Exercises the full counts[] array, not just the argmax, so any regression
+  // that misindexes the bucket array (e.g. off-by-one, UTC vs local hour)
+  // surfaces on the non-peak bins too. Also pins the contract that the chart
+  // always renders 24 bars regardless of distribution sparsity.
+  it("W715: stats-hour-chart renders 24 bars whose data-count matches each hour bucket", () => {
+    seedRichStats();
+    // Anchor seeded plays to fixed local-time hours on YESTERDAY to dodge
+    // both DST/timezone shifts AND the future-skew filter that drops
+    // ts > now (which would otherwise nuke late-hour buckets when the test
+    // runs in the morning and vice versa).
+    const at = (hour: number): number => {
+      const d = new Date();
+      d.setDate(d.getDate() - 1);
+      d.setHours(hour, 0, 0, 0);
+      return d.getTime();
+    };
+    // Distribution: 4 plays at 03:00, 1 play at 11:00, 2 plays at 20:00
+    // (split across two time-history blobs to exercise multi-blob aggregation).
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: at(3), time: 60 },
+        { ts: at(3) + 60_000, time: 60 },
+        { ts: at(3) + 120_000, time: 60 },
+        { ts: at(11), time: 60 },
+      ]),
+    );
+    localStorage.setItem(
+      "cards-time-history:spider",
+      JSON.stringify([
+        { ts: at(3) + 180_000, time: 60 },
+        { ts: at(20), time: 60 },
+        { ts: at(20) + 60_000, time: 60 },
+      ]),
+    );
+
+    renderPage();
+    const chart = screen.getByTestId("stats-hour-chart");
+    expect(chart.getAttribute("data-total")).toBe("7");
+
+    // All 24 bars must render — the chart's contract is one bar per hour
+    // regardless of how sparse the distribution is.
+    const bars = chart.querySelectorAll('[data-testid^="stats-hour-bar-"]');
+    expect(bars.length).toBe(24);
+
+    // Expected per-hour counts: hour 3 -> 4, hour 11 -> 1, hour 20 -> 2,
+    // every other hour -> 0. Walk every bar and assert data-count matches.
+    const expected = new Array<number>(24).fill(0);
+    expected[3] = 4;
+    expected[11] = 1;
+    expected[20] = 2;
+    for (let hr = 0; hr < 24; hr++) {
+      const bar = screen.getByTestId(`stats-hour-bar-${hr}`);
+      expect(bar.getAttribute("data-count")).toBe(String(expected[hr]));
+    }
+
+    // Sanity-check the totals line up: sum of every bar's data-count equals
+    // the chart's data-total attribute (7).
+    let sum = 0;
+    bars.forEach((b) => {
+      sum += Number((b as HTMLElement).getAttribute("data-count") ?? 0);
+    });
+    expect(sum).toBe(7);
+  });
+
   it("achievement cards render in unlocked → in-progress → locked order with matching data-state", () => {
     // Seed exactly: 1 unlocked (first-win), 2 in-progress (ten-wins, hundred-wins),
     // rest locked. totalWins=1 is the only stats lever flipped, so the only
@@ -1733,6 +1802,44 @@ describe("StatsPage", () => {
     expect(within(card).getByText("Favorite")).toBeTruthy();
     expect(within(card).getByText("solitaire")).toBeTruthy();
     expect(card.textContent).not.toContain("—");
+  });
+
+  // W717: stats-this-week's "Avg time" row formats current.avgTime via
+  // formatAvgTime → formatBestTime ("Mm Ss"). Seed three klondike entries
+  // inside the current 7d window with times 60/120/180s — mean is 120s, so
+  // the Avg time <em> must read exactly "2m 0s". Existing this-week tests
+  // (W633 and the up-direction delta test) only assert plays/wins counts
+  // and delta directions; this pins the actual formatted average string.
+  it("W717: stats-this-week Avg time row renders formatAvgTime(current.avgTime) as 'Mm Ss'", () => {
+    seedRichStats();
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // Three plays in [now-7d, now], times 60/120/180s → mean = 120s = "2m 0s".
+    // Score=0 on every entry so winsDelta is null and can't accidentally
+    // bleed into the avg-time row's text via shared classnames.
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60, score: 0 },
+        { ts: now - 2 * dayMs, time: 120, score: 0 },
+        { ts: now - 3 * dayMs, time: 180, score: 0 },
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-this-week");
+    const list = within(card).getByTestId("stats-this-week-list");
+    // Avg time is the 3rd <li> in the current-week list.
+    const avgRow = list.querySelectorAll("li")[2];
+    expect(avgRow).toBeDefined();
+    expect(avgRow!.textContent).toContain("Avg time");
+    const avgValue = avgRow!.querySelector(".stats-week-value");
+    expect(avgValue).not.toBeNull();
+    expect(avgValue!.textContent).toBe("2m 0s");
+    // Sanity: the format-failure sentinel must not slip in when avgTime
+    // is a finite positive number, and the value must not be NaN.
+    expect(avgValue!.textContent).not.toBe("—");
+    expect(avgValue!.textContent).not.toMatch(/NaN/);
   });
 
   // W451: Sanity-check the responsive `.stats-card-grid` so a refactor that
