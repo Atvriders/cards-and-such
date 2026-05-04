@@ -2423,3 +2423,175 @@ describe("LobbyPage — clear filters empty state (W656)", () => {
     expect(localStorage.getItem("cards-lobby-filter")).toBe("all");
   });
 });
+
+/**
+ * W686 — Pure search-query empty state.
+ *
+ * Sibling of the W656 test above, but isolates the *search-only* path:
+ * no chip filter is engaged, only a clearly-impossible query is typed
+ * into the search input. This pins the contract that:
+ *   1. The `lobby-no-results` empty-state node mounts when the
+ *      filtered tile count collapses to zero by query alone.
+ *   2. Zero `grid-tile-*` elements remain in the DOM — i.e. the
+ *      empty-state branch fully replaces the grid render rather than
+ *      coexisting with stale tiles.
+ */
+describe("LobbyPage — search-only empty state (W686)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("shows lobby-no-results and zero tiles when the search query has no matches", () => {
+    renderAt("/");
+
+    // Type a clearly-impossible query — no game id, family, or title
+    // contains this digraph soup, so the filtered set must be empty.
+    // While a query is active, featured-family duplicates are demoted to
+    // `grid-tile-<id>`; the `tile-<id>` form is the canonical id used by
+    // every tile in the main grid. Asserting both are empty pins the
+    // contract that the empty-state branch fully replaces the grid.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "qzqzqzqz" } });
+    expect(search.value).toBe("qzqzqzqz");
+
+    // 1) Empty-state node mounts.
+    expect(screen.getByTestId("lobby-no-results")).toBeInTheDocument();
+
+    // 2) Zero `grid-tile-*` elements remain — the demoted testid form
+    //    used for duplicate featured families during an active query.
+    expect(
+      document.querySelectorAll('[data-testid^="grid-tile-"]').length,
+    ).toBe(0);
+    // 3) Zero canonical `tile-<id>` tiles either — every game/family
+    //    card has been replaced by the empty-state UI. We exclude the
+    //    nested `tile-fav-marker-*`, `tile-rating-*`, etc. children
+    //    that share the `tile-` prefix on non-tile descendants.
+    const canonicalTiles = Array.from(
+      document.querySelectorAll('[data-testid^="tile-"]'),
+    ).filter((el) => {
+      const id = el.getAttribute("data-testid") ?? "";
+      // Match exactly `tile-<one segment>` — a single dash after `tile`.
+      return /^tile-[^-]+$/.test(id);
+    });
+    expect(canonicalTiles.length).toBe(0);
+  });
+});
+
+/**
+ * W682 — per-tile rating display reads from `cards-ratings`.
+ *
+ * Each main-grid GameCard renders a `tile-rating-<id>` widget exactly
+ * when the user has a non-zero rating stored for that game (LobbyPage
+ * line ~3043: `userRating > 0 && <span data-testid={"tile-rating-..."} />`).
+ * The rating itself is hydrated from localStorage[`cards-ratings`] via
+ * `readRatings()` on first render, so seeding that blob before mount
+ * MUST cause the matching tile to expose the rating widget while
+ * unrated tiles MUST NOT.
+ *
+ * `pool-10ball` is a standalone (non-family) game id whose tile
+ * resolves uniquely (no featured-strip duplicate, since it's not in
+ * FEATURED_IDS) and which the sibling Hearts test (LobbyPageHearts)
+ * already pins as a stable single-mount tile. Seeding it at 4/5
+ * exercises the positive branch; the negative branch is asserted by
+ * checking that across the WHOLE rendered grid exactly one
+ * `tile-rating-*` widget exists — proving every other tile correctly
+ * collapsed its rating slot via the `userRating > 0 &&` guard.
+ */
+describe("LobbyPage — per-tile rating display (W682)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders tile-rating-<id> only for the game with a stored rating", async () => {
+    // Seed the canonical rating blob BEFORE the lobby mounts so the
+    // initial readRatings() call in useState's initializer hydrates
+    // the value synchronously — the page renders the rating widget
+    // on the very first paint.
+    localStorage.setItem(
+      "cards-ratings",
+      JSON.stringify({ "pool-10ball": 4 }),
+    );
+
+    renderAt("/");
+
+    // findByTestId tolerates the standard tile-mount settle that the
+    // sibling Hearts/Hide tests already rely on, so the rated tile is
+    // reachable even if it lands past the initial viewport.
+    const ratedTile = await screen.findByTestId("tile-pool-10ball");
+    const ratingWidget = within(ratedTile).getByTestId(
+      "tile-rating-pool-10ball",
+    );
+    // The widget's aria-label is the production contract for "Your
+    // rating: N of 5 stars" — pinning it locks both the seeded value
+    // (4) propagating through useState AND the LobbyPage tile branch
+    // wiring `userRating` into the StarRating element.
+    expect(ratingWidget).toHaveAttribute(
+      "aria-label",
+      "Your rating: 4 of 5 stars",
+    );
+
+    // Control: across every rendered tile, EXACTLY one rating widget
+    // must be present — the seeded one. If the gating regressed and
+    // the widget always rendered, this count would balloon to match
+    // the visible tile count; if the seeded value silently failed to
+    // hydrate, the count would drop to zero. Both regressions get
+    // caught by pinning the cardinality at 1.
+    const allRatingWidgets = screen.getAllByTestId(/^tile-rating-/);
+    expect(allRatingWidgets).toHaveLength(1);
+    expect(allRatingWidgets[0]).toBe(ratingWidget);
+  });
+});
+
+/**
+ * W713 — family tiles render a visible variant-count badge with the
+ * canonical `fam-count-<family.id>` testid. The badge text MUST follow
+ * the production contract: "<N> variant" for N=1, "<N> variants" for
+ * N!=1, where N is the number of resolved family members. Sibling W662
+ * pinned the chip-style "+N variants" affordance; this companion locks
+ * the upper-right count badge at `fam-count-klondike` so a refactor
+ * that drops or renames the badge surfaces here.
+ *
+ * `klondike` is the canonical multi-variant family used throughout this
+ * file (see `web/src/games/families.ts`); it ships with several resolved
+ * members, so the badge MUST report a count of at least 2. We assert
+ * the structural shape (testid + matching label format) rather than a
+ * brittle exact number, so adding/removing a klondike variant in the
+ * registry doesn't churn this test — the contract is "the count badge
+ * mirrors the family size", not "klondike has exactly K variants".
+ */
+describe("LobbyPage — family-tile variant count badge (W713)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders fam-count-klondike with a '<N> variants' label where N >= 2", () => {
+    renderAt("/");
+
+    // The family tile is always present in the main grid for klondike
+    // (a featured family), so a synchronous query is sufficient — the
+    // sibling W663 test confirms tile-* children paint on the initial
+    // mount.
+    const countBadge = screen.getByTestId(`fam-count-${FAMILY_ID}`);
+    expect(countBadge).toBeInTheDocument();
+
+    // Production contract: badge text is "<N> variant" or "<N> variants"
+    // (the leading glyph "≡" is aria-hidden but still appears in
+    // textContent — accept it before the count to keep the regex tight
+    // without coupling to the exact glyph character).
+    const text = countBadge.textContent ?? "";
+    const match = text.match(/(\d+)\s+variants?$/);
+    expect(match).not.toBeNull();
+    const count = Number(match?.[1] ?? "0");
+
+    // Klondike is a multi-variant family by definition — a count of 0
+    // or 1 means either the family collapsed to a standalone tile (no
+    // longer a family) or the resolver dropped every member but one.
+    // Both regressions are caught by pinning N >= 2.
+    expect(count).toBeGreaterThanOrEqual(2);
+
+    // Pluralisation contract: "1 variant" (no s) when N === 1, otherwise
+    // "<N> variants" (with s). Since we just asserted N >= 2, the badge
+    // MUST use the plural form.
+    expect(text).toMatch(/\d+\s+variants$/);
+  });
+});
