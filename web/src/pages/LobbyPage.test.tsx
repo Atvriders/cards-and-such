@@ -3346,3 +3346,70 @@ describe("LobbyPage — coachmark Escape dismiss (W782)", () => {
     expect(localStorage.getItem("cards-onboard-coachmark")).toBe("done");
   });
 });
+
+/**
+ * W784 — "NEW" badge on recently-added tiles.
+ *
+ * The lobby treats the last NEW_GAME_WINDOW (60) entries of the GAMES
+ * registry as "recently added" and stamps them with a NEW badge that
+ * outranks every other badge kind (see pickBadgeKind in
+ * `web/src/platform/gameTags.ts`: NEW > CHALLENGING > QUICK > POPULAR >
+ * EDITORS-PICK). The set of "new" ids is computed from registry tail
+ * order at module load (no timestamp on plugins), so a regression that
+ * inverted the slice direction or zeroed out NEW_GAME_WINDOW would drop
+ * the badge entirely.
+ *
+ * To stay robust against registry churn we read the LAST entry of GAMES
+ * at test time — that id is guaranteed to fall inside the NEW window for
+ * any sane window size (>= 1) — and narrow the visible pool to just
+ * that game by typing its full title into the search input. Search
+ * also suppresses the featured strip, so the only `tile-badge-<id>`
+ * with the canonical (non-`feat-`) testid prefix is the main-grid one.
+ */
+describe("LobbyPage — NEW badge on recently-added tiles (W784)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("stamps tile-badge-<id> with the NEW label on the last registered game", async () => {
+    // Dynamically resolve the registry tail so the test survives both
+    // additions (the new tail entry inherits the badge) and the
+    // existing-id stays-in-window invariant up to NEW_GAME_WINDOW=60
+    // entries below.
+    const lastGame = GAMES.filter((g): g is NonNullable<typeof g> => g != null).at(-1);
+    expect(lastGame).toBeDefined();
+    const id = lastGame!.id;
+    const title = lastGame!.title;
+
+    renderAt("/");
+
+    // Narrow the visible pool to exactly this game by searching its
+    // full title — guarantees the tile lands on page 1 regardless of
+    // alphabetical pagination, and suppresses the featured strip so
+    // `tile-badge-<id>` is unambiguous (featured tiles use the
+    // distinct `feat-tile-badge-<id>` testid).
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: title } });
+
+    // The badge slot is rendered by the SoloCard branch as a child of
+    // the tile root. We don't assume any specific tile-* prefix shape
+    // for the wrapper — `tile-badge-<id>` is the load-bearing testid.
+    const badge = await waitFor(() => screen.getByTestId(`tile-badge-${id}`));
+    expect(badge).toBeInTheDocument();
+
+    // Production contract: NEW outranks every other badge kind, so the
+    // text/aria-label MUST be "NEW". This pins both that `isNew` was
+    // wired through to the SoloCard's `pickBadgeKind` call AND that the
+    // tail-slice in `newGameIds` actually included this id.
+    expect(badge).toHaveTextContent("NEW");
+    expect(badge).toHaveAttribute("aria-label", "NEW");
+    // The Badge component stamps `badge--<kind>` for the colour pill —
+    // pinning the modifier class catches a regression that swapped the
+    // kind argument while keeping the testid intact.
+    expect(badge.className).toMatch(/\bbadge--new\b/);
+  });
+});
