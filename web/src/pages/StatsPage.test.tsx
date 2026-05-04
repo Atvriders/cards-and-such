@@ -3102,4 +3102,30 @@ describe("StatsPage", () => {
     expect(subtitle).toBeInTheDocument();
     expect(subtitle.className).toContain("stats-chart-label");
   });
+
+  // W1198 — The category × day-of-week heatmap renders a header row above the
+  // category rows with the seven day-of-week labels (Mon..Sun). That header
+  // row is decorative — the cells below already carry per-cell `title`
+  // tooltips and the parent grid has an `aria-label` summarising the chart —
+  // so the head row is wired with `aria-hidden="true"` to keep screen
+  // readers from announcing "Mon Tue Wed..." before the actual data. No test
+  // currently pins either the head row's aria-hidden marker or the exact
+  // ordered set of day labels it contains, so a refactor that drops the
+  // aria-hidden (causing AT double-announcement) or reorders the labels
+  // (e.g. switching to a Sun-first week) would slip through silently.
+  it("W1198: stats-cat-heatmap head row is aria-hidden and renders Mon..Sun day labels in order", () => {
+    renderPage();
+    const grid = screen.getByTestId("stats-cat-heatmap");
+    const headRow = grid.querySelector(".stats-heatmap-row--head");
+    expect(headRow).not.toBeNull();
+    // Decorative header — must be aria-hidden so AT users only hear the
+    // grid's aria-label and per-cell tooltips, not the column headers.
+    expect(headRow?.getAttribute("aria-hidden")).toBe("true");
+    // Pin the exact ordered Mon..Sun label set so a Sun-first reorder or
+    // a label rename ("Mo"/"M") fails loudly here.
+    const dowLabels = headRow!.querySelectorAll(".stats-heatmap-dow");
+    expect(dowLabels.length).toBe(7);
+    const labels = Array.from(dowLabels).map((n) => n.textContent);
+    expect(labels).toEqual(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+  });
 });
