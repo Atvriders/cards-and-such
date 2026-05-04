@@ -658,3 +658,35 @@ describe("SettingsPage show-tutorial link (W561)", () => {
     }
   });
 });
+
+// W702: Settings UI side of the hint-cooldown contract. PlayPage tests
+// W692 / W698 cover the runtime side (the cooldown actually throttles,
+// or doesn't, based on the stored flag). This test pins the SettingsPage
+// toggle: the default is "on" (true), clicking flips the localStorage
+// value to "false", and clicking again round-trips back to "true". The
+// `cards-hint-cooldown` key is the single source of truth — keeping
+// these in lock-step prevents UI/runtime drift.
+describe("SettingsPage hint-cooldown toggle (W702)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("persists cards-hint-cooldown across both directions", () => {
+    renderPage();
+    const toggle = screen.getByTestId(
+      "settings-hint-cooldown",
+    ) as HTMLInputElement;
+    // Default is on (true) — readHintCooldown() returns true when unset.
+    expect(toggle.checked).toBe(true);
+    // The persistence effect writes the hydrated default on mount.
+    expect(localStorage.getItem("cards-hint-cooldown")).toBe("true");
+    // on → off
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-hint-cooldown")).toBe("false");
+    // off → on (round-trip the same control)
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-hint-cooldown")).toBe("true");
+  });
+});
