@@ -1287,3 +1287,31 @@ describe("SettingsPage show-coachmarks overrides terminal state (W855)", () => {
     expect(localStorage.getItem("cards-onboard-coachmark")).toBe("pending");
   });
 });
+
+// W864 — focused coverage of the Gameplay → "Hints per game" range slider.
+// Other tests only verify the storage key gets cleared on per-section reset
+// or pre-seed it as a fixture; nothing exercises the slider's interactive
+// onChange path. This test verifies that dragging the slider to a new
+// integer value (a) persists `cards-hint-count` on the 0..10 integer
+// scale and (b) updates the visible meta count next to the label so the
+// user sees their new selection. Catches regressions where the onChange
+// disconnects from setHintCount or the persistence useEffect stops
+// mirroring state to localStorage.
+describe("SettingsPage hint-count slider (W864)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("persists the new value to cards-hint-count and updates the visible meta count", () => {
+    renderPage();
+    const slider = screen.getByTestId("settings-hint-count") as HTMLInputElement;
+    // Default is 3 — confirm the visible meta tracks initial state so the
+    // post-change assertion can't pass on a stale render.
+    expect(slider.value).toBe("3");
+    fireEvent.change(slider, { target: { value: "7" } });
+    expect(slider.value).toBe("7");
+    expect(localStorage.getItem("cards-hint-count")).toBe("7");
+    // The "<n>" meta span next to the label re-renders with the new count.
+    expect(screen.getByText("7", { selector: ".settings-meta" })).toBeInTheDocument();
+  });
+});
