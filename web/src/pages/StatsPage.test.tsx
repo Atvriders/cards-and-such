@@ -3235,4 +3235,56 @@ describe("StatsPage", () => {
     });
     expect(labels).toEqual(["solitaire", "cards", "dice", "board", "arcade"]);
   });
+
+  // W1221 — The "Activity" card carries a `.stats-chart-label` subtitle that
+  // mirrors the currently selected range toggle ("Last {range} days"). On
+  // first render this defaults to "Last 14 days" (the useState seed at the
+  // top of StatsPage). W180/W626/W676 already pin the range toggle behavior
+  // and aria-pressed flipping, but no test currently asserts that the
+  // subtitle TEXT itself reflects the default range value, lives inside the
+  // `stats-activity` card, and carries the `.stats-chart-label` styling
+  // hook. A refactor that drops the subtitle, hoists it outside the card,
+  // changes the default range to 7d/30d/90d, or rewrites the copy
+  // (e.g. "Past 14 days") would currently slip through silently.
+  it("W1221: stats-activity renders 'Last 14 days' subtitle as a stats-chart-label on first render", () => {
+    renderPage();
+    const card = screen.getByTestId("stats-activity");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText("Last 14 days");
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+  });
+
+  // W1224 — The top-played bar chart SVG carries an explicit
+  // `aria-label="Games played per category"` plus `role="img"` so screen
+  // readers can announce the chart by name (the bars themselves are
+  // decorative <rect>/<text> with no individual labels). W1148 pins the
+  // *export button's* aria-label, and the chart's id is asserted via
+  // testid by other tests, but no test currently pins the SVG's own
+  // aria-label/role pair. A refactor that drops either, renames the
+  // copy (e.g. "Plays by game"), or strips role="img" would silently
+  // regress chart accessibility.
+  it("W1224: stats-bar-chart SVG exposes role='img' + aria-label='Games played per category'", () => {
+    seedRichStats();
+    renderPage();
+    const chart = screen.getByTestId("stats-bar-chart");
+    expect(chart.tagName.toLowerCase()).toBe("svg");
+    expect(chart.getAttribute("role")).toBe("img");
+    expect(chart.getAttribute("aria-label")).toBe("Games played per category");
+  });
+
+  // W1226 — The `stats-this-week` card carries a `stats-card--week`
+  // modifier class on top of the base `.stats-card` wrapper. This BEM
+  // modifier is the styling hook the week card uses to differentiate
+  // its layout (delta rows, prior-week list) from generic stat cards;
+  // a refactor that drops the modifier, renames it, or hoists the
+  // wrapper would silently regress the week card's CSS contract. No
+  // existing test pins the `stats-card--week` modifier specifically.
+  it("W1226: stats-this-week wrapper carries both stats-card and stats-card--week modifier classes", () => {
+    seedRichStats();
+    renderPage();
+    const card = screen.getByTestId("stats-this-week");
+    expect(card.classList.contains("stats-card")).toBe(true);
+    expect(card.classList.contains("stats-card--week")).toBe(true);
+  });
 });
