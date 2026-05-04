@@ -462,6 +462,54 @@ describe("StatsPage", () => {
     expect(localStorage.getItem("cards-undos-used")).toBe(seededUndos);
   });
 
+  // W690 — Reset wipes per-game time-history blobs but leaves unrelated
+  // user-data keys untouched. resetStats() funnels through
+  // clearAllTimeHistories(), which iterates every `cards-time-history:*`
+  // key and removes it. The existing W325 test pins ratings/favorites/
+  // best-times preservation but never seeds `cards-time-history:*` so it
+  // can't observe the time-history half of the contract. This test seeds
+  // two `cards-time-history:<gameId>` blobs (the targeted keys) plus
+  // `cards-lobby-filter` (an unrelated key from the same userdata module
+  // that must survive a stats reset) and asserts the time-history blobs
+  // disappear while the lobby filter is byte-for-byte intact.
+  it("W690: stats-reset clears cards-time-history:* keys but leaves cards-lobby-filter untouched", async () => {
+    seedRichStats();
+    // Targeted keys — should be removed by resetStats() →
+    // clearAllTimeHistories().
+    const klondikeHistory = JSON.stringify([
+      { day: "2026-05-01", time: 120 },
+      { day: "2026-05-02", time: 90 },
+    ]);
+    const spiderHistory = JSON.stringify([
+      { day: "2026-05-01", time: 200 },
+    ]);
+    localStorage.setItem("cards-time-history:klondike", klondikeHistory);
+    localStorage.setItem("cards-time-history:spider", spiderHistory);
+    // Unrelated key — must survive the reset.
+    const lobbyFilter = JSON.stringify({ category: "solitaire", sort: "name" });
+    localStorage.setItem("cards-lobby-filter", lobbyFilter);
+
+    renderPage();
+    // Pre-condition: targeted + unrelated all present.
+    expect(localStorage.getItem("cards-time-history:klondike")).toBe(klondikeHistory);
+    expect(localStorage.getItem("cards-time-history:spider")).toBe(spiderHistory);
+    expect(localStorage.getItem("cards-lobby-filter")).toBe(lobbyFilter);
+
+    // Click reset, confirm.
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const yes = await screen.findByTestId("confirm-yes");
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+
+    // Targeted: stats blob + every cards-time-history:* key gone.
+    expect(localStorage.getItem(STATS_KEY)).toBeNull();
+    expect(localStorage.getItem("cards-time-history:klondike")).toBeNull();
+    expect(localStorage.getItem("cards-time-history:spider")).toBeNull();
+    // Unrelated: lobby filter preserved byte-for-byte.
+    expect(localStorage.getItem("cards-lobby-filter")).toBe(lobbyFilter);
+  });
+
   it("export buttons exist and are clickable without throwing", () => {
     seedRichStats();
     renderPage();
