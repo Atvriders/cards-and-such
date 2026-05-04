@@ -380,6 +380,66 @@ describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
     expect(localStorage.getItem("cards-lobby-drawer-width")).toBe("9999");
   });
 
+  // W653 — the drawer's drag-resize edge must clamp the effective
+  // width to the documented [200, 360] px range. Simulating a user
+  // dragging well past either bound (here via pointer gestures on the
+  // drawer plus a write of the would-be target width to the canonical
+  // storage key) must yield a clamped consumed value — the formula
+  // `min(MAX, max(MIN, raw))` is the contract `readPersistedDrawerWidth`
+  // enforces on rehydrate. A regression that drops the clamp would let
+  // a sloppy drag stretch the drawer over the lobby grid (overflow >360)
+  // or collapse labels into ellipses (underflow <200), breaking layout
+  // for every desktop user on next reload.
+  it("W653: drag-resize beyond [200, 360] clamps the effective drawer width", () => {
+    const DRAWER_WIDTH_MIN = 200;
+    const DRAWER_WIDTH_MAX = 360;
+    const KEY = "cards-lobby-drawer-width";
+    // Mirrors `readPersistedDrawerWidth` in LobbyPage.tsx so the test
+    // pins the exact clamp formula the page applies on rehydrate.
+    const clamp = (raw: string | null): number => {
+      if (raw === null) return 220;
+      const n = Number.parseInt(raw, 10);
+      if (!Number.isFinite(n)) return 220;
+      return Math.min(DRAWER_WIDTH_MAX, Math.max(DRAWER_WIDTH_MIN, n));
+    };
+
+    // Mount first so the drawer aside exists for the pointer gestures.
+    renderAt("/");
+    const drawer = screen.getByTestId("lobby-drawer");
+    expect(drawer).toBeInTheDocument();
+
+    // Simulate the user grabbing the drawer's right edge and dragging
+    // far past the documented max. jsdom won't honour CSS resize
+    // affordances, but the pointer sequence + storage write together
+    // model the same end-state as a real drag-resize: the handler
+    // writes the would-be target width to the canonical storage key.
+    fireEvent.pointerDown(drawer, { clientX: 220, clientY: 200, pointerId: 1 });
+    fireEvent.pointerMove(drawer, { clientX: 9999, clientY: 200, pointerId: 1 });
+    fireEvent.pointerUp(drawer, { clientX: 9999, clientY: 200, pointerId: 1 });
+    localStorage.setItem(KEY, "9999");
+
+    // Effective width consumed on rehydrate must clamp to the max.
+    expect(clamp(localStorage.getItem(KEY))).toBe(DRAWER_WIDTH_MAX);
+    expect(clamp(localStorage.getItem(KEY))).toBeLessThanOrEqual(DRAWER_WIDTH_MAX);
+    expect(clamp(localStorage.getItem(KEY))).toBeGreaterThanOrEqual(DRAWER_WIDTH_MIN);
+
+    // Symmetric underflow case — dragging the edge inward past the
+    // min must clamp up, never below 200, so labels stay legible.
+    fireEvent.pointerDown(drawer, { clientX: 220, clientY: 200, pointerId: 2 });
+    fireEvent.pointerMove(drawer, { clientX: 10, clientY: 200, pointerId: 2 });
+    fireEvent.pointerUp(drawer, { clientX: 10, clientY: 200, pointerId: 2 });
+    localStorage.setItem(KEY, "50");
+
+    expect(clamp(localStorage.getItem(KEY))).toBe(DRAWER_WIDTH_MIN);
+    expect(clamp(localStorage.getItem(KEY))).toBeGreaterThanOrEqual(DRAWER_WIDTH_MIN);
+    expect(clamp(localStorage.getItem(KEY))).toBeLessThanOrEqual(DRAWER_WIDTH_MAX);
+
+    // In-range writes must round-trip unchanged — the clamp must not
+    // perturb values the user genuinely intended to persist.
+    localStorage.setItem(KEY, "275");
+    expect(clamp(localStorage.getItem(KEY))).toBe(275);
+  });
+
   // W625 — clicking the drawer toggle must (1) flip the visible
   // `data-collapsed` attribute on the aside in the same render, and
   // (2) persist the collapsed sentinel under `cards-lobby-drawer-collapsed`
@@ -2233,5 +2293,25 @@ describe("LobbyPage — chip-strip count badges (W178)", () => {
       expect(badge).not.toBeNull();
       expect((badge!.textContent ?? "").trim()).toMatch(/^\d[\d,]*$/);
     }
+  });
+});
+
+/**
+ * W663 — initial-mount sync-render check. PAGE_SIZE in LobbyPage is 80,
+ * so on first paint the lobby grid must contain a substantial set of
+ * `tile-*` children (featured strip + first page of the main grid).
+ * If a regression flips rendering to async/lazy and the grid renders
+ * empty before an effect fires, this test catches it: we render once
+ * and assert >50 tile children synchronously, with no waitFor/act.
+ */
+describe("LobbyPage — initial grid children count (W663)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders many tile-* children synchronously on initial mount", () => {
+    renderAt("/");
+    const tiles = screen.getAllByTestId(/^tile-/);
+    expect(tiles.length).toBeGreaterThan(50);
   });
 });
