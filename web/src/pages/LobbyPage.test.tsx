@@ -1795,6 +1795,55 @@ describe("LobbyPage — surprise me button (W579)", () => {
     fireEvent.click(screen.getByTestId("lobby-surprise"));
     expect(screen.getByTestId("loc-probe").textContent).toMatch(/^\/play\/.+/);
   });
+
+  /**
+   * W763 — surprise-me MUST honour the active filter when picking its
+   * pool. The `filter === "hidden"` branch in `surpriseMe` restricts
+   * `pool` to `allGames.filter((g) => hiddenSet.has(g.id))`, so when the
+   * hidden set contains exactly one id and the active filter is
+   * "hidden", the pool collapses to a single game and the navigate
+   * target is fully determined regardless of `Math.random`. Pinning
+   * this guards against a regression that would either ignore the
+   * filter (picking from `allGames`) or swap the hidden/non-hidden
+   * branches and pick from the wrong pool. The W579 / W604 twins above
+   * only assert the `/play/<id>` shape — they cannot detect a filter
+   * leak. We seed the hidden set and the persisted filter directly via
+   * localStorage so the page hydrates into the Hidden view without
+   * depending on the chip / tile-menu click pathways covered elsewhere.
+   */
+  it("respects the active 'hidden' filter — picks from the hidden pool only", () => {
+    // Stub Math.random so any test bug that picked from a larger pool
+    // would land deterministically (and visibly mismatch our expected
+    // single-game target). A returned 0 hits index 0 of whatever pool
+    // the function chooses — `chess` if filter wins, the first GAMES
+    // entry otherwise.
+    vi.spyOn(Math, "random").mockReturnValue(0);
+
+    // Seed the hidden set with a single, well-known game id so the
+    // hidden-pool reduces to exactly `[chess]`. `chess` is a stable,
+    // standalone (non-family) game id (see `web/src/games/chess/index.ts`)
+    // so the navigate target is the bare `/play/chess` route — no family
+    // disambiguation needed.
+    localStorage.setItem("cards-hidden-games", JSON.stringify(["chess"]));
+    // Pre-select the Hidden chip via persistence so `readPersistedFilter`
+    // hydrates `filter === "hidden"` on mount, taking the
+    // `pool = allGames.filter((g) => hiddenSet.has(g.id))` branch.
+    localStorage.setItem("cards-lobby-filter", "hidden");
+
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <LobbyPage />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByTestId("lobby-surprise"));
+
+    expect(navigateSpy).toHaveBeenCalledTimes(1);
+    // Exact match — the hidden pool has length 1 so the pick is forced.
+    // A regression that picks from `allGames` would land on whichever
+    // game is at GAMES[0] (currently `texas-holdem`), not `chess`.
+    expect(navigateSpy.mock.calls[0]?.[0]).toBe("/play/chess");
+  });
 });
 
 /**
@@ -3043,5 +3092,80 @@ describe("LobbyPage — grid End jumps focus to last tile (W747)", () => {
     expect(document.activeElement).toBe(last);
     expect(last.tabIndex).toBe(0);
     expect(tiles[0].tabIndex).toBe(-1);
+  });
+});
+
+/**
+ * W754 — lobby grid density toggle (compact / comfortable / spacious).
+ *
+ * Distinct from the list-mode toggle (W582), the chip filter strip
+ * (W267/W624/W649/W718) and the view-mode toggle. The three-state pill
+ * exposes `lobby-density-{compact,comfortable,spacious}` testids and is
+ * persisted to `cards-lobby-density`. The active mode is also mirrored
+ * as `data-density` on the rendered grid so all sizing stays CSS-driven.
+ *
+ * Default mode is "comfortable"; clicking compact must (a) flip the
+ * three buttons' aria-pressed pair so exactly one is pressed at a time,
+ * (b) write `compact` to the canonical persistence key, and (c) update
+ * the grid's `data-density` so the CSS rules pick up the new layout.
+ */
+describe("LobbyPage — grid density toggle (W754)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("clicking lobby-density-compact flips aria-pressed, persists, and stamps data-density", () => {
+    renderAt("/");
+    // Pre-condition: the three-state pill has comfortable pressed (default)
+    // and exposes all three testids inline (desktop viewport — the inline
+    // density toggle is the canonical one; W419 covers the overflow copy).
+    const compact = screen.getByTestId("lobby-density-compact");
+    const comfortable = screen.getByTestId("lobby-density-comfortable");
+    const spacious = screen.getByTestId("lobby-density-spacious");
+    expect(compact).toHaveAttribute("aria-pressed", "false");
+    expect(comfortable).toHaveAttribute("aria-pressed", "true");
+    expect(spacious).toHaveAttribute("aria-pressed", "false");
+    // The component's persistence useEffect runs on mount and writes
+    // the current (default) density to the canonical key, so the
+    // baseline is "comfortable" — not null. Pinning the default value
+    // here guards against a regression that changes the default mode
+    // without updating the rest of the toggle's wiring.
+    expect(localStorage.getItem("cards-lobby-density")).toBe("comfortable");
+
+    // The grid mirrors the default mode via data-density so CSS picks
+    // up the right column sizing. Multiple `.lobby-grid` nodes can
+    // co-render (featured strip + main grid), so target the main grid
+    // explicitly via the `:not(.lobby-grid--featured)` selector.
+    const gridBefore = document.querySelector(
+      ".lobby-grid:not(.lobby-grid--featured)",
+    ) as HTMLElement;
+    expect(gridBefore).not.toBeNull();
+    expect(gridBefore.getAttribute("data-density")).toBe("comfortable");
+
+    // The keystroke under test — flip to compact.
+    fireEvent.click(compact);
+
+    // Aria-pressed pair flips together: compact engages, comfortable
+    // releases, spacious stays unpressed. Pinning all three guards
+    // against a regression that flips only one side of the toggle.
+    expect(compact).toHaveAttribute("aria-pressed", "true");
+    expect(comfortable).toHaveAttribute("aria-pressed", "false");
+    expect(spacious).toHaveAttribute("aria-pressed", "false");
+
+    // Persistence twin lands under the canonical
+    // `cards-lobby-density` key so a reload rehydrates here.
+    expect(localStorage.getItem("cards-lobby-density")).toBe("compact");
+
+    // The grid's data-density mirror flipped — this is the
+    // load-bearing CSS hook (LobbyPage.css gates column sizing on
+    // `.lobby-grid[data-density="compact"]` etc).
+    const gridAfter = document.querySelector(
+      ".lobby-grid:not(.lobby-grid--featured)",
+    ) as HTMLElement;
+    expect(gridAfter.getAttribute("data-density")).toBe("compact");
   });
 });
