@@ -2715,14 +2715,25 @@ describe("LobbyPage — favorite-star indicator on tiles (W721)", () => {
     expect(favHeart).toHaveAttribute("aria-pressed", "true");
     expect(favHeart.className).toContain("is-active");
 
-    // Counter-example: pick a different standalone tile that we did NOT
-    // seed and confirm its heart indicator is in the inactive state. If
-    // the lobby ever flipped to "every tile reads favorited" the test
-    // above could pass while this one fails — pinning both halves locks
-    // the indicator's selectivity, not just its presence.
-    const otherHeart = await screen.findByTestId("tile-fav-toggle-pool-8ball");
-    expect(otherHeart).toHaveAttribute("aria-pressed", "false");
-    expect(otherHeart.className).not.toContain("is-active");
+    // Counter-example: discover any other rendered tile-fav-toggle button
+    // (the lobby paginates at PAGE_SIZE so the exact id of the "next" tile
+    // depends on registry sort, but at least one non-pool-10ball heart
+    // must exist on page 1 with 4000+ entries) and confirm its indicator
+    // is in the inactive state. If the lobby ever flipped to "every tile
+    // reads favorited" the test above could pass while this one fails —
+    // pinning both halves locks the indicator's selectivity, not just its
+    // presence, without coupling to a specific second-tile id whose
+    // page-1 placement could shift as the registry grows.
+    const otherHeart = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(
+        '[data-testid^="tile-fav-toggle-"]',
+      ),
+    ).find(
+      (el) => el.getAttribute("data-testid") !== "tile-fav-toggle-pool-10ball",
+    );
+    expect(otherHeart, "expected at least one non-favorited heart on page 1").toBeTruthy();
+    expect(otherHeart!.getAttribute("aria-pressed")).toBe("false");
+    expect(otherHeart!.className).not.toContain("is-active");
   });
 });
 
@@ -2849,5 +2860,65 @@ describe("LobbyPage — featured strip gated on chip-all (W735)", () => {
         'section.lobby-featured[aria-label="Featured games"]',
       ),
     ).not.toBeNull();
+  });
+});
+
+/**
+ * W742 — single-character search query MUST NOT trigger title `<mark>`
+ * highlighting on tiles.
+ *
+ * The complement of W566: that test pins the *positive* path where a
+ * query of length >= `TITLE_HIGHLIGHT_MIN_LEN` (=2) wraps matched
+ * substrings in `<mark>`. This test pins the *negative* threshold path
+ * — typing a single character (length === 1) flows down through
+ * `deferredQuery` as `highlightQuery`, but the `highlightQuery.length
+ * >= TITLE_HIGHLIGHT_MIN_LEN` gate at LobbyPage.tsx:3022/3260/3404/3469
+ * MUST suppress the `highlightMatch` call so the title renders as a
+ * plain string with zero `<mark>` children.
+ *
+ * Without this guard, a future change that lowered the constant to 1
+ * (or accidentally dropped the gate while keeping the prop wired) would
+ * cause every tile whose title contains the typed letter to flash a
+ * single-character highlight on every keystroke — visually noisy and
+ * not the documented contract. We use "k" since klondike's title
+ * obviously contains it; the assertion is that NO `<mark>` is rendered
+ * inside the tile's title span despite the substring match.
+ */
+describe("LobbyPage — single-char query suppresses highlight (W742)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("does not wrap matches in <mark> when query length is 1", async () => {
+    renderAt("/");
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    // A single-character query — well below TITLE_HIGHLIGHT_MIN_LEN=2.
+    // The lowercase "k" is a substring of the klondike title so the
+    // family tile remains in the filtered grid (the filter logic uses
+    // a plain `.includes(q)` substring check, not the highlight gate).
+    fireEvent.change(search, { target: { value: "k" } });
+
+    // The klondike family tile must still be present — single-char
+    // queries DO filter the grid, they just don't decorate matches.
+    // Use the post-search testid (`grid-tile-klondike`) per W566.
+    const tile = await waitFor(() =>
+      screen.getByTestId("grid-tile-klondike"),
+    );
+    const title = tile.querySelector(".lobby-tile-title") as HTMLElement;
+    expect(title).not.toBeNull();
+
+    // Core assertion: the title must NOT contain a `<mark>` element.
+    // We check via a DOM querySelectorAll rather than innerHTML string
+    // matching so a regression that emits a different highlight tag
+    // would still be caught by the W566 positive test (which pins the
+    // tag name) while THIS test specifically pins the threshold gate.
+    expect(title.querySelectorAll("mark").length).toBe(0);
+
+    // Belt-and-suspenders: the title's textContent must equal the raw
+    // family label (no zero-width wrappers, no split text nodes around
+    // a hidden mark element). Using a case-insensitive comparison so
+    // the "Klondike" title-cased label is accepted regardless of how
+    // the renderer normalises display casing.
+    expect(title.textContent?.toLowerCase()).toBe("klondike");
   });
 });
