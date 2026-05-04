@@ -124,6 +124,18 @@ describe("AboutPage", () => {
     }
   });
 
+  it("links to the internal Credits page from Acknowledgements", () => {
+    renderPage();
+    const creditsLink = screen.getByRole("link", { name: "Credits" });
+    expect(creditsLink).toBeInTheDocument();
+    // react-router's <Link to="/credits"> renders an <a href="/credits"> in
+    // the DOM, so verifying the href confirms the route target.
+    expect(creditsLink.getAttribute("href")).toBe("/credits");
+    // Internal links should NOT open in a new tab (distinguishes from the
+    // external GitHub/Changelog anchors covered by the rel/target test).
+    expect(creditsLink.getAttribute("target")).not.toBe("_blank");
+  });
+
   it(
     "shows 'Build info unavailable' fallback when commits array is empty",
     async () => {
