@@ -1263,3 +1263,27 @@ describe("SettingsPage show-coachmarks button (W843)", () => {
     }
   });
 });
+
+// W855 — `settings-show-coachmarks` must overwrite a *terminal* coachmark
+// state ("done", written when the user has already dismissed the lobby
+// hint) back to "pending". W843 only proves the unset → pending arc; a
+// regression that gated the write on `getCoachmarkState() !== "done"`
+// (e.g. a guard "don't re-arm if already shown") would slip through W843
+// because that test starts from a null key. The whole point of the
+// "Show again" affordance is to defeat the sticky terminal state, so we
+// pin the override explicitly.
+describe("SettingsPage show-coachmarks overrides terminal state (W855)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("forces coachmark from done back to pending when user re-arms it", () => {
+    // Simulate a user who has already dismissed the coachmark — the key
+    // is sticky-"done" until something explicitly re-arms it.
+    localStorage.setItem("cards-onboard-coachmark", "done");
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-show-coachmarks"));
+    // The terminal "done" sentinel must be overwritten, not preserved.
+    expect(localStorage.getItem("cards-onboard-coachmark")).toBe("pending");
+  });
+});
