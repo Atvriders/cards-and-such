@@ -167,6 +167,48 @@ describe("SettingsPage", () => {
     expect(toggle.closest("label")?.textContent).toContain("Off");
   });
 
+  // W819 — focused coverage of the Appearance > Light mode toggle. Light
+  // mode is a *separate* binary setting from the theme picker (W668): it
+  // flips a `data-light` attribute on `<html>` and persists "1"/"0" under
+  // `cards-light-mode` (note the non-boolean storage shape — see
+  // lightMode.ts). Other tests only seed the key for per-section reset
+  // assertions; nothing exercises the checkbox's interactive flip. This
+  // covers default-off render (jsdom has no matchMedia, so first-time
+  // users land on dark), a click that flips checkbox + visible "On"/"Off"
+  // label while persisting "1" AND setting `data-light="1"` on the root,
+  // and a return click that clears `data-light` and persists "0".
+  // Catches regressions where the onChange disconnects from setLight or
+  // the applyLightMode useEffect stops mirroring state to storage + DOM.
+  it("toggles light-mode preference, updates data-light + label, and persists in both directions", () => {
+    // Ensure no leftover seed leaks in from a sibling test.
+    delete document.documentElement.dataset.light;
+    renderPage();
+    const toggle = screen.getByTestId("settings-light-mode") as HTMLInputElement;
+    // Default: light mode is off. The mount effect mirrors that to storage
+    // ("0", not "false" — light mode uses a 1/0 shape) and leaves
+    // data-light absent on the root element.
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-light-mode")).toBe("0");
+    expect(document.documentElement.dataset.light).toBeUndefined();
+    // The sibling .settings-toggle-label should reflect the live state.
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // Click on — checkbox flips, label re-renders, storage rewrites,
+    // root gets data-light="1".
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-light-mode")).toBe("1");
+    expect(document.documentElement.dataset.light).toBe("1");
+    expect(toggle.closest("label")?.textContent).toContain("On");
+    // Click back off — full round-trip: data-light is removed again.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-light-mode")).toBe("0");
+    expect(document.documentElement.dataset.light).toBeUndefined();
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // Tidy: don't leak data-light into sibling tests.
+    delete document.documentElement.dataset.light;
+  });
+
   it("changes the card-back swatch and persists it", () => {
     renderPage();
     fireEvent.click(screen.getByTestId("card-back-red-weave"));
