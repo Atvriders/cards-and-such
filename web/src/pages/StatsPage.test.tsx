@@ -2308,4 +2308,17 @@ describe("StatsPage", () => {
     expect(playsDelta!.classList.contains("is-flat")).toBe(false);
     expect(playsDelta!.textContent).not.toContain("▲");
   });
+
+  // W823 — Page-level h1 must render the literal title "Your stats". This
+  // pins the top-level heading text + level so a regression that drops the
+  // h1, downgrades it to a div, or rewrites the copy (e.g. "Statistics",
+  // "My stats") fails loudly. Heading-role + level-1 lookup also guards
+  // accessibility: assistive tech relies on exactly one h1 to announce the
+  // page identity.
+  it("W823: stats page renders 'Your stats' as the top-level h1 heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 1, name: "Your stats" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H1");
+  });
 });
