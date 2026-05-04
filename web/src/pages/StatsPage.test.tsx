@@ -726,6 +726,54 @@ describe("StatsPage", () => {
     expect(stats.perGame).toHaveProperty("spider");
   });
 
+  // W950 — Combined SVG export shape. The third export button
+  // (`stats-export-all`) is distinct from the JSON (W655) and CSV (W564)
+  // exports: it bundles all three rendered charts into a single
+  // `image/svg+xml` document via `buildCombinedSvg`. Pin the public contract
+  // so the button can't silently regress to a different MIME (e.g.
+  // `application/json` from a copy/paste) or to a single-chart payload that
+  // omits one of the three panels. We assert (a) the Blob carries the SVG
+  // MIME, (b) the document begins with the standard `<?xml ... <svg ...>`
+  // header, (c) the combined-export title row "Cards & Such — Stats" is
+  // present (only `buildCombinedSvg` emits it; single-chart exports don't),
+  // and (d) all three panel labels (Activity / Time spent / Top played) are
+  // inlined — proving the payload truly bundles all three charts.
+  it("W950: clicking stats-export-all downloads an image/svg+xml Blob bundling all three chart panels", async () => {
+    seedRichStats();
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-all"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    // MIME pinned to image/svg+xml so the browser opens the downloaded file
+    // in its SVG viewer rather than treating it as a generic text payload.
+    expect(blob.type).toMatch(/^image\/svg\+xml/);
+
+    // Read the blob via FileReader (jsdom Blob lacks .text()).
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+
+    // Standard SVG document prolog + root element.
+    expect(text).toMatch(/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
+    expect(text).toContain("<svg xmlns=\"http://www.w3.org/2000/svg\"");
+    // The combined-export-only header copy. Single-chart exports
+    // (`chartToStandaloneSvg`) don't emit this string, so its presence pins
+    // that we routed through `buildCombinedSvg`. Use the XML-escaped form
+    // matching the source ("&amp;").
+    expect(text).toContain("Cards &amp; Such — Stats");
+    // All three panel labels present — bar, line and pie charts each
+    // contribute an `<text>` row with the panel title.
+    expect(text).toContain("Activity");
+    expect(text).toContain("Time spent (top 5)");
+    expect(text).toContain("Top played");
+  });
+
   it("most-hinted rows render an inline sparkline per game", () => {
     seedRichStats();
     renderPage();
