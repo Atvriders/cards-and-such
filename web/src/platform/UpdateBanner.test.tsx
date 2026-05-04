@@ -123,6 +123,12 @@ describe("UpdateBanner", () => {
     // `waiting` worker from the registration carried in the
     // cards:sw-update-ready CustomEvent — not some other reference. This
     // pins down the wiring between the event payload and refresh().
+    //
+    // PWA upgrade flow we're locking in:
+    //   main.tsx → registers SW → on `waiting` change, dispatches
+    //   `cards:sw-update-ready` with { detail: { registration } }.
+    //   UpdateBanner shows; user clicks Refresh; we post {type:"SKIP_WAITING"}
+    //   to registration.waiting; SW activates; controllerchange → reload.
     const { registration, postMessage } = makeFakeRegistration();
     render(<UpdateBanner />);
 
