@@ -1118,7 +1118,11 @@ describe("StatsPage", () => {
   it("stats-hour-of-day card buckets time-history timestamps into hour bins", () => {
     seedRichStats();
     // Pin three klondike plays to a known local hour so peak text is stable.
+    // Anchor to YESTERDAY so the seeded hour is never in the future relative
+    // to Date.now() (buildHourOfDayCounts drops ts > now), which would
+    // otherwise zero out the bucket when the suite runs before 09:00 local.
     const peak = new Date();
+    peak.setDate(peak.getDate() - 1);
     peak.setHours(9, 0, 0, 0);
     const peakTs = peak.getTime();
     localStorage.setItem(
@@ -1146,9 +1150,12 @@ describe("StatsPage", () => {
     seedRichStats();
     // Anchor seeded plays to fixed local-time hours by cloning a noon-base
     // Date and rewriting the hour field, so DST and timezone offsets don't
-    // shift the bucket out from under the assertion.
+    // shift the bucket out from under the assertion. Stamp YESTERDAY so a
+    // pre-09:00 (or pre-14:00) suite run doesn't push the seed into the
+    // future and trip buildHourOfDayCounts' ts > now skip.
     const at = (hour: number): number => {
       const d = new Date();
+      d.setDate(d.getDate() - 1);
       d.setHours(hour, 0, 0, 0);
       return d.getTime();
     };
