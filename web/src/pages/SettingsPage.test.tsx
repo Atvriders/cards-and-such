@@ -1530,3 +1530,37 @@ describe("SettingsPage analytics panel content (W1168)", () => {
     expect(screen.getByTestId("analytics-event-0")).toBeInTheDocument();
   });
 });
+
+describe("SettingsPage analytics panel clear button (W1189)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // Module-scoped ring buffer — wipe before each run so a sibling test
+    // can't seed events that would mask the empty-state assertion below.
+    clearEvents();
+  });
+
+  it("wipes events from the panel and reveals the empty-state hint when Clear is clicked", () => {
+    renderPage();
+
+    // Generate a tracked event so the panel has something to clear. Card-back
+    // change is the cleanest source — fires track("setting.change", ...) with
+    // no confirm dialog or async work in between.
+    fireEvent.click(screen.getByTestId("cardback-gallery-tartan"));
+    fireEvent.click(screen.getByTestId("analytics-toggle"));
+
+    // Sanity: at least one event row is visible and the empty-state hint
+    // is suppressed before the Clear click fires.
+    expect(screen.getByTestId("analytics-event-0")).toBeInTheDocument();
+    expect(screen.queryByTestId("analytics-empty")).toBeNull();
+
+    // Click Clear — handler calls clearEvents() then refreshEventLog(),
+    // which should drop every row and re-render the empty-state hint.
+    fireEvent.click(screen.getByTestId("analytics-clear"));
+
+    // Every event row is gone and the empty-state copy renders again.
+    expect(screen.queryByTestId("analytics-event-0")).toBeNull();
+    const empty = screen.getByTestId("analytics-empty");
+    expect(empty).toBeInTheDocument();
+    expect(empty).toHaveTextContent("No events recorded yet on this device.");
+  });
+});
