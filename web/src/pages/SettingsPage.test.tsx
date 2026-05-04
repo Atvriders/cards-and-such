@@ -106,6 +106,67 @@ describe("SettingsPage", () => {
     expect(toggle.closest("label")?.textContent).toContain("On");
   });
 
+  // W776 — focused coverage of the Gameplay > Hints toggle. Other tests
+  // only seed `cards-hints-enabled` for the per-section reset assertions;
+  // nothing exercises the checkbox's interactive flip. This pairs with
+  // the in-game hint coverage (W692/W698 hint visibility, W702 cooldown)
+  // by verifying the upstream Settings switch that gates them: default-on
+  // render, a click that flips checkbox + visible "On"/"Off" label while
+  // persisting "false" to `cards-hints-enabled`, and a return click that
+  // round-trips back to On. Catches regressions where the onChange
+  // disconnects from setHintsEnabled or the persistence useEffect stops
+  // mirroring state to localStorage.
+  it("toggles hints-enabled preference, updates the visible label, and persists in both directions", () => {
+    renderPage();
+    const toggle = screen.getByTestId("settings-hints-enabled") as HTMLInputElement;
+    // Default: hints are enabled. The mount effect mirrors that to storage.
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-hints-enabled")).toBe("true");
+    // The sibling .settings-toggle-label should reflect the live state.
+    expect(toggle.closest("label")?.textContent).toContain("On");
+    // Click off — checkbox flips, label re-renders, storage rewrites.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-hints-enabled")).toBe("false");
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // Click back on — full round-trip.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-hints-enabled")).toBe("true");
+    expect(toggle.closest("label")?.textContent).toContain("On");
+  });
+
+  // W793 — focused coverage of the Gameplay > Show undo count toggle.
+  // Other tests only seed `cards-show-undo-count` for the per-section
+  // reset assertions; nothing exercises the checkbox's interactive flip.
+  // This pairs with the in-game Undo/Redo coverage (W498 reactive label,
+  // hotkey/button tests) by verifying the upstream Settings switch that
+  // gates the "Undo (N)" label: default-off render, a click that flips
+  // checkbox + visible "Off"/"On" label while persisting "true" to
+  // `cards-show-undo-count`, and a return click that round-trips back
+  // to Off. Catches regressions where the onChange disconnects from
+  // setShowUndoCount or the persistence useEffect stops mirroring state
+  // to localStorage.
+  it("toggles show-undo-count preference, updates the visible label, and persists in both directions", () => {
+    renderPage();
+    const toggle = screen.getByTestId("settings-show-undo-count") as HTMLInputElement;
+    // Default: show-undo-count is off. The mount effect mirrors that to storage.
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-show-undo-count")).toBe("false");
+    // The sibling .settings-toggle-label should reflect the live state.
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // Click on — checkbox flips, label re-renders, storage rewrites.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-show-undo-count")).toBe("true");
+    expect(toggle.closest("label")?.textContent).toContain("On");
+    // Click back off — full round-trip.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-show-undo-count")).toBe("false");
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+  });
+
   it("changes the card-back swatch and persists it", () => {
     renderPage();
     fireEvent.click(screen.getByTestId("card-back-red-weave"));
