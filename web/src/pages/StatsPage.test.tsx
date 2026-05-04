@@ -1695,6 +1695,26 @@ describe("StatsPage", () => {
     expect(within(card).getByText("42")).toBeTruthy();
   });
 
+  // W701: stat-longest-streak renders `stats.longestStreak` from loadStats().
+  // Distinct from currentStreak — this is the all-time peak in `daysPlayed`
+  // streak count, persisted on the stats blob. The card should render the
+  // exact integer with the "Longest streak" label, untouched by category
+  // filters (which only affect totalsForFilter, not the Records grid).
+  it("W701: stat-longest-streak renders the persisted longestStreak from loadStats", () => {
+    seedStats({
+      totalPlayed: 30,
+      totalWins: 12,
+      longestStreak: 9,
+      currentStreak: 2,
+      perCategory: { solitaire: 30 },
+    });
+    renderPage();
+    const card = screen.getByTestId("stat-longest-streak");
+    expect(within(card).getByText("Longest streak")).toBeTruthy();
+    expect(within(card).getByText("9")).toBeTruthy();
+    expect(card.textContent).not.toMatch(/NaN/);
+  });
+
   // W681: stat-favorite-category renders the highest-count perCategory key
   // resolved by `favoriteCategory(stats)` (highest plays-count wins). With
   // perCategory={solitaire:20, cards:3, dice:2}, the card must show "solitaire".
