@@ -1107,4 +1107,35 @@ describe("SettingsPage hint-cooldown toggle (W702)", () => {
     expect(localStorage.getItem("cards-leaderboard-friends")).toBe("false");
     expect(toggle.closest("label")?.textContent).toContain("Off");
   });
+
+  // W830 — focused coverage of the Data > Use mock leaderboard toggle.
+  // Sibling to the mock-friends test (W802); the mock-leaderboard switch
+  // controls whether the Top Players tab synthesises 5 simulated players
+  // and is wired to localStorage key `cards-leaderboard-mock` via
+  // isMockLeaderboardEnabled() / setMockLeaderboardEnabled() in
+  // platform/leaderboardClient.ts. Defaults to off when unset. We verify
+  // the default-off render, a click flipping the checkbox + the visible
+  // "On"/"Off" label while persisting "true", and a return click that
+  // round-trips back to "false". Catches regressions where the onChange
+  // disconnects from setMockLeaderboard or the persistence useEffect
+  // stops mirroring state through setMockLeaderboardEnabled().
+  it("toggles mock-leaderboard preference, updates the visible label, and persists in both directions", () => {
+    renderPage();
+    const toggle = screen.getByTestId(
+      "settings-mock-leaderboard",
+    ) as HTMLInputElement;
+    // Default: mock-leaderboard is off when nothing is in storage.
+    expect(toggle.checked).toBe(false);
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+    // off → on — checkbox flips, label re-renders, storage rewrites.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(true);
+    expect(localStorage.getItem("cards-leaderboard-mock")).toBe("true");
+    expect(toggle.closest("label")?.textContent).toContain("On");
+    // on → off — full round-trip.
+    fireEvent.click(toggle);
+    expect(toggle.checked).toBe(false);
+    expect(localStorage.getItem("cards-leaderboard-mock")).toBe("false");
+    expect(toggle.closest("label")?.textContent).toContain("Off");
+  });
 });
