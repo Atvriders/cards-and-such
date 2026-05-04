@@ -2456,4 +2456,31 @@ describe("StatsPage", () => {
     expect(heading).toBeTruthy();
     expect(heading.tagName).toBe("H2");
   });
+
+  // W846 — The "Achievements" section heading must render as an h2.
+  // W828/W833/W841 pinned "Top played", "Activity", and "Personal records";
+  // this extends the section-heading audit to the achievements card so a
+  // regression that drops the h2, downgrades it to a div/h3, or rewrites
+  // the copy (e.g. to "Badges" or "Trophies") fails loudly. Section h2's
+  // give assistive tech a stable outline of the page.
+  it("W846: stats page renders 'Achievements' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Achievements" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
+
+  // W847 — The "This week" section heading must render as an h2.
+  // W828/W833/W841/W846 pinned "Top played", "Activity", "Personal records",
+  // and "Achievements"; this extends the section-heading audit to the
+  // this-week summary card so a regression that drops the h2, downgrades
+  // it to a div/h3, or rewrites the copy (e.g. to "Last 7 days" or
+  // "Weekly") fails loudly. Section h2's give assistive tech a stable
+  // outline of the page.
+  it("W847: stats page renders 'This week' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "This week" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
 });
