@@ -2746,4 +2746,41 @@ describe("StatsPage", () => {
     expect(actions?.querySelector('[data-testid="stats-export-json"]')).not.toBeNull();
     expect(actions?.querySelector('[data-testid="stats-export-csv"]')).not.toBeNull();
   });
+
+  // The JSON / CSV export buttons each carry a small inline format-tag
+  // ("JSON" / "CSV") rendered via `.stats-export-json-badge` for at-a-glance
+  // recognition. The badges are aria-hidden so screen readers don't announce
+  // them, but they're visible and load-bearing for the visual hierarchy.
+  // Pin the badge text so a refactor that drops the tag (or relocates it
+  // outside the button) is caught immediately.
+  it("W1134: stats-export-json/csv buttons render aria-hidden 'JSON'/'CSV' format badges", () => {
+    renderPage();
+    const jsonBtn = screen.getByTestId("stats-export-json");
+    const jsonBadge = jsonBtn.querySelector(".stats-export-json-badge");
+    expect(jsonBadge).not.toBeNull();
+    expect(jsonBadge?.textContent).toBe("JSON");
+    expect(jsonBadge?.getAttribute("aria-hidden")).toBe("true");
+
+    const csvBtn = screen.getByTestId("stats-export-csv");
+    const csvBadge = csvBtn.querySelector(".stats-export-json-badge");
+    expect(csvBadge).not.toBeNull();
+    expect(csvBadge?.textContent).toBe("CSV");
+    expect(csvBadge?.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  // W1136 — The per-chart export icon-buttons (line/pie/bar) render only a
+  // download glyph svg as visible content, so their accessible name is
+  // entirely carried by the `aria-label`. Pin the activity-chart export
+  // button's aria-label exactly so a copy-edit or refactor that drops it
+  // gets caught here rather than during an a11y audit.
+  it("W1136: stats-export-line button exposes 'Download activity chart as SVG' aria-label", () => {
+    seedRichStats();
+    renderPage();
+    const btn = screen.getByTestId("stats-export-line");
+    expect(btn).toBeInTheDocument();
+    expect(btn.getAttribute("aria-label")).toBe("Download activity chart as SVG");
+    // The same string must resolve via accessible-name role lookup so
+    // screen readers hit the same target the tooltip does.
+    expect(screen.getByRole("button", { name: "Download activity chart as SVG" })).toBe(btn);
+  });
 });
