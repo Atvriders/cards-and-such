@@ -98,6 +98,55 @@ describe("LobbyPage — hide-tile + Hidden chip + reset (W574)", () => {
     expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
   });
 
+  // W697 — pin the in-render chip-hidden count badge update on hide.
+  //
+  // W574 (above) confirms the localStorage write side of a click-hide,
+  // and the seeded-storage test below confirms the badge mirrors a
+  // pre-populated set on mount. Neither pins the contract that *during
+  // the same render* a click-hide flips the chip-hidden count badge
+  // from "0" to "1" — i.e. the hideGame() callback's state update
+  // recomputes hiddenCount synchronously alongside hiddenSet, with no
+  // remount or storage-event needed. A regression that updated only
+  // localStorage but forgot to bump the local state (e.g. a missed
+  // setHiddenSet call after persistence) would slip past both existing
+  // tests but be caught here.
+  it("clicking tile-menu-hide updates the chip-hidden count badge in the same render", async () => {
+    renderAt("/");
+
+    // Baseline: nothing hidden yet, so the chip-hidden badge reads "0".
+    // We grab the chip up front so the post-click assertion is against
+    // the *same* DOM node — this confirms the badge re-renders in place
+    // rather than being swapped wholesale by an unrelated re-render.
+    const hiddenChip = screen.getByTestId("chip-hidden");
+    expect(hiddenChip).toHaveTextContent("0");
+
+    // Drive the same hide pathway as W574-test-1 — search-narrow then
+    // right-click → tile-menu-hide on the canonical standalone game id.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "texas hold" } });
+    const tile = await waitFor(() =>
+      screen.getByTestId(`tile-${STANDALONE_ID}`),
+    );
+    fireEvent.contextMenu(tile);
+    const hideItem = await screen.findByTestId("tile-menu-hide");
+    fireEvent.click(hideItem);
+
+    // The contract pin: the chip-hidden count badge must reflect the
+    // newly-hidden game in the *same* render cycle. We waitFor to allow
+    // the post-click setState to flush, but no storage-event is fired —
+    // the click handler's setHiddenSet is the only path that can drive
+    // this update.
+    await waitFor(() => {
+      expect(screen.getByTestId("chip-hidden")).toHaveTextContent("1");
+    });
+    // Sanity twin: the canonical persistence side-effect also fired,
+    // confirming the in-render badge update isn't silently divorcing
+    // local state from the on-disk shape.
+    const raw = localStorage.getItem("cards-hidden-games");
+    expect(raw).not.toBeNull();
+    expect(JSON.parse(raw as string)).toEqual([STANDALONE_ID]);
+  });
+
   it("Hidden chip surfaces hidden tiles; storage-event reset hides them again", async () => {
     // Seed a single hidden id directly under the canonical key so the
     // page hydrates with that tile already filtered out of the All grid
