@@ -75,6 +75,22 @@ describe("SettingsPage", () => {
     ).toBeInTheDocument();
   });
 
+  // W885 — focused coverage of the Audio section's H2 sub-heading. W880
+  // pinned the page-level H1, but the four section cards each render an
+  // <h2> that the section <section aria-labelledby> attribute references
+  // for accessible naming. Every other test reaches into Audio via
+  // testids (sound-toggle, settings-volume, settings-mute-on-hidden) and
+  // never asserts the heading itself, so a regression that demoted the
+  // h2 to a div or renamed the heading would silently break the document
+  // outline + the section's accessible name. Pinning by role + level + name
+  // keeps that contract explicit.
+  it("renders an h2 Audio section heading", () => {
+    renderPage();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Audio" }),
+    ).toBeInTheDocument();
+  });
+
   it("exposes export / import / clear actions", () => {
     renderPage();
     expect(screen.getByTestId("settings-export")).toBeInTheDocument();
