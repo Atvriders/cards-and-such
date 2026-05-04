@@ -2049,4 +2049,31 @@ describe("StatsPage", () => {
     expect(within(panel).getByTestId("stats-replay-0")).toBeInTheDocument();
     expect(within(panel).queryByTestId("stats-replay-1")).not.toBeInTheDocument();
   });
+
+  // W755: The `.achievement-progress-fill` inline `width: <pct>%` style is the
+  // load-bearing visual cue that drives the rendered fill bar — distinct from
+  // W156 which pins the ARIA progressbar attributes (aria-valuenow / -valuemax
+  // / data-pct) and the cur/goal text label, but never touches the actual
+  // CSS width that paints the bar. A regression that drops the inline style
+  // (e.g. moving width to a className lookup) or computes the percent from a
+  // different formula would render a flat / 100%-full bar visually while the
+  // ARIA attrs still read correct — silently misleading sighted users. Seed
+  // the same Card Shark fixture (25 unique perGame keys, goal 50) and pin the
+  // fill element's `style.width` to exactly "50%".
+  it("W755: achievement progress fill renders inline width:50% when 25 of 50 unique games are seeded", () => {
+    const perGame: Record<string, { played: number; wins: number; best: number }> = {};
+    for (let i = 0; i < 25; i++) {
+      perGame[`game-${i}`] = { played: 1, wins: 0, best: 0 };
+    }
+    seedStats({ totalPlayed: 25, perGame });
+    renderPage();
+
+    const card = screen.getByTestId("achievement-card-shark");
+    const fill = card.querySelector(".achievement-progress-fill") as HTMLElement;
+    expect(fill).not.toBeNull();
+    // Inline style must be the exact "50%" string driven by the rounded pct
+    // — not "0%" (regression to default), not "50" (missing unit), not
+    // "100%" (regression that ignores cur/goal ratio).
+    expect(fill.style.width).toBe("50%");
+  });
 });
