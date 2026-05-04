@@ -412,6 +412,23 @@ describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
     expect(toggle.getAttribute("aria-expanded")).toBe("true");
     expect(localStorage.getItem("cards-lobby-drawer-collapsed")).toBe("0");
   });
+
+  // W659 — companion to W625: prove the inverse direction of the same
+  // contract. A pre-seeded `cards-lobby-drawer-collapsed` truthy sentinel
+  // (written by a prior session's toggle click) must rehydrate the aside
+  // straight into the collapsed visual state — `data-collapsed="true"` on
+  // first paint, before any user interaction. Without this, a regression
+  // that flipped the truthiness check (e.g. inverted the read, or stopped
+  // honouring the persisted sentinel) would silently lose every desktop
+  // user's saved compact layout on reload — exactly the bug W625 can't
+  // catch because it starts from an empty store.
+  it("W659: pre-seeded collapsed sentinel rehydrates drawer as collapsed", () => {
+    localStorage.setItem("cards-lobby-drawer-collapsed", "1");
+    renderAt("/");
+    const drawer = screen.getByTestId("lobby-drawer");
+    // Mounted in the persisted-collapsed state on the very first render.
+    expect(drawer.getAttribute("data-collapsed")).toBe("true");
+  });
 });
 
 /**
@@ -2021,19 +2038,88 @@ describe("LobbyPage — recently-played chip filter (W227)", () => {
     expect(chip).toHaveAttribute("aria-pressed", "true");
     expect(localStorage.getItem("cards-lobby-filter")).toBe("recently-played");
 
-    // The two seeded family tiles must both be present.
-    expect(screen.getByTestId("tile-klondike")).toBeInTheDocument();
-    expect(screen.getByTestId("tile-spider")).toBeInTheDocument();
+    // Both ids appear in `FEATURED_IDS`, so when the chip is active
+    // their main-grid tiles render with the demoted `grid-tile-<id>`
+    // testid — the canonical `tile-<id>` slot belongs to the featured
+    // strip, which is suppressed for any non-"all" filter.
+    expect(screen.getByTestId("grid-tile-klondike")).toBeInTheDocument();
+    expect(screen.getByTestId("grid-tile-spider")).toBeInTheDocument();
 
-    // Scope to the lobby grid (skips the suppressed featured strip and
-    // any unrelated tile-shaped nodes); the surviving set must be
-    // exactly those two family tiles, klondike before spider per the
-    // recently-played intrinsic descending-timestamp sort.
+    // The surviving tile set must be exactly those two family tiles,
+    // klondike before spider per the recently-played intrinsic
+    // descending-timestamp sort.
     const tileIds = Array.from(
       document.querySelectorAll<HTMLElement>('[class*="tile--cat-"]'),
     )
       .map((t) => t.getAttribute("data-testid"))
-      .filter((id): id is string => id != null && id.startsWith("tile-"));
-    expect(tileIds).toEqual(["tile-klondike", "tile-spider"]);
+      .filter((id): id is string => id != null && /^(tile|grid-tile)-/.test(id));
+    expect(tileIds).toEqual(["grid-tile-klondike", "grid-tile-spider"]);
+  });
+});
+
+/**
+ * W661 — when the lobby chip strip overflows horizontally (scrollWidth >
+ * clientWidth), the ChipStrip wrapper must surface its scroll-arrow
+ * buttons so non-touch users can advance the row without a wheel/swipe.
+ * Both arrows share `.lobby-chips-arrow` and are toggled via the native
+ * `hidden` attribute, so we assert visibility by reading that flag after
+ * forcing an overflow geometry on the track element. jsdom reports
+ * scrollWidth/clientWidth as 0, so we monkey-patch the prototype getters
+ * to simulate a real overflow without depending on a layout engine.
+ */
+describe("LobbyPage — chip-strip overflow scroll arrows (W661)", () => {
+  const protoSW = Object.getOwnPropertyDescriptor(
+    HTMLElement.prototype,
+    "scrollWidth",
+  );
+  const protoCW = Object.getOwnPropertyDescriptor(
+    HTMLElement.prototype,
+    "clientWidth",
+  );
+  beforeEach(() => {
+    localStorage.clear();
+    Object.defineProperty(HTMLElement.prototype, "scrollWidth", {
+      configurable: true,
+      get(this: HTMLElement) {
+        return this.classList.contains("lobby-chips") ? 2000 : 0;
+      },
+    });
+    Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+      configurable: true,
+      get(this: HTMLElement) {
+        return this.classList.contains("lobby-chips") ? 400 : 0;
+      },
+    });
+  });
+  afterEach(() => {
+    if (protoSW) Object.defineProperty(HTMLElement.prototype, "scrollWidth", protoSW);
+    if (protoCW) Object.defineProperty(HTMLElement.prototype, "clientWidth", protoCW);
+  });
+
+  it("renders the right scroll-arrow button (not hidden) when the chip strip overflows", () => {
+    renderAt("/");
+    // Nudge the strip so the recompute effect re-evaluates against our
+    // stubbed geometry — the post-mount scroll listener treats scroll
+    // events as the canonical "geometry changed" signal.
+    const track = document.querySelector<HTMLElement>(".lobby-chips");
+    expect(track).not.toBeNull();
+    act(() => {
+      track!.dispatchEvent(new Event("scroll"));
+    });
+
+    const right = document.querySelector<HTMLButtonElement>(
+      ".lobby-chips-arrow--right",
+    );
+    const left = document.querySelector<HTMLButtonElement>(
+      ".lobby-chips-arrow--left",
+    );
+    expect(right).not.toBeNull();
+    expect(left).not.toBeNull();
+    // At scrollLeft === 0 only the right arrow can advance, so it must
+    // be visible (`hidden` toggled off) while the left arrow stays
+    // hidden until the user has scrolled past the 1px tolerance.
+    expect(right!.hidden).toBe(false);
+    expect(right!.getAttribute("aria-label")).toBe("Scroll filters right");
+    expect(left!.hidden).toBe(true);
   });
 });
