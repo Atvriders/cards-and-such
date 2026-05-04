@@ -123,6 +123,22 @@ describe("SettingsPage", () => {
     ).toBeInTheDocument();
   });
 
+  // W899 — focused coverage of the Gameplay <section>'s aria-labelledby
+  // wiring. W893 pins the h2's role/level/name; this test pins the resolved
+  // accessible name on the parent <section> itself. The Gameplay card is a
+  // <section aria-labelledby="settings-gameplay-heading">, which gives it an
+  // implicit role="region" with an accessible name resolved from the
+  // referenced h2's text ("Gameplay"). A regression that drops the
+  // aria-labelledby attribute or renames the heading id would break this
+  // landmark relationship without changing the visible text — getByRole
+  // catches that contract drift explicitly.
+  it("exposes the Gameplay section as a region named via aria-labelledby", () => {
+    renderPage();
+    expect(
+      screen.getByRole("region", { name: "Gameplay" }),
+    ).toBeInTheDocument();
+  });
+
   // W894 — focused coverage of the Your data section's H2 sub-heading. Final
   // companion to W885 (Audio), W891 (Appearance), and W893 (Gameplay); the
   // Your data card's <section> uses `aria-labelledby="settings-data-heading"`,
