@@ -3166,4 +3166,23 @@ describe("StatsPage", () => {
     expect(subtitle).toBeInTheDocument();
     expect(subtitle.className).toContain("stats-chart-label");
   });
+
+  // W1209 — The "This week" card carries a fixed-copy subtitle
+  // ("Last 7 days vs prior 7 days") that frames the entire card: the three
+  // delta rows (Plays / Wins / Avg time) and the prior-week list below them
+  // are only meaningful once the user knows the comparison is rolling-7-day
+  // vs the 7 days before that. The deltas, the formatAvgTime call, and the
+  // direction glyphs (▲/▼/—) all have W717/W820/etc. coverage, but no test
+  // pins this subtitle's exact copy or its `.stats-chart-label` styling hook.
+  // A rewrite (e.g. "This week vs last week") or a refactor that drops the
+  // subtitle / hoists it outside the `stats-this-week` card would currently
+  // slip through, leaving users without the framing for the deltas below.
+  it("W1209: stats-this-week renders 'Last 7 days vs prior 7 days' subtitle as a stats-chart-label", () => {
+    renderPage();
+    const card = screen.getByTestId("stats-this-week");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText("Last 7 days vs prior 7 days");
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+  });
 });
