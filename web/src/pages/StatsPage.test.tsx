@@ -185,6 +185,47 @@ describe("StatsPage", () => {
     expect(r30.getAttribute("aria-pressed")).toBe("false");
   });
 
+  // W676 — Activity range toggle changes the rendered data window. The
+  // existing 7d/14d/30d/90d tests only verify aria-pressed flips on the
+  // buttons; none assert the LineChart actually re-derives its data series
+  // when the range changes. Seed daysPlayed spanning >30 days so the 7d, 30d
+  // and 90d windows would each yield a different point count, render the
+  // page (default range 14 → 14 circles), then click 7d and 90d and assert
+  // the rendered <circle> count tracks the new window length. Pins the
+  // contract that `lastNDays(playedSet, range)` actually feeds the chart.
+  it("W676: stats activity range toggle changes the rendered data window", () => {
+    // Seed 60 daysPlayed entries so even the 90d window has a non-trivial
+    // play history, but circle counts equal window length regardless of
+    // play density (LineChart renders one <circle> per day, value or zero).
+    const today = new Date();
+    const days: string[] = [];
+    for (let i = 0; i < 60; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      days.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
+    }
+    seedStats({
+      totalPlayed: 60,
+      totalWins: 30,
+      perGame: { klondike: { played: 60, wins: 30, best: 100 } },
+      perCategory: { solitaire: 60 },
+      daysPlayed: days,
+    });
+    renderPage();
+    const lineChart = screen.getByTestId("stats-line-chart");
+    // Default range is 14 → LineChart renders one <circle> per day.
+    expect(lineChart.querySelectorAll("circle").length).toBe(14);
+
+    // Toggle to 7d — point count must shrink to 7.
+    fireEvent.click(screen.getByTestId("stats-range-7d"));
+    expect(screen.getByTestId("stats-line-chart").querySelectorAll("circle").length).toBe(7);
+
+    // Toggle to 90d — point count must grow to 90, distinct from both prior
+    // windows so we've actually proven the data series is range-driven.
+    fireEvent.click(screen.getByTestId("stats-range-90d"));
+    expect(screen.getByTestId("stats-line-chart").querySelectorAll("circle").length).toBe(90);
+  });
+
   it("achievement search filters the cards", () => {
     seedRichStats();
     // Show-locked toggle defaults off; streak achievements are locked under
@@ -1604,6 +1645,26 @@ describe("StatsPage", () => {
     const card = screen.getByTestId("stats-sessions");
     expect(within(card).getByText("Sessions")).toBeTruthy();
     expect(within(card).getByText("42")).toBeTruthy();
+  });
+
+  // W681: stat-favorite-category renders the highest-count perCategory key
+  // resolved by `favoriteCategory(stats)` (highest plays-count wins). With
+  // perCategory={solitaire:20, cards:3, dice:2}, the card must show "solitaire".
+  it("W681: stat-favorite-category renders the highest-count perCategory key", () => {
+    seedStats({
+      totalPlayed: 25,
+      totalWins: 10,
+      perCategory: {
+        solitaire: 20,
+        cards: 3,
+        dice: 2,
+      },
+    });
+    renderPage();
+    const card = screen.getByTestId("stat-favorite-category");
+    expect(within(card).getByText("Favorite")).toBeTruthy();
+    expect(within(card).getByText("solitaire")).toBeTruthy();
+    expect(card.textContent).not.toContain("—");
   });
 
   // W451: Sanity-check the responsive `.stats-card-grid` so a refactor that
