@@ -91,6 +91,53 @@ describe("SettingsPage", () => {
     ).toBeInTheDocument();
   });
 
+  // W891 — focused coverage of the Appearance section's H2 sub-heading.
+  // Companion to W885 (Audio); the Appearance card's <section> uses
+  // `aria-labelledby="settings-appearance-heading"`, so a regression that
+  // demoted the <h2> to a <div> or renamed it would silently break both the
+  // document outline and the section's accessible name. All other Appearance
+  // assertions in this file reach in via `.settings-field` rows or specific
+  // controls (theme picker, card back, font), so the heading itself is
+  // otherwise unverified. Pinning by role + level + name keeps that contract
+  // explicit.
+  it("renders an h2 Appearance section heading", () => {
+    renderPage();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Appearance" }),
+    ).toBeInTheDocument();
+  });
+
+  // W893 — focused coverage of the Gameplay section's H2 sub-heading.
+  // Companion to W885 (Audio) and W891 (Appearance); the Gameplay card's
+  // <section> uses `aria-labelledby="settings-gameplay-heading"`, so a
+  // regression that demoted the <h2> to a <div> or renamed it would silently
+  // break both the document outline and the section's accessible name. The
+  // many existing Gameplay assertions in this file reach in via specific
+  // controls (auto-move, hints, animations, etc.), so the heading itself is
+  // otherwise unverified. Pinning by role + level + name keeps that contract
+  // explicit.
+  it("renders an h2 Gameplay section heading", () => {
+    renderPage();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Gameplay" }),
+    ).toBeInTheDocument();
+  });
+
+  // W894 — focused coverage of the Your data section's H2 sub-heading. Final
+  // companion to W885 (Audio), W891 (Appearance), and W893 (Gameplay); the
+  // Your data card's <section> uses `aria-labelledby="settings-data-heading"`,
+  // so a regression that demoted the <h2> to a <div> or renamed it would
+  // silently break both the document outline and the section's accessible
+  // name. Existing Your data assertions reach in via the export / import /
+  // clear testids, so the heading itself is otherwise unverified. Pinning by
+  // role + level + name keeps that contract explicit.
+  it("renders an h2 Your data section heading", () => {
+    renderPage();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Your data" }),
+    ).toBeInTheDocument();
+  });
+
   it("exposes export / import / clear actions", () => {
     renderPage();
     expect(screen.getByTestId("settings-export")).toBeInTheDocument();
