@@ -1493,3 +1493,40 @@ describe("SettingsPage analytics event-log toggle (W1132)", () => {
     expect(screen.queryByTestId("analytics-panel")).toBeNull();
   });
 });
+
+describe("SettingsPage analytics panel content (W1168)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // The analytics ring buffer is module-scoped — wipe before each run so
+    // we know the panel starts empty and any event we observe was emitted
+    // by *this* test, not a sibling that ran ahead of us.
+    clearEvents();
+  });
+
+  it("renders a setting.change entry inside the analytics panel after a setting is toggled", () => {
+    renderPage();
+
+    // Trigger a setting change. Card-back is the cleanest source: its
+    // useEffect calls track("setting.change", { key: "cardBack", value })
+    // and there's no confirm dialog or async work in the way. We pick a
+    // distinctive value ("tartan") so the assertion below can grep for an
+    // unambiguous string in the rendered list.
+    fireEvent.click(screen.getByTestId("cardback-gallery-tartan"));
+
+    // Open the panel after the change so refreshEventLog() picks up the
+    // freshly-tracked entry on its first read — saves us a Refresh click.
+    fireEvent.click(screen.getByTestId("analytics-toggle"));
+    const panel = screen.getByTestId("analytics-panel");
+    expect(panel).toBeInTheDocument();
+
+    // The panel renders each event's name and props inside a <code> child
+    // joined with `JSON.stringify(props)`. Asserting against the panel's
+    // own text guarantees the entry is *visible*, not merely in the ring.
+    expect(panel).toHaveTextContent("setting.change");
+    expect(panel).toHaveTextContent('"key":"cardBack"');
+    expect(panel).toHaveTextContent('"value":"tartan"');
+    // At least one event row was rendered — empty-state hint must be gone.
+    expect(screen.queryByTestId("analytics-empty")).toBeNull();
+    expect(screen.getByTestId("analytics-event-0")).toBeInTheDocument();
+  });
+});
