@@ -344,6 +344,23 @@ describe("StatsPage", () => {
     expect(screen.queryByTestId("stats-drill-panel")).toBeNull();
   });
 
+  // W1217: pin the drill-down "Play" deep-link. Opening the panel for a
+  // specific gameId must surface a Play link whose href routes to
+  // /play/<gameId> — that's the contract that turns the drill-down into a
+  // launch-pad rather than a read-only stat sheet. We verify the testId hooks
+  // an <a> with the expected href so a refactor that swaps the Link for a
+  // button (or routes elsewhere) gets caught immediately.
+  it("W1217: drill-down Play link routes to /play/<gameId> for the opened bar", () => {
+    seedRichStats();
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-drill-klondike"));
+    const panel = screen.getByTestId("stats-drill-panel");
+    const playLink = within(panel).getByTestId("stats-drill-play");
+    expect(playLink.tagName).toBe("A");
+    expect(playLink).toHaveAttribute("href", "/play/klondike");
+    expect(playLink.textContent).toBe("Play");
+  });
+
   it("reset stats button shows confirm dialog and clears on confirm", async () => {
     seedRichStats();
     renderPage();
