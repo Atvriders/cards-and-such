@@ -210,6 +210,62 @@ describe("SettingsPage", () => {
     clickSpy.mockRestore();
   });
 
+  // W758 — inverse of the W750 export test. Confirms the import flow
+  // reads a JSON file from the hidden file input, validates the
+  // `{ app, data }` shape via importAll, writes recognized keys back to
+  // localStorage, and stamps the "Importer" achievement flag. Catches
+  // regressions where handleImportFile silently drops the file, skips
+  // the confirm-yes wiring, or stops calling importAll altogether.
+  it("import restores user data from a JSON file backup", async () => {
+    // Empty localStorage at the start — the import is the only writer.
+    expect(localStorage.getItem("cards-favorites")).toBeNull();
+    expect(localStorage.getItem("cards-ratings")).toBeNull();
+    expect(localStorage.getItem("cards-best-times")).toBeNull();
+
+    renderPage();
+
+    // Build a JSON payload matching the export shape. Three KNOWN_KEYS
+    // entries plus an unknown key that importAll should silently skip.
+    const payload = {
+      version: 1,
+      exportedAt: "2026-05-03T00:00:00.000Z",
+      app: "cards-and-such",
+      data: {
+        "cards-favorites": '["klondike","freecell"]',
+        "cards-ratings": '{"klondike":4}',
+        "cards-best-times": '{"freecell":120}',
+        "not-a-known-key": "ignored",
+      },
+    };
+    const file = new File([JSON.stringify(payload)], "backup.json", {
+      type: "application/json",
+    });
+
+    const input = screen.getByTestId(
+      "settings-import-input",
+    ) as HTMLInputElement;
+    await act(async () => {
+      fireEvent.change(input, { target: { files: [file] } });
+    });
+
+    // The handler asks for confirmation before overwriting — click yes.
+    const yes = await screen.findByTestId("confirm-yes");
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+
+    // Recognized keys round-tripped verbatim into localStorage.
+    expect(localStorage.getItem("cards-favorites")).toBe(
+      '["klondike","freecell"]',
+    );
+    expect(localStorage.getItem("cards-ratings")).toBe('{"klondike":4}');
+    expect(localStorage.getItem("cards-best-times")).toBe('{"freecell":120}');
+    // Unknown keys silently skipped — they must not pollute storage.
+    expect(localStorage.getItem("not-a-known-key")).toBeNull();
+    // Achievement flag stamped after a successful import.
+    expect(localStorage.getItem("cards-data-imported")).toBe("true");
+  });
+
   it("clear-all aborts when the user cancels the confirm dialog", async () => {
     localStorage.setItem("cards-ratings", '{"klondike":4}');
     renderPage();
