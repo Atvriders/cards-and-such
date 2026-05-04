@@ -2644,4 +2644,31 @@ describe("StatsPage", () => {
     expect(yes.classList.contains("confirm-dialog-btn--danger")).toBe(true);
     expect(yes.classList.contains("confirm-dialog-btn--primary")).toBe(false);
   });
+
+  // W916 — The stats-reset confirm dialog must render the exact destructive
+  // body copy ("This will clear every play count, win, best score, and
+  // history entry. This cannot be undone.") inside the element referenced
+  // by the dialog's aria-describedby. handleReset() passes that string as
+  // the `message` field of showConfirm(); ConfirmDialog renders it into the
+  // `#confirm-dialog-message` div that the alertdialog's aria-describedby
+  // points at. W895 pins the title, W904 pins the danger paint, W650 pins
+  // the cancel path, W690 pins the preserves-keys contract, W612 pins the
+  // reset isolation — none assert the body text the user actually reads
+  // before deciding to wipe their stats, nor the a11y wiring that announces
+  // it to screen-readers. A regression that softens the warning (e.g.
+  // dropping "This cannot be undone.") or breaks the aria-describedby link
+  // would silently weaken the consent UX without any other test failing.
+  it("W916: stats-reset confirm dialog renders exact destructive body copy with describedby wiring", async () => {
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const dialog = await screen.findByTestId("confirm-dialog");
+    // The alertdialog's accessible description is wired via
+    // aria-describedby → #confirm-dialog-message.
+    expect(dialog.getAttribute("aria-describedby")).toBe("confirm-dialog-message");
+    const messageEl = dialog.querySelector("#confirm-dialog-message");
+    expect(messageEl).not.toBeNull();
+    expect(messageEl?.textContent).toBe(
+      "This will clear every play count, win, best score, and history entry. This cannot be undone.",
+    );
+  });
 });
