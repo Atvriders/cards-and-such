@@ -168,6 +168,25 @@ describe("friendCode", () => {
     expect(checked).toBeGreaterThan(0);
   });
 
+  it("rejects 'U' as an invalid character (deliberately unmapped Crockford slot)", () => {
+    // The decoder normalises I/L -> 1 and O -> 0, but per the source comment
+    // U is *deliberately* left unmapped so a stray 'U' surfaces as an error
+    // rather than silently aliasing to another symbol. Substituting the first
+    // alphabet character of an otherwise-valid code with 'U' must yield null.
+    const code = encodeChallenge({ gameId: "klondike", seed: 9001 });
+    expect(code).not.toBeNull();
+    const valid = code as string;
+    // Sanity: the freshly minted code itself is accepted.
+    expect(decodeChallenge(valid)).toEqual({ gameId: "klondike", seed: 9001 });
+    // Replacing any single character with 'U' must fail (U is not in ALPHABET
+    // and is not normalised to anything else).
+    const withU = `U${valid.slice(1)}`;
+    expect(decodeChallenge(withU)).toBeNull();
+    expect(isValidFriendCode(withU)).toBe(false);
+    // Lowercase 'u' uppercases to 'U' and must also be rejected.
+    expect(decodeChallenge(`u${valid.slice(1).toLowerCase()}`)).toBeNull();
+  });
+
   it("truncates seeds with bits above 16 yet stays deterministic across calls", () => {
     // Two seeds that share their low 16 bits but differ in the high bits
     // must produce the same friend code (deterministic truncation).
