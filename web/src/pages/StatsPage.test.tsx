@@ -3041,4 +3041,65 @@ describe("StatsPage", () => {
     expect(subtitle).toBeInTheDocument();
     expect(subtitle.className).toContain("stats-chart-label");
   });
+
+  // W1192 — Each cell of the category × day-of-week heatmap carries a native
+  // `title` tooltip in the form `${cat} · ${day}: ${count}` (HeatmapChart in
+  // StatsPage.tsx). This is the only on-hover affordance that surfaces the
+  // exact play count + category + day for assistive/desktop users, but no
+  // existing test pins the format. Seed three klondike (solitaire) plays on
+  // a known weekday and assert both the tooltip text and the use of the
+  // middle-dot separator (U+00B7) — a hyphen or colon-only regression would
+  // silently strip semantic clarity from the tooltip.
+  it("W1192: stats-cat-heatmap cell renders title='<cat> · <day>: <count>' tooltip with middle-dot separator", () => {
+    const dayMs = 24 * 60 * 60 * 1000;
+    const base = new Date();
+    base.setHours(12, 0, 0, 0);
+    const baseMs = base.getTime();
+    // Mon=0..Sun=6 remap matches the page's getDay() conversion.
+    const dowOf = (ts: number): number => (new Date(ts).getDay() + 6) % 7;
+    const ts = baseMs - 1 * dayMs;
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts, time: 60 },
+        { ts: ts + 60_000, time: 60 },
+        { ts: ts + 120_000, time: 60 },
+      ]),
+    );
+    renderPage();
+    const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
+    const dayLower = dayLabels[dowOf(ts)].toLowerCase();
+    const cell = screen.getByTestId(`stats-cat-heatmap-solitaire-${dayLower}`);
+    // Exact tooltip format: "<cat> · <day>: <count>" (note the U+00B7 middle
+    // dot, NOT a hyphen and NOT just a colon).
+    const expected = `solitaire · ${dayLabels[dowOf(ts)]}: 3`;
+    expect(cell.getAttribute("title")).toBe(expected);
+    // Belt-and-suspenders: the separator is the middle-dot character itself,
+    // pinned via codepoint so font/encoding regressions surface here.
+    expect(cell.getAttribute("title")).toContain("·");
+  });
+
+  // W1193 — The Personal Records card carries a fixed-copy subtitle
+  // ("Top 10 best times across all games") that documents the cap and the
+  // scope of the list. The card body conditionally renders either the
+  // empty-state CTA or the <ul> of rows, but the subtitle is unconditional —
+  // so this copy is the user's anchor for understanding what they're looking
+  // at no matter the data state. W1145 pinned the empty-state copy and
+  // W768/W786 pinned the row ordering and cap, but no test pins the subtitle
+  // itself. A refactor that drops the cap to top-5 (and rewrites the
+  // sentence) or accidentally renders the subtitle inside the empty branch
+  // would currently slip through. Pin the exact string + its
+  // `.stats-chart-label` class so any rewording, truncation, or DOM-position
+  // drift surfaces as a test failure.
+  it("W1193: stats-personal-records renders 'Top 10 best times across all games' subtitle as a stats-chart-label", () => {
+    seedStats({ totalPlayed: 1 });
+    renderPage();
+    const card = screen.getByTestId("stats-personal-records");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText(
+      "Top 10 best times across all games",
+    );
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+  });
 });
