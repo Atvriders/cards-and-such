@@ -1977,4 +1977,76 @@ describe("StatsPage", () => {
     const viewAll = within(panel).getByTestId("view-all-replays");
     expect(viewAll.getAttribute("href")).toBe("/replays");
   });
+
+  // W749: Each achievement card renders a human-readable status label inside
+  // `.achievement-status` driven by the bucket: "Unlocked" / "In progress" /
+  // "Locked". Distinct from the existing `data-state` ordering tests (W515 /
+  // W531 / unlocked→in-progress→locked test) which pin the *attribute*, and
+  // from W156 which pins the ARIA progressbar values — this test pins the
+  // visible English copy assistive tech and sighted users actually see. Seed
+  // a triplet that hits all three buckets simultaneously: first-win unlocked,
+  // ten-wins in-progress (totalWins=1 → cur=1/goal=10), card-shark locked
+  // (zero perGame keys → cur=0/goal=50). Show-locked toggle must be on so
+  // the locked card renders.
+  it("W749: each achievement card's .achievement-status text matches its bucket (Unlocked / In progress / Locked)", () => {
+    seedStats({
+      totalWins: 1,
+      perGame: {},
+      unlocked: ["first-win"],
+    });
+    localStorage.setItem("cards-stats-show-locked", "true");
+    renderPage();
+
+    const unlockedCard = screen.getByTestId("achievement-first-win");
+    const inProgressCard = screen.getByTestId("achievement-ten-wins");
+    const lockedCard = screen.getByTestId("achievement-card-shark");
+
+    // Sanity: pin each card to the bucket the status label is supposed to
+    // mirror, so a regression in the bucket-classifier doesn't masquerade as
+    // a label-copy regression.
+    expect(unlockedCard.getAttribute("data-state")).toBe("unlocked");
+    expect(inProgressCard.getAttribute("data-state")).toBe("in-progress");
+    expect(lockedCard.getAttribute("data-state")).toBe("locked");
+
+    // The status label text is the load-bearing assertion: each bucket maps
+    // to exactly one of the three canonical strings.
+    const unlockedStatus = unlockedCard.querySelector(".achievement-status");
+    const inProgressStatus = inProgressCard.querySelector(".achievement-status");
+    const lockedStatus = lockedCard.querySelector(".achievement-status");
+    expect(unlockedStatus?.textContent).toBe("Unlocked");
+    expect(inProgressStatus?.textContent).toBe("In progress");
+    expect(lockedStatus?.textContent).toBe("Locked");
+  });
+
+  // W752 — Replays-panel header pluralization for the singular case. The
+  // header copy is `Last {n} saved replay{n === 1 ? "" : "s"} (max 5)` so
+  // exactly one entry must read "Last 1 saved replay" (no trailing "s")
+  // while two-or-more rolls over to "saved replays". W513 / W745 cover the
+  // populated (n=2) and empty (n=0) cases — both render the plural — so the
+  // singular branch has no live coverage. A stray refactor that flipped the
+  // ternary or hard-coded "replays" would silently regress only this case.
+  // We seed a single replay and pin both halves: the singular header text
+  // is present, AND the plural form is NOT (so a "1 saved replays" double-
+  // form bug also fails this assertion).
+  it("W752: replays panel header uses singular 'saved replay' when exactly one replay is saved", () => {
+    seedStats({ totalPlayed: 1 });
+    localStorage.setItem(
+      "cards-replays",
+      JSON.stringify([
+        { id: "r-only", gameId: "klondike", seed: 7, actions: ["a"], savedAt: 1 },
+      ]),
+    );
+    renderPage();
+
+    const panel = screen.getByTestId("stats-replays-panel");
+    // Header must read the singular form for exactly one saved replay.
+    expect(panel.textContent).toMatch(/Last 1 saved replay\b/);
+    // And must NOT contain the plural form — guards against a regression
+    // that always emits "replays" regardless of count.
+    expect(panel.textContent).not.toMatch(/Last 1 saved replays/);
+    // Sanity: the single row is in fact rendered (so we're really on the
+    // populated branch and not accidentally matching empty-state copy).
+    expect(within(panel).getByTestId("stats-replay-0")).toBeInTheDocument();
+    expect(within(panel).queryByTestId("stats-replay-1")).not.toBeInTheDocument();
+  });
 });
