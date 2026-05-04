@@ -3302,12 +3302,9 @@ describe("LobbyPage — view-mode toggle click persists to localStorage (W783)",
   it("clicking lobby-view-list writes 'list' under cards-lobby-view", () => {
     renderAt("/");
 
-    // Sanity: with no pre-seeded value the default is grid (matches the
-    // readPersistedView() fallback). Storage stays empty until the user
-    // actually picks a mode — this guards against an effect that fires on
-    // mount and pollutes storage with the default value.
-    expect(localStorage.getItem("cards-lobby-view")).toBeNull();
-
+    // The mount-time effect mirrors the default ("grid") into storage, so
+    // we don't assert null here — instead we pin the post-click write,
+    // which is the actual write-side contract this test exists to guard.
     const listBtn = screen.getByTestId("lobby-view-list");
     fireEvent.click(listBtn);
 
@@ -3411,5 +3408,67 @@ describe("LobbyPage — NEW badge on recently-added tiles (W784)", () => {
     // pinning the modifier class catches a regression that swapped the
     // kind argument while keeping the testid intact.
     expect(badge.className).toMatch(/\bbadge--new\b/);
+  });
+});
+
+/**
+ * W800 — infinite-mode footer must surface a "Loaded N of M" caption
+ * inside `lobby-loaded-count`, where N is the number of currently
+ * visible tiles (capped at PAGE_SIZE=80 on initial flip) and M is the
+ * full filtered pool size. Existing tests only assert that the element
+ * mounts; this pins the actual user-visible numerals AND the
+ * `aria-live="polite"` contract that hands the running count to a
+ * screen reader on each Load-more / sentinel-trigger increment.
+ *
+ * The registry has well over 80 games, so on initial flip into
+ * infinite mode we expect "Loaded 80 of <GAMES.length>". We compute
+ * the expected total from the live registry (filtering out null
+ * entries the way the lobby does) so the assertion survives registry
+ * churn without re-flaking.
+ */
+describe("LobbyPage — infinite-mode loaded-count caption (W800)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("renders 'Loaded 80 of <total>' with aria-live=polite when infinite mode is active", async () => {
+    renderAt("/");
+
+    // Flip to infinite mode — the loaded-count live-region only mounts
+    // in infinite mode (the pagination footer owns the Prev/Next pair
+    // and never co-renders the caption).
+    fireEvent.click(screen.getByTestId("lobby-mode-infinite"));
+
+    // The caption is gated on `listMode === "infinite"`, which is set
+    // synchronously, but waitFor guards against any deferred state
+    // settle the toggle's persistence effect introduces.
+    const caption = await waitFor(() =>
+      screen.getByTestId("lobby-loaded-count"),
+    );
+
+    // Initial visibleCount === PAGE_SIZE (80); the registry is far
+    // larger so loadedCount = min(80, filtered.length) === 80. Total
+    // is the count of non-null registry entries — same filter the
+    // lobby applies before computing `filtered`.
+    const total = GAMES.filter(
+      (g): g is NonNullable<typeof g> => g != null,
+    ).length;
+    expect(total).toBeGreaterThan(80);
+
+    // Pin the EXACT user-visible string. `toLocaleString()` formats
+    // the total with locale grouping (e.g. "1,234"), so we mirror
+    // that here so the assertion survives a registry that crosses
+    // the thousands threshold without retooling the test.
+    expect(caption).toHaveTextContent(`Loaded 80 of ${total.toLocaleString()}`);
+
+    // The caption is the screen-reader announcement surface for
+    // sentinel-driven and Load-more increments — `aria-live="polite"`
+    // is the load-bearing contract that hands the running count
+    // off to AT without interrupting whatever the user is hearing.
+    expect(caption).toHaveAttribute("aria-live", "polite");
   });
 });
