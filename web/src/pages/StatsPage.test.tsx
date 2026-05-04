@@ -2622,4 +2622,26 @@ describe("StatsPage", () => {
     expect(titleEl.tagName).toBe("H2");
     expect(titleEl.id).toBe("confirm-dialog-title");
   });
+
+  // W904 — The stats-reset confirm dialog must render its Yes button with
+  // the destructive `danger` variant styling. handleReset() in StatsPage
+  // passes `danger: true` to showConfirm(), and ConfirmDialog turns that
+  // flag into the `confirm-dialog-btn--danger` class (vs. the benign
+  // `confirm-dialog-btn--primary` used by non-destructive prompts). The
+  // visual distinction is the only signal — short of the title copy — that
+  // tells the user "this action is irreversible" before they tap Yes.
+  // W895 pins the title, W650 pins the cancel path, W690 pins the
+  // preserves-keys contract; none assert the destructive-button paint. A
+  // regression that drops `danger: true` (e.g. while refactoring
+  // handleReset's options object) would silently downgrade the button to
+  // the primary variant and remove that visual warning. Pins the danger
+  // class on the confirm-yes button and the absence of the primary class
+  // so the wiring can't flip without this test failing.
+  it("W904: stats-reset confirm-yes button carries danger variant class, not primary", async () => {
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-reset"));
+    const yes = await screen.findByTestId("confirm-yes");
+    expect(yes.classList.contains("confirm-dialog-btn--danger")).toBe(true);
+    expect(yes.classList.contains("confirm-dialog-btn--primary")).toBe(false);
+  });
 });
