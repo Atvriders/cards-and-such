@@ -3412,6 +3412,63 @@ describe("LobbyPage — NEW badge on recently-added tiles (W784)", () => {
 });
 
 /**
+ * W806 — "QUICK" badge on curated short-play tiles.
+ *
+ * `pickBadgeKind` (web/src/platform/gameTags.ts) returns "quick" when an
+ * id is in the hand-picked QUICK_GAME_IDS set AND nothing higher-priority
+ * fired (NEW > CHALLENGING > QUICK > POPULAR > EDITORS-PICK). W784
+ * already pins the NEW path; this test pins the QUICK path so a
+ * regression that drops the QUICK_GAME_IDS check (or breaks the lobby's
+ * threading of game ids through the SoloCard's pickBadgeKind call) still
+ * surfaces.
+ *
+ * `snap` is a stable QUICK_GAME_IDS member that:
+ *  - sits near the head of the GAMES registry (well outside the
+ *    NEW_GAME_WINDOW=60 tail), so isNew is false and NEW won't preempt
+ *  - is NOT in CHALLENGING_GAME_IDS, so CHALLENGING won't preempt
+ *  - is NOT a member of any family, so it renders as a SoloCard with the
+ *    canonical `tile-badge-<id>` testid (family cards would use
+ *    `tile-badge-<familyId>` and the per-game badge would never mount)
+ *
+ * Searching by the title narrows the pool, suppresses the featured strip
+ * `feat-tile-badge-*` doubles, and keeps `tile-badge-snap` unambiguous
+ * regardless of alphabetical pagination.
+ */
+describe("LobbyPage — QUICK badge on curated short-play tiles (W806)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("stamps tile-badge-snap with the QUICK label and badge--quick class", async () => {
+    renderAt("/");
+
+    // Narrow to "Snap" — the title fragment may still match other
+    // siblings via substring rules, but `tile-badge-snap` is the only
+    // testid the curated QUICK id we care about can ever produce.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "Snap" } });
+
+    const badge = await waitFor(() => screen.getByTestId("tile-badge-snap"));
+    expect(badge).toBeInTheDocument();
+
+    // Production contract: QUICK label/aria pins that `pickBadgeKind`
+    // actually returned "quick" — and that the lobby threaded the id
+    // (not isNew, not the rating, not the featured list) into the
+    // QUICK_GAME_IDS branch.
+    expect(badge).toHaveTextContent("QUICK");
+    expect(badge).toHaveAttribute("aria-label", "QUICK");
+    // The colour-pill modifier locks the kind→class mapping in Badge.tsx
+    // so a regression that swapped the kind arg while keeping the
+    // testid intact still trips the assertion.
+    expect(badge.className).toMatch(/\bbadge--quick\b/);
+  });
+});
+
+/**
  * W800 — infinite-mode footer must surface a "Loaded N of M" caption
  * inside `lobby-loaded-count`, where N is the number of currently
  * visible tiles (capped at PAGE_SIZE=80 on initial flip) and M is the
