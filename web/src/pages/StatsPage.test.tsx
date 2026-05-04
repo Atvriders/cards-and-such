@@ -2577,4 +2577,26 @@ describe("StatsPage", () => {
     expect(heading).toBeTruthy();
     expect(heading.tagName).toBe("H2");
   });
+
+  // W888 — The stats page footer carries a privacy note: "Stats are stored
+  // locally in your browser." This is the user-facing assurance that nothing
+  // gets uploaded — every other test asserts buttons, charts, and headings,
+  // but no test pins this exact copy. A regression that drops, abbreviates,
+  // or rewrites the line (e.g. to "Stored locally" or removes the period)
+  // would silently weaken the privacy story. Locked here as a sibling of the
+  // stats-reset button inside .stats-footer so a test failure also flags any
+  // structural changes that move the note out of the footer.
+  it("W888: stats page footer renders 'Stats are stored locally in your browser.' note alongside reset button", () => {
+    renderPage();
+    const note = screen.getByText("Stats are stored locally in your browser.");
+    expect(note).toBeTruthy();
+    expect(note.tagName).toBe("SPAN");
+    expect(note.className).toContain("stats-footer-note");
+    const footer = note.closest("footer");
+    expect(footer).not.toBeNull();
+    expect(footer?.className).toContain("stats-footer");
+    // Reset button is the footer's other child — assert co-location so the
+    // note can't drift to a different region without this test noticing.
+    expect(within(footer as HTMLElement).getByTestId("stats-reset")).toBeTruthy();
+  });
 });
