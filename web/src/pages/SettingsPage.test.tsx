@@ -1644,3 +1644,26 @@ describe("SettingsPage volume slider aria-valuetext (W1218)", () => {
     expect(slider.getAttribute("aria-valuetext")).toBe("73%");
   });
 });
+
+// W1234: the Audio → Volume range slider must clamp user input to the
+// 0..100 percent domain with single-integer granularity. W1218 covered
+// the aria-valuetext announcement and W679 covered LocalStorage
+// persistence, but neither pins the underlying numeric range. A drift
+// in min/max/step (e.g. someone copy-pasting the parallax slider's 0..10
+// bounds two fields below) would silently change the meaning of every
+// stored value without breaking the existing assertions. Pinning the
+// raw HTML attributes keeps the slider's value space part of the
+// public contract.
+describe("SettingsPage volume slider min/max attributes (W1234)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("exposes min=0, max=100, step=1 on the range input", () => {
+    renderPage();
+    const slider = screen.getByTestId("settings-volume") as HTMLInputElement;
+    expect(slider.min).toBe("0");
+    expect(slider.max).toBe("100");
+    expect(slider.step).toBe("1");
+  });
+});
