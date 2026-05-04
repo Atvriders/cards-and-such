@@ -3287,4 +3287,63 @@ describe("StatsPage", () => {
     expect(card.classList.contains("stats-card")).toBe(true);
     expect(card.classList.contains("stats-card--week")).toBe(true);
   });
+
+  // W1232 — The "Plays by hour of day" card carries a `.stats-chart-label`
+  // subtitle whose empty-state copy ("No plays recorded yet — finish a
+  // game to start the chart") is what greets users on a fresh install
+  // (before any time-history samples exist). W1193/W1203/W1209/W1221
+  // pin the fixed-copy subtitles of the Personal Records, Top played,
+  // This Week, and Activity cards respectively, but no test currently
+  // pins the hour-of-day card's empty-state subtitle. A refactor that
+  // drops the placeholder line, hoists it outside the card, rewrites
+  // the copy ("No data yet" / "Finish a game first"), or strips the
+  // `.stats-chart-label` styling hook would currently slip through
+  // silently on a default render where `hourData.total === 0`.
+  it("W1232: stats-hour-of-day renders empty-state subtitle 'No plays recorded yet — finish a game to start the chart' as a stats-chart-label", () => {
+    renderPage();
+    const card = screen.getByTestId("stats-hour-of-day");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText(
+      "No plays recorded yet — finish a game to start the chart",
+    );
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+  });
+
+  // W1235 — The responsive card grid is rendered as a semantic <section>
+  // element with the `.stats-card-grid` class hook. The grid layout (CSS
+  // grid + the `> [data-testid="stats-activity"] { grid-column: span 2 }`
+  // selector at >=1024px) and the W451 sanity test both depend on this
+  // wrapper being a `<section class="stats-card-grid">`. A refactor that
+  // swaps the tag (e.g. to `<div>`) or renames/drops the class would
+  // silently break the desktop layout selector and the document outline
+  // landmark expectations.
+  it("W1235: stats-card-grid outer wrapper is a SECTION element with the stats-card-grid class", () => {
+    seedRichStats();
+    renderPage();
+    const activity = screen.getByTestId("stats-activity");
+    const wrapper = activity.parentElement;
+    expect(wrapper).not.toBeNull();
+    expect(wrapper!.tagName).toBe("SECTION");
+    expect(wrapper!.classList.contains("stats-card-grid")).toBe(true);
+  });
+
+  // W1236 — Sibling-test partner to W1224 (bar chart aria-label/role).
+  // The activity LineChart SVG carries `role="img"` plus an aria-label
+  // of `Activity over last <rangeLabel>` (e.g. "Activity over last 14d"
+  // at the default 14-day range) so screen readers can announce the
+  // chart by name — the line/path/dot elements are decorative with no
+  // individual labels. W1224 pins the bar chart's aria-label/role pair
+  // and W1148/W1164 pin the line chart's *export button* aria-label,
+  // but no test currently pins the line chart SVG's own role+aria-label
+  // pair. A refactor that drops either attribute, renames the copy
+  // (e.g. "Plays per day"), or strips role="img" would silently regress
+  // line-chart accessibility.
+  it("W1236: stats-line-chart SVG exposes role='img' + aria-label='Activity over last 14d'", () => {
+    renderPage();
+    const chart = screen.getByTestId("stats-line-chart");
+    expect(chart.tagName.toLowerCase()).toBe("svg");
+    expect(chart.getAttribute("role")).toBe("img");
+    expect(chart.getAttribute("aria-label")).toBe("Activity over last 14d");
+  });
 });
