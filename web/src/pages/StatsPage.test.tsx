@@ -3185,4 +3185,37 @@ describe("StatsPage", () => {
     expect(subtitle).toBeInTheDocument();
     expect(subtitle.className).toContain("stats-chart-label");
   });
+
+  // W1210 — The category × day-of-week heatmap renders one data row per
+  // HEATMAP_CATEGORIES entry, and each row leads with a `.stats-heatmap-cat`
+  // span carrying the category name as its text. That left-column label is
+  // the only visual hook a sighted user has for telling the five rows apart
+  // (the per-cell `title` tooltips repeat it on hover, but the row label is
+  // what's read at a glance). W798/W1171/W1192/W1198/W1206 pin the subtitle,
+  // empty subtitle, cell title, head row, and cell className respectively,
+  // but no test currently asserts the *non-head* row count or the exact
+  // ordered set of row labels. A refactor that drops a category, reorders
+  // them (e.g. alphabetical instead of registry order), or renames the
+  // `.stats-heatmap-cat` class would currently slip through silently.
+  it("W1210: stats-cat-heatmap renders 5 data rows labelled solitaire/cards/dice/board/arcade in order", () => {
+    renderPage();
+    const grid = screen.getByTestId("stats-cat-heatmap");
+    // Exclude the decorative head row (W1198 already pins it) so we count
+    // only the data rows. The non-head rows are the ones without the
+    // `--head` modifier class.
+    const allRows = grid.querySelectorAll(".stats-heatmap-row");
+    const dataRows = Array.from(allRows).filter(
+      (r) => !r.classList.contains("stats-heatmap-row--head"),
+    );
+    // 5 categories => 5 data rows (mirrors HEATMAP_CATEGORIES).
+    expect(dataRows.length).toBe(5);
+    // Each data row leads with a `.stats-heatmap-cat` whose text is the
+    // category name. Pin the exact ordered Mon..Sun-style label set so a
+    // reorder, rename, or accidental drop fails loudly here.
+    const labels = dataRows.map((r) => {
+      const span = r.querySelector(".stats-heatmap-cat");
+      return span?.textContent ?? null;
+    });
+    expect(labels).toEqual(["solitaire", "cards", "dice", "board", "arcade"]);
+  });
 });
