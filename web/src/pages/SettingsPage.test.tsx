@@ -1564,3 +1564,83 @@ describe("SettingsPage analytics panel clear button (W1189)", () => {
     expect(empty).toHaveTextContent("No events recorded yet on this device.");
   });
 });
+
+describe("SettingsPage analytics panel refresh button (W1199)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    // Module-scoped ring buffer — wipe before each run so the snapshot we
+    // observe after Refresh is built solely from the events this test fires.
+    clearEvents();
+  });
+
+  it("picks up events tracked while the panel is open after clicking Refresh", () => {
+    renderPage();
+
+    // Open the panel first so we can observe its content snapshot before
+    // any user-driven events fire. We deliberately don't assert "empty
+    // state here" — sibling components or boot-time effects may have
+    // tracked their own entries; what matters is the *delta* introduced
+    // by the next click.
+    fireEvent.click(screen.getByTestId("analytics-toggle"));
+    const panel = screen.getByTestId("analytics-panel");
+    expect(panel).toBeInTheDocument();
+
+    // Capture the event-row count immediately after open. The Refresh
+    // assertion below compares against this baseline, so it survives any
+    // pre-existing ring-buffer state we don't control.
+    const baselineRowCount = panel.querySelectorAll(
+      '[data-testid^="analytics-event-"]',
+    ).length;
+
+    // Track a setting change *while* the panel is already open. The ring
+    // buffer mutation does not auto-rerender the panel — that's the whole
+    // point of the Refresh affordance, so the new entry should NOT yet
+    // appear in the rendered list.
+    fireEvent.click(screen.getByTestId("cardback-gallery-tartan"));
+    const rowsBeforeRefresh = panel.querySelectorAll(
+      '[data-testid^="analytics-event-"]',
+    ).length;
+    expect(rowsBeforeRefresh).toBe(baselineRowCount);
+
+    // Click Refresh — handler calls refreshEventLog() which re-reads
+    // getEvents() and sets state, so the freshly-tracked entry should now
+    // render in the panel without re-toggling open/closed.
+    fireEvent.click(screen.getByTestId("analytics-refresh"));
+
+    // Exactly one new row was appended (events render newest-last) and
+    // its content carries the cardBack=tartan payload we just tracked.
+    const rowsAfterRefresh = panel.querySelectorAll(
+      '[data-testid^="analytics-event-"]',
+    );
+    expect(rowsAfterRefresh.length).toBe(baselineRowCount + 1);
+    const newest = rowsAfterRefresh[rowsAfterRefresh.length - 1];
+    expect(newest).toHaveTextContent("setting.change");
+    expect(newest).toHaveTextContent('"key":"cardBack"');
+    expect(newest).toHaveTextContent('"value":"tartan"');
+    // Panel itself stayed open across the refresh — no remount required.
+    expect(screen.getByTestId("analytics-panel")).toBeInTheDocument();
+  });
+});
+
+// W1218: the Audio → Volume range slider exposes its current 0..100
+// integer to assistive tech via `aria-valuetext` so screen readers
+// announce a friendly "37%" rather than the bare numeric value the
+// browser derives from `value`. This pins the accessibility contract:
+// the attribute must mirror the live React state — including the
+// trailing "%" suffix — across re-renders triggered by user input.
+describe("SettingsPage volume slider aria-valuetext (W1218)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders aria-valuetext as `<value>%` and updates it on change", () => {
+    localStorage.setItem("cards-sound-volume", "50");
+    renderPage();
+    const slider = screen.getByTestId("settings-volume") as HTMLInputElement;
+    // Initial: hydrated from storage on mount.
+    expect(slider.getAttribute("aria-valuetext")).toBe("50%");
+    // After user input the attribute tracks the new state value.
+    fireEvent.change(slider, { target: { value: "73" } });
+    expect(slider.getAttribute("aria-valuetext")).toBe("73%");
+  });
+});
