@@ -146,6 +146,34 @@ describe("PlayPage friend mode (W181/W202/W400)", () => {
     // QR SVG is the third visual artifact promised by the banner.
     expect(screen.getByTestId("play-friend-qr")).toBeTruthy();
   });
+
+  it("friend banner content surfaces a 'Friend mode' headline and exposes the seed (W181/W400)", async () => {
+    // Content-level assertion (separate from the structural existence
+    // test above): when the page mounts in friend mode the banner must
+    // greet the joiner with a recognisable "Friend mode" headline AND
+    // surface the active seed somewhere visible — either as plain text
+    // or via the QR-code aria-label, which is how AT users perceive it.
+    // Both invariants together confirm the banner is doing its actual
+    // job: telling the user what mode they're in and which seed they
+    // share with their friend.
+    await mountPlaying(`?seed=${FIXED_SEED}&friend=1`);
+
+    const banner = screen.getByTestId("play-friend-banner");
+    // Headline check — copy reads "Friend mode — same seed, …" so a
+    // case-insensitive match for the phrase is robust to surrounding
+    // punctuation tweaks.
+    expect(banner.textContent ?? "").toMatch(/friend mode/i);
+
+    // Seed visibility — the QR's aria-label embeds the canonical share
+    // URL (".../?seed=42&friend=1"), which is the only place the raw
+    // seed is exposed to assistive tech. textContent of the banner
+    // includes the QR's <title> too, so we read both surfaces and
+    // require the seed digits to appear in at least one.
+    const qr = screen.getByTestId("play-friend-qr");
+    const ariaLabel = qr.getAttribute("aria-label") ?? "";
+    const haystack = `${banner.textContent ?? ""} ${ariaLabel}`;
+    expect(haystack).toContain(String(FIXED_SEED));
+  });
 });
 
 // Reference React so the file is unambiguously a JSX module under
