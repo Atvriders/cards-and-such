@@ -2972,4 +2972,73 @@ describe("StatsPage", () => {
     // the ternary in StatsPage.tsx is mutually exclusive.
     expect(card.textContent).not.toMatch(/plays in the last 30 days$/);
   });
+
+  // W1186 — Sibling-test partner to W1164/W1176 (line and bar export
+  // clicks). The aria-label test (W1156) pins the accessible name of
+  // the pie export icon, but doesn't exercise the click handler — so a
+  // refactor that wires the pie button to the JSON exporter, or that
+  // silently drops the SVG MIME, would slip past. Pin the click-time
+  // behavior of the single-chart `stats-export-pie` button: clicking
+  // it must hand `URL.createObjectURL` exactly one Blob carrying the
+  // `image/svg+xml` MIME and a payload that begins with the standard
+  // SVG XML prolog. We further assert the payload is the SOLO
+  // pie-chart export (carrying the live PieChart's
+  // `aria-label="Time per game (top 5)"`) and is NOT the combined
+  // bundle (`buildCombinedSvg` emits the "Cards & Such — Stats"
+  // header — its absence here proves we routed through the
+  // single-chart `chartToStandaloneSvg` path).
+  it("W1186: clicking stats-export-pie downloads an image/svg+xml Blob carrying just the time-spent pie chart", async () => {
+    seedRichStats();
+    // Re-spy locally so we own the calls list for this test even though
+    // the beforeEach hook already installed a default spy on
+    // URL.createObjectURL.
+    const createSpy = vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock");
+    renderPage();
+    fireEvent.click(screen.getByTestId("stats-export-pie"));
+
+    expect(createSpy).toHaveBeenCalled();
+    const blob = createSpy.mock.calls[0][0] as Blob;
+    expect(blob).toBeInstanceOf(Blob);
+    // MIME pinned to image/svg+xml (`downloadSvg` in svgShare.ts) so the
+    // browser opens the file in its SVG viewer rather than as plain text.
+    expect(blob.type).toMatch(/svg/);
+    expect(blob.type).toMatch(/^image\/svg\+xml/);
+
+    // Read the blob via FileReader (jsdom Blob lacks .text()).
+    const text = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (): void => resolve(String(reader.result ?? ""));
+      reader.onerror = (): void => reject(reader.error);
+      reader.readAsText(blob);
+    });
+
+    // Standard SVG document prolog + root element.
+    expect(text).toMatch(/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
+    expect(text).toContain("<svg");
+    // Single-chart payload — carries the PieChart's aria-label, NOT the
+    // combined-bundle header that `buildCombinedSvg` emits. Together
+    // these pin that we routed through
+    // `chartToStandaloneSvg(pieRef.current, …)`.
+    expect(text).toContain("Time per game (top 5)");
+    expect(text).not.toContain("Cards &amp; Such — Stats");
+  });
+
+  // W1183 — The hour-of-day chart's empty-state copy is a single, exact
+  // sentence: "No plays recorded yet — finish a game to start the chart"
+  // (note the em-dash, not a hyphen). W1171 only asserted a substring
+  // ("No plays recorded yet") which would pass even if the trailing CTA
+  // was deleted or the em-dash regressed to a hyphen. Pin the FULL copy
+  // via getByText so any rewording, punctuation drift, or truncation
+  // surfaces as a test failure rather than silently shipping.
+  it("W1183: stats-hour-of-day card renders the full exact empty-state copy when no time history exists", () => {
+    seedStats({ totalPlayed: 0, totalWins: 0 });
+    renderPage();
+    const card = screen.getByTestId("stats-hour-of-day");
+    expect(card).toBeInTheDocument();
+    const subtitle = within(card).getByText(
+      "No plays recorded yet — finish a game to start the chart",
+    );
+    expect(subtitle).toBeInTheDocument();
+    expect(subtitle.className).toContain("stats-chart-label");
+  });
 });
