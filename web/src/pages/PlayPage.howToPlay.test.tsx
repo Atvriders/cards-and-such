@@ -104,6 +104,50 @@ describe("PlayPage how-to-play modal (W589)", () => {
     expect(bodyText).toContain("win the game.");
     expect(bodyText).toContain("Move cards onto foundations.");
   });
+
+  it("hides the help-btn and never mounts HowToPlayModal when howToPlay is undefined (W691)", async () => {
+    // Re-mock the registry with a plugin that has NO howToPlay field. This
+    // covers the missing-text fallback branch: PlayPage gates both the
+    // toolbar `help-btn` and the `HowToPlayModal` mount on
+    // `plugin.howToPlay` being truthy (and `tutorialFor` returns undefined
+    // for an unknown plugin id), so the fallback is "no help affordance".
+    vi.resetModules();
+    const TEST_GAME_ID_MISSING = "howtoplay-fixture-missing";
+    const fixturePluginNoHowTo = {
+      id: TEST_GAME_ID_MISSING,
+      title: "How To Play Fixture (Missing)",
+      category: "cards" as const,
+      players: { min: 1, max: 1, multiplayer: false },
+      description: "Test-only plugin with no howToPlay field.",
+      settings: {} as Record<string, never>,
+      // howToPlay intentionally omitted
+      initialState: () => ({ moves: 0 }),
+      reducer: (state: { moves: number }) => state,
+      isTerminal: () => null,
+      component: () => <div data-testid="fixture-game-missing">game</div>,
+    };
+    vi.doMock("../games/registry.js", () => ({
+      GAMES: [fixturePluginNoHowTo],
+    }));
+
+    const { default: PlayPage } = await import("./PlayPage.js");
+    render(
+      <MemoryRouter initialEntries={[`/play/${TEST_GAME_ID_MISSING}`]}>
+        <Routes>
+          <Route path="/play/:gameId" element={<PlayPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    // Move past the setup screen so the in-game toolbar mounts.
+    fireEvent.click(screen.getByTestId("start-game"));
+
+    // Without howToPlay (and without registered tutorialSteps for this id),
+    // the help button must not be rendered at all.
+    expect(screen.queryByTestId("help-btn")).toBeNull();
+    // And the HowToPlayModal must never be mounted.
+    expect(screen.queryByTestId("htp-modal")).toBeNull();
+  });
 });
 
 // React import keeps the file an unambiguous JSX module under tsconfigs
