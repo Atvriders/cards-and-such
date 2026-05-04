@@ -2162,3 +2162,76 @@ describe("LobbyPage — chip-strip overflow scroll arrows (W661)", () => {
     expect(left!.hidden).toBe(true);
   });
 });
+
+/**
+ * W178 — every chip in the lobby filter strip carries a numeric count
+ * badge (`.lobby-chip-count`) showing how many GAMES match that filter.
+ * The "all" chip's badge is the registry size; per-category chips
+ * (solitaire, cards, dice, board, arcade) reflect that category's
+ * entries. We read each badge while the strip is at rest, assert
+ * chip-solitaire is >= 100 (the registry has long since crossed that
+ * threshold), and confirm chip-all equals the sum of every category
+ * chip — GAMES has no category-less entries, so the totals must agree.
+ *
+ * Counts are rendered via `Number#toLocaleString`, which inserts
+ * thousands separators (",") in the test runtime locale — strip those
+ * before parseInt so the assertion is locale-stable.
+ */
+describe("LobbyPage — chip-strip count badges (W178)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("each chip's .lobby-chip-count displays the matching game count", () => {
+    function readChipCount(testId: string): number {
+      const chip = screen.getByTestId(testId);
+      const badge = chip.querySelector<HTMLElement>(".lobby-chip-count");
+      expect(badge).not.toBeNull();
+      const raw = (badge!.textContent ?? "").replace(/[^\d-]/g, "");
+      expect(raw.length).toBeGreaterThan(0);
+      return Number.parseInt(raw, 10);
+    }
+
+    renderAt("/");
+
+    // Capture every per-category badge value while still on the "all"
+    // filter — the chip strip renders these counts unconditionally,
+    // independent of the active filter.
+    const categories = ["solitaire", "cards", "dice", "board", "arcade"] as const;
+    const badgeCounts: Record<(typeof categories)[number], number> = {
+      solitaire: 0, cards: 0, dice: 0, board: 0, arcade: 0,
+    };
+    for (const cat of categories) {
+      badgeCounts[cat] = readChipCount(`chip-${cat}`);
+      expect(badgeCounts[cat]).toBeGreaterThan(0);
+    }
+
+    // The solitaire registry is the dominant category — its badge must
+    // sit at or above the 100-game threshold.
+    expect(badgeCounts.solitaire).toBeGreaterThanOrEqual(100);
+
+    // The "all" chip's badge equals the sum of every category badge —
+    // counts are over individual GAMES (not family-collapsed tiles),
+    // see the categoryCounts useMemo comment in LobbyPage.tsx.
+    const allCount = readChipCount("chip-all");
+    const summed = categories.reduce((s, c) => s + badgeCounts[c], 0);
+    expect(allCount).toBe(summed);
+
+    // Every chip in the strip must expose a numeric badge — covers the
+    // status filter chips (favorites, top-rated, recently-played,
+    // hidden) whose values may legitimately be zero on a fresh mount.
+    for (const tid of [
+      "chip-all",
+      "chip-top-rated",
+      "chip-favorites",
+      "chip-recently-played",
+      "chip-hidden",
+      ...categories.map((c) => `chip-${c}`),
+    ]) {
+      const chip = screen.getByTestId(tid);
+      const badge = chip.querySelector<HTMLElement>(".lobby-chip-count");
+      expect(badge).not.toBeNull();
+      expect((badge!.textContent ?? "").trim()).toMatch(/^\d[\d,]*$/);
+    }
+  });
+});
