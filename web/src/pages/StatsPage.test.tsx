@@ -2384,4 +2384,63 @@ describe("StatsPage", () => {
     expect(playsDelta!.textContent).not.toContain("▲");
     expect(playsDelta!.textContent).not.toContain("▼");
   });
+
+  // W832: completes the renderDelta is-flat coverage. W826 pinned the
+  // d === 0 sub-branch (current == prior > 0) which renders "0%". The
+  // is-flat class is shared with the d == null sub-branch — that path
+  // fires when pctDelta returns null because `prior <= 0` (no baseline,
+  // so a percentage isn't meaningful). This test seeds plays in the
+  // CURRENT 7d window only — zero plays in the prior 7d window — and
+  // pins the em-dash render: same is-flat / data-direction="flat"
+  // wrapper as W826, but the magnitude must be the literal em-dash
+  // (U+2014) and explicitly NOT "0%" / "%". Guards against a refactor
+  // that collapses the two flat branches into one and accidentally
+  // ships "0%" when prior == 0 (which would imply a 0% change against
+  // a zero baseline — meaningless and misleading).
+  it("W832: stats this-week Plays delta renders is-flat with em-dash when prior==0", () => {
+    seedRichStats();
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // 3 plays inside [now-7d, now], NONE in [now-14d, now-7d). Prior
+    // window is empty so pctDelta(3, 0) hits the `prior <= 0` guard
+    // and returns null — renderDelta takes the d == null branch.
+    // Score=0 keeps wins delta null too (also null/em-dash, but we
+    // explicitly query li[0] = Plays so wins can't shadow).
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60, score: 0 },
+        { ts: now - 3 * dayMs, time: 60, score: 0 },
+        { ts: now - 5 * dayMs, time: 60, score: 0 },
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-this-week");
+    const list = within(card).getByTestId("stats-this-week-list");
+    const playsRow = list.querySelectorAll("li")[0];
+    expect(playsRow).toBeDefined();
+    expect(playsRow!.textContent).toContain("3");
+
+    const playsDelta = playsRow!.querySelector(".stats-week-delta");
+    expect(playsDelta).not.toBeNull();
+    expect(playsDelta!.getAttribute("data-direction")).toBe("flat");
+    expect(playsDelta!.classList.contains("is-flat")).toBe(true);
+    // d == null branch renders the literal em-dash (U+2014) — distinct
+    // from the d === 0 branch's "0%" magnitude. Pin both the presence
+    // of the em-dash AND the absence of any percent sign so a refactor
+    // that collapses the two flat branches fails loudly.
+    expect(playsDelta!.textContent).toContain("—");
+    expect(playsDelta!.textContent).not.toContain("0%");
+    expect(playsDelta!.textContent).not.toContain("%");
+
+    // Inversion-immunity: the flat/null span must NOT carry up/down
+    // styling or glyphs. If a future refactor reorders renderDelta's
+    // branches, these guards fail loudly instead of letting "no prior
+    // baseline" render with a misleading direction arrow.
+    expect(playsDelta!.classList.contains("is-up")).toBe(false);
+    expect(playsDelta!.classList.contains("is-down")).toBe(false);
+    expect(playsDelta!.textContent).not.toContain("▲");
+    expect(playsDelta!.textContent).not.toContain("▼");
+  });
 });
