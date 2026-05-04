@@ -3844,3 +3844,80 @@ describe("LobbyPage — EDITORS-PICK badge on hand-curated featured tiles (W857)
     expect(badge.className).toMatch(/\bbadge--editors-pick\b/);
   });
 });
+
+/**
+ * W873 — family-tile rating widget exposes the "Best variant rating"
+ * aria-label, distinct from the per-game tile's "Your rating" form.
+ *
+ * Sibling of W682 (which pinned the standalone GameCard's
+ * `tile-rating-<id>` aria-label format `Your rating: N of 5 stars`) and
+ * W721 (favorite-star indicator). The FamilyCard branch
+ * (LobbyPage.tsx ~line 3282) renders its own `tile-rating-<family.id>`
+ * widget when the family's *best member rating* (entryRating, ~line
+ * 1142: `max(ratings[m.id])` over `family.members`) is > 0, BUT the
+ * aria-label uses a different prefix — "Best variant rating" —
+ * because the value reflects the strongest variant inside the family
+ * rather than the family itself. Pinning that distinction here ensures
+ * a refactor that unifies the two branches under a single aria-label
+ * (or inverts the prefix) surfaces immediately.
+ *
+ * `klondike-by-threes` is a stable, well-known klondike-family member
+ * (see `web/src/games/families.ts` ~line 65). Seeding it at 5 means
+ * `entryRating(klondikeFamilyEntry) === 5` since max(5, 0, 0…) = 5.
+ * We use the same search-narrowing pattern as W713 to bring the
+ * klondike main-grid family tile into view past the alphabetical
+ * page-1 cutoff; under an active query the featured strip is
+ * suppressed, so `grid-tile-klondike` is the sole klondike tile and
+ * its inner `tile-rating-klondike` widget is uniquely addressable.
+ */
+describe("LobbyPage — family-tile rating uses 'Best variant rating' aria-label (W873)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("renders tile-rating-<family.id> with 'Best variant rating: N of 5 stars'", async () => {
+    // Seed `cards-ratings` with a single klondike-family MEMBER (NOT the
+    // family id) before mount. The page's useState initializer hydrates
+    // synchronously via `readRatings()` (LobbyPage.tsx ~line 732), and
+    // entryRating() picks the max across `family.members`, so the family
+    // tile MUST surface its rating widget on first paint.
+    localStorage.setItem(
+      "cards-ratings",
+      JSON.stringify({ "klondike-by-threes": 5 }),
+    );
+
+    renderAt("/");
+
+    // Narrow to klondike — same setup as W713's variant-count test.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "klondike" } });
+
+    // The featured strip is suppressed under an active query, so the
+    // klondike family tile renders with the demoted `grid-tile-klondike`
+    // testid. waitFor mirrors the W713 settle pattern.
+    const familyTile = await waitFor(() =>
+      screen.getByTestId(`grid-tile-${FAMILY_ID}`),
+    );
+
+    // The rating widget inside the family tile MUST exist (gated on
+    // `userRating > 0` in the FamilyCard branch) and MUST carry the
+    // "Best variant rating" prefix — distinct from the GameCard branch's
+    // "Your rating" prefix locked by W682.
+    const ratingWidget = within(familyTile).getByTestId(
+      `tile-rating-${FAMILY_ID}`,
+    );
+    expect(ratingWidget).toHaveAttribute(
+      "aria-label",
+      "Best variant rating: 5 of 5 stars",
+    );
+
+    // Cross-branch guard: the widget MUST NOT use the GameCard's
+    // "Your rating" prefix. Without this, a refactor that wires the
+    // FamilyCard branch through the GameCard's aria-label by mistake
+    // would still satisfy the positive assertion above (since the
+    // numeric "5 of 5 stars" tail would match either prefix substring).
+    expect(ratingWidget.getAttribute("aria-label") ?? "").not.toMatch(
+      /^Your rating:/,
+    );
+  });
+});
