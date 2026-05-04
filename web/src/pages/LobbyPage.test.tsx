@@ -3527,6 +3527,80 @@ describe("LobbyPage — CHALLENGING badge on curated deep-strategy tiles (W824)"
 });
 
 /**
+ * W838 — "POPULAR" badge on highly-rated tiles.
+ *
+ * `pickBadgeKind` (web/src/platform/gameTags.ts) returns "popular" when
+ * the user's stored rating for a game id is >= TOP_RATED_THRESHOLD (=4)
+ * AND nothing higher-priority fired (NEW > CHALLENGING > QUICK > POPULAR
+ * > EDITORS-PICK). W784 pins the NEW path, W806 pins the QUICK path, and
+ * W824 pins the CHALLENGING path; this test pins the POPULAR path so a
+ * regression that drops the rating threshold check (or breaks the
+ * lobby's threading of `userRating` through the SoloCard's
+ * pickBadgeKind call) still surfaces.
+ *
+ * `hearts` is a stable game id that:
+ *  - sits near the head of the GAMES registry (well outside the
+ *    NEW_GAME_WINDOW=60 tail), so isNew is false and NEW won't preempt
+ *  - is NOT in CHALLENGING_GAME_IDS, so CHALLENGING won't preempt
+ *  - is NOT in QUICK_GAME_IDS, so QUICK won't preempt
+ *  - is NOT a member of any family (no Hearts family in
+ *    `web/src/games/families.ts`), so it renders as a SoloCard with the
+ *    canonical `tile-badge-<id>` testid (family cards would use
+ *    `tile-badge-<familyId>` and the per-game badge would never mount)
+ *
+ * Seeding `cards-ratings` with `hearts: 4` BEFORE the lobby mounts
+ * synchronously hydrates `ratings["hearts"] = 4` via readRatings()'s
+ * useState initializer, which threads through to the SoloCard's
+ * userRating prop and trips the POPULAR branch. Searching by the title
+ * narrows the pool, suppresses the featured strip `feat-tile-badge-*`
+ * doubles, and keeps `tile-badge-hearts` unambiguous regardless of
+ * alphabetical pagination.
+ */
+describe("LobbyPage — POPULAR badge on highly-rated tiles (W838)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("stamps tile-badge-hearts with the POPULAR label and badge--popular class", async () => {
+    // Seed the canonical rating blob BEFORE the lobby mounts so the
+    // initial readRatings() call in useState's initializer hydrates
+    // ratings["hearts"] = 4 synchronously — this is what trips the
+    // `userRating >= TOP_RATED_THRESHOLD` branch inside pickBadgeKind.
+    localStorage.setItem(
+      "cards-ratings",
+      JSON.stringify({ "hearts": 4 }),
+    );
+
+    renderAt("/");
+
+    // Narrow to "Hearts" — the title fragment may still match other
+    // siblings via substring rules (Omnibus Hearts, Spot Hearts, etc.),
+    // but `tile-badge-hearts` is the only testid the rated id we care
+    // about can ever produce.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "Hearts" } });
+
+    const badge = await waitFor(() => screen.getByTestId("tile-badge-hearts"));
+    expect(badge).toBeInTheDocument();
+
+    // Production contract: POPULAR label/aria pins that `pickBadgeKind`
+    // actually returned "popular" — and that the lobby threaded the
+    // hydrated rating (not isNew, not the curated lists, not the
+    // featured list) into the rating-threshold branch.
+    expect(badge).toHaveTextContent("POPULAR");
+    expect(badge).toHaveAttribute("aria-label", "POPULAR");
+    // The colour-pill modifier locks the kind→class mapping in Badge.tsx
+    // so a regression that swapped the kind arg while keeping the
+    // testid intact still trips the assertion.
+    expect(badge.className).toMatch(/\bbadge--popular\b/);
+  });
+});
+
+/**
  * W800 — infinite-mode footer must surface a "Loaded N of M" caption
  * inside `lobby-loaded-count`, where N is the number of currently
  * visible tiles (capped at PAGE_SIZE=80 on initial flip) and M is the
@@ -3621,7 +3695,6 @@ describe("LobbyPage — infinite-mode loaded-count caption (W800)", () => {
 describe("LobbyPage — long-press touch opens tile context menu (W812)", () => {
   beforeEach(() => {
     localStorage.clear();
-    vi.useFakeTimers();
   });
 
   afterEach(() => {
@@ -3641,6 +3714,9 @@ describe("LobbyPage — long-press touch opens tile context menu (W812)", () => 
     // Narrow the visible pool: alphabetical sort + PAGE_SIZE=80
     // pushes "Texas Hold'em" past page 1, so search to bring it
     // onto the rendered grid deterministically. Mirrors W803.
+    // Important: do this BEFORE swapping in fake timers so the
+    // search input's synchronous render path isn't entangled with
+    // any debounce/scheduler timer the fake clock would freeze.
     const search = screen.getByTestId("lobby-search") as HTMLInputElement;
     fireEvent.change(search, { target: { value: "texas hold" } });
     const tile = screen.getByTestId(`tile-${STANDALONE_ID}`);
@@ -3648,6 +3724,10 @@ describe("LobbyPage — long-press touch opens tile context menu (W812)", () => 
     // Pre-condition: no menu in the DOM. `menuPos` starts null and
     // the popover is gated on `menuPos !== null`.
     expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
+
+    // Now switch to fake timers — only the 600ms long-press
+    // setTimeout below needs to be fast-forwarded.
+    vi.useFakeTimers();
 
     // Dispatch a `touchstart` with one populated touch — the handler
     // reads `e.touches[0].clientX/Y`. fireEvent.touchStart accepts a
