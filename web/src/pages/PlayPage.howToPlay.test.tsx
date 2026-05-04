@@ -79,6 +79,31 @@ describe("PlayPage how-to-play modal (W589)", () => {
     expect(title).toBeTruthy();
     expect(title!.textContent).toContain(hoisted.TITLE);
   });
+
+  it("renders the plugin's howToPlay text inside the modal body (W685)", async () => {
+    const { default: PlayPage } = await import("./PlayPage.js");
+    render(
+      <MemoryRouter initialEntries={[`/play/${hoisted.TEST_GAME_ID}`]}>
+        <Routes>
+          <Route path="/play/:gameId" element={<PlayPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByTestId("start-game"));
+    fireEvent.click(screen.getByTestId("help-btn"));
+
+    const body = screen.getByTestId("htp-body");
+    expect(body).toBeTruthy();
+    // The fixture's howToPlay string is:
+    //   "Goal: win the game.\n\nMove cards onto foundations."
+    // The parser turns "Goal:" into a section heading and emits the rest of
+    // the line plus the next paragraph as body content. Both fragments
+    // should be visible to the user inside the modal body.
+    const bodyText = body.textContent ?? "";
+    expect(bodyText).toContain("win the game.");
+    expect(bodyText).toContain("Move cards onto foundations.");
+  });
 });
 
 // React import keeps the file an unambiguous JSX module under tsconfigs
