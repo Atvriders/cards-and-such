@@ -2799,6 +2799,22 @@ describe("StatsPage", () => {
     expect(screen.getByRole("button", { name: "Download top-played bar chart as SVG" })).toBe(btn);
   });
 
+  // W1156 — Sibling pin to W1136 (line) and W1148 (bar) for the time-spent
+  // pie chart export. The pie button shares the same icon-only render shape
+  // as its siblings, so its accessible name is carried entirely by
+  // `aria-label`. Pin the exact label so a copy-edit that only touches the
+  // pie export button still gets caught here rather than during an a11y
+  // audit.
+  it("W1156: stats-export-pie button exposes 'Download time-spent pie chart as SVG' aria-label", () => {
+    seedRichStats();
+    renderPage();
+    const btn = screen.getByTestId("stats-export-pie");
+    expect(btn).toBeInTheDocument();
+    expect(btn.getAttribute("aria-label")).toBe("Download time-spent pie chart as SVG");
+    // Resolves via role+name lookup so screen readers hit the same node.
+    expect(screen.getByRole("button", { name: "Download time-spent pie chart as SVG" })).toBe(btn);
+  });
+
   // W1145 — The Personal Records card surfaces a `stats-empty` placeholder
   // when `cards-best-times` is missing / empty so the layout doesn't shift
   // and the user gets a nudge to finish a timed game. Pin the exact copy
