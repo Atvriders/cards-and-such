@@ -76,6 +76,49 @@ afterEach(() => {
 });
 
 describe("PlayPage hint button cooldown (W692)", () => {
+  it("bypasses the cooldown when cards-hint-cooldown is disabled (W698)", async () => {
+    // Override the per-test default flipped on in beforeEach. With the
+    // cooldown preference off, `readHintCooldownEnabled()` resolves to
+    // false, so the button's disabled gate collapses to `!plugin.hint`
+    // alone — clicking the hint must NOT disable it.
+    localStorage.setItem("cards-hint-cooldown", "false");
+
+    // Match the sibling test's timer setup: install fake timers BEFORE
+    // mount so any hint-related setInterval registers against the
+    // virtual clock from the start (W639 mount-phase pattern). With the
+    // cooldown disabled the ticker shouldn't even be armed, but using
+    // the same harness keeps the contrast between the two tests clean.
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+
+    const { default: PlayPage } = await import("./PlayPage.js");
+    render(
+      <MemoryRouter initialEntries={[`/play/${hoisted.TEST_GAME_ID}`]}>
+        <Routes>
+          <Route path="/play/:gameId" element={<PlayPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    // Move past the setup screen so the toolbar (and the fixture's
+    // hint target) commits.
+    fireEvent.click(screen.getByTestId("start-game"));
+
+    const btn = screen.getByTestId("play-hint-btn") as HTMLButtonElement;
+    // Sanity: button is interactive before the click — plugin exposes
+    // `hint`, no cooldown ever gates this branch.
+    expect(btn.disabled).toBe(false);
+
+    // Click fires showHint which pulses the target. With the cooldown
+    // preference disabled, `hintCooldownEnabled` is false, so the
+    // `setHintCooldown(...)` arming branch is skipped entirely.
+    fireEvent.click(btn);
+
+    // The contract under test: even immediately after a successful
+    // hint click the button stays enabled because the cooldown gate
+    // is bypassed when the user has opted out of throttling.
+    expect(btn.disabled).toBe(false);
+  });
+
   it("disables the hint button after click and re-enables it after the 3s cooldown", async () => {
     // Install fake timers BEFORE mount so the cooldown ticker's setInterval
     // registers against the virtual clock from the start. `shouldAdvanceTime`
