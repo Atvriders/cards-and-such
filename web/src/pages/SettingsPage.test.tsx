@@ -1138,4 +1138,57 @@ describe("SettingsPage hint-cooldown toggle (W702)", () => {
     expect(localStorage.getItem("cards-leaderboard-mock")).toBe("false");
     expect(toggle.closest("label")?.textContent).toContain("Off");
   });
+
+  // W835 — focused coverage of the Settings page search-filter input. The
+  // header exposes a `<input type="search">` with testid
+  // settings-search-input that drives `matchesQuery(label)` on every
+  // Appearance-section field. Non-matching `.settings-field` rows flip
+  // their `hidden` attribute, so the underlying inputs (theme picker,
+  // light-mode toggle, card-back gallery, card-font picker) are removed
+  // from accessible/visible state. Clearing the query rehydrates every
+  // row. Nothing else exercises the search filter today — every other
+  // SettingsPage test bypasses the input, so a regression that wires the
+  // onChange to the wrong setter (or drops the `hidden` attribute on
+  // matchesQuery() === false) would slip through silently.
+  it("filters Appearance fields by query and rehydrates them when cleared", () => {
+    renderPage();
+    const search = screen.getByTestId(
+      "settings-search-input",
+    ) as HTMLInputElement;
+    // Locate the four Appearance-section field rows by walking up from a
+    // child testid that's stable. Each row owns the `hidden` attribute
+    // toggled by matchesQuery().
+    const themeRow = screen
+      .getByTestId("theme-reset")
+      .closest(".settings-field") as HTMLElement;
+    const lightRow = screen
+      .getByTestId("settings-light-mode")
+      .closest(".settings-field") as HTMLElement;
+    const cardBackRow = screen
+      .getByTestId("cardback-gallery")
+      .closest(".settings-field") as HTMLElement;
+    const cardFontRow = screen
+      .getByTestId("card-font-modern")
+      .closest(".settings-field") as HTMLElement;
+    // Default: empty query → every Appearance row visible (no `hidden`).
+    expect(themeRow.hidden).toBe(false);
+    expect(lightRow.hidden).toBe(false);
+    expect(cardBackRow.hidden).toBe(false);
+    expect(cardFontRow.hidden).toBe(false);
+    // Type "card back" — only the Card back row should remain visible;
+    // Background theme / Light mode / Card font rows hide.
+    fireEvent.change(search, { target: { value: "card back" } });
+    expect(search.value).toBe("card back");
+    expect(cardBackRow.hidden).toBe(false);
+    expect(themeRow.hidden).toBe(true);
+    expect(lightRow.hidden).toBe(true);
+    expect(cardFontRow.hidden).toBe(true);
+    // Clear the query → every Appearance row rehydrates.
+    fireEvent.change(search, { target: { value: "" } });
+    expect(search.value).toBe("");
+    expect(themeRow.hidden).toBe(false);
+    expect(lightRow.hidden).toBe(false);
+    expect(cardBackRow.hidden).toBe(false);
+    expect(cardFontRow.hidden).toBe(false);
+  });
 });
