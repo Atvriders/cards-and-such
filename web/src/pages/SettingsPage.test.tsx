@@ -161,6 +161,39 @@ describe("SettingsPage", () => {
     expect(dlg).toBeInTheDocument();
     expect(dlg.getAttribute("role")).toBe("alertdialog");
   });
+
+  // W728 — clear-all's requireText gate must be EXACT match. Existing
+  // coverage (W672 + the success-path test above) verifies confirm-yes
+  // starts disabled and becomes enabled when "DELETE" is typed; this test
+  // covers the in-between cases — partial, lowercase, and extra-character
+  // input — where confirm-yes must stay disabled and clicking it does not
+  // wipe data. Catches regressions where the gate gets loosened to a
+  // case-insensitive / startsWith / includes check.
+  it("clear-all keeps confirm disabled and preserves data on wrong requireText", async () => {
+    localStorage.setItem("cards-ratings", '{"klondike":4}');
+    localStorage.setItem("cards-best-times", '{"freecell":120}');
+    renderPage();
+    fireEvent.click(screen.getByTestId("settings-clear"));
+    const yes = (await screen.findByTestId("confirm-yes")) as HTMLButtonElement;
+    const input = screen.getByTestId("confirm-input") as HTMLInputElement;
+    // Partial — must stay disabled.
+    fireEvent.change(input, { target: { value: "DEL" } });
+    expect(yes.disabled).toBe(true);
+    // Wrong case — must stay disabled (exact match, case-sensitive).
+    fireEvent.change(input, { target: { value: "delete" } });
+    expect(yes.disabled).toBe(true);
+    // Trailing whitespace / extra char — must stay disabled.
+    fireEvent.change(input, { target: { value: "DELETE " } });
+    expect(yes.disabled).toBe(true);
+    fireEvent.change(input, { target: { value: "DELETED" } });
+    expect(yes.disabled).toBe(true);
+    // Clicking the disabled button must be a no-op — data survives.
+    await act(async () => {
+      fireEvent.click(yes);
+    });
+    expect(localStorage.getItem("cards-ratings")).toBe('{"klondike":4}');
+    expect(localStorage.getItem("cards-best-times")).toBe('{"freecell":120}');
+  });
 });
 
 // Reset isolation: each per-section "Reset" button (and the inline "Reset

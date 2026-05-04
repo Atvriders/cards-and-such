@@ -2595,3 +2595,182 @@ describe("LobbyPage — family-tile variant count badge (W713)", () => {
     expect(text).toMatch(/\d+\s+variants$/);
   });
 });
+
+/**
+ * W718 — chip-top-rated persistence round-trip.
+ *
+ * Sibling of the W267 chip-favorites click test and the W649 rehydrate
+ * coverage, but pinned end-to-end on the `top-rated` filter, which
+ * previously had only one half of the contract verified per chip:
+ *   1. Click chip-top-rated → `cards-lobby-filter` MUST equal
+ *      "top-rated" (the write half of the round-trip).
+ *   2. Tear the page down (cleanup) and remount fresh → chip-top-rated
+ *      MUST hydrate with `aria-pressed="true"` purely from the storage
+ *      key, with no in-memory state carryover (the read half).
+ *
+ * A regression that renames the storage key, swaps the persisted
+ * sentinel ("top-rated" vs "topRated"), or skips the mount-time read
+ * for this specific filter would surface here even when the favorites
+ * and recently-played round-trips still pass.
+ */
+describe("LobbyPage — chip-top-rated persistence round-trip (W718)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("clicking chip-top-rated writes cards-lobby-filter and rehydrates aria-pressed=true on remount", () => {
+    renderAt("/");
+    const topRated = screen.getByTestId("chip-top-rated");
+    // Default mount lands on "all"; the top-rated chip starts unpressed.
+    // The mount-time persist effect writes "all" (or leaves a previously
+    // cleared key), so the only chip-relevant precondition we pin is
+    // that the top-rated sentinel is NOT yet the active filter.
+    expect(topRated).toHaveAttribute("aria-pressed", "false");
+    expect(localStorage.getItem("cards-lobby-filter")).not.toBe("top-rated");
+
+    fireEvent.click(topRated);
+
+    // Write half — clicking the chip must (a) flip aria-pressed in the
+    // current render and (b) persist the canonical "top-rated" sentinel
+    // to `cards-lobby-filter` so a reload can rehydrate this view.
+    expect(topRated).toHaveAttribute("aria-pressed", "true");
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("top-rated");
+
+    // Read half — fully tear down the React tree and remount from
+    // scratch. The persisted sentinel is the sole bridge between the
+    // two lifecycles; the new mount's `useState` initialiser must read
+    // it and seed the filter so chip-top-rated is pressed without any
+    // user action. cleanup() unmounts every React Testing Library tree
+    // synchronously so the subsequent renderAt() is a true cold mount.
+    cleanup();
+    expect(localStorage.getItem("cards-lobby-filter")).toBe("top-rated");
+
+    renderAt("/");
+    const rehydrated = screen.getByTestId("chip-top-rated");
+    expect(rehydrated).toHaveAttribute("aria-pressed", "true");
+    // chip-all must release pressed on rehydrate — the rehydrate path
+    // shares the same exclusivity invariant as the click path, so a
+    // regression that fails to translate "top-rated" out of the
+    // mount-time read would leave both chips pressed simultaneously.
+    expect(screen.getByTestId("chip-all")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+  });
+});
+
+/**
+ * W721 — favorite-star indicator on lobby tiles.
+ *
+ * Distinct from the user-rating-stars contract (W682) and the
+ * HeartToggle click/persistence contracts (W570 / W603), this test
+ * pins the at-render indicator that tells a user "this tile is
+ * favorited" before any interaction has taken place. The indicator
+ * is the per-tile `tile-fav-toggle-<id>` button — when its parent
+ * lobby reads a non-empty `cards-favorites` blob at mount, the
+ * matching tile MUST surface the favorited state through both its
+ * `aria-pressed` flag and the `is-active` className modifier so
+ * sighted users and assistive tech see the same truth on the first
+ * paint. Tiles whose ids are NOT in the seeded blob must NOT carry
+ * the indicator, otherwise the lobby would falsely claim every game
+ * is favorited and the toggle would lose its glance-value.
+ */
+describe("LobbyPage — favorite-star indicator on tiles (W721)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("seeded cards-favorites surfaces the favorited indicator on that tile only", async () => {
+    // Seed the canonical favorites blob with a single standalone game id
+    // (`pool-10ball` — see LobbyPageHearts.test.tsx for why this id is
+    // the safest "id-in-equals-id-out" tile) BEFORE first render so the
+    // indicator must be present in the very first commit, not after a
+    // click. We deliberately do NOT pre-select the favorites filter — the
+    // contract is that the indicator paints in the default ("all") view,
+    // where the user comes face-to-face with both favorited and non-
+    // favorited tiles side-by-side.
+    localStorage.setItem("cards-favorites", JSON.stringify(["pool-10ball"]));
+    renderAt("/");
+
+    // The favorited tile's indicator: the per-tile heart button MUST be
+    // rendered with aria-pressed=true AND the is-active className so both
+    // assistive-tech and CSS see the same favorited truth on first paint.
+    const favHeart = await screen.findByTestId("tile-fav-toggle-pool-10ball");
+    expect(favHeart).toHaveAttribute("aria-pressed", "true");
+    expect(favHeart.className).toContain("is-active");
+
+    // Counter-example: pick a different standalone tile that we did NOT
+    // seed and confirm its heart indicator is in the inactive state. If
+    // the lobby ever flipped to "every tile reads favorited" the test
+    // above could pass while this one fails — pinning both halves locks
+    // the indicator's selectivity, not just its presence.
+    const otherHeart = await screen.findByTestId("tile-fav-toggle-pool-8ball");
+    expect(otherHeart).toHaveAttribute("aria-pressed", "false");
+    expect(otherHeart.className).not.toContain("is-active");
+  });
+});
+
+/**
+ * W712 — drag-handle is hidden from assistive tech.
+ *
+ * The `tile-drag-handle-<id>` span renders a purely-decorative `⋮⋮`
+ * glyph on every lobby tile (LobbyPage.tsx ~line 2990 / 3231). The
+ * actual drag interaction lives on the parent `.tile` element via
+ * the HTML `draggable` attribute; the handle is a *visual cue* only,
+ * gated to the favorites filter via the W414 CSS contract.
+ *
+ * Because the handle is not itself an interactive target — it has no
+ * keyboard handler, no `tabindex`, no `role`, no `aria-label` — it
+ * MUST carry `aria-hidden="true"` so screen-reader users don't get
+ * a meaningless "⋮⋮" announcement layered onto every favorite tile's
+ * accessible name. The parent tile's existing `aria-label` already
+ * describes the game; the handle is decoration.
+ *
+ * Prior tests cover (a) draggable=true stamping under favorites
+ * (W397), (b) `data-fav-drag-id` round-trip persistence (W397/W513),
+ * (c) the CSS-display gating contract (W414), and (d) DOM presence
+ * of the handle under the favorites filter (W414). What none of them
+ * pin is the handle's a11y stance — a regression that drops the
+ * `aria-hidden` (or flips it to "false") would silently pollute the
+ * screen-reader experience without breaking any visual or persistence
+ * test.
+ *
+ * We mount directly on `cards-lobby-filter=favorites` (and seed a
+ * favorited id) so the handle is reachable by its stable testid in
+ * the canonical favorites grid — sidestepping the featured-strip
+ * duplicate disambiguation the W414 test uses.
+ */
+describe("LobbyPage — drag-handle aria-hidden (W712)", () => {
+  // `2048` matches the W414 sibling test: standalone (no family), not
+  // in FEATURED_IDS, so the `tile-drag-handle-2048` testid resolves to
+  // a single node in the favorites grid with no featured-strip twin.
+  const GAME_ID = "2048";
+
+  beforeEach(() => {
+    localStorage.clear();
+    // Mount directly into the favorites filter so the favorites grid
+    // owns the canonical tile for GAME_ID. Seed the favorites blob so
+    // the favorites grid has at least one tile to render (otherwise
+    // `lobby-favorites-empty` shows instead and there's no handle).
+    localStorage.setItem("cards-favorites", JSON.stringify([GAME_ID]));
+    localStorage.setItem("cards-lobby-filter", "favorites");
+  });
+
+  it("renders tile-drag-handle-<id> with aria-hidden=true (decorative cue)", () => {
+    renderAt("/");
+    const handle = screen.getByTestId(`tile-drag-handle-${GAME_ID}`);
+    // Load-bearing a11y contract — the handle is a visual-only glyph
+    // and must NOT be advertised to assistive tech. The actual drag
+    // target is the parent `.tile` (see W397).
+    expect(handle).toHaveAttribute("aria-hidden", "true");
+    // Defense-in-depth: the handle must not carry interactive
+    // a11y attributes that would conflict with the aria-hidden
+    // promise. A regression that adds e.g. `role="button"` or
+    // `aria-label="Reorder"` while keeping aria-hidden=true would
+    // produce inconsistent SR output (hidden-but-named) — pin the
+    // absence of both so the contract stays internally consistent.
+    expect(handle).not.toHaveAttribute("role");
+    expect(handle).not.toHaveAttribute("aria-label");
+    expect(handle).not.toHaveAttribute("tabindex");
+  });
+});
