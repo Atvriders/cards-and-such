@@ -2834,4 +2834,22 @@ describe("StatsPage", () => {
     // the card are mutually exclusive.
     expect(within(card).queryByTestId("stats-pr-row-0")).toBeNull();
   });
+
+  // W1159 — The Top played card surfaces a `stats-empty` placeholder with the
+  // "No games played yet." copy when `categoryBarData` is empty (no perGame
+  // data) so the layout doesn't shift and the bar chart isn't rendered with
+  // a degenerate dataset. Pin the exact copy so a refactor that swaps the
+  // empty-state string is caught here.
+  it("W1159: stats-categories renders 'No games played yet.' empty copy when no perGame data exists", () => {
+    seedStats({ totalPlayed: 0, totalWins: 0 });
+    renderPage();
+    const card = screen.getByTestId("stats-categories");
+    expect(card).toBeInTheDocument();
+    const empty = within(card).getByText("No games played yet.");
+    expect(empty).toBeInTheDocument();
+    expect(empty.className).toContain("stats-empty");
+    // Bar chart should be absent in the empty branch — the two halves of
+    // the card are mutually exclusive.
+    expect(within(card).queryByTestId("stats-bar-chart")).toBeNull();
+  });
 });
