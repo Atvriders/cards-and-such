@@ -2,6 +2,7 @@ import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import LobbyPage from "./LobbyPage.js";
+import { GAMES } from "../games/registry.js";
 
 // W579 — capture navigate() calls so the surprise-me button test can assert
 // the destination URL shape without mounting a real /play/<id> route. Other
@@ -3167,5 +3168,181 @@ describe("LobbyPage — grid density toggle (W754)", () => {
       ".lobby-grid:not(.lobby-grid--featured)",
     ) as HTMLElement;
     expect(gridAfter.getAttribute("data-density")).toBe("compact");
+  });
+});
+
+/**
+ * W772 — the section header's match-count caption (`.lobby-section-count`)
+ * is gated on an active search query. With no query, the caption MUST be
+ * absent (no stray " · N matches" text leaking into the heading); once
+ * the user types into `lobby-search`, the caption mounts and prints
+ * "<N> match"/"<N> matches" with proper singular/plural agreement.
+ *
+ * This pins the contract that matchedGameCount surfaces only when the
+ * user has actually filtered the catalog — guarding against regressions
+ * that either always-render the caption (noisy header) or fail to
+ * pluralise on multi-result queries.
+ */
+describe("LobbyPage — search match-count caption (W772)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("mounts .lobby-section-count with a 'matches' caption only when a query is active", () => {
+    renderAt("/");
+    // Pre-condition: with no query, the caption MUST NOT render — the
+    // section heading should be a clean category label without the
+    // " · N matches" suffix. Asserting absence by class-selector pins
+    // that the gate `{query && (...)}` is held closed at boot.
+    expect(
+      document.querySelector(".lobby-section-count"),
+    ).toBeNull();
+
+    // Type a generic, multi-result query. "card" appears in many game
+    // titles across the catalog (the registry is a card-games hub), so
+    // the filtered pool is guaranteed > 1, exercising the plural branch
+    // of the singular/plural ternary.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "card" } });
+
+    // Caption now mounts inside the section heading. Targeting via
+    // class selector (rather than a brittle text match) keeps the
+    // assertion stable if the divider glyph or layout changes — the
+    // contract under test is *that* the count surfaces, plus its
+    // textual shape (a number followed by the matches-noun).
+    const caption = document.querySelector(
+      ".lobby-section-count",
+    ) as HTMLElement | null;
+    expect(caption).not.toBeNull();
+    const text = (caption!.textContent ?? "").trim();
+    // Shape: "· <N> matches" optionally followed by " (<M> games)".
+    // We pin the matches-noun + leading number, which is the
+    // load-bearing piece of the caption — `\d` to allow any positive
+    // count and `matches` (plural) since "card" matches many games.
+    expect(text).toMatch(/\d+\s+matches/);
+  });
+});
+
+/**
+ * View-mode toggle (W771) — orthogonal to the density toggle (W754) and
+ * to the list-mode pagination toggle (W183/W582). The grid/list view-mode
+ * pair (`lobby-view-grid` / `lobby-view-list`) controls the main grid's
+ * visual layout: "grid" is the multi-column tile grid, "list" is a
+ * single-column row layout. The active mode is mirrored as `data-view`
+ * on `.lobby-grid` so the layout switch is purely CSS-driven (see
+ * `.lobby-grid[data-view="list"]` rules in LobbyPage.css). Persistence
+ * key is `cards-lobby-view`.
+ *
+ * The rehydrate path is the load-bearing one to pin: a regression that
+ * forgets to read the persisted value (or reads from the wrong key)
+ * would silently degrade the toggle to a session-only control.
+ */
+describe("LobbyPage — view-mode toggle rehydrate (W771)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("pre-seeded cards-lobby-view=list rehydrates aria-pressed and stamps data-view on the grid", () => {
+    // Seed the persistence key BEFORE first render so the component's
+    // useState initializer reads "list" from localStorage on mount —
+    // exercises the readPersistedView() branch, not the click handler.
+    localStorage.setItem("cards-lobby-view", "list");
+
+    renderAt("/");
+
+    // The toggle pair flips together on rehydrate: list pressed, grid
+    // released. Pinning both sides guards against a regression that
+    // rehydrates only one button's pressed state.
+    const listBtn = screen.getByTestId("lobby-view-list");
+    const gridBtn = screen.getByTestId("lobby-view-grid");
+    expect(listBtn).toHaveAttribute("aria-pressed", "true");
+    expect(gridBtn).toHaveAttribute("aria-pressed", "false");
+
+    // The main grid mirrors the rehydrated mode via data-view — this is
+    // the CSS hook (LobbyPage.css gates the row layout on
+    // `.lobby-grid[data-view="list"]`). Multiple `.lobby-grid` nodes can
+    // co-render (featured strip + main grid), so target the main grid
+    // explicitly via the `:not(.lobby-grid--featured)` selector — same
+    // technique W754 uses for the density mirror.
+    const mainGrid = document.querySelector(
+      ".lobby-grid:not(.lobby-grid--featured)",
+    ) as HTMLElement;
+    expect(mainGrid).not.toBeNull();
+    expect(mainGrid.getAttribute("data-view")).toBe("list");
+  });
+});
+
+/**
+ * View-mode toggle write-side persistence (W783) — orthogonal to the
+ * rehydrate-on-mount path pinned by W771. W771 covers the read path
+ * (pre-seeded localStorage → initial state); this test covers the write
+ * path (click → effect → localStorage). A regression that drops the
+ * `writePersistedView` effect would silently degrade the toggle to
+ * session-only without any visible failure on first render, so pinning
+ * the click→storage round-trip is load-bearing for the persistence
+ * guarantee. Storage key is `cards-lobby-view`, same as W771.
+ */
+describe("LobbyPage — view-mode toggle click persists to localStorage (W783)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("clicking lobby-view-list writes 'list' under cards-lobby-view", () => {
+    renderAt("/");
+
+    // Sanity: with no pre-seeded value the default is grid (matches the
+    // readPersistedView() fallback). Storage stays empty until the user
+    // actually picks a mode — this guards against an effect that fires on
+    // mount and pollutes storage with the default value.
+    expect(localStorage.getItem("cards-lobby-view")).toBeNull();
+
+    const listBtn = screen.getByTestId("lobby-view-list");
+    fireEvent.click(listBtn);
+
+    // The effect that mirrors viewMode → localStorage runs synchronously
+    // after the state update flushes, so the value is observable without
+    // any waitFor. Pin both the storage value AND aria-pressed so a
+    // regression in either the writer or the renderer is caught here.
+    expect(localStorage.getItem("cards-lobby-view")).toBe("list");
+    expect(listBtn).toHaveAttribute("aria-pressed", "true");
+  });
+});
+
+/**
+ * W782 — Escape key dismisses the onboarding coachmark (W193).
+ *
+ * The coachmark documents Esc as one of its dismissal sources alongside
+ * tile-clicks, the explicit X button, and route navigation. The other
+ * three paths are pinned by the W193 describe block above; this test
+ * seals the keyboard pathway by asserting that a `window.keydown` Escape
+ * both unmounts the bubble AND writes "done" to `cards-onboard-coachmark`
+ * so the hint never re-shows on its own.
+ */
+describe("LobbyPage — coachmark Escape dismiss (W782)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("dismisses and persists 'done' when Escape is pressed", () => {
+    localStorage.setItem("cards-onboard-coachmark", "pending");
+    renderAt("/");
+    expect(screen.getByTestId("coachmark")).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "Escape" });
+
+    expect(screen.queryByTestId("coachmark")).not.toBeInTheDocument();
+    expect(localStorage.getItem("cards-onboard-coachmark")).toBe("done");
   });
 });
