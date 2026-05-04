@@ -144,6 +144,58 @@ describe("PlayPage restart confirm dialog (W723)", () => {
   });
 });
 
+describe("PlayPage restart confirm dialog cancel path (W726)", () => {
+  it("preserves game state when the user cancels the restart confirm dialog", async () => {
+    const { default: PlayPage } = await import("./PlayPage.js");
+
+    render(
+      <ConfirmProvider>
+        <MemoryRouter initialEntries={[`/play/${hoisted.TEST_GAME_ID}?seed=42`]}>
+          <Routes>
+            <Route path="/play/:gameId" element={<PlayPage />} />
+          </Routes>
+        </MemoryRouter>
+      </ConfirmProvider>,
+    );
+
+    // Move past the setup screen so the fixture's component mounts.
+    fireEvent.click(screen.getByTestId("start-game"));
+    expect(screen.getByTestId("fx-count").textContent).toBe("0");
+
+    // Dispatch 6 actions to cross the actionCount > 5 threshold so that
+    // restart counts as in-progress and the dialog mounts.
+    const incBtn = screen.getByTestId("fx-inc");
+    for (let i = 0; i < 6; i++) fireEvent.click(incBtn);
+    expect(screen.getByTestId("fx-count").textContent).toBe("6");
+
+    // Click Restart — dialog should mount because game is in-progress.
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("play-restart-btn"));
+      await Promise.resolve();
+    });
+
+    expect(screen.getByTestId("confirm-dialog")).toBeTruthy();
+    // count is unchanged before the user answers.
+    expect(screen.getByTestId("fx-count").textContent).toBe("6");
+
+    // Click Cancel ("confirm-no"). The promise resolves false and replay()
+    // returns early without touching state or the undo stack.
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("confirm-no"));
+      await Promise.resolve();
+    });
+
+    // Dialog has unmounted.
+    expect(screen.queryByTestId("confirm-dialog")).toBeNull();
+    // State is preserved: count remains 6 (no replay/reset happened).
+    expect(screen.getByTestId("fx-count").textContent).toBe("6");
+    // Undo stack is intact, so the undo button stays enabled.
+    expect(
+      (screen.getByTestId("play-undo-btn") as HTMLButtonElement).disabled,
+    ).toBe(false);
+  });
+});
+
 // React reference keeps this an unambiguous JSX module under strict
 // tsconfigs that don't auto-import the runtime in tests.
 void React;
