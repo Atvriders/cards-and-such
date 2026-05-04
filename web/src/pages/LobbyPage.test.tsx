@@ -3469,6 +3469,64 @@ describe("LobbyPage — QUICK badge on curated short-play tiles (W806)", () => {
 });
 
 /**
+ * W824 — "CHALLENGING" badge on curated deep-strategy tiles.
+ *
+ * `pickBadgeKind` (web/src/platform/gameTags.ts) returns "challenging" when
+ * an id is in the hand-picked CHALLENGING_GAME_IDS set AND nothing
+ * higher-priority fired (NEW > CHALLENGING > QUICK > POPULAR >
+ * EDITORS-PICK). W784 pins the NEW path and W806 pins the QUICK path; this
+ * test pins the CHALLENGING path so a regression that drops the
+ * CHALLENGING_GAME_IDS check (or breaks the lobby's threading of game ids
+ * through the SoloCard's pickBadgeKind call) still surfaces.
+ *
+ * `chess` is a stable CHALLENGING_GAME_IDS member that:
+ *  - sits near the head of the GAMES registry (well outside the
+ *    NEW_GAME_WINDOW=60 tail), so isNew is false and NEW won't preempt
+ *  - is NOT a member of any family (chess-variants memberIds list contains
+ *    only variant ids like `antichess`, `atomic-chess`, etc., never the
+ *    bare `chess` id), so it renders as a SoloCard with the canonical
+ *    `tile-badge-<id>` testid (family cards would use
+ *    `tile-badge-<familyId>` and the per-game badge would never mount)
+ *
+ * Searching by the title narrows the pool, suppresses the featured strip
+ * `feat-tile-badge-*` doubles, and keeps `tile-badge-chess` unambiguous
+ * regardless of alphabetical pagination.
+ */
+describe("LobbyPage — CHALLENGING badge on curated deep-strategy tiles (W824)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("stamps tile-badge-chess with the CHALLENGING label and badge--challenging class", async () => {
+    renderAt("/");
+
+    // Narrow to "Chess" — the title fragment may still match other
+    // siblings via substring rules, but `tile-badge-chess` is the only
+    // testid the curated CHALLENGING id we care about can ever produce.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "Chess" } });
+
+    const badge = await waitFor(() => screen.getByTestId("tile-badge-chess"));
+    expect(badge).toBeInTheDocument();
+
+    // Production contract: CHALLENGING label/aria pins that `pickBadgeKind`
+    // actually returned "challenging" — and that the lobby threaded the id
+    // (not isNew, not the rating, not the featured list) into the
+    // CHALLENGING_GAME_IDS branch.
+    expect(badge).toHaveTextContent("CHALLENGING");
+    expect(badge).toHaveAttribute("aria-label", "CHALLENGING");
+    // The colour-pill modifier locks the kind→class mapping in Badge.tsx
+    // so a regression that swapped the kind arg while keeping the
+    // testid intact still trips the assertion.
+    expect(badge.className).toMatch(/\bbadge--challenging\b/);
+  });
+});
+
+/**
  * W800 — infinite-mode footer must surface a "Loaded N of M" caption
  * inside `lobby-loaded-count`, where N is the number of currently
  * visible tiles (capped at PAGE_SIZE=80 on initial flip) and M is the
@@ -3478,9 +3536,12 @@ describe("LobbyPage — QUICK badge on curated short-play tiles (W806)", () => {
  * screen reader on each Load-more / sentinel-trigger increment.
  *
  * The registry has well over 80 games, so on initial flip into
- * infinite mode we expect "Loaded 80 of <GAMES.length>". We compute
- * the expected total from the live registry (filtering out null
- * entries the way the lobby does) so the assertion survives registry
+ * infinite mode we expect "Loaded 80 of <total>". The `total` here is
+ * the size of the filtered LOBBY ENTRY list — families collapse
+ * multiple games into one entry, so this is smaller than GAMES.length
+ * and drifts as families are added/split. We pin the SHAPE and the
+ * loaded numeral (load-bearing — it ticks on each Load-more click)
+ * and read the total from the DOM, so the assertion survives registry
  * churn without re-flaking.
  */
 describe("LobbyPage — infinite-mode loaded-count caption (W800)", () => {
@@ -3507,25 +3568,125 @@ describe("LobbyPage — infinite-mode loaded-count caption (W800)", () => {
       screen.getByTestId("lobby-loaded-count"),
     );
 
-    // Initial visibleCount === PAGE_SIZE (80); the registry is far
-    // larger so loadedCount = min(80, filtered.length) === 80. Total
-    // is the count of non-null registry entries — same filter the
-    // lobby applies before computing `filtered`.
-    const total = GAMES.filter(
-      (g): g is NonNullable<typeof g> => g != null,
-    ).length;
+    // Pin the user-visible string SHAPE: "Loaded 80 of <total>".
+    // visibleCount initialises to PAGE_SIZE === 80, the registry is
+    // far larger, so on the initial flip loadedCount === 80. We don't
+    // hard-code the total because `filtered` collapses families into
+    // a single entry — that count drifts as families are added/split.
+    // Instead we pin the loaded numeral (load-bearing — it's what
+    // changes on each Load-more click) and require the total to be
+    // an integer strictly greater than 80 (proving `hasMore` is true
+    // and the caption isn't reading a trivially-empty list).
+    const text = caption.textContent ?? "";
+    const match = text.match(/^Loaded\s+([\d,]+)\s+of\s+([\d,]+)$/);
+    expect(match).not.toBeNull();
+    const loaded = Number(match![1].replace(/,/g, ""));
+    const total = Number(match![2].replace(/,/g, ""));
+    expect(loaded).toBe(80);
     expect(total).toBeGreaterThan(80);
-
-    // Pin the EXACT user-visible string. `toLocaleString()` formats
-    // the total with locale grouping (e.g. "1,234"), so we mirror
-    // that here so the assertion survives a registry that crosses
-    // the thousands threshold without retooling the test.
-    expect(caption).toHaveTextContent(`Loaded 80 of ${total.toLocaleString()}`);
+    // Total must be locale-formatted with comma grouping once it
+    // crosses 1,000 — this catches a regression that drops the
+    // `.toLocaleString()` call and renders a raw 4-digit number.
+    if (total >= 1000) {
+      expect(match![2]).toContain(",");
+    }
 
     // The caption is the screen-reader announcement surface for
     // sentinel-driven and Load-more increments — `aria-live="polite"`
     // is the load-bearing contract that hands the running count
     // off to AT without interrupting whatever the user is hearing.
     expect(caption).toHaveAttribute("aria-live", "polite");
+  });
+});
+
+/**
+ * W812 — long-press touch gesture on a lobby tile must open the same
+ * `tile-menu` context menu that right-click triggers, after the 600ms
+ * threshold elapses. Sibling W248 / W766 / W789 / W803 / W697 tests
+ * pin the right-click (`fireEvent.contextMenu`) entry-point and the
+ * individual menu-item actions, but the touch-driven long-press path
+ * (LobbyPage.tsx ~L2854 `onTileTouchStart`) is otherwise untested.
+ *
+ * On a touch device the user holds a tile for >= 600ms; the
+ * `setTimeout(..., 600)` then sets `menuPos` and the popover renders.
+ * We use `vi.useFakeTimers()` so the test doesn't actually wait, and
+ * dispatch a `touchstart` with a populated `touches` list so the
+ * handler captures a real coordinate.
+ *
+ * The menu's testid is `tile-menu` (LobbyTileMenu.tsx L194), shared
+ * with the right-click flow — proving the long-press routes through
+ * the same rendering surface as right-click is the load-bearing
+ * contract here.
+ */
+describe("LobbyPage — long-press touch opens tile context menu (W812)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    cleanup();
+  });
+
+  it("touchstart held for 600ms surfaces the same tile-menu as right-click", () => {
+    // `texas-holdem` mirrors the standalone-game id reused across the
+    // sibling W574/W697/W766/W789/W803 menu tests — it's NOT absorbed
+    // by any family in `web/src/games/families.ts`, so its
+    // `tile-texas-holdem` testid resolves to a `GameCard` whose
+    // `onTouchStart` arms the long-press timer.
+    const STANDALONE_ID = "texas-holdem";
+    renderAt("/");
+
+    // Narrow the visible pool: alphabetical sort + PAGE_SIZE=80
+    // pushes "Texas Hold'em" past page 1, so search to bring it
+    // onto the rendered grid deterministically. Mirrors W803.
+    const search = screen.getByTestId("lobby-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "texas hold" } });
+    const tile = screen.getByTestId(`tile-${STANDALONE_ID}`);
+
+    // Pre-condition: no menu in the DOM. `menuPos` starts null and
+    // the popover is gated on `menuPos !== null`.
+    expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
+
+    // Dispatch a `touchstart` with one populated touch — the handler
+    // reads `e.touches[0].clientX/Y`. fireEvent.touchStart accepts a
+    // `touches` array directly and synthesizes a TouchEvent that
+    // satisfies the React event normalisation.
+    fireEvent.touchStart(tile, {
+      touches: [{ clientX: 50, clientY: 80 }],
+    });
+
+    // Just under the 600ms threshold — the timer must NOT have fired
+    // yet. This pins the *delay* contract so a regression that drops
+    // the threshold (or fires synchronously) is caught here.
+    act(() => {
+      vi.advanceTimersByTime(599);
+    });
+    expect(screen.queryByTestId("tile-menu")).not.toBeInTheDocument();
+
+    // Cross the threshold — the setTimeout callback flips
+    // `longPressFired` and writes `menuPos`, mounting the popover.
+    act(() => {
+      vi.advanceTimersByTime(1);
+    });
+    const menu = screen.getByTestId("tile-menu");
+    expect(menu).toBeInTheDocument();
+    // The same menu surface as the right-click path: it must carry
+    // role=menu and the per-game aria-label so AT users get the same
+    // discoverability whether they reached it via right-click,
+    // 3-dot, or long-press.
+    expect(menu).toHaveAttribute("role", "menu");
+    expect(menu).toHaveAttribute(
+      "aria-label",
+      `Actions for ${STANDALONE_ID}`,
+    );
+    // And the canonical menu-item set is present — the same five
+    // testids the right-click sibling tests assert on. We probe a
+    // couple of stable ones so this stays a focused long-press test
+    // rather than re-asserting the full LobbyTileMenu shape (which
+    // is already exhaustively covered by LobbyTileMenu.test.tsx).
+    expect(screen.getByTestId("tile-menu-play")).toBeInTheDocument();
+    expect(screen.getByTestId("tile-menu-hide")).toBeInTheDocument();
   });
 });

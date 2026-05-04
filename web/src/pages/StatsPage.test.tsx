@@ -2321,4 +2321,67 @@ describe("StatsPage", () => {
     expect(heading).toBeTruthy();
     expect(heading.tagName).toBe("H1");
   });
+
+  // W828 — The "Top played" section heading must render as an h2. This pins
+  // the section's heading text + level so a regression that drops the h2,
+  // downgrades it to a div/h3, or rewrites the copy fails loudly. Section
+  // h2's give assistive tech a stable outline of the page.
+  it("W828: stats page renders 'Top played' as a level-2 section heading", () => {
+    renderPage();
+    const heading = screen.getByRole("heading", { level: 2, name: "Top played" });
+    expect(heading).toBeTruthy();
+    expect(heading.tagName).toBe("H2");
+  });
+
+  // W826: completes the renderDelta direction trio. W633 pinned the up
+  // branch (d > 0) and W820 pinned the down branch (d < 0); this test
+  // pins the FLAT branch (d === 0) on the Plays row of the this-week
+  // card. Seed an equal number of plays in the current 7d window and the
+  // prior 7d window — pctDelta = (n - n) / n = 0% — so the delta must
+  // render with is-flat class, data-direction="flat", a literal "0%"
+  // magnitude, and explicitly NOT carry the up/down glyphs (▲ / ▼) or
+  // classes. Note: the d == null branch ALSO renders is-flat with an
+  // em-dash; this test deliberately exercises the d === 0 sub-branch
+  // (prior > 0) so the "0%" textContent assertion forces the right path.
+  it("W826: stats this-week Plays delta renders is-flat with 0% when current==prior", () => {
+    seedRichStats();
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    // 2 plays in current window vs 2 plays in prior window → 0% delta.
+    // Score=0 keeps wins at 0/0 so wins-row delta is null (also is-flat
+    // but with em-dash, not 0%) and can't accidentally satisfy the
+    // playsRow assertions below — we explicitly query li[0] (Plays).
+    localStorage.setItem(
+      "cards-time-history:klondike",
+      JSON.stringify([
+        { ts: now - 1 * dayMs, time: 60, score: 0 },
+        { ts: now - 3 * dayMs, time: 60, score: 0 },
+        { ts: now - 9 * dayMs, time: 60, score: 0 },
+        { ts: now - 11 * dayMs, time: 60, score: 0 },
+      ]),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-this-week");
+    const list = within(card).getByTestId("stats-this-week-list");
+    const playsRow = list.querySelectorAll("li")[0];
+    expect(playsRow).toBeDefined();
+    expect(playsRow!.textContent).toContain("2");
+
+    const playsDelta = playsRow!.querySelector(".stats-week-delta");
+    expect(playsDelta).not.toBeNull();
+    expect(playsDelta!.getAttribute("data-direction")).toBe("flat");
+    expect(playsDelta!.classList.contains("is-flat")).toBe(true);
+    // d === 0 branch renders the literal "0%" magnitude (not em-dash —
+    // that's the d == null branch which has prior <= 0).
+    expect(playsDelta!.textContent).toContain("0%");
+
+    // Inversion-immunity: the flat span must NOT carry up/down styling
+    // or glyphs. If a future refactor swaps branches in renderDelta,
+    // these guards fail loudly instead of shipping the wrong direction.
+    expect(playsDelta!.classList.contains("is-up")).toBe(false);
+    expect(playsDelta!.classList.contains("is-down")).toBe(false);
+    expect(playsDelta!.textContent).not.toContain("▲");
+    expect(playsDelta!.textContent).not.toContain("▼");
+  });
 });
