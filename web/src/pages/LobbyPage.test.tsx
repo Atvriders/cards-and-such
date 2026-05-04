@@ -2315,3 +2315,41 @@ describe("LobbyPage — initial grid children count (W663)", () => {
     expect(tiles.length).toBeGreaterThan(50);
   });
 });
+
+/**
+ * W673 — seeding `cards-hidden-games` with a known game id MUST keep
+ * that tile out of the default lobby grid on initial mount. The lobby
+ * hydrates `hiddenSet` synchronously from localStorage and applies
+ * `pool = allGames.filter(g => !hiddenSet.has(g.id))` for every chip
+ * other than the dedicated Hidden chip. Pinning this in the main test
+ * file (alongside the chip-filter coverage) keeps the contract visible
+ * even if the sibling W574 tests churn around the menu pathway.
+ *
+ * `texas-holdem` is a stable standalone (non-family, non-featured) game
+ * id — its `tile-texas-holdem` testid resolves to a single GameCard in
+ * the main grid, so a `queryByTestId` against it is unambiguous. We
+ * pair it with `tile-klondike` (a featured family that always renders
+ * in the featured strip) for the sanity assertion.
+ */
+describe("LobbyPage — cards-hidden-games filters main grid (W673)", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("hides a seeded id from the default grid while leaving others visible", () => {
+    localStorage.setItem(
+      "cards-hidden-games",
+      JSON.stringify(["texas-holdem"]),
+    );
+
+    renderAt("/");
+
+    // The seeded id must be filtered out of the default ("all") grid —
+    // the contract pin against `pool = allGames.filter(g => !hiddenSet.has)`.
+    expect(screen.queryByTestId("tile-texas-holdem")).not.toBeInTheDocument();
+
+    // Sanity: another well-known tile must still render so we know the
+    // filter didn't accidentally collapse the entire grid.
+    expect(screen.getByTestId("tile-klondike")).toBeInTheDocument();
+  });
+});

@@ -32,3 +32,13 @@ describe("saveReplay FIFO cap", () => {
     expect(localStorage.getItem(REPLAYS_KEY)).not.toBeNull();
   });
 });
+
+describe("loadReplays malformed-data handling", () => {
+  it("returns [] when the persisted blob is not valid JSON", () => {
+    // A foreign writer (or a half-flushed write) leaves a non-JSON string
+    // under our key; loadReplays must swallow the parse error rather than
+    // throw, otherwise StatsPage / PlayPage crash on mount.
+    localStorage.setItem(REPLAYS_KEY, "{not json");
+    expect(loadReplays()).toEqual([]);
+  });
+});
