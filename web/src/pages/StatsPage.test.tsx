@@ -2140,4 +2140,47 @@ describe("StatsPage", () => {
     expect(desc).not.toBeNull();
     expect(desc.textContent).toBe("Play 50 unique games.");
   });
+
+  // W768: The `stats-personal-records` card is the per-game best-times table
+  // and the memo (StatsPage.tsx ~L1215) sorts ascending by `time` (lower = better)
+  // so the fastest run lands at row 0. W635 covered the by-category PR mapping
+  // and W681 covered the favorite-category card — but no existing test pins
+  // the ascending-by-time order across multiple top-table rows. A regression
+  // that flipped the comparator (or sorted by id / insertion order) would
+  // silently let a slower time outrank a faster one while every other PR
+  // assertion stayed green. Seed four real game ids in deliberately
+  // non-ascending insertion order and assert each `stats-pr-row-<idx>` lands
+  // on the expected gameId in strict ascending-time order.
+  it("W768: stats-personal-records rows render in ascending-time order regardless of insertion order", () => {
+    seedStats({ totalPlayed: 4 });
+    // Insertion order is intentionally scrambled (not ascending, not
+    // alphabetical) so a regression that returned insertion order, key
+    // order, or alphabetical order would all fail this assertion.
+    localStorage.setItem(
+      "cards-best-times",
+      JSON.stringify({
+        spider: 200,    // expect row 2
+        klondike: 50,   // expect row 0 (fastest)
+        yahtzee: 300,   // expect row 3 (slowest)
+        agram: 120,     // expect row 1
+      }),
+    );
+    renderPage();
+
+    const card = screen.getByTestId("stats-personal-records");
+    // All four legit entries render — none of the cap-at-10 / corrupt-filter
+    // branches should kick in for this fixture.
+    const rows = card.querySelectorAll('[data-testid^="stats-pr-row-"]');
+    expect(rows.length).toBe(4);
+
+    // Row 0 = fastest (klondike 50s); row 3 = slowest (yahtzee 300s).
+    const row0 = within(card).getByTestId("stats-pr-row-0");
+    const row1 = within(card).getByTestId("stats-pr-row-1");
+    const row2 = within(card).getByTestId("stats-pr-row-2");
+    const row3 = within(card).getByTestId("stats-pr-row-3");
+    expect(row0.textContent).toContain("Klondike");
+    expect(row1.textContent).toContain("Agram");
+    expect(row2.textContent).toContain("Spider");
+    expect(row3.textContent).toContain("Yahtzee");
+  });
 });
