@@ -17,6 +17,8 @@ jobs:
           cache: "npm"
       - run: npm ci --workspaces --include-workspace-root
       - run: npm run typecheck
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
       - run: npm -w @cards/shared run test
       - run: npm -w @cards/server run test
       - run: npm -w @cards/web run test
