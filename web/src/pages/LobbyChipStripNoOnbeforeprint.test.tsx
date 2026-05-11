@@ -73,7 +73,7 @@ describe("LobbyPage — .lobby-chips tablist has no onbeforeprint attribute (W33
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onbeforeprint attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
