@@ -426,9 +426,9 @@ function buildCategoryDowHeatmap(
       // JS getDay() returns Sun=0..Sat=6; remap to Mon=0..Sun=6.
       const jsDow = new Date(ts).getDay();
       const dowIdx = (jsDow + 6) % 7;
-      counts[catIdx][dowIdx] += 1;
+      counts[catIdx]![dowIdx] = (counts[catIdx]![dowIdx] ?? 0) + 1;
       total += 1;
-      if (counts[catIdx][dowIdx] > max) max = counts[catIdx][dowIdx];
+      if (counts[catIdx]![dowIdx]! > max) max = counts[catIdx]![dowIdx]!;
     }
   }
   return { counts, max, total };
@@ -464,15 +464,15 @@ function buildHourOfDayCounts(
       if (ts > now) continue;
       const hr = new Date(ts).getHours();
       if (hr < 0 || hr > 23) continue;
-      counts[hr] += 1;
+      counts[hr] = (counts[hr] ?? 0) + 1;
       total += 1;
     }
   }
   let peakHour: number | null = null;
   let peakV = 0;
   for (let h = 0; h < 24; h++) {
-    if (counts[h] > peakV) {
-      peakV = counts[h];
+    if (counts[h]! > peakV) {
+      peakV = counts[h]!;
       peakHour = h;
     }
   }
