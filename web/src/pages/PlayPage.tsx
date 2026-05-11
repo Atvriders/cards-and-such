@@ -381,7 +381,10 @@ function TimeTrendChart({ history }: { history: TimeHistoryEntry[] }): JSX.Eleme
   const prevBestAt = (i: number): number | null => {
     if (i <= 0) return null;
     let m = Infinity;
-    for (let j = 0; j < i; j += 1) m = Math.min(m, entries[j].time);
+    for (let j = 0; j < i; j += 1) {
+      const entry = entries[j];
+      if (entry !== undefined) m = Math.min(m, entry.time);
+    }
     return Number.isFinite(m) ? m : null;
   };
   const formatDelta = (delta: number): string => {
@@ -401,8 +404,10 @@ function TimeTrendChart({ history }: { history: TimeHistoryEntry[] }): JSX.Eleme
     .join(" ");
 
   // The current run is the last entry — highlighted in the accent color.
+  // Guaranteed non-empty here: the `n < 2` branch above already returned, so
+  // `points` has at least two members and `points[lastIdx]` is defined.
   const lastIdx = points.length - 1;
-  const lastPoint = points[lastIdx];
+  const lastPoint = points[lastIdx]!;
   const lastDelta =
     lastPoint.prevBest != null ? lastPoint.e.time - lastPoint.prevBest : null;
   // Three-state pace tone: faster (green), tied (neutral), slower (amber).
@@ -1260,7 +1265,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (phase !== "playing") return;
     setUndoStack((stack) => {
       if (stack.length === 0) return stack;
-      const prev = stack[stack.length - 1];
+      // Non-empty guard above guarantees the indexed read is defined.
+      const prev = stack[stack.length - 1]!;
       // Bump the per-game undo counter only when an actual frame is
       // popped — empty-stack invocations are no-ops and shouldn't inflate
       // the StatsPage drill-down. Mirror of `bumpHintsUsed` semantics.
@@ -1292,7 +1298,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     if (phase !== "playing") return;
     setRedoStack((stack) => {
       if (stack.length === 0) return stack;
-      const next = stack[stack.length - 1];
+      // Non-empty guard above guarantees the indexed read is defined.
+      const next = stack[stack.length - 1]!;
       track("play.redo", { gameId: plugin.id });
       setState((cur: unknown) => {
         setUndoStack((us) => {
@@ -2482,8 +2489,10 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             const total = (qr.size + margin * 2) * px;
             const rects: JSX.Element[] = [];
             for (let r = 0; r < qr.size; r++) {
+              const row = qr.modules[r];
+              if (!row) continue;
               for (let c = 0; c < qr.size; c++) {
-                if (!qr.modules[r][c]) continue;
+                if (!row[c]) continue;
                 rects.push(
                   <rect
                     key={`${r}-${c}`}
