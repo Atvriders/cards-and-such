@@ -27,14 +27,14 @@ describe("analytics: local-only ring buffer", () => {
     track("game.start", { gameId: "klondike" });
     const evts = getEvents();
     expect(evts.length).toBe(1);
-    expect(evts[0].name).toBe("game.start");
-    expect(typeof evts[0].ts).toBe("number");
-    expect(evts[0].props).toEqual({ gameId: "klondike" });
+    expect(evts[0]!.name).toBe("game.start");
+    expect(typeof evts[0]!.ts).toBe("number");
+    expect(evts[0]!.props).toEqual({ gameId: "klondike" });
   });
 
   it("omits the props key when none are passed", () => {
     track("app.boot");
-    const evt = getEvents()[0];
+    const evt = getEvents()[0]!;
     expect(evt.name).toBe("app.boot");
     expect("props" in evt).toBe(false);
   });
@@ -54,8 +54,8 @@ describe("analytics: local-only ring buffer", () => {
     const evts = getEvents();
     expect(evts.length).toBe(RING_CAPACITY);
     // Oldest 25 dropped; first remaining should be i=25.
-    expect((evts[0].props as { i: number }).i).toBe(25);
-    expect((evts[evts.length - 1].props as { i: number }).i).toBe(RING_CAPACITY + 24);
+    expect((evts[0]!.props as { i: number }).i).toBe(25);
+    expect((evts[evts.length - 1]!.props as { i: number }).i).toBe(RING_CAPACITY + 24);
   });
 
   it("clearEvents wipes both the ring and storage", () => {
@@ -70,7 +70,7 @@ describe("analytics: local-only ring buffer", () => {
     const cyclic: Record<string, unknown> = { x: 1 };
     cyclic.self = cyclic;
     expect(() => track("cyclic", cyclic)).not.toThrow();
-    const evt = getEvents()[0];
+    const evt = getEvents()[0]!;
     // The whole props bag is dropped when JSON.stringify throws.
     expect(evt.name).toBe("cyclic");
     expect(evt.props).toBeUndefined();
