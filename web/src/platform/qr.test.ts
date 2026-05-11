@@ -15,15 +15,15 @@ describe("qr byte-mode encoder", () => {
     // Top-left finder pattern: outer 7x7 ring should be dark on its edges
     // and the inner 3x3 center (rows/cols 2..4) should also be dark.
     for (let i = 0; i < 7; i++) {
-      expect(modules[0][i]).toBe(true);
-      expect(modules[6][i]).toBe(true);
-      expect(modules[i][0]).toBe(true);
-      expect(modules[i][6]).toBe(true);
+      expect(modules[0]![i]).toBe(true);
+      expect(modules[6]![i]).toBe(true);
+      expect(modules[i]![0]).toBe(true);
+      expect(modules[i]![6]).toBe(true);
     }
-    expect(modules[2][2]).toBe(true);
-    expect(modules[4][4]).toBe(true);
+    expect(modules[2]![2]).toBe(true);
+    expect(modules[4]![4]).toBe(true);
     // The "dark module" at (size-8, 8) is mandated by the spec.
-    expect(modules[size - 8][8]).toBe(true);
+    expect(modules[size - 8]![8]).toBe(true);
   });
 
   it("picks a mask deterministically: same input yields identical grid across runs", () => {
