@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { GermanWhistState, GermanWhistSettings } from "./state.js";
-import { legalPlays, isTerminal } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import { Card } from "../../engines/deck/Card.js";
 import { rankLabel } from "../../engines/deck/index.js";
 import "./GermanWhist.css";
@@ -15,14 +16,20 @@ export function GermanWhist({ state, dispatch, onGameOver }: GameProps<GermanWhi
     if (terminal) onGameOver(terminal.score);
   }, [terminal, onGameOver]);
 
-  const { hands, stockTop, stock, trumpSuit, currentTrick, turn, phase, tricksTaken, phase1Tricks, phase2Tricks, finalScores, message } = state;
+  const { hands, stock, trump: trumpSuit, trick: currentTrick, turn, phase, tricksWon: tricksTaken, score: finalScores, message } = state;
+  const stockTop: typeof stock[number] | null = stock.length > 0 ? stock[stock.length - 1]! : null;
   const done = phase === "done";
+  const inPhase1 = !done && stock.length > 0;
+  const inPhase2 = !done && stock.length === 0;
+  const totalTricks = tricksTaken[0] + tricksTaken[1];
+  const phase1Tricks = inPhase1 ? totalTricks : 13;
+  const phase2Tricks = inPhase1 ? 0 : Math.max(0, totalTricks - 13);
 
   const legalIds = new Set(
-    (!done && turn === 0) ? legalPlays(state, 0).map(c => c.id) : []
+    (!done && turn === 0) ? legalPlays(hands[0]!, currentTrick).map(c => c.id) : []
   );
 
-  const phaseLabel = phase === "phase1" ? "Phase 1: Build hand" : phase === "phase2" ? "Phase 2: Play out" : "Done";
+  const phaseLabel = inPhase1 ? "Phase 1: Build hand" : inPhase2 ? "Phase 2: Play out" : "Done";
 
   return (
     <div className="german-whist">
@@ -31,8 +38,8 @@ export function GermanWhist({ state, dispatch, onGameOver }: GameProps<GermanWhi
         <span>{phaseLabel}</span>
         <span>Your tricks: {tricksTaken[0]}</span>
         <span>Bot tricks: {tricksTaken[1]}</span>
-        {phase === "phase1" && <span>Phase1: {phase1Tricks}/13</span>}
-        {phase === "phase2" && <span>Phase2: {phase2Tricks}/13</span>}
+        {inPhase1 && <span>Phase1: {phase1Tricks}/13</span>}
+        {inPhase2 && <span>Phase2: {phase2Tricks}/13</span>}
       </div>
 
       <div className="gw-bot-row">
@@ -46,7 +53,7 @@ export function GermanWhist({ state, dispatch, onGameOver }: GameProps<GermanWhi
         </div>
       </div>
 
-      {phase === "phase1" && (
+      {inPhase1 && (
         <div className="gw-stock-area">
           <div className="gw-stock-label">Stock top (face up):</div>
           {stockTop ? <Card card={stockTop} /> : <span style={{ opacity: 0.5 }}>—</span>}
@@ -62,7 +69,7 @@ export function GermanWhist({ state, dispatch, onGameOver }: GameProps<GermanWhi
           {currentTrick.length === 0 ? (
             <span style={{ opacity: 0.4, fontSize: "0.85rem" }}>—</span>
           ) : (
-            currentTrick.map(({ seat, card }) => (
+            currentTrick.map(({ seat, card }: { seat: number; card: import("../../engines/deck/index.js").Card }) => (
               <div key={card.id} className="gw-trick-slot">
                 <div className="gw-trick-slot-label">{seat === 0 ? "You" : "Bot"}</div>
                 <Card card={card} />
