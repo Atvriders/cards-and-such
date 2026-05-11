@@ -84,7 +84,7 @@ describe("LobbyPage — .lobby-chips tablist has no oncut attribute (W3162)", ()
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an oncut attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
