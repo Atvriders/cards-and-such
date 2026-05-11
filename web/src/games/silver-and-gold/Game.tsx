@@ -28,7 +28,7 @@ export function SilverAndGoldGame({ state, dispatch, onGameOver }: GameProps<Sil
           <button data-testid="hint-target-silver-and-gold-mark"
             key={i}
             className={`sag-cell sag-z${cellZone(i)}${filled ? " sag-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as SilverAndGoldAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

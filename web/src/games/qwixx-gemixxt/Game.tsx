@@ -28,7 +28,7 @@ export function QwixxGemixxtGame({ state, dispatch, onGameOver }: GameProps<Qwix
           <button data-testid="hint-target-qwixx-gemixxt-mark"
             key={i}
             className={`qgx-cell qgx-z${cellZone(i)}${filled ? " qgx-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as QwixxGemixxtAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

@@ -139,6 +139,7 @@ export function coopStep(
     lastAlly: allyEffort,
     lastThreatGain: threatGain,
     phase: done ? "done" : "choose",
+    difficulty: state.difficulty,
   };
 }
 

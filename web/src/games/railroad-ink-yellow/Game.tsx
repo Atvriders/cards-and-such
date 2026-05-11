@@ -28,7 +28,7 @@ export function RailroadInkYellowGame({ state, dispatch, onGameOver }: GameProps
           <button data-testid="hint-target-railroad-ink-yellow-mark"
             key={i}
             className={`riy-cell riy-z${cellZone(i)}${filled ? " riy-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as RailroadInkYellowAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

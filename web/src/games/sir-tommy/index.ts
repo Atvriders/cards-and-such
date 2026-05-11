@@ -15,5 +15,4 @@ export const sirTommyPlugin: GamePlugin<SirTommyState, SirTommyAction, typeof se
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as SirTommySettings),
   reducer,isTerminal,hint: (state: SirTommyState): HintTarget | null => { if (state.phase === "done") return null; return { selector: `[data-testid="hint-target-sir-tommy-keep"]`, pulses: 3 }; }, component:SirTommyGame,
-  hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },
 };

@@ -28,7 +28,7 @@ export function RailroadInkBlueGame({ state, dispatch, onGameOver }: GameProps<R
           <button data-testid="hint-target-railroad-ink-blue-mark"
             key={i}
             className={`rib-cell rib-z${cellZone(i)}${filled ? " rib-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as RailroadInkBlueAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

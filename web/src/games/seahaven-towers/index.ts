@@ -45,4 +45,4 @@ Tips: Suited builds and the King-only empty rule make this much harder than clas
     return null;
   },
   component: SeahavenTowersGame,
-} as unknown as GamePlugin;
+};

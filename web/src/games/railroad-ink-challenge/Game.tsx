@@ -28,7 +28,7 @@ export function RailroadInkChallengeGame({ state, dispatch, onGameOver }: GamePr
           <button data-testid="hint-target-railroad-ink-challenge-mark"
             key={i}
             className={`ric-cell ric-z${cellZone(i)}${filled ? " ric-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as RailroadInkChallengeAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

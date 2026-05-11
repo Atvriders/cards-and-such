@@ -28,7 +28,7 @@ export function RailroadInkNeonGame({ state, dispatch, onGameOver }: GameProps<R
           <button data-testid="hint-target-railroad-ink-neon-mark"
             key={i}
             className={`rin-cell rin-z${cellZone(i)}${filled ? " rin-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as RailroadInkNeonAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

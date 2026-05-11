@@ -47,7 +47,7 @@ export function SamuraiDice({
             key={i}
             value={die.value}
             kept={die.kept}
-            onClick={state.rollsUsed > 0 && state.rollsUsed < 3 ? () => dispatch({ type: "toggleKeep", index: i } as SamuraiDiceAction) : undefined}
+            {...(state.rollsUsed > 0 && state.rollsUsed < 3 ? { onClick: () => dispatch({ type: "toggleKeep", index: i } as SamuraiDiceAction) } : {})}
           />
         ))}
       </div>

@@ -80,7 +80,7 @@ export function SheddingView({
             return (
               <Card key={c.id} card={c}
                 className={playable ? "playable" : "dim"}
-                onClick={playable ? () => dispatch({ type: "play", cardId: c.id } as SheddingAction) : undefined} />
+                {...(playable ? { onClick: () => dispatch({ type: "play", cardId: c.id } as SheddingAction) } : {})} />
             );
           })}
       </div>

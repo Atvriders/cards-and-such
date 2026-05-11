@@ -16,7 +16,7 @@ function fake(id: string, category: GameCategory): GamePlugin {
     description: id,
     settings: {},
     initialState: () => ({}),
-    reducer: (s) => s,
+    reducer: (s: unknown) => s,
     isTerminal: () => null,
     component: () => null,
   } as unknown as GamePlugin;

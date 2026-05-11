@@ -28,7 +28,7 @@ export function QwixxExtremeGame({ state, dispatch, onGameOver }: GameProps<Qwix
           <button data-testid="hint-target-qwixx-extreme-mark"
             key={i}
             className={`qex-cell qex-z${cellZone(i)}${filled ? " qex-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as QwixxExtremeAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

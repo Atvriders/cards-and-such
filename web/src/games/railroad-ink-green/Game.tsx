@@ -28,7 +28,7 @@ export function RailroadInkGreenGame({ state, dispatch, onGameOver }: GameProps<
           <button data-testid="hint-target-railroad-ink-green-mark"
             key={i}
             className={`rig-cell rig-z${cellZone(i)}${filled ? " rig-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as RailroadInkGreenAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

@@ -28,7 +28,7 @@ export function RollingAmericaGame({ state, dispatch, onGameOver }: GameProps<Ro
           <button data-testid="hint-target-rolling-america-mark"
             key={i}
             className={`rma-cell rma-z${cellZone(i)}${filled ? " rma-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as RollingAmericaAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

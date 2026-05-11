@@ -209,7 +209,7 @@ export function shedReducer(state: SheddingState, action: SheddingAction): Shedd
     const { stock, pile } = reshuffleIfNeeded(state, rng);
     if (stock.length === 0) {
       // pass
-      let next = { ...state, rngSeed: nextSeed, phase: "bot" as const, message: "No cards to draw — pass." };
+      let next: SheddingState = { ...state, rngSeed: nextSeed, phase: "bot" as const, message: "No cards to draw — pass." };
       next = runBot(next);
       return next;
     }

@@ -28,7 +28,7 @@ export function QwixxBonusGame({ state, dispatch, onGameOver }: GameProps<QwixxB
           <button data-testid="hint-target-qwixx-bonus-mark"
             key={i}
             className={`qbn-cell qbn-z${cellZone(i)}${filled ? " qbn-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as QwixxBonusAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

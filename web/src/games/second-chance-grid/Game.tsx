@@ -28,7 +28,7 @@ export function SecondChanceGridGame({ state, dispatch, onGameOver }: GameProps<
           <button data-testid="hint-target-second-chance-grid-mark"
             key={i}
             className={`scg-cell scg-z${cellZone(i)}${filled ? " scg-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as SecondChanceGridAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

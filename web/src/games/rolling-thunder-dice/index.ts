@@ -21,8 +21,8 @@ After six turns your banked score is your final total. Maximum theoretical score
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
-  hint: (state) => {
-    if ((state as any).gameOver) return null;
+  hint: (state: RollingThunderState) => {
+    if ((state as { gameOver?: boolean }).gameOver) return null;
     return { selector: '[data-testid="hint-target-rolling-thunder-dice-roll"]', pulses: 3 };
   },
   component: RollingThunderDice,
