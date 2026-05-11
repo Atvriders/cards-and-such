@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DoubleDummyWhistState } from "./state.js";
-import { legalPlays, isTerminal } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import { Card } from "../../engines/deck/Card.js";
+import type { Card as CardType } from "../../engines/deck/index.js";
 import { rankLabel } from "../../engines/deck/index.js";
 import "./DoubleDummyWhist.css";
 
@@ -18,7 +20,12 @@ export function DoubleDummyWhist({ state, dispatch, onGameOver }: GameProps<Doub
     if (terminal) onGameOver(terminal.score);
   }, [terminal, onGameOver]);
 
-  const { hands, currentTrick, turn, phase, tricksTaken, tricksPlayed, trumpSuit, finalScores, message } = state;
+  const { hands, trick, turn, phase, tricksWon, trump, message } = state;
+  const currentTrick = trick ?? [];
+  const tricksTaken = tricksWon ?? [0, 0];
+  const tricksPlayed = (tricksWon?.[0] ?? 0) + (tricksWon?.[1] ?? 0);
+  const trumpSuit = trump ?? "♠";
+  const finalScores = tricksWon ?? [0, 0];
   const done = phase === "done";
 
   // Player controls seats 0 and 2
@@ -26,7 +33,9 @@ export function DoubleDummyWhist({ state, dispatch, onGameOver }: GameProps<Doub
   const isPlayerTurn = playerSeats.includes(turn) && !done;
 
   const legalIds = new Set(
-    isPlayerTurn ? legalPlays(state, turn).map(c => c.id) : []
+    isPlayerTurn && turn === 0
+      ? legalPlays(hands[0] ?? [], currentTrick).map((c: CardType) => c.id)
+      : []
   );
 
   return (
@@ -89,7 +98,7 @@ export function DoubleDummyWhist({ state, dispatch, onGameOver }: GameProps<Doub
           {currentTrick.length === 0 ? (
             <span style={{ opacity: 0.4, fontSize: "0.85rem" }}>—</span>
           ) : (
-            currentTrick.map(({ seat, card }) => (
+            currentTrick.map(({ seat, card }: { seat: number; card: CardType }) => (
               <div key={card.id} className="ddw-trick-slot">
                 <div className="ddw-trick-slot-label">{SEAT_NAMES[seat]}</div>
                 <Card card={card} />
