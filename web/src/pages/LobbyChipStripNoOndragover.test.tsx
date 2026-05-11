@@ -105,7 +105,7 @@ describe("LobbyPage — .lobby-chips tablist has no ondragover attribute (W3198)
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ondragover attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
