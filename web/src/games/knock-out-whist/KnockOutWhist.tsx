@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { KnockOutWhistState, KnockOutWhistSettings } from "./state.js";
-import { legalPlays, isTerminal } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
+import type { Card as CardType } from "../../engines/deck/index.js";
 import { Card } from "../../engines/deck/Card.js";
 import { rankLabel } from "../../engines/deck/index.js";
 import "./KnockOutWhist.css";
@@ -15,13 +17,26 @@ export function KnockOutWhist({ state, dispatch, onGameOver }: GameProps<KnockOu
     if (terminal) onGameOver(terminal.score);
   }, [terminal, onGameOver]);
 
-  const { hands, active, trumpSuit, currentTrick, turn, phase, tricksTaken, roundNumber, cardsPerRound, tricksInRound, finalWinner, message, seats } = state;
+  const { hands, trick, tricksWon, phase, leadSeat, turn, trump, message } = state;
+  const playerHand = hands[0] ?? [];
+  const currentTrick = trick ?? [];
+  const tricksTaken = tricksWon ?? [0, 0];
+  const active: readonly boolean[] = [true, true];
+  const trumpSuit = trump ?? "♥";
+  const roundNumber = 1;
+  const cardsPerRound = 7;
+  const tricksInRound = currentTrick.length;
+  const finalWinner = (tricksTaken[0] ?? 0) >= (tricksTaken[1] ?? 0) ? 0 : 1;
+  const seats = hands.length;
   const done = phase === "done";
-  const betweenRounds = phase === "between-rounds";
+  const betweenRounds = false;
 
-  const legalIds = new Set(
-    (!done && !betweenRounds && turn === 0) ? legalPlays(state, 0).map(c => c.id) : []
-  );
+  // leadSeat preserved from destructure for parity with state shape.
+  void leadSeat;
+
+  const legal: readonly CardType[] =
+    !done && !betweenRounds && turn === 0 ? legalPlays(playerHand, currentTrick) : [];
+  const legalIds = new Set(legal.map((c: CardType) => c.id));
 
   const seatName = (i: number) => i === 0 ? "You" : `Bot ${i}`;
 
@@ -39,11 +54,11 @@ export function KnockOutWhist({ state, dispatch, onGameOver }: GameProps<KnockOu
           <div key={s} className={`kow-seat${!active[s] ? " eliminated" : ""}${turn === s && !done && !betweenRounds ? " active" : ""}`}>
             <div className="kow-seat-label">{seatName(s)}</div>
             <div className="kow-card-backs">
-              {Array.from({ length: hands[s]!.length }).map((_, i) => (
+              {Array.from({ length: (hands[s] ?? []).length }).map((_, i) => (
                 <div key={i} className="kow-card-back" />
               ))}
             </div>
-            <div className="kow-tricks-badge">{tricksTaken[s]} tricks</div>
+            <div className="kow-tricks-badge">{tricksTaken[s] ?? 0} tricks</div>
           </div>
         ))}
       </div>
@@ -56,7 +71,7 @@ export function KnockOutWhist({ state, dispatch, onGameOver }: GameProps<KnockOu
           {currentTrick.length === 0 ? (
             <span style={{ opacity: 0.4, fontSize: "0.85rem" }}>—</span>
           ) : (
-            currentTrick.map(({ seat, card }) => (
+            currentTrick.map(({ seat, card }: { seat: number; card: CardType }) => (
               <div key={card.id} className="kow-trick-slot">
                 <div className="kow-trick-slot-label">{seatName(seat)}</div>
                 <Card card={card} />
@@ -79,19 +94,19 @@ export function KnockOutWhist({ state, dispatch, onGameOver }: GameProps<KnockOu
 
       <div className="kow-player-area">
         <div className="kow-player-label">
-          Your Hand ({hands[0]!.length} cards) — {tricksTaken[0]} tricks — {active[0] ? "Active" : "Eliminated"}
+          Your Hand ({playerHand.length} cards) — {tricksTaken[0] ?? 0} tricks — {active[0] ? "Active" : "Eliminated"}
         </div>
         <div className="kow-player-hand">
-          {hands[0]!
+          {playerHand
             .slice()
-            .sort((a, b) => {
+            .sort((a: CardType, b: CardType) => {
               const so: Record<string, number> = { "♠": 0, "♥": 1, "♦": 2, "♣": 3 };
               const sd = (so[a.suit] ?? 0) - (so[b.suit] ?? 0);
               return sd !== 0 ? sd : a.rank - b.rank;
             })
-            .map(card => {
-              const legal = legalIds.has(card.id);
-              return legal ? (
+            .map((card: CardType) => {
+              const isLegal = legalIds.has(card.id);
+              return isLegal ? (
                 <Card
                   key={card.id}
                   card={card}
