@@ -78,7 +78,7 @@ describe("LobbyPage — .lobby-chips tablist has no onpointermove attribute (W32
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onpointermove attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
