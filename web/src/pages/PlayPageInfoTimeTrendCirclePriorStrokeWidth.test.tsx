@@ -82,7 +82,7 @@ describe("PlayPage info popover time-trend prior-circle stroke-width (W1610)", (
     // All circles before the last are "prior" muted dots — they must be
     // flat (stroke-width="0") so only the current dot carries a halo.
     for (let i = 0; i < circles.length - 1; i++) {
-      expect(circles[i].getAttribute("stroke-width")).toBe("0");
+      expect(circles[i]!.getAttribute("stroke-width")).toBe("0");
     }
   });
 });

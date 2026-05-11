@@ -120,7 +120,7 @@ export function reducer(state: ThreesPuzzleState, action: ThreesPuzzleAction): T
     const seed2 = Math.floor(rng() * 2 ** 31);
     const best = Math.max(state.best, maxTile(next));
     let phase: "playing" | "won" | "done" = "playing";
-    if (best >= TARGET && state.phase !== "won") phase = "won";
+    if (best >= TARGET && (state.phase as string) !== "won") phase = "won";
     if (!hasMoves(next)) phase = "done";
     return { ...state, rngSeed: seed2, grid: next, score: state.score + gained, moves: state.moves + 1, best, phase };
   }

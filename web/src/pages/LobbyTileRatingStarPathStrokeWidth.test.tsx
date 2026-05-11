@@ -75,7 +75,7 @@ describe("LobbyPage — tile-rating star inner path stroke-width=1.6 (W1764)", (
     for (const star of stars) {
       const paths = star.querySelectorAll("svg > path");
       expect(paths).toHaveLength(1);
-      expect(paths[0].getAttribute("stroke-width")).toBe("1.6");
+      expect(paths[0]!.getAttribute("stroke-width")).toBe("1.6");
     }
   });
 });

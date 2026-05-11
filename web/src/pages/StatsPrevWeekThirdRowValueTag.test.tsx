@@ -44,7 +44,7 @@ describe("StatsPage stats-this-week — prev-week third row value tagName", () =
     expect(rows.length).toBeGreaterThanOrEqual(3);
     const thirdRow = rows[2];
     expect(thirdRow).not.toBeUndefined();
-    const value = thirdRow.querySelector(".stats-week-value");
+    const value = thirdRow!.querySelector(".stats-week-value");
     expect(value).not.toBeNull();
     // The element using the stats-week-value hook on the avg-time baseline
     // row must be an <em>, not <span> / <strong> / <b> / <div>. This

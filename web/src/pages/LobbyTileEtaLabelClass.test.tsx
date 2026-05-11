@@ -51,7 +51,7 @@ describe("LobbyPage — tile-eta inner label className (W1564)", () => {
       // The label is the text-bearing leaf — confirm it actually has
       // visible "Nm" text so a future refactor that strips children
       // can't silently satisfy the className check with an empty span.
-      expect(labels[0].textContent ?? "").toMatch(/^\d+m$/);
+      expect(labels[0]!.textContent ?? "").toMatch(/^\d+m$/);
     }
   });
 });

@@ -49,4 +49,4 @@ Tips: Two suits adds real difficulty over the one-suit version — when a hearts
     return null;
   },
   component: SpiderTwoSuitsGame,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<SpiderTwoSuitsState, SpiderTwoSuitsAction, Record<string, never>>;

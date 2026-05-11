@@ -39,4 +39,4 @@ Strategy: Prioritize uncovering Aces buried in reserve cells. Because the tablea
     return null;
   },
   component: Storehouse,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<StorehouseState, StorehouseAction, Record<string, never>>;

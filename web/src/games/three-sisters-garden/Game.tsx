@@ -28,7 +28,7 @@ export function ThreeSistersGardenGame({ state, dispatch, onGameOver }: GameProp
           <button data-testid="hint-target-three-sisters-garden-mark"
             key={i}
             className={`tsg-cell tsg-z${cellZone(i)}${filled ? " tsg-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking" || (state.phase as string) === "done"}
             onClick={() => dispatch({ type: "mark", index: i } as ThreeSistersGardenAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

@@ -49,4 +49,4 @@ Tips: Same-suit clusters are precious — try to keep them intact. Use empty col
     return null;
   },
   component: SpiderFourSuitsGame,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<SpiderFourSuitsState, SpiderFourSuitsAction, Record<string, never>>;

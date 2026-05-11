@@ -84,7 +84,7 @@ describe("PlayPage info popover time-trend circle <title> (W1585)", () => {
       expect(title!.tagName.toLowerCase()).toBe("title");
     });
     // The first circle's title should reference the seeded 12s finish.
-    expect(circles[0].querySelector("title")?.textContent ?? "").toContain(
+    expect(circles[0]!.querySelector("title")?.textContent ?? "").toContain(
       "12s",
     );
   });

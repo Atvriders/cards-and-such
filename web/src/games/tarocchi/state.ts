@@ -15,7 +15,6 @@ const engine = makeHuTrick({
   hasTrump: true,
   trumpFromStock: false,
   rankOrder: defaultRankOrder,
-  cardPoints: undefined,
   pointsPerTrick: 1,
 });
 

@@ -51,4 +51,4 @@ Tips: Even at one suit, this is still tactical. Plan your descending runs carefu
     return null;
   },
   component: SpiderOneSuitGame,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<SpiderOneSuitState, SpiderOneSuitAction, Record<string, never>>;

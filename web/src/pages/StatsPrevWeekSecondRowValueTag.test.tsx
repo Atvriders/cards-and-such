@@ -43,7 +43,7 @@ describe("StatsPage stats-this-week — prev-week second row value tagName", () 
     expect(rows.length).toBeGreaterThanOrEqual(2);
     const secondRow = rows[1];
     expect(secondRow).not.toBeUndefined();
-    const value = secondRow.querySelector(".stats-week-value");
+    const value = secondRow!.querySelector(".stats-week-value");
     expect(value).not.toBeNull();
     // The element using the stats-week-value hook on the wins baseline
     // row must be an <em>, not <span> / <strong> / <b> / <div>. This

@@ -79,7 +79,7 @@ describe("LobbyPage — tile-chip-diff inner dot fill count (W1511)", () => {
       const cls = chip.className;
       const match = cls.match(/tile-chip-diff-(easy|medium|hard)\b/);
       expect(match).not.toBeNull();
-      const level = match![1];
+      const level = match![1]!;
 
       // The filled-dot count MUST equal difficultyDots(level).
       const filled = chip.querySelectorAll<HTMLElement>(

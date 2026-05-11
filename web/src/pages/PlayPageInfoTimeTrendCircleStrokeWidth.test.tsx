@@ -81,6 +81,6 @@ describe("PlayPage info popover time-trend current-circle stroke-width (W1603)",
     // React serializes the `strokeWidth` JSX prop to the DOM
     // `stroke-width` attribute. The last circle is the "current run".
     const currentCircle = circles[circles.length - 1];
-    expect(currentCircle.getAttribute("stroke-width")).toBe("1.2");
+    expect(currentCircle!.getAttribute("stroke-width")).toBe("1.2");
   });
 });

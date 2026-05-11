@@ -101,7 +101,7 @@ describe("PlayPage info popover action-log <details> direct-child count (W1823)"
     // Order matters: <summary> must come first so the disclosure widget
     // is keyboard-reachable before its body, and the <ol> we resolved
     // above must be the second (and only other) child.
-    expect(details!.children[0].tagName).toBe("SUMMARY");
+    expect(details!.children[0]!.tagName).toBe("SUMMARY");
     expect(details!.children[1]).toBe(log);
   });
 });

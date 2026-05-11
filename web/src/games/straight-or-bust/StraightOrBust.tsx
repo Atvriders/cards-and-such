@@ -40,7 +40,7 @@ export function StraightOrBust({
             key={i}
             value={die.value}
             kept={die.kept}
-            onClick={canToggle ? () => dispatch({ type: "toggleKeep", index: i } as StraightOrBustAction) : undefined}
+            {...(canToggle ? { onClick: () => dispatch({ type: "toggleKeep", index: i } as StraightOrBustAction) } : {})}
           />
         ))}
       </div>

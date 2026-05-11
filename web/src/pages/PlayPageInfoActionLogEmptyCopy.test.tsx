@@ -105,7 +105,7 @@ describe("PlayPage info popover action-log empty-state copy (W1379)", () => {
 
     // Trim to tolerate harmless JSX-whitespace; the literal copy is
     // load-bearing for users so the equality check is exact.
-    expect((items[0].textContent ?? "").trim()).toBe("No actions yet.");
+    expect((items[0]!.textContent ?? "").trim()).toBe("No actions yet.");
   });
 });
 

@@ -77,7 +77,7 @@ describe("LobbyPage — tile-rating star inner path fill toggle (W1786)", () => 
       const paths = star.querySelectorAll("svg > path");
       expect(paths).toHaveLength(1);
       const expected = i < 3 ? "currentColor" : "none";
-      expect(paths[0].getAttribute("fill")).toBe(expected);
+      expect(paths[0]!.getAttribute("fill")).toBe(expected);
     });
   });
 });

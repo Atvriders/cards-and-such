@@ -51,7 +51,6 @@ describe("LobbyPage — LobbyTileMenu Share-with-friend writes friend URL to cli
     } else {
       // No descriptor existed prior — drop our stub so other tests
       // see an unstubbed navigator.
-      // @ts-expect-error - allow delete for cleanup
       delete (navigator as { clipboard?: unknown }).clipboard;
     }
   });

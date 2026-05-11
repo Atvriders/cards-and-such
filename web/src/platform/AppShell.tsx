@@ -1205,7 +1205,7 @@ export default function AppShell(): JSX.Element {
               </p>
               <input
                 type="text"
-                inputMode="latin"
+                inputMode={"latin" as "text"}
                 autoComplete="off"
                 autoCapitalize="characters"
                 spellCheck={false}

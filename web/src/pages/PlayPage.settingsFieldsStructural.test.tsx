@@ -82,7 +82,7 @@ describe("PlayPage settings modal fields container (W1083)", () => {
     // The container is the structural wrapper for setting rows; verify it
     // is a div so the structural contract (block-level grouping element)
     // is also pinned, not just the class string.
-    expect(fieldsContainers[0].tagName).toBe("DIV");
+    expect(fieldsContainers[0]!.tagName).toBe("DIV");
   });
 });
 

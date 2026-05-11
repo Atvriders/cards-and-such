@@ -53,6 +53,6 @@ describe("StatsPage top-played — bar group cursor affordance", () => {
     );
 
     const barGroup = screen.getByTestId("stats-drill-klondike");
-    expect((barGroup as SVGGElement).style.cursor).toBe("pointer");
+    expect((barGroup as unknown as SVGGElement).style.cursor).toBe("pointer");
   });
 });

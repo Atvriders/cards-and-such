@@ -28,7 +28,9 @@ describe("ErrorBoundary", () => {
     // React logs caught errors via console.error during rendering. Silence
     // it so the test output stays readable; we still assert on the
     // analytics ring buffer for the actual signal.
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    errorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {}) as unknown as ReturnType<typeof vi.spyOn>;
   });
 
   afterEach(() => {

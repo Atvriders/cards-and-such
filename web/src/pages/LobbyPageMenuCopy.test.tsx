@@ -54,7 +54,6 @@ describe("LobbyPage — LobbyTileMenu Copy-link writes play URL to clipboard (W7
     } else {
       // No descriptor existed prior — drop our stub so other tests
       // see an unstubbed navigator.
-      // @ts-expect-error - allow delete for cleanup
       delete (navigator as { clipboard?: unknown }).clipboard;
     }
   });

@@ -75,7 +75,7 @@ describe("LobbyPage — tile-rating star inner path stroke-linejoin=round (W1708
     for (const star of stars) {
       const paths = star.querySelectorAll("svg > path");
       expect(paths).toHaveLength(1);
-      expect(paths[0].getAttribute("stroke-linejoin")).toBe("round");
+      expect(paths[0]!.getAttribute("stroke-linejoin")).toBe("round");
     }
   });
 });

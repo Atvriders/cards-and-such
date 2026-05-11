@@ -73,7 +73,7 @@ describe("LobbyPage — tile-rating star inner path stroke=currentColor (W1754)"
     for (const star of stars) {
       const paths = star.querySelectorAll("svg > path");
       expect(paths).toHaveLength(1);
-      expect(paths[0].getAttribute("stroke")).toBe("currentColor");
+      expect(paths[0]!.getAttribute("stroke")).toBe("currentColor");
     }
   });
 });

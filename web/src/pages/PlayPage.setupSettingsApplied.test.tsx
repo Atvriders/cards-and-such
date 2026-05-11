@@ -119,7 +119,7 @@ describe("PlayPage setup-screen settings applied to initialState (W727)", () => 
     expect(initSpy.mock.calls.length).toBeGreaterThan(callsBeforeStart);
     const lastCall = initSpy.mock.calls[initSpy.mock.calls.length - 1];
     // [seed, settings] — the second argument is the settings object.
-    const passedSettings = lastCall[1] as { deluxe: boolean };
+    const passedSettings = lastCall![1] as { deluxe: boolean };
     expect(passedSettings.deluxe).toBe(true);
   });
 });

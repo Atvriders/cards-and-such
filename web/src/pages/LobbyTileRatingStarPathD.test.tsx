@@ -67,7 +67,7 @@ describe("LobbyPage — tile-rating star inner path d=star-geometry (W1775)", ()
     for (const star of stars) {
       const paths = star.querySelectorAll("svg > path");
       expect(paths).toHaveLength(1);
-      expect(paths[0].getAttribute("d")).toBe(expectedD);
+      expect(paths[0]!.getAttribute("d")).toBe(expectedD);
     }
   });
 });

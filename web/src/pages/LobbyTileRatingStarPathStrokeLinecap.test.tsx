@@ -78,7 +78,7 @@ describe("LobbyPage — tile-rating star inner path stroke-linecap absent (W1719
     for (const star of stars) {
       const paths = star.querySelectorAll("svg > path");
       expect(paths).toHaveLength(1);
-      expect(paths[0].getAttribute("stroke-linecap")).toBeNull();
+      expect(paths[0]!.getAttribute("stroke-linecap")).toBeNull();
     }
   });
 });
