@@ -71,7 +71,7 @@ describe("LobbyPage — .lobby-chips tablist has no onselectionchange attribute 
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onselectionchange attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
