@@ -86,7 +86,7 @@ describe("LobbyPage — .lobby-chips tablist has no onstorage attribute (W3279)"
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onstorage attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
