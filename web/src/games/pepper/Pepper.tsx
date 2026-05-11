@@ -1,16 +1,27 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { PepperState } from "./state.js";
-import { isTerminal, legalPlays, TRUMP_SUIT } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import { Card } from "../../engines/deck/Card.js";
 import "./Pepper.css";
 
 type PepperAction = { type: "play"; cardId: string };
 
+const TRUMP_SUIT: string | null = null;
+
 export function Pepper({ state, dispatch, onGameOver }: GameProps<PepperState, object>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  const { playerHand, botHand, currentTrick, playerTricks, botTricks, totalTricks, winThreshold, phase, playerLeads, message } = state;
+  const playerHand = state.hands[0] ?? [];
+  const botHand = state.hands[1] ?? [];
+  const currentTrick = state.trick;
+  const playerTricks = state.tricksWon[0];
+  const botTricks = state.tricksWon[1];
+  const totalTricks = state.tricksWon[0] + state.tricksWon[1];
+  const winThreshold = 7;
+  const { phase, message } = state;
+  const playerLeads = state.leadSeat === 0;
   const done = phase === "done";
   const legal = (!done && playerLeads) || (!done && currentTrick.length === 1) ? legalPlays(playerHand, currentTrick) : [];
   const legalIds = new Set(legal.map(c => c.id));
