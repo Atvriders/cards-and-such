@@ -72,7 +72,7 @@ describe("LobbyPage — .lobby-chips tablist has no onfocusout attribute (W3148)
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onfocusout attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
