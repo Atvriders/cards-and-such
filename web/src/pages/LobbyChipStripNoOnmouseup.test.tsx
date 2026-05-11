@@ -73,7 +73,7 @@ describe("LobbyPage — .lobby-chips tablist has no onmouseup attribute (W3129)"
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onmouseup attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
