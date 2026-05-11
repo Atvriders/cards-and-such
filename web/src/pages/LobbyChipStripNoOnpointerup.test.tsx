@@ -72,7 +72,7 @@ describe("LobbyPage — .lobby-chips tablist has no onpointerup attribute (W3210
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onpointerup attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
