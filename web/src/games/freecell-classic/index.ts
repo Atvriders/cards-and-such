@@ -43,4 +43,4 @@ Tips: Plan several moves ahead before parking a card. Bring Aces out as soon as 
     return null;
   },
   component: FreecellClassicGame,
-} as unknown as GamePlugin;
+};

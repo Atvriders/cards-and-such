@@ -120,7 +120,7 @@ export function reducer(state: Game1024State, action: Game1024Action): Game1024S
     const seed2 = Math.floor(rng() * 2 ** 31);
     const best = Math.max(state.best, maxTile(next));
     let phase: "playing" | "won" | "done" = "playing";
-    if (best >= TARGET && state.phase !== "won") phase = "won";
+    if (best >= TARGET) phase = "won";
     if (!hasMoves(next)) phase = "done";
     return { ...state, rngSeed: seed2, grid: next, score: state.score + gained, moves: state.moves + 1, best, phase };
   }

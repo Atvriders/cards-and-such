@@ -19,6 +19,6 @@ export const fakeArtistQuizPlugin: GamePlugin<FakeArtistQuizState, FakeArtistQui
   initialState: (seed, _s) => initialState(seed, { rounds: "10" }),
   reducer,
   isTerminal,
-  hint: (state: FakeArtistQuizState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
+  hint: (state: FakeArtistQuizState): HintTarget | null => (state.phase as string) === "playing" ? { selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 } : null,
   component: FakeArtistQuiz,
 };

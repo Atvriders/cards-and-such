@@ -28,7 +28,7 @@ export function HarvestDiceGardenGame({ state, dispatch, onGameOver }: GameProps
           <button data-testid="hint-target-harvest-dice-garden-mark"
             key={i}
             className={`hdg-cell hdg-z${cellZone(i)}${filled ? " hdg-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as HarvestDiceGardenAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

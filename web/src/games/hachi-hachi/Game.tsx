@@ -6,7 +6,7 @@ import "./Game.css";
 
 const COLORS: Record<string, string> = { hikari: "#ffd166", tane: "#ef476f", tan: "#06d6a0", kasu: "#94a3b8" };
 
-function Card({ id, onClick }: { id: number; onClick?: () => void }) {
+function Card({ id, onClick }: { id: number; onClick?: (() => void) | undefined }) {
   const c = cardOf(id);
   return (
     <button className="hh88-card" style={{ borderColor: COLORS[c.category] }} onClick={onClick} disabled={!onClick}>

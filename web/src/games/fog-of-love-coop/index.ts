@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { fogOfLoveCoopState, fogOfLoveCoopAction, fogOfLoveCoopSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const fogOfLoveCoopGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.fogOfLoveCoopGame as unknown as React.ComponentType<unknown> })));

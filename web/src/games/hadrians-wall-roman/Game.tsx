@@ -28,7 +28,7 @@ export function HadriansWallRomanGame({ state, dispatch, onGameOver }: GameProps
           <button data-testid="hint-target-hadrians-wall-roman-mark"
             key={i}
             className={`hwr-cell hwr-z${cellZone(i)}${filled ? " hwr-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as HadriansWallRomanAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

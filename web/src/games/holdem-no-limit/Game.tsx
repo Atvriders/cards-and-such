@@ -156,7 +156,7 @@ export function HoldemNoLimitGame({ state, dispatch, onGameOver }:
 
       {/* Action bar */}
       <div className="holdem-actions">
-        {(state.phase === "idle" || state.phase === "showdown") && state.phase !== "done" && (
+        {(state.phase === "idle" || state.phase === "showdown") && (
           <button data-testid="hint-target-holdem-no-limit-primary" className="holdem-btn holdem-btn-primary" onClick={() => send({ type: "deal" })}>
             {dealLabel}
           </button>
