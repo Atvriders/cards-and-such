@@ -67,7 +67,7 @@ describe("LobbyPage — .lobby-chips tablist has no onmousedown attribute (W3128
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onmousedown attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
