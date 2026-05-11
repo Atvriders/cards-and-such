@@ -85,7 +85,7 @@ describe("LobbyPage — .lobby-chips tablist has no oncancel attribute (W3243)",
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an oncancel attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
