@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SchieberJassState } from "./state.js";
-import { isTerminal, legalPlays, TRUMP_SUIT } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import { Card } from "../../engines/deck/Card.js";
 import "./SchieberJass.css";
 
@@ -10,10 +11,17 @@ type SchieberJassAction = { type: "play"; cardId: string };
 export function SchieberJass({ state, dispatch, onGameOver }: GameProps<SchieberJassState, object>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  const { playerHand, botHand, currentTrick, playerTricks, botTricks, totalTricks, winThreshold, phase, playerLeads, message } = state;
+  const { hands, trick: currentTrick, tricksWon, leadSeat, phase, message, trump } = state;
+  const playerHand = hands[0] ?? [];
+  const botHand = hands[1] ?? [];
+  const playerTricks = tricksWon[0];
+  const botTricks = tricksWon[1];
+  const totalTricks = tricksWon[0] + tricksWon[1];
+  const winThreshold = Math.ceil((playerHand.length + botHand.length + totalTricks) / 2) + 1;
+  const playerLeads = leadSeat === 0;
   const done = phase === "done";
   const legal = (!done && playerLeads) || (!done && currentTrick.length === 1) ? legalPlays(playerHand, currentTrick) : [];
-  const legalIds = new Set(legal.map(c => c.id));
+  const legalIds = new Set(legal.map((c: typeof legal[number]) => c.id));
 
   return (
     <div className="schieber-jass-game">
@@ -27,7 +35,7 @@ export function SchieberJass({ state, dispatch, onGameOver }: GameProps<Schieber
       <div className="schieber-jass-bot-row">
         <div className="schieber-jass-label">Bot ({botHand.length} cards)</div>
         <div className="schieber-jass-card-backs">
-          {botHand.map((_, i) => <div key={i} className="schieber-jass-card-back" />)}
+          {botHand.map((_: typeof botHand[number], i: number) => <div key={i} className="schieber-jass-card-back" />)}
         </div>
       </div>
       <div className="schieber-jass-trick">
@@ -35,7 +43,7 @@ export function SchieberJass({ state, dispatch, onGameOver }: GameProps<Schieber
         <div className="schieber-jass-trick-cards">
           {currentTrick.length === 0
             ? <span style={{ opacity: 0.4 }}>—</span>
-            : currentTrick.map(({ seat, card }) => (
+            : currentTrick.map(({ seat, card }: typeof currentTrick[number]) => (
               <div key={card.id} className="schieber-jass-trick-slot">
                 <div className="schieber-jass-trick-name">{seat === 0 ? "You" : "Bot"}</div>
                 <Card card={card} />
@@ -47,7 +55,7 @@ export function SchieberJass({ state, dispatch, onGameOver }: GameProps<Schieber
       <div className="schieber-jass-player-area">
         <div className="schieber-jass-label">Your Hand</div>
         <div className="schieber-jass-player-hand">
-          {playerHand.map(card => {
+          {playerHand.map((card: typeof playerHand[number]) => {
             const isLegal = legalIds.has(card.id);
             return isLegal
               ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as SchieberJassAction)} />
@@ -61,8 +69,8 @@ export function SchieberJass({ state, dispatch, onGameOver }: GameProps<Schieber
           <div>{message}</div>
         </div>
       )}
-      {/* mark TRUMP_SUIT used to satisfy lint */}
-      <span style={{ display: "none" }}>{TRUMP_SUIT ?? "none"}</span>
+      {/* mark trump used to satisfy lint */}
+      <span style={{ display: "none" }}>{trump ?? "none"}</span>
     </div>
   );
 }

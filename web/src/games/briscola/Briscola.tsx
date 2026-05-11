@@ -1,7 +1,9 @@
 import { useEffect } from "react";
+import type { Card } from "../../engines/deck/index.js";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { BriscolaState } from "./state.js";
-import { isTerminal, briscolaValue } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import "./Briscola.css";
 
 type BriscolaAction = { type: "play"; cardId: string };
@@ -14,6 +16,15 @@ function rankLabel(rank: number): string {
   return String(rank);
 }
 
+function briscolaValue(rank: number): number {
+  if (rank === 1) return 11;
+  if (rank === 3) return 10;
+  if (rank === 13) return 4;
+  if (rank === 12) return 3;
+  if (rank === 11) return 2;
+  return 0;
+}
+
 export function Briscola({
   state,
   dispatch,
@@ -22,8 +33,16 @@ export function Briscola({
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
-  const { playerHand, trump, trumpSuit, currentTrick, playerPoints, botPoints, stock, phase, message } = state;
+  const { hands, trick: currentTrick, score, stock, phase, trump, turn, message } = state;
+  const playerHand = hands[0] ?? [];
+  const playerPoints = score[0];
+  const botPoints = score[1];
+  const trumpSuit = trump ?? "♠";
+  const trumpCard = stock.length > 0 ? stock[stock.length - 1] : null;
   const done = phase === "done";
+  const legal: Card[] = (!done && turn === 0) ? legalPlays(playerHand, currentTrick) : [];
+  const legalIds = new Set(legal.map((c: Card) => c.id));
+  void legalIds;
 
   return (
     <div className="briscola">
@@ -36,15 +55,17 @@ export function Briscola({
       <div className="briscola-trump">
         <span>Trump:</span>
         <span style={{ color: trumpSuit === "♥" || trumpSuit === "♦" ? "#c62828" : "#333" }}>
-          {trumpSuit}{rankLabel(trump.rank)}
+          {trumpSuit}{trumpCard ? rankLabel(trumpCard.rank) : ""}
         </span>
-        <span style={{ fontSize: "0.75rem", color: "#888" }}>({briscolaValue(trump.rank)} pts)</span>
+        {trumpCard && (
+          <span style={{ fontSize: "0.75rem", color: "#888" }}>({briscolaValue(trumpCard.rank)} pts)</span>
+        )}
       </div>
 
       <div className="briscola-trick">
         {currentTrick.length === 0
           ? <span className="briscola-label">— trick area —</span>
-          : currentTrick.map(({ seat, card }) => (
+          : currentTrick.map(({ seat, card }: { seat: number; card: Card }) => (
             <div key={card.id} style={{ textAlign: "center" }}>
               <div className="briscola-label">{seat === 0 ? "You" : "Bot"}</div>
               <div
@@ -66,7 +87,7 @@ export function Briscola({
         <>
           <div className="briscola-label">Your hand — click to play:</div>
           <div className="briscola-hand">
-            {playerHand.map(card => (
+            {playerHand.map((card: Card) => (
               <div
                 key={card.id}
                 className={`briscola-card${card.suit === trumpSuit ? " trump" : ""}`}
