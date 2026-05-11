@@ -123,7 +123,7 @@ describe("PlayPage time-history append on win (W204)", () => {
     // double-fire the win path under jsdom.
     expect(parsed.length).toBeGreaterThanOrEqual(1);
 
-    const entry = parsed[parsed.length - 1];
+    const entry = parsed[parsed.length - 1]!;
     // `ts` is `Date.now()` at the moment of append — must fall inside
     // the [before, after] window we bracketed around the click.
     expect(typeof entry.ts).toBe("number");
