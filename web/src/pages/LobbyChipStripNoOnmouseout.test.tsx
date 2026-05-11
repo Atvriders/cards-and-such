@@ -75,7 +75,7 @@ describe("LobbyPage — .lobby-chips tablist has no onmouseout attribute (W3137)
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onmouseout attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
