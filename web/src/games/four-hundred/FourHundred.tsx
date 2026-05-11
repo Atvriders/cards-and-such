@@ -1,19 +1,32 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { FourHundredState } from "./state.js";
-import { isTerminal, legalPlays, TRUMP_SUIT } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
+import type { Card as DeckCard } from "../../engines/deck/index.js";
 import { Card } from "../../engines/deck/Card.js";
 import "./FourHundred.css";
 
 type FourHundredAction = { type: "play"; cardId: string };
 
+const TRUMP_SUIT = "diamonds";
+const WIN_THRESHOLD = 7;
+
 export function FourHundred({ state, dispatch, onGameOver }: GameProps<FourHundredState, object>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  const { playerHand, botHand, currentTrick, playerTricks, botTricks, totalTricks, winThreshold, phase, playerLeads, message } = state;
+  const playerHand = state.hands[0] ?? [];
+  const botHand = state.hands[1] ?? [];
+  const currentTrick = state.trick;
+  const playerTricks = state.tricksWon[0];
+  const botTricks = state.tricksWon[1];
+  const totalTricks = playerTricks + botTricks;
+  const winThreshold = WIN_THRESHOLD;
+  const playerLeads = state.leadSeat === 0;
+  const { phase, message } = state;
   const done = phase === "done";
-  const legal = (!done && playerLeads) || (!done && currentTrick.length === 1) ? legalPlays(playerHand, currentTrick) : [];
-  const legalIds = new Set(legal.map(c => c.id));
+  const legal: DeckCard[] = (!done && playerLeads) || (!done && currentTrick.length === 1) ? legalPlays(playerHand, currentTrick) : [];
+  const legalIds = new Set(legal.map((c: DeckCard) => c.id));
 
   return (
     <div className="four-hundred-game">
@@ -27,7 +40,7 @@ export function FourHundred({ state, dispatch, onGameOver }: GameProps<FourHundr
       <div className="four-hundred-bot-row">
         <div className="four-hundred-label">Bot ({botHand.length} cards)</div>
         <div className="four-hundred-card-backs">
-          {botHand.map((_, i) => <div key={i} className="four-hundred-card-back" />)}
+          {botHand.map((_: DeckCard, i: number) => <div key={i} className="four-hundred-card-back" />)}
         </div>
       </div>
       <div className="four-hundred-trick">
@@ -35,7 +48,7 @@ export function FourHundred({ state, dispatch, onGameOver }: GameProps<FourHundr
         <div className="four-hundred-trick-cards">
           {currentTrick.length === 0
             ? <span style={{ opacity: 0.4 }}>—</span>
-            : currentTrick.map(({ seat, card }) => (
+            : currentTrick.map(({ seat, card }: { seat: number; card: DeckCard }) => (
               <div key={card.id} className="four-hundred-trick-slot">
                 <div className="four-hundred-trick-name">{seat === 0 ? "You" : "Bot"}</div>
                 <Card card={card} />
@@ -47,7 +60,7 @@ export function FourHundred({ state, dispatch, onGameOver }: GameProps<FourHundr
       <div className="four-hundred-player-area">
         <div className="four-hundred-label">Your Hand</div>
         <div className="four-hundred-player-hand">
-          {playerHand.map(card => {
+          {playerHand.map((card: DeckCard) => {
             const isLegal = legalIds.has(card.id);
             return isLegal
               ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as FourHundredAction)} />
@@ -62,7 +75,7 @@ export function FourHundred({ state, dispatch, onGameOver }: GameProps<FourHundr
         </div>
       )}
       {/* mark TRUMP_SUIT used to satisfy lint */}
-      <span style={{ display: "none" }}>{TRUMP_SUIT ?? "none"}</span>
+      <span style={{ display: "none" }}>{TRUMP_SUIT}</span>
     </div>
   );
 }

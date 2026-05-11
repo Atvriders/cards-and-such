@@ -578,7 +578,7 @@ function HeatmapChart({
         <div key={cat} className="stats-heatmap-row">
           <span className="stats-heatmap-cat">{cat}</span>
           {DAY_LABELS.map((d, di) => {
-            const v = counts[ci][di];
+            const v = counts[ci]?.[di] ?? 0;
             const opacity = max > 0 ? 0.12 + 0.88 * (v / max) : 0.08;
             return (
               <span
@@ -726,7 +726,7 @@ function buildCombinedSvg(
       // be inlined as a <g>. Also drop the white-bg <rect> we just added —
       // we'll paint the combined background ourselves.
       const m = sanitized.match(/<svg[^>]*>([\s\S]*)<\/svg>/);
-      const guts = m ? m[1].replace(/<rect[^>]*fill="#ffffff"[^>]*\/>/, "") : "";
+      const guts = m ? (m[1] ?? "").replace(/<rect[^>]*fill="#ffffff"[^>]*\/>/, "") : "";
       body = `<g transform="translate(${offsetX.toFixed(2)} ${offsetY.toFixed(2)}) scale(${scale.toFixed(4)})">${guts}</g>`;
     } else {
       body = `<text x="${W / 2}" y="${plotY + targetH / 2}" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="20" text-anchor="middle">No data</text>`;
@@ -844,6 +844,7 @@ function buildStatsCsv(): string {
   const ids = Object.keys(stats.perGame).sort();
   for (const id of ids) {
     const gs = stats.perGame[id];
+    if (!gs) continue;
     const winRate = gs.played > 0 ? gs.wins / gs.played : null;
     const bestTime = bestTimeFor(id);
     const rating = ratingFor(id);
@@ -1198,11 +1199,11 @@ export default function StatsPage(): JSX.Element {
       // run set a brand-new personal record.
       let isFresh = false;
       if (history.length > 0) {
-        const latest = history[history.length - 1];
+        const latest = history[history.length - 1]!;
         if (Math.abs(latest.time - t) <= 0.05) {
           let secondBest = Infinity;
           for (let i = 0; i < history.length - 1; i += 1) {
-            const prev = history[i];
+            const prev = history[i]!;
             if (Number.isFinite(prev.time) && prev.time > 0 && prev.time < secondBest) {
               secondBest = prev.time;
             }
