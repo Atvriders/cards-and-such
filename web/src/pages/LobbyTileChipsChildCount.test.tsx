@@ -80,8 +80,8 @@ describe("LobbyPage — tile-chips wrapper childElementCount=2 (W1843)", () => {
       // eta span and added two stray decorative spans).
       const directChildren = Array.from(wrapper.children);
       expect(directChildren).toHaveLength(2);
-      expect(directChildren[0].className).toContain("tile-chip-eta");
-      expect(directChildren[1].className).toContain("tile-chip-diff");
+      expect(directChildren[0]!.className).toContain("tile-chip-eta");
+      expect(directChildren[1]!.className).toContain("tile-chip-diff");
     }
   });
 });

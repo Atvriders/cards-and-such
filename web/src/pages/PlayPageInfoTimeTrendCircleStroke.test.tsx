@@ -78,9 +78,9 @@ describe("PlayPage info popover time-trend current-circle stroke (W1598)", () =>
     // The last circle is the "current run" — it must carry the accent
     // lavender stroke so it visibly haloes against prior muted-gray dots.
     const currentCircle = circles[circles.length - 1];
-    expect(currentCircle.getAttribute("stroke")).toBe("#c7cdfe");
+    expect(currentCircle!.getAttribute("stroke")).toBe("#c7cdfe");
     // Sanity: the prior point should render stroke="none" so only the
     // current dot has a visible halo.
-    expect(circles[0].getAttribute("stroke")).toBe("none");
+    expect(circles[0]!.getAttribute("stroke")).toBe("none");
   });
 });

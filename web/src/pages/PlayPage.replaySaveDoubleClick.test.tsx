@@ -122,8 +122,8 @@ describe("PlayPage replay save double-click pins current behavior (W839)", () =>
       expect(parsed.length).toBe(2);
       // Both entries are for the same game — confirms it really is a
       // duplicate, not e.g. a separate replay from a different round.
-      expect(parsed[0].gameId).toBe(hoisted.TEST_GAME_ID);
-      expect(parsed[1].gameId).toBe(hoisted.TEST_GAME_ID);
+      expect(parsed[0]!.gameId).toBe(hoisted.TEST_GAME_ID);
+      expect(parsed[1]!.gameId).toBe(hoisted.TEST_GAME_ID);
     }
   });
 });

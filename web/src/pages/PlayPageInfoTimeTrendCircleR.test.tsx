@@ -80,11 +80,11 @@ describe("PlayPage info popover time-trend circle r attribute (W1591)", () => {
 
     // Non-current datapoints (every circle except the last) must use r="2".
     for (let i = 0; i < circles.length - 1; i += 1) {
-      expect(circles[i].getAttribute("r")).toBe("2");
+      expect(circles[i]!.getAttribute("r")).toBe("2");
     }
 
     // Trailing "current" datapoint uses the enlarged r="3.2" radius.
     const last = circles[circles.length - 1];
-    expect(last.getAttribute("r")).toBe("3.2");
+    expect(last!.getAttribute("r")).toBe("3.2");
   });
 });

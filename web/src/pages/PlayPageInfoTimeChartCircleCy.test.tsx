@@ -90,8 +90,8 @@ describe("PlayPage info popover time-trend circle cy attribute (W1623)", () => {
     expect(circles.length).toBe(2);
 
     // First datapoint (t=20=maxT) → yAt = padY = 8.
-    expect(circles[0].getAttribute("cy")).toBe("8");
+    expect(circles[0]!.getAttribute("cy")).toBe("8");
     // Last datapoint (t=10=minT) → yAt = padY + innerH = 52.
-    expect(circles[1].getAttribute("cy")).toBe("52");
+    expect(circles[1]!.getAttribute("cy")).toBe("52");
   });
 });

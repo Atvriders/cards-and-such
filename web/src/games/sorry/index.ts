@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { SorryState, SorryAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const Sorry = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Sorry as unknown as React.ComponentType<unknown> })));
@@ -32,5 +32,5 @@ Landing on an opponent pawn on a non-safe square sends it back to the yard. Safe
 Bots play automatically using a greedy strategy: they always try to advance their pawn closest to home.`,
   settings: sorrySettings,
   initialState: (seed: number, settings: SorrySettingsType) => initialState(seed, settings),
-  reducer, isTerminal, hint: (state: SorryState): HintTarget | null => (state.phase === "rolling" ? { selector: ".roll-btn", pulses: 3 } : null), component: Sorry,
+  reducer, isTerminal, hint: (state: SorryState): HintTarget | null => ((state.phase as string) === "rolling" ? { selector: ".roll-btn", pulses: 3 } : null), component: Sorry,
 };

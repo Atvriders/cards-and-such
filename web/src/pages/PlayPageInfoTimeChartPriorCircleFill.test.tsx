@@ -82,12 +82,12 @@ describe("PlayPage info popover time-trend prior-circle fill (W1600)", () => {
     // Every non-current (prior) circle must carry the muted slate fill
     // so they recede behind the accent-colored current-run dot.
     for (let i = 0; i < circles.length - 1; i++) {
-      expect(circles[i].getAttribute("fill")).toBe("rgba(148, 163, 184, 0.7)");
+      expect(circles[i]!.getAttribute("fill")).toBe("rgba(148, 163, 184, 0.7)");
     }
     // Sanity: the current circle should NOT use the muted fill, otherwise
     // there would be no visual highlight at all.
     const currentCircle = circles[circles.length - 1];
-    expect(currentCircle.getAttribute("fill")).not.toBe(
+    expect(currentCircle!.getAttribute("fill")).not.toBe(
       "rgba(148, 163, 184, 0.7)",
     );
   });

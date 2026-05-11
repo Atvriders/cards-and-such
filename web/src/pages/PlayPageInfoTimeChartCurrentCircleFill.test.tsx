@@ -78,9 +78,9 @@ describe("PlayPage info popover time-trend current-circle fill (W1593)", () => {
     // The last circle is the "current run" — it must carry the accent
     // purple fill so it visibly differs from prior muted-gray dots.
     const currentCircle = circles[circles.length - 1];
-    expect(currentCircle.getAttribute("fill")).toBe("#a78bfa");
+    expect(currentCircle!.getAttribute("fill")).toBe("#a78bfa");
     // Sanity: the prior point should NOT use the accent color, otherwise
     // there would be no visual highlight at all.
-    expect(circles[0].getAttribute("fill")).not.toBe("#a78bfa");
+    expect(circles[0]!.getAttribute("fill")).not.toBe("#a78bfa");
   });
 });

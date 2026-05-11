@@ -62,8 +62,8 @@ export function initialState(seed: number, settings: DiceTowerStackSettings): Di
  *  Returns the selection unchanged if valid; otherwise returns null. */
 export function isValidStack(dice: number[], selected: number[]): boolean {
   for (let i = 1; i < selected.length; i++) {
-    if (selected[i] <= selected[i - 1]) return false;
-    if (dice[selected[i]] <= dice[selected[i - 1]]) return false;
+    if (selected[i]! <= selected[i - 1]!) return false;
+    if (dice[selected[i]!] <= dice[selected[i - 1]!]) return false;
   }
   return true;
 }

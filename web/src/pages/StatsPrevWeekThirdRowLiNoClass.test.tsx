@@ -49,7 +49,7 @@ describe("StatsPage stats-this-week — prev-week third <li> has no class", () =
     expect(thirdRow).not.toBeUndefined();
     // The <li> wrapper must be hook-free: no `class` attribute, empty
     // className. All BEM hooks live on the inner <span>/<em> children.
-    expect(thirdRow.hasAttribute("class")).toBe(false);
-    expect(thirdRow.className).toBe("");
+    expect(thirdRow!.hasAttribute("class")).toBe(false);
+    expect(thirdRow!.className).toBe("");
   });
 });

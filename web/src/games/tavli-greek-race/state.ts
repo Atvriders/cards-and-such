@@ -199,7 +199,7 @@ function applyMove(state: TavliGrState, side: Side, from: number, pips: number):
   if (t < 0 || t >= POINTS) {
     // bear off
     if (!allInHome(myPoints, side)) return null;
-    myPoints[from] -= 1;
+    myPoints[from] = (myPoints[from] ?? 0) - 1;
     if (side === "P") next.pBorne += 1; else next.cBorne += 1;
     return next;
   }

@@ -83,8 +83,8 @@ describe("PlayPage info popover time-trend circle cx attribute (W1613)", () => {
     expect(circles.length).toBe(2);
 
     // First datapoint pins to the left inner edge (padX = 6).
-    expect(circles[0].getAttribute("cx")).toBe("6");
+    expect(circles[0]!.getAttribute("cx")).toBe("6");
     // Last datapoint pins to padX + innerW = 6 + 208 = 214.
-    expect(circles[1].getAttribute("cx")).toBe("214");
+    expect(circles[1]!.getAttribute("cx")).toBe("214");
   });
 });

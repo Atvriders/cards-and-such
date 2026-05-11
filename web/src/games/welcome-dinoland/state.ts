@@ -39,12 +39,12 @@ export function legalAt(values: (number | null)[], index: number, roll: number):
   const col = index % ROW_LEN;
   // check left: any non-null left value < roll
   for (let c = 0; c < col; c++) {
-    const v = values[row * ROW_LEN + c];
+    const v = values[row * ROW_LEN + c]!;
     if (v !== null && v >= roll) return false;
   }
   // check right: any non-null right value > roll
   for (let c = col + 1; c < ROW_LEN; c++) {
-    const v = values[row * ROW_LEN + c];
+    const v = values[row * ROW_LEN + c]!;
     if (v !== null && v <= roll) return false;
   }
   return true;
@@ -55,8 +55,8 @@ export function placeValue(roll: number, idx: number, values: (number | null)[])
   let v = roll;
   const col = idx % ROW_LEN;
   const row = Math.floor(idx / ROW_LEN);
-  const left = col > 0 ? values[row * ROW_LEN + (col - 1)] : null;
-  const right = col < ROW_LEN - 1 ? values[row * ROW_LEN + (col + 1)] : null;
+  const left = col > 0 ? values[row * ROW_LEN + (col - 1)]! : null;
+  const right = col < ROW_LEN - 1 ? values[row * ROW_LEN + (col + 1)]! : null;
   if (left !== null && roll - left === 1) v += 2;
   if (right !== null && right - roll === 1) v += 2;
   return v;

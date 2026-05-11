@@ -106,7 +106,9 @@ describe("PlayPage loss-banner share-image button (W878)", () => {
     // is reached. Capture the createObjectURL spy so we can also assert
     // the download path actually executed (a Blob was wrapped + a URL
     // returned), not just that the analytics breadcrumb fired.
-    const createObjUrlSpy = vi.fn(() => "blob:loss-share-image-mock");
+    const createObjUrlSpy = vi.fn(
+      (_blob: Blob) => "blob:loss-share-image-mock",
+    );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (URL as any).createObjectURL = createObjUrlSpy;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -178,7 +180,7 @@ describe("PlayPage loss-banner share-image button (W878)", () => {
     //    anchor's click() fired. Pins the actual download side-effect on
     //    the loss path, not just the analytics breadcrumb.
     expect(createObjUrlSpy).toHaveBeenCalledTimes(1);
-    expect(createObjUrlSpy.mock.calls[0][0]).toBeInstanceOf(Blob);
+    expect(createObjUrlSpy.mock.calls[0]![0]).toBeInstanceOf(Blob);
     expect(clickSpy).toHaveBeenCalledTimes(1);
 
     clickSpy.mockRestore();

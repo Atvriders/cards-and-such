@@ -28,5 +28,5 @@ Choose 10, 20, or 30 rounds in Settings. The remaining card counts update after 
 Your final score is shown at the end. Think carefully and use the odds — that is the whole game!`,
   settings,
   initialState: (seed: number, s: S) => initialState(seed, s as RedOrBlackSettings),
-  reducer, isTerminal, hint: (state: RedOrBlackState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component: RedOrBlack,
+  reducer, isTerminal, hint: (state: RedOrBlackState): HintTarget | null => (((state.phase as string) === "betting" || state.phase === "reveal" || (state.phase as string) === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component: RedOrBlack,
 };
