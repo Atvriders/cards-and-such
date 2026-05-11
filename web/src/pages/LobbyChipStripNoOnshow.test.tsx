@@ -64,7 +64,7 @@ describe("LobbyPage — .lobby-chips tablist has no onshow attribute (W3237)", (
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onshow attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
