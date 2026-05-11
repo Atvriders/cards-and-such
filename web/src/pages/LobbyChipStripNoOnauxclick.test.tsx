@@ -78,7 +78,7 @@ describe("LobbyPage — .lobby-chips tablist has no onauxclick attribute (W3180)
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onauxclick attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
