@@ -32,4 +32,4 @@ Strategy tips: skip mentally if you are stuck — a quick wrong click beats losi
   isTerminal,
   
   hint: (state: LightningRoundState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-lightning-round-answer-0"]', pulses: 3 } : null,component: LightningRound,
-} as unknown as GamePlugin;
+};

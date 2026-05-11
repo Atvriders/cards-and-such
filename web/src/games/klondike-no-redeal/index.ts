@@ -47,4 +47,4 @@ Tips: Be very deliberate when emptying the stock — each card you fail to play 
     return null;
   },
   component: KlondikeNoRedealGame,
-} as unknown as GamePlugin;
+};

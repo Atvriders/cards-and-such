@@ -33,4 +33,4 @@ Your final score is displayed when the game ends. Negative scores are floored to
   isTerminal,
   hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".jeo-btn", pulses: 3 }; },
   component: JeopardyLike,
-} as unknown as GamePlugin;
+};

@@ -41,4 +41,4 @@ Strategy: With 12 cells the game is much more forgiving than standard FreeCell. 
     return null;
   },
   component: MilliganCell,
-} as unknown as GamePlugin;
+};

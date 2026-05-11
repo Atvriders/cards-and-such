@@ -2,7 +2,7 @@ import { lazy } from "react";
 import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { KillerSudokuState, KillerSudokuAction } from "./state.js";
+import type { KillerSudokuState, KillerSudokuAction, KillerSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { KillerSudoku } from "./KillerSudoku.js";
 
@@ -30,7 +30,7 @@ Click any cell to select it (it highlights blue), then click a digit button or p
 
 Score: max(100, 1000 − moves × 5). Fewer moves earn a higher score. Tip: start with cages that have only one possible combination given their sum and size — for example, a 2-cell cage summing to 3 must be {1, 2}.`,
   settings: killerSudokuSettings,
-  initialState: (seed: number, settings: KillerSudokuSettingsType) => initialState(seed, settings),
+  initialState: (seed: number, settings: KillerSudokuSettingsType) => initialState(seed, settings as unknown as KillerSudokuSettings),
   reducer,
   isTerminal,
   hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".killercrimescene-num", pulses: 3 }; },

@@ -49,4 +49,4 @@ Tips: This is one of the toughest single-deck variants. Plan your stock pulls ca
     return null;
   },
   component: KlondikeThreesNoRedealGame,
-} as unknown as GamePlugin;
+};

@@ -37,4 +37,4 @@ The game ends when you answer all 14 questions correctly ($1,000,000), answer on
   isTerminal,
   
   hint: (state: MillionaireState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-millionaire-answer-0"]', pulses: 3 } : null,component: Millionaire,
-} as unknown as GamePlugin;
+};

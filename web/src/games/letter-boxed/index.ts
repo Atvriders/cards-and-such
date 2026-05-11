@@ -38,7 +38,7 @@ Tips: look for long words that use letters from multiple sides. Try to end each 
   reducer,
   isTerminal,
   hint: (state: LetterBoxedState): HintTarget | null => {
-    if (state.won || state.lost) return null;
+    if (state.won) return null;
     return { selector: ".lbx-wrap", pulses: 3 };
   },
   component: LetterBoxed,

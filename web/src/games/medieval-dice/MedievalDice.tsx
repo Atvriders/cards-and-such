@@ -59,7 +59,7 @@ export function MedievalDice({
             key={i}
             value={die.value}
             kept={die.kept}
-            onClick={state.rollsUsed > 0 && state.rollsUsed < 3 ? () => handleToggle(i) : undefined}
+            {...(state.rollsUsed > 0 && state.rollsUsed < 3 ? { onClick: () => handleToggle(i) } : {})}
           />
         ))}
       </div>

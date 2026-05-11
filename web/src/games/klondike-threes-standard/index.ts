@@ -49,4 +49,4 @@ Tips: With draw-3, plan ahead — buried cards rotate slowly. Use Auto-move once
     return null;
   },
   component: KlondikeThreesStandardGame,
-} as unknown as GamePlugin;
+};

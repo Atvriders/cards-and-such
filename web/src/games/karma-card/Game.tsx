@@ -110,7 +110,7 @@ export function KarmaGame({ state, dispatch, onGameOver }: GameProps<KarmaState,
                   onClick={() => togglePlay(c.id, zone === "hand" ? player.hand : zone === "tableUp" ? player.tableUp : player.tableDown)}
                   aria-label={zone === "tableDown" ? "Face-down" : `${c.suit}${rankLabel(c.rank)}`}
                 >
-                  <Card card={zone === "tableDown" ? undefined : c} faceDown={zone === "tableDown"} />
+                  <Card {...(zone === "tableDown" ? {} : { card: c })} faceDown={zone === "tableDown"} />
                 </button>
               ))}
             </div>
