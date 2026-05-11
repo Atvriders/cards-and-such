@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { TroubleState, TroubleAction } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const Trouble = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.Trouble as unknown as React.ComponentType<unknown> })));

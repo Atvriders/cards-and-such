@@ -41,4 +41,4 @@ Tips: With 13 long columns, plan your sequences carefully. Empty columns are ext
     return null;
   },
   component: TripleFreecellGame,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<TripleFreecellState, TripleFreecellAction, Record<string, never>>;

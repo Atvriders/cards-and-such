@@ -51,4 +51,4 @@ Tips: With 13 columns, the field is wide but face-down depth is also enormous. T
     return null;
   },
   component: TripleKlondikeGame,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<TripleKlondikeState, TripleKlondikeAction, Record<string, never>>;

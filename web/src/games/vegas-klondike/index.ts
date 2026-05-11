@@ -49,4 +49,4 @@ Tips: Treat every move as if it costs you cash. Don't draw from the stock unless
     return null;
   },
   component: SoliGame,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<SoliState, SoliAction, Record<string, never>>;

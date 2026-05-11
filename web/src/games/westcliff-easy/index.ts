@@ -49,4 +49,4 @@ Strategy: Uncover face-down cards as quickly as possible. Because building is sa
     return null;
   },
   component: WestcliffEasy,
-} as unknown as GamePlugin;
+} as unknown as GamePlugin<WestcliffEasyState, WestcliffEasyAction, Record<string, never>>;
