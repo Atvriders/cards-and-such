@@ -72,7 +72,7 @@ describe("LobbyPage — .lobby-chips tablist has no onrejectionhandled attribute
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onrejectionhandled attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
