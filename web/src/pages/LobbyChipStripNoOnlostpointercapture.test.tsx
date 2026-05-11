@@ -74,7 +74,7 @@ describe("LobbyPage — .lobby-chips tablist has no onlostpointercapture attribu
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onlostpointercapture attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
