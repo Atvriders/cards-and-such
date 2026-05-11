@@ -88,7 +88,7 @@ describe("LobbyPage — .lobby-chips tablist has no ondragenter attribute (W3192
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ondragenter attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
