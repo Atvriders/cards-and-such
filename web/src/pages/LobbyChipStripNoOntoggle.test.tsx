@@ -79,7 +79,7 @@ describe("LobbyPage — .lobby-chips tablist has no ontoggle attribute (W3234)",
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ontoggle attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
