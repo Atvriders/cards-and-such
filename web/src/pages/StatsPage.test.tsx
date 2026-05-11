@@ -572,7 +572,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-csv"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     // Blob type carries the text/csv MIME (with charset); spreadsheet tools
     // key off the major/minor type so we pin "text/csv" explicitly.
@@ -620,7 +620,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-csv"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     const text = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
@@ -654,7 +654,7 @@ describe("StatsPage", () => {
     renderPage();
     fireEvent.click(screen.getByTestId("stats-export-csv"));
 
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     const text = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (): void => resolve(String(reader.result ?? ""));
@@ -669,7 +669,7 @@ describe("StatsPage", () => {
     //   2. Double the embedded `"` → `""`.
     //   3. Preserve the embedded comma inside the quoted region (so the row
     //      still has the canonical 9 logical fields when parsed RFC 4180-wise).
-    const dataRow = lines[1];
+    const dataRow = lines[1]!;
     expect(dataRow.startsWith('"evil""game,name"')).toBe(true);
     // Pin the full row so any future drift in csvCell() or column order
     // surfaces immediately. winRate=0/1=0.0000, bestTime/rating empty.
@@ -693,7 +693,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-json"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     // MIME pinned to application/json so browsers offer a sensible default
     // handler when the user opens the downloaded file.
@@ -762,7 +762,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-all"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     // MIME pinned to image/svg+xml so the browser opens the downloaded file
     // in its SVG viewer rather than treating it as a generic text payload.
@@ -1374,16 +1374,16 @@ describe("StatsPage", () => {
     // Concrete head-of-list assertions: the unlocked + both in-progress cards
     // are the seeded ones, and ten-wins (10% progress) outranks hundred-wins
     // (1% progress) within the in-progress bucket.
-    expect(cards[0].getAttribute("data-testid")).toBe("achievement-first-win");
-    expect(cards[0].getAttribute("data-state")).toBe("unlocked");
-    expect(cards[1].getAttribute("data-testid")).toBe("achievement-ten-wins");
-    expect(cards[1].getAttribute("data-state")).toBe("in-progress");
-    expect(cards[2].getAttribute("data-testid")).toBe("achievement-hundred-wins");
-    expect(cards[2].getAttribute("data-state")).toBe("in-progress");
+    expect(cards[0]!.getAttribute("data-testid")).toBe("achievement-first-win");
+    expect(cards[0]!.getAttribute("data-state")).toBe("unlocked");
+    expect(cards[1]!.getAttribute("data-testid")).toBe("achievement-ten-wins");
+    expect(cards[1]!.getAttribute("data-state")).toBe("in-progress");
+    expect(cards[2]!.getAttribute("data-testid")).toBe("achievement-hundred-wins");
+    expect(cards[2]!.getAttribute("data-state")).toBe("in-progress");
 
     // First locked card sits immediately after the in-progress block and
     // carries data-state="locked".
-    expect(cards[3].getAttribute("data-state")).toBe("locked");
+    expect(cards[3]!.getAttribute("data-state")).toBe("locked");
   });
 
   it("this-week comparison card shows current and prior 7-day windows with deltas", () => {
@@ -1559,8 +1559,8 @@ describe("StatsPage", () => {
       // Only the single legit entry survives — exactly one PR row rendered.
       const rows = card.querySelectorAll('[data-testid^="stats-pr-row-"]');
       expect(rows.length).toBe(1);
-      expect(rows[0].getAttribute("data-testid")).toBe("stats-pr-row-0");
-      expect(rows[0].textContent).toContain("Klondike");
+      expect(rows[0]!.getAttribute("data-testid")).toBe("stats-pr-row-0");
+      expect(rows[0]!.textContent).toContain("Klondike");
       // None of the dropped IDs leak into the DOM as a row.
       expect(card.textContent).not.toContain("Spider");
       expect(card.textContent).not.toContain("Agram");
@@ -2893,7 +2893,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-line"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     // MIME pinned to image/svg+xml (`downloadSvg` in svgShare.ts) so the
     // browser opens the file in its SVG viewer rather than as plain text.
@@ -2941,7 +2941,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-bar"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     // MIME pinned to image/svg+xml (`downloadSvg` in svgShare.ts) so the
     // browser opens the file in its SVG viewer rather than as plain text.
@@ -3014,7 +3014,7 @@ describe("StatsPage", () => {
     fireEvent.click(screen.getByTestId("stats-export-pie"));
 
     expect(createSpy).toHaveBeenCalled();
-    const blob = createSpy.mock.calls[0][0] as Blob;
+    const blob = createSpy.mock.calls[0]![0] as Blob;
     expect(blob).toBeInstanceOf(Blob);
     // MIME pinned to image/svg+xml (`downloadSvg` in svgShare.ts) so the
     // browser opens the file in its SVG viewer rather than as plain text.
@@ -3085,7 +3085,7 @@ describe("StatsPage", () => {
     );
     renderPage();
     const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
-    const dayLower = dayLabels[dowOf(ts)].toLowerCase();
+    const dayLower = dayLabels[dowOf(ts)]!.toLowerCase();
     const cell = screen.getByTestId(`stats-cat-heatmap-solitaire-${dayLower}`);
     // Exact tooltip format: "<cat> · <day>: <count>" (note the U+00B7 middle
     // dot, NOT a hyphen and NOT just a colon).
