@@ -91,7 +91,7 @@ describe("LobbyPage — .lobby-chips tablist has no onkeyup attribute (W3125)", 
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onkeyup attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
