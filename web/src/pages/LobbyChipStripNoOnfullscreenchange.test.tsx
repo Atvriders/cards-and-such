@@ -76,7 +76,7 @@ describe("LobbyPage — .lobby-chips tablist has no onfullscreenchange attribute
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onfullscreenchange attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
