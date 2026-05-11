@@ -73,7 +73,7 @@ describe("LobbyPage — .lobby-chips tablist has no ondragstart attribute (W3186
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ondragstart attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
