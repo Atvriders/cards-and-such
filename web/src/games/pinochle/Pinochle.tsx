@@ -1,7 +1,9 @@
 import { useEffect } from "react";
+import type { Card as CardType } from "../../engines/deck/index.js";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { PinochleState, PinochleSettings } from "./state.js";
-import { legalPlays, isTerminal, computeMelds } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import { Card } from "../../engines/deck/Card.js";
 import { rankLabel } from "../../engines/deck/index.js";
 import "./Pinochle.css";
@@ -15,23 +17,30 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
     if (terminal) onGameOver(terminal.score);
   }, [terminal, onGameOver]);
 
-  const { hands, currentTrick, turn, trumpSuit, tricksTaken, tricksPlayed, phase, finalScores, meldsByTeam } = state;
+  const { hands, trick, turn, trump, tricksWon, phase, score } = state;
+  const currentTrick = trick ?? [];
+  const tricksTaken = tricksWon ?? [0, 0];
+  const tricksPlayed = (tricksTaken[0] ?? 0) + (tricksTaken[1] ?? 0);
+  const trumpSuit = trump ?? "♠";
+  const finalScores = score ?? [0, 0];
+  const meldsByTeam: readonly number[] = [0, 0];
+  const myMelds: readonly { name: string; value: number }[] = [];
   const done = phase === "done";
 
-  const legalIds = new Set(
-    (!done && turn === 0) ? legalPlays(state, 0).map(c => c.id) : []
-  );
+  const playerHand = hands[0] ?? [];
+
+  const legal: readonly CardType[] = (!done && turn === 0) ? legalPlays(playerHand, currentTrick) : [];
+  const legalIds = new Set(legal.map((c: CardType) => c.id));
 
   const seatName = (s: number) => s === 0 ? "You" : `Bot ${s}`;
-  const myMelds = computeMelds(hands[0]!, trumpSuit);
 
   let statusLine = "";
   if (done) statusLine = "Hand complete!";
   else if (turn === 0) statusLine = currentTrick.length === 0 ? `Your lead (trump: ${trumpSuit})` : "Your turn";
   else statusLine = `Waiting on ${seatName(turn)}…`;
 
-  const team0Tricks = tricksTaken[0]! + tricksTaken[2]!;
-  const team1Tricks = tricksTaken[1]! + tricksTaken[3]!;
+  const team0Tricks = (tricksTaken[0] ?? 0) + (tricksTaken[2] ?? 0);
+  const team1Tricks = (tricksTaken[1] ?? 0) + (tricksTaken[3] ?? 0);
 
   return (
     <div className="pinochle">
@@ -45,7 +54,7 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
         <div className="pinochle-melds">
           <h4>Your Melds (in hand)</h4>
           <div className="pinochle-meld-list">
-            {myMelds.map((m, i) => (
+            {myMelds.map((m: { name: string; value: number }, i: number) => (
               <span key={i} className="pinochle-meld-item">{m.name}: +{m.value}</span>
             ))}
           </div>
@@ -57,11 +66,11 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
           <div key={s} className={`pinochle-seat${turn === s && !done ? " active" : ""}`}>
             <div className="pinochle-seat-label">{seatName(s)}</div>
             <div className="pinochle-card-backs">
-              {Array.from({ length: hands[s]!.length }).map((_, i) => (
+              {Array.from({ length: (hands[s] ?? []).length }).map((_, i) => (
                 <div key={i} className="pinochle-card-back" />
               ))}
             </div>
-            <div className="pinochle-tricks-badge">{tricksTaken[s]} tricks</div>
+            <div className="pinochle-tricks-badge">{tricksTaken[s] ?? 0} tricks</div>
           </div>
         ))}
       </div>
@@ -74,7 +83,7 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
           {currentTrick.length === 0 ? (
             <span style={{ opacity: 0.4, fontSize: "0.85rem" }}>—</span>
           ) : (
-            currentTrick.map(({ seat, card }) => (
+            currentTrick.map(({ seat, card }: { seat: number; card: CardType }) => (
               <div key={card.id} className="pinochle-trick-slot">
                 <div className="pinochle-trick-slot-label">{seatName(seat)}</div>
                 <Card card={card} />
@@ -88,19 +97,19 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
 
       <div className="pinochle-player-area">
         <div className="pinochle-player-label">
-          Your Hand ({hands[0]!.length} cards) — partner: Bot 2 — {tricksTaken[0]} tricks
+          Your Hand ({playerHand.length} cards) — partner: Bot 2 — {tricksTaken[0] ?? 0} tricks
         </div>
         <div className="pinochle-player-hand">
-          {hands[0]!
+          {playerHand
             .slice()
-            .sort((a, b) => {
-              const suitOrder = { "♠": 0, "♥": 1, "♦": 2, "♣": 3 };
+            .sort((a: CardType, b: CardType) => {
+              const suitOrder: Record<string, number> = { "♠": 0, "♥": 1, "♦": 2, "♣": 3 };
               const sd = (suitOrder[a.suit] ?? 0) - (suitOrder[b.suit] ?? 0);
               return sd !== 0 ? sd : a.rank - b.rank;
             })
-            .map(card => {
-              const legal = legalIds.has(card.id);
-              return legal ? (
+            .map((card: CardType) => {
+              const isLegal = legalIds.has(card.id);
+              return isLegal ? (
                 <Card
                   key={card.id}
                   card={card}
@@ -129,8 +138,8 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
             (counters: A=11, 10=10, K=4, Q=3, J=2, 9=0) + meld points
           </div>
           <div>
-            {finalScores[0]! > finalScores[1]! ? "Your team wins!" :
-             finalScores[0]! < finalScores[1]! ? "Opponent team wins." : "Tie!"}
+            {(finalScores[0] ?? 0) > (finalScores[1] ?? 0) ? "Your team wins!" :
+             (finalScores[0] ?? 0) < (finalScores[1] ?? 0) ? "Opponent team wins." : "Tie!"}
           </div>
         </div>
       )}
