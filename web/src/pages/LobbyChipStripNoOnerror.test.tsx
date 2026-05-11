@@ -96,7 +96,7 @@ describe("LobbyPage — .lobby-chips tablist has no onerror attribute (W3117)", 
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onerror attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
