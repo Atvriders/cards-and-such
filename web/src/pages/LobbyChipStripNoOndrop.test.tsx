@@ -74,7 +74,7 @@ describe("LobbyPage — .lobby-chips tablist has no ondrop attribute (W3201)", (
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ondrop attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
