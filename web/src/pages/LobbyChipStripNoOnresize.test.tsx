@@ -73,7 +73,7 @@ describe("LobbyPage — .lobby-chips tablist has no onresize attribute (W3141)",
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onresize attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
