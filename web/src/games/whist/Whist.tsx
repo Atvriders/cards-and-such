@@ -20,7 +20,7 @@ export function Whist({ state, dispatch, onGameOver }: GameProps<WhistState, Whi
   const { hands, trick, turn, trump, tricksWon, phase, score } = state;
   const currentTrick = trick ?? [];
   const trumpSuit = trump ?? "♠";
-  const tricksTaken = tricksWon ?? [0, 0, 0, 0];
+  const tricksTaken: readonly number[] = tricksWon ?? [0, 0, 0, 0];
   const tricksPlayed = (tricksTaken[0] ?? 0) + (tricksTaken[1] ?? 0) + (tricksTaken[2] ?? 0) + (tricksTaken[3] ?? 0);
   const finalScores = score ?? [0, 0];
   const done = phase === "done";

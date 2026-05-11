@@ -206,7 +206,7 @@ function applyMove(state: TabulaState, side: Side, from: number, pips: number): 
   const opp = oppPoints[t] || 0;
   if (BLOCK_ONLY && opp >= 1) return null;
   if (!BLOCK_ONLY && opp >= 2) return null;
-  myPoints[from] -= 1;
+  myPoints[from] = myPoints[from]! - 1;
   if (HIT_ENABLED && opp === 1) {
     oppPoints[t] = 0;
     if (side === "P") next.cBar += 1; else next.pBar += 1;

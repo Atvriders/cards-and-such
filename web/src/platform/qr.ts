@@ -93,8 +93,8 @@ function rsGenerator(degree: number): Uint8Array {
   for (let i = 0; i < degree; i++) {
     const next = new Uint8Array(poly.length + 1);
     for (let j = 0; j < poly.length; j++) {
-      next[j] ^= poly[j]!;
-      next[j + 1] ^= gfMul(poly[j]!, GF_EXP[i]!);
+      next[j] = next[j]! ^ poly[j]!;
+      next[j + 1] = next[j + 1]! ^ gfMul(poly[j]!, GF_EXP[i]!);
     }
     poly = next;
   }
@@ -111,7 +111,7 @@ function rsEncode(data: Uint8Array, numEc: number): Uint8Array {
     result[result.length - 1] = 0;
     if (factor !== 0) {
       for (let j = 0; j < gen.length - 1; j++) {
-        result[j] ^= gfMul(gen[j + 1]!, factor);
+        result[j] = result[j]! ^ gfMul(gen[j + 1]!, factor);
       }
     }
   }

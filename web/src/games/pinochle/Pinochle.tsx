@@ -19,7 +19,7 @@ export function Pinochle({ state, dispatch, onGameOver }: GameProps<PinochleStat
 
   const { hands, trick, turn, trump, tricksWon, phase, score } = state;
   const currentTrick = trick ?? [];
-  const tricksTaken = tricksWon ?? [0, 0];
+  const tricksTaken: readonly number[] = tricksWon ?? [0, 0];
   const tricksPlayed = (tricksTaken[0] ?? 0) + (tricksTaken[1] ?? 0);
   const trumpSuit = trump ?? "♠";
   const finalScores = score ?? [0, 0];
