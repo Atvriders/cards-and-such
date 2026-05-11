@@ -93,7 +93,7 @@ describe("LobbyPage — .lobby-chips tablist has no onmessage attribute (W3282)"
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onmessage attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
