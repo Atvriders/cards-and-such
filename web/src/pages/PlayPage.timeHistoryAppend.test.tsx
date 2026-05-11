@@ -124,7 +124,7 @@ describe("PlayPage time-history append grows array (W707)", () => {
     // The newly-appended tail entry must carry a finite, non-negative
     // numeric duration (the elapsed seconds since round start, captured
     // by `appendTimeHistory(plugin.id, elapsed, term.score)`).
-    const tail = parsed[parsed.length - 1];
+    const tail = parsed[parsed.length - 1]!;
     expect(typeof tail.time).toBe("number");
     expect(Number.isFinite(tail.time)).toBe(true);
     expect(tail.time).toBeGreaterThanOrEqual(0);
