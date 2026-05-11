@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { WhistState, WhistSettings } from "./state.js";
-import { legalPlays, isTerminal } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
+import type { Card as CardType } from "../../engines/deck/index.js";
 import { Card } from "../../engines/deck/Card.js";
 import { rankLabel } from "../../engines/deck/index.js";
 import "./Whist.css";
@@ -15,12 +17,18 @@ export function Whist({ state, dispatch, onGameOver }: GameProps<WhistState, Whi
     if (terminal) onGameOver(terminal.score);
   }, [terminal, onGameOver]);
 
-  const { hands, currentTrick, turn, trumpSuit, tricksTaken, tricksPlayed, phase, finalScores } = state;
+  const { hands, trick, turn, trump, tricksWon, phase, score } = state;
+  const currentTrick = trick ?? [];
+  const trumpSuit = trump ?? "♠";
+  const tricksTaken = tricksWon ?? [0, 0, 0, 0];
+  const tricksPlayed = (tricksTaken[0] ?? 0) + (tricksTaken[1] ?? 0) + (tricksTaken[2] ?? 0) + (tricksTaken[3] ?? 0);
+  const finalScores = score ?? [0, 0];
   const done = phase === "done";
+  const playerHand = hands[0] ?? [];
 
-  const legalIds = new Set(
-    (!done && turn === 0) ? legalPlays(state, 0).map(c => c.id) : []
-  );
+  const legal: readonly CardType[] =
+    !done && turn === 0 ? legalPlays(playerHand, currentTrick) : [];
+  const legalIds = new Set(legal.map((c: CardType) => c.id));
 
   const seatName = (s: number) => s === 0 ? "You" : `Bot ${s}`;
   const seatTeam = (s: number) => s % 2 === 0 ? "Your team" : "Opp team";
@@ -71,7 +79,7 @@ export function Whist({ state, dispatch, onGameOver }: GameProps<WhistState, Whi
           {currentTrick.length === 0 ? (
             <span style={{ opacity: 0.4, fontSize: "0.85rem" }}>—</span>
           ) : (
-            currentTrick.map(({ seat, card }) => (
+            currentTrick.map(({ seat, card }: { seat: number; card: CardType }) => (
               <div key={card.id} className="whist-trick-slot">
                 <div className="whist-trick-slot-label">{seatName(seat)}</div>
                 <Card card={card} />

@@ -1,73 +1,77 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ArrowSudokuState, ArrowSudokuSettings, ArrowSudokuAction } from "./state.js";
-import { isTerminal } from "./state.js";
+import { isTerminal, GRID_SIZE, MAX_DIGIT, BOX_ROWS, BOX_COLS } from "./state.js";
 import "./ArrowSudoku.css";
 
 export function ArrowSudoku({ state, dispatch, onGameOver }: GameProps<ArrowSudokuState, ArrowSudokuSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
-  const { puzzle, board, selected, won } = state;
-  const N = 6;
-
-  const headSet = new Set(puzzle.arrows.map(a => a.head));
-  const shaftSet = new Set(puzzle.arrows.flatMap(a => a.shaft));
-
-  // Conflict detection: find cells in same row/col with same value
-  const conflictSet = new Set<number>();
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; j++) {
-      for (let k = j + 1; k < N; k++) {
-        const idxJ = i * N + j;
-        const idxK = i * N + k;
-        if (board[idxJ] !== 0 && board[idxJ] === board[idxK]) {
-          conflictSet.add(idxJ);
-          conflictSet.add(idxK);
-        }
-        const ridxJ = j * N + i;
-        const ridxK = k * N + i;
-        if (board[ridxJ] !== 0 && board[ridxJ] === board[ridxK]) {
-          conflictSet.add(ridxJ);
-          conflictSet.add(ridxK);
-        }
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (state.selected === null) return;
+      const d = parseInt(e.key, 10);
+      if (!isNaN(d) && d >= 1 && d <= MAX_DIGIT) {
+        dispatch({ type: "enter", digit: d } satisfies ArrowSudokuAction);
+      } else if (e.key === "Backspace" || e.key === "Delete" || e.key === "0") {
+        dispatch({ type: "enter", digit: 0 } satisfies ArrowSudokuAction);
       }
-    }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [state.selected, dispatch]);
+
+  if (state.phase === "done") {
+    return (
+      <div className="arrow-sudoku">
+        <div className="arrow-sudoku-title">Arrow Sudoku</div>
+        <div className="arrow-sudoku-status win">
+          Done! {state.totalSolved} / {state.puzzles.length} solved — {state.score} pts
+        </div>
+      </div>
+    );
   }
 
+  const puzzle = state.puzzles[state.idx]!;
+  const errSet = new Set(state.errors);
+  const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
+
   return (
-    <div className="arrowarchery-sudoku">
-      <div className="arrowarchery-sudoku-title">Arrow Sudoku</div>
-      <div className={`arrowarchery-sudoku-status${won ? " win" : ""}`}>
-        {won
-          ? `Solved! Score: ${terminal?.score ?? 0}`
-          : `Moves: ${state.moves} — fill 1-6; circle digit = sum of arrowarchery`}
+    <div className="arrow-sudoku">
+      <div className="arrow-sudoku-title">Arrow Sudoku</div>
+      <div className={`arrow-sudoku-status${state.solved ? " win" : ""}`}>
+        {state.solved
+          ? `Solved! Score: ${state.score} — press Next`
+          : `Puzzle ${state.idx + 1} / ${state.puzzles.length} — Moves: ${state.movesMade} — Score: ${state.score}`}
       </div>
 
-      <div className="arrowarchery-sudoku-grid">
-        {Array.from({ length: N * N }, (_, idx) => {
-          const given = puzzle.givens[idx] !== 0;
-          const isHead = headSet.has(idx);
-          const isShaft = shaftSet.has(idx);
-          const isSelected = selected === idx;
-          const isConflict = conflictSet.has(idx);
-          const val = board[idx];
+      <div className="arrow-sudoku-grid">
+        {Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, idx) => {
+          const r = Math.floor(idx / GRID_SIZE);
+          const c = idx % GRID_SIZE;
+          const val = state.current[idx] ?? 0;
+          const given = puzzle.given[idx] !== 0;
+          const isSelected = state.selected === idx;
+          const isError = errSet.has(idx);
+          const rightThick = (c + 1) % BOX_COLS === 0 && c + 1 < GRID_SIZE;
+          const bottomThick = (r + 1) % BOX_ROWS === 0 && r + 1 < GRID_SIZE;
 
           const classes = [
             "as-cell",
             given ? "given" : "",
             isSelected ? "selected" : "",
-            isHead && !given ? "arrowarchery-head" : "",
-            isShaft && !given && !isHead ? "arrowarchery-shaft" : "",
-            isConflict ? "conflict" : "",
-            won ? "won-cell" : "",
+            isError ? "conflict" : "",
+            state.solved ? "won-cell" : "",
+            rightThick ? "rt" : "",
+            bottomThick ? "bt" : "",
           ].filter(Boolean).join(" ");
 
           return (
             <div
               key={idx}
               className={classes}
-              onClick={() => !won && !given && dispatch({ type: "selectCell", idx } satisfies ArrowSudokuAction)}
+              onClick={() => !state.solved && dispatch({ type: "select", index: idx } satisfies ArrowSudokuAction)}
             >
               {val !== 0 ? val : ""}
             </div>
@@ -75,20 +79,32 @@ export function ArrowSudoku({ state, dispatch, onGameOver }: GameProps<ArrowSudo
         })}
       </div>
 
-      <div className="arrowarchery-sudoku-numpad">
-        {[1, 2, 3, 4, 5, 6].map(d => (
+      <div className="arrow-sudoku-numpad">
+        {digits.map(d => (
           <button
             key={d}
-            onClick={() => dispatch({ type: "enterDigit", digit: d } satisfies ArrowSudokuAction)}
+            onClick={() => dispatch({ type: "enter", digit: d } satisfies ArrowSudokuAction)}
           >
             {d}
           </button>
         ))}
-        <button onClick={() => dispatch({ type: "clearCell" } satisfies ArrowSudokuAction)}>X</button>
+        <button
+          aria-label="Clear"
+          onClick={() => dispatch({ type: "enter", digit: 0 } satisfies ArrowSudokuAction)}
+        >
+          X
+        </button>
       </div>
 
-      <div className="arrowarchery-sudoku-btns">
-        <button onClick={() => dispatch({ type: "reset" } satisfies ArrowSudokuAction)}>Reset</button>
+      <div className="arrow-sudoku-btns">
+        <button onClick={() => dispatch({ type: "check" } satisfies ArrowSudokuAction)}>Check</button>
+        <button onClick={() => dispatch({ type: "hint" } satisfies ArrowSudokuAction)}>Hint</button>
+        <button
+          disabled={!state.solved}
+          onClick={() => dispatch({ type: "next" } satisfies ArrowSudokuAction)}
+        >
+          {state.idx + 1 >= state.puzzles.length ? "Finish" : "Next"}
+        </button>
       </div>
     </div>
   );
