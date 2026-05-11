@@ -332,7 +332,7 @@ describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
     const rows = within(nav).getAllByRole("tab");
     // Sanity: at least the canonical anchors plus a few categories.
     expect(rows.length).toBeGreaterThanOrEqual(4);
-    rows[0].focus();
+    rows[0]!.focus();
     expect(document.activeElement).toBe(rows[0]);
 
     fireEvent.keyDown(nav, { key: "ArrowDown" });
@@ -349,7 +349,7 @@ describe("LobbyPage — drawer (W227 / W295 / W355 / W374)", () => {
     renderAt("/");
     const nav = screen.getByRole("tablist", { name: /Filter by category \(drawer\)/i });
     const rows = within(nav).getAllByRole("tab");
-    rows[2].focus();
+    rows[2]!.focus();
     expect(document.activeElement).toBe(rows[2]);
 
     fireEvent.keyDown(nav, { key: "End" });
@@ -690,8 +690,8 @@ describe("LobbyPage — favorites drag-reorder (W397)", () => {
     expect(initial).toEqual(["fam-freecell", "fam-klondike", "fam-spider"]);
 
     const tiles = favTiles();
-    const source = tiles[2]; // fam-spider
-    const target = tiles[0]; // fam-freecell
+    const source = tiles[2]!; // fam-spider
+    const target = tiles[0]!; // fam-freecell
     // jsdom's DataTransfer is intentionally minimal — provide a tiny
     // stub so the dragstart handler's setData/effectAllowed calls
     // don't throw inside the try/catch, and the dragover/drop handlers
@@ -748,7 +748,7 @@ describe("LobbyPage — favorites drag-reorder (W397)", () => {
     expect(localStorage.getItem("cards-favorites-order")).toBeNull();
 
     const tiles = favTiles();
-    const self = tiles[1]; // fam-klondike — middle tile, arbitrary
+    const self = tiles[1]!; // fam-klondike — middle tile, arbitrary
     const dataTransfer = {
       effectAllowed: "",
       dropEffect: "",
@@ -786,8 +786,8 @@ describe("LobbyPage — favorites drag-reorder (W397)", () => {
     // Drag 1: spider onto freecell → [spider, freecell, klondike].
     {
       const tiles = favTiles();
-      const src = tiles[2]; // fam-spider
-      const dst = tiles[0]; // fam-freecell
+      const src = tiles[2]!; // fam-spider
+      const dst = tiles[0]!; // fam-freecell
       fireEvent.dragStart(src, { dataTransfer });
       fireEvent.dragOver(dst, { dataTransfer });
       fireEvent.drop(dst, { dataTransfer });
@@ -806,8 +806,8 @@ describe("LobbyPage — favorites drag-reorder (W397)", () => {
       expect(order).toEqual(["fam-spider", "fam-freecell", "fam-klondike"]);
     });
     const tiles2 = favTiles();
-    const src2 = tiles2[2]; // fam-klondike
-    const dst2 = tiles2[0]; // fam-spider
+    const src2 = tiles2[2]!; // fam-klondike
+    const dst2 = tiles2[0]!; // fam-spider
     fireEvent.dragStart(src2, { dataTransfer });
     fireEvent.dragOver(dst2, { dataTransfer });
     fireEvent.drop(dst2, { dataTransfer });
@@ -932,10 +932,10 @@ describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
       expect(gridTiles().length).toBeGreaterThanOrEqual(COLS * 2 + 1);
     });
     const tiles = gridTiles();
-    const grid = tiles[0].closest(".lobby-grid") as HTMLElement;
+    const grid = tiles[0]!.closest(".lobby-grid") as HTMLElement;
     expect(grid).not.toBeNull();
 
-    tiles[0].focus();
+    tiles[0]!.focus();
     expect(document.activeElement).toBe(tiles[0]);
 
     // ArrowRight → next column (idx 1).
@@ -955,9 +955,9 @@ describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
     expect(document.activeElement).toBe(tiles[0]);
 
     // Roving-tabindex contract: the focused tile is the only tab stop.
-    expect(tiles[0].tabIndex).toBe(0);
+    expect(tiles[0]!.tabIndex).toBe(0);
     for (let i = 1; i < tiles.length; i++) {
-      expect(tiles[i].tabIndex).toBe(-1);
+      expect(tiles[i]!.tabIndex).toBe(-1);
     }
   });
 
@@ -967,9 +967,9 @@ describe("LobbyPage — grid roving-tabindex 2D arrow nav (W545)", () => {
       expect(gridTiles().length).toBeGreaterThanOrEqual(COLS * (ROWS - 1));
     });
     const tiles = gridTiles();
-    const grid = tiles[0].closest(".lobby-grid") as HTMLElement;
+    const grid = tiles[0]!.closest(".lobby-grid") as HTMLElement;
 
-    tiles[0].focus();
+    tiles[0]!.focus();
     expect(document.activeElement).toBe(tiles[0]);
 
     // PageDown from row 0 → row 5 (idx 0 + 5*COLS).
@@ -3081,7 +3081,7 @@ describe("LobbyPage — grid End jumps focus to last tile (W747)", () => {
 
     // Land focus on the first tile (the default roving tab-stop) and
     // confirm the precondition before firing End.
-    tiles[0].focus();
+    tiles[0]!.focus();
     expect(document.activeElement).toBe(tiles[0]);
 
     // The keystroke under test — End must jump straight to the last
@@ -3091,8 +3091,8 @@ describe("LobbyPage — grid End jumps focus to last tile (W747)", () => {
     // Focus moved to the last tile, and the roving-tabindex contract
     // followed: only the now-focused tile is in the tab sequence.
     expect(document.activeElement).toBe(last);
-    expect(last.tabIndex).toBe(0);
-    expect(tiles[0].tabIndex).toBe(-1);
+    expect(last!.tabIndex).toBe(0);
+    expect(tiles[0]!.tabIndex).toBe(-1);
   });
 });
 
@@ -3654,8 +3654,8 @@ describe("LobbyPage — infinite-mode loaded-count caption (W800)", () => {
     const text = caption.textContent ?? "";
     const match = text.match(/^Loaded\s+([\d,]+)\s+of\s+([\d,]+)$/);
     expect(match).not.toBeNull();
-    const loaded = Number(match![1].replace(/,/g, ""));
-    const total = Number(match![2].replace(/,/g, ""));
+    const loaded = Number(match![1]!.replace(/,/g, ""));
+    const total = Number(match![2]!.replace(/,/g, ""));
     expect(loaded).toBe(80);
     expect(total).toBeGreaterThan(80);
     // Total must be locale-formatted with comma grouping once it
