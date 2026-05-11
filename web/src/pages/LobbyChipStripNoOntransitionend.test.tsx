@@ -73,7 +73,7 @@ describe("LobbyPage — .lobby-chips tablist has no ontransitionend attribute (W
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ontransitionend attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
