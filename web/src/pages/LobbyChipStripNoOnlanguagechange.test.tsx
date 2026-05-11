@@ -74,7 +74,7 @@ describe("LobbyPage — .lobby-chips tablist has no onlanguagechange attribute (
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onlanguagechange attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
