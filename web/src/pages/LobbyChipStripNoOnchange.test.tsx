@@ -80,7 +80,7 @@ describe("LobbyPage — .lobby-chips tablist has no onchange attribute (W3115)",
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onchange attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
