@@ -70,7 +70,7 @@ describe("LobbyPage — .lobby-chips tablist has no onkeydown attribute (W3123)"
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onkeydown attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
