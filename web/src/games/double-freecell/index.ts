@@ -39,4 +39,4 @@ Strategy: Locate all eight Aces early and clear a path to the foundations. Manag
     return null;
   },
   component: DoubleFreeCell,
-} as unknown as GamePlugin;
+};

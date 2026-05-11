@@ -26,5 +26,5 @@ Click Red or Black to place your bet. The next card is then flipped to reveal wh
 Use Settings to choose 8, 12, or 16 rounds. Final score is shown at the end. A lucky or skillful run of correct calls can rack up a high score!`,
   settings: cardPileBetSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardPileBetSettings),
-  reducer, isTerminal, hint: (state: CardPileBetState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component: CardPileBet,
+  reducer, isTerminal, hint: (state: CardPileBetState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal") ? { selector: ".bet-btn", pulses: 3 } : null), component: CardPileBet,
 };

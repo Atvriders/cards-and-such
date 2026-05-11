@@ -21,7 +21,7 @@ The target on screen highlights the ring your arrow just struck. Watch your scor
   initialState: (seed: number) => initialState(seed),
   reducer,
   isTerminal,
-  hint: (state) => {
+  hint: (state: DiceArcheryState) => {
     if ((state as any).gameOver) return null;
     return { selector: '[data-testid="hint-target-dice-archery-shoot"]', pulses: 3 };
   },

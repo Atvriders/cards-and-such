@@ -36,4 +36,4 @@ Questions span geography, science, math, history, sports, and pop culture. Every
   isTerminal,
   
   hint: (state: CashCabState): HintTarget | null => state.phase === "playing" ? { selector: '[data-testid="hint-target-cash-cab-answer-0"]', pulses: 3 } : null,component: CashCab,
-} as unknown as GamePlugin;
+};

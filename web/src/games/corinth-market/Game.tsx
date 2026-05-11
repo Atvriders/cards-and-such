@@ -28,7 +28,7 @@ export function CorinthMarketGame({ state, dispatch, onGameOver }: GameProps<Cor
           <button data-testid="hint-target-corinth-market-mark"
             key={i}
             className={`com-cell com-z${cellZone(i)}${filled ? " com-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as CorinthMarketAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

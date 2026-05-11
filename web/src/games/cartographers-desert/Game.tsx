@@ -28,7 +28,7 @@ export function CartographersDesertGame({ state, dispatch, onGameOver }: GamePro
           <button data-testid="hint-target-cartographers-desert-mark"
             key={i}
             className={`ctd-cell ctd-z${cellZone(i)}${filled ? " ctd-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as CartographersDesertAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

@@ -51,4 +51,4 @@ Tips: With two decks there are eight Aces to find — plan for both copies of ea
     return null;
   },
   component: DoubleKlondikeGame,
-} as unknown as GamePlugin;
+};

@@ -28,7 +28,7 @@ export function CartographersBaseGame({ state, dispatch, onGameOver }: GameProps
           <button data-testid="hint-target-cartographers-base-mark"
             key={i}
             className={`ctgb-cell ctgb-z${cellZone(i)}${filled ? " ctgb-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as CartographersBaseAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

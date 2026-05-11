@@ -28,7 +28,7 @@ export function CartographersHeroesGame({ state, dispatch, onGameOver }: GamePro
           <button data-testid="hint-target-cartographers-heroes-mark"
             key={i}
             className={`cth-cell cth-z${cellZone(i)}${filled ? " cth-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as CartographersHeroesAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

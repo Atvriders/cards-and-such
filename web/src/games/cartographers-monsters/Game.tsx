@@ -28,7 +28,7 @@ export function CartographersMonstersGame({ state, dispatch, onGameOver }: GameP
           <button data-testid="hint-target-cartographers-monsters-mark"
             key={i}
             className={`ctm-cell ctm-z${cellZone(i)}${filled ? " ctm-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as CartographersMonstersAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

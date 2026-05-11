@@ -48,14 +48,17 @@ export function CowboyDice({
       </div>
 
       <div className="cowboy-dice-row">
-        {state.dice.map((die, i) => (
-          <Die
-            key={i}
-            value={die.value}
-            kept={die.kept}
-            onClick={state.rollsUsed > 0 && state.rollsUsed < 3 ? () => dispatch({ type: "toggleKeep", index: i } as CowboyDiceAction) : undefined}
-          />
-        ))}
+        {state.dice.map((die, i) => {
+          const dieClick = state.rollsUsed > 0 && state.rollsUsed < 3 ? () => dispatch({ type: "toggleKeep", index: i } as CowboyDiceAction) : undefined;
+          return (
+            <Die
+              key={i}
+              value={die.value}
+              kept={die.kept}
+              {...(dieClick ? { onClick: dieClick } : {})}
+            />
+          );
+        })}
       </div>
 
       <div className="cowboy-controls">

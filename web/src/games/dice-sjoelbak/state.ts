@@ -48,7 +48,7 @@ export function reducer(state: DiceSjoelbakState, action: DiceSjoelbakAction): D
     const slot = (dice[0]! - 1) % 4;
     const count = dice[1]! >= 5 ? 3 : dice[1]! >= 3 ? 2 : 1;
     const slots = [...state.slots] as [number, number, number, number];
-    slots[slot] += count;
+    slots[slot] = slots[slot]! + count;
     extra.slots = slots;
     const setMin = Math.min(slots[0], slots[1], slots[2], slots[3]);
     pts = count * (slot + 1);

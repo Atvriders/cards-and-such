@@ -28,7 +28,7 @@ export function CartographersTundraGame({ state, dispatch, onGameOver }: GamePro
           <button data-testid="hint-target-cartographers-tundra-mark"
             key={i}
             className={`ctt-cell ctt-z${cellZone(i)}${filled ? " ctt-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as CartographersTundraAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

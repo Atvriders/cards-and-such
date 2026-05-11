@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CrodaItalianState, CrodaItalianAction, CrodaItalianSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const CrodaItalianGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CrodaItalianGame as unknown as React.ComponentType<unknown> })));

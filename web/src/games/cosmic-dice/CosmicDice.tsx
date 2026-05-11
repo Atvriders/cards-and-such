@@ -53,14 +53,17 @@ export function CosmicDice({
       </div>
 
       <div className="cosmic-dice-row">
-        {state.dice.map((die, i) => (
-          <Die
-            key={i}
-            value={die.value}
-            kept={die.kept}
-            onClick={state.rollsUsed > 0 && state.rollsUsed < 3 ? () => handleToggle(i) : undefined}
-          />
-        ))}
+        {state.dice.map((die, i) => {
+          const dieClick = state.rollsUsed > 0 && state.rollsUsed < 3 ? () => handleToggle(i) : undefined;
+          return (
+            <Die
+              key={i}
+              value={die.value}
+              kept={die.kept}
+              {...(dieClick ? { onClick: dieClick } : {})}
+            />
+          );
+        })}
       </div>
 
       <div className="cosmic-controls">

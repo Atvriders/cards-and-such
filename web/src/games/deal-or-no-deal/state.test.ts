@@ -52,7 +52,7 @@ describe("DealOrNoDeal reducer", () => {
   });
 
   it("completing a round triggers bank offer", () => {
-    let s = { ...initialState(1, s26), playerCaseId: 1, phase: "eliminating" as const, casesThisRound: 1 };
+    let s: ReturnType<typeof reducer> = { ...initialState(1, s26), playerCaseId: 1, phase: "eliminating" as const, casesThisRound: 1 };
     const targetId = s.cases.find(c => !c.eliminated && c.id !== 1)!.id;
     s = reducer(s, { type: "eliminate", caseId: targetId });
     expect(s.phase).toBe("bank_offer");
