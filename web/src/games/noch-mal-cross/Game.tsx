@@ -28,7 +28,7 @@ export function NochMalCrossGame({ state, dispatch, onGameOver }: GameProps<Noch
           <button data-testid="hint-target-noch-mal-cross-mark"
             key={i}
             className={`nmc-cell nmc-z${cellZone(i)}${filled ? " nmc-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as NochMalCrossAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

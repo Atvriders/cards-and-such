@@ -147,7 +147,7 @@ export function initialState(seed: number, _s: MiniXiangqiSettings): MiniXiangqi
 
 function applyMove(board: Cell[], from: number, to: number): Cell[] {
   const nb = board.slice();
-  nb[to] = nb[from];
+  nb[to] = nb[from]!;
   nb[from] = null;
   return nb;
 }

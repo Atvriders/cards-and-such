@@ -32,4 +32,4 @@ You can choose to play with 10, 15, or 20 items. A full 20-item game with perfec
   isTerminal,
   hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".pg-btn", pulses: 3 }; },
   component: PriceGuess,
-} as unknown as GamePlugin;
+};

@@ -90,7 +90,7 @@ export function PalaceGame({ state, dispatch, onGameOver }: GameProps<PalaceStat
               onClick={() => toggleCard(c.id)}
               aria-label={zone === "tableDown" ? "Face-down card" : `${c.suit}${rankLabel(c.rank)}`}
             >
-              <Card card={zone === "tableDown" ? undefined : c} faceDown={zone === "tableDown"} />
+              {zone === "tableDown" ? <Card faceDown={true} /> : <Card card={c} faceDown={false} />}
             </button>
           ))}
         </div>

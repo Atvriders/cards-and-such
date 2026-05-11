@@ -28,7 +28,7 @@ export function PointsSaladRollGame({ state, dispatch, onGameOver }: GameProps<P
           <button data-testid="hint-target-points-salad-roll-mark"
             key={i}
             className={`psr-cell psr-z${cellZone(i)}${filled ? " psr-on" : ""}`}
-            disabled={filled || state.phase !== "marking" || state.phase === "done"}
+            disabled={filled || state.phase !== "marking"}
             onClick={() => dispatch({ type: "mark", index: i } as PointsSaladRollAction)}
           >{filled ? state.cellValues[i] : ""}</button>
         ))}

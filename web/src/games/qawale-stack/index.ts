@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, HintTarget, SettingsOf } from "../../platform/game-plugin/types.js";
 import type { QawaleStackState, QawaleStackAction, QawaleStackSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const QawaleStackGame = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.QawaleStackGame as unknown as React.ComponentType<unknown> })));
