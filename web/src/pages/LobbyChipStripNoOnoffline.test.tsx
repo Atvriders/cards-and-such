@@ -87,7 +87,7 @@ describe("LobbyPage — .lobby-chips tablist has no onoffline attribute (W3288)"
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onoffline attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
