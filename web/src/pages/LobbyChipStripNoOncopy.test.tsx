@@ -89,7 +89,7 @@ describe("LobbyPage — .lobby-chips tablist has no oncopy attribute (W3159)", (
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an oncopy attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
