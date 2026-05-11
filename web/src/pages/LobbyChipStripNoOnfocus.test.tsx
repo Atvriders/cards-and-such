@@ -85,7 +85,7 @@ describe("LobbyPage — .lobby-chips tablist has no onfocus attribute (W3109)", 
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onfocus attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
