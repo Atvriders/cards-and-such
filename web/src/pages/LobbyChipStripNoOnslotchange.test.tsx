@@ -74,7 +74,7 @@ describe("LobbyPage — .lobby-chips tablist has no onslotchange attribute (W330
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onslotchange attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
