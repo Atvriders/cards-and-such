@@ -79,12 +79,12 @@ const GF_LOG = new Uint8Array(256);
     x <<= 1;
     if (x & 0x100) x ^= 0x11d;
   }
-  for (let i = 255; i < 512; i++) GF_EXP[i] = GF_EXP[i - 255];
+  for (let i = 255; i < 512; i++) GF_EXP[i] = GF_EXP[i - 255]!;
 })();
 
 function gfMul(a: number, b: number): number {
   if (a === 0 || b === 0) return 0;
-  return GF_EXP[GF_LOG[a] + GF_LOG[b]];
+  return GF_EXP[GF_LOG[a]! + GF_LOG[b]!]!;
 }
 
 /** Build the generator polynomial of degree `degree`. */
@@ -93,8 +93,8 @@ function rsGenerator(degree: number): Uint8Array {
   for (let i = 0; i < degree; i++) {
     const next = new Uint8Array(poly.length + 1);
     for (let j = 0; j < poly.length; j++) {
-      next[j] ^= poly[j];
-      next[j + 1] ^= gfMul(poly[j], GF_EXP[i]);
+      next[j] ^= poly[j]!;
+      next[j + 1] ^= gfMul(poly[j]!, GF_EXP[i]!);
     }
     poly = next;
   }
@@ -106,12 +106,12 @@ function rsEncode(data: Uint8Array, numEc: number): Uint8Array {
   const gen = rsGenerator(numEc);
   const result = new Uint8Array(numEc);
   for (let i = 0; i < data.length; i++) {
-    const factor = data[i] ^ result[0];
+    const factor = data[i]! ^ result[0]!;
     result.copyWithin(0, 1);
     result[result.length - 1] = 0;
     if (factor !== 0) {
       for (let j = 0; j < gen.length - 1; j++) {
-        result[j] ^= gfMul(gen[j + 1], factor);
+        result[j] ^= gfMul(gen[j + 1]!, factor);
       }
     }
   }
@@ -121,16 +121,16 @@ function rsEncode(data: Uint8Array, numEc: number): Uint8Array {
 /** Pick the smallest version 1..10 that fits `byteLen` in level M, or null. */
 function pickVersion(byteLen: number): number | null {
   for (let v = 1; v <= 10; v++) {
-    if (byteLen <= BYTE_CAPACITY_M[v - 1]) return v;
+    if (byteLen <= BYTE_CAPACITY_M[v - 1]!) return v;
   }
   return null;
 }
 
 /** Encode payload into the bit stream (mode + length + data + terminator + pad). */
 function encodeData(bytes: Uint8Array, version: number): Uint8Array {
-  const totalCw = TOTAL_CODEWORDS[version - 1];
-  const ecCw = EC_CODEWORDS_M[version - 1] *
-    BLOCK_LAYOUT_M[version - 1].reduce((s, [n]) => s + n, 0);
+  const totalCw = TOTAL_CODEWORDS[version - 1]!;
+  const ecCw = EC_CODEWORDS_M[version - 1]! *
+    BLOCK_LAYOUT_M[version - 1]!.reduce((s, [n]) => s + n, 0);
   const dataCw = totalCw - ecCw;
   const totalBits = dataCw * 8;
 
@@ -154,14 +154,14 @@ function encodeData(bytes: Uint8Array, version: number): Uint8Array {
   const padBytes = [0xec, 0x11];
   let padIdx = 0;
   while (bits.length < totalBits) {
-    pushBits(padBytes[padIdx], 8);
+    pushBits(padBytes[padIdx]!, 8);
     padIdx ^= 1;
   }
 
   const out = new Uint8Array(dataCw);
   for (let i = 0; i < dataCw; i++) {
     let v = 0;
-    for (let j = 0; j < 8; j++) v = (v << 1) | bits[i * 8 + j];
+    for (let j = 0; j < 8; j++) v = (v << 1) | bits[i * 8 + j]!;
     out[i] = v;
   }
   return out;
@@ -169,8 +169,8 @@ function encodeData(bytes: Uint8Array, version: number): Uint8Array {
 
 /** Split data codewords into blocks per the layout, then compute EC and interleave. */
 function buildFinalCodewords(data: Uint8Array, version: number): Uint8Array {
-  const layout = BLOCK_LAYOUT_M[version - 1];
-  const ecPerBlock = EC_CODEWORDS_M[version - 1];
+  const layout = BLOCK_LAYOUT_M[version - 1]!;
+  const ecPerBlock = EC_CODEWORDS_M[version - 1]!;
 
   const dataBlocks: Uint8Array[] = [];
   const ecBlocks: Uint8Array[] = [];
@@ -189,11 +189,11 @@ function buildFinalCodewords(data: Uint8Array, version: number): Uint8Array {
   const interleaved: number[] = [];
   for (let col = 0; col < maxDataLen; col++) {
     for (const block of dataBlocks) {
-      if (col < block.length) interleaved.push(block[col]);
+      if (col < block.length) interleaved.push(block[col]!);
     }
   }
   for (let col = 0; col < ecPerBlock; col++) {
-    for (const block of ecBlocks) interleaved.push(block[col]);
+    for (const block of ecBlocks) interleaved.push(block[col]!);
   }
   return new Uint8Array(interleaved);
 }
@@ -225,8 +225,8 @@ function placeFinder(
         const inCenter = dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4;
         dark = onEdge || inCenter;
       }
-      m[rr][cc] = dark;
-      r[rr][cc] = true;
+      m[rr]![cc] = dark;
+      r[rr]![cc] = true;
     }
   }
 }
@@ -236,8 +236,8 @@ function placeAlignment(m: (boolean | null)[][], r: boolean[][], row: number, co
     for (let dc = -2; dc <= 2; dc++) {
       const onEdge = Math.abs(dr) === 2 || Math.abs(dc) === 2;
       const center = dr === 0 && dc === 0;
-      m[row + dr][col + dc] = onEdge || center;
-      r[row + dr][col + dc] = true;
+      m[row + dr]![col + dc] = onEdge || center;
+      r[row + dr]![col + dc] = true;
     }
   }
 }
@@ -246,23 +246,23 @@ function placeTiming(m: (boolean | null)[][], r: boolean[][]) {
   const size = m.length;
   for (let i = 8; i < size - 8; i++) {
     const dark = i % 2 === 0;
-    m[6][i] = dark; r[6][i] = true;
-    m[i][6] = dark; r[i][6] = true;
+    m[6]![i] = dark; r[6]![i] = true;
+    m[i]![6] = dark; r[i]![6] = true;
   }
 }
 
 function reserveFormat(m: (boolean | null)[][], r: boolean[][]) {
   const size = m.length;
   for (let i = 0; i < 9; i++) {
-    if (!r[8][i]) { r[8][i] = true; m[8][i] = false; }
-    if (!r[i][8]) { r[i][8] = true; m[i][8] = false; }
+    if (!r[8]![i]) { r[8]![i] = true; m[8]![i] = false; }
+    if (!r[i]![8]) { r[i]![8] = true; m[i]![8] = false; }
   }
   for (let i = 0; i < 8; i++) {
-    r[8][size - 1 - i] = true; m[8][size - 1 - i] = false;
-    r[size - 1 - i][8] = true; m[size - 1 - i][8] = false;
+    r[8]![size - 1 - i] = true; m[8]![size - 1 - i] = false;
+    r[size - 1 - i]![8] = true; m[size - 1 - i]![8] = false;
   }
   // The "dark module" — always set.
-  m[size - 8][8] = true; r[size - 8][8] = true;
+  m[size - 8]![8] = true; r[size - 8]![8] = true;
 }
 
 function fillData(
@@ -279,12 +279,12 @@ function fillData(
       const row = upward ? size - 1 - i : i;
       for (let dx = 0; dx < 2; dx++) {
         const c = col - dx;
-        if (r[row][c]) continue;
+        if (r[row]![c]) continue;
         let bit = 0;
         if (bitIdx >> 3 < codewords.length) {
-          bit = (codewords[bitIdx >> 3] >> (7 - (bitIdx & 7))) & 1;
+          bit = (codewords[bitIdx >> 3]! >> (7 - (bitIdx & 7))) & 1;
         }
-        m[row][c] = bit === 1;
+        m[row]![c] = bit === 1;
         bitIdx++;
       }
     }
@@ -316,8 +316,8 @@ function applyMask(
   for (let r = 0; r < size; r++) {
     const row: boolean[] = new Array(size);
     for (let c = 0; c < size; c++) {
-      let bit = base[r][c];
-      if (!reserved[r][c] && maskBit(mask, r, c)) bit = !bit;
+      let bit = base[r]![c]!;
+      if (!reserved[r]![c] && maskBit(mask, r, c)) bit = !bit;
       row[c] = bit;
     }
     out.push(row);
@@ -333,14 +333,14 @@ function placeFormatInfo(grid: boolean[][], mask: number) {
     rem = (rem << 1) ^ ((rem >> 9) * 0x537);
   }
   const bits = ((data << 10) | rem) ^ 0x5412;
-  for (let i = 0; i <= 5; i++) grid[8][i] = ((bits >> i) & 1) === 1;
-  grid[8][7] = ((bits >> 6) & 1) === 1;
-  grid[8][8] = ((bits >> 7) & 1) === 1;
-  grid[7][8] = ((bits >> 8) & 1) === 1;
-  for (let i = 9; i < 15; i++) grid[14 - i][8] = ((bits >> i) & 1) === 1;
-  for (let i = 0; i < 8; i++) grid[size - 1 - i][8] = ((bits >> i) & 1) === 1;
-  for (let i = 8; i < 15; i++) grid[8][size - 15 + i] = ((bits >> i) & 1) === 1;
-  grid[size - 8][8] = true; // dark module
+  for (let i = 0; i <= 5; i++) grid[8]![i] = ((bits >> i) & 1) === 1;
+  grid[8]![7] = ((bits >> 6) & 1) === 1;
+  grid[8]![8] = ((bits >> 7) & 1) === 1;
+  grid[7]![8] = ((bits >> 8) & 1) === 1;
+  for (let i = 9; i < 15; i++) grid[14 - i]![8] = ((bits >> i) & 1) === 1;
+  for (let i = 0; i < 8; i++) grid[size - 1 - i]![8] = ((bits >> i) & 1) === 1;
+  for (let i = 8; i < 15; i++) grid[8]![size - 15 + i] = ((bits >> i) & 1) === 1;
+  grid[size - 8]![8] = true; // dark module
 }
 
 function evaluatePenalty(grid: boolean[][]): number {
@@ -350,7 +350,7 @@ function evaluatePenalty(grid: boolean[][]): number {
   for (let r = 0; r < size; r++) {
     let run = 1;
     for (let c = 1; c < size; c++) {
-      if (grid[r][c] === grid[r][c - 1]) {
+      if (grid[r]![c] === grid[r]![c - 1]) {
         run++;
       } else {
         if (run >= 5) p += 3 + (run - 5);
@@ -362,7 +362,7 @@ function evaluatePenalty(grid: boolean[][]): number {
   for (let c = 0; c < size; c++) {
     let run = 1;
     for (let r = 1; r < size; r++) {
-      if (grid[r][c] === grid[r - 1][c]) {
+      if (grid[r]![c] === grid[r - 1]![c]) {
         run++;
       } else {
         if (run >= 5) p += 3 + (run - 5);
@@ -374,8 +374,8 @@ function evaluatePenalty(grid: boolean[][]): number {
   // Rule 2: 2x2 blocks
   for (let r = 0; r < size - 1; r++) {
     for (let c = 0; c < size - 1; c++) {
-      const v = grid[r][c];
-      if (v === grid[r][c + 1] && v === grid[r + 1][c] && v === grid[r + 1][c + 1]) p += 3;
+      const v = grid[r]![c];
+      if (v === grid[r]![c + 1] && v === grid[r + 1]![c] && v === grid[r + 1]![c + 1]) p += 3;
     }
   }
   // Rule 3: finder-like patterns 1:1:3:1:1
@@ -387,19 +387,19 @@ function evaluatePenalty(grid: boolean[][]): number {
   };
   for (let r = 0; r < size; r++) {
     for (let c = 0; c <= size - 11; c++) {
-      if (matches(grid[r], c, pat) || matches(grid[r], c, patRev)) p += 40;
+      if (matches(grid[r]!, c, pat) || matches(grid[r]!, c, patRev)) p += 40;
     }
   }
   for (let c = 0; c < size; c++) {
     const col: boolean[] = new Array(size);
-    for (let r = 0; r < size; r++) col[r] = grid[r][c];
+    for (let r = 0; r < size; r++) col[r] = grid[r]![c]!;
     for (let r = 0; r <= size - 11; r++) {
       if (matches(col, r, pat) || matches(col, r, patRev)) p += 40;
     }
   }
   // Rule 4: balance of dark modules
   let dark = 0;
-  for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (grid[r][c]) dark++;
+  for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (grid[r]![c]) dark++;
   const ratio = dark / (size * size);
   const dev = Math.floor(Math.abs(ratio * 100 - 50) / 5);
   p += dev * 10;
@@ -426,9 +426,9 @@ export function encodeQrModules(text: string): QrModules | null {
   placeFinder(m, r, 0, 0);
   placeFinder(m, r, 0, size - 7);
   placeFinder(m, r, size - 7, 0);
-  for (const ar of ALIGNMENT_CENTERS[version - 1]) {
-    for (const ac of ALIGNMENT_CENTERS[version - 1]) {
-      if (r[ar][ac]) continue; // skip if overlaps finder
+  for (const ar of ALIGNMENT_CENTERS[version - 1]!) {
+    for (const ac of ALIGNMENT_CENTERS[version - 1]!) {
+      if (r[ar]![ac]) continue; // skip if overlaps finder
       placeAlignment(m, r, ar, ac);
     }
   }
@@ -469,7 +469,7 @@ export function renderQrSvg(
   let path = "";
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
-      if (!grid[r][c]) continue;
+      if (!grid[r]![c]) continue;
       const x = (c + margin) * pixelSize;
       const y = (r + margin) * pixelSize;
       path += `M${x} ${y}h${pixelSize}v${pixelSize}h-${pixelSize}z`;
