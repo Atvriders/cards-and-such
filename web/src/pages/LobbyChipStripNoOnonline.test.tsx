@@ -82,7 +82,7 @@ describe("LobbyPage — .lobby-chips tablist has no ononline attribute (W3291)",
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an ononline attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
