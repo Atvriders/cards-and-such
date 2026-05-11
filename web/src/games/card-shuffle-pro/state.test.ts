@@ -70,7 +70,7 @@ describe("CardShufflePro reducer", () => {
     expect(s.revealed).toBe(true);
     expect(s.score).toBe(1);
     expect(s.history).toHaveLength(1);
-    expect(s.history[0].correct).toBe(true);
+    expect(s.history[0]!.correct).toBe(true);
   });
 
   it("guess does not score on wrong", () => {
@@ -79,7 +79,7 @@ describe("CardShufflePro reducer", () => {
     const wrong = truth === "red" ? "black" : "red";
     s = reducer(s, { type: "guess", color: wrong });
     expect(s.score).toBe(0);
-    expect(s.history[0].correct).toBe(false);
+    expect(s.history[0]!.correct).toBe(false);
   });
 
   it("next deals a new round and finishes after 12", () => {

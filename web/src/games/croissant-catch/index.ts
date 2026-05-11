@@ -23,7 +23,7 @@ Ne les manquez pas — don't miss them! Tap fast for a flaky-fresh top score.`,
   reducer,isTerminal,
   hint: (state: CroissantCatchState): HintTarget | null => {
     if (state.phase === "done") return null;
-    if (!state.targets || state.targets.length === 0) return null;
+    if (!state.items || state.items.length === 0) return null;
     return { selector: '[data-testid="hint-target-croissant-catch-target"]', pulses: 3 };
   },
   component:CroissantCatchGame,

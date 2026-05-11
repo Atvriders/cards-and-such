@@ -30,7 +30,7 @@ Tips: There is no guaranteed strategy since the deck is randomly shuffled, but t
   reducer,
   isTerminal,
   hint: (state: CardColorStreakState) => {
-    if (state.phase === "done" || state.phase === "reveal") return null;
+    if (state.phase === "gameover") return null;
     return { selector: ".ccs-btn", pulses: 3 };
   },
   component: CardColorStreak,

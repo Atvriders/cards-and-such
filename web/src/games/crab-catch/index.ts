@@ -23,7 +23,7 @@ Pinch those clicks and rack up those crabby points!`,
   reducer,isTerminal,
   hint: (state: CrabCatchState): HintTarget | null => {
     if (state.phase === "done") return null;
-    if (!state.targets || state.targets.length === 0) return null;
+    if (!state.critters || state.critters.length === 0) return null;
     return { selector: '[data-testid="hint-target-crab-catch-target"]', pulses: 3 };
   },
   component:CrabCatchGame,

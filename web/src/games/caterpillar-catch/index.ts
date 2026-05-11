@@ -17,7 +17,7 @@ export const caterpillarCatchPlugin: GamePlugin<CaterpillarCatchState, Caterpill
   reducer,isTerminal,
   hint: (state: CaterpillarCatchState): HintTarget | null => {
     if (state.phase === "done") return null;
-    if (!state.targets || state.targets.length === 0) return null;
+    if (!state.bugs || state.bugs.length === 0) return null;
     return { selector: '[data-testid="hint-target-caterpillar-catch-target"]', pulses: 3 };
   },
   component:CaterpillarCatchGame,

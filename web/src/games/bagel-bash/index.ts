@@ -23,7 +23,7 @@ Get bashing before those bagels roll past you!`,
   reducer,isTerminal,
   hint: (state: BagelBashState): HintTarget | null => {
     if (state.phase === "done") return null;
-    if (!state.targets || state.targets.length === 0) return null;
+    if (!state.items || state.items.length === 0) return null;
     return { selector: '[data-testid="hint-target-bagel-bash-target"]', pulses: 3 };
   },
   component:BagelBashGame,

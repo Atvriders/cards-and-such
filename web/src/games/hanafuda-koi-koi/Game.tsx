@@ -46,16 +46,17 @@ export function HanafudaKoiKoiGame({ state, dispatch, onGameOver }: GameProps<Ha
           {state.field.map(id => {
             const isMatch = state.phase === "select" && state.matches.includes(id);
             const isDrawnMatch = state.phase === "drawn" && state.drawnMatches.includes(id);
+            const onClick = isMatch
+              ? () => dispatch({ type: "matchHand", fieldId: id } as HanafudaKoiKoiAction)
+              : isDrawnMatch
+              ? () => dispatch({ type: "matchDraw", fieldId: id } as HanafudaKoiKoiAction)
+              : undefined;
             return (
               <CardChip
                 key={id}
                 id={id}
                 highlighted={isMatch || isDrawnMatch}
-                onClick={
-                  isMatch ? () => dispatch({ type: "matchHand", fieldId: id } as HanafudaKoiKoiAction)
-                  : isDrawnMatch ? () => dispatch({ type: "matchDraw", fieldId: id } as HanafudaKoiKoiAction)
-                  : undefined
-                }
+                {...(onClick ? { onClick } : {})}
               />
             );
           })}
@@ -75,14 +76,19 @@ export function HanafudaKoiKoiGame({ state, dispatch, onGameOver }: GameProps<Ha
       <div className="hkk-section">
         <div className="hkk-label">Your Hand</div>
         <div className="hkk-row">
-          {state.hand.map(id => (
-            <CardChip
-              key={id}
-              id={id}
-              selected={state.selected === id}
-              onClick={state.phase === "select" ? () => dispatch({ type: "select", cardId: id } as HanafudaKoiKoiAction) : undefined}
-            />
-          ))}
+          {state.hand.map(id => {
+            const onClick = state.phase === "select"
+              ? () => dispatch({ type: "select", cardId: id } as HanafudaKoiKoiAction)
+              : undefined;
+            return (
+              <CardChip
+                key={id}
+                id={id}
+                selected={state.selected === id}
+                {...(onClick ? { onClick } : {})}
+              />
+            );
+          })}
         </div>
         {state.phase === "select" && state.selected !== null && state.matches.length === 0 && (
           <button className="hkk-btn" onClick={() => dispatch({ type: "discardHand" } as HanafudaKoiKoiAction)}>Discard to Field</button>

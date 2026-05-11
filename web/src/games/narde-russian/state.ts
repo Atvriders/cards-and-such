@@ -199,14 +199,14 @@ function applyMove(state: NardeState, side: Side, from: number, pips: number): N
   if (t < 0 || t >= POINTS) {
     // bear off
     if (!allInHome(myPoints, side)) return null;
-    myPoints[from] -= 1;
+    myPoints[from] = myPoints[from]! - 1;
     if (side === "P") next.pBorne += 1; else next.cBorne += 1;
     return next;
   }
   const opp = oppPoints[t] || 0;
   if (BLOCK_ONLY && opp >= 1) return null;
   if (!BLOCK_ONLY && opp >= 2) return null;
-  myPoints[from] -= 1;
+  myPoints[from] = myPoints[from]! - 1;
   if (HIT_ENABLED && opp === 1) {
     oppPoints[t] = 0;
     if (side === "P") next.cBar += 1; else next.pBar += 1;

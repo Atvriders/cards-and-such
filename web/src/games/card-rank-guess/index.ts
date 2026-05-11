@@ -28,5 +28,5 @@ After each reveal, the card is shown and your points are awarded. Press Next to 
 Use Settings to choose 5, 10, or 15 rounds. Final score is tallied at the end. Can you guess all 15 ranks perfectly?`,
   settings: cardRankGuessSettings,
   initialState: (seed: number, s: S) => initialState(seed, s as CardRankGuessSettings),
-  reducer, isTerminal, hint: (state: CardRankGuessState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component: CardRankGuess,
+  reducer, isTerminal, hint: (state: CardRankGuessState): HintTarget | null => (state.phase === "result" ? { selector: ".bet-btn", pulses: 3 } : null), component: CardRankGuess,
 };

@@ -23,7 +23,7 @@ Cucumbers are 96% water, full of vitamins K and C, and surprisingly delicious. T
   reducer,isTerminal,
   hint: (state: CucumberCatchState): HintTarget | null => {
     if (state.phase === "done") return null;
-    if (!state.targets || state.targets.length === 0) return null;
+    if (!state.cucumbers || state.cucumbers.length === 0) return null;
     return { selector: '[data-testid="hint-target-cucumber-catch-target"]', pulses: 3 };
   },
   component:CucumberCatchGame,

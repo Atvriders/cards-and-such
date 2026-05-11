@@ -20,5 +20,5 @@ There is no trick to it — it is pure probability and intuition. Suits are even
 Use Settings to play 10 or 20 rounds. Cards are drawn from a shuffled deck, and each card is revealed after your guess whether you are right or wrong. It is a fast, satisfying mini-game that tests your luck. How many suits can you guess correctly?`,
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as CardSuitGuessSettings),
-  reducer, isTerminal, hint: (state: CardSuitGuessState): HintTarget | null => ((state.phase === "betting" || state.phase === "reveal" || state.phase === "result") ? { selector: ".bet-btn", pulses: 3 } : null), component:CardSuitGuess,
+  reducer, isTerminal, hint: (state: CardSuitGuessState): HintTarget | null => (state.phase === "reveal" ? { selector: ".bet-btn", pulses: 3 } : null), component:CardSuitGuess,
 };
