@@ -77,7 +77,7 @@ describe("LobbyPage — .lobby-chips tablist has no onbeforetoggle attribute (W3
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onbeforetoggle attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
