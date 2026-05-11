@@ -163,7 +163,7 @@ describe("LeaderboardPage tabs", () => {
     );
 
     // jsdom doesn't implement createObjectURL — install a stub spy.
-    const createSpy = vi.fn(() => "blob:fake-url");
+    const createSpy = vi.fn((..._args: unknown[]) => "blob:fake-url");
     const revokeSpy = vi.fn();
     const origCreate = URL.createObjectURL;
     const origRevoke = URL.revokeObjectURL;
@@ -185,7 +185,7 @@ describe("LeaderboardPage tabs", () => {
 
       expect(createSpy).toHaveBeenCalledTimes(1);
       // Sanity: it was invoked with a Blob (not just any value).
-      const arg = createSpy.mock.calls[0][0] as Blob;
+      const arg = createSpy.mock.calls[0]![0] as Blob;
       expect(arg).toBeInstanceOf(Blob);
 
       // downloadSvg defers revokeObjectURL via setTimeout(0); flush it

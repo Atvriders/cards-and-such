@@ -180,6 +180,7 @@ describe("Klondike isTerminal", () => {
       movesMade: 100,
       won: true,
       settings: defaultSettings,
+      history: [],
     };
 
     const result = isTerminal(wonState);
@@ -211,6 +212,7 @@ describe("Klondike isTerminal", () => {
       movesMade: 50,
       won: false,
       settings: defaultSettings,
+      history: [],
     };
     expect(isTerminal(partialState)).toBeNull();
   });
@@ -253,6 +255,7 @@ describe("Klondike scoring", () => {
       movesMade: 75,
       won: true,
       settings: defaultSettings,
+      history: [],
     };
     expect(isTerminal(wonState)?.score).toBe(750);
   });

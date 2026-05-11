@@ -53,14 +53,14 @@ export function shuffle(deck: Card[], seed: number, counter: number): Card[] {
   const arr = deck.slice();
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
   }
   return arr;
 }
 
 function dealRound(seed: number, counter: number): { hand: Card[]; next: Card } {
   const shuffled = shuffle(buildDeck(), seed, counter);
-  return { hand: shuffled.slice(0, HAND_SIZE), next: shuffled[HAND_SIZE] };
+  return { hand: shuffled.slice(0, HAND_SIZE), next: shuffled[HAND_SIZE]! };
 }
 
 export function initialState(seed: number, settings: CardShuffleProSettings): CardShuffleProState {

@@ -161,9 +161,9 @@ describe("PlayPage replay save persists (W392)", () => {
     expect(parsed.length).toBe(1);
 
     const entry = parsed[0];
-    expect(entry.gameId).toBe(hoisted.TEST_GAME_ID);
-    expect(typeof entry.seed).toBe("number");
-    expect(Array.isArray(entry.actions)).toBe(true);
+    expect(entry!.gameId).toBe(hoisted.TEST_GAME_ID);
+    expect(typeof entry!.seed).toBe("number");
+    expect(Array.isArray(entry!.actions)).toBe(true);
   });
 });
 

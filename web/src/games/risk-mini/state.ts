@@ -319,7 +319,7 @@ export function reducer(state: RiskState, action: RiskActionAll): RiskState {
       const borders = cpuOwned.filter(x => ADJ[x.i]!.some(n => owner[n] === "p"));
       const pool = borders.length > 0 ? borders : cpuOwned;
       pool.sort((a, b) => a.a - b.a);
-      armies[pool[0]!.i] += 1;
+      armies[pool[0]!.i] = armies[pool[0]!.i]! + 1;
       cpuReserve--;
     }
     log = pushLog(log, "CPU reinforces.");
@@ -348,8 +348,8 @@ export function reducer(state: RiskState, action: RiskActionAll): RiskState {
         for (let i = 0; i < Math.min(aDice.length, dDice.length); i++) {
           if (aDice[i]! > dDice[i]!) defLoss += 1; else attLoss += 1;
         }
-        armies[c.i] -= attLoss;
-        armies[tgt.i] -= defLoss;
+        armies[c.i] = armies[c.i]! - attLoss;
+        armies[tgt.i] = armies[tgt.i]! - defLoss;
         log = pushLog(log, `CPU ${TERRITORY_NAMES[c.i]}→${TERRITORY_NAMES[tgt.i]}: you −${defLoss}, CPU −${attLoss}`);
         if (armies[tgt.i]! <= 0) {
           const movers = Math.max(attCount, 1);

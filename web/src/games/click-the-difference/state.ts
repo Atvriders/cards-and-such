@@ -42,20 +42,20 @@ function buildRound(seed: number, counter: number): DiffRound {
   const total = GRID_SIZE * GRID_SIZE;
   const gridA: string[] = [];
   for (let i = 0; i < total; i++) {
-    gridA.push(POOL[Math.floor(rng() * POOL.length)]);
+    gridA.push(POOL[Math.floor(rng() * POOL.length)]!);
   }
   const diffIndex = Math.floor(rng() * total);
   // Choose a different emoji for the swap
-  let alt = POOL[Math.floor(rng() * POOL.length)];
+  let alt = POOL[Math.floor(rng() * POOL.length)]!;
   let guard = 0;
   while (alt === gridA[diffIndex] && guard < 20) {
-    alt = POOL[Math.floor(rng() * POOL.length)];
+    alt = POOL[Math.floor(rng() * POOL.length)]!;
     guard++;
   }
   if (alt === gridA[diffIndex]) {
     // Fallback: pick the next emoji in the pool
-    const cur = POOL.indexOf(gridA[diffIndex]);
-    alt = POOL[(cur + 1) % POOL.length];
+    const cur = POOL.indexOf(gridA[diffIndex]!);
+    alt = POOL[(cur + 1) % POOL.length]!;
   }
   const gridB = gridA.slice();
   gridB[diffIndex] = alt;
