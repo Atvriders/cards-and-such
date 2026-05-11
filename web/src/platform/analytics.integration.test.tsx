@@ -107,8 +107,8 @@ describe("analytics integration: app.boot", () => {
     track("app.boot", { href: "/" });
     const evts = getEvents();
     expect(evts.length).toBe(1);
-    expect(evts[0].name).toBe("app.boot");
-    expect(evts[0].props).toEqual({ href: "/" });
+    expect(evts[0]!.name).toBe("app.boot");
+    expect(evts[0]!.props).toEqual({ href: "/" });
   });
 });
 
@@ -142,14 +142,14 @@ describe("analytics integration: route.change", () => {
       </MemoryRouter>,
     );
     expect(eventNames()).toContain("route.change");
-    expect(getEvents()[0].props).toEqual({ path: "/" });
+    expect(getEvents()[0]!.props).toEqual({ path: "/" });
 
     // Navigate. The fade-out timer is opaque here — we just assert that
     // the second route.change is recorded synchronously by the effect.
     fireEvent.click(screen.getByTestId("to-about"));
     const aboutEvts = getEvents().filter((e) => e.name === "route.change");
     expect(aboutEvts.length).toBe(2);
-    expect(aboutEvts[1].props).toEqual({ path: "/about" });
+    expect(aboutEvts[1]!.props).toEqual({ path: "/about" });
   });
 });
 
@@ -167,7 +167,7 @@ describe("analytics integration: theme.change", () => {
     fireEvent.click(screen.getByTestId("theme-row-emerald"));
     const themeEvts = getEvents().filter((e) => e.name === "theme.change");
     expect(themeEvts.length).toBe(1);
-    expect(themeEvts[0].props).toEqual({ theme: "emerald" });
+    expect(themeEvts[0]!.props).toEqual({ theme: "emerald" });
   });
 });
 
@@ -189,7 +189,7 @@ describe("analytics integration: play.hint + play.undo", () => {
     fireEvent.click(screen.getByTestId("play-hint-btn"));
     const hintEvts = getEvents().filter((e) => e.name === "play.hint");
     expect(hintEvts.length).toBe(1);
-    expect(hintEvts[0].props).toEqual({ gameId: TEST_GAME_ID });
+    expect(hintEvts[0]!.props).toEqual({ gameId: TEST_GAME_ID });
   });
 
   it("play.undo fires after Ctrl+Z when there is something to undo", async () => {
@@ -209,7 +209,7 @@ describe("analytics integration: play.hint + play.undo", () => {
     });
     const undoEvts = getEvents().filter((e) => e.name === "play.undo");
     expect(undoEvts.length).toBe(1);
-    expect(undoEvts[0].props).toEqual({ gameId: TEST_GAME_ID });
+    expect(undoEvts[0]!.props).toEqual({ gameId: TEST_GAME_ID });
   });
 });
 
