@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import type * as React from "react";
-import type { GamePlugin, SettingsOf } from "../../platform/game-plugin/types.js";
+import type { GamePlugin, SettingsOf, HintTarget } from "../../platform/game-plugin/types.js";
 import type { CanadianCheckers12State, CanadianCheckers12Action, CanadianCheckers12Settings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 const CanadianCheckers12Game = /* @__PURE__ */ lazy(() => import("./Game.js").then((mod) => ({ default: mod.CanadianCheckers12Game as unknown as React.ComponentType<unknown> })));

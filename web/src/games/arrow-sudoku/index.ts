@@ -2,7 +2,7 @@ import { lazy } from "react";
 import type * as React from "react";
 import type { GamePlugin } from "../../platform/game-plugin/types.js";
 import type { SettingsOf } from "../../platform/game-plugin/types.js";
-import type { ArrowSudokuState, ArrowSudokuAction } from "./state.js";
+import type { ArrowSudokuState, ArrowSudokuAction, ArrowSudokuSettings } from "./state.js";
 import { initialState, reducer, isTerminal } from "./state.js";
 import { ArrowSudoku } from "./ArrowSudoku.js";
 
@@ -36,7 +36,7 @@ Strategy tip: arrow heads with short shafts (one or two cells) give the tightest
 
 Click Reset to start fresh.`,
   settings: arrowSudokuSettings,
-  initialState: (seed: number, settings: S) => initialState(seed, settings),
+  initialState: (seed: number, settings: S) => initialState(seed, settings as unknown as ArrowSudokuSettings),
   reducer,
   isTerminal,
   hint: (s: any) => { const p = (s as any).phase; if (p === "done" || p === "gameover" || p === "ended" || p === "finished" || (s as any).gameOver || (s as any).won || (s as any).complete || (s as any).isComplete) return null; return { selector: ".arrowsudoku-num", pulses: 3 }; },
