@@ -70,7 +70,7 @@ describe("LobbyPage — .lobby-chips tablist has no onsecuritypolicyviolation at
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onsecuritypolicyviolation attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
