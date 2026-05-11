@@ -1375,11 +1375,12 @@ export default function LobbyPage(): JSX.Element {
     const grid = gridRef.current;
     if (!grid) return;
     const tiles = Array.from(grid.querySelectorAll<HTMLElement>(".tile"));
-    if (tiles.length === 0) return;
+    const firstTile = tiles[0];
+    if (!firstTile) return;
     const current = tiles.findIndex((t) => t === document.activeElement);
     if (current < 0) return; // focus isn't on a grid tile — leave the event alone
     // Compute columns by counting tiles whose top matches the first tile's top.
-    const firstTop = tiles[0].getBoundingClientRect().top;
+    const firstTop = firstTile.getBoundingClientRect().top;
     let cols = 0;
     for (const t of tiles) {
       // 1px tolerance for sub-pixel rounding.
@@ -1421,9 +1422,12 @@ export default function LobbyPage(): JSX.Element {
       return;
     }
     e.preventDefault();
-    tiles[current].tabIndex = -1;
-    tiles[next].tabIndex = 0;
-    tiles[next].focus();
+    const currentTile = tiles[current];
+    const nextTile = tiles[next];
+    if (!currentTile || !nextTile) return;
+    currentTile.tabIndex = -1;
+    nextTile.tabIndex = 0;
+    nextTile.focus();
   }, []);
 
   // -----------------------------------------------------------------
@@ -2976,10 +2980,7 @@ function GameCard({
       aria-label={tileAriaLabel}
       onMouseDown={startPress}
       onMouseUp={endPress}
-      onMouseLeave={endPress}
       onContextMenu={onTileContextMenu}
-      onTouchStart={onTileTouchStart}
-      onTouchEnd={onTileTouchEnd}
       onTouchMove={onTileTouchMove}
       onTouchCancel={onTileTouchEnd}
       onClick={onTileClick}
