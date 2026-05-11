@@ -79,7 +79,7 @@ describe("LobbyPage — .lobby-chips tablist has no onpointerleave attribute (W3
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onpointerleave attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
