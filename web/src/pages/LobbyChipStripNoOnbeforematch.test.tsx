@@ -72,7 +72,7 @@ describe("LobbyPage — .lobby-chips tablist has no onbeforematch attribute (W33
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onbeforematch attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
