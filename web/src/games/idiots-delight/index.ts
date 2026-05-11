@@ -15,7 +15,7 @@ export const idiotsDelightPlugin: GamePlugin<IdiotsDelightState, IdiotsDelightAc
   description: "Aces Up variant — drop the lower of any same-suit pair, leave the four aces.",
   howToPlay: "Aces Up variant — drop the lower of any same-suit pair, leave the four aces. Click a column to select it, click again to discard the top (legal only if a higher same-suit lurks elsewhere); click another column to move into an empty slot. Goal: only the four Aces remain.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as IdiotsDelightSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as IdiotsDelightSettings),
   hint: (state: IdiotsDelightState): HintTarget | null => {
     if (state.won) return null;
     type Top = { col: number; suit: string; rank: number };

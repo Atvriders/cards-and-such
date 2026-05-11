@@ -16,7 +16,7 @@ export const towerLondonSoliPlugin: GamePlugin<TowerLondonSoliState, TowerLondon
   description: "Tower London variant — same engine, same-suit allowed packing.",
   howToPlay: "Tower London variant — same engine, same-suit allowed packing. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as TowerLondonSoliSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as TowerLondonSoliSettings),
   reducer,
   isTerminal,
   hint: (state: TowerLondonSoliState): HintTarget | null => {

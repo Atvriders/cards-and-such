@@ -15,7 +15,7 @@ export const gizaPyramidPlugin: GamePlugin<GizaPyramidState, GizaPyramidAction, 
   description: "Giza Pyramid — single shot through the stock.",
   howToPlay: "Giza Pyramid — single shot through the stock. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as GizaPyramidSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as GizaPyramidSettings),
   hint: (state: GizaPyramidState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

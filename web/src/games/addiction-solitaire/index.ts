@@ -15,7 +15,7 @@ export const addictionSolPlugin: GamePlugin<AddictionSolitaireState, AddictionSo
   description: "Addiction Solitaire — same engine as Montana / Gaps with two redeals.",
   howToPlay: "Addiction Solitaire — same engine as Montana / Gaps with two redeals. Click a card, then a gap to slide it in. A card can fill a gap only if its rank is one higher than the card to the gap's left and shares its suit. The leftmost column accepts only twos.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AddictionSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AddictionSolitaireSettings),
   hint: (state: AddictionSolitaireState): HintTarget | null => {
     if (state.won || state.lost) return null;
     for (let r = 0; r < state.grid.length; r++) {

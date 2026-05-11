@@ -15,7 +15,7 @@ export const apophisSoliPlugin: GamePlugin<ApophisSoliState, ApophisSoliAction, 
   description: "Apophis variant of Pyramid Solitaire.",
   howToPlay: "Apophis variant of Pyramid Solitaire. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ApophisSoliSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ApophisSoliSettings),
   hint: (state: ApophisSoliState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

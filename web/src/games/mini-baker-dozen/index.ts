@@ -16,7 +16,7 @@ export const miniBakerDozenPlugin: GamePlugin<MiniBakerDozenState, MiniBakerDoze
   description: "Mini Baker's Dozen — 13 four-card columns, fully open.",
   howToPlay: "Mini Baker's Dozen — 13 four-card columns, fully open. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniBakerDozenSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniBakerDozenSettings),
   reducer,
   isTerminal,
   hint: (state: MiniBakerDozenState): HintTarget | null => {

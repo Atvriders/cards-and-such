@@ -16,7 +16,7 @@ export const kingsQueensPatPlugin: GamePlugin<KingsQueensPatState, KingsQueensPa
   description: "Patience variant of Kings & Queens.",
   howToPlay: "Patience variant of Kings & Queens. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as KingsQueensPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as KingsQueensPatSettings),
   reducer,
   isTerminal,
   hint: (state: KingsQueensPatState): HintTarget | null => {

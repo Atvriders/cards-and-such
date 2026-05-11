@@ -16,7 +16,7 @@ export const miniCanfieldPlugin: GamePlugin<MiniCanfieldState, MiniCanfieldActio
   description: "Compact Canfield with 3-card draw.",
   howToPlay: "Compact Canfield with 3-card draw. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniCanfieldSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniCanfieldSettings),
   reducer,
   isTerminal,
   hint: (state: MiniCanfieldState): HintTarget | null => {

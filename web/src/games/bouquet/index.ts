@@ -16,7 +16,7 @@ export const bouquetPlugin: GamePlugin<BouquetState, BouquetAction, typeof setti
   description: "Bouquet: two-deck eight-fan layout.",
   howToPlay: "Bouquet: two-deck eight-fan layout. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as BouquetSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as BouquetSettings),
   reducer,
   isTerminal,
   hint: (state: BouquetState): HintTarget | null => {

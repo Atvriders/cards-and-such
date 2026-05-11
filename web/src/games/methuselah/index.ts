@@ -16,7 +16,7 @@ export const methuselahPlugin: GamePlugin<MethuselahState, MethuselahAction, typ
   description: "Long-life Klondike-style with no redeals; one shot through stock.",
   howToPlay: "Long-life Klondike-style with no redeals; one shot through stock. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MethuselahSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MethuselahSettings),
   reducer,
   isTerminal,
   hint: (state: MethuselahState): HintTarget | null => {

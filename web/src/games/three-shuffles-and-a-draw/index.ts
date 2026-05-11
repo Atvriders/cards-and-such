@@ -16,7 +16,7 @@ export const threeShufflesAndADrawPlugin: GamePlugin<ThreeShufflesAndADrawState,
   description: "Lucie variant with three reshuffles and a final card draw.",
   howToPlay: "Lucie variant with three reshuffles and a final card draw. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ThreeShufflesAndADrawSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ThreeShufflesAndADrawSettings),
   reducer,
   isTerminal,
   hint: (state: ThreeShufflesAndADrawState): HintTarget | null => {

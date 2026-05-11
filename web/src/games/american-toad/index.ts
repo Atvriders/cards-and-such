@@ -16,7 +16,7 @@ export const americanToadPlugin: GamePlugin<AmericanToadState, AmericanToadActio
   description: "Two-deck American Toad: same-suit packing, one redeal.",
   howToPlay: "Two-deck American Toad: same-suit packing, one redeal. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AmericanToadSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AmericanToadSettings),
   reducer,
   isTerminal,
   hint: (state: AmericanToadState): HintTarget | null => {

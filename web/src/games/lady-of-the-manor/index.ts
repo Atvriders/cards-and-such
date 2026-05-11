@@ -16,7 +16,7 @@ export const ladyOfTheManorPlugin: GamePlugin<LadyOfTheManorState, LadyOfTheMano
   description: "Lady of the Manor — eight reserve fans, no stock.",
   howToPlay: "Lady of the Manor — eight reserve fans, no stock. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as LadyOfTheManorSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as LadyOfTheManorSettings),
   reducer,
   isTerminal,
   hint: (state: LadyOfTheManorState): HintTarget | null => {

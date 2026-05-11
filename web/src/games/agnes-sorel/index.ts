@@ -16,7 +16,7 @@ export const agnesSorelPlugin: GamePlugin<AgnesSorelState, AgnesSorelAction, typ
   description: "Klondike-family with two decks: build down by colour rather than alternating.",
   howToPlay: "Klondike-family with two decks: build down by colour rather than alternating. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AgnesSorelSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AgnesSorelSettings),
   reducer,
   isTerminal,
   hint: (state: AgnesSorelState): HintTarget | null => {

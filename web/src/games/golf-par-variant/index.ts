@@ -15,7 +15,7 @@ export const golfParVariantPlugin: GamePlugin<GolfParVariantState, GolfParVarian
   description: "Par Golf with a single redeal cycle.",
   howToPlay: "Par Golf with a single redeal cycle. Click any available column-top whose rank is one above or below the waste top to play it; draw from the stock when the board stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as GolfParVariantSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as GolfParVariantSettings),
   hint: (state: GolfParVariantState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const wasteTop = state.waste[state.waste.length - 1];

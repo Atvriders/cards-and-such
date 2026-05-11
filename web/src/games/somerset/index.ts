@@ -16,7 +16,7 @@ export const somersetSolPlugin: GamePlugin<SomersetState, SomersetAction, typeof
   description: "Somerset — descending fan deal, no stock.",
   howToPlay: "Somerset — descending fan deal, no stock. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SomersetSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as SomersetSettings),
   reducer,
   isTerminal,
   hint: (state: SomersetState): HintTarget | null => {

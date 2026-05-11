@@ -16,7 +16,7 @@ export const alaskaPatPlugin: GamePlugin<AlaskaPatState, AlaskaPatAction, typeof
   description: "Alaska Patience: Yukon-with-suit packing.",
   howToPlay: "Alaska Patience: Yukon-with-suit packing. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AlaskaPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AlaskaPatSettings),
   reducer,
   isTerminal,
   hint: (state: AlaskaPatState): HintTarget | null => {

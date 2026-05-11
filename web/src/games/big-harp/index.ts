@@ -16,7 +16,7 @@ export const bigHarpPlugin: GamePlugin<BigHarpState, BigHarpAction, typeof setti
   description: "Bigger Harp variant — same shape, same engine.",
   howToPlay: "Bigger Harp variant — same shape, same engine. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as BigHarpSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as BigHarpSettings),
   reducer,
   isTerminal,
   hint: (state: BigHarpState): HintTarget | null => {

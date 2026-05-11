@@ -16,7 +16,7 @@ export const somersetPatPlugin: GamePlugin<SomersetPatState, SomersetPatAction, 
   description: "Somerset Patience variant.",
   howToPlay: "Somerset Patience variant. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SomersetPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as SomersetPatSettings),
   reducer,
   isTerminal,
   hint: (state: SomersetPatState): HintTarget | null => {

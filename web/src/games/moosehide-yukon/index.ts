@@ -16,7 +16,7 @@ export const moosehideYukonPlugin: GamePlugin<MoosehideYukonState, MoosehideYuko
   description: "Yukon-with-Moose colour: build down any-suit.",
   howToPlay: "Yukon-with-Moose colour: build down any-suit. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MoosehideYukonSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MoosehideYukonSettings),
   reducer,
   isTerminal,
   hint: (state: MoosehideYukonState): HintTarget | null => {

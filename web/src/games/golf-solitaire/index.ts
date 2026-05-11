@@ -16,7 +16,7 @@ export const golfSolitairePlugin: GamePlugin<GolfSolitaireState, GolfSolitaireAc
   description: "Classic Golf — one less or more than the waste; no recycling.",
   howToPlay: "Classic Golf — one less or more than the waste; no recycling. Click any available column-top whose rank is one above or below the waste top to play it; draw from the stock when the board stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as GolfSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as GolfSolitaireSettings),
   reducer,
   isTerminal,
   hint: (state: GolfSolitaireState): HintTarget | null => {

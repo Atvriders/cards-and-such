@@ -16,7 +16,7 @@ export const crescentSolitairePlugin: GamePlugin<CrescentSolitaireState, Crescen
   description: "Crescent — two-deck arc of 16 fans of six.",
   howToPlay: "Crescent — two-deck arc of 16 fans of six. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as CrescentSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as CrescentSolitaireSettings),
   reducer,
   isTerminal,
   hint: (state: CrescentSolitaireState): HintTarget | null => {

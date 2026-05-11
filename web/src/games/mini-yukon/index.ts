@@ -16,7 +16,7 @@ export const miniYukonPlugin: GamePlugin<MiniYukonState, MiniYukonAction, typeof
   description: "Compact Yukon variant — four columns.",
   howToPlay: "Compact Yukon variant — four columns. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniYukonSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniYukonSettings),
   reducer,
   isTerminal,
   hint: (state: MiniYukonState): HintTarget | null => {

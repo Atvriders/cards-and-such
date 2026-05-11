@@ -16,7 +16,7 @@ export const parallelsSolPlugin: GamePlugin<ParallelsState, ParallelsAction, typ
   description: "Parallels — two-deck row variant.",
   howToPlay: "Parallels — two-deck row variant. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ParallelsSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ParallelsSettings),
   reducer,
   isTerminal,
   hint: (state: ParallelsState): HintTarget | null => {

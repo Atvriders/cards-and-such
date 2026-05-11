@@ -15,7 +15,7 @@ export const apophisPlugin: GamePlugin<ApophisState, ApophisAction, typeof setti
   description: "Apophis — pyramid with two redeals through the stock.",
   howToPlay: "Apophis — pyramid with two redeals through the stock. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ApophisSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ApophisSettings),
   hint: (state: ApophisState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

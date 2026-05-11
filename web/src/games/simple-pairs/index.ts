@@ -15,7 +15,7 @@ export const simplePairsPlugin: GamePlugin<SimplePairsState, SimplePairsAction, 
   description: "Match same-rank pairs anywhere on the board.",
   howToPlay: "Match same-rank pairs anywhere on the board. Click a card, then click another that shares its rank. Pairs cancel; clear the board to win.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SimplePairsSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as SimplePairsSettings),
   hint: (state: SimplePairsState): HintTarget | null => {
     if (state.won) return null;
     type Pos = { r: number; c: number; rank: number };

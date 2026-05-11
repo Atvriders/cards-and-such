@@ -15,7 +15,7 @@ export const clockDoubleDeckPlugin: GamePlugin<ClockDoubleDeckState, ClockDouble
   description: "Two-deck Clock Patience — eight cards per hour.",
   howToPlay: "Two-deck Clock Patience — eight cards per hour. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ClockDoubleDeckSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ClockDoubleDeckSettings),
   hint: (state: ClockDoubleDeckState): HintTarget | null => {
     if (state.won || state.lost) return null;
     if (!state.held) return null;

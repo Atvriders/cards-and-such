@@ -15,7 +15,7 @@ export const trefoilPlugin: GamePlugin<TrefoilState, TrefoilAction, typeof setti
   description: "Match adjacent pairs across a six-row spread.",
   howToPlay: "Match adjacent pairs across a six-row spread. Click a card, then click another that shares its rank. Pairs cancel; clear the board to win.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as TrefoilSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as TrefoilSettings),
   hint: (state: TrefoilState): HintTarget | null => {
     if (state.won) return null;
     type Pos = { r: number; c: number; rank: number };

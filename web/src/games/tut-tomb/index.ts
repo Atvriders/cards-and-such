@@ -15,7 +15,7 @@ export const tutTombPlugin: GamePlugin<TutTombState, TutTombAction, typeof setti
   description: "Tut's Tomb pyramid variant with a single redeal.",
   howToPlay: "Tut's Tomb pyramid variant with a single redeal. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as TutTombSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as TutTombSettings),
   hint: (state: TutTombState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

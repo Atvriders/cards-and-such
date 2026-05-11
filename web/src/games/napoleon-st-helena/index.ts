@@ -16,7 +16,7 @@ export const napoleonStHelenaPlugin: GamePlugin<NapoleonStHelenaState, NapoleonS
   description: "Two-deck Napoleon: ten 4-card columns, build by suit.",
   howToPlay: "Two-deck Napoleon: ten 4-card columns, build by suit. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as NapoleonStHelenaSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as NapoleonStHelenaSettings),
   reducer,
   isTerminal,
   hint: (state: NapoleonStHelenaState): HintTarget | null => {

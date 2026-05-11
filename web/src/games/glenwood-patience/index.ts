@@ -16,7 +16,7 @@ export const glenwoodPatiencePlugin: GamePlugin<GlenwoodPatienceState, GlenwoodP
   description: "Glenwood: Canfield-style with a single-card draw and one redeal.",
   howToPlay: "Glenwood: Canfield-style with a single-card draw and one redeal. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as GlenwoodPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as GlenwoodPatienceSettings),
   reducer,
   isTerminal,
   hint: (state: GlenwoodPatienceState): HintTarget | null => {

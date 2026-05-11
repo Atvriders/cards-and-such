@@ -15,7 +15,7 @@ export const addictionSoliPlugin: GamePlugin<AddictionSoliState, AddictionSoliAc
   description: "Addiction Solitaire variant.",
   howToPlay: "Addiction Solitaire variant. Click a card, then a gap to slide it in. A card can fill a gap only if its rank is one higher than the card to the gap's left and shares its suit. The leftmost column accepts only twos.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AddictionSoliSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AddictionSoliSettings),
   hint: (state: AddictionSoliState): HintTarget | null => {
     if (state.won || state.lost) return null;
     for (let r = 0; r < state.grid.length; r++) {

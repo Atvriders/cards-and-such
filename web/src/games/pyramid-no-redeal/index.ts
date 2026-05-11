@@ -15,7 +15,7 @@ export const pyramidNoRedealPlugin: GamePlugin<PyramidNoRedealState, PyramidNoRe
   description: "Pyramid with a single pass through the stock.",
   howToPlay: "Pyramid with a single pass through the stock. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PyramidNoRedealSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as PyramidNoRedealSettings),
   hint: (state: PyramidNoRedealState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

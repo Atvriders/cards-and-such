@@ -16,7 +16,7 @@ export const hopscotchSolitairePlugin: GamePlugin<HopscotchSolitaireState, Hopsc
   description: "Klondike with a single redeal — hop through the stock.",
   howToPlay: "Klondike with a single redeal — hop through the stock. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as HopscotchSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as HopscotchSolitaireSettings),
   reducer,
   isTerminal,
   hint: (state: HopscotchSolitaireState): HintTarget | null => {

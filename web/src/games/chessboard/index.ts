@@ -16,7 +16,7 @@ export const chessboardPlugin: GamePlugin<ChessboardState, ChessboardAction, typ
   description: "Eight-column board with no redeals.",
   howToPlay: "Eight-column board with no redeals. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ChessboardSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ChessboardSettings),
   reducer,
   isTerminal,
   hint: (state: ChessboardState): HintTarget | null => {

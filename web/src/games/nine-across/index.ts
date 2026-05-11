@@ -16,7 +16,7 @@ export const nineAcrossPlugin: GamePlugin<NineAcrossState, NineAcrossAction, typ
   description: "Single-deck nine-column variant, no redeals.",
   howToPlay: "Single-deck nine-column variant, no redeals. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as NineAcrossSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as NineAcrossSettings),
   reducer,
   isTerminal,
   hint: (state: NineAcrossState): HintTarget | null => {

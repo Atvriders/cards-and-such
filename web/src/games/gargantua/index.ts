@@ -16,7 +16,7 @@ export const gargantuaPlugin: GamePlugin<GargantuaState, GargantuaAction, typeof
   description: "Two-deck Klondike — large, sprawling layout.",
   howToPlay: "Two-deck Klondike — large, sprawling layout. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as GargantuaSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as GargantuaSettings),
   reducer,
   isTerminal,
   hint: (state: GargantuaState): HintTarget | null => {

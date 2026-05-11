@@ -15,7 +15,7 @@ export const sundialPlugin: GamePlugin<SundialState, SundialAction, typeof setti
   description: "Twelve-slot variant of Clock Patience.",
   howToPlay: "Twelve-slot variant of Clock Patience. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SundialSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as SundialSettings),
   hint: (state: SundialState): HintTarget | null => {
     if (state.won || state.lost) return null;
     if (state.held) {

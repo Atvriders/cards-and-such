@@ -15,7 +15,7 @@ export const zodiacPlugin: GamePlugin<ZodiacState, ZodiacAction, typeof settings
   description: "Zodiac — twelve houses, classic clock-style flow.",
   howToPlay: "Zodiac — twelve houses, classic clock-style flow. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ZodiacSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ZodiacSettings),
   hint: (state: ZodiacState): HintTarget | null => {
     if (state.won || state.lost) return null;
     if (state.held) {

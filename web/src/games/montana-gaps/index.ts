@@ -15,7 +15,7 @@ export const montanaGapsPlugin: GamePlugin<MontanaGapsState, MontanaGapsAction, 
   description: "Montana / Gaps: 4×13 grid, slot the next-rank-same-suit into each gap.",
   howToPlay: "Montana / Gaps: 4×13 grid, slot the next-rank-same-suit into each gap. Click a card, then a gap to slide it in. A card can fill a gap only if its rank is one higher than the card to the gap's left and shares its suit. The leftmost column accepts only twos.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MontanaGapsSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MontanaGapsSettings),
   hint: (state: MontanaGapsState): HintTarget | null => {
     if (state.won || state.lost) return null;
     for (let r = 0; r < state.grid.length; r++) {

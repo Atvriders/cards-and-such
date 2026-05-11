@@ -16,7 +16,7 @@ export const moosehidePlugin: GamePlugin<MoosehideState, MoosehideAction, typeof
   description: "Yukon-style any-suit variant — pick up groups freely, no stock.",
   howToPlay: "Yukon-style any-suit variant — pick up groups freely, no stock. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MoosehideSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MoosehideSettings),
   reducer,
   isTerminal,
   hint: (state: MoosehideState): HintTarget | null => {

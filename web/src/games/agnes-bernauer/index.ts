@@ -16,7 +16,7 @@ export const agnesBernauerPlugin: GamePlugin<AgnesBernauerState, AgnesBernauerAc
   description: "Two-deck Klondike-style with a 7-card reserve and same-colour tableau.",
   howToPlay: "Two-deck Klondike-style with a 7-card reserve and same-colour tableau. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AgnesBernauerSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AgnesBernauerSettings),
   reducer,
   isTerminal,
   hint: (state: AgnesBernauerState): HintTarget | null => {

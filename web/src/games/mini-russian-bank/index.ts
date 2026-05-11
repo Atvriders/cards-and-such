@@ -16,7 +16,7 @@ export const miniRussianBankPlugin: GamePlugin<MiniRussianBankState, MiniRussian
   description: "Mini Russian Bank — four columns of four, fully open.",
   howToPlay: "Mini Russian Bank — four columns of four, fully open. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniRussianBankSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniRussianBankSettings),
   reducer,
   isTerminal,
   hint: (state: MiniRussianBankState): HintTarget | null => {

@@ -16,7 +16,7 @@ export const raglanPatiencePlugin: GamePlugin<RaglanPatienceState, RaglanPatienc
   description: "Raglan: nine fans of five — fully open layout.",
   howToPlay: "Raglan: nine fans of five — fully open layout. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as RaglanPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as RaglanPatienceSettings),
   reducer,
   isTerminal,
   hint: (state: RaglanPatienceState): HintTarget | null => {

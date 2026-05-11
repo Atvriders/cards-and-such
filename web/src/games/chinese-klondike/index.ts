@@ -16,7 +16,7 @@ export const chineseKlondikePlugin: GamePlugin<ChineseKlondikeState, ChineseKlon
   description: "Klondike with 3-card draw and capped redeals.",
   howToPlay: "Klondike with 3-card draw and capped redeals. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ChineseKlondikeSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ChineseKlondikeSettings),
   reducer,
   isTerminal,
   hint: (state: ChineseKlondikeState): HintTarget | null => {

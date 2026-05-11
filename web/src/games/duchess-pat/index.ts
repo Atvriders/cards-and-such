@@ -16,7 +16,7 @@ export const duchessPatPlugin: GamePlugin<DuchessPatState, DuchessPatAction, typ
   description: "Single-deck Duchess Patience with four reserve fans.",
   howToPlay: "Single-deck Duchess Patience with four reserve fans. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as DuchessPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as DuchessPatSettings),
   reducer,
   isTerminal,
   hint: (state: DuchessPatState): HintTarget | null => {

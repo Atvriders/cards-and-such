@@ -16,7 +16,7 @@ export const quiltPatPlugin: GamePlugin<QuiltPatState, QuiltPatAction, typeof se
   description: "Two-deck Quilt — eight 4-card columns.",
   howToPlay: "Two-deck Quilt — eight 4-card columns. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as QuiltPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as QuiltPatSettings),
   reducer,
   isTerminal,
   hint: (state: QuiltPatState): HintTarget | null => {

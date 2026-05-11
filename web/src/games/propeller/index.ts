@@ -16,7 +16,7 @@ export const propellerPlugin: GamePlugin<PropellerState, PropellerAction, typeof
   description: "Compact propeller layout, alternating-colour tableau.",
   howToPlay: "Compact propeller layout, alternating-colour tableau. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PropellerSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as PropellerSettings),
   reducer,
   isTerminal,
   hint: (state: PropellerState): HintTarget | null => {

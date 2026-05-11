@@ -16,7 +16,7 @@ export const napoleonsShoulderPlugin: GamePlugin<NapoleonsShoulderState, Napoleo
   description: "Shoulder variant: nine columns of five face-up cards.",
   howToPlay: "Shoulder variant: nine columns of five face-up cards. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as NapoleonsShoulderSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as NapoleonsShoulderSettings),
   reducer,
   isTerminal,
   hint: (state: NapoleonsShoulderState): HintTarget | null => {

@@ -16,7 +16,7 @@ export const stalactitesPlugin: GamePlugin<StalactitesState, StalactitesAction, 
   description: "Stalactites — eight 6-card columns, drip down to foundations.",
   howToPlay: "Stalactites — eight 6-card columns, drip down to foundations. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as StalactitesSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as StalactitesSettings),
   reducer,
   isTerminal,
   hint: (state: StalactitesState): HintTarget | null => {

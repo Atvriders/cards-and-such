@@ -16,7 +16,7 @@ export const carltonPatiencePlugin: GamePlugin<CarltonPatienceState, CarltonPati
   description: "Twelve fan-piles fed by stock; two-deck.",
   howToPlay: "Twelve fan-piles fed by stock; two-deck. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as CarltonPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as CarltonPatienceSettings),
   reducer,
   isTerminal,
   hint: (state: CarltonPatienceState): HintTarget | null => {

@@ -15,7 +15,7 @@ export const bigBenPlugin: GamePlugin<BigBenState, BigBenAction, typeof settings
   description: "Two-deck Big Ben: clock built up by suit from each hour.",
   howToPlay: "Two-deck Big Ben: clock built up by suit from each hour. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as BigBenSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as BigBenSettings),
   hint: (state: BigBenState): HintTarget | null => {
     if (state.won || state.lost) return null;
     if (state.held) {

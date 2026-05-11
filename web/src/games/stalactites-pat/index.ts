@@ -16,7 +16,7 @@ export const stalactitesPatPlugin: GamePlugin<StalactitesPatState, StalactitesPa
   description: "Patience variant of Stalactites.",
   howToPlay: "Patience variant of Stalactites. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as StalactitesPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as StalactitesPatSettings),
   reducer,
   isTerminal,
   hint: (state: StalactitesPatState): HintTarget | null => {

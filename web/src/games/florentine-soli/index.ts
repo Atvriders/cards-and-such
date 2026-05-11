@@ -16,7 +16,7 @@ export const florentineSoliPlugin: GamePlugin<FlorentineSoliState, FlorentineSol
   description: "Compact Florentine — four reserves and a single-card draw.",
   howToPlay: "Compact Florentine — four reserves and a single-card draw. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as FlorentineSoliSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as FlorentineSoliSettings),
   reducer,
   isTerminal,
   hint: (state: FlorentineSoliState): HintTarget | null => {

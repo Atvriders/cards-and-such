@@ -15,7 +15,7 @@ export const acesUpFiringSquadPlugin: GamePlugin<AcesUpFiringSquadState, AcesUpF
   description: "Aces Up firing-squad rules — only the absolute highest of each suit gets the boot.",
   howToPlay: "Aces Up firing-squad rules — only the absolute highest of each suit gets the boot. Click a column to select it, click again to discard the top (legal only if a higher same-suit lurks elsewhere); click another column to move into an empty slot. Goal: only the four Aces remain.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AcesUpFiringSquadSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AcesUpFiringSquadSettings),
   hint: (state: AcesUpFiringSquadState): HintTarget | null => {
     if (state.won) return null;
     type Top = { col: number; suit: string; rank: number };

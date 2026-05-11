@@ -16,7 +16,7 @@ export const westhavenPlugin: GamePlugin<WesthavenState, WesthavenAction, typeof
   description: "Westhaven — ten columns of three, top face-up.",
   howToPlay: "Westhaven — ten columns of three, top face-up. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as WesthavenSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as WesthavenSettings),
   reducer,
   isTerminal,
   hint: (state: WesthavenState): HintTarget | null => {

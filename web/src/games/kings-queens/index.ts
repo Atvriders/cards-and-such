@@ -16,7 +16,7 @@ export const kingsQueensPlugin: GamePlugin<KingsQueensState, KingsQueensAction, 
   description: "Two-deck: build foundations from Aces and Kings on opposite sides.",
   howToPlay: "Two-deck: build foundations from Aces and Kings on opposite sides. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as KingsQueensSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as KingsQueensSettings),
   reducer,
   isTerminal,
   hint: (state: KingsQueensState): HintTarget | null => {

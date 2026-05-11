@@ -16,7 +16,7 @@ export const waspPlugin: GamePlugin<WaspState, WaspAction, typeof settings> = {
   description: "Wasp — three reserve columns plus four fans of seven.",
   howToPlay: "Wasp — three reserve columns plus four fans of seven. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as WaspSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as WaspSettings),
   reducer,
   isTerminal,
   hint: (state: WaspState): HintTarget | null => {

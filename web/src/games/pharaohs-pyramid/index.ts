@@ -15,7 +15,7 @@ export const pharaohsPyramidPlugin: GamePlugin<PharaohsPyramidState, PharaohsPyr
   description: "Pyramid with one redeal.",
   howToPlay: "Pyramid with one redeal. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PharaohsPyramidSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as PharaohsPyramidSettings),
   hint: (state: PharaohsPyramidState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

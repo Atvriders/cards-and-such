@@ -16,7 +16,7 @@ export const baronessPatiencePlugin: GamePlugin<BaronessPatienceState, BaronessP
   description: "Five-pile Baroness: pair-13 removal across rows; engine simplified to a Klondike-style hand-out.",
   howToPlay: "Five-pile Baroness: pair-13 removal across rows; engine simplified to a Klondike-style hand-out. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as BaronessPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as BaronessPatienceSettings),
   reducer,
   isTerminal,
   hint: (state: BaronessPatienceState): HintTarget | null => {

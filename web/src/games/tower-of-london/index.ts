@@ -16,7 +16,7 @@ export const towerOfLondonPlugin: GamePlugin<TowerOfLondonState, TowerOfLondonAc
   description: "Eight columns, any-suit descending tableau, single deck.",
   howToPlay: "Eight columns, any-suit descending tableau, single deck. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as TowerOfLondonSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as TowerOfLondonSettings),
   reducer,
   isTerminal,
   hint: (state: TowerOfLondonState): HintTarget | null => {

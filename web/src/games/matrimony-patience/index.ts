@@ -16,7 +16,7 @@ export const matrimonyPatiencePlugin: GamePlugin<MatrimonyPatienceState, Matrimo
   description: "Two-deck Matrimony with 16 reserve piles.",
   howToPlay: "Two-deck Matrimony with 16 reserve piles. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MatrimonyPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MatrimonyPatienceSettings),
   reducer,
   isTerminal,
   hint: (state: MatrimonyPatienceState): HintTarget | null => {

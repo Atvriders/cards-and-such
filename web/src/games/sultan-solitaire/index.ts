@@ -16,7 +16,7 @@ export const sultanSolitairePlugin: GamePlugin<SultanSolitaireState, SultanSolit
   description: "Sultan — two-deck eight-pile variant.",
   howToPlay: "Sultan — two-deck eight-pile variant. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SultanSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as SultanSolitaireSettings),
   reducer,
   isTerminal,
   hint: (state: SultanSolitaireState): HintTarget | null => {

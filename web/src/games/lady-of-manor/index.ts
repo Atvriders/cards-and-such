@@ -16,7 +16,7 @@ export const ladyOfManorPlugin: GamePlugin<LadyOfManorState, LadyOfManorAction, 
   description: "Two-deck Lady of Manor variant.",
   howToPlay: "Two-deck Lady of Manor variant. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as LadyOfManorSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as LadyOfManorSettings),
   reducer,
   isTerminal,
   hint: (state: LadyOfManorState): HintTarget | null => {

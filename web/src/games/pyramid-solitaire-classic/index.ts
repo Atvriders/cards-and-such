@@ -15,7 +15,7 @@ export const pyramidSolitaireClassicPlugin: GamePlugin<PyramidSolitaireClassicSt
   description: "Classic Pyramid Solitaire — pair to thirteen, drop Kings alone.",
   howToPlay: "Classic Pyramid Solitaire — pair to thirteen, drop Kings alone. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as PyramidSolitaireClassicSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as PyramidSolitaireClassicSettings),
   hint: (state: PyramidSolitaireClassicState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

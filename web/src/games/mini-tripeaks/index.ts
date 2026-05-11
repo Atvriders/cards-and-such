@@ -15,7 +15,7 @@ export const miniTripeaksPlugin: GamePlugin<MiniTripeaksState, MiniTripeaksActio
   description: "Compact tri-peaks with smaller stock.",
   howToPlay: "Compact tri-peaks with smaller stock. Click any available column-top whose rank is one above or below the waste top to play it; draw from the stock when the board stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniTripeaksSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniTripeaksSettings),
   hint: (state: MiniTripeaksState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const wasteTop = state.waste[state.waste.length - 1];

@@ -16,7 +16,7 @@ export const quadrupleAlliancePlugin: GamePlugin<QuadrupleAllianceState, Quadrup
   description: "Two-deck Quadruple Alliance — eight 4-card columns.",
   howToPlay: "Two-deck Quadruple Alliance — eight 4-card columns. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as QuadrupleAllianceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as QuadrupleAllianceSettings),
   reducer,
   isTerminal,
   hint: (state: QuadrupleAllianceState): HintTarget | null => {

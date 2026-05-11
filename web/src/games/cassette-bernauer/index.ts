@@ -16,7 +16,7 @@ export const cassetteBernauerPlugin: GamePlugin<CassetteBernauerState, CassetteB
   description: "Compact Bernauer cassette: 8 columns, same-colour tableau.",
   howToPlay: "Compact Bernauer cassette: 8 columns, same-colour tableau. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as CassetteBernauerSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as CassetteBernauerSettings),
   reducer,
   isTerminal,
   hint: (state: CassetteBernauerState): HintTarget | null => {

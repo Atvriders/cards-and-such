@@ -15,7 +15,7 @@ export const zodiacPatPlugin: GamePlugin<ZodiacPatState, ZodiacPatAction, typeof
   description: "Zodiac patience variant — same wheel, single deck.",
   howToPlay: "Zodiac patience variant — same wheel, single deck. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ZodiacPatSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ZodiacPatSettings),
   reducer,
   isTerminal,
   hint: (state) => isTerminal(state) ? null : { selector: '[data-testid="play-restart-btn"]', pulses: 3 },

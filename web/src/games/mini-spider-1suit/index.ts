@@ -16,7 +16,7 @@ export const miniSpider1suitPlugin: GamePlugin<MiniSpider1suitState, MiniSpider1
   description: "Mini Spider — single deck, six columns, suit packing.",
   howToPlay: "Mini Spider — single deck, six columns, suit packing. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniSpider1suitSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniSpider1suitSettings),
   reducer,
   isTerminal,
   hint: (state: MiniSpider1suitState): HintTarget | null => {

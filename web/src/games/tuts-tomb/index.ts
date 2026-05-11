@@ -15,7 +15,7 @@ export const tutsTombPlugin: GamePlugin<TutsTombState, TutsTombAction, typeof se
   description: "Pyramid Solitaire themed around Tutankhamun — single redeal.",
   howToPlay: "Pyramid Solitaire themed around Tutankhamun — single redeal. Click a card to select it, then click another that pairs with it to sum thirteen — Kings drop alone. Use the stock when the pyramid stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as TutsTombSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as TutsTombSettings),
   hint: (state: TutsTombState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const isAvail = (r: number, c: number): boolean => {

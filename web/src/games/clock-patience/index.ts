@@ -15,7 +15,7 @@ export const clockPatiencePlugin: GamePlugin<ClockPatienceState, ClockPatienceAc
   description: "Classic Clock Patience — four cards per hour.",
   howToPlay: "Classic Clock Patience — four cards per hour. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ClockPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ClockPatienceSettings),
   hint: (state: ClockPatienceState): HintTarget | null => {
     if (state.won || state.lost) return null;
     if (!state.held) return null;

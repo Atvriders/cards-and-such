@@ -15,7 +15,7 @@ export const zodiacPatiencePlugin: GamePlugin<ZodiacPatienceState, ZodiacPatienc
   description: "Twelve-zodiac slot variant of Clock Patience.",
   howToPlay: "Twelve-zodiac slot variant of Clock Patience. Click Tick to flip the held card into its rank-slot; the next card in that slot becomes the new held card. Win when every slot fills before the centre runs out.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as ZodiacPatienceSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as ZodiacPatienceSettings),
   hint: (state: ZodiacPatienceState): HintTarget | null => {
     if (state.won || state.lost) return null;
     if (state.held) {

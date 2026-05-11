@@ -15,7 +15,7 @@ export const miniPokerSquarePlugin: GamePlugin<MiniPokerSquareState, MiniPokerSq
   description: "Mini Poker Square — match pairs in a 4×4 grid by adjacency.",
   howToPlay: "Mini Poker Square — match pairs in a 4×4 grid by adjacency. Click a card, then click another that shares its rank. Pairs cancel; clear the board to win.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as MiniPokerSquareSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as MiniPokerSquareSettings),
   hint: (state: MiniPokerSquareState): HintTarget | null => {
     if (state.won) return null;
     type Pos = { r: number; c: number; rank: number };

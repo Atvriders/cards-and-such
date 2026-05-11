@@ -15,7 +15,7 @@ export const triPeaksSolitairePlugin: GamePlugin<TriPeaksSolitaireState, TriPeak
   description: "Three-peak board: clear cards rank-adjacent to the waste top.",
   howToPlay: "Three-peak board: clear cards rank-adjacent to the waste top. Click any available column-top whose rank is one above or below the waste top to play it; draw from the stock when the board stalls.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as TriPeaksSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as TriPeaksSolitaireSettings),
   hint: (state: TriPeaksSolitaireState): HintTarget | null => {
     if (state.won || state.lost) return null;
     const wasteTop = state.waste[state.waste.length - 1];

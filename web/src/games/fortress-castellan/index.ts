@@ -16,7 +16,7 @@ export const fortressCastellanPlugin: GamePlugin<FortressCastellanState, Fortres
   description: "Fortress / Castellan — ten fans, build down by suit.",
   howToPlay: "Fortress / Castellan — ten fans, build down by suit. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as FortressCastellanSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as FortressCastellanSettings),
   reducer,
   isTerminal,
   hint: (state: FortressCastellanState): HintTarget | null => {

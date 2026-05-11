@@ -15,7 +15,7 @@ export const accordionSolitairePlugin: GamePlugin<AccordionSolitaireState, Accor
   description: "Accordion: collapse adjacent cards that share suit or rank.",
   howToPlay: "Accordion: collapse adjacent cards that share suit or rank. Click a card, then click another that's exactly one or three positions to its left and shares either suit or rank. The two collapse — get down to a single card to win.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as AccordionSolitaireSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as AccordionSolitaireSettings),
   hint: (state: AccordionSolitaireState): HintTarget | null => {
     if (state.won) return null;
     const live = state.cards.filter((c): c is NonNullable<typeof c> => c !== null);

@@ -16,7 +16,7 @@ export const selectiveCanfieldPlugin: GamePlugin<SelectiveCanfieldState, Selecti
   description: "Pick any starting foundation rank; otherwise plays as Canfield.",
   howToPlay: "Pick any starting foundation rank; otherwise plays as Canfield. Use drag-and-drop or click a card to auto-move it to the best legal destination. The Auto-move button finishes the foundations once the board is solved.",
   settings,
-  initialState: (seed: number, s: S) => initialState(seed, s as SelectiveCanfieldSettings),
+  initialState: (seed: number, s: S) => initialState(seed, s as unknown as SelectiveCanfieldSettings),
   reducer,
   isTerminal,
   hint: (state: SelectiveCanfieldState): HintTarget | null => {
