@@ -1,7 +1,9 @@
 import { useEffect } from "react";
+import type { Card as CardType } from "../../engines/deck/index.js";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { BidWhistState } from "./state.js";
-import { isTerminal, legalPlays, TRUMP_SUIT } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
 import { Card } from "../../engines/deck/Card.js";
 import "./BidWhist.css";
 
@@ -10,10 +12,19 @@ type BidWhistAction = { type: "play"; cardId: string };
 export function BidWhist({ state, dispatch, onGameOver }: GameProps<BidWhistState, object>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  const { playerHand, botHand, currentTrick, playerTricks, botTricks, totalTricks, winThreshold, phase, playerLeads, message } = state;
+  const { hands, trick: currentTrick, tricksWon, phase, leadSeat, turn, trump, message } = state;
+  const playerHand = hands[0] ?? [];
+  const botHand = hands[1] ?? [];
+  const playerTricks = tricksWon[0];
+  const botTricks = tricksWon[1];
+  const totalTricks = playerTricks + botTricks;
+  const winThreshold = 13;
+  const playerLeads = leadSeat === 0;
   const done = phase === "done";
-  const legal = (!done && playerLeads) || (!done && currentTrick.length === 1) ? legalPlays(playerHand, currentTrick) : [];
-  const legalIds = new Set(legal.map(c => c.id));
+  const legal: CardType[] = (!done && turn === 0 && ((playerLeads && currentTrick.length === 0) || currentTrick.length === 1))
+    ? legalPlays(playerHand, currentTrick)
+    : [];
+  const legalIds = new Set(legal.map((c: CardType) => c.id));
 
   return (
     <div className="bid-whist-game">
@@ -22,12 +33,12 @@ export function BidWhist({ state, dispatch, onGameOver }: GameProps<BidWhistStat
         <span>Bot: {botTricks}</span>
         <span>Tricks: {totalTricks}</span>
         <span>Win: {winThreshold}+</span>
-        <span>Trump: ♥</span>
+        <span>Trump: {trump ?? "♥"}</span>
       </div>
       <div className="bid-whist-bot-row">
         <div className="bid-whist-label">Bot ({botHand.length} cards)</div>
         <div className="bid-whist-card-backs">
-          {botHand.map((_, i) => <div key={i} className="bid-whist-card-back" />)}
+          {botHand.map((_: CardType, i: number) => <div key={i} className="bid-whist-card-back" />)}
         </div>
       </div>
       <div className="bid-whist-trick">
@@ -35,7 +46,7 @@ export function BidWhist({ state, dispatch, onGameOver }: GameProps<BidWhistStat
         <div className="bid-whist-trick-cards">
           {currentTrick.length === 0
             ? <span style={{ opacity: 0.4 }}>—</span>
-            : currentTrick.map(({ seat, card }) => (
+            : currentTrick.map(({ seat, card }: { seat: number; card: CardType }) => (
               <div key={card.id} className="bid-whist-trick-slot">
                 <div className="bid-whist-trick-name">{seat === 0 ? "You" : "Bot"}</div>
                 <Card card={card} />
@@ -47,7 +58,7 @@ export function BidWhist({ state, dispatch, onGameOver }: GameProps<BidWhistStat
       <div className="bid-whist-player-area">
         <div className="bid-whist-label">Your Hand</div>
         <div className="bid-whist-player-hand">
-          {playerHand.map(card => {
+          {playerHand.map((card: CardType) => {
             const isLegal = legalIds.has(card.id);
             return isLegal
               ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as BidWhistAction)} />
@@ -61,8 +72,6 @@ export function BidWhist({ state, dispatch, onGameOver }: GameProps<BidWhistStat
           <div>{message}</div>
         </div>
       )}
-      {/* mark TRUMP_SUIT used to satisfy lint */}
-      <span style={{ display: "none" }}>{TRUMP_SUIT ?? "none"}</span>
     </div>
   );
 }
