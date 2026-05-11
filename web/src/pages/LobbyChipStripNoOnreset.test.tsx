@@ -78,7 +78,7 @@ describe("LobbyPage — .lobby-chips tablist has no onreset attribute (W3139)", 
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onreset attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
