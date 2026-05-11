@@ -71,7 +71,7 @@ describe("LobbyPage — .lobby-chips tablist has no oncontextmenu attribute (W31
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an oncontextmenu attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
