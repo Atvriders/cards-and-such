@@ -76,7 +76,7 @@ describe("LobbyPage — .lobby-chips tablist has no onpopstate attribute (W3276)
 
   it("renders the inner .lobby-chips <div role=\"tablist\"> WITHOUT an onpopstate attribute", () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/lobby"]}>
         <LobbyPage />
       </MemoryRouter>,
     );
