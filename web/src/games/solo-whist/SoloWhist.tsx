@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
-import type { SoloWhistState, SoloWhistSettings, SoloBid } from "./state.js";
-import { legalPlays, isTerminal } from "./state.js";
+import type { SoloWhistState, SoloWhistSettings } from "./state.js";
+import { isTerminal } from "./state.js";
+import { legalPlays } from "../_shared/trick-engine.js";
+import type { Card as CardType } from "../../engines/deck/index.js";
 import { Card } from "../../engines/deck/Card.js";
 import "./SoloWhist.css";
+
+type SoloBid = "solo" | "misere" | "abundance" | "pass";
 
 type SoloWhistAction =
   | { type: "bid"; bid: SoloBid }
@@ -26,10 +30,16 @@ export function SoloWhist({
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
-  const { hands, trumpSuit, currentTrick, turn, phase, playerBid, tricks, score, message } = state;
+  const { hands, trump, trick, turn, phase, tricksWon, score, message } = state;
+  const trumpSuit = trump ?? "♥";
+  const currentTrick = trick ?? [];
+  const tricks = tricksWon ?? [0, 0, 0, 0];
+  const playerBid: SoloBid | null = null;
+  const bidPhase = false;
   const done = phase === "done";
+  const playerHand = hands[0] ?? [];
   const legalIds = new Set(
-    (!done && phase === "playing" && turn === 0) ? legalPlays(state, 0).map(c => c.id) : []
+    (!done && phase === "playing" && turn === 0) ? legalPlays(playerHand, currentTrick).map((c: CardType) => c.id) : []
   );
 
   return (
@@ -46,14 +56,14 @@ export function SoloWhist({
           <div key={s} className={`sw-seat${turn === s && !done ? " active" : ""}`}>
             <div className="sw-seat-label">{SEAT_NAMES[s]}</div>
             <div className="sw-card-backs">
-              {hands[s]!.map((_, i) => <div key={i} className="sw-card-back" />)}
+              {(hands[s] ?? []).map((_, i) => <div key={i} className="sw-card-back" />)}
             </div>
-            <div className="sw-seat-info">Tricks: {tricks[s]}</div>
+            <div className="sw-seat-info">Tricks: {tricks[s] ?? 0}</div>
           </div>
         ))}
       </div>
 
-      {phase === "bidding" && (
+      {bidPhase && (
         <div className="sw-bid-area">
           <div className="sw-label">Choose your bid:</div>
           <div className="sw-bid-buttons">
@@ -73,7 +83,7 @@ export function SoloWhist({
           <div className="sw-trick-cards">
             {currentTrick.length === 0
               ? <span className="sw-empty">—</span>
-              : currentTrick.map(({ seat, card }) => (
+              : currentTrick.map(({ seat, card }: { seat: number; card: CardType }) => (
                 <div key={card.id} className="sw-trick-slot">
                   <div className="sw-trick-name">{SEAT_NAMES[seat]}</div>
                   <Card card={card} />
@@ -86,9 +96,9 @@ export function SoloWhist({
       <div className="sw-status">{message}</div>
 
       <div className="sw-player-area">
-        <div className="sw-player-label">Your Hand — Tricks: {tricks[0]}</div>
+        <div className="sw-player-label">Your Hand — Tricks: {tricks[0] ?? 0}</div>
         <div className="sw-player-hand">
-          {hands[0]!.map(card => {
+          {playerHand.map((card: CardType) => {
             const legal = legalIds.has(card.id);
             return legal
               ? <Card key={card.id} card={card} onClick={() => dispatch({ type: "play", cardId: card.id } as SoloWhistAction)} />
