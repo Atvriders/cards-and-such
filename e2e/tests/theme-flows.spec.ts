@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 /**
  * Smoke coverage for the appearance / theme surfaces in /settings:
@@ -40,12 +40,19 @@ test.describe("theme flows smoke", () => {
     // exactly what React listens for.
     const before = await readAccent(page);
     const targetColor = "#ff00aa";
+    // React's controlled <input type="color"> ignores raw `el.value = ...`
+    // because the SyntheticEvent change tracker still sees the old value.
+    // Use the native HTMLInputElement value setter so React's onChange fires.
     await page.evaluate((next) => {
       const el = document.querySelector(
         '[data-testid="theme-custom-accent"]',
       ) as HTMLInputElement | null;
       if (!el) return;
-      el.value = next;
+      const nativeSetter = Object.getOwnPropertyDescriptor(
+        window.HTMLInputElement.prototype,
+        "value",
+      )?.set;
+      nativeSetter?.call(el, next);
       el.dispatchEvent(new Event("input", { bubbles: true }));
       el.dispatchEvent(new Event("change", { bubbles: true }));
     }, targetColor);

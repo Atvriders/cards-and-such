@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 /**
  * SettingsPage "Clear all" → DELETE-gated confirm → reload flow.
@@ -19,6 +19,7 @@ import { expect, test, type Page } from "@playwright/test";
  */
 
 async function loginAs(page: Page, prefix: string): Promise<void> {
+  // Server enforces 20-char username limit; keep prefix short.
   const username = `e2e_${prefix}_${Math.random().toString(36).slice(2, 8)}`;
   await page.goto("/login", { waitUntil: "domcontentloaded" });
   await page.getByLabel(/username/i).fill(username);
@@ -27,7 +28,7 @@ async function loginAs(page: Page, prefix: string): Promise<void> {
 }
 
 test("settings clear-all gates confirm behind DELETE then reloads", async ({ page }) => {
-  await loginAs(page, "settings_clear");
+  await loginAs(page, "setclr");
 
   await page.goto("/settings", { waitUntil: "domcontentloaded" });
 
@@ -57,14 +58,22 @@ test("settings clear-all gates confirm behind DELETE then reloads", async ({ pag
 
   // Wait for the reload: the sentinel we stamped on the previous
   // document instance must be gone after navigation completes.
+  // `page.evaluate` throws while the context is being destroyed mid-reload,
+  // so swallow that race and treat it as "still pre-reload" so the poll
+  // keeps trying until the fresh document is fully loaded.
   await expect
     .poll(
-      () =>
-        page.evaluate(
-          () =>
-            (window as unknown as { __preReloadSentinel?: boolean })
-              .__preReloadSentinel === true,
-        ),
+      async () => {
+        try {
+          return await page.evaluate(
+            () =>
+              (window as unknown as { __preReloadSentinel?: boolean })
+                .__preReloadSentinel === true,
+          );
+        } catch {
+          return true;
+        }
+      },
       { timeout: 5000 },
     )
     .toBe(false);

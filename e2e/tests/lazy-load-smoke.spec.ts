@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "../fixtures";
 
 /**
  * W469 lazy-load smoke.
@@ -25,20 +25,30 @@ test.describe("W469 lazy-load smoke", () => {
 
     const skeleton = page.getByTestId("play-loading-skeleton");
     const playBoard = page.locator(".play-board");
+    const setup = page.getByTestId("setup-panel");
 
     // Kick off navigation but don't await: we want a chance to observe
     // the suspense fallback while the chunk is still in flight.
     const navPromise = page.goto("/play/klondike", { waitUntil: "domcontentloaded" });
 
     // First-to-resolve wins. Either the skeleton became visible (lazy
-    // chunk in-flight) or the play-board rendered (chunk already
-    // cached / resolved synchronously). Both are valid pass states.
+    // chunk in-flight), the play-board rendered, or the setup-panel
+    // rendered (klondike defaults to setup-first now, gated behind a
+    // "Start playing" button). All three prove the lazy boundary is
+    // wired up and didn't throw.
     await Promise.race([
       skeleton.waitFor({ state: "visible", timeout: 10_000 }),
       playBoard.waitFor({ state: "visible", timeout: 10_000 }),
+      setup.waitFor({ state: "visible", timeout: 10_000 }),
     ]);
 
     await navPromise;
+
+    // If the setup-panel rendered, click Start so the play-board mounts
+    // and we can prove the lazy import resolved successfully.
+    if (await setup.isVisible().catch(() => false)) {
+      await page.getByTestId("start-game").click();
+    }
 
     // The play-board must end up rendered, proving the lazy import
     // resolved successfully (skeleton alone with no resolution would

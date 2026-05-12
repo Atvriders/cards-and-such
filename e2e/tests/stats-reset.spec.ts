@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 /**
  * Stats reset → confirm → clear flow
@@ -22,7 +22,7 @@ async function loginAs(page: Page, prefix: string): Promise<void> {
 }
 
 test("stats reset → confirm clears localStorage stats blob", async ({ page }) => {
-  await loginAs(page, "stats_reset");
+  await loginAs(page, "strst");
 
   // Seed a stats blob so we can prove the reset path actually clears it
   // rather than passively asserting on an empty store.

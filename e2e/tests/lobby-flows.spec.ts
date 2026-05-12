@@ -1,4 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+import { expect, test } from "../fixtures";
 
 /**
  * Smoke-render coverage for the new lobby surfaces:
@@ -29,7 +30,7 @@ test.describe("lobby flows smoke", () => {
     await expect.poll(async () => tiles.count(), { timeout: 10_000 }).toBeGreaterThanOrEqual(100);
   });
 
-  test("favorites chip: empty state, then klondike heart round-trip", async ({ page }) => {
+  test("favorites chip: empty state, then 2048 heart round-trip", async ({ page }) => {
     await loginAs(page, "fav");
     // W169 (c13fdfde) added the Favorites chip + per-tile heart toggle.
     // Fresh user has no stored favorites, so the chip should land on the
@@ -38,37 +39,55 @@ test.describe("lobby flows smoke", () => {
     await favChip.click();
     await expect(page.getByTestId("lobby-favorites-empty")).toBeVisible();
 
-    // Bounce back to "All" so the klondike tile (and its heart toggle) is
-    // mounted and clickable.
+    // Bounce back to "All" so the target tile (and its heart toggle) is
+    // mounted and clickable. We use `2048` instead of klondike because
+    // klondike is now a featured *family* tile, and family-featured tiles
+    // hard-code `isFavorite={false}` (see LobbyPage.tsx FeaturedTile),
+    // which means a click never flips aria-pressed to "true". `2048` is
+    // a standalone game and behaves like a normal lobby tile.
     await page.getByTestId("chip-all").click();
-    const klondikeHeart = page.getByTestId("tile-fav-toggle-klondike");
-    await expect(klondikeHeart).toBeVisible();
-    await klondikeHeart.click();
-    await expect(klondikeHeart).toHaveAttribute("aria-pressed", "true");
+    const tileHeart = page.getByTestId("tile-fav-toggle-2048");
+    await expect(tileHeart).toBeVisible();
+    await tileHeart.click();
+    await expect(tileHeart).toHaveAttribute("aria-pressed", "true");
 
-    // Re-enter the Favorites chip; klondike should now be the only tile.
+    // Re-enter the Favorites chip; 2048 should now be the only tile.
     await favChip.click();
-    await expect(page.getByTestId("tile-klondike")).toBeVisible();
+    await expect(page.getByTestId("tile-2048")).toBeVisible();
     await expect(page.getByTestId("lobby-favorites-empty")).toHaveCount(0);
 
     // Cleanup: unfavorite so the next test run starts from a clean slate.
     // The heart on the Favorites view still carries the same testid.
-    await page.getByTestId("tile-fav-toggle-klondike").click();
+    await page.getByTestId("tile-fav-toggle-2048").click();
     await expect(page.getByTestId("lobby-favorites-empty")).toBeVisible();
   });
 
   test("welcome tutorial appears on a fresh device and Skip dismisses it", async ({ page }) => {
-    // Visit the app first so an origin is bound, then wipe localStorage and
-    // reload — guarantees the welcome carousel runs on a truly fresh slate
-    // regardless of any prior test mutating storage on this origin.
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-    await page.evaluate(() => window.localStorage.clear());
-    await page.reload({ waitUntil: "domcontentloaded" });
-
-    // W170 added 1-indexed `tut-step-N` testids; the first card is
-    // `tut-step-1`. (The user prompt mentioned `tut-step-0` but the
-    // implementation uses 1-based indices — see Tutorial.tsx:351.)
+    // The welcome carousel only mounts inside AppShell, which is gated by
+    // RequireAuth. Claim a username first to enter the shell, then
+    // programmatically re-open the carousel via the documented event
+    // bridge — the shared `addInitScript` fixture pre-marks the welcome
+    // tutorial as seen, so a reload alone won't re-arm it.
+    await loginAs(page, "welcome");
+    // Wait for the AppShell to finish hydrating so its
+    // `cards:open-welcome-tutorial` listener is actually attached.
+    // Without this the dispatch can land before the useEffect runs and
+    // the carousel never opens.
+    await expect(page.getByTestId("tile-klondike")).toBeVisible();
+    // Use `expect.poll` to retry the dispatch + visibility check — if the
+    // listener still isn't bound, dispatch again next tick.
     const firstStep = page.getByTestId("tut-step-1");
+    await expect
+      .poll(
+        async () => {
+          await page.evaluate(() =>
+            window.dispatchEvent(new Event("cards:open-welcome-tutorial")),
+          );
+          return await firstStep.count();
+        },
+        { timeout: 10_000 },
+      )
+      .toBeGreaterThan(0);
     await expect(firstStep).toBeVisible();
 
     await page.getByTestId("tut-skip").click();
@@ -77,10 +96,12 @@ test.describe("lobby flows smoke", () => {
 
   test("footer shortcuts button opens kbd modal and Esc closes it", async ({ page }) => {
     await loginAs(page, "kbd");
-    // Footer is below the fold on most viewports — scroll it into view
-    // before clicking so the click target is interactable.
+    // Footer is below the fold on most viewports — wait for it to mount
+    // (the AppShell renders it lazily), then click. Using `.click()` with
+    // an internal scroll is more resilient than scrollIntoViewIfNeeded
+    // when the footer subtree re-renders during initial lobby hydration.
     const trigger = page.getByTestId("footer-shortcuts-btn");
-    await trigger.scrollIntoViewIfNeeded();
+    await expect(trigger).toBeAttached();
     await trigger.click();
 
     const modal = page.getByTestId("kbd-modal");
@@ -92,13 +113,14 @@ test.describe("lobby flows smoke", () => {
 
   test("submitting search 'klondike' lands on /search?q=klondike", async ({ page }) => {
     await loginAs(page, "search");
-    // The header search lives inside a <form role="search"> with a single
-    // search input. Open the toggle if it's collapsed, then submit.
+    // The header search lives inside a <form role="search">. Once expanded
+    // it renders as a combobox (suggest menu) rather than a plain
+    // searchbox — match either role for resilience.
     const searchToggle = page.getByRole("button", { name: /search lobby/i }).first();
     if (await searchToggle.isVisible().catch(() => false)) {
       await searchToggle.click().catch(() => undefined);
     }
-    const input = page.getByRole("searchbox", { name: /search lobby/i });
+    const input = page.getByRole("combobox", { name: /search lobby/i });
     await input.fill("klondike");
     await input.press("Enter");
     await expect(page).toHaveURL(/\/search\?q=klondike/);

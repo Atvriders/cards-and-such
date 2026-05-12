@@ -96,3 +96,32 @@ describe("POST /scores", () => {
     expect(res.statusCode).toBe(400);
   });
 });
+
+describe("GET /leaderboard/recent", () => {
+  let app: FastifyInstance;
+  beforeEach(async () => { app = await makeTestApp(); });
+  afterEach(async () => { await app.close(); });
+
+  it("returns the most recent scores newest-first with id/user fields", async () => {
+    seedUser(app, "alice"); seedUser(app, "bob");
+    seedScore(app, "alice", "klondike", 100);
+    await new Promise((r) => setTimeout(r, 2));
+    seedScore(app, "bob", "freecell", 200);
+    await new Promise((r) => setTimeout(r, 2));
+    seedScore(app, "alice", "spider", 150);
+
+    const res = await app.inject({ method: "GET", url: "/leaderboard/recent?limit=2" });
+    expect(res.statusCode).toBe(200);
+    const body = res.json() as Array<{ id: number; user: string; gameId: string; score: number }>;
+    expect(body).toHaveLength(2);
+    expect(body[0]!.user).toBe("alice"); expect(body[0]!.gameId).toBe("spider");
+    expect(body[1]!.user).toBe("bob");   expect(body[1]!.gameId).toBe("freecell");
+    expect(typeof body[0]!.id).toBe("number");
+  });
+
+  it("empty when no scores", async () => {
+    const res = await app.inject({ method: "GET", url: "/leaderboard/recent" });
+    expect(res.statusCode).toBe(200);
+    expect(res.json()).toEqual([]);
+  });
+});

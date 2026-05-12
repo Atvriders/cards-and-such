@@ -11,6 +11,11 @@ services:
     build:
       context: .
       dockerfile: server/Dockerfile
+    environment:
+      # E2E hammers /auth/claim from a single docker network IP; the prod
+      # default (20/hour) trips after ~half the suite. Loosen for CI runs.
+      CLAIM_RATE_MAX: "1000"
+      RESUME_RATE_MAX: "1000"
 
   web:
     pull_policy: build

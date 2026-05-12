@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 async function loginAs(page: Page, prefix: string): Promise<void> {
   const username = `${prefix}_${Math.random().toString(36).slice(2, 8)}`;

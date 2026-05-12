@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 /**
  * W568 — Stats page card audit smoke.
@@ -44,7 +44,33 @@ async function loginAs(page: Page, prefix: string): Promise<void> {
 }
 
 test("stats page renders all major card testids", async ({ page }) => {
-  await loginAs(page, "stats_audit");
+  await loginAs(page, "staud");
+
+  // Seed a non-empty stats blob so data-gated cards (bar chart requires
+  // `categoryBarData.length > 0`, etc.) render their roll-ups.
+  await page.addInitScript(() => {
+    try {
+      window.localStorage.setItem(
+        "cards-and-such:stats:v1",
+        JSON.stringify({
+          totalPlayed: 3,
+          totalWins: 1,
+          longestStreak: 1,
+          currentStreak: 0,
+          perGame: { klondike: { played: 3, wins: 1, best: 100 } },
+          perCategory: { solitaire: 3 },
+          daysPlayed: [new Date().toISOString().slice(0, 10)],
+          unlocked: [],
+        }),
+      );
+      window.localStorage.setItem(
+        "cards-hints-used",
+        JSON.stringify({ klondike: 2 }),
+      );
+    } catch {
+      /* ignore */
+    }
+  });
 
   await page.goto("/stats", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("stats-page")).toBeVisible();

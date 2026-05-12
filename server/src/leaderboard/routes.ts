@@ -30,6 +30,13 @@ export async function registerLeaderboardRoutes(app: FastifyInstance): Promise<v
       LIMIT 100`,
   );
 
+  const recentScores = app.db.prepare(
+    `SELECT rowid AS id, username AS user, game_id AS gameId, score, played_at AS playedAt
+       FROM scores
+      ORDER BY played_at DESC
+      LIMIT ?`,
+  );
+
   app.get<{
     Params: { gameId: string };
     Querystring: { settingsHash?: string };
@@ -46,6 +53,14 @@ export async function registerLeaderboardRoutes(app: FastifyInstance): Promise<v
       rank: i + 1, username: r.username, score: r.score, playedAt: r.playedAt,
     }));
     return result;
+  });
+
+  app.get<{ Querystring: { limit?: string } }>("/leaderboard/recent", async (req) => {
+    const raw = Number(req.query.limit ?? 10);
+    const limit = Number.isFinite(raw) ? Math.min(Math.max(Math.trunc(raw), 1), 100) : 10;
+    return recentScores.all(limit) as Array<{
+      id: number; user: string; gameId: string; score: number; playedAt: number;
+    }>;
   });
 
   app.get("/leaderboard/global", async () => {

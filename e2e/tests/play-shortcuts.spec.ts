@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 /**
  * Power-user keyboard shortcuts on the PlayPage (PlayPage.tsx ~line 1530).
@@ -20,10 +20,27 @@ async function loginAs(page: Page, prefix: string): Promise<void> {
   await page.goto("/login", { waitUntil: "domcontentloaded" });
   await page.getByLabel(/username/i).fill(username);
   await page.getByRole("button", { name: /^claim$/i }).click();
-  await expect(page).toHaveURL("/");
+  // Bump the URL-assertion timeout: under concurrent load the claim
+  // POST + lobby-route mount can take longer than the 5s default.
+  await expect(page).toHaveURL("/", { timeout: 15_000 });
 }
 
 async function startKlondike(page: Page): Promise<void> {
+  // Pre-mark klondike's per-game tutorial as seen so the tutorial overlay
+  // (modal SVG backdrop) doesn't intercept keyboard / pointer events on
+  // the play toolbar. The shared `fixtures.ts` only pre-dismisses the
+  // welcome carousel; per-game tutorials use the same SeenMap keyed by
+  // `plugin.id`.
+  await page.addInitScript(() => {
+    try {
+      const raw = window.localStorage.getItem("cards-tutorial-seen");
+      const map: Record<string, boolean> = raw ? JSON.parse(raw) : {};
+      map["klondike"] = true;
+      window.localStorage.setItem("cards-tutorial-seen", JSON.stringify(map));
+    } catch {
+      /* ignore */
+    }
+  });
   await page.goto("/play/klondike", { waitUntil: "domcontentloaded" });
   const setup = page.getByTestId("setup-panel");
   if (await setup.isVisible().catch(() => false)) {

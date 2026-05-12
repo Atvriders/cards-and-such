@@ -7,10 +7,9 @@ import {
 } from "@cards/shared";
 import { createJwt } from "./jwt.js";
 
-const CLAIM_LIMIT = { max: 20, timeWindow: "1 hour" };
-const RESUME_LIMIT = { max: 60, timeWindow: "1 hour" };
-
 export async function registerAuthRoutes(app: FastifyInstance): Promise<void> {
+  const CLAIM_LIMIT = { max: app.config.CLAIM_RATE_MAX, timeWindow: app.config.CLAIM_RATE_WINDOW };
+  const RESUME_LIMIT = { max: app.config.RESUME_RATE_MAX, timeWindow: app.config.RESUME_RATE_WINDOW };
   const jwt = createJwt(app.config.JWT_SECRET);
   const insertUser = app.db.prepare(
     "INSERT INTO users (username, created_at) VALUES (?, ?)",

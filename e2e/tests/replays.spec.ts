@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 /**
  * /replays smoke spec.
@@ -49,7 +49,7 @@ test.describe("/replays smoke", () => {
     await loginAs(page, "rep_footer");
 
     const link = page.getByTestId("footer-replays-link");
-    await link.scrollIntoViewIfNeeded();
+    await expect(link).toBeAttached();
     await link.click();
 
     await expect(page).toHaveURL(/\/replays$/);

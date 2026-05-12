@@ -1,11 +1,13 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "../fixtures";
 
 async function loginAs(page: Page, prefix: string): Promise<void> {
   const username = `${prefix}_${Math.random().toString(36).slice(2, 8)}`;
   await page.goto("/login");
   await page.getByLabel(/username/i).fill(username);
   await page.getByRole("button", { name: /^claim$/i }).click();
-  await expect(page).toHaveURL("/");
+  // Bump the URL-assertion timeout: under concurrent load the claim
+  // POST + lobby-route mount can take longer than the 5s default.
+  await expect(page).toHaveURL("/", { timeout: 15_000 });
 }
 
 test.describe("top-games smoke", () => {
@@ -17,7 +19,16 @@ test.describe("top-games smoke", () => {
 
   test("clicking klondike tile navigates to /play/klondike", async ({ page }) => {
     await loginAs(page, "k");
+    // Klondike now lives inside a family (LobbyPage FEATURED_IDS), so
+    // `tile-klondike` is the family-aggregate button which opens a
+    // variants picker dialog rather than navigating directly. Click the
+    // tile, then click the "Klondike Solitaire" link inside the picker
+    // which points at /play/klondike.
     await page.getByTestId("tile-klondike").click();
+    await page
+      .getByRole("dialog", { name: /klondike variants/i })
+      .getByRole("link", { name: /^klondike solitaire/i })
+      .click();
     await expect(page).toHaveURL(/\/play\/klondike(?:$|\/|\?)/);
   });
 
@@ -56,7 +67,11 @@ test.describe("top-games smoke", () => {
     await loginAs(page, "daily");
     await page.goto("/daily");
     await expect(page.getByTestId("daily-page")).toBeVisible();
-    await expect(page.getByRole("heading", { name: /today's challenge/i })).toBeVisible();
+    // Page hero heading reads "Daily challenge" now (the legacy
+    // "Today's challenge" phrasing moved to the region aria-label).
+    await expect(
+      page.getByRole("heading", { name: /daily challenge/i, level: 1 }),
+    ).toBeVisible();
     await expect(page.getByTestId("daily-date")).toBeVisible();
   });
 
