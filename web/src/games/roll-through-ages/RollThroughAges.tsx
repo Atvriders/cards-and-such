@@ -99,7 +99,7 @@ export function RollThroughAges({
       </div>
 
       {phase === "done" && (
-        <div className="rta-gameover">
+        <div className="rta-gameover bounce-in">
           Age complete! Final score: <strong>{score}</strong>
         </div>
       )}

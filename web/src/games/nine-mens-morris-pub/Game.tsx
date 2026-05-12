@@ -10,7 +10,7 @@ export function NineMensMorrisPubGame({ state, dispatch, onGameOver }: GameProps
   if (state.phase === "done") {
     return (
       <div className="nimemopu-wrap">
-        <div className="nimemopu-done">
+        <div className="nimemopu-done bounce-in">
           <h2>Move</h2>
           <div className="nimemopu-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function NineMensMorrisPubGame({ state, dispatch, onGameOver }: GameProps
     );
   }
   return (
-    <div className="nimemopu-wrap">
+    <div className="nimemopu-wrap fade-in">
       <div className="nimemopu-head">
         <span className="nimemopu-round">Move {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="nimemopu-score">{state.score} pts</span>
+        <span className="nimemopu-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

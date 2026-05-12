@@ -9,7 +9,7 @@ export function ApiaryBeesGame({ state, dispatch, onGameOver }: GameProps<Apiary
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="apb-wrap">
+    <div className="apb-wrap fade-in">
       <h3 className="apb-title">Apiary: Bees</h3>
       <div className="apb-stats">
         <div className="apb-stat"><span>Round</span><b>{state.round}/9</b></div>
@@ -36,7 +36,7 @@ export function ApiaryBeesGame({ state, dispatch, onGameOver }: GameProps<Apiary
         </div>
       )}
       {state.phase === "done" && (
-        <div className="apb-done">
+        <div className="apb-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="apb-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
           <div className="apb-final-score">Final score: <b>{finalScore}</b></div>

@@ -8,12 +8,12 @@ export function PasseDixGame({ state, dispatch, onGameOver }: GameProps<PasseDix
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="pd-wrap"><div className="pd-done"><h2>Done!</h2><div className="pd-final">{state.score} pts</div></div></div>;
+    return <div className="pd-wrap"><div className="pd-done bounce-in"><h2>Done!</h2><div className="pd-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="pd-wrap">
+    <div className="pd-wrap fade-in">
       <div className="pd-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="pd-score">{state.score} pts</div>
+      <div className="pd-score pulse">{state.score} pts</div>
       {state.dice.length > 0 && <div className="pd-row">{state.dice.map((d, i) => <div key={i} className="pd-die">{d}</div>)}</div>}
       {state.message && <div className="pd-result">{state.message}</div>}
       {state.phase === "roll" && <button className="pd-btn" data-testid="hint-target-passe-dix-roll" onClick={() => dispatch({ type:"roll" } as PasseDixAction)}>Roll</button>}

@@ -16,14 +16,14 @@ export function PokepuzzleLeagueMiniGame({ state, dispatch, onGameOver }: GamePr
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="m3-wrap"><div className="m3-done"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
+    return <div className="m3-wrap"><div className="m3-done bounce-in"><h2>Time's Up!</h2><div>Matches: {state.matches}</div><div className="m3-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="m3-wrap">
       <div className="m3-header">
         <span className="m3-info">Matches: {state.matches}</span>
         <span className="m3-timer">{state.ticksRemaining}s</span>
-        <span className="m3-score">{state.score} pts</span>
+        <span className="m3-score pulse">{state.score} pts</span>
       </div>
       <div className="m3-grid">
         {state.grid.map((row, r) => row.map((g, c) => {

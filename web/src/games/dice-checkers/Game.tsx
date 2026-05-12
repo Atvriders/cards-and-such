@@ -6,7 +6,7 @@ import "./Game.css";
 export function DiceCheckersGame({ state, dispatch, onGameOver }: GameProps<DiceCheckersState, DiceCheckersSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>Captures: {state.captures}</div><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="dm-wrap"><div className="dm-done bounce-in"><h2>Done!</h2><div>Captures: {state.captures}</div><div className="dm-final">{state.score} pts</div></div></div>;
   return (
     <div className="dm-wrap">
       <div className="dm-info">Turn {state.turn} / {TOTAL_TURNS} — Captures: {state.captures}</div>

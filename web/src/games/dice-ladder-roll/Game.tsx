@@ -7,10 +7,10 @@ import "./Game.css";
 export function DiceLadderRollGame({ state, dispatch, onGameOver }: GameProps<DiceLadderRollState, DiceLadderRollSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  if (state.phase === "gameover") return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><p>Total: {state.score} pts</p></div></div>;
+  if (state.phase === "gameover") return <div className="dm-wrap"><div className="dm-done bounce-in"><h2>Done!</h2><p>Total: {state.score} pts</p></div></div>;
   return (
-    <div className="dm-wrap">
-      <div className="dm-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dm-score">{state.score} pts</span></div>
+    <div className="dm-wrap fade-in">
+      <div className="dm-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dm-score pulse">{state.score} pts</span></div>
       <div className="dm-target">Streak: {state.streak} | Last: {state.lastRoll || "—"}</div>
       <p>Roll higher than the last to keep the streak!</p>
       {state.phase === "waiting" && <button className="dm-btn" data-testid="hint-target-dice-ladder-roll-roll" onClick={() => dispatch({ type:"roll" } as DiceLadderRollAction)}>Roll!</button>}

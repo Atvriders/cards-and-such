@@ -14,14 +14,14 @@ export function PineconePopGame({ state, dispatch, onGameOver }: GameProps<Pinec
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="pcp-wrap"><div className="pcp-done"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="pcp-final">{state.score} pts</div></div></div>;
+    return <div className="pcp-wrap"><div className="pcp-done bounce-in"><h2>Time's Up!</h2><div>Clicked: {state.clicked} / Missed: {state.missed}</div><div className="pcp-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="pcp-wrap">
       <div className="pcp-header">
         <span className="pcp-info">Clicked: {state.clicked}</span>
         <span className="pcp-timer">{state.ticksRemaining}s</span>
-        <span className="pcp-score">{state.score} pts</span>
+        <span className="pcp-score pulse">{state.score} pts</span>
       </div>
       <div className="pcp-board" style={{ background: "linear-gradient(180deg,#166534,#052e16)" }}>
         {state.targets.map(p => {

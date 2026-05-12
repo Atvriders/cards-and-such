@@ -10,7 +10,7 @@ export function DartsKillerClassicGame({ state, dispatch, onGameOver }: GameProp
   if (state.phase === "done") {
     return (
       <div className="dakicl-wrap">
-        <div className="dakicl-done">
+        <div className="dakicl-done bounce-in">
           <h2>Throw</h2>
           <div className="dakicl-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DartsKillerClassicGame({ state, dispatch, onGameOver }: GameProp
     );
   }
   return (
-    <div className="dakicl-wrap">
+    <div className="dakicl-wrap fade-in">
       <div className="dakicl-head">
         <span className="dakicl-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dakicl-score">{state.score} pts</span>
+        <span className="dakicl-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

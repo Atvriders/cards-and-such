@@ -21,7 +21,7 @@ export function MenschGame({ state, dispatch, onGameOver }: GameProps<MenschStat
     return (
       <div className="mensch-wrap">
         <h2 className={`mensch-banner ${won ? "mensch-win" : "mensch-loss"}`}>{won ? "You won the race!" : "CPU won the race!"}</h2>
-        <div className="mensch-score">Final score: {state.score}</div>
+        <div className="mensch-score pulse">Final score: {state.score}</div>
       </div>
     );
   }
@@ -93,6 +93,7 @@ export function MenschGame({ state, dispatch, onGameOver }: GameProps<MenschStat
                   {opts.map((pips, k) => (
                     <button
                       key={k}
+                      title="Move pawn"
                       className="mensch-movebtn"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as MenschAction)}
                     >

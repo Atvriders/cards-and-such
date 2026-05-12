@@ -8,9 +8,9 @@ export function AtlanticCityBjGame({ state, dispatch, onGameOver }: GameProps<At
   if (state.phase === "done") return <div className="ac-bj-wrap"><div className="ac-bj-done"><h2>Done!</h2><div className="ac-bj-final">{state.score} pts</div></div></div>;
   const showDealer = state.phase !== "play";
   return (
-    <div className="ac-bj-wrap">
+    <div className="ac-bj-wrap fade-in">
       <div className="ac-bj-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ac-bj-score">{state.score} pts</div>
+      <div className="ac-bj-score pulse">{state.score} pts</div>
       <div className="ac-bj-info">Dealer ({showDealer ? state.dealerTotal : "?"}):</div>
       <div className="ac-bj-row">
         {state.dealer.map((c, i) => (i === 1 && !showDealer)

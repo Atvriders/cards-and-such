@@ -10,7 +10,7 @@ export function DiceAroundClockGame({ state, dispatch, onGameOver }: GameProps<D
   if (state.phase === "done") {
     return (
       <div className="diarcl-wrap">
-        <div className="diarcl-done">
+        <div className="diarcl-done bounce-in">
           <h2>Throw</h2>
           <div className="diarcl-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceAroundClockGame({ state, dispatch, onGameOver }: GameProps<D
     );
   }
   return (
-    <div className="diarcl-wrap">
+    <div className="diarcl-wrap fade-in">
       <div className="diarcl-head">
         <span className="diarcl-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="diarcl-score">{state.score} pts</span>
+        <span className="diarcl-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

@@ -17,7 +17,7 @@ export function RestaurantTycoon({
   const estimatedCost = staffCost + state.marketing + Math.round(state.staff * 8 * state.menuPrice * 0.3 * MEALS[state.featuredMeal].costMult);
 
   return (
-    <div className="rest-wrap">
+    <div className="rest-wrap fade-in">
       <div className="rest-header">
         <span className="rest-title">🍽️ Restaurant Tycoon</span>
         <span className="rest-day">Day {state.day}/{TOTAL_DAYS}</span>
@@ -79,7 +79,7 @@ export function RestaurantTycoon({
       )}
 
       {state.phase === "done" && (
-        <div className="rest-done">
+        <div className="rest-done bounce-in">
           <div className="rest-final">Final Cash: <strong>${state.cash}</strong></div>
           <div>{state.cash >= 2000 ? "⭐ Michelin Star quality!" : state.cash >= 1000 ? "👍 Solid business!" : "📉 Struggled to profit"}</div>
         </div>

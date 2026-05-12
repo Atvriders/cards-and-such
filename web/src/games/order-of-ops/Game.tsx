@@ -28,7 +28,7 @@ export function OrderOfOpsGame({ state, dispatch, onGameOver }: GameProps<OrderO
   if (terminal) {
     return (
       <div className="oo-wrap">
-        <div className="oo-done">
+        <div className="oo-done bounce-in">
           <h2>Finished!</h2>
           <p>Score: <strong>{terminal.score}</strong> &middot; {state.correctCount}/{total} correct</p>
         </div>
@@ -37,7 +37,7 @@ export function OrderOfOpsGame({ state, dispatch, onGameOver }: GameProps<OrderO
   }
 
   return (
-    <div className="oo-wrap">
+    <div className="oo-wrap fade-in">
       <div className="oo-header">
         <span>Question <strong>{state.currentIndex + 1}</strong>/{total}</span>
         <span>Score: <strong>{state.score}</strong></span>

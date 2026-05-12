@@ -80,10 +80,10 @@ export function KingsRowGame({
             )}
             {col.length > 0 && (
               <>
-                <button className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 0 } as KingsRowAction)}>→F1</button>
-                <button className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 1 } as KingsRowAction)}>→F2</button>
-                <button className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 2 } as KingsRowAction)}>→F3</button>
-                <button className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 3 } as KingsRowAction)}>→F4</button>
+                <button title="Move to foundation 1" className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 0 } as KingsRowAction)}>→F1</button>
+                <button title="Move to foundation 2" className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 1 } as KingsRowAction)}>→F2</button>
+                <button title="Move to foundation 3" className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 2 } as KingsRowAction)}>→F3</button>
+                <button title="Move to foundation 4" className="kr-btn" onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: 3 } as KingsRowAction)}>→F4</button>
               </>
             )}
           </div>

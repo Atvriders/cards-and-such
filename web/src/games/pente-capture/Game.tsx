@@ -11,7 +11,7 @@ export function PenteCaptureGame({ state, dispatch, onGameOver }: GameProps<Game
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="pnt-wrap">
-        <div className="pnt-done"><h2>{msg}</h2><div className="pnt-final">{state.score} pts</div></div>
+        <div className="pnt-done bounce-in"><h2>{msg}</h2><div className="pnt-final">{state.score} pts</div></div>
       </div>
     );
   }

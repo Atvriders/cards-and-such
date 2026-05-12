@@ -13,7 +13,7 @@ export function DiceShrineGame({ state, dispatch, onGameOver }: GameProps<DiceSh
   if (state.phase === "done") {
     return (
       <div className="sh-wrap">
-        <div className="sh-done">
+        <div className="sh-done bounce-in">
           <h2>The Gods Are Pleased</h2>
           <div className="sh-final">{state.score} pts</div>
         </div>
@@ -22,7 +22,7 @@ export function DiceShrineGame({ state, dispatch, onGameOver }: GameProps<DiceSh
   }
 
   return (
-    <div className="sh-wrap">
+    <div className="sh-wrap fade-in">
       <div className="sh-banner">Round {state.round} / {ROUNDS} · Score {state.score}</div>
       <div className={`sh-altar ${state.god}`}>
         <div className="sh-glyph">{GLYPH[state.god]}</div>

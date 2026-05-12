@@ -14,14 +14,14 @@ export function PuppyTapGame({ state, dispatch, onGameOver }: GameProps<PuppyTap
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="pt-wrap"><div className="pt-done"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="pt-final">{state.score} pts</div></div></div>;
+    return <div className="pt-wrap"><div className="pt-done bounce-in"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="pt-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="pt-wrap">
       <div className="pt-header">
         <span className="pt-info">Tapped: {state.popped}</span>
         <span className="pt-timer">{state.ticksRemaining}s</span>
-        <span className="pt-score">{state.score} pts</span>
+        <span className="pt-score pulse">{state.score} pts</span>
       </div>
       <div className="pt-board" style={{ background: "linear-gradient(180deg,#fed7aa,#c2410c)" }}>
         {state.targets.map(p => {

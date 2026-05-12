@@ -13,16 +13,16 @@ export function AcronymDefineQuizGame({ state, dispatch, onGameOver }: GameProps
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as AcronymDefineQuizAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="acronymdefinequiz-wrap"><div className="acronymdefinequiz-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="acronymdefinequiz-wrap"><div className="acronymdefinequiz-done bounce-in"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="acronymdefinequiz-wrap">
+    <div className="acronymdefinequiz-wrap fade-in">
       <div className="acronymdefinequiz-header">
         <span className="acronymdefinequiz-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`acronymdefinequiz-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="acronymdefinequiz-score">{state.score} pts</span>
+        <span className="acronymdefinequiz-score pulse">{state.score} pts</span>
       </div>
       <div className="acronymdefinequiz-question">{q.question}</div>
       <div className="acronymdefinequiz-choices">

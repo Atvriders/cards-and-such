@@ -25,7 +25,7 @@ export function DiceFantasyBasketballDraftGame({ state, dispatch, onGameOver }: 
     <div className="difbsk-wrap">
       <div className="difbsk-head">
         <span className="difbsk-round">Pick {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="difbsk-score">{state.score} pts</span>
+        <span className="difbsk-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

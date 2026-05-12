@@ -13,14 +13,14 @@ export function WeedWhackGame({ state, dispatch, onGameOver }: GameProps<WeedWha
     return ()=>{ if (tickRef.current) clearInterval(tickRef.current); };
   },[state.phase,dispatch]);
   if (state.phase==="done") {
-    return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Weeds: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+    return <div className="fc-wrap"><div className="fc-done bounce-in"><h2>Time's Up!</h2><div>Weeds: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="fc-wrap">
       <div className="fc-header">
         <span className="fc-info">Weeds: {state.popped}</span>
         <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+        <span className="fc-score pulse">{state.score} pts</span>
       </div>
       <div className="fc-board">
         {state.targets.map(p=>{

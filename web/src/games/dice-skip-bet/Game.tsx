@@ -12,7 +12,7 @@ export function DiceSkipBet({ state, dispatch, onGameOver }: GameProps<DiceSkipB
   if (state.phase === "gameover") return <div className="dg-wrap"><div className="dg-done"><h2>Done!</h2><p>Coins: {state.coins}</p></div></div>;
   return (
     <div className="dg-wrap">
-      <div className="dg-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dg-score">{state.coins} coins</span></div>
+      <div className="dg-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dg-score pulse">{state.coins} coins</span></div>
       <p className="dg-label">Pick a "skip" number. Hit it = lose 5× bet. Miss it = win bet.</p>
       <div className="dg-dice">{state.die ? <div className={`dg-die${state.lastWin===false?" "+(state.skipNumber===state.die?"":""):""}`} style={{borderColor:state.lastWin===false?"#e74c3c":"#27ae60"}}>{FACES[state.die]}</div> : <div className="dg-die" style={{opacity:0.3}}>?</div>}</div>
       {state.phase==="result" && <p className={`dg-msg${state.lastWin?"":" bad"}`}>{state.lastWin?`Rolled ${state.die} — not ${state.skipNumber}! +${state.bet} coins`:`Hit ${state.skipNumber}! Lost ${state.bet*5} coins`}</p>}

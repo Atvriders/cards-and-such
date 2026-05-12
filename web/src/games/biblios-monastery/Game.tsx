@@ -9,7 +9,7 @@ export function BibliosMonasteryGame({ state, dispatch, onGameOver }: GameProps<
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="bbm-wrap">
+    <div className="bbm-wrap fade-in">
       <h3 className="bbm-title">Biblios: Monastery</h3>
       <div className="bbm-stats">
         <div className="bbm-stat"><span>Round</span><b>{state.round}/8</b></div>
@@ -36,7 +36,7 @@ export function BibliosMonasteryGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bbm-done">
+        <div className="bbm-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="bbm-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
           <div className="bbm-final-score">Final score: <b>{finalScore}</b></div>

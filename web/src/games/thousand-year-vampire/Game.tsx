@@ -7,14 +7,14 @@ const LABELS = ["A", "B", "C", "D"];
 export function ThousandYearVampireGame({ state, dispatch, onGameOver }: GameProps<ThousandYearVampireState, ThousandYearVampireSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="tyv-wrap"><div className="tyv-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#b91c1c" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="tyv-wrap"><div className="tyv-done bounce-in"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#b91c1c" }}>{state.score} pts</p></div></div>;
   const p = state.prompts[state.index]!;
   const isResult = state.phase === "result";
   return (
-    <div className="tyv-wrap">
+    <div className="tyv-wrap fade-in">
       <div className="tyv-header">
         <span className="tyv-progress">Entry {state.index + 1} / {state.prompts.length}</span>
-        <span className="tyv-score">{state.score} pts</span>
+        <span className="tyv-score pulse">{state.score} pts</span>
       </div>
       <div className="tyv-prompt">{p.prompt}</div>
       <div className="tyv-choices">

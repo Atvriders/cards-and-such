@@ -14,7 +14,7 @@ export function WelcomeLasVegasGame({ state, dispatch, onGameOver }: GameProps<W
         <h2 className="wlv-title">Welcome to Las Vegas</h2>
         <div className="wlv-meta">
           <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="wlv-score">{state.score} pts</span>
+          <span className="wlv-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "placing" && state.lastRoll !== null && (
@@ -51,7 +51,7 @@ export function WelcomeLasVegasGame({ state, dispatch, onGameOver }: GameProps<W
         )}
         <button className="wlv-btn wlv-reset" onClick={() => dispatch({ type: "reset" } as WelcomeLasVegasAction)}>Reset</button>
       </div>
-      {state.phase === "done" && <div className="wlv-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="wlv-done bounce-in">Final: <b>{final}</b></div>}
       <div className="wlv-rules">Roll 12 = jackpot +10</div>
     </div>
   );

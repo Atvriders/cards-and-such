@@ -19,7 +19,7 @@ export function Trek12ArcticGame({ state, dispatch, onGameOver }: GameProps<Trek
         <h2 className="tar-title">Trek 12 Arctic</h2>
         <div className="tar-meta">
           <span>Roll {state.rolls + (state.phase === "choosing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="tar-score">{state.score} pts</span>
+          <span className="tar-score pulse">{state.score} pts</span>
         </div>
       </header>
 
@@ -57,7 +57,7 @@ export function Trek12ArcticGame({ state, dispatch, onGameOver }: GameProps<Trek
         <button className="tar-btn tar-reset" onClick={() => dispatch({ type: "reset" } as Trek12ArcticAction)}>Reset</button>
       </div>
 
-      {state.phase === "done" && <div className="tar-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="tar-done bounce-in">Final: <b>{final}</b></div>}
       <div className="tar-rules">All ≤3 rolls: ice bonus +5</div>
     </div>
   );

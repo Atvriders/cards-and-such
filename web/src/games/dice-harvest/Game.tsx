@@ -11,7 +11,7 @@ export function DiceHarvestGame({ state, dispatch, onGameOver }: GameProps<DiceH
   if (state.phase === "done") {
     return (
       <div className="hv-wrap">
-        <div className="hv-done">
+        <div className="hv-done bounce-in">
           <h2>Harvest Festival</h2>
           <div className="hv-final">{state.score} pts</div>
         </div>
@@ -20,7 +20,7 @@ export function DiceHarvestGame({ state, dispatch, onGameOver }: GameProps<DiceH
   }
 
   return (
-    <div className="hv-wrap">
+    <div className="hv-wrap fade-in">
       <div className="hv-banner">Season {state.season} / {SEASONS} · Score {state.score}</div>
       <div className="hv-fields">
         {state.fields.map((f, i) => (

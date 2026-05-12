@@ -17,7 +17,7 @@ export function DiceDoubleTrouble({ state, dispatch, onGameOver }: GameProps<Dic
   const isResult = state.phase === "result";
 
   return (
-    <div className="dice-wrap">
+    <div className="dice-wrap fade-in">
       <div className="dice-header"><span>Round {state.round}/{state.maxRounds}</span><span>{state.totalScore} pts</span></div>
       {isResult && (
         <>

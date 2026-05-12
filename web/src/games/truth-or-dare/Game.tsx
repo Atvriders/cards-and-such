@@ -14,7 +14,7 @@ export function TruthOrDare({ state, dispatch, onGameOver }: GameProps<TODState,
   if (state.phase === "done") {
     return (
       <div className="tod-wrap">
-        <div className="tod-done">
+        <div className="tod-done bounce-in">
           <h2>All Done!</h2>
           <p>Completed <strong>{state.completed}</strong> rounds of Truth or Dare!</p>
         </div>
@@ -45,7 +45,7 @@ export function TruthOrDare({ state, dispatch, onGameOver }: GameProps<TODState,
   const isTruth = card.kind === "truth";
 
   return (
-    <div className="tod-wrap">
+    <div className="tod-wrap fade-in">
       <div className="tod-header">
         <span>Round {state.currentIndex + 1} / {state.cards.length}</span>
       </div>

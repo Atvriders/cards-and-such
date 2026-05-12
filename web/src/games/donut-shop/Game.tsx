@@ -16,7 +16,7 @@ export function DonutShop({
   const estCost = Math.round(state.dozenCount * FLAVORS[state.flavor].cost);
 
   return (
-    <div className="donut-wrap">
+    <div className="donut-wrap fade-in">
       <div className="donut-header">
         <span className="donut-title">Donut Shop</span>
         <span className="donut-day">Day {state.day}/{TOTAL_DAYS}</span>
@@ -85,7 +85,7 @@ export function DonutShop({
       )}
 
       {state.phase === "done" && (
-        <div className="donut-done">
+        <div className="donut-done bounce-in">
           <div className="donut-final">Final Cash: <strong>${state.cash}</strong></div>
           <div>{state.cash >= 1000 ? "Donut Legend!" : state.cash >= 500 ? "Sweet Success!" : "Keep glazing!"}</div>
         </div>

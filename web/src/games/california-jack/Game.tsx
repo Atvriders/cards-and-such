@@ -98,7 +98,7 @@ export function CaliforniaJackGame({ state, dispatch, onGameOver }: GameProps<Ca
       )}
 
       {phase === "done" && (
-        <div className="cj-done">
+        <div className="cj-done bounce-in">
           <h3>{playerScore >= target ? "You Win!" : "Bot Wins!"}</h3>
           <div>Final: You {playerScore} – Bot {botScore}</div>
         </div>

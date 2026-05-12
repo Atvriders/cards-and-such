@@ -10,14 +10,14 @@ export function RaceGame({ state, dispatch, onGameOver }: GameProps<RaceState, R
 
   if (state.phase === "done") {
     const msg = state.winner === "P" ? "You won!" : "CPU won!";
-    return <div className="race-wrap"><h2>{msg}</h2><div className="race-score">Score: {state.score}</div></div>;
+    return <div className="race-wrap"><h2>{msg}</h2><div className="race-score pulse">Score: {state.score}</div></div>;
   }
 
   const isPTurn = state.turn === "P";
   const dieAvailable = (i: 0 | 1) => !state.diceUsed[i];
 
   return (
-    <div className="race-wrap">
+    <div className="race-wrap fade-in">
       <div className="race-status">
         {isPTurn ? (state.phase === "rolling" ? "Your turn — roll dice." : "Move your checkers.") : "CPU thinking..."}
       </div>

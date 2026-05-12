@@ -77,7 +77,7 @@ export function QuickTickGame({ state, dispatch, onGameOver }: GameProps<QuickTi
 
   return (
     <div className="quick-tick">
-      <div className="qt-score">Score: {state.score} / {TOTAL_TICKS * POINTS_PERFECT}</div>
+      <div className="qt-score pulse">Score: {state.score} / {TOTAL_TICKS * POINTS_PERFECT}</div>
       <div className="qt-progress">Tick {Math.min(state.tickNumber + 1, TOTAL_TICKS)} of {TOTAL_TICKS}</div>
 
       {state.phase === "waiting" && (
@@ -104,7 +104,7 @@ export function QuickTickGame({ state, dispatch, onGameOver }: GameProps<QuickTi
 
       {state.phase === "done" && (
         <>
-          <div className="qt-done">Done! Final Score: {state.score}</div>
+          <div className="qt-done bounce-in">Done! Final Score: {state.score}</div>
           <div className="qt-controls">
             <button onClick={() => dispatch({ type: "newGame" })}>Play Again</button>
           </div>

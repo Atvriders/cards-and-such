@@ -7,10 +7,10 @@ export function FourCardPokerCasGame({ state, dispatch, onGameOver }: GameProps<
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") return <div className="fcp-c-wrap"><h3>Four Card Poker (Casino)</h3><div className="fcp-c-done"><h2>Done!</h2><div className="fcp-c-final">{state.score} pts</div></div></div>;
   return (
-    <div className="fcp-c-wrap">
+    <div className="fcp-c-wrap fade-in">
       <h3>Four Card Poker (Casino)</h3>
       <div className="fcp-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="fcp-c-score">{state.score} pts</div>
+      <div className="fcp-c-score pulse">{state.score} pts</div>
       {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
         <div className="fcp-c-row">
           <div className={`fcp-c-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>

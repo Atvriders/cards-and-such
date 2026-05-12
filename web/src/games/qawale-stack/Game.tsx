@@ -8,10 +8,10 @@ export function QawaleStackGame({ state, dispatch, onGameOver }: GameProps<Qawal
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
-    return <div className="ab-wrap"><h3>Qawale Stack</h3><div className="ab-done"><h2>{msg}</h2><div className="ab-final">{state.score} pts</div></div></div>;
+    return <div className="ab-wrap"><h3>Qawale Stack</h3><div className="ab-done bounce-in"><h2>{msg}</h2><div className="ab-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="ab-wrap">
+    <div className="ab-wrap fade-in">
       <h3>Qawale Stack</h3>
       <div className="ab-info">Place on an empty square. Most pieces wins.</div>
       <div className="ab-score">Move {state.moves}</div>

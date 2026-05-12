@@ -14,7 +14,7 @@ export function BlinkSpeedGame({ state, dispatch, onGameOver }: GameProps<BlinkS
   return (
     <div className="blnkspd-wrap">
       <div className="blnkspd-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="blnkspd-score">{state.score} pts</div>
+      <div className="blnkspd-score pulse">{state.score} pts</div>
       <div className="blnkspd-prompt">{r.question}</div>
       <div className="blnkspd-grid">
         {r.choices.map((n, i) => {

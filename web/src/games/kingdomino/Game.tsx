@@ -11,7 +11,7 @@ export function KingdominoGame({ state, dispatch, onGameOver }: GameProps<Kingdo
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="kdom-wrap">
+    <div className="kdom-wrap fade-in">
       <h3 className="kdom-title">Kingdomino</h3>
       <div className="kdom-meta">
         <div className="kdom-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function KingdominoGame({ state, dispatch, onGameOver }: GameProps<Kingdo
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="kdom-done">
+        <div className="kdom-done bounce-in">
           <h3>Done!</h3>
           <div className="kdom-final">{state.score} pts</div>
         </div>

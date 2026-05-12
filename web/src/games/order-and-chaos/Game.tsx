@@ -18,7 +18,7 @@ export function OrderAndChaosGame({ state, dispatch, onGameOver }: GameProps<Gam
   return (
     <div className="oac-wrap">
       <div className="oac-info">Order and Chaos: click an empty cell to place your piece. Move {state.moves}.</div>
-      <div className="oac-score">Captures: {state.captures}</div>
+      <div className="oac-score pulse">Captures: {state.captures}</div>
       <div className="oac-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];

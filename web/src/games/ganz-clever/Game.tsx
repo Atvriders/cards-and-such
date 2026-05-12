@@ -17,7 +17,7 @@ export function GanzCleverGame({ state, dispatch, onGameOver }: GameProps<GanzCl
         <h2 className="gcl-title">Ganz Clever</h2>
         <div className="gcl-meta">
           <span>Roll {state.rolls + (state.phase !== "rolling" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="gcl-score">{state.score} pts</span>
+          <span className="gcl-score pulse">{state.score} pts</span>
         </div>
       </header>
 
@@ -72,7 +72,7 @@ export function GanzCleverGame({ state, dispatch, onGameOver }: GameProps<GanzCl
         <button className="gcl-btn gcl-reset" onClick={() => dispatch({ type: "reset" } as GanzCleverAction)}>Reset</button>
       </div>
 
-      {state.phase === "done" && <div className="gcl-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="gcl-done bounce-in">Final: <b>{final}</b></div>}
       <div className="gcl-rules">Each die: pick track, sum the rest</div>
     </div>
   );

@@ -14,7 +14,7 @@ export function PopcornPopGame({ state, dispatch, onGameOver }: GameProps<Popcor
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="popcornpop-wrap"><div className="popcornpop-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="popcornpop-final">{state.score} pts</div></div></div>;
+    return <div className="popcornpop-wrap"><div className="popcornpop-done bounce-in"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="popcornpop-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="popcornpop-wrap">

@@ -30,7 +30,7 @@ export function GuessTheFlag({
   return (
     <div className="guess-flag">
       {state.phase === "done" ? (
-        <div className="gf-done">
+        <div className="gf-done bounce-in">
           Quiz complete! {state.correct}/{state.totalRounds} correct
           <br />Score: {state.correct * 4}
         </div>

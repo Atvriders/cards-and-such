@@ -39,7 +39,7 @@ export function SevenWondersArchitectsDraftGame({ state, dispatch, onGameOver }:
         <div className="swad-done">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="swad-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="swad-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="swad-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="swad-tableaus">

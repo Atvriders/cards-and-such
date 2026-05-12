@@ -10,7 +10,7 @@ export function DiceApbaBasketballGame({ state, dispatch, onGameOver }: GameProp
   if (state.phase === "done") {
     return (
       <div className="diapba-wrap">
-        <div className="diapba-done">
+        <div className="diapba-done bounce-in">
           <h2>Quarter</h2>
           <div className="diapba-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceApbaBasketballGame({ state, dispatch, onGameOver }: GameProp
     );
   }
   return (
-    <div className="diapba-wrap">
+    <div className="diapba-wrap fade-in">
       <div className="diapba-head">
         <span className="diapba-round">Quarter {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="diapba-score">{state.score} pts</span>
+        <span className="diapba-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

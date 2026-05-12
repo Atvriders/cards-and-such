@@ -13,16 +13,16 @@ export function AlmostChessGame({ state, dispatch, onGameOver }: GameProps<Almos
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as AlmostChessAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="almch-wrap"><div className="almch-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="almch-wrap"><div className="almch-done bounce-in"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="almch-wrap">
+    <div className="almch-wrap fade-in">
       <div className="almch-header">
         <span className="almch-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`almch-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="almch-score">{state.score} pts</span>
+        <span className="almch-score pulse">{state.score} pts</span>
       </div>
       <div className="almch-question">{q.question}</div>
       <div className="almch-choices">

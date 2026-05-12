@@ -22,7 +22,7 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
   if (state.phase === "done") {
     return (
       <div className="hypersapphire-wrap">
-        <div className="hypersapphire-done">
+        <div className="hypersapphire-done bounce-in">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
           <p className="hypersapphire-final">{state.score} pts</p>
@@ -39,7 +39,7 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
     <div className="hypersapphire-wrap">
       <div className="hypersapphire-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="hypersapphire-score">{state.score} pts</span>
+        <span className="hypersapphire-score pulse">{state.score} pts</span>
       </div>
       <div className="hypersapphire-mech">Sudoku with four extra 3×3 hyper-regions.</div>
       <div className="hypersapphire-grid">

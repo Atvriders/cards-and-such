@@ -9,7 +9,7 @@ export function SixCardStudCasGame({ state, dispatch, onGameOver }: GameProps<Si
   return (
     <div className="dm-wrap thm6StudCas">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="dm-score pulse">{state.score} pts</div>
       <div className="dm-info">You:</div>
       <div className="dm-row">{state.you.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "see" && <div className="dm-row">

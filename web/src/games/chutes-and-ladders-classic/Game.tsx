@@ -21,7 +21,7 @@ export function ChutesGame({ state, dispatch, onGameOver }: GameProps<ChutesStat
     return (
       <div className="chutes-cl-wrap">
         <h2 className={`chutes-cl-banner ${won ? "chutes-cl-win" : "chutes-cl-loss"}`}>{won ? "You won the race!" : "CPU won the race!"}</h2>
-        <div className="chutes-cl-score">Final score: {state.score}</div>
+        <div className="chutes-cl-score pulse">Final score: {state.score}</div>
       </div>
     );
   }

@@ -16,7 +16,7 @@ export function WordPyramid({ state, dispatch, onGameOver }: GameProps<WordPyram
     return (
       <div className="pyramid-wrap">
         <div className="pyramid-title">Word Pyramid</div>
-        <div className="pyramid-done">
+        <div className="pyramid-done bounce-in">
           <h2>Complete!</h2>
           <p style={{ fontWeight: 900, fontSize: "1.5rem", color: "#27ae60" }}>Score: {state.score}</p>
           <p>{state.message}</p>

@@ -8,13 +8,13 @@ export function FlagsMemoryGame({ state, dispatch, onGameOver }: GameProps<Flags
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="flagmem-wrap"><div className="flagmem-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="flagmem-final">{state.score} pts</div></div></div>;
+    return <div className="flagmem-wrap"><div className="flagmem-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="flagmem-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="flagmem-wrap">
+    <div className="flagmem-wrap fade-in">
       <div className="flagmem-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="flagmem-score">{state.score} pts</div>
+      <div className="flagmem-score pulse">{state.score} pts</div>
       <div className="flagmem-prompt">{r.question}</div>
       <div className="flagmem-grid">
         {r.choices.map((n, i) => {

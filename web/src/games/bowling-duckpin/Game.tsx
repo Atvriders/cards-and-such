@@ -25,7 +25,7 @@ export function BowlingDuckpinGame({ state, dispatch, onGameOver }: GameProps<Bo
     <div className="bowduc-wrap">
       <div className="bowduc-head">
         <span className="bowduc-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="bowduc-score">{state.score} pts</span>
+        <span className="bowduc-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

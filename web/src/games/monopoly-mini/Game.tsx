@@ -267,7 +267,7 @@ export function MonopolyMiniGame({ state, dispatch, onGameOver }: GameProps<Mono
           </button>
         )}
         {state.phase === "done" && (
-          <div className="monopolymini-done">
+          <div className="monopolymini-done bounce-in">
             <div className="monopolymini-done-msg">{state.message}</div>
             <div className="monopolymini-done-score">Score: <strong>{score(state)}</strong></div>
           </div>

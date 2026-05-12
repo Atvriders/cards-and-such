@@ -8,15 +8,15 @@ export function CardTrioBuildGame({ state, dispatch, onGameOver }: GameProps<Car
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ctb-wrap"><div className="ctb-done"><h2>Done!</h2><div>Trios formed: {state.trios}</div><div className="ctb-final">{t?.score} pts</div></div></div>;
+    return <div className="ctb-wrap"><div className="ctb-done bounce-in"><h2>Done!</h2><div>Trios formed: {state.trios}</div><div className="ctb-final">{t?.score} pts</div></div></div>;
   }
   // count by rank for build buttons
   const counts: Record<number, number> = {};
   for (const c of state.hand) counts[c.rank] = (counts[c.rank] ?? 0) + 1;
   const buildable = Object.entries(counts).filter(([_, n]) => n >= 3).map(([r]) => parseInt(r, 10));
   return (
-    <div className="ctb-wrap">
-      <div className="ctb-header">Draws {state.drew}/{TOTAL_DRAWS} — Trios {state.trios} <span className="ctb-score">{state.score}</span></div>
+    <div className="ctb-wrap fade-in">
+      <div className="ctb-header">Draws {state.drew}/{TOTAL_DRAWS} — Trios {state.trios} <span className="ctb-score pulse">{state.score}</span></div>
       <div className="ctb-hand">
         {state.hand.map(c => (
           <button key={c.id} className="ctb-card" onClick={() => dispatch({ type:"discard", cardId: c.id } as CardTrioBuildAction)}>{rankLabel(c.rank)}</button>

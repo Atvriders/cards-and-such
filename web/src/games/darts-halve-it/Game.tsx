@@ -10,7 +10,7 @@ export function DartsHalveItGame({ state, dispatch, onGameOver }: GameProps<Dart
   if (state.phase === "done") {
     return (
       <div className="dahait-wrap">
-        <div className="dahait-done">
+        <div className="dahait-done bounce-in">
           <h2>Round</h2>
           <div className="dahait-final">{Math.max(0, state.score)} pts</div>
           

@@ -46,7 +46,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<ChinchonState, o
       <div className="chinchon-message">{message}</div>
 
       {finalScores && (
-        <div className="chinchon-done">
+        <div className="chinchon-done bounce-in">
           Your deadwood: {finalScores.player} | Bot deadwood: {finalScores.bot}
         </div>
       )}

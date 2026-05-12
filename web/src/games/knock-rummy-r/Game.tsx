@@ -5,11 +5,11 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function KnockRummyRGame({ state, dispatch, onGameOver }: GameProps<KnockRummyRState, KnockRummyRSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="knkr-wrap"><div className="knkr-done"><h2>Done!</h2><div className="knkr-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="knkr-wrap"><div className="knkr-done bounce-in"><h2>Done!</h2><div className="knkr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="knkr-wrap">
+    <div className="knkr-wrap fade-in">
       <div className="knkr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="knkr-score">{state.score} pts</div>
+      <div className="knkr-score pulse">{state.score} pts</div>
       <div className="knkr-row">{state.hand.map((c, i) => <div key={i} className={`knkr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <button data-testid="hint-target-knock-rummy-r-play" className="knkr-btn" onClick={() => dispatch({ type: "score" } as KnockRummyRAction)}>Auto-score</button>}
       {state.phase === "scored" && <>

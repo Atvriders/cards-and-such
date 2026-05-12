@@ -83,9 +83,9 @@ export function PineappleOfcGame({ state, dispatch, onGameOver }: GameProps<Pine
             </div>
             {inHand && (
               <div className={cls("placeactions")}>
-                <button data-testid="hint-target-pineap-ofc-top" className={cls("btn")} onClick={() => dis({ type: "place", row: "top", cardIndex: selectedIdx })} disabled={!canTop}>Top</button>
-                <button data-testid="hint-target-pineap-ofc-mid" className={cls("btn")} onClick={() => dis({ type: "place", row: "middle", cardIndex: selectedIdx })} disabled={!canMid}>Mid</button>
-                <button data-testid="hint-target-pineap-ofc-bot" className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom", cardIndex: selectedIdx })} disabled={!canBot}>Bot</button>
+                <button data-testid="hint-target-pineap-ofc-top" title="Place in top row" className={cls("btn")} onClick={() => dis({ type: "place", row: "top", cardIndex: selectedIdx })} disabled={!canTop}>Top</button>
+                <button data-testid="hint-target-pineap-ofc-mid" title="Place in middle row" className={cls("btn")} onClick={() => dis({ type: "place", row: "middle", cardIndex: selectedIdx })} disabled={!canMid}>Mid</button>
+                <button data-testid="hint-target-pineap-ofc-bot" title="Place in bottom row" className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom", cardIndex: selectedIdx })} disabled={!canBot}>Bot</button>
               </div>
             )}
           </>

@@ -10,7 +10,7 @@ export function DiceDuckpinGame({ state, dispatch, onGameOver }: GameProps<DiceD
   if (state.phase === "done") {
     return (
       <div className="dicduc-wrap">
-        <div className="dicduc-done">
+        <div className="dicduc-done bounce-in">
           <h2>Frame</h2>
           <div className="dicduc-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceDuckpinGame({ state, dispatch, onGameOver }: GameProps<DiceD
     );
   }
   return (
-    <div className="dicduc-wrap">
+    <div className="dicduc-wrap fade-in">
       <div className="dicduc-head">
         <span className="dicduc-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dicduc-score">{state.score} pts</span>
+        <span className="dicduc-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

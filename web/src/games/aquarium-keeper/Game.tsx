@@ -33,7 +33,7 @@ export function AquariumKeeper({
       <div className="aqk-header">
         <span className="aqk-title">Aquarium Keeper</span>
         <span className="aqk-day">Day {state.day}/{state.totalDays}</span>
-        <span className="aqk-score">Score: {state.score}</span>
+        <span className="aqk-score pulse">Score: {state.score}</span>
       </div>
 
       <div className="aqk-meters">

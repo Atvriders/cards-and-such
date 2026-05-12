@@ -20,7 +20,7 @@ export function SurfSpikeGame({ state, dispatch, onGameOver }: GameProps<SurfSpi
       <div className="surfspike-header">
         <span className="surfspike-info">Popped: {state.popped}</span>
         <span className="surfspike-timer">{state.ticksRemaining}s</span>
-        <span className="surfspike-score">{state.score} pts</span>
+        <span className="surfspike-score pulse">{state.score} pts</span>
       </div>
       <div className="surfspike-board">
         {state.targets.map(p => {

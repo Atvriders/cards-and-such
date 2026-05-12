@@ -11,7 +11,7 @@ export function CarcassonneTowerGame({ state, dispatch, onGameOver }: GameProps<
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="carct-wrap">
+    <div className="carct-wrap fade-in">
       <h3 className="carct-title">Carcassonne: The Tower</h3>
       <div className="carct-meta">
         <div className="carct-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function CarcassonneTowerGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="carct-done">
+        <div className="carct-done bounce-in">
           <h3>Done!</h3>
           <div className="carct-final">{state.score} pts</div>
         </div>

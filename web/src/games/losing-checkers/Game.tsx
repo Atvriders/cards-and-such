@@ -11,7 +11,7 @@ export function LosingCheckersGame({ state, dispatch, onGameOver }: GameProps<Ga
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="lch-wrap">
-        <div className="lch-done"><h2>{msg}</h2><div className="lch-final">{state.score} pts</div></div>
+        <div className="lch-done bounce-in"><h2>{msg}</h2><div className="lch-final">{state.score} pts</div></div>
       </div>
     );
   }

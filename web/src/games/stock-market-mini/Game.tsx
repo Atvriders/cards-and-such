@@ -75,7 +75,7 @@ export function StockMarketMini({ state, dispatch, onGameOver }: GameProps<Stock
       )}
 
       {state.phase === "done" && (
-        <div className="stock-done">
+        <div className="stock-done bounce-in">
           <div className="stock-final">Final Value: <strong>${state.cash.toFixed(2)}</strong></div>
           <div className="stock-result">
             {state.cash >= 2000 ? "🏆 Stock Market Master!" : state.cash >= 1200 ? "👍 Profitable!" : "📉 Lost Money"}

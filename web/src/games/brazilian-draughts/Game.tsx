@@ -11,7 +11,7 @@ export function BrazilianDraughtsGame({ state, dispatch, onGameOver }: GameProps
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="bdg-wrap">
-        <div className="bdg-done"><h2>{msg}</h2><div className="bdg-final">{state.score} pts</div></div>
+        <div className="bdg-done bounce-in"><h2>{msg}</h2><div className="bdg-final">{state.score} pts</div></div>
       </div>
     );
   }

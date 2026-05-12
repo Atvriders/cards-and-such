@@ -8,7 +8,7 @@ export function ChronogramPuzzleGame({ state, dispatch, onGameOver }: GameProps<
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   if (state.phase === "done") return (
-    <div className="nlp-wrap"><div className="nlp-done"><h2>Done!</h2><p>Correct: {state.correct} / {state.puzzles.length}</p><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#27ae60" }}>{state.score} pts</p></div></div>
+    <div className="nlp-wrap"><div className="nlp-done bounce-in"><h2>Done!</h2><p>Correct: {state.correct} / {state.puzzles.length}</p><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#27ae60" }}>{state.score} pts</p></div></div>
   );
   const p = state.puzzles[state.idx]!;
   const isResult = state.phase === "result";

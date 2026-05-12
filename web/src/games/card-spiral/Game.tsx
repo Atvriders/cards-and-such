@@ -8,11 +8,11 @@ export function CardSpiralGame({ state, dispatch, onGameOver }: GameProps<CardSp
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="csp-wrap"><div className="csp-done"><h2>Spiral Complete!</h2><div className="csp-final">{t?.score} pts</div></div></div>;
+    return <div className="csp-wrap"><div className="csp-done bounce-in"><h2>Spiral Complete!</h2><div className="csp-final">{t?.score} pts</div></div></div>;
   }
   return (
-    <div className="csp-wrap">
-      <div className="csp-header">Draw {state.drew} / {TOTAL_DRAWS} <span className="csp-score">{state.score}</span></div>
+    <div className="csp-wrap fade-in">
+      <div className="csp-header">Draw {state.drew} / {TOTAL_DRAWS} <span className="csp-score pulse">{state.score}</span></div>
       <div className="csp-spiral">
         {state.spiral.map(c => (
           <div key={c.id} className="csp-card-mini">{rankLabel(c.rank)}</div>

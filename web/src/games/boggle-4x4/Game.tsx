@@ -13,7 +13,7 @@ export function Boggle4x4Game({ state, dispatch, onGameOver }: GameProps<GameSta
   if (state.phase === "done") {
     return (
       <div className="bg4-wrap">
-        <div className="bg4-done">
+        <div className="bg4-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -29,7 +29,7 @@ export function Boggle4x4Game({ state, dispatch, onGameOver }: GameProps<GameSta
     <div className="bg4-wrap">
       <div className="bg4-header">
         <span className="bg4-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="bg4-score">{state.score} pts</span>
+        <span className="bg4-score pulse">{state.score} pts</span>
       </div>
       <div className="bg4-prompt">{r.prompt}</div>
       <div className="bg4-choices">

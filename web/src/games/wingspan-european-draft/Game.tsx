@@ -9,7 +9,7 @@ export function WingspanEuropeanDraftGame({ state, dispatch, onGameOver }: GameP
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="wse-wrap">
+    <div className="wse-wrap fade-in">
       <h3 className="wse-title">Wingspan: European</h3>
       <div className="wse-stats">
         <div className="wse-stat"><span>Round</span><b>{state.round}/8</b></div>
@@ -36,7 +36,7 @@ export function WingspanEuropeanDraftGame({ state, dispatch, onGameOver }: GameP
         </div>
       )}
       {state.phase === "done" && (
-        <div className="wse-done">
+        <div className="wse-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="wse-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
           <div className="wse-final-score">Final score: <b>{finalScore}</b></div>

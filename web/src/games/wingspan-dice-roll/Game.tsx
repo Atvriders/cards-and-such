@@ -10,7 +10,7 @@ export function WingspanDiceRollGame({ state, dispatch, onGameOver }: GameProps<
   if (state.phase === "done") {
     return (
       <div className="rw-wrap">
-        <div className="rw-done">
+        <div className="rw-done bounce-in">
           <h2>Done!</h2>
           <div className="rw-final">{t?.score ?? state.score} pts</div>
         </div>
@@ -18,9 +18,9 @@ export function WingspanDiceRollGame({ state, dispatch, onGameOver }: GameProps<
     );
   }
   return (
-    <div className="rw-wrap">
+    <div className="rw-wrap fade-in">
       <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
+      <div className="rw-score pulse">{state.score} pts</div>
       {state.lastRoll !== null && state.phase === "marking" && (
         <div className="rw-die">{state.lastRoll}</div>
       )}

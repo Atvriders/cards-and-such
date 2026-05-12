@@ -11,7 +11,7 @@ export function BlokusClassicGame({ state, dispatch, onGameOver }: GameProps<Blo
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="blkc-wrap">
+    <div className="blkc-wrap fade-in">
       <h3 className="blkc-title">Blokus Classic</h3>
       <div className="blkc-meta">
         <div className="blkc-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function BlokusClassicGame({ state, dispatch, onGameOver }: GameProps<Blo
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="blkc-done">
+        <div className="blkc-done bounce-in">
           <h3>Done!</h3>
           <div className="blkc-final">{state.score} pts</div>
         </div>

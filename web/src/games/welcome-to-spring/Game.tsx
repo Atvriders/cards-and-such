@@ -14,7 +14,7 @@ export function WelcomeToSpringGame({ state, dispatch, onGameOver }: GameProps<W
         <h2 className="wsp-title">Welcome To Spring</h2>
         <div className="wsp-meta">
           <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="wsp-score">{state.score} pts</span>
+          <span className="wsp-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "placing" && state.lastRoll !== null && (
@@ -51,7 +51,7 @@ export function WelcomeToSpringGame({ state, dispatch, onGameOver }: GameProps<W
         )}
         <button className="wsp-btn wsp-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSpringAction)}>Reset</button>
       </div>
-      {state.phase === "done" && <div className="wsp-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="wsp-done bounce-in">Final: <b>{final}</b></div>}
       <div className="wsp-rules">Each consecutive pair: +flower</div>
     </div>
   );

@@ -7,9 +7,9 @@ export function Game500Game({ state, dispatch, onGameOver }: GameProps<Game500St
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") return <div className="game-500-wrap"><div className="game-500-done"><h2>Match Complete</h2><div>Wins: {state.wins} · Losses: {state.losses}</div><div className="game-500-final">{state.score} pts</div></div></div>;
   return (
-    <div className="game-500-wrap">
+    <div className="game-500-wrap fade-in">
       <div className="game-500-info">Round {state.round} / {TOTAL_ROUNDS} — Hand {HAND_SIZE} cards · W{state.wins} L{state.losses}</div>
-      <div className="game-500-score">{state.score} pts</div>
+      <div className="game-500-score pulse">{state.score} pts</div>
       <div className="game-500-info">Tricks: you {state.tricksWon} · cpu {state.tricksLost}</div>
       {state.phase === "ready" && <button data-testid="hint-target-game-500-primary" className="game-500-btn" onClick={() => dispatch({ type: "play" } as Game500Action)}>Play Round</button>}
       {state.phase === "scored" && <>

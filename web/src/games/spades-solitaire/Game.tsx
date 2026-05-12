@@ -15,7 +15,7 @@ export function SpadesSolitaireGame({ state, dispatch, onGameOver }: GameProps<S
     <div className="sol-wrap">
       <div className="sol-header">
         <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+        <span className="sol-score pulse">{state.score} pts</span>
       </div>
       <div className="sol-board">
         {state.hand.map((c, i) => (

@@ -65,9 +65,9 @@ export function OpenFaceChineseGame({ state, dispatch, onGameOver }: GameProps<O
             <div className={cls("cardlabel")}>Place this card:</div>
             <div className={cls("cardbox")}><Card card={cur} /></div>
             <div className={cls("placeactions")}>
-              <button data-testid="hint-target-ofc-top" className={cls("btn")} onClick={() => dis({ type: "place", row: "top" })} disabled={!canTop}>Top</button>
-              <button data-testid="hint-target-ofc-mid" className={cls("btn")} onClick={() => dis({ type: "place", row: "middle" })} disabled={!canMid}>Mid</button>
-              <button data-testid="hint-target-ofc-bot" className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom" })} disabled={!canBot}>Bot</button>
+              <button data-testid="hint-target-ofc-top" title="Place in top row" className={cls("btn")} onClick={() => dis({ type: "place", row: "top" })} disabled={!canTop}>Top</button>
+              <button data-testid="hint-target-ofc-mid" title="Place in middle row" className={cls("btn")} onClick={() => dis({ type: "place", row: "middle" })} disabled={!canMid}>Mid</button>
+              <button data-testid="hint-target-ofc-bot" title="Place in bottom row" className={cls("btn")} onClick={() => dis({ type: "place", row: "bottom" })} disabled={!canBot}>Bot</button>
             </div>
           </>
         )}

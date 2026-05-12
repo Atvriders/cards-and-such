@@ -22,7 +22,7 @@ export function MarseillaisChessGame({ state, dispatch, onGameOver }: GameProps<
       <div className="marsch-header">
         <span className="marsch-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`marsch-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="marsch-score">{state.score} pts</span>
+        <span className="marsch-score pulse">{state.score} pts</span>
       </div>
       <div className="marsch-question">{q.question}</div>
       <div className="marsch-choices">

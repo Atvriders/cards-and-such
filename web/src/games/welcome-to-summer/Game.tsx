@@ -14,7 +14,7 @@ export function WelcomeToSummerGame({ state, dispatch, onGameOver }: GameProps<W
         <h2 className="wsu-title">Welcome To Summer</h2>
         <div className="wsu-meta">
           <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="wsu-score">{state.score} pts</span>
+          <span className="wsu-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "placing" && state.lastRoll !== null && (
@@ -51,7 +51,7 @@ export function WelcomeToSummerGame({ state, dispatch, onGameOver }: GameProps<W
         )}
         <button className="wsu-btn wsu-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSummerAction)}>Reset</button>
       </div>
-      {state.phase === "done" && <div className="wsu-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="wsu-done bounce-in">Final: <b>{final}</b></div>}
       <div className="wsu-rules">Even rolls: +pool bonus</div>
     </div>
   );

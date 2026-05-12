@@ -21,7 +21,7 @@ export function BubbleBurstArcadeGame({ state, dispatch, onGameOver }: GameProps
       <div className="bubbleburstarcade-header">
         <span className="bubbleburstarcade-info">Popped: {state.popped}</span>
         <span className="bubbleburstarcade-timer">{state.ticksRemaining}s</span>
-        <span className="bubbleburstarcade-score">{state.score} pts</span>
+        <span className="bubbleburstarcade-score pulse">{state.score} pts</span>
       </div>
       <div className="bubbleburstarcade-board">
         {state.targets.map(p => {

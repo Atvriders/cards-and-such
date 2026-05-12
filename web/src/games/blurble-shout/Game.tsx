@@ -29,7 +29,7 @@ export function BlurbleShoutGame({ state, dispatch, onGameOver }: GameProps<Blur
     <div className="blr-wrap">
       <div className="blr-header">
         <span className="blr-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="blr-score">{state.score} pts</span>
+        <span className="blr-score pulse">{state.score} pts</span>
       </div>
       <div className="blr-prompt"><span className="blr-label">Choose:</span> {r.prompt}</div>
       <div className="blr-choices">

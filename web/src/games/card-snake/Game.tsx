@@ -8,11 +8,11 @@ export function CardSnakeGame({ state, dispatch, onGameOver }: GameProps<CardSna
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div>Best snake: {state.bestRun}</div><div className="cm-final">{state.score} pts</div></div></div>;
+    return <div className="cm-wrap"><div className="cm-done bounce-in"><h2>Done!</h2><div>Best snake: {state.bestRun}</div><div className="cm-final">{state.score} pts</div></div></div>;
   }
   const last = state.drawn[state.drawn.length - 1];
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap fade-in">
       <div className="cm-info">Draw {state.draws} / {TOTAL_DRAWS} — Run: {state.currentRun} — Best: {state.bestRun}</div>
       {last !== undefined && (
         <div className="cm-row">

@@ -29,7 +29,7 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
   const cpuTop = state.cpuPlayed[state.cpuPlayed.length - 1];
 
   return (
-    <div className="war-wrap">
+    <div className="war-wrap fade-in">
       <div className="war-hud">
         <div className="war-stat">Round <b>{state.round}</b>/{MAX_ROUNDS}</div>
         <div className="war-stat">CPU cards: <b>{state.cpu.length}</b></div>
@@ -80,7 +80,7 @@ export function MiniWarGame({ state, dispatch, onGameOver }: GameProps<MiniWarSt
           </>
         )}
         {state.phase === "done" && (
-          <div className="war-done">
+          <div className="war-done bounce-in">
             <h2>{state.winner === "player" ? "Victory!" : state.winner === "cpu" ? "Defeat" : "Stalemate"}</h2>
             <div className="war-final">Final: you {state.player.length} vs CPU {state.cpu.length}</div>
           </div>

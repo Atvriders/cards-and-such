@@ -6,11 +6,11 @@ import "./Game.css";
 export function RedRiverGame({ state, dispatch, onGameOver }: GameProps<RedRiverState, RedRiverSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div>Best streak: {state.bestStreak}</div><div className="cm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="cm-wrap"><div className="cm-done bounce-in"><h2>Done!</h2><div>Best streak: {state.bestStreak}</div><div className="cm-final">{state.score} pts</div></div></div>;
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap fade-in">
       <div className="cm-info">Draw {state.draw} / {TOTAL_DRAWS}</div>
-      <div className="cm-score">{state.score} pts (Streak: {state.streak})</div>
+      <div className="cm-score pulse">{state.score} pts (Streak: {state.streak})</div>
       {state.lastCard !== null && <div className={`cm-card ${isRed(state.lastCard) ? "red" : "black"}`}>{cardName(state.lastCard)}</div>}
       {state.phase === "drawing" && <button data-testid="hint-target-red-river-primary" className="cm-btn" onClick={() => dispatch({ type:"draw" } as RedRiverAction)}>Draw</button>}
       {state.phase === "result" && <>

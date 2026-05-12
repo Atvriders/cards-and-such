@@ -21,7 +21,7 @@ export function ParchisGame({ state, dispatch, onGameOver }: GameProps<ParchisSt
     return (
       <div className="parchis-wrap">
         <h2 className={`parchis-banner ${won ? "parchis-win" : "parchis-loss"}`}>{won ? "You won the race!" : "CPU won the race!"}</h2>
-        <div className="parchis-score">Final score: {state.score}</div>
+        <div className="parchis-score pulse">Final score: {state.score}</div>
       </div>
     );
   }

@@ -10,7 +10,7 @@ export function ResourceChain({ state, dispatch, onGameOver }: GameProps<Resourc
   const d = (a: ResourceChainAction) => dispatch(a);
 
   return (
-    <div className="rc-wrap">
+    <div className="rc-wrap fade-in">
       <div className="rc-header">
         <span className="rc-title">⚙️ Resource Chain</span>
         <span className="rc-turn">Turn {state.turn}/{TOTAL_TURNS}</span>
@@ -96,7 +96,7 @@ export function ResourceChain({ state, dispatch, onGameOver }: GameProps<Resourc
       )}
 
       {state.phase === "done" && (
-        <div className="rc-done">
+        <div className="rc-done bounce-in">
           <div>Final Coins: <strong>{state.coins}</strong></div>
           <div>{state.coins >= 300 ? "🏆 Master Producer!" : state.coins >= 150 ? "👍 Solid Chain!" : "🌱 Keep practicing!"}</div>
         </div>

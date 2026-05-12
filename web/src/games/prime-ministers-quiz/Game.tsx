@@ -19,7 +19,7 @@ export function PrimeMinistersQuiz({ state, dispatch, onGameOver }: GameProps<PM
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
     <div className="trivia-wrap">
-      <div className="trivia-header"><span className="trivia-progress">Q {state.currentIndex+1} / {state.questions.length}</span><span className={`trivia-timer${urgent?" urgent":""}`}>{state.timeLeft}s</span><span className="trivia-score">{state.score} pts</span></div>
+      <div className="trivia-header"><span className="trivia-progress">Q {state.currentIndex+1} / {state.questions.length}</span><span className={`trivia-timer${urgent?" urgent":""}`}>{state.timeLeft}s</span><span className="trivia-score pulse">{state.score} pts</span></div>
       <div className="trivia-question">{q.question}</div>
       <div className="trivia-choices">{q.choices.map((choice,i) => { let cls="trivia-choice"; if(isResult){if(i===q.correct) cls+=" correct"; else if(i===state.selected&&state.selected!==q.correct) cls+=" wrong";} else if(i===state.selected) cls+=" selected"; return <button key={i} className={cls} disabled={isResult} data-testid={`hint-target-quiz-answer-${i}`} onClick={()=>dispatch({type:"select",choice:i} as PMAction)}><span className="trivia-choice-letter">{LABELS[i]}</span>{choice}</button>; })}</div>
       {isResult && <div className={`trivia-feedback ${state.selected===q.correct?"correct":"wrong"}`}>{state.selected===q.correct?"Correct! +100 pts + speed bonus":`Wrong! Answer: ${q.choices[q.correct]}`}</div>}

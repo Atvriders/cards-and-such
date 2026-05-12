@@ -9,7 +9,7 @@ export function MichiganNewmarketGame({ state, dispatch, onGameOver }: GameProps
   return (
     <div className="michigan-newmarket-wrap mnm-shed">
       <div className="michigan-newmarket-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
-      <div className="michigan-newmarket-score">{state.score} pts</div>
+      <div className="michigan-newmarket-score pulse">{state.score} pts</div>
       <div className="michigan-newmarket-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
       {state.phase === "ready" && <button data-testid="hint-target-michigan-newmarket-primary" className="michigan-newmarket-btn" onClick={() => dispatch({ type: "play" } as MichiganNewmarketAction)}>Play Round</button>}
       {state.phase === "scored" && <>

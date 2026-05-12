@@ -87,7 +87,7 @@ export function HotelTycoon({
       )}
 
       {state.phase === "done" && (
-        <div className="hotel-done">
+        <div className="hotel-done bounce-in">
           <div className="hotel-final">Final Cash: <strong>${state.cash}</strong></div>
           <div>{state.cash >= 4000 ? "🏆 5-Star Empire!" : state.cash >= 2000 ? "👍 Profitable hotel!" : "📉 Rooms to improve"}</div>
         </div>

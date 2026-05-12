@@ -81,7 +81,7 @@ export function CoinCounter({
           )}
         </>
       ) : (
-        <div className="cc-done">
+        <div className="cc-done bounce-in">
           Time's up! Score: {Math.max(0, state.correct * 10 - state.wrong * 3)}
         </div>
       )}

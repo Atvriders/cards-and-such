@@ -11,7 +11,7 @@ export function ZooVadisRwGame({ state, dispatch, onGameOver }: GameProps<ZooVad
     return (
       <div className="rw-wrap">
         <h3 className="rw-title">Zoo Vadis: R&W</h3>
-        <div className="rw-done">
+        <div className="rw-done bounce-in">
           <h2>Done!</h2>
           <div className="rw-final">{t?.score ?? state.score} pts</div>
         </div>
@@ -19,10 +19,10 @@ export function ZooVadisRwGame({ state, dispatch, onGameOver }: GameProps<ZooVad
     );
   }
   return (
-    <div className="rw-wrap">
+    <div className="rw-wrap fade-in">
       <h3 className="rw-title">Zoo Vadis: R&W</h3>
       <div className="rw-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="rw-score">{state.score} pts</div>
+      <div className="rw-score pulse">{state.score} pts</div>
       {state.lastRoll !== null && state.phase === "marking" && (
         <div className="rw-die">{state.lastRoll}</div>
       )}

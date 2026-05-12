@@ -17,7 +17,7 @@ export function CrypticSudokuGame({ state, dispatch, onGameOver }: GameProps<Cry
     <div className="nlp-wrap">
       <div className="nlp-header">
         <span className="nlp-progress">Q {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="nlp-score">{state.score} pts</span>
+        <span className="nlp-score pulse">{state.score} pts</span>
       </div>
       <div className="nlp-grid">
         {rows.map((row, ri) => (

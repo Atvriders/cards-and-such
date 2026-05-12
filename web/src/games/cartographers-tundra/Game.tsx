@@ -9,12 +9,12 @@ export function CartographersTundraGame({ state, dispatch, onGameOver }: GamePro
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="ctt-wrap">
+    <div className="ctt-wrap fade-in">
       <header className="ctt-head">
         <h2 className="ctt-title">Cartographers Tundra</h2>
         <div className="ctt-meta">
           <span className="ctt-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="ctt-meta-score">{state.score} pts</span>
+          <span className="ctt-meta-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "marking" && state.lastRoll !== null && (
@@ -43,7 +43,7 @@ export function CartographersTundraGame({ state, dispatch, onGameOver }: GamePro
         <button className="ctt-btn ctt-btn-reset" onClick={() => dispatch({ type: "reset" } as CartographersTundraAction)}>Reset</button>
       </div>
       {state.phase === "done" && (
-        <div className="ctt-done">Final score: <b>{final}</b></div>
+        <div className="ctt-done bounce-in">Final score: <b>{final}</b></div>
       )}
       <div className="ctt-rules">Rolls 1-2: ice bonus +3</div>
     </div>

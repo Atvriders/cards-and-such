@@ -11,10 +11,10 @@ export function DiceQuickRollGame({ state, dispatch, onGameOver }: GameProps<Dic
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   const [bid, setBid] = useState(5);
   if (state.phase === "gameover") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Game Over</h2><div className="dm-final">Final Coins: {state.coins}</div></div></div>;
+    return <div className="dm-wrap"><div className="dm-done bounce-in"><h2>Game Over</h2><div className="dm-final">Final Coins: {state.coins}</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap fade-in">
       <div className="dm-info">Round {state.round} / {state.maxRounds}</div>
       <div className="dm-coins">Coins: {state.coins}</div>
       <div className="dm-dice">{state.dice.map((d,i) => <span key={i}>{FACES[d] ?? d}</span>)}</div>

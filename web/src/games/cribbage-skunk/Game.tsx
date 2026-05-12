@@ -10,7 +10,7 @@ export function CribbageSkunkGame({ state, dispatch, onGameOver }: GameProps<Cri
   if (state.phase === "done") {
     return (
       <div className="crisku-wrap">
-        <div className="crisku-done">
+        <div className="crisku-done bounce-in">
           <h2>Hand</h2>
           <div className="crisku-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function CribbageSkunkGame({ state, dispatch, onGameOver }: GameProps<Cri
     );
   }
   return (
-    <div className="crisku-wrap">
+    <div className="crisku-wrap fade-in">
       <div className="crisku-head">
         <span className="crisku-round">Hand {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="crisku-score">{state.score} pts</span>
+        <span className="crisku-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

@@ -21,7 +21,7 @@ export function AggravationGame({ state, dispatch, onGameOver }: GameProps<Aggra
     return (
       <div className="aggravation-wrap">
         <h2 className={`aggravation-banner ${won ? "aggravation-win" : "aggravation-loss"}`}>{won ? "You won the race!" : "CPU won the race!"}</h2>
-        <div className="aggravation-score">Final score: {state.score}</div>
+        <div className="aggravation-score pulse">Final score: {state.score}</div>
       </div>
     );
   }

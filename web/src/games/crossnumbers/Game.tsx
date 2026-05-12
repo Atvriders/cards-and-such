@@ -29,7 +29,7 @@ export function CrossnumbersGame({ state, dispatch, onGameOver }: GameProps<Game
     <div className="qz-wrap">
       <div className="qz-header">
         <span className="qz-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="qz-score">{state.score} pts</span>
+        <span className="qz-score pulse">{state.score} pts</span>
       </div>
       <div className="qz-prompt">{r.prompt}</div>
       <div className="qz-choices">

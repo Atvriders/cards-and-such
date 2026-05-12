@@ -7,7 +7,7 @@ export function SpringJumpGame({ state, dispatch, onGameOver }: GameProps<Spring
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   const last = state.results[state.results.length - 1];
-  if (state.phase === "done") return <div className="arc-wrap"><div className="arc-done"><h2>Done!</h2><p>Score: {state.score} pts</p><p>Jumps: {TOTAL_JUMPS}</p></div></div>;
+  if (state.phase === "done") return <div className="arc-wrap"><div className="arc-done bounce-in"><h2>Done!</h2><p>Score: {state.score} pts</p><p>Jumps: {TOTAL_JUMPS}</p></div></div>;
   return (
     <div className="arc-wrap">
       <div className="arc-header"><span>Jump {state.jumpIndex+1}/{TOTAL_JUMPS}</span><span className="arc-score">{state.score} pts</span></div>

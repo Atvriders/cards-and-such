@@ -59,8 +59,8 @@ export function EndlessShootEmUpGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="esemup-controls">
-        <button data-testid="hint-target-endless-shoot-em-up-primary" className="esemup-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessShootEmUpAction)}>↑ Up</button>
-        <button className="esemup-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessShootEmUpAction)}>↓ Down</button>
+        <button data-testid="hint-target-endless-shoot-em-up-primary" title="Move up" className="esemup-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessShootEmUpAction)}>↑ Up</button>
+        <button title="Move down" className="esemup-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessShootEmUpAction)}>↓ Down</button>
       </div>
       <div className="esemup-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>
     </div>

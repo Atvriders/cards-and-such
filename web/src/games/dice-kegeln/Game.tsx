@@ -10,7 +10,7 @@ export function DiceKegelnGame({ state, dispatch, onGameOver }: GameProps<DiceKe
   if (state.phase === "done") {
     return (
       <div className="dickeg-wrap">
-        <div className="dickeg-done">
+        <div className="dickeg-done bounce-in">
           <h2>Frame</h2>
           <div className="dickeg-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceKegelnGame({ state, dispatch, onGameOver }: GameProps<DiceKe
     );
   }
   return (
-    <div className="dickeg-wrap">
+    <div className="dickeg-wrap fade-in">
       <div className="dickeg-head">
         <span className="dickeg-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dickeg-score">{state.score} pts</span>
+        <span className="dickeg-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

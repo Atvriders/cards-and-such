@@ -11,7 +11,7 @@ export function SagradaWindowGame({ state, dispatch, onGameOver }: GameProps<Sag
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="sgrdw-wrap">
+    <div className="sgrdw-wrap fade-in">
       <h3 className="sgrdw-title">Sagrada: Window</h3>
       <div className="sgrdw-meta">
         <div className="sgrdw-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function SagradaWindowGame({ state, dispatch, onGameOver }: GameProps<Sag
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="sgrdw-done">
+        <div className="sgrdw-done bounce-in">
           <h3>Done!</h3>
           <div className="sgrdw-final">{state.score} pts</div>
         </div>

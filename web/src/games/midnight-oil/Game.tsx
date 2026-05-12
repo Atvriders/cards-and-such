@@ -9,13 +9,13 @@ export function MidnightOilGame({ state, dispatch, onGameOver }: GameProps<Midni
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     const rating = state.score >= 105 ? "Excellent" : state.score >= 65 ? "Good" : state.score >= 28 ? "Fair" : "Pass";
-    return <div className="sol-wrap"><div className="sol-done"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
+    return <div className="sol-wrap"><div className="sol-done bounce-in"><h2>Done!</h2><div className="sol-final">{state.score} pts</div><div>{rating}</div></div></div>;
   }
   return (
-    <div className="sol-wrap">
+    <div className="sol-wrap fade-in">
       <div className="sol-header">
         <span className="sol-info">Round: {state.round + 1} / {ROUNDS}</span>
-        <span className="sol-score">{state.score} pts</span>
+        <span className="sol-score pulse">{state.score} pts</span>
       </div>
       <div className="sol-board">
         {state.hand.map((c, i) => (

@@ -39,7 +39,7 @@ export function SevenWondersArmadaGame({ state, dispatch, onGameOver }: GameProp
         <div className="swa-done">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="swa-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="swa-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="swa-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="swa-tableaus">

@@ -22,7 +22,7 @@ export function SpartanChessQuizGame({ state, dispatch, onGameOver }: GameProps<
       <div className="sparchq-header">
         <span className="sparchq-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`sparchq-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="sparchq-score">{state.score} pts</span>
+        <span className="sparchq-score pulse">{state.score} pts</span>
       </div>
       <div className="sparchq-question">{q.question}</div>
       <div className="sparchq-choices">

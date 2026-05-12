@@ -9,9 +9,9 @@ export function CivilWarQuizGame({ state, dispatch, onGameOver }: GameProps<Civi
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   const entry = state.entries[state.current];
   return (
-    <div className="hq-wrap">
+    <div className="hq-wrap fade-in">
       <div className="hq-progress">Question {state.current + 1} of {state.entries.length}</div>
-      <div className="hq-score">Score: {state.score}</div>
+      <div className="hq-score pulse">Score: {state.score}</div>
       {!state.done && entry ? (<>
         <div className="hq-question">{entry.question}</div>
         <div className="hq-choices">
@@ -22,7 +22,7 @@ export function CivilWarQuizGame({ state, dispatch, onGameOver }: GameProps<Civi
           })}
         </div>
         {state.selected !== null && <button className="hq-next" onClick={() => dispatch({ type:"next" } as CivilWarQuizAction)}>{state.current + 1 < state.entries.length ? "Next" : "Finish"}</button>}
-      </>) : <div className="hq-done"><h2>Quiz Complete!</h2><div className="hq-final">Score: {state.score} / {state.entries.length * 10}</div></div>}
+      </>) : <div className="hq-done bounce-in"><h2>Quiz Complete!</h2><div className="hq-final">Score: {state.score} / {state.entries.length * 10}</div></div>}
     </div>
   );
 }

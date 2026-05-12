@@ -10,7 +10,7 @@ export function DiceDiscGolfGame({ state, dispatch, onGameOver }: GameProps<Dice
   if (state.phase === "done") {
     return (
       <div className="didigo-wrap">
-        <div className="didigo-done">
+        <div className="didigo-done bounce-in">
           <h2>Hole</h2>
           <div className="didigo-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceDiscGolfGame({ state, dispatch, onGameOver }: GameProps<Dice
     );
   }
   return (
-    <div className="didigo-wrap">
+    <div className="didigo-wrap fade-in">
       <div className="didigo-head">
         <span className="didigo-round">Hole {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="didigo-score">{state.score} pts</span>
+        <span className="didigo-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

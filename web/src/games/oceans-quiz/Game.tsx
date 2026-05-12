@@ -17,7 +17,7 @@ export function OceansQuiz({ state, dispatch, onGameOver }: GameProps<QuizState,
   }, [state.phase, dispatch]);
 
   if (state.phase === "done") return (
-    <div className="trivia-wrap"><div className="trivia-done">
+    <div className="trivia-wrap"><div className="trivia-done bounce-in">
       <h2>Game Over!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p>
       <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
     </div></div>
@@ -27,11 +27,11 @@ export function OceansQuiz({ state, dispatch, onGameOver }: GameProps<QuizState,
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
+    <div className="trivia-wrap fade-in">
       <div className="trivia-header">
         <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+        <span className="trivia-score pulse">{state.score} pts</span>
       </div>
       <div className="trivia-question">{q.question}</div>
       <div className="trivia-choices">

@@ -8,7 +8,7 @@ export function AcquireHotelsGame({ state, dispatch, onGameOver }: GameProps<Acq
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-ahq-wrap">
+    <div className="bz-ahq-wrap fade-in">
       <h3 className="bz-ahq-title">Acquire Hotels</h3>
       <div className="bz-ahq-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>

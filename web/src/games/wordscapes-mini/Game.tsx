@@ -13,7 +13,7 @@ export function WordscapesMiniGame({ state, dispatch, onGameOver }: GameProps<Wo
   if (state.phase === "done") {
     return (
       <div className="word-wrap">
-        <div className="word-done">
+        <div className="word-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>

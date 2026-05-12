@@ -100,7 +100,7 @@ export function ForagerGame({
       )}
 
       {state.phase === "done" && (
-        <div className="forager-done">
+        <div className="forager-done bounce-in">
           <div className="forager-final">Cache: {totalCache} | Food: {state.food}</div>
           <div>{totalCache >= 50 ? "🏆 Master Forager!" : totalCache >= 25 ? "👍 Good haul!" : "🍃 Keep exploring!"}</div>
         </div>

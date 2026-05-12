@@ -39,7 +39,7 @@ export function BetweenTwoCastlesLudwigGame({ state, dispatch, onGameOver }: Gam
         <div className="b2cl-done">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="b2cl-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="b2cl-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="b2cl-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="b2cl-tableaus">

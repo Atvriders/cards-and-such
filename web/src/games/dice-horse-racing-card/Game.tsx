@@ -25,7 +25,7 @@ export function DiceHorseRacingCardGame({ state, dispatch, onGameOver }: GamePro
     <div className="dihoraca-wrap">
       <div className="dihoraca-head">
         <span className="dihoraca-round">Lap {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dihoraca-score">{state.score} pts</span>
+        <span className="dihoraca-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

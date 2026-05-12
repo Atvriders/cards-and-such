@@ -9,7 +9,7 @@ export function WonderPackExtraGame({ state, dispatch, onGameOver }: GameProps<W
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="wpe-wrap">
+    <div className="wpe-wrap fade-in">
       <h3 className="wpe-title">Wonder Pack</h3>
       <div className="wpe-stats">
         <div className="wpe-stat"><span>Round</span><b>{state.round}/8</b></div>
@@ -36,7 +36,7 @@ export function WonderPackExtraGame({ state, dispatch, onGameOver }: GameProps<W
         </div>
       )}
       {state.phase === "done" && (
-        <div className="wpe-done">
+        <div className="wpe-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="wpe-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
           <div className="wpe-final-score">Final score: <b>{finalScore}</b></div>

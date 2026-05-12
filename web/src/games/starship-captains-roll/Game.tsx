@@ -21,7 +21,7 @@ export function StarshipCaptainsRoll({ state, dispatch, onGameOver }: GameProps<
     <div className="g-wrap">
       <div className="g-header">
         <span>Round {state.round} / {state.maxRounds}</span>
-        <span className="g-score">Score: {state.score}</span>
+        <span className="g-score pulse">Score: {state.score}</span>
       </div>
       {state.lastRoll.length > 0 && (
         <div className="g-dice">

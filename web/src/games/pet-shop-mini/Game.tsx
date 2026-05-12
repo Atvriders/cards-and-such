@@ -38,12 +38,12 @@ export function PetShopMini({
                 <div className="psm-pet-controls">
                   <span>Stock:</span>
                   <button className="psm-btn-sm" title="Decrease stock" onClick={() => d({ type: "setStock", petType: pet.type, delta: -1 })}>−</button>
-                  <button className="psm-btn-sm" onClick={() => d({ type: "setStock", petType: pet.type, delta: 1 })}>+ (${pet.cost})</button>
+                  <button className="psm-btn-sm" title="Buy one (increase stock)" onClick={() => d({ type: "setStock", petType: pet.type, delta: 1 })}>+ (${pet.cost})</button>
                   <span>Price:</span>
-                  <button className="psm-btn-sm" onClick={() => d({ type: "setPrice", petType: pet.type, delta: -5 })}>−$5</button>
-                  <button className="psm-btn-sm" onClick={() => d({ type: "setPrice", petType: pet.type, delta: 5 })}>+$5</button>
+                  <button className="psm-btn-sm" title="Lower price by $5" onClick={() => d({ type: "setPrice", petType: pet.type, delta: -5 })}>−$5</button>
+                  <button className="psm-btn-sm" title="Raise price by $5" onClick={() => d({ type: "setPrice", petType: pet.type, delta: 5 })}>+$5</button>
                   <span>Care:</span>
-                  <button className="psm-btn-sm" onClick={() => d({ type: "setHappy", petType: pet.type, delta: 10 })}>+10 ($2)</button>
+                  <button className="psm-btn-sm" title="Increase happiness (costs $2)" onClick={() => d({ type: "setHappy", petType: pet.type, delta: 10 })}>+10 ($2)</button>
                 </div>
               </div>
             ))}

@@ -10,7 +10,7 @@ export function blazeFireworkGame({ state, dispatch, onGameOver }: GameProps<bla
   if (state.phase === "done") {
     return (
       <div className="rw-wrap">
-        <div className="rw-done">
+        <div className="rw-done bounce-in">
           <h2>Done!</h2>
           <div className="rw-final">{t?.score ?? state.score} pts</div>
         </div>

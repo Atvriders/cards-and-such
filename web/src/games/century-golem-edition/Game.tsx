@@ -8,7 +8,7 @@ export function CenturyGolemEditionGame({ state, dispatch, onGameOver }: GamePro
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-cge-wrap">
+    <div className="bz-cge-wrap fade-in">
       <h3 className="bz-cge-title">Century Golem Edition</h3>
       <div className="bz-cge-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>

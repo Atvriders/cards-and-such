@@ -9,7 +9,7 @@ export function MallManiaMiniGame({ state, dispatch, onGameOver }: GameProps<Mal
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const shop = MALL[state.lastShop]!;
   return (
-    <div className="mm-wrap">
+    <div className="mm-wrap fade-in">
       <div className="mm-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
         <div>Budget <b>${state.budget}</b></div>
@@ -33,7 +33,7 @@ export function MallManiaMiniGame({ state, dispatch, onGameOver }: GameProps<Mal
           </div>
         </div>
       )}
-      {state.phase === "done" && <div className="mm-done">Final score: {score(state)}</div>}
+      {state.phase === "done" && <div className="mm-done bounce-in">Final score: {score(state)}</div>}
     </div>
   );
 }

@@ -10,7 +10,7 @@ export function StratFootballGame({ state, dispatch, onGameOver }: GameProps<Str
   if (state.phase === "done") {
     return (
       <div className="strfoo-wrap">
-        <div className="strfoo-done">
+        <div className="strfoo-done bounce-in">
           <h2>Quarter</h2>
           <div className="strfoo-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function StratFootballGame({ state, dispatch, onGameOver }: GameProps<Str
     );
   }
   return (
-    <div className="strfoo-wrap">
+    <div className="strfoo-wrap fade-in">
       <div className="strfoo-head">
         <span className="strfoo-round">Quarter {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="strfoo-score">{state.score} pts</span>
+        <span className="strfoo-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

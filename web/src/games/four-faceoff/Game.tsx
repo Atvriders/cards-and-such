@@ -7,7 +7,7 @@ export function FourFaceoffGame({ state, dispatch, onGameOver }: GameProps<FourF
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase==="done") {
-    return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><p>Fours: {state.matches}</p><div className="cm-final">{state.score} pts</div></div></div>;
+    return <div className="cm-wrap"><div className="cm-done bounce-in"><h2>Done!</h2><p>Fours: {state.matches}</p><div className="cm-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="cm-wrap">

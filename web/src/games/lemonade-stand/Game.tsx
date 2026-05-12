@@ -35,7 +35,7 @@ export function LemonadeStand({
   const d = (a: LemonadeAction) => dispatch(a);
 
   return (
-    <div className="lemon-wrap">
+    <div className="lemon-wrap fade-in">
       <div className="lemon-header">
         <span className="lemon-title">🍋 Lemonade Stand</span>
         <span className="lemon-day">Day {state.day}/{TOTAL_DAYS}</span>
@@ -90,7 +90,7 @@ export function LemonadeStand({
       )}
 
       {state.phase === "done" && (
-        <div className="lemon-done">
+        <div className="lemon-done bounce-in">
           <div className="lemon-final">Final Balance: <strong>{fmt(state.money)}</strong></div>
           <div className="lemon-score">{state.money >= 400 ? "🏆 Great profit!" : state.money >= 200 ? "👍 Broke even!" : "📉 Lost money"}</div>
         </div>

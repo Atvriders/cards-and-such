@@ -8,7 +8,7 @@ export function CoffeeTradersMiniGame({ state, dispatch, onGameOver }: GameProps
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-ctm-wrap">
+    <div className="bz-ctm-wrap fade-in">
       <h3 className="bz-ctm-title">Coffee Traders Mini</h3>
       <div className="bz-ctm-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>

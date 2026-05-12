@@ -22,7 +22,7 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
   if (state.phase === "done") {
     return (
       <div className="palindromemirror-wrap">
-        <div className="palindromemirror-done">
+        <div className="palindromemirror-done bounce-in">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
           <p className="palindromemirror-final">{state.score} pts</p>
@@ -39,7 +39,7 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
     <div className="palindromemirror-wrap">
       <div className="palindromemirror-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="palindromemirror-score">{state.score} pts</span>
+        <span className="palindromemirror-score pulse">{state.score} pts</span>
       </div>
       <div className="palindromemirror-mech">Sudoku with palindrome lines that read the same forwards and backwards.</div>
       <div className="palindromemirror-grid">

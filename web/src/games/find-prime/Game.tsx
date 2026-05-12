@@ -8,13 +8,13 @@ export function FindPrimeGame({ state, dispatch, onGameOver }: GameProps<FindPri
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="fp-wrap"><div className="fp-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {TOTAL_ROUNDS}</div><div className="fp-final">{state.score} pts</div></div></div>;
+    return <div className="fp-wrap"><div className="fp-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {TOTAL_ROUNDS}</div><div className="fp-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="fp-wrap">
+    <div className="fp-wrap fade-in">
       <div className="fp-info">Round {state.currentIndex + 1} / {TOTAL_ROUNDS}</div>
-      <div className="fp-score">{state.score} pts</div>
+      <div className="fp-score pulse">{state.score} pts</div>
       <div className="fp-prompt">Find the prime number</div>
       <div className="fp-grid">
         {r.numbers.map((n, i) => {

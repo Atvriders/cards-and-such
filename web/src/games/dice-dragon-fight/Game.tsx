@@ -12,7 +12,7 @@ export function DiceDragonFightGame({ state, dispatch, onGameOver }: GameProps<D
     const won = state.dragonHp === 0;
     return (
       <div className="df-wrap">
-        <div className="df-done">
+        <div className="df-done bounce-in">
           <h2>{won ? "Dragon Slain" : "The Dragon Prevails"}</h2>
           <div className="df-final">{state.score} pts</div>
           <div className="df-log">{state.log}</div>
@@ -25,7 +25,7 @@ export function DiceDragonFightGame({ state, dispatch, onGameOver }: GameProps<D
   const drPct = (state.dragonHp / DRAGON_MAX_HP) * 100;
 
   return (
-    <div className="df-wrap">
+    <div className="df-wrap fade-in">
       <div className="df-banner">Turn {state.turn} · Score {state.score}</div>
 
       <div className="df-bar-row">

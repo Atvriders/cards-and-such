@@ -10,14 +10,14 @@ export function CardBidFlip({ state, dispatch, onGameOver }: GameProps<CardBidFl
   const [bidInput, setBidInput] = useState(10);
 
   if (state.phase === "gameover") return (
-    <div className="cbf-wrap"><div className="cbf-done">
+    <div className="cbf-wrap"><div className="cbf-done bounce-in">
       <h2>Game Over!</h2>
       <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#f39c12" }}>{state.coins} coins</p>
     </div></div>
   );
 
   return (
-    <div className="cbf-wrap">
+    <div className="cbf-wrap fade-in">
       <div className="cbf-header">
         <span>Round {state.round} / {state.maxRounds}</span>
         <span className="cbf-coins">{state.coins} coins</span>

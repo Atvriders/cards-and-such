@@ -11,7 +11,7 @@ export function DiceMonsterMashGame({ state, dispatch, onGameOver }: GameProps<D
   if (state.phase === "done") {
     return (
       <div className="mm-wrap">
-        <div className="mm-done">
+        <div className="mm-done bounce-in">
           <h2>Monster Mash Complete</h2>
           <div className="mm-final">{state.score} pts</div>
           <div className="mm-log">{state.log}</div>

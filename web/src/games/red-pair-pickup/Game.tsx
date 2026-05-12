@@ -14,7 +14,7 @@ export function RedPairPickupGame({ state, dispatch, onGameOver }: GameProps<Red
     <div className="cm-wrap">
       <div className="cm-header">
         <span className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="cm-score">{state.score} pts</span>
+        <span className="cm-score pulse">{state.score} pts</span>
       </div>
       <div className="cm-hand">
         {state.hand.map((c, i) => (

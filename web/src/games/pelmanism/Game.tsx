@@ -16,7 +16,7 @@ export function PelmanismGame({ state, dispatch, onGameOver }: GameProps<Pelmani
   if (state.phase === "done") {
     return (
       <div className="pelman-wrap">
-        <div className="pelman-done">
+        <div className="pelman-done bounce-in">
           <h2>Cleared</h2>
           <div className="pelman-stats">{state.matches} pairs in {state.attempts} attempts</div>
           <div className="pelman-final">{state.score} pts</div>
@@ -30,7 +30,7 @@ export function PelmanismGame({ state, dispatch, onGameOver }: GameProps<Pelmani
       <div className="pelman-header">
         <span className="pelman-progress">{state.matches} / {PAIR_COUNT} pairs</span>
         <span className="pelman-attempts">{state.attempts} attempts</span>
-        <span className="pelman-score">{state.score} pts</span>
+        <span className="pelman-score pulse">{state.score} pts</span>
       </div>
       <div className="pelman-board">
         {state.values.map((v, i) => {

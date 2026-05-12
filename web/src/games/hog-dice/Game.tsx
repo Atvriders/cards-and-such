@@ -8,12 +8,12 @@ export function HogDiceGame({ state, dispatch, onGameOver }: GameProps<HogDiceSt
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="hg-wrap"><div className="hg-done"><h2>Done!</h2><div className="hg-final">{state.score} pts</div></div></div>;
+    return <div className="hg-wrap"><div className="hg-done bounce-in"><h2>Done!</h2><div className="hg-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="hg-wrap">
+    <div className="hg-wrap fade-in">
       <div className="hg-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="hg-score">{state.score} pts</div>
+      <div className="hg-score pulse">{state.score} pts</div>
       {state.dice.length > 0 && <div className="hg-row">{state.dice.map((d, i) => <div key={i} className="hg-die">{d}</div>)}</div>}
       {state.message && <div className="hg-result">{state.message}</div>}
       {state.phase === "roll" && <button data-testid="hint-target-hog-dice-roll" className="hg-btn" onClick={() => dispatch({ type:"roll" } as HogDiceAction)}>Roll</button>}

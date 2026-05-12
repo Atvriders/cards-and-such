@@ -13,7 +13,7 @@ export function CardLighthouseGame({ state, dispatch, onGameOver }: GameProps<Ca
   return (
     <div className="cm-wrap">
       <div className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="cm-score">{state.score} pts</div>
+      <div className="cm-score pulse">{state.score} pts</div>
       <div className="cm-hint">Card Lighthouse</div>
       <div className="cm-target">Target suit: {SUIT_NAMES[state.target]}</div>
       <div className="cm-row">

@@ -22,7 +22,7 @@ export function FourPlayerChessTeamGame({ state, dispatch, onGameOver }: GamePro
       <div className="fpctsg-header">
         <span className="fpctsg-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`fpctsg-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="fpctsg-score">{state.score} pts</span>
+        <span className="fpctsg-score pulse">{state.score} pts</span>
       </div>
       <div className="fpctsg-question">{q.question}</div>
       <div className="fpctsg-choices">

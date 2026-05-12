@@ -9,7 +9,7 @@ export function AnacondaPokerGame({ state, dispatch, onGameOver }: GameProps<Ana
   return (
     <div className="dm-wrap thmAnaconda">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="dm-score pulse">{state.score} pts</div>
       {state.hand.length > 0 && (
         <div className="dm-row">{state.hand.map((c, i) => <div key={i} className={`dm-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       )}

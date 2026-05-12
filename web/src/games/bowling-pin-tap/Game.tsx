@@ -13,14 +13,14 @@ export function BowlingPinTapGame({ state, dispatch, onGameOver }: GameProps<Bow
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="ftap-wrap"><div className="ftap-done"><h2>Time's Up!</h2><div>Hits: {state.popped} / Missed: {state.missed}</div><div className="ftap-final">{state.score} pts</div></div></div>;
+    return <div className="ftap-wrap"><div className="ftap-done bounce-in"><h2>Time's Up!</h2><div>Hits: {state.popped} / Missed: {state.missed}</div><div className="ftap-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="ftap-wrap">
       <div className="ftap-header">
         <span className="ftap-info">Bowling — Hits: {state.popped}</span>
         <span className="ftap-timer">{state.ticksRemaining}s</span>
-        <span className="ftap-score">{state.score} pts</span>
+        <span className="ftap-score pulse">{state.score} pts</span>
       </div>
       <div className="ftap-board">
         {state.targets.map(p => {

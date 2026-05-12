@@ -8,13 +8,13 @@ export function MapMemoryGame({ state, dispatch, onGameOver }: GameProps<MapMemo
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="mapmem-wrap"><div className="mapmem-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="mapmem-final">{state.score} pts</div></div></div>;
+    return <div className="mapmem-wrap"><div className="mapmem-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="mapmem-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="mapmem-wrap">
+    <div className="mapmem-wrap fade-in">
       <div className="mapmem-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="mapmem-score">{state.score} pts</div>
+      <div className="mapmem-score pulse">{state.score} pts</div>
       <div className="mapmem-prompt">{r.question}</div>
       <div className="mapmem-grid">
         {r.choices.map((n, i) => {

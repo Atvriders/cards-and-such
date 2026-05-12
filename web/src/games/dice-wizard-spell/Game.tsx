@@ -14,7 +14,7 @@ export function DiceWizardSpellGame({ state, dispatch, onGameOver }: GameProps<D
   if (state.phase === "done") {
     return (
       <div className="ws-wrap">
-        <div className="ws-done">
+        <div className="ws-done bounce-in">
           <h2>Spellbook Complete</h2>
           <div className="ws-final">{state.score} pts</div>
         </div>

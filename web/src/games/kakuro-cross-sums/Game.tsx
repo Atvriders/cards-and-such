@@ -11,7 +11,7 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
   if (state.phase === "done") {
     return (
       <div className="kakurocross-wrap">
-        <div className="kakurocross-done">
+        <div className="kakurocross-done bounce-in">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
           <p className="kakurocross-final">{state.score} pts</p>
@@ -27,7 +27,7 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
     <div className="kakurocross-wrap">
       <div className="kakurocross-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="kakurocross-score">{state.score} pts</span>
+        <span className="kakurocross-score pulse">{state.score} pts</span>
       </div>
       <div className="kakurocross-mech">Fill digits 1-9 so each entry sums to its clue. Stored-solution simplification.</div>
       <div className="kakurocross-grid">

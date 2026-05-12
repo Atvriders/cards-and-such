@@ -5,7 +5,7 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function SkarneyRGame({ state, dispatch, onGameOver }: GameProps<GState, object>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="skrr-wrap"><div className="skrr-done"><h2>Done!</h2><div className="skrr-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="skrr-wrap"><div className="skrr-done bounce-in"><h2>Done!</h2><div className="skrr-final">{state.score} pts</div></div></div>;
   return (
     <div className="skrr-wrap">
       <div className="skrr-info">Round {state.round} / {TOTAL_ROUNDS}</div>

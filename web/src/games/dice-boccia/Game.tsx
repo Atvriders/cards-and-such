@@ -10,7 +10,7 @@ export function DiceBocciaGame({ state, dispatch, onGameOver }: GameProps<DiceBo
   if (state.phase === "done") {
     return (
       <div className="dicbcc-wrap">
-        <div className="dicbcc-done">
+        <div className="dicbcc-done bounce-in">
           <h2>End</h2>
           <div className="dicbcc-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceBocciaGame({ state, dispatch, onGameOver }: GameProps<DiceBo
     );
   }
   return (
-    <div className="dicbcc-wrap">
+    <div className="dicbcc-wrap fade-in">
       <div className="dicbcc-head">
         <span className="dicbcc-round">End {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dicbcc-score">{state.score} pts</span>
+        <span className="dicbcc-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

@@ -9,7 +9,7 @@ export function TidesOfMadnessDraftGame({ state, dispatch, onGameOver }: GamePro
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="tmd-wrap">
+    <div className="tmd-wrap fade-in">
       <h3 className="tmd-title">Tides of Madness</h3>
       <div className="tmd-stats">
         <div className="tmd-stat"><span>Round</span><b>{state.round}/6</b></div>
@@ -36,7 +36,7 @@ export function TidesOfMadnessDraftGame({ state, dispatch, onGameOver }: GamePro
         </div>
       )}
       {state.phase === "done" && (
-        <div className="tmd-done">
+        <div className="tmd-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="tmd-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
           <div className="tmd-final-score">Final score: <b>{finalScore}</b></div>

@@ -10,7 +10,7 @@ export function ShoveHapennyGame({ state, dispatch, onGameOver }: GameProps<Shov
   if (state.phase === "done") {
     return (
       <div className="shohap-wrap">
-        <div className="shohap-done">
+        <div className="shohap-done bounce-in">
           <h2>Shove</h2>
           <div className="shohap-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function ShoveHapennyGame({ state, dispatch, onGameOver }: GameProps<Shov
     );
   }
   return (
-    <div className="shohap-wrap">
+    <div className="shohap-wrap fade-in">
       <div className="shohap-head">
         <span className="shohap-round">Shove {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="shohap-score">{state.score} pts</span>
+        <span className="shohap-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

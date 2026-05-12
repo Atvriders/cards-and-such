@@ -57,9 +57,9 @@ export function ArcticSurvival({ state, dispatch, onGameOver }: GameProps<Arctic
       </div>
 
       {state.phase === "gameover" && (
-        <div className="as-gameover">
+        <div className="as-gameover bounce-in">
           <div className="as-result">{state.survived ? "You survived!" : "You perished in the cold."}</div>
-          <div className="as-score">Score: {state.score}</div>
+          <div className="as-score pulse">Score: {state.score}</div>
           <button onClick={() => dispatch({ type: "restart" })}>Play Again</button>
         </div>
       )}

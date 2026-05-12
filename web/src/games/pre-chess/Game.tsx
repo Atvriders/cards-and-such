@@ -13,16 +13,16 @@ export function PreChessGame({ state, dispatch, onGameOver }: GameProps<PreChess
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as PreChessAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="prech-wrap"><div className="prech-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="prech-wrap"><div className="prech-done bounce-in"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="prech-wrap">
+    <div className="prech-wrap fade-in">
       <div className="prech-header">
         <span className="prech-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`prech-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="prech-score">{state.score} pts</span>
+        <span className="prech-score pulse">{state.score} pts</span>
       </div>
       <div className="prech-question">{q.question}</div>
       <div className="prech-choices">

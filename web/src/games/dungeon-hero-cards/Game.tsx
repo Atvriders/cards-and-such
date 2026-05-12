@@ -7,14 +7,14 @@ const LABELS = ["A", "B", "C", "D"];
 export function DungeonHeroCardsGame({ state, dispatch, onGameOver }: GameProps<DungeonHeroCardsState, DungeonHeroCardsSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dhc-wrap"><div className="dhc-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#ea580c" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="dhc-wrap"><div className="dhc-done bounce-in"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#ea580c" }}>{state.score} pts</p></div></div>;
   const p = state.prompts[state.index]!;
   const isResult = state.phase === "result";
   return (
-    <div className="dhc-wrap">
+    <div className="dhc-wrap fade-in">
       <div className="dhc-header">
         <span className="dhc-progress">Entry {state.index + 1} / {state.prompts.length}</span>
-        <span className="dhc-score">{state.score} pts</span>
+        <span className="dhc-score pulse">{state.score} pts</span>
       </div>
       <div className="dhc-prompt">{p.prompt}</div>
       <div className="dhc-choices">

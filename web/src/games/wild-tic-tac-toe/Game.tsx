@@ -25,12 +25,13 @@ export function ConnectGame({
         <h2 className="wildttt-title">Wild Tic-Tac-Toe</h2>
         <div className="wildttt-info">Anyone who completes 3 of either symbol wins.</div>
         <div className="wildttt-status">{status}</div>
-        <div className="wildttt-score">Score: {state.score}</div>
+        <div className="wildttt-score pulse">Score: {state.score}</div>
       </div>
 
       <div className="wildttt-pick">
         <span className="wildttt-pick-label">Place:</span>
         <button
+          title="Place X"
           className={`wildttt-pickbtn ${state.pendingMark === "X" ? "wildttt-pickbtn-active" : ""}`}
           onClick={() => dispatch({ type: "selectMark", mark: "X" } as ConnectAction)}
           disabled={state.phase === "done"}
@@ -38,6 +39,7 @@ export function ConnectGame({
           X
         </button>
         <button
+          title="Place O"
           className={`wildttt-pickbtn ${state.pendingMark === "O" ? "wildttt-pickbtn-active" : ""}`}
           onClick={() => dispatch({ type: "selectMark", mark: "O" } as ConnectAction)}
           disabled={state.phase === "done"}

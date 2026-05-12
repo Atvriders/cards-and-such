@@ -14,14 +14,14 @@ export function PepperPopGame({ state, dispatch, onGameOver }: GameProps<PepperP
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="pepperpop-wrap"><div className="pepperpop-done"><h2>Time's Up!</h2><div>popped: {state.popped} / Missed: {state.missed}</div><div className="pepperpop-final">{state.score} pts</div></div></div>;
+    return <div className="pepperpop-wrap"><div className="pepperpop-done bounce-in"><h2>Time's Up!</h2><div>popped: {state.popped} / Missed: {state.missed}</div><div className="pepperpop-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="pepperpop-wrap">
       <div className="pepperpop-header">
         <span className="pepperpop-info">popped: {state.popped}</span>
         <span className="pepperpop-timer">{state.ticksRemaining}s</span>
-        <span className="pepperpop-score">{state.score} pts</span>
+        <span className="pepperpop-score pulse">{state.score} pts</span>
       </div>
       <div className="pepperpop-board">
         {state.items.map(c => {

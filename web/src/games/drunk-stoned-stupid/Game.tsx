@@ -12,9 +12,9 @@ export function DrunkStonedStupidGame({ state, dispatch, onGameOver }: GameProps
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="g-drunstonstup-wrap">
+    <div className="g-drunstonstup-wrap fade-in">
       <div className="g-drunstonstup-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="g-drunstonstup-score">{state.score} pts</div>
+      <div className="g-drunstonstup-score pulse">{state.score} pts</div>
       <div className="g-drunstonstup-prompt">{r.question}</div>
       <div className="g-drunstonstup-grid">
         {r.choices.map((n, i) => {

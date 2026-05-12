@@ -10,7 +10,7 @@ export function HuaRongDaoGame({ state, dispatch, onGameOver }: GameProps<HuaRon
   if (state.phase === "done") {
     return (
       <div className="ded-wrap">
-        <div className="ded-done">
+        <div className="ded-done bounce-in">
           <h2>Case Closed</h2>
           <p>Solved: {state.correctCount} / {state.puzzles.length}</p>
           <p className="ded-final">{state.score} pts</p>
@@ -23,7 +23,7 @@ export function HuaRongDaoGame({ state, dispatch, onGameOver }: GameProps<HuaRon
     <div className="ded-wrap">
       <div className="ded-header">
         <span>Puzzle {state.currentIndex + 1} / {state.puzzles.length}</span>
-        <span className="ded-score">{state.score} pts</span>
+        <span className="ded-score pulse">{state.score} pts</span>
       </div>
       <div className="ded-scenario">{p.scenario}</div>
       <ul className="ded-clues">

@@ -21,7 +21,7 @@ export function ConnectGame({ state, dispatch, onGameOver }: GameProps<ConnectSt
   return (
     <div className="cn-wrap">
       <div className="cn-info">{TARGET}-in-a-row wins. {MODE === "gravity" ? "Gravity drop." : "Place anywhere."}</div>
-      <div className="cn-score">Turn: {state.turn === "P" ? "You (red)" : "CPU"}</div>
+      <div className="cn-score pulse">Turn: {state.turn === "P" ? "You (red)" : "CPU"}</div>
       <div className="cn-board" style={{ gridTemplateColumns: `repeat(${COLS},1fr)` }}>
         {Array.from({ length: ROWS }).map((_, r) =>
           Array.from({ length: COLS }).map((__, c) => {

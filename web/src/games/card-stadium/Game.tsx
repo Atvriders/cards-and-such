@@ -8,12 +8,12 @@ export function CardStadiumGame({ state, dispatch, onGameOver }: GameProps<CardS
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="cst-wrap"><div className="cst-done"><h2>Done!</h2><div className="cst-final">{state.score} pts</div></div></div>;
+    return <div className="cst-wrap"><div className="cst-done bounce-in"><h2>Done!</h2><div className="cst-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cst-wrap">
+    <div className="cst-wrap fade-in">
       <div className="cst-info">Card {state.drawn.length} / {TOTAL_CARDS}</div>
-      <div className="cst-score">{state.score} pts</div>
+      <div className="cst-score pulse">{state.score} pts</div>
       {state.drawn.length > 0 && (
         <div className="cst-row">
           {state.drawn.map((c, i) => <div key={i} className={`cst-card ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>)}

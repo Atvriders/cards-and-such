@@ -31,7 +31,7 @@ export function FarmageddonCropsGame({ state, dispatch, onGameOver }: GameProps<
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-fmc-done">
+        <div className="bz-fmc-done bounce-in">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

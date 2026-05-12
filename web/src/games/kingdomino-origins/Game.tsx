@@ -11,7 +11,7 @@ export function KingdominoOriginsGame({ state, dispatch, onGameOver }: GameProps
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="kdomo-wrap">
+    <div className="kdomo-wrap fade-in">
       <h3 className="kdomo-title">Kingdomino: Origins</h3>
       <div className="kdomo-meta">
         <div className="kdomo-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function KingdominoOriginsGame({ state, dispatch, onGameOver }: GameProps
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="kdomo-done">
+        <div className="kdomo-done bounce-in">
           <h3>Done!</h3>
           <div className="kdomo-final">{state.score} pts</div>
         </div>

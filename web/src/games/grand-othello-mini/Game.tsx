@@ -11,7 +11,7 @@ export function GrandOthelloMiniGame({ state, dispatch, onGameOver }: GameProps<
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="goh-wrap">
-        <div className="goh-done"><h2>{msg}</h2><div className="goh-final">{state.score} pts</div></div>
+        <div className="goh-done bounce-in"><h2>{msg}</h2><div className="goh-final">{state.score} pts</div></div>
       </div>
     );
   }

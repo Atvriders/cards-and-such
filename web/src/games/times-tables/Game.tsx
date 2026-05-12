@@ -28,7 +28,7 @@ export function TimesTablesGame({ state, dispatch, onGameOver }: GameProps<Times
   if (terminal) {
     return (
       <div className="tt-wrap">
-        <div className="tt-done">
+        <div className="tt-done bounce-in">
           <h2>Finished!</h2>
           <p>Score: <strong>{terminal.score}</strong> &middot; {state.correctCount}/{total} correct</p>
         </div>
@@ -37,7 +37,7 @@ export function TimesTablesGame({ state, dispatch, onGameOver }: GameProps<Times
   }
 
   return (
-    <div className="tt-wrap">
+    <div className="tt-wrap fade-in">
       <div className="tt-header">
         <span>Question <strong>{state.currentIndex + 1}</strong>/{total}</span>
         <span>Score: <strong>{state.score}</strong></span>

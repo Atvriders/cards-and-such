@@ -10,7 +10,7 @@ export function BarDiceThreesGame({ state, dispatch, onGameOver }: GameProps<Bar
   if (state.phase === "done") {
     return (
       <div className="badith-wrap">
-        <div className="badith-done">
+        <div className="badith-done bounce-in">
           <h2>Roll</h2>
           <div className="badith-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function BarDiceThreesGame({ state, dispatch, onGameOver }: GameProps<Bar
     );
   }
   return (
-    <div className="badith-wrap">
+    <div className="badith-wrap fade-in">
       <div className="badith-head">
         <span className="badith-round">Roll {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="badith-score">{state.score} pts</span>
+        <span className="badith-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

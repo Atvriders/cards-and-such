@@ -9,7 +9,7 @@ export function ChineseTenGame({ state, dispatch, onGameOver }: GameProps<Chines
   return (
     <div className="chinese-ten-wrap ct-shed">
       <div className="chinese-ten-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
-      <div className="chinese-ten-score">{state.score} pts</div>
+      <div className="chinese-ten-score pulse">{state.score} pts</div>
       <div className="chinese-ten-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
       {state.phase === "ready" && <button data-testid="hint-target-chinese-ten-primary" className="chinese-ten-btn" onClick={() => dispatch({ type: "play" } as ChineseTenAction)}>Play Round</button>}
       {state.phase === "scored" && <>

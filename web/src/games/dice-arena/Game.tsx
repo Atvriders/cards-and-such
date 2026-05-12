@@ -11,7 +11,7 @@ export function DiceArenaGame({ state, dispatch, onGameOver }: GameProps<DiceAre
   if (state.phase === "done") {
     return (
       <div className="ar-wrap">
-        <div className="ar-done">
+        <div className="ar-done bounce-in">
           <h2>{state.myHp > 0 ? "Champion!" : "Fallen Gladiator"}</h2>
           <div className="ar-final">{state.score} pts</div>
           <div className="ar-log">{state.log}</div>
@@ -25,7 +25,7 @@ export function DiceArenaGame({ state, dispatch, onGameOver }: GameProps<DiceAre
   const oppPct = (opp.hp / opp.maxHp) * 100;
 
   return (
-    <div className="ar-wrap">
+    <div className="ar-wrap fade-in">
       <div className="ar-banner">Bout {state.current + 1} / {state.opps.length} · Score {state.score}</div>
       <div className="ar-row-bars">
         <div className="ar-side">

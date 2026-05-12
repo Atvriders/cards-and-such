@@ -17,7 +17,7 @@ export function DiceMirrorRoll({ state, dispatch, onGameOver }: GameProps<DiceMi
   const isReveal = state.phase === "reveal";
 
   return (
-    <div className="dice-wrap">
+    <div className="dice-wrap fade-in">
       <div className="dice-header"><span>Round {state.round}/{state.maxRounds}</span><span>{state.score} pts</span></div>
       <div className="dice-row">
         <span className="die">{PIPS[state.currentDie]}</span>

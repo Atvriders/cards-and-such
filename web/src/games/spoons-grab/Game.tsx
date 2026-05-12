@@ -8,13 +8,13 @@ export function SpoonsGrabGame({ state, dispatch, onGameOver }: GameProps<Spoons
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="gspoons-wrap"><div className="gspoons-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="gspoons-final">{state.score} pts</div></div></div>;
+    return <div className="gspoons-wrap"><div className="gspoons-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="gspoons-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="gspoons-wrap">
+    <div className="gspoons-wrap fade-in">
       <div className="gspoons-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="gspoons-score">{state.score} pts</div>
+      <div className="gspoons-score pulse">{state.score} pts</div>
       <div className="gspoons-prompt">{r.question}</div>
       <div className="gspoons-grid">
         {r.choices.map((n, i) => {

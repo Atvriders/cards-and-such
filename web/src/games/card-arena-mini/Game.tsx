@@ -8,12 +8,12 @@ export function CardArenaMiniGame({ state, dispatch, onGameOver }: GameProps<Car
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="cam-wrap"><div className="cam-done"><h2>Done!</h2><div className="cam-final">{state.score} pts</div></div></div>;
+    return <div className="cam-wrap"><div className="cam-done bounce-in"><h2>Done!</h2><div className="cam-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cam-wrap">
+    <div className="cam-wrap fade-in">
       <div className="cam-info">Card {state.drawn.length} / {TOTAL_CARDS}</div>
-      <div className="cam-score">{state.score} pts</div>
+      <div className="cam-score pulse">{state.score} pts</div>
       {state.drawn.length > 0 && (
         <div className="cam-row">
           {state.drawn.map((c, i) => <div key={i} className={`cam-card ${isRed(c)?"red":"black"}`}>{cardName(c)}</div>)}

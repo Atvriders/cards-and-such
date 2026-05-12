@@ -12,7 +12,7 @@ export function BluffCardsGame({ state, dispatch, onGameOver }: GameProps<BluffC
   return (
     <div className="dm-wrap bf-shed">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="dm-score pulse">{state.score} pts</div>
       {state.you !== null && state.cpu !== null && (
         <div className="dm-row">
           <div><div style={{ fontSize: "0.85rem", color: "#888" }}>You</div><div className={`dm-card ${isRed(state.you) ? "red" : "black"}`}>{cardName(state.you)}</div></div>

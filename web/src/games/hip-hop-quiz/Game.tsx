@@ -22,7 +22,7 @@ export function HipHopQuizGame({ state, dispatch, onGameOver }: GameProps<HipHop
       <div className="trivia-header">
         <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+        <span className="trivia-score pulse">{state.score} pts</span>
       </div>
       <div className="trivia-question">{q.question}</div>
       <div className="trivia-choices">

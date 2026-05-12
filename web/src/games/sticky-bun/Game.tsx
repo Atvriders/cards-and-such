@@ -9,7 +9,7 @@ export function StickyBunGame({ state, dispatch, onGameOver }: GameProps<StickyB
   if (state.phase === "done") return <div className="arc-wrap"><div className="arc-done"><h2>Done!</h2><p>Score: {state.score}</p></div></div>;
   return (
     <div className="arc-wrap">
-      <div className="arc-header"><span>Round {state.roundIndex+1}/{TOTAL_ROUNDS}</span><span className="arc-score">{state.score} pts</span></div>
+      <div className="arc-header"><span>Round {state.roundIndex+1}/{TOTAL_ROUNDS}</span><span className="arc-score pulse">{state.score} pts</span></div>
       <div className="arc-display">🍞</div>
       <p style={{fontSize:"0.9rem",color:"#888"}}>Adjust stickiness and toss!</p>
       {state.phase==="aiming" && <>

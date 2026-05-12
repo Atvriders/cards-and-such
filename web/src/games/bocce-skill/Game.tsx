@@ -10,7 +10,7 @@ export function BocceSkillGame({ state, dispatch, onGameOver }: GameProps<BocceS
   if (state.phase === "done") {
     return (
       <div className="bocski-wrap">
-        <div className="bocski-done">
+        <div className="bocski-done bounce-in">
           <h2>End</h2>
           <div className="bocski-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function BocceSkillGame({ state, dispatch, onGameOver }: GameProps<BocceS
     );
   }
   return (
-    <div className="bocski-wrap">
+    <div className="bocski-wrap fade-in">
       <div className="bocski-head">
         <span className="bocski-round">End {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="bocski-score">{state.score} pts</span>
+        <span className="bocski-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

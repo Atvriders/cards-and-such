@@ -9,10 +9,10 @@ export function DameoGame({ state, dispatch, onGameOver }: GameProps<DameoState,
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
-    return <div className="dm-wrap"><div className="dm-done"><h2>{msg}</h2><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap"><div className="dm-done bounce-in"><h2>{msg}</h2><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap fade-in">
       <div className="dm-info">Place your piece on an empty square. Most pieces wins.</div>
       <div className="dm-score">Move {state.moves}</div>
       <div className="dm-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>

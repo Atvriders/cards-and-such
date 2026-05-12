@@ -13,7 +13,7 @@ export function GeneralaServidaGame({ state, dispatch, onGameOver }: GameProps<G
   return (
     <div className="gs-wrap">
       <div className="gs-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="gs-score">{state.score} pts</div>
+      <div className="gs-score pulse">{state.score} pts</div>
       {state.dice.length > 0 && <div className="gs-row">{state.dice.map((d, i) => <div key={i} className="gs-die">{d}</div>)}</div>}
       {state.message && <div className="gs-result">{state.message}</div>}
       {state.phase === "roll" && <button data-testid="hint-target-generala-servida-primary" className="gs-btn" onClick={() => dispatch({ type:"roll" } as GeneralaServidaAction)}>Roll</button>}

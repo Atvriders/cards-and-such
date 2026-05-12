@@ -22,7 +22,7 @@ export function HachiHachiGame({ state, dispatch, onGameOver }: GameProps<HachiH
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
 
   return (
-    <div className="hh88-wrap">
+    <div className="hh88-wrap fade-in">
       <div className="hh88-header">
         <span>Round {state.round} / {TOTAL_ROUNDS}</span>
         <span className="hh88-you">You {state.score}</span>
@@ -54,7 +54,7 @@ export function HachiHachiGame({ state, dispatch, onGameOver }: GameProps<HachiH
       )}
 
       {state.phase === "done" && (
-        <div className="hh88-done">
+        <div className="hh88-done bounce-in">
           <h3>Final</h3>
           <div className="hh88-final">You {state.score} / CPU {state.cpuScore}</div>
           <div>{state.score >= 88 ? "Hachi-Hachi! Hit 88!" : state.score > state.cpuScore ? "You won." : "CPU won."}</div>

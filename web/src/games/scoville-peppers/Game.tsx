@@ -8,7 +8,7 @@ export function ScovillePeppersGame({ state, dispatch, onGameOver }: GameProps<S
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-scv-wrap">
+    <div className="bz-scv-wrap fade-in">
       <h3 className="bz-scv-title">Scoville Peppers</h3>
       <div className="bz-scv-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>

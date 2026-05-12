@@ -13,7 +13,7 @@ export function FarkleMiniGame({ state, dispatch, onGameOver }: GameProps<Farkle
   if (state.phase === "done") {
     return (
       <div className="farkle-wrap farkle-theme">
-        <div className="farkle-done">
+        <div className="farkle-done bounce-in">
           <h2>Game Over</h2>
           <div className="farkle-final">{state.totalScore}</div>
           <div className="farkle-final-label">total points</div>

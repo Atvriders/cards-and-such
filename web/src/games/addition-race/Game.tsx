@@ -14,14 +14,14 @@ export function AdditionRaceGame({ state, dispatch, onGameOver }: GameProps<Addi
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="mr-wrap"><div className="mr-done"><h2>Time!</h2><div>Correct: {state.correctCount} / {TOTAL_QUESTIONS}</div><div className="mr-final">{state.score} pts</div></div></div>;
+    return <div className="mr-wrap"><div className="mr-done bounce-in"><h2>Time!</h2><div>Correct: {state.correctCount} / {TOTAL_QUESTIONS}</div><div className="mr-final">{state.score} pts</div></div></div>;
   }
   const q = state.questions[state.currentIndex]!;
   return (
-    <div className="mr-wrap">
+    <div className="mr-wrap fade-in">
       <div className="mr-info">Q {state.currentIndex + 1} / {TOTAL_QUESTIONS}</div>
       <div className="mr-timer">{state.timeLeft}s</div>
-      <div className="mr-score">{state.score} pts</div>
+      <div className="mr-score pulse">{state.score} pts</div>
       <div className="mr-question">{q.a} + {q.b} = ?</div>
       <div className="mr-choices">
         {q.choices.map((c, i) => (

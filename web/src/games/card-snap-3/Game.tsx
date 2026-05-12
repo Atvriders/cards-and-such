@@ -11,7 +11,7 @@ export function CardSnap3({ state, dispatch, onGameOver }: GameProps<CardSnap3St
   const snappable = isSnappable(state.history);
 
   if (state.phase === "gameover") return (
-    <div className="cs3-wrap"><div className="cs3-done">
+    <div className="cs3-wrap"><div className="cs3-done bounce-in">
       <h2>Game Over!</h2>
       <p>Snaps: {state.snaps} | Misses: {state.misses}</p>
       <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#e67e22" }}>{state.score} pts</p>
@@ -19,10 +19,10 @@ export function CardSnap3({ state, dispatch, onGameOver }: GameProps<CardSnap3St
   );
 
   return (
-    <div className="cs3-wrap">
+    <div className="cs3-wrap fade-in">
       <div className="cs3-header">
         <span>Card {state.round} / {state.maxRounds}</span>
-        <span className="cs3-score">{state.score} pts</span>
+        <span className="cs3-score pulse">{state.score} pts</span>
       </div>
       <div className="cs3-history">
         {state.history.length === 0 && <span className="cs3-empty">Flip a card to start</span>}

@@ -9,10 +9,10 @@ export function hanabiDeluxeCoopGame({ state, dispatch, onGameOver }: GameProps<
   const theme = "Hanabi Deluxe";
   if (state.phase === "done") {
     const won = state.teamScore >= TARGET_SCORE;
-    return <div className="coop-wrap"><div className="coop-done"><h2>{won ? "Mission Success!" : "Mission Over"}</h2><div className="coop-final">{state.teamScore} pts (target {TARGET_SCORE})</div>{won && <p style={{ color: "#27ae60", fontWeight: 700 }}>+50 bonus!</p>}</div></div>;
+    return <div className="coop-wrap"><div className="coop-done bounce-in"><h2>{won ? "Mission Success!" : "Mission Over"}</h2><div className="coop-final">{state.teamScore} pts (target {TARGET_SCORE})</div>{won && <p style={{ color: "#27ae60", fontWeight: 700 }}>+50 bonus!</p>}</div></div>;
   }
   return (
-    <div className="coop-wrap">
+    <div className="coop-wrap fade-in">
       <div className="coop-info">{theme} — Round {state.round} / {TOTAL_ROUNDS}</div>
       <div className="coop-target">Team Score: {state.teamScore} / {TARGET_SCORE}</div>
       {state.phase === "rolled" && (

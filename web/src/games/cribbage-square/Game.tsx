@@ -41,6 +41,7 @@ export function CribbageSquare({ state, dispatch, onGameOver }: GameProps<Cribba
       <div className="csq-grid">
         {state.grid.map((c, i) => (
           <button key={i} className={`csq-cell${c === null ? " empty" : ""}`}
+            title="Place card here"
             style={{ color: c !== null && isRed(c) ? "#e74c3c" : "#222" }}
             disabled={c !== null}
             onClick={() => dispatch({ type: "place", cellIndex: i } as CribbageSquareAction)}>

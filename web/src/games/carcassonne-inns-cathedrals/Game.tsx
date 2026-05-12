@@ -11,7 +11,7 @@ export function CarcassonneInnsCathedralsGame({ state, dispatch, onGameOver }: G
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="carcic-wrap">
+    <div className="carcic-wrap fade-in">
       <h3 className="carcic-title">Carcassonne: Inns & Cathedrals</h3>
       <div className="carcic-meta">
         <div className="carcic-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function CarcassonneInnsCathedralsGame({ state, dispatch, onGameOver }: G
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="carcic-done">
+        <div className="carcic-done bounce-in">
           <h3>Done!</h3>
           <div className="carcic-final">{state.score} pts</div>
         </div>

@@ -16,7 +16,7 @@ export function BalloonBurst({ state, dispatch, onGameOver }: GameProps<BalloonB
   }, [state.phase, dispatch]);
 
   if (state.phase === "gameover") return (
-    <div className="bb-wrap"><div className="bb-done">
+    <div className="bb-wrap"><div className="bb-done bounce-in">
       <h2>All Balloons!</h2>
       <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#e74c3c" }}>{state.score} pts</p>
     </div></div>
@@ -26,10 +26,10 @@ export function BalloonBurst({ state, dispatch, onGameOver }: GameProps<BalloonB
   const color = state.size >= 70 ? "#c0392b" : state.size >= 40 ? "#f39c12" : "#3498db";
 
   return (
-    <div className="bb-wrap">
+    <div className="bb-wrap fade-in">
       <div className="bb-header">
         <span>Balloon {state.balloons + 1} / {state.maxBalloons}</span>
-        <span className="bb-score">{state.score} pts</span>
+        <span className="bb-score pulse">{state.score} pts</span>
       </div>
       <div className="bb-stage">
         {state.phase === "inflating" && (

@@ -10,7 +10,7 @@ export function DiceKaisaGame({ state, dispatch, onGameOver }: GameProps<DiceKai
   if (state.phase === "done") {
     return (
       <div className="dickai-wrap">
-        <div className="dickai-done">
+        <div className="dickai-done bounce-in">
           <h2>Shot</h2>
           <div className="dickai-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceKaisaGame({ state, dispatch, onGameOver }: GameProps<DiceKai
     );
   }
   return (
-    <div className="dickai-wrap">
+    <div className="dickai-wrap fade-in">
       <div className="dickai-head">
         <span className="dickai-round">Shot {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dickai-score">{state.score} pts</span>
+        <span className="dickai-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

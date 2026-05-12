@@ -10,7 +10,7 @@ export function DiceMmaGame({ state, dispatch, onGameOver }: GameProps<DiceMmaSt
   if (state.phase === "done") {
     return (
       <div className="dicmma-wrap">
-        <div className="dicmma-done">
+        <div className="dicmma-done bounce-in">
           <h2>Round</h2>
           <div className="dicmma-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceMmaGame({ state, dispatch, onGameOver }: GameProps<DiceMmaSt
     );
   }
   return (
-    <div className="dicmma-wrap">
+    <div className="dicmma-wrap fade-in">
       <div className="dicmma-head">
         <span className="dicmma-round">Round {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dicmma-score">{state.score} pts</span>
+        <span className="dicmma-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

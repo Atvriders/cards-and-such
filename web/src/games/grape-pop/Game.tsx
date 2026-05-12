@@ -14,14 +14,14 @@ export function GrapePopGame({ state, dispatch, onGameOver }: GameProps<GrapePop
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="grapepop-wrap"><div className="grapepop-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="grapepop-final">{state.score} pts</div></div></div>;
+    return <div className="grapepop-wrap"><div className="grapepop-done bounce-in"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="grapepop-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="grapepop-wrap">
       <div className="grapepop-header">
         <span className="grapepop-info">Popped: {state.popped}</span>
         <span className="grapepop-timer">{state.ticksRemaining}s</span>
-        <span className="grapepop-score">{state.score} pts</span>
+        <span className="grapepop-score pulse">{state.score} pts</span>
       </div>
       <div className="grapepop-board">
         {state.targets.map(p => {

@@ -17,7 +17,7 @@ export function WordConnections({ state, dispatch, onGameOver }: GameProps<Conne
     return (
       <div className="conn-wrap">
         <div className="conn-title">Word Connections</div>
-        <div className="conn-done">
+        <div className="conn-done bounce-in">
           <h2>{state.phase === "won" ? "Solved!" : "Better luck next time"}</h2>
           <p style={{ fontWeight: 900, fontSize: "1.4rem", color: state.phase === "won" ? "#27ae60" : "#e74c3c" }}>
             Score: {terminal?.score ?? 0}
@@ -35,7 +35,7 @@ export function WordConnections({ state, dispatch, onGameOver }: GameProps<Conne
   }
 
   return (
-    <div className="conn-wrap">
+    <div className="conn-wrap fade-in">
       <div className="conn-title">Word Connections</div>
       <div className="conn-solved">
         {solvedGroups.map(g => (

@@ -8,12 +8,12 @@ export function MaxiYatzyGame({ state, dispatch, onGameOver }: GameProps<MaxiYat
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="mx-wrap"><div className="mx-done"><h2>Done!</h2><div className="mx-final">{state.score} pts</div></div></div>;
+    return <div className="mx-wrap"><div className="mx-done bounce-in"><h2>Done!</h2><div className="mx-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="mx-wrap">
+    <div className="mx-wrap fade-in">
       <div className="mx-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="mx-score">{state.score} pts</div>
+      <div className="mx-score pulse">{state.score} pts</div>
       {state.dice.length > 0 && <div className="mx-row">{state.dice.map((d, i) => <div key={i} className="mx-die">{d}</div>)}</div>}
       {state.message && <div className="mx-result">{state.message}</div>}
       {state.phase === "roll" && <button data-testid="hint-target-maxi-yatzy-primary" className="mx-btn" onClick={() => dispatch({ type:"roll" } as MaxiYatzyAction)}>Roll</button>}

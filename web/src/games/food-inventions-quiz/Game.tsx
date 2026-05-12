@@ -13,16 +13,16 @@ export function FoodInventionsQuizGame({ state, dispatch, onGameOver }: GameProp
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as FoodInventionsQuizAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="trivia-wrap"><div className="trivia-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="trivia-wrap fade-in"><div className="trivia-done bounce-in"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="trivia-wrap">
+    <div className="trivia-wrap fade-in">
       <div className="trivia-header">
         <span className="trivia-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`trivia-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="trivia-score">{state.score} pts</span>
+        <span className="trivia-score pulse">{state.score} pts</span>
       </div>
       <div className="trivia-question">{q.question}</div>
       <div className="trivia-choices">

@@ -62,6 +62,7 @@ export function PentagoMiniGame({
                 <div className="pentago-q-label">{QUADRANT_NAMES[q]}</div>
                 <button
                   type="button"
+                  title="Rotate counter-clockwise"
                   className="pentago-rotate-btn"
                   onClick={() => dispatch({ type: "rotate", quadrant: q, dir: "ccw" } as PentagoMiniAction)}
                 >
@@ -69,6 +70,7 @@ export function PentagoMiniGame({
                 </button>
                 <button
                   type="button"
+                  title="Rotate clockwise"
                   className="pentago-rotate-btn"
                   onClick={() => dispatch({ type: "rotate", quadrant: q, dir: "cw" } as PentagoMiniAction)}
                 >
