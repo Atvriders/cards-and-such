@@ -30,12 +30,12 @@ describe("arrowHitPlugin", () => {
 
   it("hint returns a HintTarget while aiming and null after gameover", () => {
     const s = arrowHitPlugin.initialState(1, settings);
-    const target = arrowHitPlugin.hint!(s, settings);
+    const target = arrowHitPlugin.hint!(s);
     expect(target).not.toBeNull();
     expect(target).toMatchObject({ selector: expect.any(String) });
     expect((target as { selector: string }).selector.length).toBeGreaterThan(0);
 
     const ended = { ...s, phase: "gameover" as const };
-    expect(arrowHitPlugin.hint!(ended, settings)).toBeNull();
+    expect(arrowHitPlugin.hint!(ended)).toBeNull();
   });
 });

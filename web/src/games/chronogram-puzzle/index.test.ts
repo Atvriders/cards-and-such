@@ -20,9 +20,10 @@ describe("chronogramPuzzlePlugin shape", () => {
   });
 
   it("initialState is deterministic by seed and isTerminal is null on a fresh state", () => {
-    const a = chronogramPuzzlePlugin.initialState(42);
-    const b = chronogramPuzzlePlugin.initialState(42);
-    const c = chronogramPuzzlePlugin.initialState(43);
+    const s = { dummy: false };
+    const a = chronogramPuzzlePlugin.initialState(42, s);
+    const b = chronogramPuzzlePlugin.initialState(42, s);
+    const c = chronogramPuzzlePlugin.initialState(43, s);
     expect(a.puzzles.length).toBe(6);
     expect(a.idx).toBe(0);
     expect(a.selected).toBeNull();
@@ -39,7 +40,7 @@ describe("chronogramPuzzlePlugin shape", () => {
   });
 
   it("hint returns a HintTarget while playing and null when not in playing phase", () => {
-    const playing = chronogramPuzzlePlugin.initialState(7);
+    const playing = chronogramPuzzlePlugin.initialState(7, { dummy: false });
     const target = chronogramPuzzlePlugin.hint!(playing);
     expect(target).not.toBeNull();
     expect(target!.selector).toBe('[data-testid="hint-target-chronogram-puzzle-answer-0"]');

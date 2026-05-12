@@ -20,9 +20,10 @@ describe("diagonalKillerPlugin shape", () => {
   });
 
   it("initialState is deterministic by seed and isTerminal is null on a fresh state", () => {
-    const a = diagonalKillerPlugin.initialState(42);
-    const b = diagonalKillerPlugin.initialState(42);
-    const c = diagonalKillerPlugin.initialState(43);
+    const s = { dummy: false };
+    const a = diagonalKillerPlugin.initialState(42, s);
+    const b = diagonalKillerPlugin.initialState(42, s);
+    const c = diagonalKillerPlugin.initialState(43, s);
     expect(a.puzzles.length).toBe(6);
     expect(a.phase).toBe("playing");
     expect(a.idx).toBe(0);
@@ -39,7 +40,7 @@ describe("diagonalKillerPlugin shape", () => {
   });
 
   it("hint returns a HintTarget while playing and null when not in playing phase", () => {
-    const playing = diagonalKillerPlugin.initialState(7);
+    const playing = diagonalKillerPlugin.initialState(7, { dummy: false });
     const target = diagonalKillerPlugin.hint!(playing);
     expect(target).not.toBeNull();
     expect(target!.selector).toBe('[data-testid="hint-target-diagonal-killer-answer-0"]');

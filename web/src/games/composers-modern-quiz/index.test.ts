@@ -33,14 +33,14 @@ describe("composersModernQuizPlugin", () => {
   it("hint returns HintTarget when playing and null otherwise", () => {
     const settings = { questions: "10" as const };
     const s = composersModernQuizPlugin.initialState(1, settings);
-    const hint = composersModernQuizPlugin.hint!(s, settings);
+    const hint = composersModernQuizPlugin.hint!(s);
     expect(hint).not.toBeNull();
     expect(hint).toEqual({ selector: '[data-testid="hint-target-quiz-answer-0"]', pulses: 3 });
 
     const doneState = { ...s, phase: "done" as const };
-    expect(composersModernQuizPlugin.hint!(doneState, settings)).toBeNull();
+    expect(composersModernQuizPlugin.hint!(doneState)).toBeNull();
 
     const resultState = { ...s, phase: "result" as const };
-    expect(composersModernQuizPlugin.hint!(resultState, settings)).toBeNull();
+    expect(composersModernQuizPlugin.hint!(resultState)).toBeNull();
   });
 });

@@ -52,11 +52,11 @@ describe("OnlineNowPanel", () => {
     // Each user appears in an <li>; assert names and game labels.
     const items = panel.querySelectorAll("li");
     expect(items).toHaveLength(2);
-    expect(items[0].querySelector(".name")?.textContent).toBe("alice");
-    expect(items[0].querySelector(".where")?.textContent).toBe("uno");
-    expect(items[1].querySelector(".name")?.textContent).toBe("bob");
+    expect(items[0]!.querySelector(".name")?.textContent).toBe("alice");
+    expect(items[0]!.querySelector(".where")?.textContent).toBe("uno");
+    expect(items[1]!.querySelector(".name")?.textContent).toBe("bob");
     // game === null falls back to the literal string "in lobby".
-    expect(items[1].querySelector(".where")?.textContent).toBe("in lobby");
+    expect(items[1]!.querySelector(".where")?.textContent).toBe("in lobby");
   });
 
   it("renders 0 online with an empty user list when nobody is connected", () => {

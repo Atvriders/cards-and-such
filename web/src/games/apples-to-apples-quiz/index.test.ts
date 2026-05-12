@@ -13,7 +13,7 @@ describe("applesToApplesQuizPlugin shape", () => {
     expect(typeof applesToApplesQuizPlugin.description).toBe("string");
     expect(applesToApplesQuizPlugin.description.length).toBeGreaterThan(0);
     expect(typeof applesToApplesQuizPlugin.howToPlay).toBe("string");
-    expect(applesToApplesQuizPlugin.howToPlay.length).toBeGreaterThan(0);
+    expect(applesToApplesQuizPlugin.howToPlay!.length).toBeGreaterThan(0);
     expect(applesToApplesQuizPlugin.settings).toBeDefined();
     expect(applesToApplesQuizPlugin.settings.dummy.kind).toBe("boolean");
     expect(applesToApplesQuizPlugin.settings.dummy.default).toBe(false);

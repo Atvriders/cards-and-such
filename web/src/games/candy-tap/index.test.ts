@@ -31,16 +31,16 @@ describe("candyTapPlugin", () => {
 
   it("hint returns null when no targets or done, returns HintTarget when targets present", () => {
     const empty = candyTapPlugin.initialState(1, { dummy: false });
-    expect(candyTapPlugin.hint!(empty, { dummy: false })).toBeNull();
+    expect(candyTapPlugin.hint!(empty)).toBeNull();
 
     const done: CandyTapState = { ...empty, phase: "done" };
-    expect(candyTapPlugin.hint!(done, { dummy: false })).toBeNull();
+    expect(candyTapPlugin.hint!(done)).toBeNull();
 
     const withTargets: CandyTapState = {
       ...empty,
       targets: [{ id: 1, lane: 0, ticksLeft: 3 }],
     };
-    const hint = candyTapPlugin.hint!(withTargets, { dummy: false });
+    const hint = candyTapPlugin.hint!(withTargets);
     expect(hint).not.toBeNull();
     expect(hint).toEqual({ selector: ".fc-target", pulses: 3 });
   });

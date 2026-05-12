@@ -15,7 +15,7 @@ import {
 function seqRng(values: number[]): () => number {
   let i = 0;
   return () => {
-    const v = values[i % values.length];
+    const v = values[i % values.length]!;
     i++;
     return v;
   };

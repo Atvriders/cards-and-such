@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import DevErrorTestPage from "./DevErrorTestPage.js";
@@ -12,7 +12,7 @@ const FLAG_KEY = "__cardsForceError";
 type FlagWindow = Window & { [FLAG_KEY]?: boolean };
 
 describe("DevErrorTestPage", () => {
-  let errorSpy: ReturnType<typeof vi.spyOn>;
+  let errorSpy: MockInstance;
 
   beforeEach(() => {
     // React logs the error to console.error when a component throws during

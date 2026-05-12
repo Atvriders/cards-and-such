@@ -9,7 +9,7 @@ describe("shortcuts", () => {
     expect(SHORTCUTS).toHaveProperty("pyramid");
     expect(SHORTCUTS).toHaveProperty("youtube-clicker");
 
-    const klondike = SHORTCUTS.klondike;
+    const klondike = SHORTCUTS.klondike!;
     expect(Array.isArray(klondike)).toBe(true);
     expect(klondike.length).toBeGreaterThan(0);
 

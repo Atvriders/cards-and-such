@@ -37,7 +37,7 @@ describe("canadianCheckersPlugin", () => {
   it("hint returns HintTarget while playing and null otherwise", () => {
     const settings = { questions: "10" as const };
     const state = canadianCheckersPlugin.initialState(7, settings);
-    const target = canadianCheckersPlugin.hint!(state, settings);
+    const target = canadianCheckersPlugin.hint!(state);
     expect(target).not.toBeNull();
     expect(target).toEqual({
       selector: '[data-testid="hint-target-canadian-checkers-answer-0"]',
@@ -45,6 +45,6 @@ describe("canadianCheckersPlugin", () => {
     });
 
     const doneState: CanadianCheckersState = { ...state, phase: "done" };
-    expect(canadianCheckersPlugin.hint!(doneState, settings)).toBeNull();
+    expect(canadianCheckersPlugin.hint!(doneState)).toBeNull();
   });
 });

@@ -40,7 +40,7 @@ describe("StarRating", () => {
     );
     const stars = screen.getAllByRole("radio");
     stars.forEach((s) => expect(s).toBeDisabled());
-    fireEvent.click(stars[4]);
+    fireEvent.click(stars[4]!);
     expect(onChange).not.toHaveBeenCalled();
   });
 });

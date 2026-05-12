@@ -48,13 +48,13 @@ describe("archery-target plugin", () => {
 
     // The hint function inspects `phase`, `gameOver`, and `done` flags via untyped access,
     // so force the null branch using those signals.
-    const gameOverState = { ...(initialState(5, settings) as object), gameOver: true } as unknown as Parameters<typeof archeryTargetPlugin.hint>[0];
-    expect(archeryTargetPlugin.hint!(gameOverState as never)).toBeNull();
+    const gameOverState = { ...(initialState(5, settings) as object), gameOver: true } as never;
+    expect(archeryTargetPlugin.hint!(gameOverState)).toBeNull();
 
-    const doneState = { ...(initialState(5, settings) as object), done: true } as unknown as Parameters<typeof archeryTargetPlugin.hint>[0];
-    expect(archeryTargetPlugin.hint!(doneState as never)).toBeNull();
+    const doneState = { ...(initialState(5, settings) as object), done: true } as never;
+    expect(archeryTargetPlugin.hint!(doneState)).toBeNull();
 
-    const phaseState = { ...(initialState(5, settings) as object), phase: "gameover" } as unknown as Parameters<typeof archeryTargetPlugin.hint>[0];
-    expect(archeryTargetPlugin.hint!(phaseState as never)).toBeNull();
+    const phaseState = { ...(initialState(5, settings) as object), phase: "gameover" } as never;
+    expect(archeryTargetPlugin.hint!(phaseState)).toBeNull();
   });
 });

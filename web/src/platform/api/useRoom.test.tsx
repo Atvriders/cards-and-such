@@ -62,18 +62,18 @@ describe("useRoom", () => {
 
   it("authenticates, joins, and applies room-state messages", () => {
     const { result } = renderHook(() => useRoom(ROOM_ID, "tok"));
-    const ws = FakeWebSocket.instances[0];
+    const ws = FakeWebSocket.instances[0]!;
     expect(ws).toBeDefined();
 
     act(() => {
       ws.open();
     });
-    expect(JSON.parse(ws.sent[0])).toEqual({ type: "auth", token: "tok" });
+    expect(JSON.parse(ws.sent[0]!)).toEqual({ type: "auth", token: "tok" });
 
     act(() => {
       ws.message({ type: "auth_ok" });
     });
-    expect(JSON.parse(ws.sent[1])).toEqual({ type: "room-join", roomId: ROOM_ID });
+    expect(JSON.parse(ws.sent[1]!)).toEqual({ type: "room-join", roomId: ROOM_ID });
     expect(result.current[0].status).toBe("authed");
 
     act(() => {
@@ -99,7 +99,7 @@ describe("useRoom", () => {
 
   it("dispatch sends room-action only when socket is OPEN", () => {
     const { result } = renderHook(() => useRoom(ROOM_ID, "tok"));
-    const ws = FakeWebSocket.instances[0];
+    const ws = FakeWebSocket.instances[0]!;
 
     // Not open yet -> dispatch is a no-op
     act(() => {
@@ -116,7 +116,7 @@ describe("useRoom", () => {
       result.current[1].dispatch({ kind: "play", card: 7 });
     });
     expect(ws.sent).toHaveLength(1);
-    expect(JSON.parse(ws.sent[0])).toEqual({
+    expect(JSON.parse(ws.sent[0]!)).toEqual({
       type: "room-action",
       roomId: ROOM_ID,
       action: { kind: "play", card: 7 },
@@ -125,6 +125,6 @@ describe("useRoom", () => {
     act(() => {
       result.current[1].leave();
     });
-    expect(JSON.parse(ws.sent[1])).toEqual({ type: "room-leave", roomId: ROOM_ID });
+    expect(JSON.parse(ws.sent[1]!)).toEqual({ type: "room-leave", roomId: ROOM_ID });
   });
 });

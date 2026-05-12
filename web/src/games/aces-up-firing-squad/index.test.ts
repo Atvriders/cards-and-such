@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { acesUpFiringSquadPlugin } from "./index.js";
-import type { AcesUpFiringSquadState, AcesUpFiringSquadSettings } from "./state.js";
+import type { AcesUpFiringSquadState } from "./state.js";
 
-const SETTINGS = {} as AcesUpFiringSquadSettings;
+const SETTINGS = { _dummy: false } as const;
 
 describe("acesUpFiringSquadPlugin", () => {
   it("exposes the required GamePlugin shape", () => {

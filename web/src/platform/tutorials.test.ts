@@ -28,7 +28,7 @@ describe("tutorials", () => {
     for (const step of klondike ?? []) {
       expect(typeof step.title).toBe("string");
       expect(typeof step.text).toBe("string");
-      expect(step.title.length).toBeGreaterThan(0);
+      expect(step.title!.length).toBeGreaterThan(0);
     }
     expect(tutorialFor("does-not-exist")).toBeUndefined();
   });

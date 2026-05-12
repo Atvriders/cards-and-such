@@ -49,7 +49,7 @@ describe("createRoom", () => {
 
     expect(out).toEqual({ room: VALID_ROOM, seat: 1 });
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
     expect(url).toBe("/api/rooms");
     expect(init.method).toBe("POST");
     const headers = init.headers as Record<string, string>;
@@ -86,7 +86,7 @@ describe("joinRoomByCode", () => {
     const out = await joinRoomByCode("AB12");
 
     expect(out).toEqual({ room: VALID_ROOM });
-    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
     expect(url).toBe("/api/rooms/join");
     expect(init.method).toBe("POST");
     expect(JSON.parse(init.body as string)).toEqual({ code: "AB12" });

@@ -96,7 +96,7 @@ describe("Toast", () => {
     expect(ids).toHaveLength(3);
 
     act(() => {
-      useToast.getState().dismiss(ids[1]);
+      useToast.getState().dismiss(ids[1]!);
     });
 
     const remaining = useToast.getState().toasts.map((t) => t.message);

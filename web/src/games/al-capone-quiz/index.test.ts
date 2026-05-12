@@ -27,12 +27,12 @@ describe("alCaponeQuizPlugin", () => {
   it("hint returns HintTarget while playing and null when done", () => {
     const s = { questions: "10" as const };
     const playing = alCaponeQuizPlugin.initialState(7, s);
-    const target = alCaponeQuizPlugin.hint!(playing, s);
+    const target = alCaponeQuizPlugin.hint!(playing);
     expect(target).not.toBeNull();
     expect(target!.selector).toBe('[data-testid="hint-target-quiz-answer-0"]');
     expect(target!.pulses).toBe(3);
 
     const done = { ...playing, phase: "done" as const };
-    expect(alCaponeQuizPlugin.hint!(done, s)).toBeNull();
+    expect(alCaponeQuizPlugin.hint!(done)).toBeNull();
   });
 });

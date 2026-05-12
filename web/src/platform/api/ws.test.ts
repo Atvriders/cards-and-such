@@ -48,7 +48,7 @@ describe("useLobbyPresence (ws.ts)", () => {
     const { result } = renderHook(() => useLobbyPresence("tok-123"));
 
     expect(FakeWebSocket.instances).toHaveLength(1);
-    const sock = FakeWebSocket.instances[0];
+    const sock = FakeWebSocket.instances[0]!;
     // jsdom's window.location.protocol is http:, so this should be ws://
     expect(sock.url.startsWith("ws://")).toBe(true);
     expect(sock.url.endsWith("/ws")).toBe(true);
@@ -67,7 +67,7 @@ describe("useLobbyPresence (ws.ts)", () => {
 
   it("updates state from a presence message and ignores malformed payloads", () => {
     const { result } = renderHook(() => useLobbyPresence("tok"));
-    const sock = FakeWebSocket.instances[0];
+    const sock = FakeWebSocket.instances[0]!;
 
     act(() => {
       sock.emit("open", {});
@@ -101,7 +101,7 @@ describe("useLobbyPresence (ws.ts)", () => {
     try {
       const { result } = renderHook(() => useLobbyPresence("tok"));
       expect(FakeWebSocket.instances).toHaveLength(1);
-      const first = FakeWebSocket.instances[0];
+      const first = FakeWebSocket.instances[0]!;
 
       act(() => {
         first.emit("open", {});
