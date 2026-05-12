@@ -21,6 +21,6 @@ Light, snappy, and pure 50/50 luck — Dice Spinner is the perfect background ga
   settings,
   initialState:(seed:number,s:S)=>initialState(seed,s as DiceSpinnerSettings),
   reducer,isTerminal,
-  hint: (state: any) => { if ((state as any).phase === "gameover" || (state as any).gameOver) return null; return { selector: '[data-testid="hint-target-dice-spinner-roll"]', pulses: 3 }; },
+  hint: (state) => state.phase === "done" ? null : { selector: '[data-testid="hint-target-dice-spinner-roll"]', pulses: 3 },
   component:DiceSpinnerGame,
 };

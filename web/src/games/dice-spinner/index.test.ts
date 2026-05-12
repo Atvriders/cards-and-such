@@ -48,8 +48,8 @@ describe("dice-spinner plugin", () => {
       }
     }
 
-    // When phase is gameover, hint() should return null.
-    const done = { ...state, phase: "gameover" as const };
+    // When phase is done, hint() should return null.
+    const done = { ...state, phase: "done" as const };
     expect(diceSpinnerPlugin.hint!(done)).toBeNull();
   });
 });
