@@ -24,30 +24,27 @@ export interface CardCrawlerState {
 
 export type CardCrawlerAction = { type: "flip"; idx: number };
 
-let _idCounter = 0;
-
-function makeCard(kind: CardKind, value: number, label: string): GridCard {
-  return { id: _idCounter++, kind, value, label, revealed: false };
-}
-
 function buildDeck(rng: () => number): GridCard[] {
+  const make = (id: number, kind: CardKind, value: number, label: string): GridCard => ({
+    id, kind, value, label, revealed: false,
+  });
   const cards: GridCard[] = [
-    makeCard("fight",  8,  "Sword +8"),
-    makeCard("fight",  12, "Axe +12"),
-    makeCard("fight",  6,  "Dagger +6"),
-    makeCard("fight",  15, "Hammer +15"),
-    makeCard("heal",   10, "Potion +10hp"),
-    makeCard("heal",   6,  "Herb +6hp"),
-    makeCard("gold",   15, "Coins 15g"),
-    makeCard("gold",   20, "Chest 20g"),
-    makeCard("enemy",  8,  "Goblin -8hp"),
-    makeCard("enemy",  12, "Orc -12hp"),
-    makeCard("enemy",  6,  "Rat -6hp"),
-    makeCard("enemy",  18, "Troll -18hp"),
-    makeCard("boss",   30, "BOSS -30hp"),
-    makeCard("empty",  0,  "Empty"),
-    makeCard("empty",  0,  "Empty"),
-    makeCard("fight",  10, "Spear +10"),
+    make(0,  "fight",  8,  "Sword +8"),
+    make(1,  "fight",  12, "Axe +12"),
+    make(2,  "fight",  6,  "Dagger +6"),
+    make(3,  "fight",  15, "Hammer +15"),
+    make(4,  "heal",   10, "Potion +10hp"),
+    make(5,  "heal",   6,  "Herb +6hp"),
+    make(6,  "gold",   15, "Coins 15g"),
+    make(7,  "gold",   20, "Chest 20g"),
+    make(8,  "enemy",  8,  "Goblin -8hp"),
+    make(9,  "enemy",  12, "Orc -12hp"),
+    make(10, "enemy",  6,  "Rat -6hp"),
+    make(11, "enemy",  18, "Troll -18hp"),
+    make(12, "boss",   30, "BOSS -30hp"),
+    make(13, "empty",  0,  "Empty"),
+    make(14, "empty",  0,  "Empty"),
+    make(15, "fight",  10, "Spear +10"),
   ];
   // Fisher-Yates shuffle
   for (let i = cards.length - 1; i > 0; i--) {

@@ -101,7 +101,6 @@ function buildPuzzle(rng: () => number, difficulty: string): { gates: Gate[]; in
 export function initialState(seed: number, settings: LogicGatesSettings): LogicGatesState {
   const rng = mulberry32(seed);
   const { gates, inputs, target } = buildPuzzle(rng, settings.difficulty);
-  const current = evaluate(gates, inputs);
   return {
     settings,
     gates,
@@ -109,7 +108,10 @@ export function initialState(seed: number, settings: LogicGatesSettings): LogicG
     targetOutput: target,
     numInputs: inputs.length,
     movesMade: 0,
-    won: current === target,
+    // Fresh puzzles aren't "won" yet — the player must toggle at least once
+    // to register a solution. Without this, degenerate gate networks (where
+    // every input combo yields the target) trip isTerminal on the fresh state.
+    won: false,
   };
 }
 

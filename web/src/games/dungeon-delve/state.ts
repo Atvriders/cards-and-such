@@ -75,10 +75,9 @@ const ENEMIES = [
   { name: "Boss",      maxHp: 100, attack: 18 },
 ];
 
-let cardIdCounter = 0;
-function makeCard(type: CardType): Card {
+function makeCard(id: number, type: CardType): Card {
   const def = CARD_DEFS[type];
-  return { id: cardIdCounter++, type, ...def };
+  return { id, type, ...def };
 }
 
 function shuffleDeck(deck: Card[], rng: () => number): Card[] {
@@ -110,7 +109,7 @@ export function initialState(seed: number): DungeonDelveState {
   const rng = mulberry32(seed);
   const nextSeed = Math.floor(rng() * 2 ** 31);
   const rng2 = mulberry32(nextSeed);
-  const deck = shuffleDeck(DECK_TEMPLATE.map(makeCard), rng2);
+  const deck = shuffleDeck(DECK_TEMPLATE.map((t, i) => makeCard(i, t)), rng2);
   const drawn = drawCards(deck.slice(), [], 5, rng2);
   const enemy = { ...ENEMIES[0]!, hp: ENEMIES[0]!.maxHp, poisoned: 0 };
   return {
