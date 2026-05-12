@@ -1,10 +1,15 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CodenamesState, CodenamesAction } from "./state.js";
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-export function CodenamesLiteGame({ state, dispatch }: GameProps<CodenamesState, Record<string, never>>): JSX.Element {
+export function CodenamesLiteGame({ state, dispatch, onGameOver }: GameProps<CodenamesState, Record<string, never>>): JSX.Element {
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) { endedRef.current = true; onGameOver(terminal.score); }
+  }, [terminal, onGameOver]);
 
   function handleTile(i: number) {
     if (terminal || state.tiles[i]?.revealed) return;

@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { TeleportMazeState, TeleportMazeSettings, Dir } from "./state.js";
+import { isTerminal } from "./state.js";
 import "./Game.css";
 
 const PAD_COLORS = ["#ff44ff", "#ff8844", "#44ffff", "#ffff44", "#44ff88", "#ff4444", "#4488ff", "#ff88cc"];
@@ -8,7 +9,13 @@ const PAD_COLORS = ["#ff44ff", "#ff8844", "#44ffff", "#ffff44", "#44ff88", "#ff4
 export function TeleportMazeGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<TeleportMazeState, TeleportMazeSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const map: Record<string, Dir> = {

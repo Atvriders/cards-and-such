@@ -1,11 +1,16 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { JustOneState, JustOneAction } from "./state.js";
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-export function JustOneGame({ state, dispatch }: GameProps<JustOneState, Record<string, never>>): JSX.Element {
+export function JustOneGame({ state, dispatch, onGameOver }: GameProps<JustOneState, Record<string, never>>): JSX.Element {
   const terminal = isTerminal(state);
   const isLastRound = state.round >= state.totalRounds;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) { endedRef.current = true; onGameOver(terminal.score); }
+  }, [terminal, onGameOver]);
 
   return (
     <div className="just-one">

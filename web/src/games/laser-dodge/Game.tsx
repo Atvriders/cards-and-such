@@ -10,9 +10,15 @@ const LASER_THICKNESS = 5; // px
 
 type Settings = { difficulty: "easy" | "normal" | "hard" };
 
-export function LaserDodge({ state, dispatch }: GameProps<LaserDodgeState, Settings>): JSX.Element {
+export function LaserDodge({ state, dispatch, onGameOver }: GameProps<LaserDodgeState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);

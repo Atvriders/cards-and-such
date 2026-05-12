@@ -10,12 +10,14 @@ const PH = 500;
 export function PaddleBallJuggleGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<PaddleBallState, PaddleBallSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const endedRef = useRef(false);
 
   const tick = useCallback(
     (now: number) => {
@@ -121,6 +123,13 @@ export function PaddleBallJuggleGame({
   });
 
   const terminal = isTerminal(state);
+
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   return (
     <div className="paddle-game">

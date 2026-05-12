@@ -15,12 +15,13 @@ const LANE_LABELS = ["D", "F", "J", "K"];
 
 type Settings = { bpm: "60" | "90" | "120" };
 
-export function RhythmTap({ state, dispatch }: GameProps<RhythmTapState, Settings>): JSX.Element {
+export function RhythmTap({ state, dispatch, onGameOver }: GameProps<RhythmTapState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
+  const endedRef = useRef(false);
 
   const tick = useCallback((now: number) => {
     const s = stateRef.current;
@@ -55,6 +56,14 @@ export function RhythmTap({ state, dispatch }: GameProps<RhythmTapState, Setting
   }, [dispatch]);
 
   const terminal = isTerminal(state);
+
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
+
   const { elapsed, duration, combo, score, lives, beats } = state;
   const hitZoneY = PH * 0.85;
 

@@ -10,9 +10,15 @@ const SEG_H = PH / NUM_SEGMENTS;
 
 type Settings = { difficulty: "easy" | "normal" | "hard" };
 
-export function TunnelRunner({ state, dispatch }: GameProps<TunnelRunnerState, Settings>): JSX.Element {
+export function TunnelRunner({ state, dispatch, onGameOver }: GameProps<TunnelRunnerState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);

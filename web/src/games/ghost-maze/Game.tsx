@@ -7,11 +7,17 @@ import "./Game.css";
 export function GhostMazeGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<GhostMazeState, GhostMazeSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
   const rafRef = useRef<number | null>(null);
   const lastTickRef = useRef(0);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
 
   const tick = useCallback(
     (now: number) => {

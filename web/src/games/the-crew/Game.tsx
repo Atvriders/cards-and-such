@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CrewState, CrewAction, CrewCard } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -29,9 +29,13 @@ function Card({ card, selected, onClick, isTask }: {
   );
 }
 
-export function TheCrewGame({ state, dispatch }: GameProps<CrewState, Record<string, never>>): JSX.Element {
+export function TheCrewGame({ state, dispatch, onGameOver }: GameProps<CrewState, Record<string, never>>): JSX.Element {
   const [selected, setSelected] = useState<number | null>(null);
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) { endedRef.current = true; onGameOver(terminal.score); }
+  }, [terminal, onGameOver]);
 
   const taskCardIds = new Set(state.tasks.map(t => t.card.id));
   const playerHand = state.hands[0]!;

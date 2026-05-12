@@ -1,12 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ClassicMazeState, ClassicMazeSettings, Dir } from "./state.js";
+import { isTerminal } from "./state.js";
 import "./Game.css";
 
 export function ClassicMazeGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<ClassicMazeState, ClassicMazeSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const map: Record<string, Dir> = {

@@ -4,9 +4,16 @@ import type { SpotItState, SpotItAction } from "./state.js";
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-export function SpotItGame({ state, dispatch }: GameProps<SpotItState, Record<string, never>>): JSX.Element {
+export function SpotItGame({ state, dispatch, onGameOver }: GameProps<SpotItState, Record<string, never>>): JSX.Element {
   const terminal = isTerminal(state);
   const startTimeRef = useRef<number>(Date.now());
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   useEffect(() => {
     startTimeRef.current = Date.now();

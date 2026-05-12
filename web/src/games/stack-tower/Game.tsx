@@ -11,9 +11,10 @@ const VISIBLE_BLOCKS = 14;
 
 type Settings = { speed: "slow" | "normal" | "fast" };
 
-export function StackTower({ state, dispatch }: GameProps<StackTowerState, Settings>): JSX.Element {
+export function StackTower({ state, dispatch, onGameOver }: GameProps<StackTowerState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
@@ -51,6 +52,12 @@ export function StackTower({ state, dispatch }: GameProps<StackTowerState, Setti
   }, [dispatch]);
 
   const terminal = isTerminal(state);
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
   const { stack, moving, score } = state;
 
   // Scroll: show top of stack

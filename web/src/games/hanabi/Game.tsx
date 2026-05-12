@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { HanabiState, HanabiAction, HanabiColor, HanabiNumber } from "./state.js";
 import { COLORS, NUMBERS } from "./state.js";
@@ -39,10 +39,14 @@ function CardFront({ card, selected, onClick }: {
 
 type ClueMode = { player: number; type: "color" | "number" } | null;
 
-export function HanabiGame({ state, dispatch }: GameProps<HanabiState, Record<string, never>>): JSX.Element {
+export function HanabiGame({ state, dispatch, onGameOver }: GameProps<HanabiState, Record<string, never>>): JSX.Element {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [clueMode, setClueMode] = useState<ClueMode>(null);
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) { endedRef.current = true; onGameOver(terminal.score); }
+  }, [terminal, onGameOver]);
 
   function handlePlay() {
     if (selectedCard === null) return;

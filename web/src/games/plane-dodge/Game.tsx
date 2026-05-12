@@ -9,12 +9,13 @@ const PH = 400;
 
 type Settings = { difficulty: "easy" | "normal" | "hard" };
 
-export function PlaneDodge({ state, dispatch }: GameProps<PlaneDodgeState, Settings>): JSX.Element {
+export function PlaneDodge({ state, dispatch, onGameOver }: GameProps<PlaneDodgeState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
+  const endedRef = useRef(false);
 
   const tick = useCallback((now: number) => {
     const s = stateRef.current;
@@ -65,6 +66,14 @@ export function PlaneDodge({ state, dispatch }: GameProps<PlaneDodgeState, Setti
   }, [dispatch]);
 
   const terminal = isTerminal(state);
+
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
+
   const { planeX, planeY, obstacles, score } = state;
 
   return (

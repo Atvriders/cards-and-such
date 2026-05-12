@@ -18,12 +18,14 @@ const PEG_COLORS: Record<number, string> = {
 export function RingThrowerGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<RingThrowerState, RingThrowerSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const endedRef = useRef(false);
 
   const tick = useCallback(
     (now: number) => {
@@ -158,6 +160,13 @@ export function RingThrowerGame({
   });
 
   const terminal = isTerminal(state);
+
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   return (
     <div className="ring-game">

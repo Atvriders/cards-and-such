@@ -14,12 +14,13 @@ const COLOR_HEX: Record<BubbleColor, string> = {
 
 type Settings = { colors: "3" | "4" | "5" };
 
-export function BubblePopChain({ state, dispatch }: GameProps<BubblePopState, Settings>): JSX.Element {
+export function BubblePopChain({ state, dispatch, onGameOver }: GameProps<BubblePopState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
+  const endedRef = useRef(false);
 
   const tick = useCallback((now: number) => {
     const s = stateRef.current;
@@ -43,6 +44,13 @@ export function BubblePopChain({ state, dispatch }: GameProps<BubblePopState, Se
   }, [state.over, tick]);
 
   const terminal = isTerminal(state);
+
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
   const { grid, score, moveTimer, moveInterval } = state;
   const timerPct = (moveTimer / moveInterval) * 100;
 

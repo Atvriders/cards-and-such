@@ -1,13 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { IceSlideMazeState, IceSlideMazeSettings, Dir } from "./state.js";
-import { slide } from "./state.js";
+import { slide, isTerminal } from "./state.js";
 import "./Game.css";
 
 export function IceSlideMazeGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<IceSlideMazeState, IceSlideMazeSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const map: Record<string, Dir> = {

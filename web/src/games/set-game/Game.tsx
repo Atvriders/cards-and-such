@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SetState, SetAction, SetCard, Attr3 } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -34,8 +35,15 @@ function SetCardView({ card, selected, onClick }: { card: SetCard | null; select
   );
 }
 
-export function SetGame({ state, dispatch }: GameProps<SetState, Record<string, never>>): JSX.Element {
+export function SetGame({ state, dispatch, onGameOver }: GameProps<SetState, Record<string, never>>): JSX.Element {
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   return (
     <div className="set-game">

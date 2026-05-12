@@ -17,9 +17,11 @@ function gameYtoScreenY(y: number): number {
 export function TapRunnerGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<TapRunnerState, TapRunnerSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -102,6 +104,12 @@ export function TapRunnerGame({
   });
 
   const terminal = isTerminal(state);
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   return (
     <div className="tap-runner-game">

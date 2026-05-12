@@ -10,12 +10,18 @@ const PH = 400;
 export function FlappyBirdGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<FlappyBirdState, FlappyBirdSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
 
   const tick = useCallback(
     (now: number) => {

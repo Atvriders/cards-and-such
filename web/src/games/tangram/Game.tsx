@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { TangramState, TangramAction, PieceId } from "./state.js";
 import { getPieceDef, ALL_PIECES, getCells, isTerminal } from "./state.js";
 import "./Game.css";
 
-export function TangramGame({ state, dispatch }: GameProps<TangramState, Record<string, never>>): JSX.Element {
+export function TangramGame({ state, dispatch, onGameOver }: GameProps<TangramState, Record<string, never>>): JSX.Element {
   const [hoverCell, setHoverCell] = useState<[number, number] | null>(null);
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   // Build cell map
   const cellMap: Record<string, string> = {}; // "r,c" -> color

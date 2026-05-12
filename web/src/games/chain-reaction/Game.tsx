@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ChainReactionState, ChainReactionAction } from "./state.js";
 import { ROWS, COLS, capacity, idx, isTerminal } from "./state.js";
@@ -5,8 +6,15 @@ import "./Game.css";
 
 const ORB_EMOJI = ["", "●", "●●", "●●●", "●●●●"];
 
-export function ChainReactionGame({ state, dispatch }: GameProps<ChainReactionState, Record<string, never>>): JSX.Element {
+export function ChainReactionGame({ state, dispatch, onGameOver }: GameProps<ChainReactionState, Record<string, never>>): JSX.Element {
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (terminal && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(terminal.score);
+    }
+  }, [terminal, onGameOver]);
 
   return (
     <div className="chain-reaction">

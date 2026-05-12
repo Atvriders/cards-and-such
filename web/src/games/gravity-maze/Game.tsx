@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { GravityMazeState, GravityMazeSettings } from "./state.js";
+import { isTerminal } from "./state.js";
 import "./Game.css";
 
 const GRAVITY_ARROWS: Record<string, string> = {
@@ -10,7 +11,13 @@ const GRAVITY_ARROWS: Record<string, string> = {
 export function GravityMazeGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<GravityMazeState, GravityMazeSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {

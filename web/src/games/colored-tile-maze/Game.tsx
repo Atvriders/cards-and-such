@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ColoredTileMazeState, ColoredTileMazeSettings, Dir, TileColor } from "./state.js";
+import { isTerminal } from "./state.js";
 import "./Game.css";
 
 const TILE_FILL: Record<TileColor, string> = {
@@ -29,7 +30,13 @@ const TILE_COLOR: Partial<Record<TileColor, string>> = {
 export function ColoredTileMazeGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<ColoredTileMazeState, ColoredTileMazeSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const map: Record<string, Dir> = {

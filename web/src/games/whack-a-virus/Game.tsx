@@ -8,9 +8,15 @@ type Settings = { slots: "9" | "16"; speed: "normal" | "fast" };
 
 const VIRUS_EMOJI = "🦠";
 
-export function WhackAVirus({ state, dispatch }: GameProps<WhackVirusState, Settings>): JSX.Element {
+export function WhackAVirus({ state, dispatch, onGameOver }: GameProps<WhackVirusState, Settings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) { endedRef.current = true; onGameOver(t.score); }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
