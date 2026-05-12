@@ -523,6 +523,10 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "error">("idle");
   const [showConfetti, setShowConfetti] = useState(false);
+  // Toggle that the play-board element keys against to (re)trigger a shake
+  // animation when the user dispatches a no-op action (reducer returns the
+  // same state reference — typically an illegal move).
+  const [shakeKey, setShakeKey] = useState(0);
   const [elapsed, setElapsed] = useState<number>(0);
   const [bestTime, setBestTime] = useState<number | null>(() => readBestTime(plugin.id));
   // Per-game time-trend history — last 20 finishes. Populated on every
@@ -1179,6 +1183,13 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const dispatch = useCallback(
     (action: unknown) => {
       actionCountRef.current += 1;
+      // Mobile haptic — a brief 10ms tick on every dispatched action.
+      // No-op outside browsers / on devices without a vibration motor.
+      try {
+        if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+          navigator.vibrate(10);
+        }
+      } catch { /* some browsers throw on disabled vibrate; ignore */ }
       // Push every dispatched action into the replay ring buffer (cap
       // REPLAY_RING_CAP). Done unconditionally — even reducer no-ops
       // are recorded so the saved replay matches the user's actual
@@ -1206,6 +1217,14 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
       });
       setState((s: unknown) => {
         const next = plugin.reducer(s, action);
+        // Reducer returned same reference → illegal/no-op action.
+        // Bump shakeKey so the play-board re-keys its `.shake` class and
+        // gives the user immediate visual feedback that the input was
+        // rejected. (Lose sound is reserved for terminal-state losses
+        // further down; this is just a "nope" cue.)
+        if (next === s && action && typeof action === "object" && (action as { type?: unknown }).type !== "tick") {
+          setShakeKey((k) => k + 1);
+        }
         // Push the prior state onto the unified undo ring buffer (last
         // UNDO_STACK_CAP). Skip when the reducer returned the same
         // reference — those are no-ops and pushing them would let undo
@@ -1234,6 +1253,8 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             setIsNewRecord(isRecord);
             setShowConfetti(true);
           } else {
+            // Zero-score finish — count it as a loss for audio feedback.
+            playSound("lose");
             setPreviousBest(null);
             setIsNewRecord(false);
           }
@@ -2530,7 +2551,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         <div className="play-with-sidebar">
           <section
             ref={playPanelRef}
-            className={`play-panel play-board${paused ? " play-panel--paused" : ""}`}
+            className={`play-panel play-board${paused ? " play-panel--paused" : ""}${shakeKey > 0 ? (shakeKey % 2 === 0 ? " play-board--shake-a" : " play-board--shake-b") : ""}`}
           >
             {/* Suspense fallback shows a skeleton "loading game…" card while
                 the active plugin's component module finishes loading. Most
@@ -2549,7 +2570,12 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
                 hint="The play surface crashed, but the rest of the app is still running. Reload to try again or report the bug below."
               >
                 <Suspense fallback={<GameLoadingSkeleton gameTitle={plugin.title} />}>
-                  <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
+                  {/* Keyed by plugin.id so the mount fade-in fires fresh on every
+                      game switch. `data-game` exposes the id for engines/CSS
+                      to scope per-game tweaks. */}
+                  <div className="game-mount fade-in" key={plugin.id} data-game={plugin.id}>
+                    <plugin.component state={state} settings={settings} dispatch={dispatch} onGameOver={onGameOver} seed={seed} />
+                  </div>
                 </Suspense>
               </ErrorBoundary>
             ) : (
