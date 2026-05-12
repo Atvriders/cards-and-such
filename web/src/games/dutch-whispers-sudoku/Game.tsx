@@ -68,7 +68,7 @@ export function DutchWhispersSudokuGame({ state, dispatch, onGameOver }: GamePro
         {digits.map((d) => (
           <button key={d} className="dutchwhispersorange-num" onClick={() => dispatch({ type: "enter", digit: d } as DutchWhispersSudokuAction)}>{d}</button>
         ))}
-        <button className="dutchwhispersorange-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as DutchWhispersSudokuAction)}>×</button>
+        <button className="dutchwhispersorange-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as DutchWhispersSudokuAction)}>×</button>
       </div>
       <div className="dutchwhispersorange-actions">
         <button className="dutchwhispersorange-btn check" onClick={() => dispatch({ type: "check" } as DutchWhispersSudokuAction)}>Check</button>

@@ -51,11 +51,11 @@ export function MountainClimb({ state, dispatch, onGameOver }: GameProps<Mountai
       {!state.gameOver && (
         <div className="mc-controls">
           <div className="mc-row">
-            <button onClick={() => dispatch({ type: "jump", dir: "up" })}>▲</button>
+            <button title="Jump up" onClick={() => dispatch({ type: "jump", dir: "up" })}>▲</button>
           </div>
           <div className="mc-row">
-            <button onClick={() => dispatch({ type: "jump", dir: "left" })}>◀</button>
-            <button onClick={() => dispatch({ type: "jump", dir: "right" })}>▶</button>
+            <button title="Jump left" onClick={() => dispatch({ type: "jump", dir: "left" })}>◀</button>
+            <button title="Jump right" onClick={() => dispatch({ type: "jump", dir: "right" })}>▶</button>
           </div>
         </div>
       )}

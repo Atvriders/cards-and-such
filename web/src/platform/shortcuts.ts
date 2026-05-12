@@ -43,3 +43,49 @@ export const SHORTCUTS: Record<string, Shortcut[]> = {
     { keys: "R", description: "Reset score" },
   ],
 };
+
+/**
+ * Categorical shortcut templates — surfaced when no per-game entry exists
+ * in SHORTCUTS. Mirrors the categorical-tutorial fallback in
+ * `tutorials.ts` so the per-game shortcut surface is never empty for a
+ * registered plugin.
+ */
+export const CATEGORY_SHORTCUTS: Record<string, Shortcut[]> = {
+  solitaire: [
+    { keys: "U", description: "Undo last move" },
+    { keys: "R", description: "Restart deal" },
+    { keys: "H", description: "Hint — highlight a legal move" },
+  ],
+  cards: [
+    { keys: "Space", description: "Confirm / advance turn" },
+    { keys: "H", description: "Hint — suggest the strongest legal play" },
+    { keys: "U", description: "Undo last action" },
+  ],
+  dice: [
+    { keys: "Space", description: "Roll the dice" },
+    { keys: "H", description: "Hint — suggest the safest action" },
+    { keys: "R", description: "Reset the round" },
+  ],
+  board: [
+    { keys: "U", description: "Undo last move" },
+    { keys: "R", description: "Restart the board" },
+    { keys: "H", description: "Hint — suggest a move" },
+  ],
+  arcade: [
+    { keys: "Space", description: "Primary action (jump / fire / tap)" },
+    { keys: "Esc", description: "Pause the round" },
+    { keys: "R", description: "Restart the round" },
+  ],
+};
+
+/**
+ * Resolve the keyboard shortcuts surface for a given game. Falls back to
+ * the categorical default when no explicit entry exists, so every
+ * registered plugin always returns at least the platform-standard set.
+ */
+export function shortcutsFor(gameId: string, category?: string): Shortcut[] | undefined {
+  const explicit = SHORTCUTS[gameId];
+  if (explicit) return explicit;
+  if (category && CATEGORY_SHORTCUTS[category]) return CATEGORY_SHORTCUTS[category];
+  return undefined;
+}

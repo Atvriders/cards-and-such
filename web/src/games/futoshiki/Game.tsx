@@ -116,6 +116,7 @@ export function Futoshiki({
             </button>
           ))}
           <button
+            title="Clear cell"
             className="futoshikiviolet-num-btn clear"
             onClick={() => dispatch({ type: "clearCell" } satisfies FutoshikiAction)}
           >

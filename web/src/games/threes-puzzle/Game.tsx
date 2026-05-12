@@ -64,10 +64,10 @@ export function ThreesPuzzleGame({ state, dispatch, onGameOver }: GameProps<Thre
         ))}
       </div>
       <div className="thrspz-pad">
-        <div></div><button data-testid="hint-target-threes-puzzle-action" className="thrspz-btn" onClick={() => tap("up")}>↑</button><div></div>
-        <button className="thrspz-btn" onClick={() => tap("left")}>←</button>
-        <button className="thrspz-btn" onClick={() => tap("down")}>↓</button>
-        <button className="thrspz-btn" onClick={() => tap("right")}>→</button>
+        <div></div><button data-testid="hint-target-threes-puzzle-action" className="thrspz-btn" title="Slide up" onClick={() => tap("up")}>↑</button><div></div>
+        <button className="thrspz-btn" title="Slide left" onClick={() => tap("left")}>←</button>
+        <button className="thrspz-btn" title="Slide down" onClick={() => tap("down")}>↓</button>
+        <button className="thrspz-btn" title="Slide right" onClick={() => tap("right")}>→</button>
       </div>
       <div className="thrspz-hint">Use arrow keys or WASD</div>
     </div>

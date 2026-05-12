@@ -64,21 +64,25 @@ export function NumberMaze({
           </div>
           <div className="nm-arrow-pad">
             <button data-testid="hint-target-number-maze-action"
+              title="Move up"
               className="nm-arrow up"
               disabled={!legalDirs.includes("up")}
               onClick={() => dispatch({ type: "move", dir: "up" })}
             >▲</button>
             <button
+              title="Move left"
               className="nm-arrow left"
               disabled={!legalDirs.includes("left")}
               onClick={() => dispatch({ type: "move", dir: "left" })}
             >◀</button>
             <button
+              title="Move right"
               className="nm-arrow right"
               disabled={!legalDirs.includes("right")}
               onClick={() => dispatch({ type: "move", dir: "right" })}
             >▶</button>
             <button
+              title="Move down"
               className="nm-arrow down"
               disabled={!legalDirs.includes("down")}
               onClick={() => dispatch({ type: "move", dir: "down" })}

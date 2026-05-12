@@ -48,12 +48,12 @@ export function DesertTrek({ state, dispatch, onGameOver }: GameProps<DesertTrek
       {!state.gameOver && (
         <div className="dt-controls">
           <div className="dt-row">
-            <button onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
+            <button title="Move up" onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
           </div>
           <div className="dt-row">
-            <button onClick={() => dispatch({ type: "move", dir: "left" })}>◀</button>
-            <button onClick={() => dispatch({ type: "move", dir: "down" })}>▼</button>
-            <button onClick={() => dispatch({ type: "move", dir: "right" })}>▶</button>
+            <button title="Move left" onClick={() => dispatch({ type: "move", dir: "left" })}>◀</button>
+            <button title="Move down" onClick={() => dispatch({ type: "move", dir: "down" })}>▼</button>
+            <button title="Move right" onClick={() => dispatch({ type: "move", dir: "right" })}>▶</button>
           </div>
         </div>
       )}

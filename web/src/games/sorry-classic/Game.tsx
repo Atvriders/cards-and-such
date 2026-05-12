@@ -94,6 +94,7 @@ export function SorryClGame({ state, dispatch, onGameOver }: GameProps<SorryClSt
                     <button
                       key={k}
                       className="sorrycl-movebtn"
+                      title="Move pawn"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as SorryClAction)}
                     >
                       +{pips}

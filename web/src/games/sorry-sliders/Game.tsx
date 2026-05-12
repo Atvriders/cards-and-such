@@ -93,6 +93,7 @@ export function SorrySlidersGame({ state, dispatch, onGameOver }: GameProps<Sorr
                   {opts.map((pips, k) => (
                     <button
                       key={k}
+                      title={`Move ${pips} spaces`}
                       className="sorrysliders-movebtn"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as SorrySlidersAction)}
                     >

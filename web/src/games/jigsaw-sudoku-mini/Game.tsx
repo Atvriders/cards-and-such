@@ -68,7 +68,7 @@ export function JigsawSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
         {digits.map((d) => (
           <button key={d} className="jigsawpiece-num" onClick={() => dispatch({ type: "enter", digit: d } as JigsawSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="jigsawpiece-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as JigsawSudokuMiniAction)}>×</button>
+        <button className="jigsawpiece-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as JigsawSudokuMiniAction)}>×</button>
       </div>
       <div className="jigsawpiece-actions">
         <button className="jigsawpiece-btn check" onClick={() => dispatch({ type: "check" } as JigsawSudokuMiniAction)}>Check</button>

@@ -94,6 +94,7 @@ export function AggravationGame({ state, dispatch, onGameOver }: GameProps<Aggra
                     <button
                       key={k}
                       className="aggravation-movebtn"
+                      title="Move pawn by this amount"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as AggravationAction)}
                     >
                       +{pips}

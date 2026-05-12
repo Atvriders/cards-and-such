@@ -51,6 +51,7 @@ export function HyperGame({ state, dispatch, onGameOver }: GameProps<HyperState,
               <button
                 key={k}
                 className="hyper-bg-movebtn"
+                title="Move checker"
                 onClick={() => dispatch({ type: "move", from: i, pips } as HyperAction)}
               >
                 +{pips}

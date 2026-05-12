@@ -59,7 +59,7 @@ export function YinYangPuzzleGame({ state, dispatch, onGameOver }: GameProps<Yin
         {VALUES.map((vv, i) => (
           <button key={vv} className={`yinyangzen-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as YinYangPuzzleAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="yinyangzen-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as YinYangPuzzleAction)}>×</button>
+        <button className="yinyangzen-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", value: 0 } as YinYangPuzzleAction)}>×</button>
       </div>
       <div className="yinyangzen-actions">
         <button className="yinyangzen-btn check" onClick={() => dispatch({ type: "check" } as YinYangPuzzleAction)}>Check</button>

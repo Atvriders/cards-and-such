@@ -32,6 +32,7 @@ export function ResourceChain({ state, dispatch, onGameOver }: GameProps<Resourc
             <div className="rc-btns">
               {[1, 3, 5].map(q => (
                 <button key={q} className="rc-btn rc-buy"
+                  title={`Buy ${q} seeds`}
                   disabled={state.coins < 5 * q}
                   onClick={() => d({ type: "buy", resource: "seeds", qty: q })}>
                   +{q}
@@ -80,6 +81,7 @@ export function ResourceChain({ state, dispatch, onGameOver }: GameProps<Resourc
             <div className="rc-btns">
               {[1, 3, 5].map(q => (
                 <button key={q} className="rc-btn rc-sell"
+                  title={`Sell ${q} bread`}
                   disabled={state.resources.bread < q}
                   onClick={() => d({ type: "sell", qty: q })}>
                   -{q}

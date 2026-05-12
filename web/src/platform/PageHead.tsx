@@ -9,6 +9,14 @@ export interface PageHeadProps {
   exact?: boolean;
   /** Optional canonical URL — written to `<link rel="canonical">`. */
   canonical?: string;
+  /**
+   * Optional JSON-LD structured data payload. Written as a
+   * `<script type="application/ld+json" data-pagehead="ld">` block and
+   * replaced on each route change. Skip for marketing/static pages where
+   * the index.html stamp covers it; supply for per-game pages so search
+   * engines see VideoGame / WebApplication entities.
+   */
+  jsonLd?: Record<string, unknown>;
 }
 
 const SITE_SUFFIX = " — Cards and Such";
@@ -21,7 +29,7 @@ const DEFAULT_DESCRIPTION =
  * route's PageHead will overwrite the title, and a tab without a head
  * mounted is an unmounted SPA which is fine to leave with stale state.
  */
-export function PageHead({ title, description, exact, canonical }: PageHeadProps): null {
+export function PageHead({ title, description, exact, canonical, jsonLd }: PageHeadProps): null {
   useEffect(() => {
     if (typeof document === "undefined") return;
     const fullTitle = exact ? title : `${title}${SITE_SUFFIX}`;
@@ -44,7 +52,23 @@ export function PageHead({ title, description, exact, canonical }: PageHeadProps
       link.href = canonical;
       setProperty("og:url", canonical);
     }
-  }, [title, description, exact, canonical]);
+
+    // JSON-LD: stamp into a stable <script data-pagehead="ld"> so we can
+    // overwrite (rather than append) on each route change.
+    if (jsonLd) {
+      let ldScript = document.querySelector<HTMLScriptElement>('script[data-pagehead="ld"]');
+      if (!ldScript) {
+        ldScript = document.createElement("script");
+        ldScript.type = "application/ld+json";
+        ldScript.setAttribute("data-pagehead", "ld");
+        document.head.appendChild(ldScript);
+      }
+      ldScript.textContent = JSON.stringify(jsonLd);
+    } else {
+      const ldScript = document.querySelector<HTMLScriptElement>('script[data-pagehead="ld"]');
+      if (ldScript) ldScript.remove();
+    }
+  }, [title, description, exact, canonical, jsonLd]);
 
   return null;
 }

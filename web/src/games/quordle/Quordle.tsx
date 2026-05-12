@@ -140,7 +140,7 @@ export function Quordle({
       </div>
 
       <div className="qrd-controls">
-        <button onClick={() => dispatch({ type: "delete" } as QuordleAction)}>⌫</button>
+        <button onClick={() => dispatch({ type: "delete" } as QuordleAction)} title="Delete letter">⌫</button>
         <button className="qrd-enter" onClick={() => dispatch({ type: "submit" } as QuordleAction)}>ENTER</button>
       </div>
 

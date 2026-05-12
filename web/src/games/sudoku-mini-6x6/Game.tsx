@@ -68,7 +68,7 @@ export function SudokuMini6x6Game({ state, dispatch, onGameOver }: GameProps<Sud
         {digits.map((d) => (
           <button key={d} className="sudoku6x6mint-num" onClick={() => dispatch({ type: "enter", digit: d } as SudokuMini6x6Action)}>{d}</button>
         ))}
-        <button className="sudoku6x6mint-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as SudokuMini6x6Action)}>×</button>
+        <button title="Clear cell" className="sudoku6x6mint-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as SudokuMini6x6Action)}>×</button>
       </div>
       <div className="sudoku6x6mint-actions">
         <button className="sudoku6x6mint-btn check" onClick={() => dispatch({ type: "check" } as SudokuMini6x6Action)}>Check</button>

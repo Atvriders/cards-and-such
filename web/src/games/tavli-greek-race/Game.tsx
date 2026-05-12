@@ -51,6 +51,7 @@ export function TavliGrGame({ state, dispatch, onGameOver }: GameProps<TavliGrSt
               <button
                 key={k}
                 className="tavli-movebtn"
+                title="Move checker"
                 onClick={() => dispatch({ type: "move", from: i, pips } as TavliGrAction)}
               >
                 +{pips}

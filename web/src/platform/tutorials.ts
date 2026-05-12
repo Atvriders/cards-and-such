@@ -169,8 +169,108 @@ export const TUTORIALS: Record<string, TutorialStep[]> = {
   ],
 };
 
-export function tutorialFor(gameId: string): TutorialStep[] | undefined {
-  return TUTORIALS[gameId];
+/**
+ * Categorical tutorial templates — used as a fallback when no per-game
+ * entry exists in TUTORIALS. The platform calls `tutorialFor(gameId)`
+ * with a known plugin category as a second argument so every registered
+ * game gets *some* onboarding without hand-writing 4,500 entries.
+ *
+ * Targets are intentionally generic (the play surface, hint button, start
+ * button) so the modal still mounts and centers if no DOM match exists.
+ */
+export const CATEGORY_TUTORIALS: Record<string, TutorialStep[]> = {
+  solitaire: [
+    {
+      title: "Goal",
+      target: ".game-mount",
+      text: "Move every card to its target pile, following the suit/colour/rank rules shown above the board.",
+    },
+    {
+      title: "Make a move",
+      target: ".game-mount",
+      text: "Click or drag a card to a legal destination. Highlighted slots are valid landing spots.",
+    },
+    {
+      title: "Stuck?",
+      target: '[data-testid="play-hint-btn"]',
+      text: "Press the lightbulb to highlight a recommended move when the board feels frozen.",
+    },
+  ],
+  cards: [
+    {
+      title: "The hand",
+      target: ".game-mount",
+      text: "Your cards are along the bottom. Click one to play it — the action depends on the game.",
+    },
+    {
+      title: "Your turn vs. theirs",
+      target: ".game-mount",
+      text: "When it's your turn the table highlights playable cards. Wait for the CPU to respond between your turns.",
+    },
+    {
+      title: "Hint",
+      target: '[data-testid="play-hint-btn"]',
+      text: "Tap the lightbulb if you're not sure which card to play — it'll suggest the strongest legal option.",
+    },
+  ],
+  dice: [
+    {
+      title: "Roll",
+      target: ".game-mount",
+      text: "Press the big roll button. Each round is a fresh roll — no skill, just probability and choice.",
+    },
+    {
+      title: "Pick & keep",
+      target: ".game-mount",
+      text: "Some games let you keep specific dice between rolls. Tap a die to hold it, tap again to release.",
+    },
+    {
+      title: "Bank or push",
+      target: '[data-testid="play-hint-btn"]',
+      text: "When in doubt, the hint button points at the safest action for your current score.",
+    },
+  ],
+  board: [
+    {
+      title: "Your pieces",
+      target: ".game-mount",
+      text: "Tap a piece to select it. Highlighted squares are legal destinations.",
+    },
+    {
+      title: "Reading the position",
+      target: ".game-mount",
+      text: "Each game's win condition is shown at the top — keep an eye on it as you trade pieces.",
+    },
+    {
+      title: "Hint",
+      target: '[data-testid="play-hint-btn"]',
+      text: "Press the lightbulb for a suggested next move when the position is unclear.",
+    },
+  ],
+  arcade: [
+    {
+      title: "Quick reflexes",
+      target: ".game-mount",
+      text: "These are timed score-attack games — tap or hold the controls shown on the surface.",
+    },
+    {
+      title: "Score",
+      target: ".game-mount",
+      text: "Your score climbs as you survive and react. Watch the HUD at the top of the play surface.",
+    },
+    {
+      title: "Hint",
+      target: '[data-testid="play-hint-btn"]',
+      text: "The lightbulb points at the next thing to react to — useful while learning the patterns.",
+    },
+  ],
+};
+
+export function tutorialFor(gameId: string, category?: string): TutorialStep[] | undefined {
+  const explicit = TUTORIALS[gameId];
+  if (explicit) return explicit;
+  if (category && CATEGORY_TUTORIALS[category]) return CATEGORY_TUTORIALS[category];
+  return undefined;
 }
 
 const STORAGE_KEY = "cards-tutorial-seen";

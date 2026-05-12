@@ -187,9 +187,9 @@ export function BarrelJumper({
       </div>
 
       <div className="barreljumper-controls">
-        <button data-testid="hint-target-donkey-kong-like-action" onClick={() => dispatch({ type: "move-left" } as BarrelJumperAction)}>◀</button>
+        <button data-testid="hint-target-donkey-kong-like-action" title="Move left" onClick={() => dispatch({ type: "move-left" } as BarrelJumperAction)}>◀</button>
         <button onClick={() => dispatch({ type: "jump" } as BarrelJumperAction)}>Jump</button>
-        <button onClick={() => dispatch({ type: "move-right" } as BarrelJumperAction)}>▶</button>
+        <button title="Move right" onClick={() => dispatch({ type: "move-right" } as BarrelJumperAction)}>▶</button>
         <button onClick={() => dispatch({ type: "climb" } as BarrelJumperAction)}>Climb (F)</button>
       </div>
 

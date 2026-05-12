@@ -60,13 +60,13 @@ export function TombOfKings({ state, dispatch, onGameOver }: GameProps<TombOfKin
       {state.phase === "explore" && (
         <div className="tok-controls">
           <div className="tok-btn-empty" />
-          <button className="tok-btn" onClick={() => d({ type: "move", dir: "up" })}>^</button>
+          <button className="tok-btn" title="Move up" onClick={() => d({ type: "move", dir: "up" })}>^</button>
           <div className="tok-btn-empty" />
-          <button className="tok-btn" onClick={() => d({ type: "move", dir: "left" })}>{"<"}</button>
+          <button className="tok-btn" title="Move left" onClick={() => d({ type: "move", dir: "left" })}>{"<"}</button>
           <div className="tok-btn-empty" />
-          <button className="tok-btn" onClick={() => d({ type: "move", dir: "right" })}>{">"}</button>
+          <button className="tok-btn" title="Move right" onClick={() => d({ type: "move", dir: "right" })}>{">"}</button>
           <div className="tok-btn-empty" />
-          <button className="tok-btn" onClick={() => d({ type: "move", dir: "down" })}>v</button>
+          <button className="tok-btn" title="Move down" onClick={() => d({ type: "move", dir: "down" })}>v</button>
           <div className="tok-btn-empty" />
         </div>
       )}

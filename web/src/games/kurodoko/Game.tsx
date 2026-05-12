@@ -59,7 +59,7 @@ export function KurodokoGame({ state, dispatch, onGameOver }: GameProps<Kurodoko
         {VALUES.map((vv, i) => (
           <button key={vv} className={`kurodokomoonlight-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as KurodokoAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="kurodokomoonlight-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KurodokoAction)}>×</button>
+        <button title="Clear cell" className="kurodokomoonlight-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KurodokoAction)}>×</button>
       </div>
       <div className="kurodokomoonlight-actions">
         <button className="kurodokomoonlight-btn check" onClick={() => dispatch({ type: "check" } as KurodokoAction)}>Check</button>

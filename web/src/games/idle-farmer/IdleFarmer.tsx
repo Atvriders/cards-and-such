@@ -42,7 +42,7 @@ export function IdleFarmer({
       </div>
       {!state.gameOver && (
         <>
-          <button className="if-harvest-btn" onClick={() => dispatch({ type: "harvest" })}>
+          <button className="if-harvest-btn" title="Harvest crops" onClick={() => dispatch({ type: "harvest" })}>
             🌾
           </button>
           <div className="if-info">

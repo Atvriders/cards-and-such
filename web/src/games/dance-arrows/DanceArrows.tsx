@@ -75,6 +75,7 @@ export function DanceArrows({
         <div className="da-row">
           <button
             className={`da-btn up${state.activeArrow === "up" ? " active" : ""}`}
+            title="Press up"
             onClick={() => dispatch({ type: "press", arrow: "up" })}
             disabled={inputDisabled}
           >▲</button>
@@ -84,6 +85,7 @@ export function DanceArrows({
             <button
               key={arrow}
               className={`da-btn ${arrow}${state.activeArrow === arrow ? " active" : ""}`}
+              title={`Press ${arrow}`}
               onClick={() => dispatch({ type: "press", arrow })}
               disabled={inputDisabled}
             >{ARROW_SYMBOLS[arrow]}</button>
@@ -92,6 +94,7 @@ export function DanceArrows({
         <div className="da-row">
           <button
             className={`da-btn down${state.activeArrow === "down" ? " active" : ""}`}
+            title="Press down"
             onClick={() => dispatch({ type: "press", arrow: "down" })}
             disabled={inputDisabled}
           >▼</button>

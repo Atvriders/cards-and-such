@@ -68,7 +68,7 @@ export function KillerSudokuGame({ state, dispatch, onGameOver }: GameProps<Kill
         {digits.map((d) => (
           <button key={d} className="killercrimescene-num" onClick={() => dispatch({ type: "enter", digit: d } as KillerSudokuAction)}>{d}</button>
         ))}
-        <button className="killercrimescene-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as KillerSudokuAction)}>×</button>
+        <button title="Clear cell" className="killercrimescene-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as KillerSudokuAction)}>×</button>
       </div>
       <div className="killercrimescene-actions">
         <button className="killercrimescene-btn check" onClick={() => dispatch({ type: "check" } as KillerSudokuAction)}>Check</button>

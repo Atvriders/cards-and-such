@@ -59,7 +59,7 @@ export function NumbrixMiniGame({ state, dispatch, onGameOver }: GameProps<Numbr
         {VALUES.map((vv, i) => (
           <button key={vv} className={`numbrixchrome-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as NumbrixMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="numbrixchrome-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as NumbrixMiniAction)}>×</button>
+        <button title="Clear cell" className="numbrixchrome-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as NumbrixMiniAction)}>×</button>
       </div>
       <div className="numbrixchrome-actions">
         <button className="numbrixchrome-btn check" onClick={() => dispatch({ type: "check" } as NumbrixMiniAction)}>Check</button>

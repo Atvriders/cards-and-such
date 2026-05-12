@@ -30,6 +30,7 @@ export function HulaHoop({ state, dispatch, onGameOver }: GameProps<HulaHoopStat
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#00b894,#00cec9)" }}>
         {state.items.map(item => (
           <button data-testid="hint-target-hula-hoop-action" key={item.id} className="banana-btn"
+            title="Catch hoop"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as HulaHoopAction)}>
             {item.points >= 20 ? "⭕⭕" : "⭕"}

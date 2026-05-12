@@ -68,7 +68,7 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
         {digits.map((d) => (
           <button key={d} className="windokuplusherb-num" onClick={() => dispatch({ type: "enter", digit: d } as WindokuPlusMiniAction)}>{d}</button>
         ))}
-        <button className="windokuplusherb-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as WindokuPlusMiniAction)}>×</button>
+        <button className="windokuplusherb-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as WindokuPlusMiniAction)} title="Clear cell">×</button>
       </div>
       <div className="windokuplusherb-actions">
         <button className="windokuplusherb-btn check" onClick={() => dispatch({ type: "check" } as WindokuPlusMiniAction)}>Check</button>

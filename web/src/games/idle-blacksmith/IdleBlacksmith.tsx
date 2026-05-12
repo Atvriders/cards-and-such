@@ -43,7 +43,7 @@ export function IdleBlacksmith({
       </div>
       {!state.gameOver && (
         <>
-          <button className="ibs-forge-btn" onClick={() => dispatch({ type: "forge" })}>
+          <button className="ibs-forge-btn" title="Forge" onClick={() => dispatch({ type: "forge" })}>
             🔨
           </button>
           <div className="ibs-info">

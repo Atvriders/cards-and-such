@@ -41,9 +41,9 @@ export function NimMulti({ state, dispatch, onGameOver }: GameProps<NimMultiStat
                 ))}
               </div>
               <div className="nim-multi-pile-controls">
-                <button disabled={!isPlayerTurn || count === 0 || selCount <= 0} onClick={() => adjust(i, -1)}>−</button>
+                <button title="Take one less" disabled={!isPlayerTurn || count === 0 || selCount <= 0} onClick={() => adjust(i, -1)}>−</button>
                 <span className="pile-sel-count">{selCount}</span>
-                <button disabled={!isPlayerTurn || count === 0 || selCount >= count} onClick={() => adjust(i, 1)}>+</button>
+                <button title="Take one more" disabled={!isPlayerTurn || count === 0 || selCount >= count} onClick={() => adjust(i, 1)}>+</button>
               </div>
             </div>
           );

@@ -68,7 +68,7 @@ export function LittleKillerSudokuGame({ state, dispatch, onGameOver }: GameProp
         {digits.map((d) => (
           <button key={d} className="littlekillerforensic-num" onClick={() => dispatch({ type: "enter", digit: d } as LittleKillerSudokuAction)}>{d}</button>
         ))}
-        <button className="littlekillerforensic-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as LittleKillerSudokuAction)}>×</button>
+        <button title="Clear cell" className="littlekillerforensic-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as LittleKillerSudokuAction)}>×</button>
       </div>
       <div className="littlekillerforensic-actions">
         <button className="littlekillerforensic-btn check" onClick={() => dispatch({ type: "check" } as LittleKillerSudokuAction)}>Check</button>

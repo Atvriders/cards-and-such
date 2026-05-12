@@ -59,7 +59,7 @@ export function LitsMiniGame({ state, dispatch, onGameOver }: GameProps<LitsMini
         {VALUES.map((vv, i) => (
           <button key={vv} className={`litstetris-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as LitsMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="litstetris-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as LitsMiniAction)}>×</button>
+        <button title="Clear cell" className="litstetris-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as LitsMiniAction)}>×</button>
       </div>
       <div className="litstetris-actions">
         <button className="litstetris-btn check" onClick={() => dispatch({ type: "check" } as LitsMiniAction)}>Check</button>

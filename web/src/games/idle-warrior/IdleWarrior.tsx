@@ -42,7 +42,7 @@ export function IdleWarrior({
       </div>
       {!state.gameOver && (
         <>
-          <button className="iwar-strike-btn" onClick={() => dispatch({ type: "strike" })}>
+          <button className="iwar-strike-btn" title="Strike enemy" onClick={() => dispatch({ type: "strike" })}>
             ⚔️
           </button>
           <div className="iwar-info">

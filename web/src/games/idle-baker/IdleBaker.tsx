@@ -43,7 +43,7 @@ export function IdleBaker({
       </div>
       {!state.gameOver && (
         <>
-          <button className="ibk-bake-btn" onClick={() => dispatch({ type: "bake" })}>
+          <button className="ibk-bake-btn" title="Bake" onClick={() => dispatch({ type: "bake" })}>
             🥐
           </button>
           <div className="ibk-info">

@@ -61,7 +61,7 @@ export function Fillomino({ state, dispatch, onGameOver }: GameProps<FillominoSt
             {n}
           </button>
         ))}
-        <button className="fillomino-padBtn clear" onClick={() => dispatch({ type: "enter", value: 0 })}>⌫</button>
+        <button className="fillomino-padBtn clear" onClick={() => dispatch({ type: "enter", value: 0 })} title="Clear cell">⌫</button>
       </div>
 
       <div className="fillomino-btns">

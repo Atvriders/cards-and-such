@@ -170,10 +170,10 @@ export function QJump({
 
       <div className="qjump-controls">
         <span />
-        <button onClick={() => doJump("ul")}>↖</button>
-        <button onClick={() => doJump("ur")}>↗</button>
-        <button onClick={() => doJump("dl")}>↙</button>
-        <button onClick={() => doJump("dr")}>↘</button>
+        <button title="Jump up-left" onClick={() => doJump("ul")}>↖</button>
+        <button title="Jump up-right" onClick={() => doJump("ur")}>↗</button>
+        <button title="Jump down-left" onClick={() => doJump("dl")}>↙</button>
+        <button title="Jump down-right" onClick={() => doJump("dr")}>↘</button>
         <span />
       </div>
 

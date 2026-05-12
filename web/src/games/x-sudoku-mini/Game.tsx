@@ -68,7 +68,7 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
         {digits.map((d) => (
           <button key={d} className="xsudokucrimson-num" onClick={() => dispatch({ type: "enter", digit: d } as XSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="xsudokucrimson-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as XSudokuMiniAction)}>×</button>
+        <button className="xsudokucrimson-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as XSudokuMiniAction)} title="Clear cell">×</button>
       </div>
       <div className="xsudokucrimson-actions">
         <button className="xsudokucrimson-btn check" onClick={() => dispatch({ type: "check" } as XSudokuMiniAction)}>Check</button>

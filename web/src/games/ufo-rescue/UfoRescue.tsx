@@ -146,6 +146,7 @@ export function UfoRescue({
               onMouseDown={() => { void dispatch({ type: "moveLeft" } as UfoAction); }}
               onMouseUp={() => {}}
               onClick={() => dispatch({ type: "moveLeft" } as UfoAction)}
+              title="Move left"
             >◀</button>
             <button data-testid="hint-target-ufo-rescue-action"
               className={state.beamActive ? "active" : ""}
@@ -153,7 +154,7 @@ export function UfoRescue({
             >
               {state.beamActive ? "Beam ON" : "Beam OFF"}
             </button>
-            <button onClick={() => dispatch({ type: "moveRight" } as UfoAction)}>▶</button>
+            <button onClick={() => dispatch({ type: "moveRight" } as UfoAction)} title="Move right">▶</button>
           </div>
           <div className="ufo-hint">Arrow/A-D to move · Space/B to toggle beam · Rescue all humans!</div>
         </>

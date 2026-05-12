@@ -49,7 +49,7 @@ export function PaganiniGame({
               <div className="pag-label">{suit} #{Math.floor(i / 4) + 1} ({f.length})</div>
               {top ? <Card card={top} /> : <div className="pag-placeholder">A{suit}</div>}
               {wasteTop && (
-                <button className="pag-btn" onClick={() => dispatch({ type: "waste-to-foundation", foundIdx: i } as PaganiniAction)}>
+                <button className="pag-btn" title="Move waste card to this foundation" onClick={() => dispatch({ type: "waste-to-foundation", foundIdx: i } as PaganiniAction)}>
                   W→
                 </button>
               )}
@@ -81,6 +81,7 @@ export function PaganiniGame({
               <button
                 key={fi}
                 className="pag-btn"
+                title={`Move tableau card to foundation ${fi + 1}`}
                 onClick={() => dispatch({ type: "tableau-to-foundation", fromCol: colIdx, foundIdx: fi } as PaganiniAction)}
               >
                 →F{fi + 1}
@@ -114,6 +115,7 @@ export function PaganiniGame({
               <button
                 key={ci}
                 className="pag-btn"
+                title={`Move waste card to column ${ci + 1}`}
                 onClick={() => dispatch({ type: "waste-to-tableau", toCol: ci } as PaganiniAction)}
               >
                 →C{ci + 1}

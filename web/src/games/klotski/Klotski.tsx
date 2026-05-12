@@ -97,6 +97,7 @@ export function Klotski({
         <div className="klotski-arrow-blank" />
         <button
           className="klotski-arrow-btn"
+          title="Move block up"
           onClick={() => move(-1, 0)}
           disabled={sel === null || !canMove(state.blocks, sel, -1, 0)}
         >↑</button>
@@ -104,12 +105,14 @@ export function Klotski({
 
         <button
           className="klotski-arrow-btn"
+          title="Move block left"
           onClick={() => move(0, -1)}
           disabled={sel === null || !canMove(state.blocks, sel, 0, -1)}
         >←</button>
         <div className="klotski-arrow-blank" />
         <button
           className="klotski-arrow-btn"
+          title="Move block right"
           onClick={() => move(0, 1)}
           disabled={sel === null || !canMove(state.blocks, sel, 0, 1)}
         >→</button>
@@ -117,6 +120,7 @@ export function Klotski({
         <div className="klotski-arrow-blank" />
         <button
           className="klotski-arrow-btn"
+          title="Move block down"
           onClick={() => move(1, 0)}
           disabled={sel === null || !canMove(state.blocks, sel, 1, 0)}
         >↓</button>

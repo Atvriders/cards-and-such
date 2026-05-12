@@ -34,7 +34,7 @@ export function AlchemyShop({ state, dispatch, onGameOver }: GameProps<AlchemySh
               <span>{INGREDIENT_EMOJI[ing]} {INGREDIENT_LABELS[ing]}: {state.inventory[ing]}</span>
               <div className="as-ing-btns">
                 {[1, 2, 3].map(q => (
-                  <button key={q} className="as-buy-btn"
+                  <button key={q} title={`Buy ${q}`} className="as-buy-btn"
                     disabled={state.coins < INGREDIENT_COST * q}
                     onClick={() => d({ type: "buyIngredient", ingredient: ing, qty: q })}>
                     +{q}

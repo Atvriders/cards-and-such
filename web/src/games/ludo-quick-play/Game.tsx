@@ -94,6 +94,7 @@ export function LudoQuickGame({ state, dispatch, onGameOver }: GameProps<LudoQui
                     <button
                       key={k}
                       className="ludoquick-movebtn"
+                      title="Move pawn"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as LudoQuickAction)}
                     >
                       +{pips}

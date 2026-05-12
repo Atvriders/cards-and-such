@@ -44,12 +44,12 @@ export function FrozenRiver({ state, dispatch, onGameOver }: GameProps<FrozenRiv
       {!state.gameOver && (
         <div className="fr-controls">
           <div className="fr-row">
-            <button onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
+            <button onClick={() => dispatch({ type: "move", dir: "up" })} title="Move up">▲</button>
           </div>
           <div className="fr-row">
-            <button onClick={() => dispatch({ type: "move", dir: "left" })}>◀</button>
-            <button onClick={() => dispatch({ type: "move", dir: "down" })}>▼</button>
-            <button onClick={() => dispatch({ type: "move", dir: "right" })}>▶</button>
+            <button onClick={() => dispatch({ type: "move", dir: "left" })} title="Move left">◀</button>
+            <button onClick={() => dispatch({ type: "move", dir: "down" })} title="Move down">▼</button>
+            <button onClick={() => dispatch({ type: "move", dir: "right" })} title="Move right">▶</button>
           </div>
         </div>
       )}

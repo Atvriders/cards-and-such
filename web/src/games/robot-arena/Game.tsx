@@ -51,13 +51,13 @@ export function RobotArenaGame({
       {!state.over && (
         <div className="ra-controls">
           <div className="ra-dpad">
-            <button className="ra-btn" onClick={() => dispatch({ type: "move", dr: -1, dc: 0 })}>▲</button>
+            <button title="Move up" className="ra-btn" onClick={() => dispatch({ type: "move", dr: -1, dc: 0 })}>▲</button>
             <div className="ra-dpad-row">
-              <button className="ra-btn" onClick={() => dispatch({ type: "move", dr: 0, dc: -1 })}>◄</button>
-              <button className="ra-btn ra-attack" onClick={() => dispatch({ type: "attack" })}>⚡</button>
-              <button className="ra-btn" onClick={() => dispatch({ type: "move", dr: 0, dc: 1 })}>►</button>
+              <button title="Move left" className="ra-btn" onClick={() => dispatch({ type: "move", dr: 0, dc: -1 })}>◄</button>
+              <button title="Attack" className="ra-btn ra-attack" onClick={() => dispatch({ type: "attack" })}>⚡</button>
+              <button title="Move right" className="ra-btn" onClick={() => dispatch({ type: "move", dr: 0, dc: 1 })}>►</button>
             </div>
-            <button className="ra-btn" onClick={() => dispatch({ type: "move", dr: 1, dc: 0 })}>▼</button>
+            <button title="Move down" className="ra-btn" onClick={() => dispatch({ type: "move", dr: 1, dc: 0 })}>▼</button>
           </div>
           <div className="ra-hint">Arrows: move · ⚡: attack adjacent enemy</div>
         </div>

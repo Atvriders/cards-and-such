@@ -44,12 +44,12 @@ export function ForestTrek({ state, dispatch, onGameOver }: GameProps<ForestTrek
       {!state.gameOver && (
         <div className="ft-controls">
           <div className="ft-row">
-            <button onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
+            <button title="Move up" onClick={() => dispatch({ type: "move", dir: "up" })}>▲</button>
           </div>
           <div className="ft-row">
-            <button onClick={() => dispatch({ type: "move", dir: "left" })}>◀</button>
-            <button onClick={() => dispatch({ type: "move", dir: "down" })}>▼</button>
-            <button onClick={() => dispatch({ type: "move", dir: "right" })}>▶</button>
+            <button title="Move left" onClick={() => dispatch({ type: "move", dir: "left" })}>◀</button>
+            <button title="Move down" onClick={() => dispatch({ type: "move", dir: "down" })}>▼</button>
+            <button title="Move right" onClick={() => dispatch({ type: "move", dir: "right" })}>▶</button>
           </div>
         </div>
       )}

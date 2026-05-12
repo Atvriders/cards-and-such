@@ -94,6 +94,7 @@ export function ChutesGame({ state, dispatch, onGameOver }: GameProps<ChutesStat
                     <button
                       key={k}
                       className="chutes-cl-movebtn"
+                      title="Move pawn by this amount"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as ChutesAction)}
                     >
                       +{pips}

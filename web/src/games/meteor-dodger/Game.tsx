@@ -148,10 +148,10 @@ export function MeteorDodgerGame({
         )}
       </div>
       <div className="arcade-controls">
-        <button className="arcade-btn" onPointerDown={() => dispatch({ type: "move", dx: -1, dy: 0 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>←</button>
-        <button className="arcade-btn" onPointerDown={() => dispatch({ type: "move", dx: 0, dy: -1 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>↑</button>
-        <button className="arcade-btn" onPointerDown={() => dispatch({ type: "move", dx: 0, dy: 1 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>↓</button>
-        <button className="arcade-btn" onPointerDown={() => dispatch({ type: "move", dx: 1, dy: 0 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>→</button>
+        <button className="arcade-btn" title="Move left" onPointerDown={() => dispatch({ type: "move", dx: -1, dy: 0 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>←</button>
+        <button className="arcade-btn" title="Move up" onPointerDown={() => dispatch({ type: "move", dx: 0, dy: -1 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>↑</button>
+        <button className="arcade-btn" title="Move down" onPointerDown={() => dispatch({ type: "move", dx: 0, dy: 1 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>↓</button>
+        <button className="arcade-btn" title="Move right" onPointerDown={() => dispatch({ type: "move", dx: 1, dy: 0 } as MeteorDodgerAction)} onPointerUp={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)} onPointerLeave={() => dispatch({ type: "move", dx: 0, dy: 0 } as MeteorDodgerAction)}>→</button>
       </div>
       <div className="arcade-hint">WASD or arrow keys. Move the ship. Avoid every meteor!</div>
     </div>

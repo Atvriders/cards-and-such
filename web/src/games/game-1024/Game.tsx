@@ -64,10 +64,10 @@ export function Game1024Game({ state, dispatch, onGameOver }: GameProps<Game1024
         ))}
       </div>
       <div className="g1024-pad">
-        <div></div><button data-testid="hint-target-game-1024-action" className="g1024-btn" onClick={() => tap("up")}>↑</button><div></div>
-        <button className="g1024-btn" onClick={() => tap("left")}>←</button>
-        <button className="g1024-btn" onClick={() => tap("down")}>↓</button>
-        <button className="g1024-btn" onClick={() => tap("right")}>→</button>
+        <div></div><button data-testid="hint-target-game-1024-action" className="g1024-btn" title="Slide up" onClick={() => tap("up")}>↑</button><div></div>
+        <button className="g1024-btn" title="Slide left" onClick={() => tap("left")}>←</button>
+        <button className="g1024-btn" title="Slide down" onClick={() => tap("down")}>↓</button>
+        <button className="g1024-btn" title="Slide right" onClick={() => tap("right")}>→</button>
       </div>
       <div className="g1024-hint">Use arrow keys or WASD</div>
     </div>

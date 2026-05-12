@@ -42,7 +42,7 @@ export function IdleWizard({
       </div>
       {!state.gameOver && (
         <>
-          <button className="iw-cast-btn" onClick={() => dispatch({ type: "cast" })}>
+          <button className="iw-cast-btn" onClick={() => dispatch({ type: "cast" })} title="Cast spell">
             🔮
           </button>
           <div className="iw-info">

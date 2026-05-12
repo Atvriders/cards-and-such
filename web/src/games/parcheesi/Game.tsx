@@ -94,12 +94,12 @@ export function Parcheesi({
                     </span>
                     <span className="pawn-pos">{posLabel}</span>
                     {canUse0 && (
-                      <button className="move-btn" onClick={() => handleMove(pawnIdx, 0)}>
+                      <button className="move-btn" title="Move pawn with die 1" onClick={() => handleMove(pawnIdx, 0)}>
                         +{state.dice[0]}
                       </button>
                     )}
                     {canUse1 && (
-                      <button className="move-btn" onClick={() => handleMove(pawnIdx, 1)}>
+                      <button className="move-btn" title="Move pawn with die 2" onClick={() => handleMove(pawnIdx, 1)}>
                         +{state.dice[1]}
                       </button>
                     )}

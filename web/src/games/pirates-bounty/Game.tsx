@@ -38,6 +38,7 @@ export function PiratesBounty({ state, dispatch, onGameOver }: GameProps<PirateS
                   {!isHere && !island.dug && <div className="pirate-cell-prob">{Math.round(island.treasureProbability * 100)}%</div>}
                   {!isHere && (
                     <button className="pirate-sail-btn"
+                      title="Sail to this island"
                       disabled={fuelNeeded > state.fuel}
                       onClick={() => d({ type: "sail", row, col })}>
                       ⛵ {fuelNeeded}⛽

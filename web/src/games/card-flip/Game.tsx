@@ -24,7 +24,7 @@ export function CardFlipGame({ state, dispatch, onGameOver }: GameProps<CardFlip
       <div className="cf-header">Matches: {state.matches}/8 — Attempts: {state.attempts} <span className="cf-score">{state.score}</span></div>
       <div className="cf-grid">
         {state.cards.map((c, i) => (
-          <button data-testid={`hint-target-card-flip-card-${i}`} key={c.id} className={`cf-card${c.revealed ? " revealed" : ""}${c.matched ? " matched" : ""}`} onClick={() => dispatch({ type:"flip", index: i } as CardFlipAction)}>
+          <button data-testid={`hint-target-card-flip-card-${i}`} key={c.id} title="Flip card" className={`cf-card${c.revealed ? " revealed" : ""}${c.matched ? " matched" : ""}`} onClick={() => dispatch({ type:"flip", index: i } as CardFlipAction)}>
             {(c.revealed || c.matched) ? SYMBOLS[c.value - 1] : "?"}
           </button>
         ))}

@@ -100,13 +100,13 @@ export function TankBattle({
         <>
           <div className="tank-controls">
             <div />
-            <button data-testid="hint-target-tank-battle-action" onClick={() => dispatch({ type: "move", dx: 0, dy: -1 } as TankAction)}>▲</button>
+            <button data-testid="hint-target-tank-battle-action" title="Move up" onClick={() => dispatch({ type: "move", dx: 0, dy: -1 } as TankAction)}>▲</button>
             <div />
-            <button onClick={() => dispatch({ type: "move", dx: -1, dy: 0 } as TankAction)}>◀</button>
-            <button onClick={() => dispatch({ type: "shoot" } as TankAction)}>🔥</button>
-            <button onClick={() => dispatch({ type: "move", dx: 1, dy: 0 } as TankAction)}>▶</button>
+            <button title="Move left" onClick={() => dispatch({ type: "move", dx: -1, dy: 0 } as TankAction)}>◀</button>
+            <button title="Shoot" onClick={() => dispatch({ type: "shoot" } as TankAction)}>🔥</button>
+            <button title="Move right" onClick={() => dispatch({ type: "move", dx: 1, dy: 0 } as TankAction)}>▶</button>
             <div />
-            <button onClick={() => dispatch({ type: "move", dx: 0, dy: 1 } as TankAction)}>▼</button>
+            <button title="Move down" onClick={() => dispatch({ type: "move", dx: 0, dy: 1 } as TankAction)}>▼</button>
             <div />
           </div>
           <div className="tank-hint">Arrow/WASD to move · Space/F to shoot</div>

@@ -98,11 +98,11 @@ export function Sokoban({
 
       <div className="sokoban-controls">
         <div style={{ gridColumn: "2" }}>
-          <button onClick={() => move(-1, 0)} disabled={!!terminal}>↑</button>
+          <button title="Move up" onClick={() => move(-1, 0)} disabled={!!terminal}>↑</button>
         </div>
-        <button onClick={() => move(0, -1)} disabled={!!terminal}>←</button>
-        <button onClick={() => move(1, 0)} disabled={!!terminal}>↓</button>
-        <button onClick={() => move(0, 1)} disabled={!!terminal}>→</button>
+        <button title="Move left" onClick={() => move(0, -1)} disabled={!!terminal}>←</button>
+        <button title="Move down" onClick={() => move(1, 0)} disabled={!!terminal}>↓</button>
+        <button title="Move right" onClick={() => move(0, 1)} disabled={!!terminal}>→</button>
       </div>
 
       <div className="sokoban-btn-row">

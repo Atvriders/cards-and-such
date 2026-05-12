@@ -51,9 +51,9 @@ export function RaceGame({ state, dispatch, onGameOver }: GameProps<RaceState, R
             {state.pPositions.map((p, idx) => p < TRACK ? (
               <div key={idx} className="race-pick">
                 <span>#{idx+1} @ {p}</span>
-                {dieAvailable(0) && <button onClick={() => dispatch({ type:"move", checkerIdx: idx, die: 0 } as RaceAction)}>+{state.dice[0]}</button>}
-                {dieAvailable(1) && <button onClick={() => dispatch({ type:"move", checkerIdx: idx, die: 1 } as RaceAction)}>+{state.dice[1]}</button>}
-                {dieAvailable(0) && dieAvailable(1) && <button onClick={() => dispatch({ type:"move", checkerIdx: idx, die: 2 } as RaceAction)}>+{state.dice[0]+state.dice[1]}</button>}
+                {dieAvailable(0) && <button title="Move using first die" onClick={() => dispatch({ type:"move", checkerIdx: idx, die: 0 } as RaceAction)}>+{state.dice[0]}</button>}
+                {dieAvailable(1) && <button title="Move using second die" onClick={() => dispatch({ type:"move", checkerIdx: idx, die: 1 } as RaceAction)}>+{state.dice[1]}</button>}
+                {dieAvailable(0) && dieAvailable(1) && <button title="Move using sum of both dice" onClick={() => dispatch({ type:"move", checkerIdx: idx, die: 2 } as RaceAction)}>+{state.dice[0]+state.dice[1]}</button>}
               </div>
             ) : <div key={idx} className="race-pick done">#{idx+1} done</div>)}
           </div>

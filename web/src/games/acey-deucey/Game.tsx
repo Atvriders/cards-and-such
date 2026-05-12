@@ -51,6 +51,7 @@ export function AceyGame({ state, dispatch, onGameOver }: GameProps<AceyState, A
               <button
                 key={k}
                 className="acey-d-movebtn"
+                title="Move checker"
                 onClick={() => dispatch({ type: "move", from: i, pips } as AceyAction)}
               >
                 +{pips}

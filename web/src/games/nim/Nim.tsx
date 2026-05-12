@@ -51,6 +51,7 @@ export function Nim({ state, dispatch, onGameOver }: GameProps<NimState, NimSett
             <div className="nim-pile-controls">
               <button
                 className="nim-pile-btn"
+                title="Take one fewer stone"
                 disabled={!isPlayerTurn || count === 0}
                 onClick={() => adjustCount(i, -1)}
               >−</button>
@@ -59,6 +60,7 @@ export function Nim({ state, dispatch, onGameOver }: GameProps<NimState, NimSett
               </span>
               <button
                 className="nim-pile-btn"
+                title="Take one more stone"
                 disabled={!isPlayerTurn || (selected?.pile === i ? selected.count >= count : count === 0)}
                 onClick={() => adjustCount(i, 1)}
               >+</button>

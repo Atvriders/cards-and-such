@@ -51,6 +51,7 @@ export function NackGame({ state, dispatch, onGameOver }: GameProps<NackState, N
               <button
                 key={k}
                 className="nack-movebtn"
+                title="Move checker"
                 onClick={() => dispatch({ type: "move", from: i, pips } as NackAction)}
               >
                 +{pips}

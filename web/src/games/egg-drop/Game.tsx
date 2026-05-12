@@ -30,6 +30,7 @@ export function EggDrop({ state, dispatch, onGameOver }: GameProps<EggDropState,
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#dfe6e9,#b2bec3)" }}>
         {state.items.map(item => (
           <button data-testid="hint-target-egg-drop-action" key={item.id} className="banana-btn"
+            title="Catch egg"
             style={{ left: `${item.x}%`, top: `${Math.min(item.y, 90)}%` }}
             onClick={() => dispatch({ type: "catch", id: item.id } as EggDropAction)}>
             {item.points >= 20 ? "🥚🥚" : "🥚"}

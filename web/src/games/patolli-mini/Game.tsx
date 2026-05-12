@@ -94,6 +94,7 @@ export function PatolliMiniGame({ state, dispatch, onGameOver }: GameProps<Patol
                     <button
                       key={k}
                       className="patollimini-movebtn"
+                      title="Move pawn"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as PatolliMiniAction)}
                     >
                       +{pips}

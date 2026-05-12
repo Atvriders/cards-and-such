@@ -37,7 +37,7 @@ export function PetShopMini({
                 </div>
                 <div className="psm-pet-controls">
                   <span>Stock:</span>
-                  <button className="psm-btn-sm" onClick={() => d({ type: "setStock", petType: pet.type, delta: -1 })}>−</button>
+                  <button className="psm-btn-sm" title="Decrease stock" onClick={() => d({ type: "setStock", petType: pet.type, delta: -1 })}>−</button>
                   <button className="psm-btn-sm" onClick={() => d({ type: "setStock", petType: pet.type, delta: 1 })}>+ (${pet.cost})</button>
                   <span>Price:</span>
                   <button className="psm-btn-sm" onClick={() => d({ type: "setPrice", petType: pet.type, delta: -5 })}>−$5</button>

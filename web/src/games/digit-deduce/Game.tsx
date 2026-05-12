@@ -40,6 +40,7 @@ export function DigitDeduceGame({
             <div className="dd-entry-cell">
               <button
                 className="dd-inc"
+                title="Increase digit"
                 onClick={() => {
                   const cur = entries[i] ?? -1;
                   dispatch({ type: "setDigit", pos: i, digit: (cur + 1) % 10 } satisfies DigitAction);
@@ -50,6 +51,7 @@ export function DigitDeduceGame({
               </div>
               <button
                 className="dd-dec"
+                title="Decrease digit"
                 onClick={() => {
                   const cur = entries[i] ?? 1;
                   dispatch({ type: "setDigit", pos: i, digit: (cur - 1 + 10) % 10 } satisfies DigitAction);

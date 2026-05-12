@@ -68,7 +68,7 @@ export function NumberMemory({
             {digits.map((d) => (
               <button key={d} className="nm-key" onClick={() => dispatch({ type: "type-digit", digit: d })}>{d}</button>
             ))}
-            <button className="nm-key nm-key-del" onClick={() => dispatch({ type: "backspace" })}>⌫</button>
+            <button className="nm-key nm-key-del" onClick={() => dispatch({ type: "backspace" })} title="Backspace">⌫</button>
             <button
               className="nm-key nm-key-ok"
               disabled={state.playerInput.length < state.currentNumber.length}

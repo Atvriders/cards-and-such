@@ -59,7 +59,7 @@ export function KakuroCrossSumsGame({ state, dispatch, onGameOver }: GameProps<K
         {VALUES.map((vv, i) => (
           <button key={vv} className={`kakurocross-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as KakuroCrossSumsAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="kakurocross-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as KakuroCrossSumsAction)}>×</button>
+        <button className="kakurocross-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", value: 0 } as KakuroCrossSumsAction)}>×</button>
       </div>
       <div className="kakurocross-actions">
         <button className="kakurocross-btn check" onClick={() => dispatch({ type: "check" } as KakuroCrossSumsAction)}>Check</button>

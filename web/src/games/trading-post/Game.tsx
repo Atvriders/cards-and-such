@@ -34,7 +34,7 @@ export function TradingPost({ state, dispatch, onGameOver }: GameProps<TradingPo
               {state.phase === "buy" && (
                 <div className="tp-btns">
                   {[1, 3, 5].map(qty => (
-                    <button key={qty} className="tp-btn tp-buy"
+                    <button key={qty} className="tp-btn tp-buy" title="Buy"
                       disabled={state.gold < state.prices[g] * qty}
                       onClick={() => d({ type: "buy", good: g, qty })}>+{qty}</button>
                   ))}
@@ -43,7 +43,7 @@ export function TradingPost({ state, dispatch, onGameOver }: GameProps<TradingPo
               {state.phase === "sell" && (
                 <div className="tp-btns">
                   {[1, 3, 5].map(qty => (
-                    <button key={qty} className="tp-btn tp-sell"
+                    <button key={qty} className="tp-btn tp-sell" title="Sell"
                       disabled={state.inventory[g] < qty}
                       onClick={() => d({ type: "sell", good: g, qty })}>-{qty}</button>
                   ))}

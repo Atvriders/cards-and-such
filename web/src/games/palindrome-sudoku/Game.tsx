@@ -68,7 +68,7 @@ export function PalindromeSudokuGame({ state, dispatch, onGameOver }: GameProps<
         {digits.map((d) => (
           <button key={d} className="palindromemirror-num" onClick={() => dispatch({ type: "enter", digit: d } as PalindromeSudokuAction)}>{d}</button>
         ))}
-        <button className="palindromemirror-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as PalindromeSudokuAction)}>×</button>
+        <button className="palindromemirror-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as PalindromeSudokuAction)}>×</button>
       </div>
       <div className="palindromemirror-actions">
         <button className="palindromemirror-btn check" onClick={() => dispatch({ type: "check" } as PalindromeSudokuAction)}>Check</button>

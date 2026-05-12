@@ -68,7 +68,7 @@ export function HyperSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<H
         {digits.map((d) => (
           <button key={d} className="hypersapphire-num" onClick={() => dispatch({ type: "enter", digit: d } as HyperSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="hypersapphire-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as HyperSudokuMiniAction)}>×</button>
+        <button className="hypersapphire-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as HyperSudokuMiniAction)}>×</button>
       </div>
       <div className="hypersapphire-actions">
         <button className="hypersapphire-btn check" onClick={() => dispatch({ type: "check" } as HyperSudokuMiniAction)}>Check</button>

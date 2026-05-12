@@ -69,7 +69,7 @@ export function SudokuMini4x4Game({ state, dispatch, onGameOver }: GameProps<Sud
         {digits.map((d) => (
           <button key={d} className="sudoku4x4kid-num" onClick={() => dispatch({ type: "enter", digit: d } as SudokuMini4x4Action)}>{d}</button>
         ))}
-        <button className="sudoku4x4kid-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as SudokuMini4x4Action)}>×</button>
+        <button title="Clear cell" className="sudoku4x4kid-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as SudokuMini4x4Action)}>×</button>
       </div>
       <div className="sudoku4x4kid-actions">
         <button className="sudoku4x4kid-btn check" onClick={() => dispatch({ type: "check" } as SudokuMini4x4Action)}>Check</button>

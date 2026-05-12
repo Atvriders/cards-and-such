@@ -44,7 +44,7 @@ export function PrestigeClicker({
       </div>
       {!state.gameOver && (
         <>
-          <button className="pc-click-btn" onClick={() => dispatch({ type: "click" })}>
+          <button className="pc-click-btn" onClick={() => dispatch({ type: "click" })} title="Earn points">
             ⭐
           </button>
           <div className="pc-info">

@@ -50,6 +50,7 @@ export function HyperBgGame({ state, dispatch, onGameOver }: GameProps<HyperBgSt
             {myMoves.map((pips, k) => (
               <button
                 key={k}
+                title={`Move ${pips} pips`}
                 className="hyperbg-movebtn"
                 onClick={() => dispatch({ type: "move", from: i, pips } as HyperBgAction)}
               >

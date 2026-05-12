@@ -42,7 +42,7 @@ export function GemClicker({
       </div>
       {!state.gameOver && (
         <>
-          <button className="gc-click-btn" onClick={() => dispatch({ type: "click" })}>
+          <button className="gc-click-btn" onClick={() => dispatch({ type: "click" })} title="Mine gem">
             💎
           </button>
           <div className="gc-info">

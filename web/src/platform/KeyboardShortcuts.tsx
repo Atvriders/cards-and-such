@@ -1,5 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useFocusTrap } from "./useFocusTrap.js";
+import { GAMES } from "../games/registry.js";
+import { shortcutsFor } from "./shortcuts.js";
 import "./KeyboardShortcuts.css";
 
 /**
@@ -101,6 +104,27 @@ export function KeyboardShortcutsModal(
   { open, onClose }: KeyboardShortcutsModalProps,
 ): JSX.Element | null {
   const dialogRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
+
+  // If we're inside a /play/<gameId> route, surface the per-game shortcut
+  // section pulled from the SHORTCUTS registry (with categorical fallback).
+  // Outside Play we render only the global static SECTIONS.
+  const perGameSection = useMemo<ShortcutSection | null>(() => {
+    const match = location.pathname.match(/^\/play\/([a-z0-9][a-z0-9-]*)(\/|$)/);
+    if (!match) return null;
+    const gameId = match[1]!;
+    const plugin = GAMES.find((g) => g.id === gameId);
+    const rows = shortcutsFor(gameId, plugin?.category);
+    if (!rows || rows.length === 0) return null;
+    return {
+      id: "per-game",
+      title: plugin ? `${plugin.title} — game shortcuts` : "Game shortcuts",
+      rows: rows.map((r) => ({
+        keys: r.keys.split(/\s*\+\s*|\s+/).filter(Boolean),
+        description: r.description,
+      })),
+    };
+  }, [location.pathname]);
 
   // Esc anywhere closes; we listen on window so focus can be on any descendant
   // (kbd-close button included) and not just within the modal.
@@ -149,7 +173,7 @@ export function KeyboardShortcutsModal(
           </button>
         </header>
         <div className="kbd-body">
-          {SECTIONS.map((section) => (
+          {[...(perGameSection ? [perGameSection] : []), ...SECTIONS].map((section) => (
             <section
               key={section.id}
               className="kbd-section"

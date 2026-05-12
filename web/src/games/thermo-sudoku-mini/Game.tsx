@@ -68,7 +68,7 @@ export function ThermoSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<
         {digits.map((d) => (
           <button key={d} className="thermored-num" onClick={() => dispatch({ type: "enter", digit: d } as ThermoSudokuMiniAction)}>{d}</button>
         ))}
-        <button className="thermored-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as ThermoSudokuMiniAction)}>×</button>
+        <button className="thermored-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as ThermoSudokuMiniAction)}>×</button>
       </div>
       <div className="thermored-actions">
         <button className="thermored-btn check" onClick={() => dispatch({ type: "check" } as ThermoSudokuMiniAction)}>Check</button>

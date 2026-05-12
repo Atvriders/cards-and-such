@@ -68,7 +68,7 @@ export function RenbanSudokuGame({ state, dispatch, onGameOver }: GameProps<Renb
         {digits.map((d) => (
           <button key={d} className="renbanribbon-num" onClick={() => dispatch({ type: "enter", digit: d } as RenbanSudokuAction)}>{d}</button>
         ))}
-        <button className="renbanribbon-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as RenbanSudokuAction)}>×</button>
+        <button className="renbanribbon-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as RenbanSudokuAction)}>×</button>
       </div>
       <div className="renbanribbon-actions">
         <button className="renbanribbon-btn check" onClick={() => dispatch({ type: "check" } as RenbanSudokuAction)}>Check</button>

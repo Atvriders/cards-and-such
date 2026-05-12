@@ -90,7 +90,7 @@ export function Panagram({ state, dispatch, onGameOver }: GameProps<PanagramStat
       <div className={`panagram-message${isBad ? " bad" : ""}`}>{state.message}</div>
 
       <div className="panagram-btns">
-        <button className="panagram-btn secondary" onClick={() => dispatch({ type: "backspace" } as PanagramAction)}>⌫</button>
+        <button className="panagram-btn secondary" onClick={() => dispatch({ type: "backspace" } as PanagramAction)} title="Backspace">⌫</button>
         <button className="panagram-btn secondary" onClick={() => dispatch({ type: "shuffle" } as PanagramAction)}>Shuffle</button>
         <button className="panagram-btn" onClick={() => dispatch({ type: "submit" } as PanagramAction)}>Enter</button>
         <button className="panagram-btn end" onClick={() => dispatch({ type: "endGame" } as PanagramAction)}>End</button>

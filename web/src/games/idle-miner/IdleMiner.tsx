@@ -45,7 +45,7 @@ export function IdleMiner({
 
       {!state.gameOver && (
         <>
-          <button className="im-mine-btn" onClick={() => dispatch({ type: "dig" })}>
+          <button className="im-mine-btn" title="Mine" onClick={() => dispatch({ type: "dig" })}>
             ⛏
           </button>
 

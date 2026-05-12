@@ -59,7 +59,7 @@ export function MagnetsPuzzleGame({ state, dispatch, onGameOver }: GameProps<Mag
         {VALUES.map((vv, i) => (
           <button key={vv} className={`magnetspoles-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as MagnetsPuzzleAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="magnetspoles-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as MagnetsPuzzleAction)}>×</button>
+        <button className="magnetspoles-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", value: 0 } as MagnetsPuzzleAction)}>×</button>
       </div>
       <div className="magnetspoles-actions">
         <button className="magnetspoles-btn check" onClick={() => dispatch({ type: "check" } as MagnetsPuzzleAction)}>Check</button>

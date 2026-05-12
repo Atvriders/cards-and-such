@@ -93,6 +93,7 @@ export function ParchisMiniGame({ state, dispatch, onGameOver }: GameProps<Parch
                   {opts.map((pips, k) => (
                     <button
                       key={k}
+                      title={`Move ${pips} spaces`}
                       className="parchismini-movebtn"
                       onClick={() => dispatch({ type: "move", pawnIdx: idx, pips } as ParchisMiniAction)}
                     >

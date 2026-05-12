@@ -42,7 +42,7 @@ export function GoldRushIdle({
       </div>
       {!state.gameOver && (
         <>
-          <button className="gri-pan-btn" onClick={() => dispatch({ type: "pan" })}>
+          <button className="gri-pan-btn" title="Pan for gold" onClick={() => dispatch({ type: "pan" })}>
             🪙
           </button>
           <div className="gri-info">

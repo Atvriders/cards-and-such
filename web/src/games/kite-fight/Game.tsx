@@ -51,13 +51,13 @@ export function KiteFight({
         <>
           <div className="kf-controls">
             <button className="kf-btn empty-btn" />
-            <button data-testid="hint-target-kite-fight-action" className="kf-btn" onClick={() => d({ type: "movePlayer", dx: 0, dy: -1 })}>↑</button>
+            <button data-testid="hint-target-kite-fight-action" className="kf-btn" title="Move up" onClick={() => d({ type: "movePlayer", dx: 0, dy: -1 })}>↑</button>
             <button className="kf-btn empty-btn" />
-            <button className="kf-btn" onClick={() => d({ type: "movePlayer", dx: -1, dy: 0 })}>←</button>
+            <button className="kf-btn" title="Move left" onClick={() => d({ type: "movePlayer", dx: -1, dy: 0 })}>←</button>
             <button className="kf-btn" onClick={() => d({ type: "confirmMove" })}>OK</button>
-            <button className="kf-btn" onClick={() => d({ type: "movePlayer", dx: 1, dy: 0 })}>→</button>
+            <button className="kf-btn" title="Move right" onClick={() => d({ type: "movePlayer", dx: 1, dy: 0 })}>→</button>
             <button className="kf-btn empty-btn" />
-            <button className="kf-btn" onClick={() => d({ type: "movePlayer", dx: 0, dy: 1 })}>↓</button>
+            <button className="kf-btn" title="Move down" onClick={() => d({ type: "movePlayer", dx: 0, dy: 1 })}>↓</button>
             <button className="kf-btn empty-btn" />
           </div>
           <div className="kf-legend">

@@ -5,7 +5,62 @@ import { GAMES } from "../games/registry.js";
 import { SettingsForm } from "../platform/game-plugin/settings.js";
 import { defaultsOf, type SettingSchema, type SettingsOf } from "../platform/game-plugin/types.js";
 import { submitScore } from "../platform/game-plugin/submitScore.js";
-import { playSound } from "../platform/sounds.js";
+import { playSound, type SoundName } from "../platform/sounds.js";
+
+/**
+ * Platform-wide map from common reducer action types to a platform sound.
+ * Inferred from a survey of state.ts files across the 4,505-game registry:
+ * roll/deal/draw/flip/play/select/submit/move/place/discard/swap/keep/mark/
+ * pop/answer/predict are the high-frequency interactive actions. tick
+ * (timers) and pure-navigation (next/restart/reset/skip/score/set) are
+ * intentionally omitted so the audio doesn't become noise.
+ */
+/**
+ * Categorical theme defaults — applied to the .play-page CSS variables
+ * when the plugin doesn't declare its own `themeOverrides`. Keeps every
+ * card category visually distinct without per-game design work.
+ */
+const CATEGORY_THEMES: Record<string, { feltGradient?: string; accent?: string; bgGradient?: string }> = {
+  solitaire: {
+    feltGradient: "linear-gradient(135deg, #0b3d2e, #1a6c3f)",
+    accent: "rgba(74, 222, 128, 0.45)",
+  },
+  cards: {
+    feltGradient: "linear-gradient(135deg, #14213d, #1d3557)",
+    accent: "rgba(96, 165, 250, 0.45)",
+  },
+  dice: {
+    feltGradient: "linear-gradient(135deg, #6b3f1a, #8a5a2b 50%, #4a2810)",
+    accent: "rgba(217, 119, 6, 0.45)",
+  },
+  board: {
+    feltGradient: "linear-gradient(135deg, #2a1f3d, #3d2a5a)",
+    accent: "rgba(167, 139, 250, 0.45)",
+  },
+  arcade: {
+    feltGradient: "linear-gradient(135deg, #2d1424, #571945)",
+    accent: "rgba(244, 114, 182, 0.45)",
+  },
+};
+
+const ACTION_SOUND_MAP: Record<string, SoundName | undefined> = {
+  roll: "dice-roll",
+  deal: "card-deal",
+  draw: "card-deal",
+  flip: "card-flip",
+  play: "card-place",
+  place: "card-place",
+  discard: "card-place",
+  move: "card-place",
+  select: "button-click",
+  submit: "button-click",
+  pop: "button-click",
+  swap: "button-click",
+  keep: "button-click",
+  mark: "button-click",
+  answer: "button-click",
+  predict: "button-click",
+};
 import { Tutorial } from "../platform/Tutorial.js";
 import { tutorialFor, hasSeenTutorial, markTutorialSeen } from "../platform/tutorials.js";
 import { Confetti } from "../platform/Confetti.js";
@@ -783,15 +838,21 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
     return () => clearInterval(id);
   }, [hintCooldown]);
 
-  const tutorialSteps = useMemo(() => tutorialFor(plugin.id), [plugin.id]);
+  const tutorialSteps = useMemo(() => tutorialFor(plugin.id, plugin.category), [plugin.id, plugin.category]);
+  // Auto-launch only when the game has an EXPLICIT, hand-written tutorial.
+  // The categorical fallback (added so the Help button never returns
+  // nothing) is too generic to surface uninvited — it would intercept
+  // clicks on every fresh game visit.
+  const hasExplicitTutorial = useMemo(() => tutorialFor(plugin.id) != null, [plugin.id]);
 
   // Auto-launch tutorial for first-time visitors of supported games.
   useEffect(() => {
     if (phase !== "playing") return;
+    if (!hasExplicitTutorial) return;
     if (!tutorialSteps || tutorialSteps.length === 0) return;
     if (hasSeenTutorial(plugin.id)) return;
     setTutorialOpen(true);
-  }, [phase, plugin.id, tutorialSteps]);
+  }, [phase, plugin.id, tutorialSteps, hasExplicitTutorial]);
 
   // If the URL ?seed= changes externally (back/forward navigation), adopt it.
   useEffect(() => {
@@ -1183,6 +1244,20 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   const dispatch = useCallback(
     (action: unknown) => {
       actionCountRef.current += 1;
+      // Infer the action type and play a platform-mapped sound. Keeps
+      // games sounding alive without per-game playSound() calls. Skips
+      // high-volume timer ticks and pure navigation actions.
+      const actionTypeRaw =
+        action && typeof action === "object" && typeof (action as { type?: unknown }).type === "string"
+          ? ((action as { type: string }).type)
+          : "";
+      const sound = ACTION_SOUND_MAP[actionTypeRaw];
+      if (sound) playSound(sound);
+      // Coarse per-game analytics for action mix. Skip high-volume timer
+      // ticks and unknown/empty types so the event stream stays useful.
+      if (actionTypeRaw && actionTypeRaw !== "tick") {
+        track("play.action", { gameId: plugin.id, type: actionTypeRaw });
+      }
       // Mobile haptic — a brief 10ms tick on every dispatched action.
       // No-op outside browsers / on devices without a vibration motor.
       try {
@@ -1671,9 +1746,9 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
   // inject `--theme-felt` / `--theme-accent` / `--theme-bg` directly onto the
   // `.play-page` element (NOT `:root`) so the override stays scoped to this
   // game and the user's ThemePicker selection still owns the rest of the app.
-  // Cast through CSSProperties so TS accepts custom-property keys.
+  // Falls back to a categorical default so every game gets a coherent feel.
   const playPageStyle = (() => {
-    const ov = plugin.themeOverrides;
+    const ov = plugin.themeOverrides ?? CATEGORY_THEMES[plugin.category];
     if (!ov) return undefined;
     const s: Record<string, string> = {};
     if (ov.feltGradient) s["--theme-felt"] = ov.feltGradient;
@@ -1693,6 +1768,19 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
         title={`Play ${plugin.title}`}
         description={`Play ${plugin.title} free online — ${plugin.description}`}
         canonical={`https://cards.waterburp.com/play/${plugin.id}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "VideoGame",
+          name: plugin.title,
+          description: plugin.description,
+          genre: plugin.category,
+          applicationCategory: "Game",
+          operatingSystem: "Web Browser",
+          url: `https://cards.waterburp.com/play/${plugin.id}`,
+          numberOfPlayers: { "@type": "QuantitativeValue", minValue: plugin.players.min, maxValue: plugin.players.max },
+          isAccessibleForFree: true,
+          publisher: { "@type": "Organization", name: "Cards and Such" },
+        }}
       />
       <header className="play-header">
         <div className="play-header-titleblock">

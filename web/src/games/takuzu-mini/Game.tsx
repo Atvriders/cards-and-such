@@ -59,7 +59,7 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
         {VALUES.map((vv, i) => (
           <button key={vv} className={`takuzudual-num val${i}`} onClick={() => dispatch({ type: "enter", value: vv } as TakuzuMiniAction)}>{VALUE_LABELS[i]}</button>
         ))}
-        <button className="takuzudual-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as TakuzuMiniAction)}>×</button>
+        <button className="takuzudual-num clear" onClick={() => dispatch({ type: "enter", value: 0 } as TakuzuMiniAction)} title="Clear cell">×</button>
       </div>
       <div className="takuzudual-actions">
         <button className="takuzudual-btn check" onClick={() => dispatch({ type: "check" } as TakuzuMiniAction)}>Check</button>

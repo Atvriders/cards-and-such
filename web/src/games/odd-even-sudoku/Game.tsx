@@ -68,7 +68,7 @@ export function OddEvenSudokuGame({ state, dispatch, onGameOver }: GameProps<Odd
         {digits.map((d) => (
           <button key={d} className="oddevenparity-num" onClick={() => dispatch({ type: "enter", digit: d } as OddEvenSudokuAction)}>{d}</button>
         ))}
-        <button className="oddevenparity-num clear" onClick={() => dispatch({ type: "enter", digit: 0 } as OddEvenSudokuAction)}>×</button>
+        <button className="oddevenparity-num clear" title="Clear cell" onClick={() => dispatch({ type: "enter", digit: 0 } as OddEvenSudokuAction)}>×</button>
       </div>
       <div className="oddevenparity-actions">
         <button className="oddevenparity-btn check" onClick={() => dispatch({ type: "check" } as OddEvenSudokuAction)}>Check</button>

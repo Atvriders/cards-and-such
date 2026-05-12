@@ -89,8 +89,8 @@ export function DodgeCars({
         )}
       </div>
       <div className="dc-btn-row">
-        <button data-testid="hint-target-dodge-cars-action" onClick={() => dispatch({ type: "move", lane: state.playerLane - 1 })}>◀</button>
-        <button onClick={() => dispatch({ type: "move", lane: state.playerLane + 1 })}>▶</button>
+        <button data-testid="hint-target-dodge-cars-action" title="Move left" onClick={() => dispatch({ type: "move", lane: state.playerLane - 1 })}>◀</button>
+        <button title="Move right" onClick={() => dispatch({ type: "move", lane: state.playerLane + 1 })}>▶</button>
       </div>
       <div className="dc-hint">Arrow keys / A-D to change lanes</div>
     </div>
