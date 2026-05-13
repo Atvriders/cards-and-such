@@ -1,0 +1,284 @@
+/* Scoped styles for boggle-full. Prefix every class with .bgf- to avoid
+   bleeding into other Boggle variants in this repo. */
+
+.bgf-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  color: var(--theme-fg, #f4f4f4);
+  font-family: var(--font-display, system-ui, sans-serif);
+}
+
+.bgf-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.bgf-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bgf-stat strong {
+  font-size: 1.15rem;
+  color: var(--theme-accent, #fff8a0);
+}
+
+.bgf-timer strong { color: var(--theme-accent, #ffe082); }
+.bgf-timer { font-weight: 700; }
+
+.bgf-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(56px, 72px));
+  grid-template-rows: repeat(4, minmax(56px, 72px));
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 14px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.bgf-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #fdfaf3, #e8e0c8);
+  color: #2a2418;
+  font-weight: 700;
+  font-size: 1.8rem;
+  border: 2px solid #b9ad8a;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 100ms ease, background 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.bgf-cell:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.bgf-cell.selected {
+  background: linear-gradient(180deg, #ffd16b, #f0a838);
+  border-color: #c97a14;
+  color: #2a1c00;
+}
+
+.bgf-cell.first {
+  background: linear-gradient(180deg, #b6eb7a, #6cba2a);
+  border-color: #3a7a14;
+  color: #1a2a00;
+}
+
+.bgf-cell:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.bgf-current-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bgf-current-word {
+  min-width: 160px;
+  min-height: 38px;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgf-placeholder {
+  opacity: 0.5;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.bgf-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms ease, transform 100ms ease;
+}
+
+.bgf-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.bgf-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bgf-btn.submit {
+  background: var(--theme-accent, #4caf50);
+  color: #0c1a08;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.bgf-btn.clear {
+  background: rgba(200, 60, 60, 0.7);
+  color: #fff;
+}
+
+.bgf-typed-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bgf-typed {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  color: inherit;
+  min-width: 220px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bgf-error {
+  min-height: 1.2em;
+  color: #ff8a80;
+  font-size: 0.95rem;
+}
+
+.bgf-found {
+  width: 100%;
+  max-width: 520px;
+}
+
+.bgf-found-label {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.bgf-found-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bgf-chip {
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+}
+
+.bgf-chip em {
+  color: var(--theme-accent, #ffe082);
+  font-style: normal;
+  font-size: 0.78rem;
+  margin-left: 4px;
+}
+
+.bgf-chip.cpu {
+  background: rgba(120, 160, 255, 0.18);
+}
+
+.bgf-done-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 16px;
+}
+
+.bgf-done-box {
+  background: linear-gradient(180deg, #2a2436, #1a1622);
+  color: #fff;
+  border-radius: 14px;
+  padding: 24px 28px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bgf-done-box h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  text-align: center;
+  color: var(--theme-accent, #ffd16b);
+}
+
+.bgf-summary {
+  width: 100%;
+  margin: 12px 0;
+  border-collapse: collapse;
+}
+
+.bgf-summary td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bgf-summary td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.bgf-summary tr.bgf-bonus td {
+  color: #b6eb7a;
+}
+
+.bgf-summary tr.bgf-final td {
+  font-size: 1.15rem;
+  border-bottom: none;
+}
+
+.bgf-cpu-words {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.bgf-cpu-words summary {
+  cursor: pointer;
+  opacity: 0.85;
+  padding: 4px 0;
+}
+
+.bgf-cpu-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}

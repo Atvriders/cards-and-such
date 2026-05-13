@@ -1,0 +1,193 @@
+.rkf {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  color: var(--text-100, #e8eaf3);
+}
+
+.rkf-info {
+  flex-wrap: wrap;
+}
+.rkf-info .label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-500, #8b91a8);
+  margin-right: 0.2rem;
+}
+.rkf-info .value {
+  font-weight: 700;
+  color: var(--text-100, #e8eaf3);
+  font-variant-numeric: tabular-nums;
+}
+
+.rkf-status {
+  text-align: center;
+  font-size: 0.95rem;
+  min-height: 1.4em;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.rkf-status.win {
+  color: #b8f4d2;
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.35);
+  font-weight: 700;
+}
+.rkf-status.loss {
+  color: #ffd5dd;
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.35);
+  font-weight: 700;
+}
+
+.rkf-table-label,
+.rkf-hand-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-500, #8b91a8);
+  padding: 4px 4px 0;
+}
+
+.rkf-table {
+  min-height: 96px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px;
+  background: linear-gradient(180deg, #1d3526 0%, #14241c 100%);
+  border: 1px solid rgba(63, 137, 96, 0.4);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.rkf-meld {
+  display: inline-flex;
+  gap: 3px;
+  padding: 6px 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
+}
+
+.rkf-empty {
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+  padding: 8px;
+}
+
+.rkf-hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: linear-gradient(180deg, #2a2f47 0%, #1c2034 100%);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 14px;
+  min-height: 72px;
+}
+
+.rkf-tile {
+  position: relative;
+  width: 40px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.15rem;
+  font-family: inherit;
+  background: #f6f3e7;
+  color: #1f2937;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.12) inset,
+    0 3px 6px rgba(0, 0, 0, 0.35);
+  cursor: default;
+  user-select: none;
+  padding: 0;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.rkf-tile--clickable {
+  cursor: pointer;
+}
+.rkf-tile--clickable:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.rkf-tile--red    { color: #c0392b; }
+.rkf-tile--blue   { color: #1f4e9d; }
+.rkf-tile--orange { color: #d35400; }
+.rkf-tile--black  { color: #1a1f29; }
+.rkf-tile--joker {
+  background: linear-gradient(135deg, #fef0c2 0%, #f6d57a 100%);
+  color: #6e3a06;
+}
+.rkf-tile--selected {
+  transform: translateY(-6px);
+  background: #fff3a8;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.12) inset,
+    0 8px 14px rgba(0, 0, 0, 0.4),
+    0 0 0 2px var(--primary, #6366f1);
+}
+.rkf-tile--pending {
+  outline: 2px dashed rgba(99, 102, 241, 0.55);
+  outline-offset: 2px;
+}
+.rkf-tile:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.rkf-tile__num {
+  line-height: 1;
+}
+
+.rkf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.rkf-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  text-align: center;
+  background: rgba(99, 102, 241, 0.10);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 12px;
+}
+.rkf-end__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.rkf-cpu-note {
+  text-align: center;
+  font-style: italic;
+  color: var(--text-500, #8b91a8);
+  padding: 6px;
+}
+
+@media (max-width: 640px) {
+  .rkf { padding: 10px; }
+  .rkf-tile { width: 32px; height: 46px; font-size: 0.95rem; }
+}

@@ -1,0 +1,537 @@
+/* Splendor (Full) — scoped styles. Prefix all classes with .spf- to avoid
+ * collisions with the splendor-gems variant (.spg-*). */
+
+.spf-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 16px;
+  font-family: 'Inter', system-ui, sans-serif;
+  max-width: 980px;
+  margin: 0 auto;
+  color: #1c2833;
+}
+
+.spf-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #8e44ad;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.spf-info {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+.spf-info-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  background: #f8f4fa;
+  border-radius: 8px;
+  min-width: 80px;
+  border: 1px solid #ecd9f5;
+}
+.spf-info-cell span {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7f5fa5;
+}
+.spf-info-cell b {
+  font-size: 1.05rem;
+  color: #8e44ad;
+}
+
+.spf-section-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6c3a8e;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.spf-section-sub {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin-top: 8px;
+}
+
+/* Bank */
+.spf-bank {
+  background: #fbf7fd;
+  border: 1px solid #e6d4f0;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.spf-bank-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.spf-bank-token {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background: #fff;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 100ms ease;
+}
+.spf-bank-token:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.spf-bank-token:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+.spf-bank-token.spf-picked {
+  outline: 3px solid #8e44ad;
+  outline-offset: 1px;
+}
+.spf-token-glyph {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.78rem;
+}
+.spf-token-count {
+  font-size: 0.85rem;
+  color: #34495e;
+}
+.spf-bank-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.spf-action-btn {
+  padding: 6px 12px;
+  background: #8e44ad;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.spf-action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.spf-action-or {
+  font-size: 0.7rem;
+  color: #888;
+}
+.spf-take2-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #d6c2e6;
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.spf-take2-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Nobles */
+.spf-nobles {
+  background: #fdfbf3;
+  border: 1px solid #f0e3b3;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.spf-noble-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.spf-noble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 10px;
+  background: linear-gradient(160deg, #fff 0%, #faf3e0 100%);
+  border: 2px solid #d4af37;
+  border-radius: 8px;
+  min-width: 84px;
+}
+.spf-noble-prestige {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  color: #b7791f;
+  font-weight: 900;
+}
+.spf-noble-req {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+.spf-req {
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: 800;
+}
+
+/* Tier rows */
+.spf-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.spf-tier {
+  background: #f9f5fc;
+  border: 1px solid #e6d4f0;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+.spf-tier-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #6c3a8e;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+.spf-tier-deck {
+  font-size: 0.66rem;
+  color: #998;
+  font-weight: 500;
+}
+.spf-tier-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Card */
+.spf-card {
+  width: 120px;
+  min-height: 150px;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.spf-card-empty {
+  opacity: 0.3;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 0.7rem;
+  color: #aaa;
+}
+.spf-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.spf-card-prestige {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #2c3e50;
+  min-height: 1.4rem;
+}
+.spf-card-color {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+.spf-card-cost {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  flex: 1;
+  align-content: flex-start;
+}
+.spf-cost-pip {
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+.spf-card-actions {
+  display: flex;
+  gap: 4px;
+}
+.spf-card-buy, .spf-card-reserve {
+  flex: 1;
+  padding: 4px 0;
+  border-radius: 5px;
+  border: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.spf-card-buy {
+  background: #8e44ad;
+  color: #fff;
+}
+.spf-card-buy:disabled {
+  background: #d6d6d6;
+  color: #888;
+  cursor: not-allowed;
+}
+.spf-card-reserve {
+  background: #f5e6d3;
+  color: #6c3a8e;
+}
+.spf-card-reserve:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* You / opponents */
+.spf-you {
+  background: #f0eaf5;
+  border: 2px solid #8e44ad;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.spf-you-summary {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  margin-bottom: 6px;
+}
+.spf-perm {
+  padding: 3px 8px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 800;
+}
+.spf-prestige {
+  background: #8e44ad !important;
+  color: #fff !important;
+}
+.spf-you-tokens {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+}
+.spf-tok {
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #ddd;
+  font-weight: 700;
+}
+.spf-reserved-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.spf-opponents {
+  background: #f9f5fc;
+  border: 1px solid #e6d4f0;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.spf-opp-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.spf-opp {
+  flex: 1 1 200px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.spf-opp-turn {
+  border-color: #8e44ad;
+  box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.18);
+}
+.spf-opp-name {
+  font-weight: 800;
+  color: #34495e;
+}
+.spf-opp-prestige {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  color: #8e44ad;
+  font-weight: 900;
+}
+.spf-opp-perms {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.spf-opp-perm {
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+.spf-opp-reserved {
+  font-size: 0.72rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+.spf-done {
+  text-align: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #fff 0%, #f8f4fa 100%);
+  border-radius: 12px;
+  border: 2px solid #8e44ad;
+}
+.spf-done h3 {
+  margin: 0 0 6px;
+  color: #8e44ad;
+}
+.spf-final {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #555;
+}
+
+.spf-log {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: #555;
+  max-height: 110px;
+  overflow-y: auto;
+}
+.spf-log-line + .spf-log-line {
+  margin-top: 2px;
+}
+
+.spf-empty {
+  font-size: 0.78rem;
+  color: #bbb;
+  font-style: italic;
+  padding: 6px;
+}
+
+.spf-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  opacity: 0;
+}
+
+/* Gem color palette (token + cost pip backgrounds) */
+.spf-c-emerald .spf-token-glyph,
+.spf-c-emerald.spf-take2-btn,
+.spf-c-emerald.spf-req,
+.spf-c-emerald.spf-cost-pip,
+.spf-c-emerald .spf-card-color,
+.spf-c-emerald.spf-perm,
+.spf-c-emerald.spf-opp-perm {
+  background: #27ae60;
+}
+.spf-c-sapphire .spf-token-glyph,
+.spf-c-sapphire.spf-take2-btn,
+.spf-c-sapphire.spf-req,
+.spf-c-sapphire.spf-cost-pip,
+.spf-c-sapphire .spf-card-color,
+.spf-c-sapphire.spf-perm,
+.spf-c-sapphire.spf-opp-perm {
+  background: #2980b9;
+}
+.spf-c-ruby .spf-token-glyph,
+.spf-c-ruby.spf-take2-btn,
+.spf-c-ruby.spf-req,
+.spf-c-ruby.spf-cost-pip,
+.spf-c-ruby .spf-card-color,
+.spf-c-ruby.spf-perm,
+.spf-c-ruby.spf-opp-perm {
+  background: #c0392b;
+}
+.spf-c-diamond .spf-token-glyph,
+.spf-c-diamond.spf-take2-btn,
+.spf-c-diamond.spf-req,
+.spf-c-diamond.spf-cost-pip,
+.spf-c-diamond .spf-card-color,
+.spf-c-diamond.spf-perm,
+.spf-c-diamond.spf-opp-perm {
+  background: #95a5a6;
+  color: #fff !important;
+}
+.spf-c-onyx .spf-token-glyph,
+.spf-c-onyx.spf-take2-btn,
+.spf-c-onyx.spf-req,
+.spf-c-onyx.spf-cost-pip,
+.spf-c-onyx .spf-card-color,
+.spf-c-onyx.spf-perm,
+.spf-c-onyx.spf-opp-perm {
+  background: #2c3e50;
+}
+.spf-c-gold .spf-token-glyph {
+  background: #f1c40f;
+  color: #6e4c00;
+}
+.spf-c-gold {
+  background: #fff7d6;
+}
+
+/* Take-2 button color text contrast */
+.spf-take2-btn.spf-c-emerald,
+.spf-take2-btn.spf-c-sapphire,
+.spf-take2-btn.spf-c-ruby,
+.spf-take2-btn.spf-c-onyx,
+.spf-take2-btn.spf-c-diamond {
+  color: #fff;
+}
+
+.spf-card.spf-c-emerald { border-color: #27ae60; }
+.spf-card.spf-c-sapphire { border-color: #2980b9; }
+.spf-card.spf-c-ruby { border-color: #c0392b; }
+.spf-card.spf-c-diamond { border-color: #95a5a6; }
+.spf-card.spf-c-onyx { border-color: #2c3e50; }

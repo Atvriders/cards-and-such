@@ -1,0 +1,394 @@
+.azf-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 880px;
+  margin: 0 auto;
+  color: #1f2333;
+}
+
+.azf-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.azf-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #2a3460;
+}
+
+.azf-meta {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* ─── Factories + center ──────────────────────────────────────────────── */
+
+.azf-factories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.azf-factories-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.azf-factory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f9f4e1, #f0e7c8);
+  border: 2px solid #b9a76e;
+  min-width: 78px;
+  min-height: 78px;
+  justify-content: center;
+}
+
+.azf-factory-empty {
+  opacity: 0.4;
+}
+
+.azf-factory-label {
+  font-size: 0.65rem;
+  color: #6e6435;
+  font-weight: 700;
+}
+
+.azf-factory-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+}
+
+.azf-center {
+  width: 100%;
+  max-width: 520px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #efeadf;
+  border: 1.5px dashed #b9a76e;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.azf-center-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #5a4f2a;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.azf-marker-chip {
+  background: #fff;
+  color: #333;
+  border: 1px solid #888;
+  font-size: 0.7rem;
+  padding: 0 6px;
+  border-radius: 999px;
+}
+
+.azf-center-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+}
+
+/* ─── Tile chips ─────────────────────────────────────────────────────── */
+
+.azf-tile {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1.5px solid #444;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.azf-tile-static {
+  cursor: default;
+}
+
+.azf-tile-pick:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px #ffb433;
+}
+
+.azf-tile:disabled {
+  cursor: default;
+}
+
+.azf-c-blue   { background: #3a6cb8; border-color: #224785; }
+.azf-c-yellow { background: #f3c637; border-color: #b48a18; }
+.azf-c-red    { background: #c83e3e; border-color: #82201f; }
+.azf-c-black  { background: #1b1d22; border-color: #050608; }
+.azf-c-white  { background: #f3f1ec; border-color: #99948a; }
+
+/* ─── Pending pick info ─────────────────────────────────────────────── */
+
+.azf-pending {
+  text-align: center;
+  font-size: 0.88rem;
+  min-height: 32px;
+}
+
+.azf-pending-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: #fff5d9;
+  border-radius: 8px;
+  border: 1px solid #d6b85a;
+}
+
+.azf-pending-empty {
+  color: #777;
+  font-style: italic;
+}
+
+/* ─── Boards ─────────────────────────────────────────────────────────── */
+
+.azf-boards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.azf-board {
+  border: 1.5px solid #d6d2c2;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fdfbf6;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.azf-board-you {
+  background: #f4f8ff;
+  border-color: #b8c8e8;
+}
+
+.azf-board-active {
+  box-shadow: 0 0 0 2px #f5b342 inset;
+  border-color: #d59100;
+}
+
+.azf-board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.azf-board-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.azf-board-score {
+  font-weight: 800;
+  color: #2a3460;
+}
+
+.azf-board-grid {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.azf-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.azf-row {
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 4px;
+  padding: 1px;
+  cursor: default;
+}
+
+.azf-row:disabled {
+  cursor: default;
+}
+
+.azf-row-legal {
+  border-color: #2bb673;
+  background: #e3fcef;
+  cursor: pointer;
+}
+
+.azf-row-cells {
+  display: flex;
+  gap: 3px;
+  justify-content: flex-end;
+}
+
+.azf-cell {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1.5px solid #b3b0a4;
+  background: #ece8da;
+}
+
+.azf-cell-empty {
+  background: #ece8da;
+}
+
+.azf-cell-pad {
+  background: transparent;
+  border-color: transparent;
+}
+
+.azf-wall {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px;
+  border: 1.5px solid #d6d2c2;
+  border-radius: 4px;
+  background: #f4efe1;
+}
+
+.azf-wall-row {
+  display: flex;
+  gap: 3px;
+}
+
+.azf-wall-cell {
+  border-color: #a09c8a;
+}
+
+.azf-wall-faded {
+  opacity: 0.35;
+}
+
+.azf-wall-filled {
+  opacity: 1;
+  box-shadow: 0 0 0 1.5px #fff inset;
+}
+
+/* ─── Floor ──────────────────────────────────────────────────────────── */
+
+.azf-floor {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.azf-floor-label {
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.azf-floor-cell {
+  position: relative;
+}
+
+.azf-floor-pen {
+  position: absolute;
+  top: -10px;
+  right: -2px;
+  font-size: 0.6rem;
+  color: #999;
+}
+
+.azf-marker {
+  background: repeating-linear-gradient(45deg, #fff 0 4px, #e0e0e0 4px 8px);
+  border-color: #444;
+}
+
+/* ─── Controls / event / final ───────────────────────────────────────── */
+
+.azf-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.azf-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #6a728f;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.azf-btn-primary {
+  background: #2a3460;
+  color: #fff;
+  border-color: #1d2548;
+}
+
+.azf-btn-warn {
+  background: #ffe9c2;
+  border-color: #c89232;
+  color: #5e4012;
+}
+
+.azf-event {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #444;
+  background: #eef2fa;
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin-top: 2px;
+}
+
+.azf-final {
+  margin: 8px auto 0;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2a3460, #4d5fa3);
+  color: #fff;
+  text-align: center;
+  max-width: 360px;
+}
+
+.azf-final-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+.azf-final-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  font-size: 0.92rem;
+}
+
+.azf-final-you {
+  color: #ffe39a;
+}

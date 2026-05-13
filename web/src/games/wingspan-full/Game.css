@@ -1,0 +1,234 @@
+.wf-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  color: var(--theme-text, #e9e7df);
+  font-family: var(--theme-font, system-ui, sans-serif);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.wf-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 10px;
+}
+
+.wf-info { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+.wf-bonus { font-size: 12px; opacity: 0.85; }
+
+.wf-score {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffe7a1;
+  padding: 4px 12px;
+  background: rgba(255, 220, 100, 0.08);
+  border: 1px solid rgba(255, 220, 100, 0.25);
+  border-radius: 8px;
+}
+
+.wf-status {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 6px 12px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+}
+.wf-actions { color: #ffd066; font-weight: 600; }
+.wf-log { opacity: 0.8; font-style: italic; }
+
+.wf-round-end {
+  padding: 12px 16px;
+  background: rgba(255, 220, 100, 0.1);
+  border: 1px solid rgba(255, 220, 100, 0.35);
+  border-radius: 10px;
+  text-align: center;
+}
+.wf-round-end h3 { margin: 0 0 4px 0; }
+.wf-round-end p { margin: 0 0 10px 0; opacity: 0.9; }
+
+.wf-board {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wf-row {
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 4px solid #555;
+}
+.wf-row--forest { border-left-color: #5d8c4d; background: rgba(93, 140, 77, 0.12); }
+.wf-row--grassland { border-left-color: #d4a13a; background: rgba(212, 161, 58, 0.12); }
+.wf-row--wetland { border-left-color: #4d8fb5; background: rgba(77, 143, 181, 0.12); }
+
+.wf-row-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.wf-row-emoji { font-size: 20px; }
+.wf-row-count { margin-left: auto; opacity: 0.7; font-weight: 400; font-size: 12px; }
+
+.wf-slots {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.wf-slot {
+  min-height: 78px;
+  padding: 6px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wf-slot--empty {
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 22px;
+}
+.wf-slot--filled {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.wf-bird-name { font-weight: 600; font-size: 12px; line-height: 1.1; }
+.wf-bird-meta { display: flex; gap: 6px; flex-wrap: wrap; font-size: 11px; opacity: 0.9; }
+.wf-bird-power { font-size: 10px; opacity: 0.7; text-transform: lowercase; margin-top: auto; }
+
+.wf-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.wf-resource { display: inline-flex; gap: 6px; align-items: center; }
+.wf-resource strong { color: #ffe7a1; }
+
+.wf-hand { display: flex; flex-direction: column; gap: 6px; }
+.wf-hand-head { font-weight: 600; font-size: 13px; opacity: 0.9; }
+.wf-hand-cards {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.wf-empty { font-style: italic; opacity: 0.6; font-size: 13px; }
+
+.wf-card {
+  min-width: 130px;
+  max-width: 150px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: transform 120ms var(--ease-out-expo, ease-out), background 120ms ease;
+}
+.wf-card:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+.wf-card:focus-visible { outline: 2px solid #ffd066; outline-offset: 2px; }
+.wf-card--disabled { opacity: 0.45; cursor: not-allowed; }
+.wf-card--forest { border-left: 4px solid #5d8c4d; }
+.wf-card--grassland { border-left: 4px solid #d4a13a; }
+.wf-card--wetland { border-left: 4px solid #4d8fb5; }
+.wf-card-name { font-weight: 600; font-size: 13px; line-height: 1.15; }
+.wf-card-line { display: flex; justify-content: space-between; font-size: 12px; }
+.wf-card-cost { color: #ffd066; }
+.wf-card-vp { color: #ffe7a1; }
+.wf-card-meta { display: flex; gap: 8px; font-size: 11px; opacity: 0.8; }
+.wf-card-power { font-size: 11px; opacity: 0.75; text-transform: lowercase; }
+
+.wf-cpus {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.wf-cpu {
+  flex: 1 1 220px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.wf-cpu-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.wf-cpu-score { color: #ffe7a1; font-weight: 600; }
+.wf-cpu-stats { display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; opacity: 0.9; }
+
+.wf-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #5d8c4d, #466a3a);
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+.wf-btn:hover:not(:disabled) { filter: brightness(1.1); }
+.wf-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.wf-btn--small { padding: 2px 10px; font-size: 12px; }
+.wf-btn--ghost {
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  color: inherit;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.wf-done {
+  text-align: center;
+  padding: 24px;
+  background: rgba(255, 220, 100, 0.08);
+  border: 1px solid rgba(255, 220, 100, 0.3);
+  border-radius: 12px;
+  max-width: 480px;
+  margin: 24px auto;
+}
+.wf-done h2 { margin: 0 0 8px 0; }
+.wf-final { font-size: 40px; font-weight: 700; color: #ffe7a1; margin: 8px 0; }
+.wf-final-note { font-size: 14px; opacity: 0.85; margin-bottom: 12px; }
+.wf-final-list { list-style: none; padding: 0; margin: 0; }
+.wf-final-list li { padding: 4px 0; font-size: 14px; }
+
+@media (max-width: 720px) {
+  .wf-slots { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .wf-slot { min-height: 64px; font-size: 10px; }
+  .wf-bird-name { font-size: 11px; }
+  .wf-bird-meta, .wf-bird-power { font-size: 9px; }
+  .wf-card { min-width: 110px; }
+}

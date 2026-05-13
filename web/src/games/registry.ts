@@ -4495,6 +4495,16 @@ import { phase10FullPlugin } from "./phase-10-full/index.js";
 import { skipBoFullPlugin } from "./skip-bo-full/index.js";
 import { crokinoleFullPlugin } from "./crokinole-full/index.js";
 import { kingOfTokyoFullPlugin } from "./king-of-tokyo-full/index.js";
+import { azulFullPlugin } from "./azul-full/index.js";
+import { splendorFullPlugin } from "./splendor-full/index.js";
+import { dominionFullPlugin } from "./dominion-full/index.js";
+import { codenamesFullPlugin } from "./codenames-full/index.js";
+import { wingspanFullPlugin } from "./wingspan-full/index.js";
+import { boggleFullPlugin } from "./boggle-full/index.js";
+import { rummikubFullPlugin } from "./rummikub-full/index.js";
+import { dixitFullPlugin } from "./dixit-full/index.js";
+import { sequenceFullPlugin } from "./sequence-full/index.js";
+import { chutesAndLaddersLongPlugin } from "./chutes-and-ladders-long/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -8992,4 +9002,14 @@ export const GAMES: GamePlugin[] = [
   skipBoFullPlugin as unknown as GamePlugin,
   crokinoleFullPlugin as unknown as GamePlugin,
   kingOfTokyoFullPlugin as unknown as GamePlugin,
+  azulFullPlugin as unknown as GamePlugin,
+  splendorFullPlugin as unknown as GamePlugin,
+  dominionFullPlugin as unknown as GamePlugin,
+  codenamesFullPlugin as unknown as GamePlugin,
+  wingspanFullPlugin as unknown as GamePlugin,
+  boggleFullPlugin as unknown as GamePlugin,
+  rummikubFullPlugin as unknown as GamePlugin,
+  dixitFullPlugin as unknown as GamePlugin,
+  sequenceFullPlugin as unknown as GamePlugin,
+  chutesAndLaddersLongPlugin as unknown as GamePlugin,
 ];

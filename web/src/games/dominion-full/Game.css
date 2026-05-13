@@ -1,0 +1,213 @@
+.dfull-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 16px;
+  font-family: 'Inter', system-ui, sans-serif;
+  max-width: 1080px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #1d1408 0%, #3a2810 100%);
+  border-radius: 14px;
+  color: #fef3c7;
+  min-height: 600px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dfull-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #b08020;
+  padding: 6px 4px 10px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.95rem;
+}
+.dfull-turn { color: #fde68a; }
+.dfull-phase { color: #fcd34d; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+.dfull-counts { display: flex; gap: 12px; color: #fbbf24; font-weight: 800; }
+
+.dfull-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+.dfull-player {
+  background: #2a1d0c;
+  border-radius: 8px;
+  border: 1px solid #71492e;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+}
+.dfull-player.active { border-color: #fcd34d; box-shadow: 0 0 0 2px rgba(252, 211, 77, 0.35); }
+.dfull-player.cpu { background: #1f1a2e; border-color: #6c5ed0; }
+.dfull-player.cpu.active { border-color: #c4b5fd; box-shadow: 0 0 0 2px rgba(196, 181, 253, 0.4); }
+.dfull-pname { font-weight: 800; font-size: 1rem; margin-bottom: 4px; color: #fcd34d; }
+.dfull-player.cpu .dfull-pname { color: #c4b5fd; }
+.dfull-pline { color: #fde68a; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.78rem; }
+.dfull-pline.meta { color: #fbbf24; font-weight: 700; margin-top: 4px; }
+
+.dfull-section-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d6b87a;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.dfull-supply-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(98px, 1fr));
+  gap: 8px;
+}
+.dfull-supply-card {
+  aspect-ratio: 3 / 4;
+  border-radius: 9px;
+  padding: 8px 6px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: #fef3c7;
+  border: 2px solid #71492e;
+  background: #2a1d0c;
+  font-family: 'Inter', inherit;
+}
+.dfull-supply-card.treasure { background: linear-gradient(140deg, #a16207 0%, #ca8a04 100%); border-color: #fbbf24; }
+.dfull-supply-card.victory  { background: linear-gradient(140deg, #3b1e5d 0%, #5b2c84 100%); border-color: #a78bfa; }
+.dfull-supply-card.curse    { background: linear-gradient(140deg, #4c1d95 0%, #831843 100%); border-color: #f472b6; }
+.dfull-supply-card.action   { background: linear-gradient(140deg, #064e3b 0%, #0f766e 100%); border-color: #5eead4; }
+
+.dfull-supply-card.buyable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+.dfull-supply-card.disabled { opacity: 0.4; cursor: not-allowed; }
+
+.dfull-supply-foot {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+.dfull-supply-count { color: #fef3c7; }
+
+.dfull-cname { font-weight: 700; font-size: 0.88rem; color: #fef3c7; }
+.dfull-cstat { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; color: #fde68a; line-height: 1.2; }
+.dfull-ccost { font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 900; color: #fbbf24; }
+
+.dfull-hand-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 130px;
+}
+.dfull-card {
+  width: 96px;
+  min-height: 130px;
+  border-radius: 9px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 2px solid #71492e;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, opacity 0.12s;
+  text-align: center;
+  font-family: 'Inter', inherit;
+  background: #2a1d0c;
+  color: #fef3c7;
+}
+.dfull-card.treasure { background: linear-gradient(140deg, #a16207 0%, #ca8a04 100%); border-color: #fbbf24; }
+.dfull-card.victory  { background: linear-gradient(140deg, #3b1e5d 0%, #5b2c84 100%); border-color: #a78bfa; }
+.dfull-card.curse    { background: linear-gradient(140deg, #4c1d95 0%, #831843 100%); border-color: #f472b6; }
+.dfull-card.action   { background: linear-gradient(140deg, #064e3b 0%, #0f766e 100%); border-color: #5eead4; }
+.dfull-card:not(.disabled):hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4); }
+.dfull-card.disabled { opacity: 0.55; cursor: default; }
+
+.dfull-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.dfull-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #1f1810;
+  background: #fbbf24;
+  font-family: 'Inter', inherit;
+  transition: transform 0.1s, opacity 0.15s;
+}
+.dfull-btn.primary { background: #fde047; padding: 12px 28px; }
+.dfull-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.dfull-workshop {
+  width: 100%;
+  background: rgba(94, 234, 212, 0.08);
+  border: 1px solid #5eead4;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.dfull-workshop-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.dfull-log {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #71492e;
+}
+.dfull-log ul { list-style: none; margin: 0; padding: 0; }
+.dfull-log li {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: #fde68a;
+  padding: 2px 0;
+}
+
+.dfull-done {
+  text-align: center;
+  padding: 28px 24px;
+  background: #1f1810;
+  border-radius: 12px;
+  border: 2px solid #b08020;
+  margin: 32px auto;
+  max-width: 480px;
+}
+.dfull-done h2 {
+  margin: 0 0 16px;
+  color: #fcd34d;
+  font-family: 'Inter', inherit;
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+.dfull-scoreboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.dfull-score-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: #2a1d0c;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+.dfull-score-row.winner { background: #92400e; color: #fef9c3; }
+.dfull-final {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fbbf24;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
