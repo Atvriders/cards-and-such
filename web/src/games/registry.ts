@@ -4475,6 +4475,16 @@ import { battleshipFullPlugin } from "./battleship-full/index.js";
 import { mancalaFullKalahPlugin } from "./mancala-full-kalah/index.js";
 import { checkersFullTournamentPlugin } from "./checkers-full-tournament/index.js";
 import { backgammonFullMatchPlugin } from "./backgammon-full-match/index.js";
+import { connectFourFullPlugin } from "./connect-four-full/index.js";
+import { yahtzeeFullMatchPlugin } from "./yahtzee-full-match/index.js";
+import { farkleFullPlugin } from "./farkle-full/index.js";
+import { liarsDiceFullPlugin } from "./liars-dice-full/index.js";
+import { qwixxFullPlugin } from "./qwixx-full/index.js";
+import { othelloFullTournamentPlugin } from "./othello-full-tournament/index.js";
+import { sorryFullPlugin } from "./sorry-full/index.js";
+import { operationFullPlugin } from "./operation-full/index.js";
+import { chineseCheckersFullPlugin } from "./chinese-checkers-full/index.js";
+import { mouseTrapFullPlugin } from "./mouse-trap-full/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -8952,4 +8962,14 @@ export const GAMES: GamePlugin[] = [
   mancalaFullKalahPlugin as unknown as GamePlugin,
   checkersFullTournamentPlugin as unknown as GamePlugin,
   backgammonFullMatchPlugin as unknown as GamePlugin,
+  connectFourFullPlugin as unknown as GamePlugin,
+  yahtzeeFullMatchPlugin as unknown as GamePlugin,
+  farkleFullPlugin as unknown as GamePlugin,
+  liarsDiceFullPlugin as unknown as GamePlugin,
+  qwixxFullPlugin as unknown as GamePlugin,
+  othelloFullTournamentPlugin as unknown as GamePlugin,
+  sorryFullPlugin as unknown as GamePlugin,
+  operationFullPlugin as unknown as GamePlugin,
+  chineseCheckersFullPlugin as unknown as GamePlugin,
+  mouseTrapFullPlugin as unknown as GamePlugin,
 ];
