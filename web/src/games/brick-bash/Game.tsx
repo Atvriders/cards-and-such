@@ -13,14 +13,14 @@ export function BrickBashGame({ state, dispatch, onGameOver }: GameProps<BrickBa
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="ck-wrap"><div className="ck-done"><h2>Time's Up!</h2><div>Hit: {state.hits} / Missed: {state.missed}</div><div className="ck-final">{state.score} pts</div></div></div>;
+    return <div className="ck-wrap"><div className="ck-done bounce-in"><h2>Time's Up!</h2><div>Hit: {state.hits} / Missed: {state.missed}</div><div className="ck-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="ck-wrap">
+    <div className="ck-wrap fade-in">
       <div className="ck-header">
         <span className="ck-info">Hit: {state.hits}</span>
         <span className="ck-timer">{state.ticksRemaining}s</span>
-        <span className="ck-score">{state.score} pts</span>
+        <span className="ck-score pulse">{state.score} pts</span>
       </div>
       <div className="ck-board">
         {state.targets.map(p => {

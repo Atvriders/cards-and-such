@@ -1,8 +1,19 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { RedOrBlackState, RedOrBlackAction, RedOrBlackSettings } from "./state.js";
-import { isTerminal, cardName } from "./state.js";
+import { isTerminal } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
+import type { Card as EngineCard, Suit, Rank } from "../../engines/deck/index.js";
 import "./Game.css";
+
+// state.ts encodes cards as 0..51 with rank order [2,3,..,K,A] (index 12 = A).
+const SUITS: Suit[] = ["♠", "♥", "♦", "♣"];
+function toEngineCard(c: number): EngineCard {
+  const rIdx = c % 13;
+  const sIdx = Math.floor(c / 13);
+  const rank = (rIdx === 12 ? 1 : rIdx + 2) as Rank;
+  return { suit: SUITS[sIdx]!, rank, id: `rob-${c}` };
+}
 
 export function RedOrBlack({ state, dispatch, onGameOver }: GameProps<RedOrBlackState, RedOrBlackSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -19,9 +30,9 @@ export function RedOrBlack({ state, dispatch, onGameOver }: GameProps<RedOrBlack
       <div className="card-game-header"><span>Round {state.round}/{state.maxRounds}</span><span>Score: {state.score}</span></div>
       <p style={{ color: "#555", fontSize: "0.9rem" }}>Red left ~{redLeft} | Black left ~{blackLeft}</p>
       <div className="card-game-cards">
-        <div className={`playing-card${isReveal ? (state.lastResult === "correct" ? " card-win" : " card-lose") : ""}`} style={{ fontSize: "2rem" }}>
-          {isReveal && state.lastCard !== null ? cardName(state.lastCard) : "?"}
-        </div>
+        {isReveal && state.lastCard !== null
+          ? <Card card={toEngineCard(state.lastCard)} className={`playing-card ${state.lastResult === "correct" ? "card-win" : "card-lose"}`} />
+          : <Card faceDown className="playing-card" />}
       </div>
       {!isReveal && (
         <div className="card-game-bets">

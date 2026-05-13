@@ -79,7 +79,7 @@ export function ProgressiveChessGame({
   ));
 
   return (
-    <div className="pg-wrap">
+    <div className="pg-wrap fade-in">
       <div className="pg-info">
         <span>Progressive Chess</span>
         <span>You: White | Bot: Black ({state.settings.opponent})</span>

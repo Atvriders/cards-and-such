@@ -63,7 +63,7 @@ export function Stacker({
   const movingRowIndex = stackLen - startRow; // row above last visible
 
   return (
-    <div className="stacker">
+    <div className="stacker fade-in">
       <div className="stk-info">
         <span>Score: <strong>{state.score}</strong></span>
         <span>Height: <strong>{state.stack.length}</strong></span>

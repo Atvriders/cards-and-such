@@ -18,8 +18,8 @@ export function CoopView({ prefix, cfg, state, onPlay, onGameOver, scoreFn, intr
   const p = prefix;
   if (state.phase === "done" && t) {
     return (
-      <div className={`${p}-wrap`}>
-        <div className={`${p}-final`}>
+      <div className={`${p}-wrap fade-in`}>
+        <div className={`${p}-final bounce-in`}>
           <h2 className={`${p}-final-title`}>{t.victory ? "Mission Success!" : "Mission Over"}</h2>
           <div className={`${p}-final-score`}>Score: {t.score}</div>
           <div className={`${p}-final-stats`}>
@@ -32,7 +32,7 @@ export function CoopView({ prefix, cfg, state, onPlay, onGameOver, scoreFn, intr
   const progressPct = Math.min(100, (state.progress / cfg.progressTarget) * 100);
   const threatPct = Math.min(100, (state.threat / cfg.threatBreakpoint) * 100);
   return (
-    <div className={`${p}-wrap`}>
+    <div className={`${p}-wrap fade-in`}>
       <div className={`${p}-header`}>
         <span className={`${p}-icon`}>{cfg.scenarioEmoji}</span>
         <span className={`${p}-scenario`}>{cfg.scenarioLabel}</span>

@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DicePairRollState, DicePairRollAction, DicePairRollSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const FACES = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
 
 export function DicePairRoll({ state, dispatch, onGameOver }: GameProps<DicePairRollState, DicePairRollSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -15,7 +14,7 @@ export function DicePairRoll({ state, dispatch, onGameOver }: GameProps<DicePair
     <div className="dg-wrap fade-in">
       <div className="dg-header"><span>Round {state.round} / {state.maxRounds}</span><span className="dg-score">{state.coins} pts</span></div>
       <div className="dg-dice">
-        {state.dice ? state.dice.map((d,i) => <div key={i} className="dg-die">{FACES[d]}</div>) : [1,2].map(i => <div key={i} className="dg-die" style={{opacity:0.3}}>?</div>)}
+        {state.dice ? state.dice.map((d,i) => <div key={i} className="dg-die"><Die value={d as 1 | 2 | 3 | 4 | 5 | 6} /></div>) : [1,2].map(i => <div key={i} className="dg-die" style={{opacity:0.3}}>?</div>)}
       </div>
       {state.phase === "result" && <p className="dg-msg">{isDouble ? `Doubles! ×2 — +${state.lastGain} pts` : `Sum ${state.dice![0]!+state.dice![1]!} — +${state.lastGain} pts`}</p>}
       <div>

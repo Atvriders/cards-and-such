@@ -10,7 +10,7 @@ export function PaperArrow({ state, dispatch, onGameOver }: GameProps<PaperArrow
   // We simulate tick in state via targetVX; no separate tick action needed (static target display)
   const W=340,H=160;
   if(state.phase==="gameover") return <div className="arcade-wrap"><h2>Game Over!</h2><p>Hits: {state.hits}/{state.throws}</p><p>Score: <strong>{state.score}</strong></p></div>;
-  return <div className="arcade-wrap">
+  return <div className="arcade-wrap fade-in">
     <div className="arcade-header"><span>Arrows: {state.arrowsLeft}</span><span>Hits: {state.hits} | Score: {state.score}</span></div>
     {state.throws>0&&<p style={{fontSize:"0.9rem",fontWeight:700,color:state.lastHit?"#27ae60":"#e74c3c"}}>{state.lastHit?"Hit! +pts":"Miss!"}</p>}
     <svg width={W} height={H} style={{border:"2px solid #8e44ad",borderRadius:"12px",background:"#f0f0f0",cursor:"crosshair"}}

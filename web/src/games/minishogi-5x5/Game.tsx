@@ -11,21 +11,21 @@ export function Minishogi5x5Game({ state, dispatch, onGameOver }: GameProps<Game
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="msg-wrap">
-        <div className="msg-done"><h2>{msg}</h2><div className="msg-final">{state.score} pts</div></div>
+        <div className="msg-done bounce-in"><h2>{msg}</h2><div className="msg-final">{state.score} pts</div></div>
       </div>
     );
   }
   return (
-    <div className="msg-wrap">
+    <div className="msg-wrap fade-in">
       <div className="msg-info">Minishogi 5x5: click an empty cell to place your piece. Move {state.moves}.</div>
-      <div className="msg-score">Captures: {state.captures}</div>
+      <div className="msg-score pulse">Captures: {state.captures}</div>
       <div className="msg-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];
           const cls = v === "P" ? "p" : v === "C" ? "c" : "";
           const disabled = false ? v !== "P" : v !== null;
           return (
-            <button key={i} className={`msg-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
+            <button title="Select cell" key={i} className={`msg-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
               {v ?? ""}
             </button>
           );

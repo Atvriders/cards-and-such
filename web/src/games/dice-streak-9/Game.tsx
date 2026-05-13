@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceStreak9State, DiceStreak9Action, DiceStreak9Settings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const FACES = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
 export function DiceStreak9({ state, dispatch, onGameOver }: GameProps<DiceStreak9State, DiceStreak9Settings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -31,7 +30,9 @@ export function DiceStreak9({ state, dispatch, onGameOver }: GameProps<DiceStrea
       </div>
       <div className="ds9-dice">
         {state.dice.map((d, i) => (
-          <span key={i} className={`ds9-die ${d === state.nextNeeded && state.lastHit ? "hit" : ""}`}>{FACES[d]}</span>
+          <span key={i} className={`ds9-die ${d === state.nextNeeded && state.lastHit ? "hit" : ""}`}>
+            <Die value={d as 1 | 2 | 3 | 4 | 5 | 6} />
+          </span>
         ))}
       </div>
       {state.lastHit !== null && (

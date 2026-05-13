@@ -13,7 +13,7 @@ export function CatchphraseClueGame({ state, dispatch, onGameOver }: GameProps<C
   if (state.phase === "done") {
     return (
       <div className="ctp-wrap">
-        <div className="ctp-done">
+        <div className="ctp-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function CatchphraseClueGame({ state, dispatch, onGameOver }: GameProps<C
   const isResult = state.phase === "result";
 
   return (
-    <div className="ctp-wrap">
+    <div className="ctp-wrap fade-in">
       <div className="ctp-header">
         <span className="ctp-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="ctp-score">{state.score} pts</span>
+        <span className="ctp-score pulse">{state.score} pts</span>
       </div>
       <div className="ctp-prompt"><span className="ctp-label">Choose:</span> {r.prompt}</div>
       <div className="ctp-choices">

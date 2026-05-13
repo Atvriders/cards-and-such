@@ -2,17 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DoubleBonusState, DoubleBonusSettings, DoubleBonusAction } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
 import "./Game.css";
-
-const RED_SUITS = new Set(["♥", "♦"]);
-
-function rankLabel(rank: number): string {
-  if (rank === 1) return "A";
-  if (rank === 11) return "J";
-  if (rank === 12) return "Q";
-  if (rank === 13) return "K";
-  return String(rank);
-}
 
 export function DoubleBonusPoker({ state, dispatch, onGameOver }: GameProps<DoubleBonusState, DoubleBonusSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -38,10 +29,7 @@ export function DoubleBonusPoker({ state, dispatch, onGameOver }: GameProps<Doub
               className={`db-card-wrap${held[i] ? " held" : ""}`}
               onClick={() => phase === "draw" && dis({ type: "toggle-hold", index: i })}
             >
-              <div className={`db-card${RED_SUITS.has(card.suit) ? " red" : ""}`}>
-                <span>{rankLabel(card.rank)}</span>
-                <span>{card.suit}</span>
-              </div>
+              <Card card={card} className="db-card" />
               <div className="db-held-label">{held[i] ? "HELD" : ""}</div>
             </div>
           ))}

@@ -9,9 +9,18 @@ const CELL = 28; // px per cell
 export function Tetris({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<TetrisState, TetrisSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   // ── Tick loop using setInterval keyed on level ─────────────────────────────
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);

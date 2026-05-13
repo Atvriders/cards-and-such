@@ -23,9 +23,18 @@ function tileDataValue(value: number): string {
 export function TwentyFortyEight({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<TwoFortyEightState, TFESettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   // Keyboard handler
   useEffect(() => {

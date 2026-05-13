@@ -1,10 +1,19 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import { COLS, ROWS, type Connect4State, type Connect4Action } from "@cards/shared";
 import "./Connect4.css";
 
 type Settings = { opponent: "bot" | "hot-seat"; botDepth: "2" | "4" };
 
-export function Connect4({ state, dispatch }: GameProps<Connect4State & { settings: Settings }, Settings>): JSX.Element {
+export function Connect4({ state, dispatch, onGameOver }: GameProps<Connect4State & { settings: Settings }, Settings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (state.winner !== null && !endedRef.current) {
+      endedRef.current = true;
+      const score = state.winner === 0 ? 100 : state.winner === "draw" ? 50 : 0;
+      onGameOver(score);
+    }
+  }, [state, onGameOver]);
   const winSet = new Set((state.winningLine ?? []).map(([r, c]) => `${r},${c}`));
   return (
     <div className="c4-root">

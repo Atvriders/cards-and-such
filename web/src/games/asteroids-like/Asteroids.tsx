@@ -14,9 +14,18 @@ function asteroidRadius(size: number): number {
 export function Asteroids({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<AsteroidsState, AsteroidsSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -188,7 +197,7 @@ export function Asteroids({
   const maxLives = 3;
 
   return (
-    <div className="asteroids-game">
+    <div className="asteroids-game fade-in">
       <div className="asteroids-header">
         <span>Score: {state.score}</span>
         <div className="asteroids-lives">

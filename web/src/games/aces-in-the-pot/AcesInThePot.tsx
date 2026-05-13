@@ -15,7 +15,7 @@ export function AcesInThePot({ state, dispatch, onGameOver }: GameProps<AcesStat
     : null;
 
   return (
-    <div className="aces">
+    <div className="aces fade-in">
       <h2>Aces in the Pot</h2>
       <div className="aces-info">
         <span>Round: <strong>{state.round}/{state.maxRounds}</strong></span>

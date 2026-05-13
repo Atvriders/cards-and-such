@@ -54,7 +54,7 @@ export function LaserMaze({ state, dispatch, onGameOver }: GameProps<LaserMazeSt
   const emitterLabel = DIR_ARROW[emitter.dir] ?? "→";
 
   return (
-    <div className="laser-maze">
+    <div className="laser-maze fade-in">
       <div className="laser-maze-title">Laser Maze</div>
       <div className={`laser-maze-status${won ? " win" : ""}`}>
         {won ? `Solved! Score: ${terminal?.score ?? 0}` : `Place ${mirrorCount} mirror(s). Placed: ${placedMirrors.size} | Moves: ${state.moves}`}

@@ -10,9 +10,18 @@ const PH = 420;
 export function PendulumDrop({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<PendulumDropState, PendulumDropSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
 

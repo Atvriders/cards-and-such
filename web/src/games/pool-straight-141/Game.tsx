@@ -10,7 +10,7 @@ export function PoolStraight141Game({ state, dispatch, onGameOver }: GameProps<P
   if (state.phase === "done") {
     return (
       <div className="post14-wrap">
-        <div className="post14-done">
+        <div className="post14-done bounce-in">
           <h2>Shot</h2>
           <div className="post14-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function PoolStraight141Game({ state, dispatch, onGameOver }: GameProps<P
     );
   }
   return (
-    <div className="post14-wrap">
+    <div className="post14-wrap fade-in">
       <div className="post14-head">
         <span className="post14-round">Shot {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="post14-score">{state.score} pts</span>
+        <span className="post14-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

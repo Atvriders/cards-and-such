@@ -8,13 +8,13 @@ export function SherlookDiffGame({ state, dispatch, onGameOver }: GameProps<Sher
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="shrlokd-wrap"><div className="shrlokd-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="shrlokd-final">{state.score} pts</div></div></div>;
+    return <div className="shrlokd-wrap"><div className="shrlokd-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="shrlokd-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="shrlokd-wrap">
+    <div className="shrlokd-wrap fade-in">
       <div className="shrlokd-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="shrlokd-score">{state.score} pts</div>
+      <div className="shrlokd-score pulse">{state.score} pts</div>
       <div className="shrlokd-prompt">{r.question}</div>
       <div className="shrlokd-grid">
         {r.choices.map((n, i) => {

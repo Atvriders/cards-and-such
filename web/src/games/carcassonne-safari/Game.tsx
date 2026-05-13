@@ -11,7 +11,7 @@ export function CarcassonneSafariGame({ state, dispatch, onGameOver }: GameProps
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="carcsf-wrap">
+    <div className="carcsf-wrap fade-in">
       <h3 className="carcsf-title">Carcassonne: Safari</h3>
       <div className="carcsf-meta">
         <div className="carcsf-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function CarcassonneSafariGame({ state, dispatch, onGameOver }: GameProps
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="carcsf-done">
+        <div className="carcsf-done bounce-in">
           <h3>Done!</h3>
           <div className="carcsf-final">{state.score} pts</div>
         </div>

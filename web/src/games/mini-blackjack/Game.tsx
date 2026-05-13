@@ -37,7 +37,7 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
   const canDouble = state.phase === "player" && state.player.length === 2 && state.bankroll >= state.bet;
 
   return (
-    <div className="bj-mini-wrap">
+    <div className="bj-mini-wrap fade-in">
       <div className="bj-mini-hud">
         <div className="bj-mini-stat">Bankroll <b>${state.bankroll}</b></div>
         <div className="bj-mini-stat">Bet <b>${state.bet || 0}</b></div>
@@ -46,7 +46,7 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
 
       <div className="bj-mini-table">
         <div className="bj-mini-side bj-mini-dealer">
-          <div className="bj-mini-label">Dealer {state.dealer.length > 0 && <span className="bj-mini-total">{dealerTotal}</span>}</div>
+          <div className="bj-mini-label">Dealer {state.dealer.length > 0 && <span className="bj-mini-total pulse">{dealerTotal}</span>}</div>
           <div className="bj-mini-hand">
             {state.dealer.length === 0 && <div className="bj-mini-slot" />}
             {state.dealer.map((c, i) => {
@@ -78,7 +78,7 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
         </div>
 
         <div className="bj-mini-side bj-mini-you">
-          <div className="bj-mini-label">You {state.player.length > 0 && <span className="bj-mini-total">{playerTotal}</span>}</div>
+          <div className="bj-mini-label">You {state.player.length > 0 && <span className="bj-mini-total pulse">{playerTotal}</span>}</div>
           <div className="bj-mini-hand">
             {state.player.length === 0 && <div className="bj-mini-slot" />}
             {state.player.map((c) => <div key={c.id} className="bj-mini-card-wrap"><Card card={c} /></div>)}
@@ -102,7 +102,7 @@ export function MiniBlackjackGame({ state, dispatch, onGameOver }: GameProps<Min
       </div>
 
       {state.phase === "done" && (
-        <div className="bj-mini-done">
+        <div className="bj-mini-done bounce-in">
           <h2>Game Over</h2>
           <div className="bj-mini-final">Final bankroll: ${state.bankroll}</div>
         </div>

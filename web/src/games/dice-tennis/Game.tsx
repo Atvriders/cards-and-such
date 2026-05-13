@@ -17,20 +17,20 @@ export function DiceTennis({ state, dispatch, onGameOver }: GameProps<DiceTennis
   const isOver = state.phase === "gameOver";
 
   return (
-    <div className="dice-tennis">
+    <div className="dice-tennis fade-in">
       <div className="dt-scoreboard">
-        <div className="dt-score-col">
+        <div className="dt-score-col pulse">
           <span className="dt-label">You</span>
           <span className="dt-sets">{state.playerSets}</span>
           <span className="dt-games">{state.playerGames}</span>
           <span className="dt-points">{POINT_LABELS[state.playerPoints] ?? "Ad"}</span>
         </div>
-        <div className="dt-score-sep">
+        <div className="dt-score-sep pulse">
           <span>Sets</span>
           <span>Games</span>
           <span>Points</span>
         </div>
-        <div className="dt-score-col">
+        <div className="dt-score-col pulse">
           <span className="dt-label">AI</span>
           <span className="dt-sets">{state.aiSets}</span>
           <span className="dt-games">{state.aiGames}</span>

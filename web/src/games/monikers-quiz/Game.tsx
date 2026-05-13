@@ -13,8 +13,8 @@ export function MonikersQuizGame({ state, dispatch, onGameOver }: GameProps<Moni
   useEffect(() => { if (state.phase === "ask") setStart(Date.now()); }, [state.current, state.phase]);
   if (state.phase === "done") {
     return (
-      <div className={`${P}-wrap`}>
-        <div className={`${P}-final`}>
+      <div className={`${P}-wrap fade-in`}>
+        <div className={`${P}-final bounce-in`}>
           <h2 className={`${P}-final-title`}>Monikers Quiz — Complete</h2>
           <div className={`${P}-final-score`}>{state.score} pts</div>
           <div className={`${P}-streak`}>{state.questions.length} questions answered</div>
@@ -23,9 +23,9 @@ export function MonikersQuizGame({ state, dispatch, onGameOver }: GameProps<Moni
     );
   }
   const q = state.questions[state.current];
-  if (!q) return <div className={`${P}-wrap`}>Loading…</div>;
+  if (!q) return <div className={`${P}-wrap fade-in`}>Loading…</div>;
   return (
-    <div className={`${P}-wrap`}>
+    <div className={`${P}-wrap fade-in`}>
       <div className={`${P}-header`}>
         <span className={`${P}-progress`}>Q{state.current + 1} / {TOTAL_QUESTIONS}</span>
         <span className={`${P}-score`}>Score {state.score} · 🔥 {state.streak}</span>

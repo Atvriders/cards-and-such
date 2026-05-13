@@ -22,7 +22,7 @@ export function TripletsGame({
   };
 
   return (
-    <div className="triplets">
+    <div className="triplets fade-in">
       <div className="tri-info">
         <span>Moves: {state.movesMade}</span>
         <span>Removed groups: {state.removed}</span>

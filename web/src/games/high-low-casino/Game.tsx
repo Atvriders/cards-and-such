@@ -2,17 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { HighLowState, HighLowSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
 import "./Game.css";
-
-const RED_SUITS = new Set(["♥", "♦"]);
-
-function rankLabel(rank: number): string {
-  if (rank === 1) return "A";
-  if (rank === 11) return "J";
-  if (rank === 12) return "Q";
-  if (rank === 13) return "K";
-  return String(rank);
-}
 
 export function HighLowCasino({ state, dispatch, onGameOver }: GameProps<HighLowState, HighLowSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -30,15 +21,12 @@ export function HighLowCasino({ state, dispatch, onGameOver }: GameProps<HighLow
 
       <div className="hl-cards">
         {baseCard ? (
-          <div className={`hl-card${RED_SUITS.has(baseCard.suit) ? " red" : ""}`}>
-            <span>{rankLabel(baseCard.rank)}</span>
-            <span>{baseCard.suit}</span>
-          </div>
+          <Card card={baseCard} className="hl-card" />
         ) : (
-          <div className="hl-card placeholder">?</div>
+          <Card faceDown className="hl-card placeholder" />
         )}
         <div className="hl-arrow">→</div>
-        <div className="hl-card placeholder">?</div>
+        <Card faceDown className="hl-card placeholder" />
       </div>
 
       {streak > 0 && <div className="hl-streak">Streak: {streak} ({streak === 1 ? "1x" : streak === 2 ? "2x" : streak === 3 ? "4x" : "8x"} multiplier)</div>}

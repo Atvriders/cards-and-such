@@ -46,7 +46,7 @@ export function Whitehead({
   const stock = getPile("stock");
 
   return (
-    <div className="whitehead">
+    <div className="whitehead fade-in">
       <div className="whitehead-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

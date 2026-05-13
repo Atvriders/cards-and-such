@@ -72,7 +72,7 @@ export function RhythmTap({ state, dispatch, onGameOver }: GameProps<RhythmTapSt
   );
 
   return (
-    <div className="rt-game">
+    <div className="rt-game fade-in">
       <div className="rt-header">
         <span>Score: {score}</span>
         <span>Combo: x{combo}</span>

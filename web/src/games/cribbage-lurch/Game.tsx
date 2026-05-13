@@ -10,7 +10,7 @@ export function CribbageLurchGame({ state, dispatch, onGameOver }: GameProps<Cri
   if (state.phase === "done") {
     return (
       <div className="crilur-wrap">
-        <div className="crilur-done">
+        <div className="crilur-done bounce-in">
           <h2>Hand</h2>
           <div className="crilur-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function CribbageLurchGame({ state, dispatch, onGameOver }: GameProps<Cri
     );
   }
   return (
-    <div className="crilur-wrap">
+    <div className="crilur-wrap fade-in">
       <div className="crilur-head">
         <span className="crilur-round">Hand {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="crilur-score">{state.score} pts</span>
+        <span className="crilur-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

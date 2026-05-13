@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceAddBetState, DiceAddBetAction, DiceAddBetSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-const FACES = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
 export function DiceAddBet({ state, dispatch, onGameOver }: GameProps<DiceAddBetState, DiceAddBetSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
@@ -13,7 +13,7 @@ export function DiceAddBet({ state, dispatch, onGameOver }: GameProps<DiceAddBet
   return (
     <div className="dg-wrap">
       <div className="dg-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dg-score">{state.coins} coins</span></div>
-      <div className="dg-dice">{state.dice ? state.dice.map((d,i)=><div key={i} className="dg-die">{FACES[d]}</div>) : [1,2,3].map(i=><div key={i} className="dg-die" style={{opacity:0.3}}>?</div>)}</div>
+      <div className="dg-dice">{state.dice ? state.dice.map((d,i)=><div key={i} className="dg-die"><Die value={d as 1 | 2 | 3 | 4 | 5 | 6} /></div>) : [1,2,3].map(i=><div key={i} className="dg-die" style={{opacity:0.3}}>?</div>)}</div>
       {state.phase==="result" && <p className={`dg-msg${state.lastWin?"":" bad"}`}>{state.lastWin?`Won! Sum=${sum} — +${state.bet} coins`:`Lost! Sum=${sum} — -${state.bet} coins`}</p>}
       {state.phase==="betting" && <>
         <label className="dg-label">Bet: <input type="number" min={1} max={state.coins} value={bet} onChange={e=>setBet(Math.max(1,parseInt(e.target.value)||1))} style={{width:"60px",textAlign:"center"}}/></label>

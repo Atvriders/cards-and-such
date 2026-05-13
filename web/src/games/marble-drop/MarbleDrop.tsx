@@ -13,9 +13,18 @@ const MARBLE_COLORS = ["#ff4444", "#4488ff", "#44cc44", "#ffaa22", "#cc44cc", "#
 export function MarbleDrop({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<MarbleDropState, MarbleDropSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
 

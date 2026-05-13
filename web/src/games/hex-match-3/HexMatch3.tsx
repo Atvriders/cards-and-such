@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { HexMatchState, HexMatchSettings } from "./state.js";
 import { isTerminal, allHexCells } from "./state.js";
@@ -16,7 +17,15 @@ function hexToPixel(q: number, r: number, radius: number): { x: number; y: numbe
   return { x, y };
 }
 
-export function HexMatch3({ state, dispatch }: GameProps<HexMatchState, HexMatchSettings>): JSX.Element {
+export function HexMatch3({ state, dispatch, onGameOver }: GameProps<HexMatchState, HexMatchSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const radius = parseInt(state.settings.radius, 10);
   const cells = allHexCells(radius);

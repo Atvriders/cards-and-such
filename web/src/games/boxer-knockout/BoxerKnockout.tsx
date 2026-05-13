@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { BoxerState, BoxerAction, BoxerSettings } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -20,8 +21,17 @@ const RESULT_TEXT: Record<string, string> = {
 export function BoxerKnockout({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<BoxerState, BoxerSettings>): JSX.Element {
   const terminal = isTerminal(state);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const playerHpPct = (state.playerHP / 100) * 100;
   const opponentHpPct = (state.opponentHP / 100) * 100;

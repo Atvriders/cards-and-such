@@ -1,8 +1,19 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CardDiscardDownState, CardDiscardDownAction, CardDiscardDownSettings } from "./state.js";
-import { isTerminal, cardName, isRed, pipValue, TOTAL_ROUNDS } from "./state.js";
+import { isTerminal, pipValue, TOTAL_ROUNDS } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
+import type { Card as EngineCard, Suit, Rank } from "../../engines/deck/index.js";
 import "./Game.css";
+
+// state.ts encodes cards as 0..51 with rank order [2,3,..,K,A] (index 12 = A).
+const SUITS: Suit[] = ["♠", "♥", "♦", "♣"];
+function toEngineCard(c: number, i: number): EngineCard {
+  const rIdx = c % 13;
+  const sIdx = Math.floor(c / 13);
+  const rank = (rIdx === 12 ? 1 : rIdx + 2) as Rank;
+  return { suit: SUITS[sIdx]!, rank, id: `cdd-${i}-${c}` };
+}
 
 export function CardDiscardDownGame({ state, dispatch, onGameOver }: GameProps<CardDiscardDownState, CardDiscardDownSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -19,13 +30,17 @@ export function CardDiscardDownGame({ state, dispatch, onGameOver }: GameProps<C
       <div className="cdd-row">
         {state.hand.map((c, i) => {
           const sel = state.selected.includes(i);
+          const cls = `cdd-card ${sel ? "selected" : ""}`;
+          const canClick = state.phase === "selecting";
           return (
-            <button
-              key={i}
-              className={`cdd-card ${isRed(c) ? "red" : "black"} ${sel ? "selected" : ""}`}
-              disabled={state.phase !== "selecting"}
-              onClick={() => dispatch({ type: "toggle", index: i } as CardDiscardDownAction)}
-            >{cardName(c)}<div className="cdd-pip">({pipValue(c)})</div></button>
+            <div key={i} className="cdd-card-wrap">
+              <Card
+                card={toEngineCard(c, i)}
+                className={cls}
+                {...(canClick ? { onClick: () => dispatch({ type: "toggle", index: i } as CardDiscardDownAction) } : {})}
+              />
+              <div className="cdd-pip">({pipValue(c)})</div>
+            </div>
           );
         })}
       </div>

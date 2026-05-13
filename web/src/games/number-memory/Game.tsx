@@ -34,7 +34,7 @@ export function NumberMemory({
   const digits = ["1","2","3","4","5","6","7","8","9","0"];
 
   return (
-    <div className="nm-game">
+    <div className="nm-game fade-in">
       <div className="nm-header">
         <span>Round <strong>{state.round}/{state.maxRound}</strong></span>
         <span>Score <strong>{state.score}</strong></span>

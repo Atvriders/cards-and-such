@@ -2,17 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DragonTigerState, DragonTigerSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
 import "./Game.css";
-
-const RED_SUITS = new Set(["♥", "♦"]);
-
-function rankLabel(rank: number): string {
-  if (rank === 1) return "A";
-  if (rank === 11) return "J";
-  if (rank === 12) return "Q";
-  if (rank === 13) return "K";
-  return String(rank);
-}
 
 export function DragonTiger({ state, dispatch, onGameOver }: GameProps<DragonTigerState, DragonTigerSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -32,20 +23,14 @@ export function DragonTiger({ state, dispatch, onGameOver }: GameProps<DragonTig
         <div className="dt-side">
           <div className="dt-label dragon">Dragon</div>
           {dragonCard ? (
-            <div className={`dt-card${RED_SUITS.has(dragonCard.suit) ? " red" : ""}`}>
-              <span>{rankLabel(dragonCard.rank)}</span>
-              <span>{dragonCard.suit}</span>
-            </div>
+            <Card card={dragonCard} className="dt-card" />
           ) : <div className="dt-card empty" />}
         </div>
         <div className="dt-vs">VS</div>
         <div className="dt-side">
           <div className="dt-label tiger">Tiger</div>
           {tigerCard ? (
-            <div className={`dt-card${RED_SUITS.has(tigerCard.suit) ? " red" : ""}`}>
-              <span>{rankLabel(tigerCard.rank)}</span>
-              <span>{tigerCard.suit}</span>
-            </div>
+            <Card card={tigerCard} className="dt-card" />
           ) : <div className="dt-card empty" />}
         </div>
       </div>

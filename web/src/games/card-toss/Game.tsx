@@ -6,11 +6,11 @@ import "./Game.css";
 export function CardTossGame({ state, dispatch, onGameOver }: GameProps<CardTossState, CardTossSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div className="cm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="cm-wrap"><div className="cm-done bounce-in"><h2>Done!</h2><div className="cm-final">{state.score} pts</div></div></div>;
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap fade-in">
       <div className="cm-info">Card {Math.min(state.idx + 1, TOTAL_CARDS)} / {TOTAL_CARDS}</div>
-      <div className="cm-score">{state.score} pts</div>
+      <div className="cm-score pulse">{state.score} pts</div>
       {state.current !== null && <div className={`cm-card ${isRed(state.current) ? "red" : "black"}`}>{cardName(state.current)}</div>}
       {state.lastResult && <div className="cm-result">{state.lastResult}</div>}
       <div className="cm-row">

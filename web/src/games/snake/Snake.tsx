@@ -15,10 +15,19 @@ const CELL_SIZE = 24; // px per cell
 export function Snake({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<SnakeState, SnakeSettings>): JSX.Element {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const tick = useCallback(() => {
     dispatch({ type: "tick" } as SnakeAction);

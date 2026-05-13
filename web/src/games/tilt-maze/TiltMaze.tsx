@@ -44,7 +44,7 @@ export function TiltMaze({
   const onGoal = state.ballCol === state.goalCol && state.ballRow === state.goalRow;
 
   return (
-    <div className="tilt-maze">
+    <div className="tilt-maze fade-in">
       <div className="tilt-maze-info">
         <span>Tilts: {state.moves}</span>
         <span>Get the ball to the orange goal</span>

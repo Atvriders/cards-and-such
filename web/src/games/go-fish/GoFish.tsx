@@ -44,7 +44,7 @@ export function GoFish({
   }
 
   return (
-    <div className="go-fish">
+    <div className="go-fish fade-in">
       {/* Opponents */}
       <div className="gf-opponents">
         {Array.from({ length: state.seats - 1 }, (_, i) => i + 1).map(seat => {

@@ -4,7 +4,7 @@ import type { DiceQuickRollState, DiceQuickRollAction, DiceQuickRollSettings } f
 import { isTerminal } from "./state.js";
 import "./Game.css";
 
-const FACES = ["", "⚀","⚁","⚂","⚃","⚄","⚅"];
+import { Die } from "../../engines/dice/Die.js";
 
 export function DiceQuickRollGame({ state, dispatch, onGameOver }: GameProps<DiceQuickRollState, DiceQuickRollSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -17,7 +17,7 @@ export function DiceQuickRollGame({ state, dispatch, onGameOver }: GameProps<Dic
     <div className="dm-wrap fade-in">
       <div className="dm-info">Round {state.round} / {state.maxRounds}</div>
       <div className="dm-coins">Coins: {state.coins}</div>
-      <div className="dm-dice">{state.dice.map((d,i) => <span key={i}>{FACES[d] ?? d}</span>)}</div>
+      <div className="dm-dice">{state.dice.map((d,i) => <Die key={i} value={d as 1 | 2 | 3 | 4 | 5 | 6} />)}</div>
       {state.phase === "betting" ? (
         <div className="dm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />

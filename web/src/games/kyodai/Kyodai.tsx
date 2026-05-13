@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { KyodaiState, KyodaiSettings } from "./state.js";
 import { isTerminal, ROWS, COLS } from "./state.js";
@@ -19,7 +20,15 @@ const TILE_SYMBOLS = [
   "🀇","🀈","🀉","🀊","🀋","🀌","🀍","🀎","🀏","🀙","🀚",
 ];
 
-export function Kyodai({ state, dispatch }: GameProps<KyodaiState, KyodaiSettings>): JSX.Element {
+export function Kyodai({ state, dispatch, onGameOver }: GameProps<KyodaiState, KyodaiSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
 
   return (

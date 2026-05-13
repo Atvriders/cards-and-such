@@ -9,7 +9,7 @@ export function PaydayMiniGame({ state, dispatch, onGameOver }: GameProps<Payday
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const last = state.log[state.log.length - 1];
   return (
-    <div className="pd-wrap">
+    <div className="pd-wrap fade-in">
       <div className="pd-head">Day <b>{state.day}</b> / {DAYS} — Bank <b>${state.bank}</b></div>
       <div className="pd-cal">
         {Array.from({ length: DAYS }, (_, i) => {
@@ -25,7 +25,7 @@ export function PaydayMiniGame({ state, dispatch, onGameOver }: GameProps<Payday
           <button className="pd-btn alt" onClick={() => dispatch({ type: "next" } as PaydayAction)}>Next Day</button>
         </div>
       )}
-      {state.phase === "done" && <div className="pd-done">Month over! Net Worth: ${score(state)}</div>}
+      {state.phase === "done" && <div className="pd-done bounce-in">Month over! Net Worth: ${score(state)}</div>}
     </div>
   );
 }

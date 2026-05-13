@@ -10,7 +10,7 @@ export function SkittlesWestCountryGame({ state, dispatch, onGameOver }: GamePro
   if (state.phase === "done") {
     return (
       <div className="skweco-wrap">
-        <div className="skweco-done">
+        <div className="skweco-done bounce-in">
           <h2>Frame</h2>
           <div className="skweco-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function SkittlesWestCountryGame({ state, dispatch, onGameOver }: GamePro
     );
   }
   return (
-    <div className="skweco-wrap">
+    <div className="skweco-wrap fade-in">
       <div className="skweco-head">
         <span className="skweco-round">Frame {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="skweco-score">{state.score} pts</span>
+        <span className="skweco-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

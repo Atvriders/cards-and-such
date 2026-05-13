@@ -21,9 +21,9 @@ export function RgbMixer({
   const lastRoundPts = state.roundScores[state.roundScores.length - 1];
 
   return (
-    <div className="rgb-game">
+    <div className="rgb-game fade-in">
       <div className="rgb-title">RGB Mixer</div>
-      <div className="rgb-score">
+      <div className="rgb-score pulse">
         Round {state.currentRound + 1}/{state.totalRounds} — Score: {state.score}
       </div>
 

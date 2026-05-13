@@ -9,7 +9,7 @@ export function SplendorTradeRoutesGame({ state, dispatch, onGameOver }: GamePro
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="spt-wrap">
+    <div className="spt-wrap fade-in">
       <h3 className="spt-title">Splendor: Trade Routes</h3>
       <div className="spt-stats">
         <div className="spt-stat"><span>Round</span><b>{state.round}/8</b></div>
@@ -36,10 +36,10 @@ export function SplendorTradeRoutesGame({ state, dispatch, onGameOver }: GamePro
         </div>
       )}
       {state.phase === "done" && (
-        <div className="spt-done">
+        <div className="spt-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="spt-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="spt-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="spt-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="spt-tableaus">

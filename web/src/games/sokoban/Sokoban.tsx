@@ -43,7 +43,7 @@ export function Sokoban({
   const [pr, pc] = playerPos;
 
   return (
-    <div className="sokoban" tabIndex={0} onKeyDown={handleKey}>
+    <div className="sokoban fade-in" tabIndex={0} onKeyDown={handleKey}>
       <div className="sokoban-info">
         <span>Difficulty: {state.settings.difficulty}</span>
         <span>Moves: {state.movesMade}</span>
@@ -52,7 +52,7 @@ export function Sokoban({
       </div>
 
       {terminal && (
-        <div className="sokoban-game-over">Level Complete! Score: {terminal.score}</div>
+        <div className="sokoban-game-over bounce-in">Level Complete! Score: {terminal.score}</div>
       )}
 
       <div

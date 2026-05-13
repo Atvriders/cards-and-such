@@ -1,8 +1,19 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CardClockState, CardClockAction, CardClockSettings } from "./state.js";
-import { isTerminal, cardName, isRed, TOTAL_DRAWS, POINTS_PER_HIT } from "./state.js";
+import { isTerminal, TOTAL_DRAWS, POINTS_PER_HIT } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
+import type { Card as EngineCard, Suit, Rank } from "../../engines/deck/index.js";
 import "./Game.css";
+
+// state.ts encodes cards as 0..51 with rank order [2,3,..,K,A] (index 12 = A).
+const SUITS: Suit[] = ["♠", "♥", "♦", "♣"];
+function toEngineCard(c: number): EngineCard {
+  const rIdx = c % 13;
+  const sIdx = Math.floor(c / 13);
+  const rank = (rIdx === 12 ? 1 : rIdx + 2) as Rank;
+  return { suit: SUITS[sIdx]!, rank, id: `cclk-${c}` };
+}
 
 export function CardClockGame({ state, dispatch, onGameOver }: GameProps<CardClockState, CardClockSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -15,7 +26,7 @@ export function CardClockGame({ state, dispatch, onGameOver }: GameProps<CardClo
       <div className="cm-info">Hour {state.currentHour} / {TOTAL_DRAWS}</div>
       <div className="cm-score">{state.score} pts • Hits: {state.hits}</div>
       {state.card !== null && (
-        <div className={`cm-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
+        <Card card={toEngineCard(state.card)} className="cm-card" />
       )}
       {state.phase === "drawing" && (
         <button data-testid="hint-target-card-clock-primary" className="cm-btn" onClick={() => dispatch({ type: "draw" } as CardClockAction)}>Draw for hour {state.currentHour}</button>

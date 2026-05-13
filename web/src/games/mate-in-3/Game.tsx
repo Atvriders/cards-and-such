@@ -59,7 +59,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<PuzzleState, Set
   };
 
   return (
-    <div className="cp-puzzle">
+    <div className="cp-puzzle fade-in">
       <div className="cp-header">
         <span className="cp-title">Mate in Three</span>
         <span className="cp-progress">Puzzle {state.puzzleIndex + 1} / 10 — {phaseLabels[state.phase]}</span>

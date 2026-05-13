@@ -29,7 +29,7 @@ export function PictionaryPrompter({ state, dispatch, onGameOver }: GameProps<Pi
   if (state.phase === "done") {
     return (
       <div className="pictionary-wrap">
-        <div className="pictionary-done">
+        <div className="pictionary-done bounce-in">
           <h2>Round Over!</h2>
           <p>Completed: <strong style={{ color: "#27ae60" }}>{state.completedCount}</strong></p>
           <p>Skipped: <strong style={{ color: "#e74c3c" }}>{state.skippedCount}</strong></p>
@@ -44,7 +44,7 @@ export function PictionaryPrompter({ state, dispatch, onGameOver }: GameProps<Pi
   const urgent = state.timeLeft <= 15;
 
   return (
-    <div className="pictionary-wrap">
+    <div className="pictionary-wrap fade-in">
       <div className="pictionary-header">
         <div className="pictionary-stats">
           <span className="pictionary-completed">✓ {state.completedCount}</span>

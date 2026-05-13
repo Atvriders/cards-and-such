@@ -14,7 +14,7 @@ export function TwoTruthsLie({ state, dispatch, onGameOver }: GameProps<TTLState
   if (state.phase === "done") {
     return (
       <div className="ttl-wrap">
-        <div className="ttl-done">
+        <div className="ttl-done bounce-in">
           <h2>Game Over!</h2>
           <p>Correct: {state.correctCount} / {state.sets.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -28,10 +28,10 @@ export function TwoTruthsLie({ state, dispatch, onGameOver }: GameProps<TTLState
   const isCorrect = state.selected === set.lieIndex;
 
   return (
-    <div className="ttl-wrap">
+    <div className="ttl-wrap fade-in">
       <div className="ttl-header">
         <span className="ttl-progress">Round {state.currentIndex + 1} / {state.sets.length}</span>
-        <span className="ttl-score">{state.score} pts</span>
+        <span className="ttl-score pulse">{state.score} pts</span>
       </div>
 
       <div className="ttl-instruction">Which one is the LIE?</div>

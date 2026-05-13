@@ -32,7 +32,7 @@ export function RoundTheClock({
   }
 
   return (
-    <div className="rtc">
+    <div className="rtc fade-in">
       <div className="rtc-title">Round the Clock 🎯</div>
       <div className={`rtc-status${won ? " win" : ""}`}>
         {won

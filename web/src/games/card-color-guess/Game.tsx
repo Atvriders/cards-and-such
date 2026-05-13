@@ -2,7 +2,19 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CardColorGuessState, CardColorGuessAction, CardColorGuessSettings } from "./state.js";
 import { isTerminal, cardName } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
+import type { Card as EngineCard, Suit, Rank } from "../../engines/deck/index.js";
 import "./Game.css";
+
+// state.ts encodes cards as 0..51 with rank order [2,3,..,K,A] (index 12 = A).
+const SUITS: Suit[] = ["♠", "♥", "♦", "♣"];
+function toEngineCard(c: number): EngineCard {
+  const rIdx = c % 13;
+  const sIdx = Math.floor(c / 13);
+  const rank = (rIdx === 12 ? 1 : rIdx + 2) as Rank;
+  return { suit: SUITS[sIdx]!, rank, id: `ccg-${c}` };
+}
+
 export function CardColorGuess({ state, dispatch, onGameOver }: GameProps<CardColorGuessState, CardColorGuessSettings>): JSX.Element {
   const terminal=isTerminal(state);
   useEffect(()=>{ if(terminal) onGameOver(terminal.score); },[terminal,onGameOver]);
@@ -11,9 +23,9 @@ export function CardColorGuess({ state, dispatch, onGameOver }: GameProps<CardCo
   return <div className="card-game-wrap">
     <div className="card-game-header"><span>Round {state.round}/{state.maxRounds}</span><span>Score: {state.score} | Streak: {state.streak}</span></div>
     <div className="card-game-cards">
-      <div className={`playing-card ${isReveal?(state.lastResult==="correct"?"card-win":"card-lose"):""}`} style={{fontSize:"2rem"}}>
-        {isReveal?cardName(state.currentCard):"?"}
-      </div>
+      {isReveal
+        ? <Card card={toEngineCard(state.currentCard)} className={`playing-card ${state.lastResult==="correct"?"card-win":"card-lose"}`} />
+        : <Card faceDown className="playing-card" />}
     </div>
     {!isReveal&&<div className="card-game-bets">
       <button className="bet-btn" style={{background:"#e74c3c"}} onClick={()=>dispatch({type:"guess",color:"red"} as CardColorGuessAction)}>Red ♥♦</button>

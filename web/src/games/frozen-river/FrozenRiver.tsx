@@ -21,7 +21,7 @@ export function FrozenRiver({ state, dispatch, onGameOver }: GameProps<FrozenRiv
   }, [terminal, onGameOver]);
 
   return (
-    <div className="frozen-river">
+    <div className="frozen-river fade-in">
       <div className="fr-info">Steps: {state.steps}</div>
       <div
         className="fr-grid"

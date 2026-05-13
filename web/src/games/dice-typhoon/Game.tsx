@@ -11,7 +11,7 @@ export function DiceTyphoonGame({ state, dispatch, onGameOver }: GameProps<DiceT
   if (state.phase === "done") {
     return (
       <div className="ty-wrap">
-        <div className="ty-done">
+        <div className="ty-done bounce-in">
           <h2>Storm Passes</h2>
           <div className="ty-final">{state.score} pts</div>
         </div>
@@ -20,7 +20,7 @@ export function DiceTyphoonGame({ state, dispatch, onGameOver }: GameProps<DiceT
   }
 
   return (
-    <div className="ty-wrap">
+    <div className="ty-wrap fade-in">
       <div className="ty-rain"></div>
       <div className="ty-banner">Round {state.round} / {ROUNDS} · Banked {state.score}</div>
       <div className="ty-pool">Pool: <strong>{state.pool}</strong></div>

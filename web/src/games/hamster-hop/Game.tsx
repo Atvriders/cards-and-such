@@ -14,14 +14,14 @@ export function HamsterHopGame({ state, dispatch, onGameOver }: GameProps<Hamste
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="hh-wrap"><div className="hh-done"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="hh-final">{state.score} pts</div></div></div>;
+    return <div className="hh-wrap"><div className="hh-done bounce-in"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="hh-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="hh-wrap">
+    <div className="hh-wrap fade-in">
       <div className="hh-header">
         <span className="hh-info">Tapped: {state.popped}</span>
         <span className="hh-timer">{state.ticksRemaining}s</span>
-        <span className="hh-score">{state.score} pts</span>
+        <span className="hh-score pulse">{state.score} pts</span>
       </div>
       <div className="hh-board" style={{ background: "linear-gradient(180deg,#fde68a,#a16207)" }}>
         {state.targets.map(p => {

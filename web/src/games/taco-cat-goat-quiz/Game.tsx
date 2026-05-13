@@ -17,10 +17,10 @@ export function TacoCatGoatQuiz({ state, dispatch, onGameOver }: GameProps<TacoC
   const q = QUESTIONS[qi]!;
 
   return (
-    <div className="g-wrap">
+    <div className="g-wrap fade-in">
       <div className="g-header">
         <span>Q {state.index + 1} / {QUESTIONS.length}</span>
-        <span className="g-score">Score: {state.score}</span>
+        <span className="g-score pulse">Score: {state.score}</span>
       </div>
       <div className="g-q">{q.q}</div>
       <div className="g-options">

@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceFlushBetState, DiceFlushBetAction, DiceFlushBetSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const FACES = ["", "⚀","⚁","⚂","⚃","⚄","⚅"];
 
 export function DiceFlushBetGame({ state, dispatch, onGameOver }: GameProps<DiceFlushBetState, DiceFlushBetSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -17,7 +16,7 @@ export function DiceFlushBetGame({ state, dispatch, onGameOver }: GameProps<Dice
     <div className="dm-wrap">
       <div className="dm-info">Round {state.round} / {state.maxRounds}</div>
       <div className="dm-coins">Coins: {state.coins}</div>
-      <div className="dm-dice">{state.dice.map((d,i) => <span key={i}>{FACES[d] ?? d}</span>)}</div>
+      <div className="dm-dice">{state.dice.map((d,i) => <Die key={i} value={d as 1 | 2 | 3 | 4 | 5 | 6} />)}</div>
       {state.phase === "betting" ? (
         <div className="dm-bid-row">
           <input type="number" min={1} max={state.coins} value={bid} onChange={e => setBid(Number(e.target.value))} />

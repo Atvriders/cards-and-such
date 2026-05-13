@@ -18,7 +18,7 @@ export function SuperColumnsMiniGame({ state, dispatch, onGameOver }: GameProps<
   if (state.phase === "done") {
     return (
       <div className="spcolmn-wrap">
-        <div className="spcolmn-done">
+        <div className="spcolmn-done bounce-in">
           <h2>Time's Up!</h2>
           <div className="spcolmn-stats">Matches: {state.matches}</div>
           <div className="spcolmn-final">{state.score} pts</div>
@@ -27,11 +27,11 @@ export function SuperColumnsMiniGame({ state, dispatch, onGameOver }: GameProps<
     );
   }
   return (
-    <div className="spcolmn-wrap">
+    <div className="spcolmn-wrap fade-in">
       <div className="spcolmn-header">
         <span className="spcolmn-info">Matches: {state.matches}</span>
         <span className="spcolmn-timer">{state.ticksRemaining}s</span>
-        <span className="spcolmn-score">{state.score} pts</span>
+        <span className="spcolmn-score pulse">{state.score} pts</span>
       </div>
       <div className="spcolmn-grid">
         {state.grid.map((row, r) => row.map((g, c) => {

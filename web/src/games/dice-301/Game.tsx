@@ -10,7 +10,7 @@ export function Dice301Game({ state, dispatch, onGameOver }: GameProps<Dice301St
   if (state.phase === "done") {
     return (
       <div className="dic301-wrap">
-        <div className="dic301-done">
+        <div className="dic301-done bounce-in">
           <h2>Throw</h2>
           <div className="dic301-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function Dice301Game({ state, dispatch, onGameOver }: GameProps<Dice301St
     );
   }
   return (
-    <div className="dic301-wrap">
+    <div className="dic301-wrap fade-in">
       <div className="dic301-head">
         <span className="dic301-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dic301-score">{state.score} pts</span>
+        <span className="dic301-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

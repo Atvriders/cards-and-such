@@ -107,7 +107,7 @@ export function Sudoku({
   }
 
   return (
-    <div className="sudokunews" tabIndex={0} onKeyDown={handleKeyDown}>
+    <div className="sudokunews fade-in" tabIndex={0} onKeyDown={handleKeyDown}>
       <div className="sudokunews-info">
         <span>Difficulty: {state.settings.difficulty}</span>
         <span>Moves: {state.movesMade}</span>

@@ -29,7 +29,7 @@ export function EndlessWhackMoleGame({ state, dispatch, onGameOver }: GameProps<
   if (state.phase === "done") {
     return (
       <div className="ewmole-wrap">
-        <div className="ewmole-done">
+        <div className="ewmole-done bounce-in">
           <h2>Crashed!</h2>
           <div className="ewmole-stats">Survived {state.ticks} ticks</div>
           <div className="ewmole-final">{state.score} pts</div>
@@ -38,10 +38,10 @@ export function EndlessWhackMoleGame({ state, dispatch, onGameOver }: GameProps<
     );
   }
   return (
-    <div className="ewmole-wrap">
+    <div className="ewmole-wrap fade-in">
       <div className="ewmole-header">
         <span className="ewmole-info">Survived: {state.ticks}</span>
-        <span className="ewmole-score">{state.score} pts</span>
+        <span className="ewmole-score pulse">{state.score} pts</span>
       </div>
       <div className="ewmole-track">
         {Array.from({ length: LANES }).map((_, lane) => (
@@ -59,7 +59,7 @@ export function EndlessWhackMoleGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="ewmole-controls">
-        <button data-testid="hint-target-endless-whack-mole-primary" className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessWhackMoleAction)}>↑ Up</button>
+        <button title="Move up" data-testid="hint-target-endless-whack-mole-primary" className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as EndlessWhackMoleAction)}>↑ Up</button>
         <button className="ewmole-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as EndlessWhackMoleAction)}>↓ Down</button>
       </div>
       <div className="ewmole-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

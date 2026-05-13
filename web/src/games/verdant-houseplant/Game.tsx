@@ -17,7 +17,7 @@ export function VerdantHouseplant({ state, dispatch, onGameOver }: GameProps<Ver
   );
 
   return (
-    <div className="bz-vhp-wrap g-wrap">
+    <div className="bz-vhp-wrap g-wrap fade-in">
       <p>You are X. Click an empty cell.</p>
       <div className="g-grid">
         {state.board.map((c, i) => (

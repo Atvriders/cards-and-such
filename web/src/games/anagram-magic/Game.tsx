@@ -13,7 +13,7 @@ export function AnagramMagicGame({ state, dispatch, onGameOver }: GameProps<Anag
   if (state.phase === "done") {
     return (
       <div className="agm-wrap">
-        <div className="agm-done">
+        <div className="agm-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function AnagramMagicGame({ state, dispatch, onGameOver }: GameProps<Anag
   const isResult = state.phase === "result";
 
   return (
-    <div className="agm-wrap">
+    <div className="agm-wrap fade-in">
       <div className="agm-header">
         <span className="agm-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="agm-score">{state.score} pts</span>
+        <span className="agm-score pulse">{state.score} pts</span>
       </div>
       <div className="agm-prompt"><span className="agm-label">Unscramble:</span> {r.prompt}</div>
       <div className="agm-choices">

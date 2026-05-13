@@ -8,7 +8,7 @@ export function FoodRestaurantGame({ state, dispatch, onGameOver }: GameProps<Fo
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-fre-wrap">
+    <div className="bz-fre-wrap fade-in">
       <h3 className="bz-fre-title">Food Chain Restaurant</h3>
       <div className="bz-fre-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
@@ -31,7 +31,7 @@ export function FoodRestaurantGame({ state, dispatch, onGameOver }: GameProps<Fo
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-fre-done">
+        <div className="bz-fre-done bounce-in">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

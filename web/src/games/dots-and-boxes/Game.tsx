@@ -39,7 +39,7 @@ export function DotsAndBoxes({
   else statusText = "Your turn — draw a line segment between two dots.";
 
   return (
-    <div className="dab">
+    <div className="dab fade-in">
       <div className={`dab-status ${statusClass}`}>{statusText}</div>
       <div className="dab-scores">
         <span style={{ color: "#2060c0" }}>You: {state.scores[0]}</span>

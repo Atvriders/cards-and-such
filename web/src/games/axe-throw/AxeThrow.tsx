@@ -13,11 +13,20 @@ const LOG_R = 0.12 * PW;
 export function AxeThrow({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<AxeThrowState, AxeThrowSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const tick = useCallback((now: number) => {
     const s = stateRef.current;

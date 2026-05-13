@@ -14,7 +14,7 @@ export function MiniTripeaksGame(
   );
   if (state.won || state.lost) onGameOver(state.score);
   return (
-    <div className="mini-tripeaks-root">
+    <div className="mini-tripeaks-root fade-in">
       <div className="mini-tripeaks-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

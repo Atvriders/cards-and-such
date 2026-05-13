@@ -15,9 +15,18 @@ const RING_COLORS = ["#ffff00", "#ffff00", "#ff0000", "#ff0000", "#000080", "#00
 export function ArcheryTarget({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<ArcheryTargetState, ArcheryTargetSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
   const holdingRef = useRef(false);

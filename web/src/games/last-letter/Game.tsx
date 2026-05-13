@@ -29,7 +29,7 @@ export function LastLetter({ state, dispatch, onGameOver }: GameProps<LastLetter
     return (
       <div className="lastletter-wrap">
         <div className="lastletter-title">Last Letter</div>
-        <div className="lastletter-done">
+        <div className="lastletter-done bounce-in">
           <h2>Time's Up!</h2>
           <p>Chain: <strong>{chainLen - 1}</strong> words</p>
           <p style={{ fontWeight: 900, fontSize: "1.5rem", color: "#27ae60" }}>Score: {state.score}</p>
@@ -47,10 +47,10 @@ export function LastLetter({ state, dispatch, onGameOver }: GameProps<LastLetter
   }
 
   return (
-    <div className="lastletter-wrap">
+    <div className="lastletter-wrap fade-in">
       <div className="lastletter-title">Last Letter</div>
       <div className="lastletter-header">
-        <span className="lastletter-score">Score: {state.score} | Words: {chainLen - 1}</span>
+        <span className="lastletter-score pulse">Score: {state.score} | Words: {chainLen - 1}</span>
         <span className={`lastletter-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
       </div>
       <div className="lastletter-chain">

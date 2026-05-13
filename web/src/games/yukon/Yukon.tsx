@@ -55,7 +55,7 @@ export function Yukon({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className={`yukon${state.won ? " has-won" : ""}`}>
+    <div className={`yukon fade-in${state.won ? " has-won" : ""}`}>
       <div className="yukon-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

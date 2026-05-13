@@ -9,7 +9,7 @@ export function OceansTraitsGame({ state, dispatch, onGameOver }: GameProps<Ocea
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="oct-wrap">
+    <div className="oct-wrap fade-in">
       <h3 className="oct-title">Oceans: Traits</h3>
       <div className="oct-stats">
         <div className="oct-stat"><span>Round</span><b>{state.round}/9</b></div>
@@ -36,10 +36,10 @@ export function OceansTraitsGame({ state, dispatch, onGameOver }: GameProps<Ocea
         </div>
       )}
       {state.phase === "done" && (
-        <div className="oct-done">
+        <div className="oct-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="oct-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="oct-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="oct-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="oct-tableaus">

@@ -17,7 +17,7 @@ export function ParliamentGame({ state, dispatch, onGameOver }: GameProps<Parlia
   const playableIds = new Set(playerHand.filter(c => canPlayCard(c, state.board)).map(c => c.id));
 
   return (
-    <div className="parliament">
+    <div className="parliament fade-in">
       <div className="parl-title">Parliament</div>
 
       <div className="parl-opponents">

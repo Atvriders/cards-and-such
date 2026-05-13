@@ -22,7 +22,7 @@ export function RummyView({
   const done = phase === "done";
 
   return (
-    <div className={`${prefix}-wrap`}>
+    <div className={`${prefix}-wrap fade-in`}>
       <div className={`${prefix}-header`}>
         <span>{title}</span>
         <span>Phase: {phase}</span>

@@ -32,7 +32,7 @@ export function PrestigeClicker({
   const canPrestige = state.points >= state.prestigeGoal;
 
   return (
-    <div className="pc-game">
+    <div className="pc-game fade-in">
       <div className="pc-title">Prestige Clicker</div>
       <div className="pc-stats">
         <span className="pc-pts">⭐ {Math.floor(state.points)} pts</span>

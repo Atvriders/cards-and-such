@@ -8,11 +8,11 @@ export function FrenchCuisineQuiz({ state, dispatch, onGameOver }: GameProps<Fre
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   const entry = state.entries[state.current];
-  if (state.done) return <div className="cq-wrap"><div className="cq-done"><h2>Quiz Complete!</h2><p className="cq-final">Score: {state.score} / {state.entries.length * 10}</p></div></div>;
+  if (state.done) return <div className="cq-wrap"><div className="cq-done bounce-in"><h2>Quiz Complete!</h2><p className="cq-final">Score: {state.score} / {state.entries.length * 10}</p></div></div>;
   return (
-    <div className="cq-wrap">
+    <div className="cq-wrap fade-in">
       <div className="cq-progress">Question {state.current + 1} of {state.entries.length}</div>
-      <div className="cq-score">Score: {state.score}</div>
+      <div className="cq-score pulse">Score: {state.score}</div>
       {entry && <>
         <div className="cq-question">{entry.question}</div>
         <div className="cq-choices">

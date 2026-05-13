@@ -27,7 +27,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<DurakState, obje
   const isDefending = phase === "player-defend";
 
   return (
-    <div className="durak">
+    <div className="durak fade-in">
       <div className="durak-header">
         <span>Trump: <strong style={{ color: trump === "♥" || trump === "♦" ? "#c62828" : "#333" }}>{trump}</strong></span>
         <span>Deck: {deck.length}</span>
@@ -47,7 +47,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<DurakState, obje
       <div className="durak-message">{message}</div>
 
       {finalScores && (
-        <div className="durak-done">
+        <div className="durak-done bounce-in">
           {finalScores.player > finalScores.bot ? "You WIN — bot is Durak!" : finalScores.player < finalScores.bot ? "You are the Durak (fool)!" : "Draw!"}
         </div>
       )}

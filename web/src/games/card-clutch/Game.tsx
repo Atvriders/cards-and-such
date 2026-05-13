@@ -1,8 +1,19 @@
 import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CardClutchState, CardClutchAction, CardClutchSettings } from "./state.js";
-import { isTerminal, cardName, isRed, TOTAL_ROUNDS } from "./state.js";
+import { isTerminal, TOTAL_ROUNDS } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
+import type { Card as EngineCard, Suit, Rank } from "../../engines/deck/index.js";
 import "./Game.css";
+
+// state.ts encodes cards as 0..51 with rank order [2,3,..,K,A] (index 12 = A).
+const SUITS: Suit[] = ["♠", "♥", "♦", "♣"];
+function toEngineCard(c: number): EngineCard {
+  const rIdx = c % 13;
+  const sIdx = Math.floor(c / 13);
+  const rank = (rIdx === 12 ? 1 : rIdx + 2) as Rank;
+  return { suit: SUITS[sIdx]!, rank, id: `cclt-${c}` };
+}
 
 export function CardClutchGame({ state, dispatch, onGameOver }: GameProps<CardClutchState, CardClutchSettings>): JSX.Element {
   const t = isTerminal(state);
@@ -16,7 +27,7 @@ export function CardClutchGame({ state, dispatch, onGameOver }: GameProps<CardCl
       <div className={`cc-info ${isClutchRound ? "clutch" : ""}`}>{isClutchRound ? "CLUTCH ROUND!" : `Round ${state.round} / ${TOTAL_ROUNDS}`}</div>
       <div className="cc-score">{state.score} pts</div>
       {state.card !== null && (
-        <div className={`cc-card ${isRed(state.card) ? "red" : "black"}`}>{cardName(state.card)}</div>
+        <Card card={toEngineCard(state.card)} className="cc-card" />
       )}
       {state.phase === "predict" && (
         <>

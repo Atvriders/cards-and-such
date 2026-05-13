@@ -11,14 +11,14 @@ export function DicePipAdd({ state, dispatch, onGameOver }: GameProps<DicePipAdd
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
   if (state.phase === "gameover") {
-    return <div className="dice-wrap"><h2>Game Over!</h2><p>Total Score: <strong>{state.totalScore}</strong></p></div>;
+    return <div className="dice-wrap fade-in"><h2>Game Over!</h2><p>Total Score: <strong>{state.totalScore}</strong></p></div>;
   }
 
   const isResult = state.phase === "result";
   const currentDie = state.dice[state.diceIdx] ?? null;
 
   return (
-    <div className="dice-wrap">
+    <div className="dice-wrap fade-in">
       <div className="dice-header"><span>Round {state.round}/{state.maxRounds}</span><span>{state.totalScore} pts</span></div>
       <p style={{ fontSize: "1.2rem", fontWeight: 700, color: "#3498db" }}>Target: {state.target}</p>
       <div className="dice-row">

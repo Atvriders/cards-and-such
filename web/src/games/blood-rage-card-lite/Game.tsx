@@ -9,7 +9,7 @@ export function BloodRageCardLiteGame({ state, dispatch, onGameOver }: GameProps
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="brcl-wrap">
+    <div className="brcl-wrap fade-in">
       <h3 className="brcl-title">Blood Rage: Lite</h3>
       <div className="brcl-stats">
         <div className="brcl-stat"><span>Round</span><b>{state.round}/8</b></div>
@@ -36,10 +36,10 @@ export function BloodRageCardLiteGame({ state, dispatch, onGameOver }: GameProps
         </div>
       )}
       {state.phase === "done" && (
-        <div className="brcl-done">
+        <div className="brcl-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="brcl-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="brcl-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="brcl-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="brcl-tableaus">

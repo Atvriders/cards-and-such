@@ -11,9 +11,18 @@ const GEM_COLORS = [
 export function Columns({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<ColumnsState, ColumnsSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startInterval = useCallback(() => {

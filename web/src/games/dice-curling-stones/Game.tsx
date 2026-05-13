@@ -10,7 +10,7 @@ export function DiceCurlingStonesGame({ state, dispatch, onGameOver }: GameProps
   if (state.phase === "done") {
     return (
       <div className="dicust-wrap">
-        <div className="dicust-done">
+        <div className="dicust-done bounce-in">
           <h2>End</h2>
           <div className="dicust-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceCurlingStonesGame({ state, dispatch, onGameOver }: GameProps
     );
   }
   return (
-    <div className="dicust-wrap">
+    <div className="dicust-wrap fade-in">
       <div className="dicust-head">
         <span className="dicust-round">End {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dicust-score">{state.score} pts</span>
+        <span className="dicust-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

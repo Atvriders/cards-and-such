@@ -18,8 +18,8 @@ export function DeductionView({ prefix, cfg, state, onSet, onSubmit, onGameOver,
   const p = prefix;
   if (state.phase !== "guess" && r) {
     return (
-      <div className={`${p}-wrap`}>
-        <div className={`${p}-final`}>
+      <div className={`${p}-wrap fade-in`}>
+        <div className={`${p}-final bounce-in`}>
           <h2 className={`${p}-final-title`}>{r.won ? "Solved!" : "Out of Guesses"}</h2>
           <div className={`${p}-final-score`}>{r.score} pts</div>
           <div className={`${p}-final-stats`}>Answer: {state.answer.map(i => cfg.symbolLabels[i] ?? "?").join(" · ")}</div>
@@ -28,7 +28,7 @@ export function DeductionView({ prefix, cfg, state, onSet, onSubmit, onGameOver,
     );
   }
   return (
-    <div className={`${p}-wrap`}>
+    <div className={`${p}-wrap fade-in`}>
       <div className={`${p}-header`}>
         <span className={`${p}-icon`}>{cfg.scenarioEmoji}</span>
         <span className={`${p}-scenario`}>{cfg.scenarioLabel}</span>

@@ -23,7 +23,7 @@ export function LongGame({ state, dispatch, onGameOver }: GameProps<LongState, L
     return (
       <div className="longgam-wrap">
         <h2 className={`longgam-banner ${won ? "longgam-win" : "longgam-loss"}`}>{won ? "You won!" : "CPU won!"}</h2>
-        <div className="longgam-score">Final score: {state.score}</div>
+        <div className="longgam-score pulse">Final score: {state.score}</div>
       </div>
     );
   }
@@ -63,7 +63,7 @@ export function LongGame({ state, dispatch, onGameOver }: GameProps<LongState, L
   };
 
   return (
-    <div className="longgam-wrap">
+    <div className="longgam-wrap fade-in">
       <div className="longgam-status">
         {isPTurn ? (state.phase === "rolling" ? "Your turn — roll the dice." : "Move your checkers.") : "CPU is moving..."}
       </div>

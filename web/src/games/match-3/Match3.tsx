@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { Match3State, Match3Action, Match3Settings } from "./state.js";
 import { isTerminal, COLS, ROWS } from "./state.js";
@@ -16,7 +17,16 @@ const GEM_COLORS = [
 export function Match3({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<Match3State, Match3Settings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
 
   function handleCell(row: number, col: number) {

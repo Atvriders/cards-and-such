@@ -24,7 +24,7 @@ export function Fillomino({ state, dispatch, onGameOver }: GameProps<FillominoSt
   const maxVal = puzzle.size;
 
   return (
-    <div className="fillomino">
+    <div className="fillomino fade-in">
       <div className="fillomino-title">Fillomino</div>
       <div className={`fillomino-status${won ? " win" : ""}`}>
         {won ? `Solved! Score: ${terminal?.score ?? 0}` : `Moves: ${state.moves} — fill each region with its size`}

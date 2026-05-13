@@ -27,7 +27,7 @@ export function CutthroatPinochle({ state, dispatch, onGameOver }: GameProps<Cut
   const legalIds = new Set(legal.map((c: CardType) => c.id));
 
   return (
-    <div className="cutthroat-pinochle-game">
+    <div className="cutthroat-pinochle-game fade-in">
       <div className="cutthroat-pinochle-header">
         <span>You: {playerTricks}</span>
         <span>Bot: {botTricks}</span>

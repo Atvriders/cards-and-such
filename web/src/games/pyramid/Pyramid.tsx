@@ -66,7 +66,7 @@ export function Pyramid({
   const wasteSelected = state.selected?.kind === "waste";
 
   return (
-    <div className={`pyramid-game${state.won ? " has-won" : ""}`}>
+    <div className={`pyramid-game fade-in${state.won ? " has-won" : ""}`}>
       <div className="pyramid-info">
         <span>Moves: {state.movesMade}</span>
         <span>Redeals left: {state.redealsRemaining}</span>

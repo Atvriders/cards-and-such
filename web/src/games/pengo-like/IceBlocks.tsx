@@ -12,9 +12,18 @@ const PH = ROWS * CH;
 export function IceBlocks({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<IceBlocksState, Record<never, never>>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
@@ -84,7 +93,7 @@ export function IceBlocks({
   };
 
   return (
-    <div className="iceblocks-game">
+    <div className="iceblocks-game fade-in">
       <div className="iceblocks-header">
         <span>Score: {score}</span>
         <span>Lives: {lives}</span>

@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceTarget25State, DiceTarget25Action, DiceTarget25Settings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const FACES = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
 export function DiceTarget25({ state, dispatch, onGameOver }: GameProps<DiceTarget25State, DiceTarget25Settings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -27,14 +26,21 @@ export function DiceTarget25({ state, dispatch, onGameOver }: GameProps<DiceTarg
         <span className="dt25-score">{state.score} pts</span>
       </div>
       <div className="dt25-target">Target: <strong>{state.target}</strong></div>
-      <div className="dt25-dice">
-        {state.dice.map((d, i) => (
-          <button key={i} className={`dt25-die ${state.kept[i] ? "kept" : ""} ${isScored ? "final" : ""}`}
-            onClick={() => dispatch({ type: "toggle", index: i } as DiceTarget25Action)}
-            disabled={isScored || state.rollsLeft === 2}>
-            {FACES[d]}
-          </button>
-        ))}
+      <div className={`dt25-dice ${isScored ? "final" : ""}`}>
+        {state.dice.map((d, i) => {
+          const disabled = isScored || state.rollsLeft === 2;
+          const clickProps = disabled
+            ? {}
+            : { onClick: () => dispatch({ type: "toggle", index: i } as DiceTarget25Action) };
+          return (
+            <Die
+              key={i}
+              value={d as 1 | 2 | 3 | 4 | 5 | 6}
+              kept={!!state.kept[i]}
+              {...clickProps}
+            />
+          );
+        })}
       </div>
       <div className="dt25-sum">Sum: <strong>{sum}</strong> (diff: {Math.abs(sum - state.target)})</div>
       {!isScored && state.rollsLeft > 0 && (

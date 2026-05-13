@@ -34,7 +34,7 @@ export function Pool8Ball({ state, dispatch, onGameOver }: GameProps<Pool8BallSt
   });
 
   return (
-    <div className="pool-game">
+    <div className="pool-game fade-in">
       <div className="pool-title">Pool — 8 Ball</div>
 
       <div className="pool-info-row">

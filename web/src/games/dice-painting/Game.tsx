@@ -8,12 +8,12 @@ export function DicePaintingGame({ state, dispatch, onGameOver }: GameProps<Dice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dpa-wrap"><div className="dpa-done"><h2>Done!</h2><div className="dpa-final">{state.score} pts</div></div></div>;
+    return <div className="dpa-wrap"><div className="dpa-done bounce-in"><h2>Done!</h2><div className="dpa-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dpa-wrap">
+    <div className="dpa-wrap fade-in">
       <div className="dpa-info">Round {state.round + 1} / {TOTAL_ROUNDS}</div>
-      <div className="dpa-score">{state.score} pts</div>
+      <div className="dpa-score pulse">{state.score} pts</div>
       {state.lastRoll > 0 && (
         <>
           <div className="dpa-die">{state.lastRoll}</div>

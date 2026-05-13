@@ -25,7 +25,7 @@ export function GoingToBoston({
     phase === "kept2" ? "Roll Last Die" : "";
 
   return (
-    <div className="gtb">
+    <div className="gtb fade-in">
       <div className="gtb-header">
         Round {round} of {totalRounds} — Total: {totalScore}
       </div>
@@ -53,7 +53,7 @@ export function GoingToBoston({
       )}
 
       {(phase === "roundDone" || phase === "gameDone") && (
-        <div className="gtb-score">Round Score: {roundScore}</div>
+        <div className="gtb-score pulse">Round Score: {roundScore}</div>
       )}
 
       {terminal && (
@@ -62,7 +62,7 @@ export function GoingToBoston({
 
       <div className="gtb-controls">
         {(phase === "preRoll" || phase === "kept1" || phase === "kept2") && (
-          <button data-testid="hint-target-going-to-boston-roll" onClick={() => dispatch({ type: "roll" } as GoingToBostonAction)}>{rollLabel}</button>
+          <button title="Roll" data-testid="hint-target-going-to-boston-roll" onClick={() => dispatch({ type: "roll" } as GoingToBostonAction)}>{rollLabel}</button>
         )}
         {phase === "roundDone" && (
           <button data-testid="hint-target-going-to-boston-nextRound" onClick={() => dispatch({ type: "nextRound" } as GoingToBostonAction)}>Next Round</button>

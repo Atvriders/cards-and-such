@@ -20,7 +20,7 @@ export function ArenaChampion({ state, dispatch, onGameOver }: GameProps<ArenaCh
   const oppHpPct = Math.round((state.opponentHp / state.opponent.maxHp) * 100);
 
   return (
-    <div className="ac-wrap">
+    <div className="ac-wrap fade-in">
       <div className="ac-header">
         <span className="ac-title">Arena Champion</span>
         <span className="ac-round">Fight {state.round}/{state.maxRounds} | Wins: {state.wins}</span>
@@ -60,7 +60,7 @@ export function ArenaChampion({ state, dispatch, onGameOver }: GameProps<ArenaCh
           <button className="ac-next" onClick={() => d({ type: "nextFight" })}>Next Fight →</button>
         </div>
       )}
-      {state.phase === "done" && <div className="ac-done">Arena Champion! All {state.maxRounds} fights won! Score: 100</div>}
+      {state.phase === "done" && <div className="ac-done bounce-in">Arena Champion! All {state.maxRounds} fights won! Score: 100</div>}
       {state.phase === "dead" && <div className="ac-dead">Defeated in fight {state.round}. Wins: {state.wins}. Score: {terminal?.score ?? 0}/100</div>}
 
       <div className="ac-log">

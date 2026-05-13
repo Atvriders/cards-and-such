@@ -8,16 +8,16 @@ export function Sudoku25Game({ state, dispatch, onGameOver }: GameProps<Sudoku25
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   if (state.phase === "done") return (
-    <div className="sudokutwentyfive-wrap"><div className="sudokutwentyfive-done"><h2>Done!</h2><p>Correct: {state.correct} / {state.puzzles.length}</p><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#27ae60" }}>{state.score} pts</p></div></div>
+    <div className="sudokutwentyfive-wrap"><div className="sudokutwentyfive-done bounce-in"><h2>Done!</h2><p>Correct: {state.correct} / {state.puzzles.length}</p><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#27ae60" }}>{state.score} pts</p></div></div>
   );
   const p = state.puzzles[state.idx]!;
   const isResult = state.phase === "result";
   const rows = p.grid.split("|");
   return (
-    <div className="sudokutwentyfive-wrap">
+    <div className="sudokutwentyfive-wrap fade-in">
       <div className="sudokutwentyfive-header">
         <span className="sudokutwentyfive-progress">Q {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="sudokutwentyfive-score">{state.score} pts</span>
+        <span className="sudokutwentyfive-score pulse">{state.score} pts</span>
       </div>
       <div className="sudokutwentyfive-grid">
         {rows.map((row, ri) => (

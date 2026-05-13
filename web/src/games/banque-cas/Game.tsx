@@ -7,12 +7,12 @@ import "./Game.css";
 export function BanqueCasGame({ state, dispatch, onGameOver }: GameProps<BanqueCasState, BanqueCasSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="banq-c-wrap"><div className="banq-c-done"><h2>Done!</h2><div className="banq-c-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="banq-c-wrap"><div className="banq-c-done bounce-in"><h2>Done!</h2><div className="banq-c-final">{state.score} pts</div></div></div>;
   return (
-    <div className="banq-c-wrap">
+    <div className="banq-c-wrap fade-in">
       <div className="banq-c-title">Baccarat Banque</div>
       <div className="banq-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="banq-c-score">{state.score} pts</div>
+      <div className="banq-c-score pulse">{state.score} pts</div>
       {state.phase === "bet" && (
         <>
           <div className="banq-c-info">Place your bet:</div>

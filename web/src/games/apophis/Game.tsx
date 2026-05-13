@@ -15,7 +15,7 @@ export function ApophisGame(
   if (state.won || state.lost) onGameOver(state.score);
 
   return (
-    <div className="apophis-root">
+    <div className="apophis-root fade-in">
       <div className="apophis-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

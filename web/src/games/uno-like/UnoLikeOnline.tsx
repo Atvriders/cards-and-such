@@ -35,7 +35,7 @@ export default function UnoLikeOnline(): JSX.Element {
   };
 
   return (
-    <div className="uno-root">
+    <div className="uno-root fade-in">
       <div className="uno-members">
         Room: {view.members.map((m) => m.username).join(", ")}
       </div>
@@ -60,7 +60,7 @@ export default function UnoLikeOnline(): JSX.Element {
 
       <div className="uno-hand">
         {myHand.map((c) => (
-          <button key={c.id} className="uno-card" onClick={() => play(c)} disabled={!isMyTurn}>
+          <button title="Play card" key={c.id} className="uno-card" onClick={() => play(c)} disabled={!isMyTurn}>
             {renderCard(c)}
           </button>
         ))}

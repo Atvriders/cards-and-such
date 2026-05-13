@@ -5,12 +5,12 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function RedDogCasGame({ state, dispatch, onGameOver }: GameProps<RedDogCasState, RedDogCasSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="rd-c-wrap"><h3>Red Dog (Casino)</h3><div className="rd-c-done"><h2>Done!</h2><div className="rd-c-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="rd-c-wrap"><h3>Red Dog (Casino)</h3><div className="rd-c-done bounce-in"><h2>Done!</h2><div className="rd-c-final">{state.score} pts</div></div></div>;
   return (
-    <div className="rd-c-wrap">
+    <div className="rd-c-wrap fade-in">
       <h3>Red Dog (Casino)</h3>
       <div className="rd-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="rd-c-score">{state.score} pts</div>
+      <div className="rd-c-score pulse">{state.score} pts</div>
       {state.cardA !== null && state.cardB !== null && state.cardC !== null && (
         <div className="rd-c-row">
           <div className={`rd-c-card ${isRed(state.cardA) ? "red" : "black"}`}>{cardName(state.cardA)}</div>

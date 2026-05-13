@@ -14,14 +14,14 @@ export function SeahorseSpinGame({ state, dispatch, onGameOver }: GameProps<Seah
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="shs-wrap"><div className="shs-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="shs-final">{state.score} pts</div></div></div>;
+    return <div className="shs-wrap"><div className="shs-done bounce-in"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="shs-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="shs-wrap">
+    <div className="shs-wrap fade-in">
       <div className="shs-header">
         <span className="shs-info">Caught: {state.popped}</span>
         <span className="shs-timer">{state.ticksRemaining}s</span>
-        <span className="shs-score">{state.score} pts</span>
+        <span className="shs-score pulse">{state.score} pts</span>
       </div>
       <div className="shs-board" style={{ background: "linear-gradient(180deg,#67e8f9,#0e7490)" }}>
         {state.critters.map(p => {

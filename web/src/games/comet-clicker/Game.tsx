@@ -14,14 +14,14 @@ export function CometClickerGame({ state, dispatch, onGameOver }: GameProps<Come
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="cometclicker-wrap"><div className="cometclicker-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="cometclicker-final">{state.score} pts</div></div></div>;
+    return <div className="cometclicker-wrap"><div className="cometclicker-done bounce-in"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="cometclicker-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cometclicker-wrap">
+    <div className="cometclicker-wrap fade-in">
       <div className="cometclicker-header">
         <span className="cometclicker-info">Popped: {state.popped}</span>
         <span className="cometclicker-timer">{state.ticksRemaining}s</span>
-        <span className="cometclicker-score">{state.score} pts</span>
+        <span className="cometclicker-score pulse">{state.score} pts</span>
       </div>
       <div className="cometclicker-board">
         {state.targets.map(p => {

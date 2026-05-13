@@ -15,7 +15,7 @@ export function TutTombGame(
   if (state.won || state.lost) onGameOver(state.score);
 
   return (
-    <div className="tut-tomb-root">
+    <div className="tut-tomb-root fade-in">
       <div className="tut-tomb-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

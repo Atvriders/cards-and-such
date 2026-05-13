@@ -38,7 +38,7 @@ export function CowboyDice({
   const upperFilled = UPPER_COWBOY.filter((c) => c in state.scores).length;
 
   return (
-    <div className="cowboy-dice">
+    <div className="cowboy-dice fade-in">
       <h2>COWBOY DICE</h2>
 
       <div className="cowboy-header">
@@ -83,7 +83,7 @@ export function CowboyDice({
           const preview = canScore && !already ? computeCowboyScore(state.dice, cat) : null;
           const isUpper = (UPPER_COWBOY as CowboyCategory[]).includes(cat);
           return (
-            <div key={cat} className={`cowboy-score-row${already ? " scored" : ""}${isUpper ? " upper-section" : ""}`}>
+            <div key={cat} className={`cowboy-score-row${already ? " scored" : ""}${isUpper ? " upper-section" : ""} pulse`}>
               <span>{CATEGORY_LABELS[cat]}</span>
               {already ? (
                 <span>{state.scores[cat]}</span>
@@ -99,7 +99,7 @@ export function CowboyDice({
         })}
       </div>
 
-      <div className="cowboy-total">Total: {totalCowboyScore(state.scores, threshold)}</div>
+      <div className="cowboy-total pulse">Total: {totalCowboyScore(state.scores, threshold)}</div>
     </div>
   );
 }

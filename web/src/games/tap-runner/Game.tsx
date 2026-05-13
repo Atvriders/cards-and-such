@@ -112,7 +112,7 @@ export function TapRunnerGame({
   }, [terminal, onGameOver]);
 
   return (
-    <div className="tap-runner-game">
+    <div className="tap-runner-game fade-in">
       <div style={{ position: "relative" }}>
         <canvas
           ref={canvasRef}

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { ColorLinesState, ColorLinesSettings } from "./state.js";
 import { isTerminal, GRID_SIZE } from "./state.js";
@@ -7,7 +8,15 @@ const BALL_COLORS = [
   "#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22",
 ];
 
-export function ColorLines({ state, dispatch }: GameProps<ColorLinesState, ColorLinesSettings>): JSX.Element {
+export function ColorLines({ state, dispatch, onGameOver }: GameProps<ColorLinesState, ColorLinesSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const size = GRID_SIZE;
 

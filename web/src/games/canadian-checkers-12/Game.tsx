@@ -8,18 +8,18 @@ export function CanadianCheckers12Game({ state, dispatch, onGameOver }: GameProp
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
-    return <div className="ab-wrap"><h3>Canadian Checkers 12x12</h3><div className="ab-done"><h2>{msg}</h2><div className="ab-final">{state.score} pts</div></div></div>;
+    return <div className="ab-wrap"><h3>Canadian Checkers 12x12</h3><div className="ab-done bounce-in"><h2>{msg}</h2><div className="ab-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="ab-wrap">
+    <div className="ab-wrap fade-in">
       <h3>Canadian Checkers 12x12</h3>
       <div className="ab-info">Place on an empty square. Most pieces wins.</div>
-      <div className="ab-score">Move {state.moves}</div>
+      <div className="ab-score pulse">Move {state.moves}</div>
       <div className="ab-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];
           const cls = v === "P" ? "p" : v === "C" ? "c" : "";
-          return <button key={i} className={`ab-cell ${cls}`} disabled={v !== null} onClick={() => dispatch({ type:"place", idx:i } as CanadianCheckers12Action)}>{v ?? ""}</button>;
+          return <button title="Select cell" key={i} className={`ab-cell ${cls}`} disabled={v !== null} onClick={() => dispatch({ type:"place", idx:i } as CanadianCheckers12Action)}>{v ?? ""}</button>;
         })}
       </div>
     </div>

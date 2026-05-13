@@ -17,7 +17,7 @@ export function Rikudo({ state, dispatch, onGameOver }: GameProps<RikudoState, R
   const numpadRows = Math.ceil(n / cols4Numpad);
 
   return (
-    <div className="rikudo">
+    <div className="rikudo fade-in">
       <div className="rikudo-title">Rikudo</div>
       <div className={`rikudo-status${won ? " win" : ""}`}>
         {won

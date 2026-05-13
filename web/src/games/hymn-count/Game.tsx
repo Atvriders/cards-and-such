@@ -7,12 +7,12 @@ export function HymnCountGame({ state, dispatch, onGameOver }: GameProps<HymnCou
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dm-wrap"><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
+    return <div className="dm-wrap"><div className="dm-done bounce-in"><h2>Done!</h2><div>W: {state.wins} L: {state.losses} T: {state.ties}</div><div className="dm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap fade-in">
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses} T{state.ties}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="dm-score pulse">{state.score} pts</div>
       {state.you !== null && state.cpu !== null && (
         <div className="dm-row">
           <div><div style={{ fontSize: "0.85rem", color: "#888" }}>You</div><div className={`dm-card ${isRed(state.you) ? "red" : "black"}`}>{cardName(state.you)}</div></div>

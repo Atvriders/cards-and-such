@@ -14,14 +14,14 @@ export function TrainTapGame({ state, dispatch, onGameOver }: GameProps<TrainTap
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="trt-wrap"><div className="trt-done"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="trt-final">{state.score} pts</div></div></div>;
+    return <div className="trt-wrap"><div className="trt-done bounce-in"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="trt-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="trt-wrap">
+    <div className="trt-wrap fade-in">
       <div className="trt-header">
         <span className="trt-info">Tapped: {state.popped}</span>
         <span className="trt-timer">{state.ticksRemaining}s</span>
-        <span className="trt-score">{state.score} pts</span>
+        <span className="trt-score pulse">{state.score} pts</span>
       </div>
       <div className="trt-board">
         {state.targets.map(p => {

@@ -9,9 +9,18 @@ const TICK_MS = 250;
 export function TankBattle({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<TankState, TankSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const tick = useCallback(() => {
     dispatch({ type: "tick" } as TankAction);

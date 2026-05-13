@@ -10,7 +10,7 @@ export function SpoofBiddingGame({ state, dispatch, onGameOver }: GameProps<Spoo
   if (state.phase === "done") {
     return (
       <div className="spobid-wrap">
-        <div className="spobid-done">
+        <div className="spobid-done bounce-in">
           <h2>Round</h2>
           <div className="spobid-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function SpoofBiddingGame({ state, dispatch, onGameOver }: GameProps<Spoo
     );
   }
   return (
-    <div className="spobid-wrap">
+    <div className="spobid-wrap fade-in">
       <div className="spobid-head">
         <span className="spobid-round">Round {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="spobid-score">{state.score} pts</span>
+        <span className="spobid-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

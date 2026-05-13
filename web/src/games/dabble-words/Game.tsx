@@ -13,7 +13,7 @@ export function DabbleWordsGame({ state, dispatch, onGameOver }: GameProps<Dabbl
   if (state.phase === "done") {
     return (
       <div className="dbw-wrap">
-        <div className="dbw-done">
+        <div className="dbw-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function DabbleWordsGame({ state, dispatch, onGameOver }: GameProps<Dabbl
   const isResult = state.phase === "result";
 
   return (
-    <div className="dbw-wrap">
+    <div className="dbw-wrap fade-in">
       <div className="dbw-header">
         <span className="dbw-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="dbw-score">{state.score} pts</span>
+        <span className="dbw-score pulse">{state.score} pts</span>
       </div>
       <div className="dbw-prompt"><span className="dbw-label">Choose:</span> {r.prompt}</div>
       <div className="dbw-choices">

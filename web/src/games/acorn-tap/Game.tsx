@@ -14,14 +14,14 @@ export function AcornTapGame({ state, dispatch, onGameOver }: GameProps<AcornTap
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="acorntap-wrap"><div className="acorntap-done"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="acorntap-final">{state.score} pts</div></div></div>;
+    return <div className="acorntap-wrap"><div className="acorntap-done bounce-in"><h2>Time's Up!</h2><div>Popped: {state.popped} / Missed: {state.missed}</div><div className="acorntap-final">{state.score} pts</div></div></div>;
   }
   return (
     <div className="acorntap-wrap">
       <div className="acorntap-header">
         <span className="acorntap-info">Popped: {state.popped}</span>
         <span className="acorntap-timer">{state.ticksRemaining}s</span>
-        <span className="acorntap-score">{state.score} pts</span>
+        <span className="acorntap-score pulse">{state.score} pts</span>
       </div>
       <div className="acorntap-board">
         {state.targets.map(p => {

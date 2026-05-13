@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { WordGuessState, WordGuessAction, LetterState } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -38,7 +38,16 @@ function buildLetterStates(attempts: WordGuessState["attempts"]): Record<string,
 export function WordGuess({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<WordGuessState, WordGuessSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
 
   const handleKey = useCallback(

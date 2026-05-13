@@ -7,12 +7,12 @@ import "./Game.css";
 export function CheminDeFerCasGame({ state, dispatch, onGameOver }: GameProps<CheminDeFerCasState, CheminDeFerCasSettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="cdf-c-wrap"><div className="cdf-c-done"><h2>Done!</h2><div className="cdf-c-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="cdf-c-wrap"><div className="cdf-c-done bounce-in"><h2>Done!</h2><div className="cdf-c-final">{state.score} pts</div></div></div>;
   return (
-    <div className="cdf-c-wrap">
+    <div className="cdf-c-wrap fade-in">
       <div className="cdf-c-title">Chemin de Fer</div>
       <div className="cdf-c-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="cdf-c-score">{state.score} pts</div>
+      <div className="cdf-c-score pulse">{state.score} pts</div>
       {state.phase === "bet" && (
         <>
           <div className="cdf-c-info">Place your bet:</div>

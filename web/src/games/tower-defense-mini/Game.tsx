@@ -41,7 +41,7 @@ export function TowerDefenseMini({ state, dispatch, onGameOver }: GameProps<Towe
   const hpPct = (state.baseHp / BASE_HP) * 100;
 
   return (
-    <div className="td-wrap">
+    <div className="td-wrap fade-in">
       <div className="td-header">
         <span className="td-title">🗼 Tower Defense</span>
         <span className="td-wave">Wave {state.wave}/{TOTAL_WAVES}</span>
@@ -88,7 +88,7 @@ export function TowerDefenseMini({ state, dispatch, onGameOver }: GameProps<Towe
         </button>
       )}
 
-      {state.phase === "done" && <div className="td-done">🏆 All {TOTAL_WAVES} waves survived! Base HP: {state.baseHp}</div>}
+      {state.phase === "done" && <div className="td-done bounce-in">🏆 All {TOTAL_WAVES} waves survived! Base HP: {state.baseHp}</div>}
       {state.phase === "lost" && <div className="td-lost">💀 Base destroyed on wave {state.wave}!</div>}
 
       {state.log.length > 0 && (

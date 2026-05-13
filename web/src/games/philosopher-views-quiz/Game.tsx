@@ -18,9 +18,9 @@ export function PhilosopherViewsQuiz({
   const entry = state.entries[state.current];
 
   return (
-    <div className="qz-wrap">
+    <div className="qz-wrap fade-in">
       <div className="qz-progress">Question {state.current + 1} of {state.entries.length}</div>
-      <div className="qz-score">Score: {state.score}</div>
+      <div className="qz-score pulse">Score: {state.score}</div>
       {!state.done && entry ? (
         <>
           <div className="qz-question">{entry.question}</div>
@@ -51,7 +51,7 @@ export function PhilosopherViewsQuiz({
           )}
         </>
       ) : (
-        <div className="qz-done">
+        <div className="qz-done bounce-in">
           <h2>Quiz Complete!</h2>
           <div className="qz-final">Score: {state.score} / {state.entries.length * 10}</div>
         </div>

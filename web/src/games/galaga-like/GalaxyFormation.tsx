@@ -10,9 +10,18 @@ const PH = 600;
 export function GalaxyFormation({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<GalaxyFormationState, Record<never, never>>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
@@ -85,7 +94,7 @@ export function GalaxyFormation({
   const enemyColors = ["#f44", "#fa4", "#ff4", "#4f4"];
 
   return (
-    <div className="galaxy-game">
+    <div className="galaxy-game fade-in">
       <div className="galaxy-header">
         <span>Score: {score}</span>
         <span>Wave: {wave}/3</span>

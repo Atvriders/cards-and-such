@@ -11,7 +11,7 @@ export function QueendominoGame({ state, dispatch, onGameOver }: GameProps<Queen
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="qdom-wrap">
+    <div className="qdom-wrap fade-in">
       <h3 className="qdom-title">Queendomino</h3>
       <div className="qdom-meta">
         <div className="qdom-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function QueendominoGame({ state, dispatch, onGameOver }: GameProps<Queen
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="qdom-done">
+        <div className="qdom-done bounce-in">
           <h3>Done!</h3>
           <div className="qdom-final">{state.score} pts</div>
         </div>

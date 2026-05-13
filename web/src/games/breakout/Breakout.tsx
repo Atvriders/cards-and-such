@@ -21,7 +21,16 @@ type BreakoutSettings = { difficulty: "easy" | "medium" | "hard"; rows: "3" | "5
 export function Breakout({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<BreakoutState, BreakoutSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const stateRef = useRef(state);
   stateRef.current = state;
 

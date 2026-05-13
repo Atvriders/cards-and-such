@@ -61,7 +61,7 @@ export function GhostMazeGame({
   const idx = (r: number, c: number) => r * cols + c;
 
   return (
-    <div className="ghost-maze-wrap">
+    <div className="ghost-maze-wrap fade-in">
       <div className="ghost-maze-header">
         <span>Moves: {moves}</span>
         <span>Escape the ghost!</span>

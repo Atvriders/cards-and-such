@@ -11,21 +11,21 @@ export function LascaStackGame({ state, dispatch, onGameOver }: GameProps<GameSt
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="lsk-wrap">
-        <div className="lsk-done"><h2>{msg}</h2><div className="lsk-final">{state.score} pts</div></div>
+        <div className="lsk-done bounce-in"><h2>{msg}</h2><div className="lsk-final">{state.score} pts</div></div>
       </div>
     );
   }
   return (
-    <div className="lsk-wrap">
+    <div className="lsk-wrap fade-in">
       <div className="lsk-info">Lasca: click an empty cell to place your piece. Move {state.moves}.</div>
-      <div className="lsk-score">Captures: {state.captures}</div>
+      <div className="lsk-score pulse">Captures: {state.captures}</div>
       <div className="lsk-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];
           const cls = v === "P" ? "p" : v === "C" ? "c" : "";
           const disabled = false ? v !== "P" : v !== null;
           return (
-            <button key={i} className={`lsk-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
+            <button title="Select cell" key={i} className={`lsk-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
               {v ?? ""}
             </button>
           );

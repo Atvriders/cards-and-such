@@ -13,7 +13,7 @@ export function TripleTownMiniGame({ state, dispatch, onGameOver }: GameProps<Tr
   if (state.phase === "done") {
     return (
       <div className="tttwn-wrap">
-        <div className="tttwn-done">
+        <div className="tttwn-done bounce-in">
           <h2>Board Full!</h2>
           <div className="tttwn-stats">Best tier: {state.best} • Moves: {state.movesUsed}</div>
           <div className="tttwn-final">{state.score} pts</div>
@@ -22,15 +22,15 @@ export function TripleTownMiniGame({ state, dispatch, onGameOver }: GameProps<Tr
     );
   }
   return (
-    <div className="tttwn-wrap">
+    <div className="tttwn-wrap fade-in">
       <div className="tttwn-header">
         <span className="tttwn-info">Moves: {state.movesUsed}/{MAX_MOVES}</span>
         <span className="tttwn-next" style={{ background: TIER_COLOR[state.next] }}>{TIER_ICON[state.next]}</span>
-        <span className="tttwn-score">{state.score}</span>
+        <span className="tttwn-score pulse">{state.score}</span>
       </div>
       <div className="tttwn-grid">
         {state.grid.map((row, r) => row.map((v, c) => (
-          <button data-testid="hint-target-triple-town-mini-action" key={`${r}-${c}`} className="tttwn-cell"
+          <button title="Select cell" data-testid="hint-target-triple-town-mini-action" key={`${r}-${c}`} className="tttwn-cell"
             disabled={v !== 0}
             style={{ background: v ? TIER_COLOR[v] : "#f1f5f9" }}
             onClick={() => dispatch({ type: "place", row: r, col: c } as TripleTownMiniAction)}>

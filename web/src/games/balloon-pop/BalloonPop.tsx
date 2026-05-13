@@ -34,10 +34,10 @@ export function BalloonPop({
   }
 
   return (
-    <div className="bp-game">
+    <div className="bp-game fade-in">
       <div className="bp-title">Balloon Pop</div>
 
-      <div className="bp-score">Score: {state.score}</div>
+      <div className="bp-score pulse">Score: {state.score}</div>
 
       <div className="bp-grid">
         {Array.from({ length: 8 }, (_, r) => (
@@ -63,7 +63,7 @@ export function BalloonPop({
       </div>
 
       {state.over && (
-        <div className="bp-game-over">
+        <div className="bp-game-over bounce-in">
           {state.grid.every((r) => r.every((c) => c === null)) ? "Board cleared! +500 bonus!" : "No moves left!"}<br />
           <span className="bp-final-score">Score: {terminal?.score}</span>
         </div>

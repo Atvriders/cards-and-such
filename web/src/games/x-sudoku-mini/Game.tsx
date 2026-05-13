@@ -22,7 +22,7 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
   if (state.phase === "done") {
     return (
       <div className="xsudokucrimson-wrap">
-        <div className="xsudokucrimson-done">
+        <div className="xsudokucrimson-done bounce-in">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
           <p className="xsudokucrimson-final">{state.score} pts</p>
@@ -36,10 +36,10 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="xsudokucrimson-wrap">
+    <div className="xsudokucrimson-wrap fade-in">
       <div className="xsudokucrimson-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="xsudokucrimson-score">{state.score} pts</span>
+        <span className="xsudokucrimson-score pulse">{state.score} pts</span>
       </div>
       <div className="xsudokucrimson-mech">Sudoku with both diagonals also containing 1–9.</div>
       <div className="xsudokucrimson-grid">
@@ -54,7 +54,7 @@ export function XSudokuMiniGame({ state, dispatch, onGameOver }: GameProps<XSudo
               const rightThick = (c + 1) % BOX_COLS === 0 && c + 1 < GRID_SIZE;
               const bottomThick = (r + 1) % BOX_ROWS === 0 && r + 1 < GRID_SIZE;
               return (
-                <button
+                <button title="Select cell"
                   key={c}
                   className={`xsudokucrimson-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as XSudokuMiniAction)}

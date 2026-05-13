@@ -14,14 +14,14 @@ export function LollipopLiftGame({ state, dispatch, onGameOver }: GameProps<Loll
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="lollipoplift-wrap"><div className="lollipoplift-done"><h2>Time's Up!</h2><div>Caught: {state.caught} / Missed: {state.missed}</div><div className="lollipoplift-final">{state.score} pts</div></div></div>;
+    return <div className="lollipoplift-wrap"><div className="lollipoplift-done bounce-in"><h2>Time's Up!</h2><div>Caught: {state.caught} / Missed: {state.missed}</div><div className="lollipoplift-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="lollipoplift-wrap">
+    <div className="lollipoplift-wrap fade-in">
       <div className="lollipoplift-header">
         <span className="lollipoplift-info">Caught: {state.caught}</span>
         <span className="lollipoplift-timer">{state.ticksRemaining}s</span>
-        <span className="lollipoplift-score">{state.score} pts</span>
+        <span className="lollipoplift-score pulse">{state.score} pts</span>
       </div>
       <div className="lollipoplift-board" style={{ background: "linear-gradient(180deg,#ffe4f0,#ffaad4)" }}>
         {state.targets.map(p => {

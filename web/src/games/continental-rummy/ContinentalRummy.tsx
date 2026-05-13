@@ -39,7 +39,7 @@ export function ContinentalRummy({ state, dispatch, onGameOver }: GameProps<Cont
   const contractMet = groups.length === contract.length && meetsContract(contractCards, contract);
 
   return (
-    <div className="continental">
+    <div className="continental fade-in">
       <div className="continental-header">
         <span>Round {round + 1}/3</span>
         <span>Stock: {stock.length}</span>

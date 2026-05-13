@@ -28,7 +28,7 @@ export function PuzzleBox({
   }
 
   return (
-    <div className="pb-game">
+    <div className="pb-game fade-in">
       <div className="pb-title">Puzzle Box</div>
       <div className="pb-subtitle">3×3 Sliding Puzzle — {theme}</div>
       <div className="pb-stats">Moves: {state.movesMade}</div>
@@ -51,7 +51,7 @@ export function PuzzleBox({
       {state.won && (
         <div className="pb-victory">
           <div className="pb-victory-text">Solved in {state.movesMade} moves!</div>
-          <div className="pb-score">Score: {terminal?.score}</div>
+          <div className="pb-score pulse">Score: {terminal?.score}</div>
           <button data-testid="hint-target-puzzle-box-action"
             className="pb-restart-btn"
             onClick={() => dispatch({ type: "restart" } as PuzzleBoxAction)}

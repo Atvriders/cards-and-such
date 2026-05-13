@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { MotoState, MotoAction, MotoSettings } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -13,7 +13,16 @@ const CAMERA_OFFSET = 80; // bike appears at this x on screen
 export function MotorcycleJump({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<MotoState, MotoSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const tick = useCallback(() => {
     dispatch({ type: "tick" } as MotoAction);
   }, [dispatch]);

@@ -41,11 +41,11 @@ export function ConnectGame({
       : "CPU thinking...";
 
   return (
-    <div className="tttclassic-wrap">
+    <div className="tttclassic-wrap fade-in">
       <div className="tttclassic-header">
         <h2 className="tttclassic-title">Tic-Tac-Toe</h2>
         <div className="tttclassic-status">{status}</div>
-        <div className="tttclassic-score">Score: {state.score}</div>
+        <div className="tttclassic-score pulse">Score: {state.score}</div>
       </div>
       <div className="tttclassic-board">
         {Array.from({ length: ROWS * COLS }).map((_, idx) => {

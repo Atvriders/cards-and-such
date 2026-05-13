@@ -8,12 +8,12 @@ export function HelpingNeighborGame({ state, dispatch, onGameOver }: GameProps<H
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="hn-wrap"><div className="hn-done"><h2>Done!</h2><div className="hn-final">{state.score} pts</div></div></div>;
+    return <div className="hn-wrap"><div className="hn-done bounce-in"><h2>Done!</h2><div className="hn-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="hn-wrap">
+    <div className="hn-wrap fade-in">
       <div className="hn-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="hn-score">{state.score} pts</div>
+      <div className="hn-score pulse">{state.score} pts</div>
       {state.dice.length > 0 && <div className="hn-row">{state.dice.map((d, i) => <div key={i} className="hn-die">{d}</div>)}</div>}
       {state.message && <div className="hn-result">{state.message}</div>}
       {state.phase === "roll" && <button className="hn-btn" data-testid="hint-target-helping-neighbor-roll" onClick={() => dispatch({ type:"roll" } as HelpingNeighborAction)}>Roll</button>}

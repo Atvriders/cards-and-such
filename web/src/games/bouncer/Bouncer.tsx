@@ -16,9 +16,18 @@ const POWER_UP_COLORS: Record<string, string> = {
 export function Bouncer({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<BouncerState, BouncerSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);

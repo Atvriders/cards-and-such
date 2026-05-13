@@ -9,12 +9,12 @@ export function RailroadInkBlueGame({ state, dispatch, onGameOver }: GameProps<R
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="rib-wrap">
+    <div className="rib-wrap fade-in">
       <header className="rib-head">
         <h2 className="rib-title">Railroad Ink Blue</h2>
         <div className="rib-meta">
           <span className="rib-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="rib-meta-score">{state.score} pts</span>
+          <span className="rib-meta-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "marking" && state.lastRoll !== null && (
@@ -25,7 +25,7 @@ export function RailroadInkBlueGame({ state, dispatch, onGameOver }: GameProps<R
       )}
       <div className="rib-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button data-testid="hint-target-railroad-ink-blue-mark"
+          <button title="Select cell" data-testid="hint-target-railroad-ink-blue-mark"
             key={i}
             className={`rib-cell rib-z${cellZone(i)}${filled ? " rib-on" : ""}`}
             disabled={filled || state.phase !== "marking"}
@@ -43,7 +43,7 @@ export function RailroadInkBlueGame({ state, dispatch, onGameOver }: GameProps<R
         <button className="rib-btn rib-btn-reset" onClick={() => dispatch({ type: "reset" } as RailroadInkBlueAction)}>Reset</button>
       </div>
       {state.phase === "done" && (
-        <div className="rib-done">Final score: <b>{final}</b></div>
+        <div className="rib-done bounce-in">Final score: <b>{final}</b></div>
       )}
       <div className="rib-rules">Rivers: +2 each connected cell</div>
     </div>

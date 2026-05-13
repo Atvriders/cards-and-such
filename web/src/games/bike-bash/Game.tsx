@@ -14,14 +14,14 @@ export function BikeBashGame({ state, dispatch, onGameOver }: GameProps<BikeBash
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="bbs-wrap"><div className="bbs-done"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="bbs-final">{state.score} pts</div></div></div>;
+    return <div className="bbs-wrap"><div className="bbs-done bounce-in"><h2>Time's Up!</h2><div>Tapped: {state.popped} / Missed: {state.missed}</div><div className="bbs-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="bbs-wrap">
+    <div className="bbs-wrap fade-in">
       <div className="bbs-header">
         <span className="bbs-info">Tapped: {state.popped}</span>
         <span className="bbs-timer">{state.ticksRemaining}s</span>
-        <span className="bbs-score">{state.score} pts</span>
+        <span className="bbs-score pulse">{state.score} pts</span>
       </div>
       <div className="bbs-board">
         {state.targets.map(p => {

@@ -44,7 +44,7 @@ export function Belote({ state, dispatch, onGameOver }: GameProps<BeloteState, o
   );
 
   return (
-    <div className="belote">
+    <div className="belote fade-in">
       <div className="belote-header">
         <span>Your team (You+S3): {pts02} pts</span>
         <span>Opponents (S2+S4): {pts13} pts</span>

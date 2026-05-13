@@ -29,7 +29,7 @@ export function LaneDefenderMiniGame({ state, dispatch, onGameOver }: GameProps<
   if (state.phase === "done") {
     return (
       <div className="lndfm-wrap">
-        <div className="lndfm-done">
+        <div className="lndfm-done bounce-in">
           <h2>Crashed!</h2>
           <div className="lndfm-stats">Survived {state.ticks} ticks</div>
           <div className="lndfm-final">{state.score} pts</div>
@@ -38,10 +38,10 @@ export function LaneDefenderMiniGame({ state, dispatch, onGameOver }: GameProps<
     );
   }
   return (
-    <div className="lndfm-wrap">
+    <div className="lndfm-wrap fade-in">
       <div className="lndfm-header">
         <span className="lndfm-info">Survived: {state.ticks}</span>
-        <span className="lndfm-score">{state.score} pts</span>
+        <span className="lndfm-score pulse">{state.score} pts</span>
       </div>
       <div className="lndfm-track">
         {Array.from({ length: LANES }).map((_, lane) => (
@@ -59,7 +59,7 @@ export function LaneDefenderMiniGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="lndfm-controls">
-        <button data-testid="hint-target-lane-defender-mini-primary" className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as LaneDefenderMiniAction)}>↑ Up</button>
+        <button title="Move up" data-testid="hint-target-lane-defender-mini-primary" className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as LaneDefenderMiniAction)}>↑ Up</button>
         <button className="lndfm-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as LaneDefenderMiniAction)}>↓ Down</button>
       </div>
       <div className="lndfm-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

@@ -19,7 +19,7 @@ export function DiceTowerStackGame({
   const wouldBePerfect = isPerfect(state.dice, state.selected);
 
   return (
-    <div className="dts-root">
+    <div className="dts-root fade-in">
       <div className="dts-info">
         <span>Round <strong>{state.round}/{ROUNDS}</strong></span>
         <span>Total <strong>{state.totalScore}</strong></span>

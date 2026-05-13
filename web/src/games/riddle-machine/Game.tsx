@@ -25,10 +25,10 @@ export function RiddleMachineGame({
   const riddle = RIDDLES[queue[currentIndex]!]!;
 
   return (
-    <div className="riddle-machine">
+    <div className="riddle-machine fade-in">
       <div className="rm-header">
         <div className="rm-title">Riddle Machine</div>
-        <div className="rm-score">Score: {totalScore}{streak > 1 ? ` 🔥×${streak}` : ""}</div>
+        <div className="rm-score pulse">Score: {totalScore}{streak > 1 ? ` 🔥×${streak}` : ""}</div>
       </div>
 
       <div className="rm-meta">

@@ -2,26 +2,13 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CasinoWarMultiState, CasinoWarMultiSettings, WarHand } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
+import type { Card as EngineCard } from "../../engines/deck/index.js";
 import "./Game.css";
 
-const RED_SUITS = new Set(["♥", "♦"]);
-
-function rankLabel(rank: number): string {
-  if (rank === 1) return "A";
-  if (rank === 11) return "J";
-  if (rank === 12) return "Q";
-  if (rank === 13) return "K";
-  return String(rank);
-}
-
-function MiniCard({ card, back }: { card: { rank: number; suit: string } | null; back?: boolean }) {
-  if (!card || back) return <div className="cwm-card back" />;
-  return (
-    <div className={`cwm-card${RED_SUITS.has(card.suit) ? " red" : ""}`}>
-      <span>{rankLabel(card.rank)}</span>
-      <span style={{ fontSize: "0.8rem" }}>{card.suit}</span>
-    </div>
-  );
+function MiniCard({ card, back }: { card: EngineCard | null; back?: boolean }) {
+  if (!card || back) return <Card faceDown className="cwm-card back" />;
+  return <Card card={card} className="cwm-card" />;
 }
 
 function HandDisplay({ hand, index }: { hand: WarHand; index: number }) {

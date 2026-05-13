@@ -23,7 +23,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<TrucoState, obje
   const isPlayerTurn = phase === "player-turn";
 
   return (
-    <div className="truco">
+    <div className="truco fade-in">
       <div className="truco-header">
         <span>You: {playerScore} pts</span>
         <span>Tricks this hand — You: {roundsWon.player} Bot: {roundsWon.bot}</span>
@@ -48,7 +48,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<TrucoState, obje
       <div className="truco-message">{message}</div>
 
       {finalScores && (
-        <div className="truco-done">
+        <div className="truco-done bounce-in">
           Final: You {finalScores.player} — Bot {finalScores.bot}
         </div>
       )}

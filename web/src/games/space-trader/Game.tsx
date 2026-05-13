@@ -19,7 +19,7 @@ export function SpaceTraderGame({
   const cargoUsed = cargoTotal(state.cargo);
 
   return (
-    <div className="st-wrap">
+    <div className="st-wrap fade-in">
       <div className="st-header">
         <span className="st-title">🚀 Space Trader</span>
         <span className="st-planet">📍 {state.planet}</span>
@@ -76,7 +76,7 @@ export function SpaceTraderGame({
       )}
 
       {state.phase === "done" && (
-        <div className="st-done">
+        <div className="st-done bounce-in">
           <div className="st-final">Credits: ${state.credits}</div>
           <div>{state.credits >= 600 ? "🏆 Trade Baron!" : state.credits >= 300 ? "👍 Profitable voyage!" : "💸 Keep flying!"}</div>
         </div>

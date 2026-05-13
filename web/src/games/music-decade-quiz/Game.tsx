@@ -11,7 +11,7 @@ export function MusicDecadeQuiz({ state, dispatch, onGameOver }: GameProps<Music
   useEffect(()=>{ if(terminal) onGameOver(terminal.score); },[terminal,onGameOver]);
 
   if(state.phase==="done") return (
-    <div className="trivia-wrap"><div className="trivia-done">
+    <div className="trivia-wrap"><div className="trivia-done bounce-in">
       <h2>Game Over!</h2>
       <p>Correct: {state.correctCount} / {state.questions.length}</p>
       <p style={{fontSize:"1.8rem",fontWeight:900,color:"#27ae60"}}>{state.score} pts</p>
@@ -21,10 +21,10 @@ export function MusicDecadeQuiz({ state, dispatch, onGameOver }: GameProps<Music
   const q=state.questions[state.currentIndex]!;
   const isResult=state.phase==="result";
   return (
-    <div className="trivia-wrap">
+    <div className="trivia-wrap fade-in">
       <div className="trivia-header">
         <span className="trivia-progress">Q {state.currentIndex+1}/{state.questions.length}</span>
-        <span className="trivia-score">{state.score} pts</span>
+        <span className="trivia-score pulse">{state.score} pts</span>
       </div>
       <div className="trivia-question">{q.question}</div>
       <div className="trivia-choices">

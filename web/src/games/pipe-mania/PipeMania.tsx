@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { PipeManiaState, PipeManiaSettings } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -9,7 +9,15 @@ const PIPE_GLYPHS: Record<string, string> = {
   NESW: "╋", source: "⬤",
 };
 
-export function PipeMania({ state, dispatch }: GameProps<PipeManiaState, PipeManiaSettings>): JSX.Element {
+export function PipeMania({ state, dispatch, onGameOver }: GameProps<PipeManiaState, PipeManiaSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const rows = state.grid.length;
   const cols = state.grid[0]!.length;

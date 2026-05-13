@@ -21,7 +21,7 @@ export function PirateShipCannonGame({ state, dispatch, onGameOver }: GameProps<
   const shipY = 30 + Math.max(0, (100 - state.enemy.distance) * 0.4);
 
   return (
-    <div className="pirate-cannon">
+    <div className="pirate-cannon fade-in">
       <div className="pc-header">
         <span>Round {Math.min(state.round, state.totalRounds)}/{state.totalRounds}</span>
         <span>Score: {state.score}</span>
@@ -63,7 +63,7 @@ export function PirateShipCannonGame({ state, dispatch, onGameOver }: GameProps<
       )}
 
       {isOver && (
-        <div className="pc-gameover">Battle over! Score: {terminal ? terminal.score : state.score}</div>
+        <div className="pc-gameover bounce-in">Battle over! Score: {terminal ? terminal.score : state.score}</div>
       )}
 
       <button className="pc-restart" onClick={() => dispatch({ type: "restart" })}>New Battle</button>

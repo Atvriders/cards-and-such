@@ -16,7 +16,7 @@ export function CourtPiece({ state, dispatch, onGameOver }: GameProps<CourtPiece
   const legalIds = new Set(legal.map(c => c.id));
 
   return (
-    <div className="court-piece-game">
+    <div className="court-piece-game fade-in">
       <div className="court-piece-header">
         <span>You: {playerTricks}</span>
         <span>Bot: {botTricks}</span>

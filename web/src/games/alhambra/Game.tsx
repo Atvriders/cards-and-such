@@ -49,7 +49,7 @@ export function Game({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className="alhambra">
+    <div className="alhambra fade-in">
       <div className="alhambra-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

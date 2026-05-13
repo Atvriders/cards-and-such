@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DominosaPuzzleState, DominosaPuzzleSettings } from "./state.js";
 import { isTerminal, ROWS, COLS } from "./state.js";
@@ -6,7 +6,15 @@ import "./Dominosa.css";
 
 function cellKey(r: number, c: number): string { return `${r},${c}`; }
 
-export function Dominosa({ state, dispatch }: GameProps<DominosaPuzzleState, DominosaPuzzleSettings>): JSX.Element {
+export function Dominosa({ state, dispatch, onGameOver }: GameProps<DominosaPuzzleState, DominosaPuzzleSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const [firstSel, setFirstSel] = useState<string | null>(null);
 

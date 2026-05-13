@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { SameGameState, SameGameAction, SameGameSettings } from "./state.js";
 import { isTerminal, findGroup, COLS, ROWS } from "./state.js";
@@ -11,7 +11,16 @@ const CELL_COLORS = [
 export function SameGame({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<SameGameState, SameGameSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const [hoverGroup, setHoverGroup] = useState<Set<string>>(new Set());
 

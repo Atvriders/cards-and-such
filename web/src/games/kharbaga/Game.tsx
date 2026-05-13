@@ -46,7 +46,7 @@ export function Kharbaga({
   else { statusText = "Your turn — select a white piece."; }
 
   return (
-    <div className="kharbaga-game">
+    <div className="kharbaga-game fade-in">
       <div className="kharbaga-counts">
         <span>White: {wCount}</span>
         <span>Black: {bCount}</span>

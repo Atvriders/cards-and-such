@@ -11,7 +11,7 @@ export function DiceTournamentGame({ state, dispatch, onGameOver }: GameProps<Di
   if (state.phase === "done") {
     return (
       <div className="to-wrap">
-        <div className="to-done">
+        <div className="to-done bounce-in">
           <h2>{state.myWins >= state.needed && state.round >= ROUNDS ? "Tournament Champion" : "Eliminated"}</h2>
           <div className="to-final">{state.score} pts</div>
         </div>
@@ -20,7 +20,7 @@ export function DiceTournamentGame({ state, dispatch, onGameOver }: GameProps<Di
   }
 
   return (
-    <div className="to-wrap">
+    <div className="to-wrap fade-in">
       <div className="to-banner">Match {state.round} / {ROUNDS} · Best of {state.needed * 2 - 1} · Score {state.score}</div>
       <div className="to-board">
         <div className="to-side">

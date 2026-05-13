@@ -23,7 +23,7 @@ export function SheddingView({
   const suits: Suit[] = ["♠", "♥", "♦", "♣"];
 
   return (
-    <div className={`${prefix}-wrap`}>
+    <div className={`${prefix}-wrap fade-in`}>
       <div className={`${prefix}-header`}>
         <span>{title}</span>
         <span>Stock: {stock.length}</span>

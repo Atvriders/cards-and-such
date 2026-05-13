@@ -11,21 +11,21 @@ export function DamaTurkishGame({ state, dispatch, onGameOver }: GameProps<GameS
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="dtk-wrap">
-        <div className="dtk-done"><h2>{msg}</h2><div className="dtk-final">{state.score} pts</div></div>
+        <div className="dtk-done bounce-in"><h2>{msg}</h2><div className="dtk-final">{state.score} pts</div></div>
       </div>
     );
   }
   return (
-    <div className="dtk-wrap">
+    <div className="dtk-wrap fade-in">
       <div className="dtk-info">Dama (Turkish): click an empty cell to place your piece. Move {state.moves}.</div>
-      <div className="dtk-score">Captures: {state.captures}</div>
+      <div className="dtk-score pulse">Captures: {state.captures}</div>
       <div className="dtk-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];
           const cls = v === "P" ? "p" : v === "C" ? "c" : "";
           const disabled = false ? v !== "P" : v !== null;
           return (
-            <button key={i} className={`dtk-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
+            <button title="Select cell" key={i} className={`dtk-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
               {v ?? ""}
             </button>
           );

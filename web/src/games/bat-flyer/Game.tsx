@@ -29,7 +29,7 @@ export function BatFlyerGame({ state, dispatch, onGameOver }: GameProps<BatFlyer
   if (state.phase === "done") {
     return (
       <div className="btfly-wrap">
-        <div className="btfly-done">
+        <div className="btfly-done bounce-in">
           <h2>Crashed!</h2>
           <div className="btfly-stats">Survived {state.ticks} ticks</div>
           <div className="btfly-final">{state.score} pts</div>
@@ -38,10 +38,10 @@ export function BatFlyerGame({ state, dispatch, onGameOver }: GameProps<BatFlyer
     );
   }
   return (
-    <div className="btfly-wrap">
+    <div className="btfly-wrap fade-in">
       <div className="btfly-header">
         <span className="btfly-info">Survived: {state.ticks}</span>
-        <span className="btfly-score">{state.score} pts</span>
+        <span className="btfly-score pulse">{state.score} pts</span>
       </div>
       <div className="btfly-track">
         {Array.from({ length: LANES }).map((_, lane) => (
@@ -59,7 +59,7 @@ export function BatFlyerGame({ state, dispatch, onGameOver }: GameProps<BatFlyer
         ))}
       </div>
       <div className="btfly-controls">
-        <button data-testid="hint-target-bat-flyer-primary" className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as BatFlyerAction)}>↑ Up</button>
+        <button title="Move up" data-testid="hint-target-bat-flyer-primary" className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as BatFlyerAction)}>↑ Up</button>
         <button className="btfly-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as BatFlyerAction)}>↓ Down</button>
       </div>
       <div className="btfly-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

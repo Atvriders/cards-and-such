@@ -20,7 +20,7 @@ export function ChemistryQuizGame({ state, dispatch, onGameOver }: GameProps<Che
   if (terminal) {
     return (
       <div className="cq-wrap">
-        <div className="cq-done">
+        <div className="cq-done bounce-in">
           <h2>Done!</h2>
           <p>Score: <strong>{terminal.score}</strong> &middot; {state.correctCount}/{state.questions.length} correct</p>
         </div>
@@ -34,7 +34,7 @@ export function ChemistryQuizGame({ state, dispatch, onGameOver }: GameProps<Che
   const isResult = state.submitted;
 
   return (
-    <div className="cq-wrap">
+    <div className="cq-wrap fade-in">
       <div className="cq-header">
         <span>Q <strong>{state.currentIndex + 1}</strong>/{total}</span>
         <span>Score: <strong>{state.score}</strong></span>

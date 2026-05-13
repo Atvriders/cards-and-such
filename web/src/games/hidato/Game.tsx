@@ -37,7 +37,7 @@ export function Hidato({
   }
 
   return (
-    <div className="hidatosnake">
+    <div className="hidatosnake fade-in">
       <div className="hidatosnake-title">Hidato</div>
       <div className={`hidatosnake-status${won ? " win" : ""}`}>
         {won

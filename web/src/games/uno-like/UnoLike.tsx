@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { UnoCard, UnoColor, UnoLikeAction, UnoLikeState } from "@cards/shared";
 import "./UnoLike.css";
 
 type Settings = { bots: "1" | "2" | "3" };
 
-export function UnoLike({ state, dispatch }: GameProps<UnoLikeState & { settings: Settings }, Settings>): JSX.Element {
+export function UnoLike({ state, dispatch, onGameOver }: GameProps<UnoLikeState & { settings: Settings }, Settings>): JSX.Element {
   const [picking, setPicking] = useState<UnoCard | null>(null);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    if (state.winner !== null && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(state.winner === 0 ? 100 : 0);
+    }
+  }, [state, onGameOver]);
   const myHand = state.hands[0] ?? [];
 
   const play = (card: UnoCard): void => {
@@ -24,7 +31,7 @@ export function UnoLike({ state, dispatch }: GameProps<UnoLikeState & { settings
   };
 
   return (
-    <div className="uno-root">
+    <div className="uno-root fade-in">
       <div className="uno-status">
         Turn: {state.turn === 0 ? "you" : `bot ${state.turn}`} · active color: <span className={`uno-pill uno-${state.activeColor}`}>{state.activeColor}</span>
         {state.pendingDraws > 0 && <span> · stacked draws: {state.pendingDraws}</span>}
@@ -56,7 +63,7 @@ export function UnoLike({ state, dispatch }: GameProps<UnoLikeState & { settings
 
       <div className="uno-hand" data-testid="uno-hand">
         {myHand.map((c) => (
-          <button
+          <button title="Play card"
             key={c.id}
             className="uno-card"
             onClick={() => play(c)}

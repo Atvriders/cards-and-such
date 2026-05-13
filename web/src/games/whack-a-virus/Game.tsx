@@ -49,7 +49,7 @@ export function WhackAVirus({ state, dispatch, onGameOver }: GameProps<WhackViru
   const slotMap = new Map(viruses.map((v) => [v.slot, v]));
 
   return (
-    <div className="wav-game">
+    <div className="wav-game fade-in">
       <div className="wav-header">
         <span>Score: {score}</span>
         <span>Lives: {"❤ ".repeat(Math.max(0, lives)).trim()}</span>

@@ -12,7 +12,7 @@ export function CircusJuggle({ state, dispatch, onGameOver }: GameProps<CircusJu
   }, [terminal, onGameOver]);
 
   return (
-    <div className="circus-juggle">
+    <div className="circus-juggle fade-in">
       <div className="cj-stats">
         <span>Caught: {state.catchCount}</span>
         <span>Streak: {state.streak}</span>

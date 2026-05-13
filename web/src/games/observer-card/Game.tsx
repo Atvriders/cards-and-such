@@ -15,13 +15,13 @@ export function ObserverCardGame({ state, dispatch, onGameOver }: GameProps<Obse
   }, [state.currentIndex]);
 
   if (state.phase === "done") {
-    return <div className="obscard-wrap"><div className="obscard-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="obscard-final">{state.score} pts</div></div></div>;
+    return <div className="obscard-wrap"><div className="obscard-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="obscard-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="obscard-wrap">
+    <div className="obscard-wrap fade-in">
       <div className="obscard-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="obscard-score">{state.score} pts</div>
+      <div className="obscard-score pulse">{state.score} pts</div>
       {showTray ? (
         <>
           <div className="obscard-prompt">Memorize the tray (3.5s)</div>

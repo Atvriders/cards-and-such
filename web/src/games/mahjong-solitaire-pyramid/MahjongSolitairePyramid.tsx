@@ -39,7 +39,7 @@ export function MahjongSolitairePyramid({
   };
 
   return (
-    <div className="mahjong-pyramid">
+    <div className="mahjong-pyramid fade-in">
       <div className="mahjong-info">
         <span>Removed: {state.removed}/{state.total}</span>
         <span>Moves: {state.moves}</span>

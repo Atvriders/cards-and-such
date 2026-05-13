@@ -21,7 +21,7 @@ export function SenetMiniGame({ state, dispatch, onGameOver }: GameProps<SenetMi
     return (
       <div className="senet-mini-wrap">
         <h2 className={`senet-mini-banner ${won ? "senet-mini-win" : "senet-mini-loss"}`}>{won ? "You won the race!" : "CPU won the race!"}</h2>
-        <div className="senet-mini-score">Final score: {state.score}</div>
+        <div className="senet-mini-score pulse">Final score: {state.score}</div>
       </div>
     );
   }
@@ -29,7 +29,7 @@ export function SenetMiniGame({ state, dispatch, onGameOver }: GameProps<SenetMi
   const cells: number[] = Array.from({ length: TRACK_LEN + 1 }, (_, i) => i);
 
   return (
-    <div className="senet-mini-wrap">
+    <div className="senet-mini-wrap fade-in">
       <div className="senet-mini-status">
         {isPTurn
           ? (state.phase === "rolling" ? "Your turn — roll the dice." : "Move your pawns.")

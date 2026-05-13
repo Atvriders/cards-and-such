@@ -25,7 +25,7 @@ export function CoinPop({ state, dispatch, onGameOver }: GameProps<CoinPopState,
   }
   const hearts = Array.from({ length: 3 }, (_, i) => i < state.lives ? "❤️" : "🖤");
   return (
-    <div className="banana-wrap">
+    <div className="banana-wrap fade-in">
       <div className="banana-header"><span>{hearts.join("")}</span><span>{state.timeLeft}s</span><span>{state.score} pts</span></div>
       <div className="banana-arena" style={{ background: "linear-gradient(180deg,#fdcb6e,#e17055)" }}>
         {state.items.map(item => (

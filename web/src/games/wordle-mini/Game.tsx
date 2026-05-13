@@ -49,7 +49,7 @@ export function WordleMiniGame({ state, dispatch, onGameOver }: GameProps<Wordle
   }
 
   return (
-    <div className="wm-wrap">
+    <div className="wm-wrap fade-in">
       <div className="wm-header">
         <span className="wm-title">Wordle</span>
         <span className="wm-info">Guess {state.guesses.length + (state.status === "playing" ? 1 : 0)} / {state.maxGuesses}</span>

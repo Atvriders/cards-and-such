@@ -16,7 +16,7 @@ export function SpoilFive({ state, dispatch, onGameOver }: GameProps<SpoilFiveSt
   const legalIds = new Set(legal.map(c => c.id));
 
   return (
-    <div className="spoil-five-game">
+    <div className="spoil-five-game fade-in">
       <div className="spoil-five-header">
         <span>You: {playerTricks}</span>
         <span>Bot: {botTricks}</span>

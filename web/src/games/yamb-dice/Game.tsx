@@ -8,12 +8,12 @@ export function YambDiceGame({ state, dispatch, onGameOver }: GameProps<YambDice
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="ym-wrap"><div className="ym-done"><h2>Done!</h2><div className="ym-final">{state.score} pts</div></div></div>;
+    return <div className="ym-wrap"><div className="ym-done bounce-in"><h2>Done!</h2><div className="ym-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="ym-wrap">
+    <div className="ym-wrap fade-in">
       <div className="ym-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="ym-score">{state.score} pts</div>
+      <div className="ym-score pulse">{state.score} pts</div>
       {state.dice.length > 0 && <div className="ym-row">{state.dice.map((d, i) => <div key={i} className="ym-die">{d}</div>)}</div>}
       {state.message && <div className="ym-result">{state.message}</div>}
       {state.phase === "roll" && <button data-testid="hint-target-yamb-dice-roll" className="ym-btn" onClick={() => dispatch({ type:"roll" } as YambDiceAction)}>Roll</button>}

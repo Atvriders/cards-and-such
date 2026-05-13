@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { TriangleMatchState, TriangleMatchSettings } from "./state.js";
 import { isTerminal, findGroup, NUM_ROWS } from "./state.js";
@@ -6,7 +7,15 @@ import "./TriangleMatch.css";
 const TRI_COLORS = ["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6", "#1abc9c"];
 const SIDE = 44; // side length of each triangle in px
 
-export function TriangleMatch({ state, dispatch }: GameProps<TriangleMatchState, TriangleMatchSettings>): JSX.Element {
+export function TriangleMatch({ state, dispatch, onGameOver }: GameProps<TriangleMatchState, TriangleMatchSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
 
   // Compute points for triangle (row r, col c)

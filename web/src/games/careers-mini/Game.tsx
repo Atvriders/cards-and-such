@@ -10,7 +10,7 @@ export function CareersMiniGame({ state, dispatch, onGameOver }: GameProps<Caree
   const path = PATHS[state.path];
   const cur = path[state.pos]!;
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap fade-in">
       <div className="cm-head">Career: <b>{state.path.toUpperCase()}</b></div>
       <div className="cm-stats">
         <div>Money <b>${state.money}</b> / {state.goalMoney}</div>
@@ -32,7 +32,7 @@ export function CareersMiniGame({ state, dispatch, onGameOver }: GameProps<Caree
         </div>
       )}
       {state.phase === "done" && (
-        <div className="cm-done">
+        <div className="cm-done bounce-in">
           <h3>Career Done</h3>
           <div>Score: {score(state)}</div>
         </div>

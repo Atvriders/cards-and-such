@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { Drop7State, Drop7Action, Drop7Settings } from "./state.js";
 import { isTerminal, COLS, ROWS } from "./state.js";
@@ -15,7 +16,16 @@ function discColor(value: number): string {
 export function Drop7({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<Drop7State, Drop7Settings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
 
   function handleColClick(col: number) {

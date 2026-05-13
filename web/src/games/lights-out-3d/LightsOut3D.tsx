@@ -20,7 +20,7 @@ export function LightsOut3D({
   const on = countOn(state.cells);
 
   return (
-    <div className="lo3d">
+    <div className="lo3d fade-in">
       <div className="lo3d-info">
         <span>Lights on: {on} / 27</span>
         <span>Moves: {state.moves}</span>

@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceBingoMiniState, DiceBingoMiniAction, DiceBingoMiniSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const FACES = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
 export function DiceBingoMini({ state, dispatch, onGameOver }: GameProps<DiceBingoMiniState, DiceBingoMiniSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -25,7 +24,7 @@ export function DiceBingoMini({ state, dispatch, onGameOver }: GameProps<DiceBin
         <span>Roll {state.rollCount} / {state.maxRolls}</span>
         <span className="dbm-score">{state.score} pts</span>
       </div>
-      <div className="dbm-die">{FACES[state.die]}</div>
+      <div className="dbm-die"><Die value={state.die as 1 | 2 | 3 | 4 | 5 | 6} /></div>
       <div className="dbm-card">
         {state.card.map((row, r) => row.map((num, c) => (
           <div key={`${r}-${c}`} className={`dbm-cell ${state.marked[r]![c] ? "marked" : ""}`}>{num}</div>

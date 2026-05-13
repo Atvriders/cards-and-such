@@ -14,10 +14,10 @@ export function PriceGuess({ state, dispatch, onGameOver }: GameProps<PriceGuess
   if (state.phase === "done") {
     return (
       <div className="pg-wrap">
-        <div className="pg-done">
+        <div className="pg-done bounce-in">
           <h2>Game Over!</h2>
           <p>Items won (within 10%): {state.won} / {state.items.length}</p>
-          <div className="pg-done-score">{state.totalScore} pts</div>
+          <div className="pg-done-score pulse">{state.totalScore} pts</div>
         </div>
       </div>
     );
@@ -35,10 +35,10 @@ export function PriceGuess({ state, dispatch, onGameOver }: GameProps<PriceGuess
   };
 
   return (
-    <div className="pg-wrap">
+    <div className="pg-wrap fade-in">
       <div className="pg-header">
         <span>Item {state.currentIndex + 1} / {state.items.length}</span>
-        <span className="pg-score">{state.totalScore} pts | Won: {state.won}</span>
+        <span className="pg-score pulse">{state.totalScore} pts | Won: {state.won}</span>
       </div>
 
       <div className="pg-progress-bar">

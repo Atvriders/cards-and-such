@@ -40,7 +40,7 @@ export function Conquian({
   };
 
   return (
-    <div className="conquian">
+    <div className="conquian fade-in">
       <div className="conquian-header">
         <span>Your melds: {playerMelds.length}</span>
         <span>Bot melds: {botMelds.length}</span>
@@ -83,7 +83,7 @@ export function Conquian({
       <div className="conquian-message">{message}</div>
 
       {done && (
-        <div className="conquian-done">
+        <div className="conquian-done bounce-in">
           {winner === "player" ? "You win!" : winner === "bot" ? "Bot wins!" : "Draw!"}
         </div>
       )}

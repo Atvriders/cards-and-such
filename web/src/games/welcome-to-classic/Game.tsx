@@ -9,12 +9,12 @@ export function WelcomeToClassicGame({ state, dispatch, onGameOver }: GameProps<
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="wtc-wrap">
+    <div className="wtc-wrap fade-in">
       <header className="wtc-head">
         <h2 className="wtc-title">Welcome To Classic</h2>
         <div className="wtc-meta">
           <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="wtc-score">{state.score} pts</span>
+          <span className="wtc-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "placing" && state.lastRoll !== null && (
@@ -51,7 +51,7 @@ export function WelcomeToClassicGame({ state, dispatch, onGameOver }: GameProps<
         )}
         <button className="wtc-btn wtc-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToClassicAction)}>Reset</button>
       </div>
-      {state.phase === "done" && <div className="wtc-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="wtc-done bounce-in">Final: <b>{final}</b></div>}
       <div className="wtc-rules">Houses must be ascending — skips score</div>
     </div>
   );

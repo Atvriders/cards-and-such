@@ -24,7 +24,7 @@ export function WalkingTheDogGame({
   const hazardLabel = state.hazardAhead ? `${HAZARD_EMOJI[state.hazardAhead]} ${state.hazardAhead}` : "🦴 clear path";
 
   return (
-    <div className="wtd-game">
+    <div className="wtd-game fade-in">
       <div className="wtd-title">Walking the Dog 🐕</div>
 
       <div className="wtd-hud">

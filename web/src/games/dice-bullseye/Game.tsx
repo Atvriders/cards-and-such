@@ -11,7 +11,7 @@ export function DiceBullseyeGame({ state, dispatch, onGameOver }: GameProps<Dice
   if (state.phase === "done") {
     return (
       <div className="bs-wrap">
-        <div className="bs-done">
+        <div className="bs-done bounce-in">
           <h2>Match Over</h2>
           <div className="bs-final">{state.score} pts</div>
         </div>
@@ -20,7 +20,7 @@ export function DiceBullseyeGame({ state, dispatch, onGameOver }: GameProps<Dice
   }
 
   return (
-    <div className="bs-wrap">
+    <div className="bs-wrap fade-in">
       <div className="bs-banner">Shot {state.round} / {TOTAL_ROUNDS} · Score {state.score}</div>
       <div className="bs-target">
         <div className="bs-ring r1"><div className="bs-ring r2"><div className="bs-ring r3"><div className="bs-ring r4 bull" /></div></div></div>
@@ -35,7 +35,7 @@ export function DiceBullseyeGame({ state, dispatch, onGameOver }: GameProps<Dice
       {state.phase === "aim" && (
         <div className="bs-actions">
           {RINGS.map(r => (
-            <button key={r} className="bs-btn" data-testid="hint-target-dice-bullseye-roll" onClick={() => dispatch({ type: "shoot", target: r } as DiceBullseyeAction)}>Aim {r}</button>
+            <button title="Roll" key={r} className="bs-btn" data-testid="hint-target-dice-bullseye-roll" onClick={() => dispatch({ type: "shoot", target: r } as DiceBullseyeAction)}>Aim {r}</button>
           ))}
         </div>
       )}

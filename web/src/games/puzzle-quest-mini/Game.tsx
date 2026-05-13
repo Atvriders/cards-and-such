@@ -18,7 +18,7 @@ export function PuzzleQuestMiniGame({ state, dispatch, onGameOver }: GameProps<P
   if (state.phase === "done") {
     return (
       <div className="pzqst-wrap">
-        <div className="pzqst-done">
+        <div className="pzqst-done bounce-in">
           <h2>Time's Up!</h2>
           <div className="pzqst-stats">Matches: {state.matches}</div>
           <div className="pzqst-final">{state.score} pts</div>
@@ -27,11 +27,11 @@ export function PuzzleQuestMiniGame({ state, dispatch, onGameOver }: GameProps<P
     );
   }
   return (
-    <div className="pzqst-wrap">
+    <div className="pzqst-wrap fade-in">
       <div className="pzqst-header">
         <span className="pzqst-info">Matches: {state.matches}</span>
         <span className="pzqst-timer">{state.ticksRemaining}s</span>
-        <span className="pzqst-score">{state.score} pts</span>
+        <span className="pzqst-score pulse">{state.score} pts</span>
       </div>
       <div className="pzqst-grid">
         {state.grid.map((row, r) => row.map((g, c) => {

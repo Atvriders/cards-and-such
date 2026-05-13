@@ -9,9 +9,18 @@ const TICK_MS = 16;
 export function PinballMini({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<PinballState, PinballSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const tick = useCallback(() => {
     dispatch({ type: "tick" } as PinballAction);

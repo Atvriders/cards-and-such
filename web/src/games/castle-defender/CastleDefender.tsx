@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { CastleState, CastleAction, CastleSettings } from "./state.js";
 import { isTerminal } from "./state.js";
@@ -9,7 +9,16 @@ const TICK_MS = 80;
 export function CastleDefender({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<CastleState, CastleSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const tick = useCallback(() => {
     dispatch({ type: "tick" } as CastleAction);
   }, [dispatch]);

@@ -10,7 +10,7 @@ export function DiceMolkkyGame({ state, dispatch, onGameOver }: GameProps<DiceMo
   if (state.phase === "done") {
     return (
       <div className="dicmol-wrap">
-        <div className="dicmol-done">
+        <div className="dicmol-done bounce-in">
           <h2>Throw</h2>
           <div className="dicmol-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceMolkkyGame({ state, dispatch, onGameOver }: GameProps<DiceMo
     );
   }
   return (
-    <div className="dicmol-wrap">
+    <div className="dicmol-wrap fade-in">
       <div className="dicmol-head">
         <span className="dicmol-round">Throw {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="dicmol-score">{state.score} pts</span>
+        <span className="dicmol-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

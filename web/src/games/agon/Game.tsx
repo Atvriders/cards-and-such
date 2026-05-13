@@ -89,7 +89,7 @@ export function Agon({
   }
 
   return (
-    <div className="agon-game">
+    <div className="agon-game fade-in">
       <div className={`agon-status ${statusClass}`}>{statusText}</div>
       <svg
         width={SVG_W}

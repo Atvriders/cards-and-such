@@ -52,7 +52,7 @@ export function SwarmDefense({ state, dispatch, onGameOver }: GameProps<SwarmDef
   }
 
   return (
-    <div className="swarm-defense">
+    <div className="swarm-defense fade-in">
       <div className="sd-hud">
         <span>Wave: {state.wave}</span>
         <span>Base HP: {state.baseHp}</span>

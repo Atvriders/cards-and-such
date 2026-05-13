@@ -8,13 +8,13 @@ export function CortexChallenge2Game({ state, dispatch, onGameOver }: GameProps<
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="crtxch2-wrap"><div className="crtxch2-done"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="crtxch2-final">{state.score} pts</div></div></div>;
+    return <div className="crtxch2-wrap"><div className="crtxch2-done bounce-in"><h2>Done!</h2><div>Correct: {state.correctCount} / {state.rounds.length}</div><div className="crtxch2-final">{state.score} pts</div></div></div>;
   }
   const r = state.rounds[state.currentIndex]!;
   return (
-    <div className="crtxch2-wrap">
+    <div className="crtxch2-wrap fade-in">
       <div className="crtxch2-info">Round {state.currentIndex + 1} / {state.rounds.length}</div>
-      <div className="crtxch2-score">{state.score} pts</div>
+      <div className="crtxch2-score pulse">{state.score} pts</div>
       <div className="crtxch2-prompt">{r.question}</div>
       <div className="crtxch2-grid">
         {r.choices.map((n, i) => {

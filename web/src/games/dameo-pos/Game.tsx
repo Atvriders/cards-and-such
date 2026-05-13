@@ -13,16 +13,16 @@ export function DameoPosGame({ state, dispatch, onGameOver }: GameProps<DameoPos
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as DameoPosAction), 1000);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="dameopz-wrap"><div className="dameopz-done"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="dameopz-wrap"><div className="dameopz-done bounce-in"><h2>Done!</h2><p>Correct: {state.correctCount} / {state.questions.length}</p><p style={{ fontSize:"1.8rem",fontWeight:900,color:"#27ae60" }}>{state.score} pts</p></div></div>;
   const q = state.questions[state.currentIndex]!;
   const isResult = state.phase === "result";
   const urgent = state.timeLeft <= 5 && !state.submitted;
   return (
-    <div className="dameopz-wrap">
+    <div className="dameopz-wrap fade-in">
       <div className="dameopz-header">
         <span className="dameopz-progress">Q {state.currentIndex + 1} / {state.questions.length}</span>
         <span className={`dameopz-timer${urgent ? " urgent" : ""}`}>{state.timeLeft}s</span>
-        <span className="dameopz-score">{state.score} pts</span>
+        <span className="dameopz-score pulse">{state.score} pts</span>
       </div>
       <div className="dameopz-question">{q.question}</div>
       <div className="dameopz-choices">

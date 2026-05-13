@@ -68,7 +68,7 @@ export function Hangman({
   const guessedSet = new Set(guessed);
 
   return (
-    <div className="hgm-wrap">
+    <div className="hgm-wrap fade-in">
       <HangmanFigure wrong={wrongGuesses} max={maxWrongNum} />
 
       <div className="hgm-status">
@@ -111,12 +111,12 @@ export function Hangman({
             <h2>{won ? "You win!" : "Game over!"}</h2>
             <div className="hgm-target-reveal">{target}</div>
             {won && (
-              <div className="hgm-score">
+              <div className="hgm-score pulse">
                 Score: {(maxWrongNum - wrongGuesses) * 50 + target.length * 10}
               </div>
             )}
             {lost && (
-              <div className="hgm-score">Better luck next time!</div>
+              <div className="hgm-score pulse">Better luck next time!</div>
             )}
           </div>
         </div>

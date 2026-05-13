@@ -8,7 +8,7 @@ export function WingspanAsiaFlockGame({ state, dispatch, onGameOver }: GameProps
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="dr-wrap">
+    <div className="dr-wrap fade-in">
       <h3 className="dr-title">Wingspan: Asia Flock</h3>
       <div className="dr-stats">
         <div>Round <b>{state.round}/{TOTAL_ROUNDS}</b></div>
@@ -35,7 +35,7 @@ export function WingspanAsiaFlockGame({ state, dispatch, onGameOver }: GameProps
         </div>
       )}
       {state.phase === "done" && (
-        <div className="dr-done">
+        <div className="dr-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Win! +25 bonus" : state.myScore === state.cpuScore ? "Tie" : "Lost"}</h3>
           <div>You: {state.myScore} | CPU: {state.cpuScore}</div>
           <div>Score: {score(state)}</div>

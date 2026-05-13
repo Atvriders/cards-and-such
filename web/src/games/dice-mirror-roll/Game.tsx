@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceMirrorRollState, DiceMirrorRollAction, DiceMirrorRollSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const PIPS = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
 export function DiceMirrorRoll({ state, dispatch, onGameOver }: GameProps<DiceMirrorRollState, DiceMirrorRollSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -20,8 +19,12 @@ export function DiceMirrorRoll({ state, dispatch, onGameOver }: GameProps<DiceMi
     <div className="dice-wrap fade-in">
       <div className="dice-header"><span>Round {state.round}/{state.maxRounds}</span><span>{state.score} pts</span></div>
       <div className="dice-row">
-        <span className="die">{PIPS[state.currentDie]}</span>
-        {isReveal && state.nextDie !== null && <span className={`die${state.result === "correct" ? " die-double" : ""}`}>{PIPS[state.nextDie]}</span>}
+        <Die value={state.currentDie as 1 | 2 | 3 | 4 | 5 | 6} />
+        {isReveal && state.nextDie !== null && (
+          <span className={state.result === "correct" ? "die-double" : ""}>
+            <Die value={state.nextDie as 1 | 2 | 3 | 4 | 5 | 6} />
+          </span>
+        )}
       </div>
       {!isReveal && <p style={{ color: "#555", fontSize: "0.9rem" }}>Will the next roll be higher, lower, or the same?</p>}
       {!isReveal && (

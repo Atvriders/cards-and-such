@@ -10,7 +10,7 @@ export function ConnectGame({ state, dispatch, onGameOver }: GameProps<ConnectSt
 
   if (state.phase === "done") {
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
-    return <div className="cn-wrap"><div className="cn-done"><h2>{msg}</h2><div className="cn-final">Score: {state.score}</div></div></div>;
+    return <div className="cn-wrap fade-in"><div className="cn-done bounce-in"><h2>{msg}</h2><div className="cn-final">Score: {state.score}</div></div></div>;
   }
 
   function topRow(col: number): number {
@@ -19,9 +19,9 @@ export function ConnectGame({ state, dispatch, onGameOver }: GameProps<ConnectSt
   }
 
   return (
-    <div className="cn-wrap">
+    <div className="cn-wrap fade-in">
       <div className="cn-info">{TARGET}-in-a-row wins. {MODE === "gravity" ? "Gravity drop." : "Place anywhere."}</div>
-      <div className="cn-score">Turn: {state.turn === "P" ? "You (red)" : "CPU"}</div>
+      <div className="cn-score pulse">Turn: {state.turn === "P" ? "You (red)" : "CPU"}</div>
       <div className="cn-board" style={{ gridTemplateColumns: `repeat(${COLS},1fr)` }}>
         {Array.from({ length: ROWS }).map((_, r) =>
           Array.from({ length: COLS }).map((__, c) => {

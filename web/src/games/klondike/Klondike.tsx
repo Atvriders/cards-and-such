@@ -151,7 +151,7 @@ export function Klondike({
   };
 
   return (
-    <div className={`klondike${state.won ? " has-won" : ""}`} data-testid="hint-target-klondike">
+    <div className={`klondike fade-in${state.won ? " has-won" : ""}`} data-testid="hint-target-klondike">
       <div className="klondike-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

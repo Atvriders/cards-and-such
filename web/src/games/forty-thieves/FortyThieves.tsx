@@ -60,7 +60,7 @@ export function FortyThieves({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className={`forty-thieves${state.won ? " has-won" : ""}`}>
+    <div className={`forty-thieves fade-in${state.won ? " has-won" : ""}`}>
       <div className="forty-thieves-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

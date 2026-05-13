@@ -42,7 +42,7 @@ export function Piquet({
   }
 
   return (
-    <div className="piquet">
+    <div className="piquet fade-in">
       <div className="pq-header">
         <span>You: {playerScore} pts</span>
         <span>Bot: {botScore} pts</span>

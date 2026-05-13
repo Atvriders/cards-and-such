@@ -45,7 +45,7 @@ export function CipherCrackGame({
     .join("");
 
   return (
-    <div className="cipher-crack">
+    <div className="cipher-crack fade-in">
       <div className="cipher-crack-info">
         <span>Length: {state.settings.length}</span>
         <span>Guesses: {state.movesMade}</span>

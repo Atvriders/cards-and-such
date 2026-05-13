@@ -50,7 +50,7 @@ export function Battleship({
   }
 
   return (
-    <div className="battleship">
+    <div className="battleship fade-in">
       <div className={`battleship-status ${statusClass}`}>{statusText}</div>
 
       {isSetup && (
@@ -128,7 +128,7 @@ export function Battleship({
         </div>
       </div>
 
-      <div className="battleship-score-info">
+      <div className="battleship-score-info pulse">
         Enemy ships remaining: {state.enemyShips.filter((s) => s.hits < s.size).length} / {SHIPS.length}
       </div>
     </div>

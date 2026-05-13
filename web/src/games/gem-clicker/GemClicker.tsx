@@ -31,7 +31,7 @@ export function GemClicker({
   const rCost = refineryCost(state.refineries);
 
   return (
-    <div className="gc-game">
+    <div className="gc-game fade-in">
       <div className="gc-title">Gem Clicker</div>
       <div className="gc-stats">
         <span className="gc-gems">💎 {Math.floor(state.gems)} gems</span>

@@ -19,9 +19,18 @@ function cubeScreenPos(row: number, col: number): { x: number; y: number } {
 export function QJump({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<QJumpState, Record<never, never>>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);

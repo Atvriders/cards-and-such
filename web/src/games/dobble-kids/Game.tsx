@@ -11,7 +11,7 @@ export function DobbleKidsGame({ state, dispatch, onGameOver }: GameProps<Dobble
   if (state.phase === "done") {
     return (
       <div className="dobkidz-wrap">
-        <div className="dobkidz-done">
+        <div className="dobkidz-done bounce-in">
           <h2>Spotted</h2>
           <div className="dobkidz-stats">{state.correctCount} / {state.rounds.length} hits · {(state.totalMs / 1000).toFixed(1)}s total</div>
           <div className="dobkidz-final">{state.score} pts</div>
@@ -31,10 +31,10 @@ export function DobbleKidsGame({ state, dispatch, onGameOver }: GameProps<Dobble
   const isCorrect = state.selected === r.shared;
 
   return (
-    <div className="dobkidz-wrap">
+    <div className="dobkidz-wrap fade-in">
       <div className="dobkidz-header">
         <span className="dobkidz-progress">Card {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="dobkidz-score">{state.score} pts</span>
+        <span className="dobkidz-score pulse">{state.score} pts</span>
       </div>
       <div className="dobkidz-prompt">Find the symbol on BOTH cards. Click it.</div>
       <div className="dobkidz-cards">

@@ -8,12 +8,12 @@ export function CardTowerFallGame({ state, dispatch, onGameOver }: GameProps<Car
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="rg-wrap"><div className="rg-done"><h2>Done!</h2><div className="rg-final">{state.score} pts</div></div></div>;
+    return <div className="rg-wrap"><div className="rg-done bounce-in"><h2>Done!</h2><div className="rg-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="rg-wrap">
+    <div className="rg-wrap fade-in">
       <div className="rg-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="rg-score">{state.score} pts</div>
+      <div className="rg-score pulse">{state.score} pts</div>
       {state.display && <div className="rg-display">{state.display}</div>}
       {state.phase === "predict" && (
         <div className="rg-row">

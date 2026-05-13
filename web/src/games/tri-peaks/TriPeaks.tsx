@@ -86,7 +86,7 @@ export function TriPeaks({
   }
 
   return (
-    <div className={`tri-peaks-game${state.won ? " has-won" : ""}`}>
+    <div className={`tri-peaks-game fade-in${state.won ? " has-won" : ""}`}>
       <div className="tri-peaks-info">
         <span>Moves: {state.movesMade}</span>
         <span>Stock: {state.stock.length}</span>

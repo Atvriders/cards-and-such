@@ -60,7 +60,7 @@ export function Game({ state, dispatch, onGameOver }: GameProps<PuzzleState, Set
   const files = ["a","b","c","d","e","f","g","h"];
 
   return (
-    <div className="cp-puzzle">
+    <div className="cp-puzzle fade-in">
       <div className="cp-header">
         <span className="cp-title">Pawn Promotion Puzzle</span>
         <span className="cp-progress">Puzzle {state.puzzleIndex + 1} / 12</span>

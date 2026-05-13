@@ -8,10 +8,10 @@ export function DiceHotDiceGame({ state, dispatch, onGameOver }: GameProps<DiceH
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dhdc-wrap dhdc-theme"><div className="dhdc-done"><h2>Done!</h2><div className="dhdc-final">{state.banked} pts banked</div></div></div>;
+    return <div className="dhdc-wrap dhdc-theme"><div className="dhdc-done bounce-in"><h2>Done!</h2><div className="dhdc-final">{state.banked} pts banked</div></div></div>;
   }
   return (
-    <div className="dhdc-wrap dhdc-theme">
+    <div className="dhdc-wrap dhdc-theme fade-in">
       <div className="dhdc-header">Round {state.round}/{TOTAL_ROUNDS} <span className="dhdc-banked">Banked {state.banked}</span></div>
       <div className="dhdc-tally"><span>Current: {state.current}</span><span>Streak: {state.streak}</span></div>
       {state.lastDie && (

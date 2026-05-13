@@ -20,9 +20,18 @@ const RING_SCORES = [10, 20, 40, 60, 100];
 export function SkeeBall({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<SkeeBallState, SkeeBallSettings>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number | null>(null);
 
@@ -130,7 +139,7 @@ export function SkeeBall({
   const terminal = isTerminal(state);
 
   return (
-    <div className="skeeball-game">
+    <div className="skeeball-game fade-in">
       <div className="skeeball-hud">
         <span>Balls: {state.totalBalls - state.ballsThrown}</span>
         <span>Score: {state.score}</span>

@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceStepBetState, DiceStepBetAction, DiceStepBetSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-const FACES = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
 export function DiceStepBet({ state, dispatch, onGameOver }: GameProps<DiceStepBetState, DiceStepBetSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
@@ -13,7 +13,7 @@ export function DiceStepBet({ state, dispatch, onGameOver }: GameProps<DiceStepB
       <div className="dg-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dg-score">{state.coins} pts</span></div>
       <div style={{fontSize:"1.6rem",fontWeight:900,color:state.runTotal>21?"#e74c3c":state.runTotal>=15?"#f39c12":"#2c3e50"}}>Total: {state.runTotal} / 21</div>
       <div className="dg-dice" style={{flexWrap:"wrap",gap:"6px",justifyContent:"center"}}>
-        {state.dieHistory.map((d,i)=><div key={i} className="dg-die" style={{width:"48px",height:"48px",fontSize:"1.4rem"}}>{FACES[d]}</div>)}
+        {state.dieHistory.map((d,i)=><div key={i} className="dg-die" style={{width:"48px",height:"48px",fontSize:"1.4rem"}}><Die value={d as 1 | 2 | 3 | 4 | 5 | 6} /></div>)}
       </div>
       {state.phase==="result" && <p className={`dg-msg${state.bust?" bad":""}`}>{state.bust?`Bust at ${state.runTotal}! +0 pts`:`Banked ${state.lastBank} pts!`}</p>}
       <div style={{display:"flex",gap:"12px"}}>

@@ -5,11 +5,11 @@ import { isTerminal, TOTAL_ROUNDS, cardName, isRed } from "./state.js";
 import "./Game.css";
 export function CanastaSpeedRGame({ state, dispatch, onGameOver }: GameProps<GState, object>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="cspdr-wrap"><div className="cspdr-done"><h2>Done!</h2><div className="cspdr-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="cspdr-wrap"><div className="cspdr-done bounce-in"><h2>Done!</h2><div className="cspdr-final">{state.score} pts</div></div></div>;
   return (
-    <div className="cspdr-wrap">
+    <div className="cspdr-wrap fade-in">
       <div className="cspdr-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="cspdr-score">{state.score} pts</div>
+      <div className="cspdr-score pulse">{state.score} pts</div>
       <div className="cspdr-row">{state.hand.map((c, i) => <div key={i} className={`cspdr-card ${isRed(c) ? "red" : "black"}`}>{cardName(c)}</div>)}</div>
       {state.phase === "play" && <button data-testid="hint-target-canasta-speed-r-play" className="cspdr-btn" onClick={() => dispatch({ type: "score" } as GAction)}>Auto-score</button>}
       {state.phase === "scored" && <>

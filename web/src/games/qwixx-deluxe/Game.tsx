@@ -10,7 +10,7 @@ export function QwixxDeluxeGame({ state, dispatch, onGameOver }: GameProps<Qwixx
   if (state.phase === "done") {
     return (
       <div className="qdx-wrap">
-        <div className="qdx-done">
+        <div className="qdx-done bounce-in">
           <h2>Done!</h2>
           <div className="qdx-final">{t?.score ?? state.score} pts</div>
         </div>
@@ -18,15 +18,15 @@ export function QwixxDeluxeGame({ state, dispatch, onGameOver }: GameProps<Qwixx
     );
   }
   return (
-    <div className="qdx-wrap">
+    <div className="qdx-wrap fade-in">
       <div className="qdx-info">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</div>
-      <div className="qdx-score">{state.score} pts</div>
+      <div className="qdx-score pulse">{state.score} pts</div>
       {state.lastRoll !== null && state.phase === "marking" && (
         <div className="qdx-die">{state.lastRoll}</div>
       )}
       <div className="qdx-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 44px)` }}>
         {state.cells.map((filled, i) => (
-          <button
+          <button title="Select cell"
             key={i}
             className={`qdx-cell${filled ? " qdx-filled" : ""}`}
             disabled={filled || state.phase !== "marking"}

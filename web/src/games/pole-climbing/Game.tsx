@@ -28,10 +28,10 @@ export function PoleClimbing({
   const poleHeight = 200;
 
   return (
-    <div className="pole-wrap">
+    <div className="pole-wrap fade-in">
       <div className="pole-header">
         <span className="pole-title">Pole Climbing</span>
-        <span className="pole-score">Falls: {state.falls} | Score: {state.score}</span>
+        <span className="pole-score pulse">Falls: {state.falls} | Score: {state.score}</span>
       </div>
 
       <div className="pole-arena">
@@ -77,8 +77,8 @@ export function PoleClimbing({
       )}
 
       {state.phase === "done" && (
-        <div className="pole-done">
-          <div className="pole-done-score">Reached the top! Score: {state.score}</div>
+        <div className="pole-done bounce-in">
+          <div className="pole-done-score pulse">Reached the top! Score: {state.score}</div>
           <div>{state.falls === 0 ? "Perfect Climb!" : state.falls <= 3 ? "Nice ascent!" : "Made it up!"}</div>
         </div>
       )}

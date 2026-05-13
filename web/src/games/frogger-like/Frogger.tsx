@@ -21,7 +21,16 @@ function cellType(
 export function Frogger({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<FroggerState, FroggerSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const stateRef = useRef(state);
   stateRef.current = state;
 

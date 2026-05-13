@@ -59,7 +59,7 @@ export function Stitches({ state, dispatch, onGameOver }: GameProps<StitchState,
   }
 
   return (
-    <div className="stitches">
+    <div className="stitches fade-in">
       <div className="stitches-title">Stitches</div>
       <div className={`stitches-status${won ? " win" : ""}`}>
         {won

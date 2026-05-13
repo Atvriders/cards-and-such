@@ -23,7 +23,7 @@ export function BridgeBuilderPuzzle({
   const d = (a: BridgeAction) => dispatch(a);
 
   return (
-    <div className="bridge-wrap">
+    <div className="bridge-wrap fade-in">
       <div className="bridge-header">
         <span className="bridge-title">Bridge Builder</span>
         <span className="bridge-info">Planks: {state.planksLeft} | Moves: {state.moves}</span>

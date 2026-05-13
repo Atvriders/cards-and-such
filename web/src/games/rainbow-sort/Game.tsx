@@ -23,7 +23,7 @@ export function RainbowSort({ state, dispatch, onGameOver }: GameProps<RainbowSt
   const statusCls = `rs-status${state.lastCorrect === true ? " correct" : state.lastCorrect === false ? " wrong" : ""}`;
 
   return (
-    <div className="rs-game">
+    <div className="rs-game fade-in">
       <div className={statusCls}>{state.message}</div>
       <div className="rs-progress">Round {state.roundNum}/{state.totalRounds} | Score: {state.score}</div>
 
@@ -49,7 +49,7 @@ export function RainbowSort({ state, dispatch, onGameOver }: GameProps<RainbowSt
       )}
 
       {state.done && (
-        <div className="rs-score">Final Score: {state.score}</div>
+        <div className="rs-score pulse">Final Score: {state.score}</div>
       )}
     </div>
   );

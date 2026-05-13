@@ -8,9 +8,9 @@ export function SportsRulesQuiz({ state, dispatch, onGameOver }: GameProps<Sport
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
   const entry = state.entries[state.current];
   return (
-    <div className="sq-wrap">
+    <div className="sq-wrap fade-in">
       <div className="sq-progress">Question {state.current + 1} of {state.entries.length}</div>
-      <div className="sq-score">Score: {state.score}</div>
+      <div className="sq-score pulse">Score: {state.score}</div>
       {!state.done && entry ? (<>
           <div className="sq-question">{entry.question}</div>
           <div className="sq-choices">
@@ -21,7 +21,7 @@ export function SportsRulesQuiz({ state, dispatch, onGameOver }: GameProps<Sport
             })}
           </div>
           {state.selected !== null && <button className="sq-next" onClick={() => dispatch({ type: "next" })}>{state.current + 1 < state.entries.length ? "Next" : "Finish"}</button>}
-        </>) : (<div className="sq-done"><h2>Quiz Complete!</h2><div className="sq-final">Score: {state.score} / {state.entries.length * 10}</div></div>)}
+        </>) : (<div className="sq-done bounce-in"><h2>Quiz Complete!</h2><div className="sq-final">Score: {state.score} / {state.entries.length * 10}</div></div>)}
     </div>
   );
 }

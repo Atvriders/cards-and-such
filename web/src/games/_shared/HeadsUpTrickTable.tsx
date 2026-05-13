@@ -19,7 +19,7 @@ export function HeadsUpTrickTable({ state, dispatch, onGameOver, isTerminal, pre
     ? legalPlays(state.hands[0]!, state.trick).map(c => c.id) : []);
 
   return (
-    <div className={`${prefix}-wrap`}>
+    <div className={`${prefix}-wrap fade-in`}>
       {title && <div className={`${prefix}-title`}>{title}</div>}
       <div className={`${prefix}-header`}>
         <span>You: {state.score[0]} pts ({state.tricksWon[0]} tricks)</span>

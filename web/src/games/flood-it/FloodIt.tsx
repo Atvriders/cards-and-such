@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { FloodItState, FloodItSettings } from "./state.js";
 import { isTerminal, SIZE } from "./state.js";
@@ -5,7 +6,15 @@ import "./FloodIt.css";
 
 const COLORS = ["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6", "#1abc9c"];
 
-export function FloodIt({ state, dispatch }: GameProps<FloodItState, FloodItSettings>): JSX.Element {
+export function FloodIt({ state, dispatch, onGameOver }: GameProps<FloodItState, FloodItSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const currentColor = state.grid[0]![0]!;
 

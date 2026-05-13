@@ -56,7 +56,7 @@ export function SeesawBalance({
   };
 
   return (
-    <div className="seesaw-game">
+    <div className="seesaw-game fade-in">
       <div className="seesaw-header">
         <span>Round {state.round} / {state.maxRounds}</span>
         <span>Score: {state.score}</span>

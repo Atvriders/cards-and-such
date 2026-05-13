@@ -8,7 +8,7 @@ export function ZoolorettoTruckGame({ state, dispatch, onGameOver }: GameProps<Z
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-zlt-wrap">
+    <div className="bz-zlt-wrap fade-in">
       <h3 className="bz-zlt-title">Zooloretto Truck</h3>
       <div className="bz-zlt-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
@@ -31,7 +31,7 @@ export function ZoolorettoTruckGame({ state, dispatch, onGameOver }: GameProps<Z
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-zlt-done">
+        <div className="bz-zlt-done bounce-in">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

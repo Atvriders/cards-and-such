@@ -18,7 +18,7 @@ export function BingoCall({
   }, [terminal, onGameOver]);
 
   return (
-    <div className="bingo-call">
+    <div className="bingo-call fade-in">
       <h2>BINGO CALL</h2>
 
       {state.lastCall !== null && (
@@ -55,7 +55,7 @@ export function BingoCall({
       {state.bingo && <div className="bc-bingo">BINGO!</div>}
 
       {terminal && !state.bingo && (
-        <div className="bc-gameover">All numbers called — no bingo.</div>
+        <div className="bc-gameover bounce-in">All numbers called — no bingo.</div>
       )}
 
       <button data-testid="hint-target-bingo-call-action"

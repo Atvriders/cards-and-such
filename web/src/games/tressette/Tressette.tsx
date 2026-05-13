@@ -43,7 +43,7 @@ export function Tressette({ state, dispatch, onGameOver }: GameProps<TressetteSt
     + Math.floor(team13.filter((c: CardType) => isFaceCard(c.rank)).length / 3);
 
   return (
-    <div className="tressette">
+    <div className="tressette fade-in">
       <div className="tressette-header">
         <span>Your team (You+S3): {pts02} pts</span>
         <span>Opponents (S2+S4): {pts13} pts</span>

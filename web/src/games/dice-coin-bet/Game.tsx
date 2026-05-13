@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceCoinBetState, DiceCoinBetAction, DiceCoinBetSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-
-const FACES = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
 export function DiceCoinBet({ state, dispatch, onGameOver }: GameProps<DiceCoinBetState, DiceCoinBetSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -24,7 +23,7 @@ export function DiceCoinBet({ state, dispatch, onGameOver }: GameProps<DiceCoinB
         <span>Round {state.round} / {state.maxRounds}</span>
         <span className="dcb-coins">{state.coins} coins</span>
       </div>
-      {state.dieResult && <div className="dcb-die">{FACES[state.dieResult]}</div>}
+      {state.dieResult && <div className="dcb-die"><Die value={state.dieResult as 1 | 2 | 3 | 4 | 5 | 6} /></div>}
       {!state.dieResult && <div className="dcb-die dim">?</div>}
       {state.phase === "betting" && (
         <div className="dcb-body">

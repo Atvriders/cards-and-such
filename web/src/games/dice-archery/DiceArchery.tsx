@@ -20,7 +20,7 @@ export function DiceArchery({
   }, [terminal, onGameOver]);
 
   return (
-    <div className="dice-archery">
+    <div className="dice-archery fade-in">
       <h2>DICE ARCHERY</h2>
       <div className="da-info">
         <span>Arrows: <b>{state.arrowsRemaining}</b></span>
@@ -50,7 +50,7 @@ export function DiceArchery({
       )}
 
       {terminal && (
-        <div className="da-gameover">
+        <div className="da-gameover bounce-in">
           All arrows shot! Final: {state.score}
         </div>
       )}

@@ -13,7 +13,7 @@ export function BonzaJigsawGame({ state, dispatch, onGameOver }: GameProps<Bonza
   if (state.phase === "done") {
     return (
       <div className="word-wrap">
-        <div className="word-done">
+        <div className="word-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function BonzaJigsawGame({ state, dispatch, onGameOver }: GameProps<Bonza
   const isResult = state.phase === "result";
 
   return (
-    <div className="word-wrap">
+    <div className="word-wrap fade-in">
       <div className="word-header">
         <span className="word-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="word-score">{state.score} pts</span>
+        <span className="word-score pulse">{state.score} pts</span>
       </div>
       <div className="word-prompt"><span className="word-label">Choose:</span> {r.prompt}</div>
       <div className="word-choices">

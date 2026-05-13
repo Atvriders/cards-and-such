@@ -9,12 +9,12 @@ export function NochMalSoGutGame({ state, dispatch, onGameOver }: GameProps<Noch
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="nms-wrap">
+    <div className="nms-wrap fade-in">
       <header className="nms-head">
         <h2 className="nms-title">Noch Mal So Gut</h2>
         <div className="nms-meta">
           <span className="nms-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="nms-meta-score">{state.score} pts</span>
+          <span className="nms-meta-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "marking" && state.lastRoll !== null && (
@@ -25,7 +25,7 @@ export function NochMalSoGutGame({ state, dispatch, onGameOver }: GameProps<Noch
       )}
       <div className="nms-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button data-testid="hint-target-noch-mal-so-gut-mark"
+          <button title="Select cell" data-testid="hint-target-noch-mal-so-gut-mark"
             key={i}
             className={`nms-cell nms-z${cellZone(i)}${filled ? " nms-on" : ""}`}
             disabled={filled || state.phase !== "marking"}
@@ -43,7 +43,7 @@ export function NochMalSoGutGame({ state, dispatch, onGameOver }: GameProps<Noch
         <button className="nms-btn nms-btn-reset" onClick={() => dispatch({ type: "reset" } as NochMalSoGutAction)}>Reset</button>
       </div>
       {state.phase === "done" && (
-        <div className="nms-done">Final score: <b>{final}</b></div>
+        <div className="nms-done bounce-in">Final score: <b>{final}</b></div>
       )}
       <div className="nms-rules">Sequel: every 4th cell: +2 token</div>
     </div>

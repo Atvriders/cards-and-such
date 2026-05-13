@@ -16,7 +16,7 @@ export function PyramidGolf({ state, dispatch, onGameOver }: GameProps<PyramidGo
   const wasteTop = state.waste.length > 0 ? state.waste[state.waste.length - 1]! : null;
 
   return (
-    <div className="pyramid-golf">
+    <div className="pyramid-golf fade-in">
       <div className="pg-info">
         <span>Moves: {state.movesMade}</span>
         <span>Stock: {state.stock.length}</span>

@@ -12,7 +12,7 @@ export function DiceGalaxyGame({ state, dispatch, onGameOver }: GameProps<DiceGa
     return (
       <div className="ga-wrap">
         <div className="ga-stars" />
-        <div className="ga-done">
+        <div className="ga-done bounce-in">
           <h2>Mission Logbook</h2>
           <div className="ga-final">{state.score} pts</div>
           <div className="ga-log">{state.log}</div>
@@ -22,7 +22,7 @@ export function DiceGalaxyGame({ state, dispatch, onGameOver }: GameProps<DiceGa
   }
 
   return (
-    <div className="ga-wrap">
+    <div className="ga-wrap fade-in">
       <div className="ga-stars" />
       <div className="ga-banner">Fuel {state.fuel} · Score {state.score}</div>
       <div className="ga-planets">

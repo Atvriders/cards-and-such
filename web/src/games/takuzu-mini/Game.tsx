@@ -11,7 +11,7 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
   if (state.phase === "done") {
     return (
       <div className="takuzudual-wrap">
-        <div className="takuzudual-done">
+        <div className="takuzudual-done bounce-in">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
           <p className="takuzudual-final">{state.score} pts</p>
@@ -24,10 +24,10 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
   const errSet = new Set(state.errors);
 
   return (
-    <div className="takuzudual-wrap">
+    <div className="takuzudual-wrap fade-in">
       <div className="takuzudual-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="takuzudual-score">{state.score} pts</span>
+        <span className="takuzudual-score pulse">{state.score} pts</span>
       </div>
       <div className="takuzudual-mech">Same rules as Binairo: equal counts, no 3-in-a-row of same symbol.</div>
       <div className="takuzudual-grid">
@@ -44,7 +44,7 @@ export function TakuzuMiniGame({ state, dispatch, onGameOver }: GameProps<Takuzu
               const valIdx = VALUES.indexOf(v);
               const label = isBlocked ? "■" : (v === 0 ? "" : (valIdx >= 0 ? VALUE_LABELS[valIdx] : String(v)));
               return (
-                <button
+                <button title="Select cell"
                   key={c}
                   disabled={isBlocked}
                   className={`takuzudual-cell${isGiven ? " given" : ""}${isBlocked ? " blocked" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""} val${valIdx}`}

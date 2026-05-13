@@ -18,11 +18,11 @@ export function SilentLetters({
   const entry = state.entries[state.current];
 
   return (
-    <div className="sl-wrap">
+    <div className="sl-wrap fade-in">
       <div className="sl-progress">
         Question {state.current + 1} of {state.entries.length}
       </div>
-      <div className="sl-score">Score: {state.score}</div>
+      <div className="sl-score pulse">Score: {state.score}</div>
 
       {!state.done && entry ? (
         <>
@@ -57,7 +57,7 @@ export function SilentLetters({
           )}
         </>
       ) : (
-        <div className="sl-done">
+        <div className="sl-done bounce-in">
           <h2>Complete!</h2>
           <div className="sl-final">
             Score: {state.score} / {state.entries.length * 10}

@@ -27,7 +27,7 @@ export function DecadeSolitaire({ state, dispatch, onGameOver }: GameProps<Decad
   }
 
   return (
-    <div className="decade-wrap">
+    <div className="decade-wrap fade-in">
       <div className="decade-header">
         <span>Decade Solitaire</span>
         <span>Moves: {state.moves}</span>

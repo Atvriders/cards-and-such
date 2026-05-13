@@ -15,7 +15,7 @@ export function FieldGoalKicker({ state, dispatch, onGameOver }: GameProps<Field
   const windDir = state.wind > 0.03 ? `→ ${Math.round(state.wind * 100)}%` : state.wind < -0.03 ? `← ${Math.round(Math.abs(state.wind) * 100)}%` : "Calm";
 
   return (
-    <div className="fg-game">
+    <div className="fg-game fade-in">
       <div className="fg-title">Field Goal Kicker</div>
 
       <div className="fg-stats">
@@ -64,7 +64,7 @@ export function FieldGoalKicker({ state, dispatch, onGameOver }: GameProps<Field
       )}
 
       {state.phase === "done" && (
-        <div className="fg-game-over">
+        <div className="fg-game-over bounce-in">
           {state.goodCount}/{state.totalKicks} ({pct}%)<br />
           {pct >= 80 ? "Pro Kicker!" : pct >= 60 ? "Solid session" : "Need more practice"}<br />
           Score: {terminal?.score ?? 0}

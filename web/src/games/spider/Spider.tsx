@@ -64,7 +64,7 @@ export function Spider({
   const dealsRemaining = Math.floor(stockCount / 10);
 
   return (
-    <div className={`spider${state.won ? " has-won" : ""}`}>
+    <div className={`spider fade-in${state.won ? " has-won" : ""}`}>
       <div className="spider-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

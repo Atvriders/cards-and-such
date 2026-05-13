@@ -17,12 +17,12 @@ export function SumTargetDice({ state, dispatch, onGameOver }: GameProps<SumTarg
   const pts = diff === 0 ? 50 : Math.max(0, 30 - diff * 5);
 
   return (
-    <div className="dice-wrap">
+    <div className="dice-wrap fade-in">
       <div className="dice-header"><span>Round {state.round}/{state.maxRounds}</span><span>Total: {state.totalScore}</span></div>
       <div style={{ fontSize: "1.4rem", fontWeight: 900, color: "#3498db" }}>Target: {state.target}</div>
       <div className="dice-row">
         {state.dice.map((d, i) => (
-          <button key={i} className={`die${state.held[i] ? " die-double" : ""}`}
+          <button title="Toggle die" key={i} className={`die${state.held[i] ? " die-double" : ""}`}
             style={{ cursor: state.rerollsLeft > 0 && state.phase === "rolling" ? "pointer" : "default" }}
             onClick={() => dispatch({ type: "toggleHold", idx: i as 0 | 1 | 2 } as SumTargetAction)}>{d}</button>
         ))}

@@ -48,7 +48,7 @@ export function RankAndFile({
   const getPile = (id: string) => state.piles.find((p) => p.id === id)!;
 
   return (
-    <div className="rank-and-file">
+    <div className="rank-and-file fade-in">
       <div className="rank-and-file-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}/52</span>

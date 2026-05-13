@@ -11,7 +11,7 @@ export function CascadiaHabitatGame({ state, dispatch, onGameOver }: GameProps<C
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const next = state.queue[state.placed] ?? -1;
   return (
-    <div className="cas-wrap">
+    <div className="cas-wrap fade-in">
       <h3 className="cas-title">Cascadia: Habitat</h3>
       <div className="cas-meta">
         <div className="cas-meta-item"><span>Tile</span><b>{Math.min(state.placed + 1, TOTAL_TILES)}/{TOTAL_TILES}</b></div>
@@ -37,7 +37,7 @@ export function CascadiaHabitatGame({ state, dispatch, onGameOver }: GameProps<C
         ))}
       </div>
       {state.phase === "done" && (
-        <div className="cas-done">
+        <div className="cas-done bounce-in">
           <h3>Done!</h3>
           <div className="cas-final">{state.score} pts</div>
         </div>

@@ -13,7 +13,7 @@ export function EruditMiniGame({ state, dispatch, onGameOver }: GameProps<Erudit
   if (state.phase === "done") {
     return (
       <div className="eru-wrap">
-        <div className="eru-done">
+        <div className="eru-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function EruditMiniGame({ state, dispatch, onGameOver }: GameProps<Erudit
   const isResult = state.phase === "result";
 
   return (
-    <div className="eru-wrap">
+    <div className="eru-wrap fade-in">
       <div className="eru-header">
         <span className="eru-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="eru-score">{state.score} pts</span>
+        <span className="eru-score pulse">{state.score} pts</span>
       </div>
       <div className="eru-prompt"><span className="eru-label">Choose:</span> {r.prompt}</div>
       <div className="eru-choices">

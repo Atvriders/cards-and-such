@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { RotateMatchState, RotateMatchSettings } from "./state.js";
 import { isTerminal, SIZE } from "./state.js";
@@ -6,7 +6,15 @@ import "./RotateMatch.css";
 
 const TILE_COLORS = ["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6"];
 
-export function RotateMatch({ state, dispatch }: GameProps<RotateMatchState, RotateMatchSettings>): JSX.Element {
+export function RotateMatch({ state, dispatch, onGameOver }: GameProps<RotateMatchState, RotateMatchSettings>): JSX.Element {
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
   const terminal = isTerminal(state);
   const [hoveredBlock, setHoveredBlock] = useState<[number, number] | null>(null);
 

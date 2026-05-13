@@ -14,10 +14,19 @@ const RING_COLORS = ["#008000", "#008000", "#cc0000", "#cc0000", "#000080", "#00
 export function DartThrow({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<DartThrowState, DartThrowSettings>): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [dragging, setDragging] = useState(false);
   const startRef = useRef<{ x: number; y: number } | null>(null);
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -108,7 +117,7 @@ export function DartThrow({
   const terminal = isTerminal(state);
 
   return (
-    <div className="dart-game">
+    <div className="dart-game fade-in">
       <div className="dart-hud">
         <span>Darts: {state.totalDarts - state.dartsThrown} left</span>
         <span>Score: {state.score}</span>

@@ -13,7 +13,7 @@ export function ShiritoriGame({ state, dispatch, onGameOver }: GameProps<GameSta
   if (state.phase === "done") {
     return (
       <div className="qz-wrap">
-        <div className="qz-done">
+        <div className="qz-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function ShiritoriGame({ state, dispatch, onGameOver }: GameProps<GameSta
   const isResult = state.phase === "result";
 
   return (
-    <div className="qz-wrap">
+    <div className="qz-wrap fade-in">
       <div className="qz-header">
         <span className="qz-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="qz-score">{state.score} pts</span>
+        <span className="qz-score pulse">{state.score} pts</span>
       </div>
       <div className="qz-prompt">{r.prompt}</div>
       <div className="qz-choices">

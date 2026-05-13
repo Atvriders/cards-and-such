@@ -23,7 +23,7 @@ export function GladiatorArena({ state, dispatch, onGameOver }: GameProps<Gladia
   const canAct = !state.gameOver && !state.actionUsed;
 
   return (
-    <div className="gladiator-arena">
+    <div className="gladiator-arena fade-in">
       <div className="ga-title">⚔️ GLADIATOR ARENA ⚔️</div>
       <div className="ga-round">Round {state.round}</div>
 

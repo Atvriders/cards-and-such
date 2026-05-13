@@ -11,21 +11,21 @@ export function ItalianDraughtsGame({ state, dispatch, onGameOver }: GameProps<G
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
     return (
       <div className="idg-wrap">
-        <div className="idg-done"><h2>{msg}</h2><div className="idg-final">{state.score} pts</div></div>
+        <div className="idg-done bounce-in"><h2>{msg}</h2><div className="idg-final">{state.score} pts</div></div>
       </div>
     );
   }
   return (
-    <div className="idg-wrap">
+    <div className="idg-wrap fade-in">
       <div className="idg-info">Italian Draughts: click an empty cell to place your piece. Move {state.moves}.</div>
-      <div className="idg-score">Captures: {state.captures}</div>
+      <div className="idg-score pulse">Captures: {state.captures}</div>
       <div className="idg-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];
           const cls = v === "P" ? "p" : v === "C" ? "c" : "";
           const disabled = false ? v !== "P" : v !== null;
           return (
-            <button key={i} className={`idg-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
+            <button title="Select cell" key={i} className={`idg-cell ${cls}`} disabled={disabled} onClick={() => dispatch({ type: "place", idx: i } as GameAction)}>
               {v ?? ""}
             </button>
           );

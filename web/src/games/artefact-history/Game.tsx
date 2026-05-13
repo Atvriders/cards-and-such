@@ -7,14 +7,14 @@ const LABELS = ["A", "B", "C", "D"];
 export function ArtefactHistoryGame({ state, dispatch, onGameOver }: GameProps<ArtefactHistoryState, ArtefactHistorySettings>): JSX.Element {
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="ath-wrap"><div className="ath-done"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#d97706" }}>{state.score} pts</p></div></div>;
+  if (state.phase === "done") return <div className="ath-wrap"><div className="ath-done bounce-in"><h2>Saga End</h2><p style={{ fontSize:"1.6rem", fontWeight:900, color:"#d97706" }}>{state.score} pts</p></div></div>;
   const p = state.prompts[state.index]!;
   const isResult = state.phase === "result";
   return (
-    <div className="ath-wrap">
+    <div className="ath-wrap fade-in">
       <div className="ath-header">
         <span className="ath-progress">Entry {state.index + 1} / {state.prompts.length}</span>
-        <span className="ath-score">{state.score} pts</span>
+        <span className="ath-score pulse">{state.score} pts</span>
       </div>
       <div className="ath-prompt">{p.prompt}</div>
       <div className="ath-choices">

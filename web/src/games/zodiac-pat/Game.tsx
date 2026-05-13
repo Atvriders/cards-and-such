@@ -8,7 +8,7 @@ export function ZodiacPatGame(
 ): JSX.Element {
   if (state.won || state.lost) onGameOver(state.score);
   return (
-    <div className="zodiac-pat-root">
+    <div className="zodiac-pat-root fade-in">
       <div className="zodiac-pat-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

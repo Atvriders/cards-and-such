@@ -41,7 +41,7 @@ export function Panagram({ state, dispatch, onGameOver }: GameProps<PanagramStat
     return (
       <div className="panagram-wrap">
         <div className="panagram-title">Pangram</div>
-        <div className="panagram-done">
+        <div className="panagram-done bounce-in">
           <h2>Game Over</h2>
           <p style={{ fontWeight: 900, fontSize: "1.5rem", color: "#27ae60" }}>Score: {state.score}</p>
           <p>Found {state.found.length} words</p>
@@ -56,9 +56,9 @@ export function Panagram({ state, dispatch, onGameOver }: GameProps<PanagramStat
   }
 
   return (
-    <div className="panagram-wrap">
+    <div className="panagram-wrap fade-in">
       <div className="panagram-title">Pangram</div>
-      <div className="panagram-score">Score: {state.score} | Found: {state.found.length}</div>
+      <div className="panagram-score pulse">Score: {state.score} | Found: {state.found.length}</div>
 
       <div className="panagram-found-bar">
         {state.found.length === 0

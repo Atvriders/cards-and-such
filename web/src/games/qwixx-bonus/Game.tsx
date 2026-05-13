@@ -9,12 +9,12 @@ export function QwixxBonusGame({ state, dispatch, onGameOver }: GameProps<QwixxB
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="qbn-wrap">
+    <div className="qbn-wrap fade-in">
       <header className="qbn-head">
         <h2 className="qbn-title">Qwixx Bonus</h2>
         <div className="qbn-meta">
           <span className="qbn-meta-roll">Roll {state.rolls + (state.phase === "marking" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="qbn-meta-score">{state.score} pts</span>
+          <span className="qbn-meta-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "marking" && state.lastRoll !== null && (
@@ -25,7 +25,7 @@ export function QwixxBonusGame({ state, dispatch, onGameOver }: GameProps<QwixxB
       )}
       <div className="qbn-grid" style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 56px)` }}>
         {state.cells.map((filled, i) => (
-          <button data-testid="hint-target-qwixx-bonus-mark"
+          <button title="Select cell" data-testid="hint-target-qwixx-bonus-mark"
             key={i}
             className={`qbn-cell qbn-z${cellZone(i)}${filled ? " qbn-on" : ""}`}
             disabled={filled || state.phase !== "marking"}
@@ -43,7 +43,7 @@ export function QwixxBonusGame({ state, dispatch, onGameOver }: GameProps<QwixxB
         <button className="qbn-btn qbn-btn-reset" onClick={() => dispatch({ type: "reset" } as QwixxBonusAction)}>Reset</button>
       </div>
       {state.phase === "done" && (
-        <div className="qbn-done">Final score: <b>{final}</b></div>
+        <div className="qbn-done bounce-in">Final score: <b>{final}</b></div>
       )}
       <div className="qbn-rules">Two of same value = +5 bonus</div>
     </div>

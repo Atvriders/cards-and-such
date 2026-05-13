@@ -2,17 +2,8 @@ import { useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DeucesWildState, DeucesWildSettings, DeucesWildAction } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Card } from "../../engines/deck/Card.js";
 import "./Game.css";
-
-const SUITS_RED = new Set(["♥", "♦"]);
-
-function rankLabel(rank: number): string {
-  if (rank === 1) return "A";
-  if (rank === 11) return "J";
-  if (rank === 12) return "Q";
-  if (rank === 13) return "K";
-  return String(rank);
-}
 
 export function DeucesWild({ state, dispatch, onGameOver }: GameProps<DeucesWildState, DeucesWildSettings>): JSX.Element {
   const terminal = isTerminal(state);
@@ -39,10 +30,7 @@ export function DeucesWild({ state, dispatch, onGameOver }: GameProps<DeucesWild
               className={`dw-card-wrap${held[i] ? " held" : ""}`}
               onClick={() => phase === "draw" && dis({ type: "toggle-hold", index: i })}
             >
-              <div className={`dw-card${SUITS_RED.has(card.suit) ? " red" : ""}${card.rank === 2 ? " wild" : ""}`}>
-                <span>{rankLabel(card.rank)}</span>
-                <span>{card.suit}</span>
-              </div>
+              <Card card={card} className={`dw-card${card.rank === 2 ? " wild" : ""}`} />
               <div className="dw-held-label">{held[i] ? "HELD" : ""}</div>
             </div>
           ))}

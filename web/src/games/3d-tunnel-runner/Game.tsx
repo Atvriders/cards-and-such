@@ -29,7 +29,7 @@ export function ThreedTunnelRunnerGame({ state, dispatch, onGameOver }: GameProp
   if (state.phase === "done") {
     return (
       <div className="tdtnl-wrap">
-        <div className="tdtnl-done">
+        <div className="tdtnl-done bounce-in">
           <h2>Crashed!</h2>
           <div className="tdtnl-stats">Survived {state.ticks} ticks</div>
           <div className="tdtnl-final">{state.score} pts</div>
@@ -38,10 +38,10 @@ export function ThreedTunnelRunnerGame({ state, dispatch, onGameOver }: GameProp
     );
   }
   return (
-    <div className="tdtnl-wrap">
+    <div className="tdtnl-wrap fade-in">
       <div className="tdtnl-header">
         <span className="tdtnl-info">Survived: {state.ticks}</span>
-        <span className="tdtnl-score">{state.score} pts</span>
+        <span className="tdtnl-score pulse">{state.score} pts</span>
       </div>
       <div className="tdtnl-track">
         {Array.from({ length: LANES }).map((_, lane) => (
@@ -59,7 +59,7 @@ export function ThreedTunnelRunnerGame({ state, dispatch, onGameOver }: GameProp
         ))}
       </div>
       <div className="tdtnl-controls">
-        <button data-testid="hint-target-3d-tunnel-runner-primary" className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ThreedTunnelRunnerAction)}>↑ Up</button>
+        <button title="Move up" data-testid="hint-target-3d-tunnel-runner-primary" className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ThreedTunnelRunnerAction)}>↑ Up</button>
         <button className="tdtnl-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ThreedTunnelRunnerAction)}>↓ Down</button>
       </div>
       <div className="tdtnl-hint">Use arrow keys / WASD — dodge the {OBSTACLE_ICON} pulses</div>

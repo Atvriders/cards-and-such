@@ -29,7 +29,7 @@ export function Hnefatafl({
   const cellSize = 44;
 
   return (
-    <div className="hnefatafl-game">
+    <div className="hnefatafl-game fade-in">
       <div className={`hnefatafl-status ${statusClass}`}>{statusText}</div>
       <div className="hnefatafl-legend">
         <span className="legend-def">■ Defender (you)</span>

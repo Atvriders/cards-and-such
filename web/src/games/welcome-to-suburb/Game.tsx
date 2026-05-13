@@ -9,12 +9,12 @@ export function WelcomeToSuburbGame({ state, dispatch, onGameOver }: GameProps<W
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const final = t?.score ?? state.score;
   return (
-    <div className="wts-wrap">
+    <div className="wts-wrap fade-in">
       <header className="wts-head">
         <h2 className="wts-title">Welcome To Suburb</h2>
         <div className="wts-meta">
           <span>Roll {state.rolls + (state.phase === "placing" ? 1 : 0)} / {TOTAL_ROLLS}</span>
-          <span className="wts-score">{state.score} pts</span>
+          <span className="wts-score pulse">{state.score} pts</span>
         </div>
       </header>
       {state.phase === "placing" && state.lastRoll !== null && (
@@ -51,7 +51,7 @@ export function WelcomeToSuburbGame({ state, dispatch, onGameOver }: GameProps<W
         )}
         <button className="wts-btn wts-reset" onClick={() => dispatch({ type: "reset" } as WelcomeToSuburbAction)}>Reset</button>
       </div>
-      {state.phase === "done" && <div className="wts-done">Final: <b>{final}</b></div>}
+      {state.phase === "done" && <div className="wts-done bounce-in">Final: <b>{final}</b></div>}
       <div className="wts-rules">Each pair of consecutive houses: +2</div>
     </div>
   );

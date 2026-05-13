@@ -12,7 +12,7 @@ export function DontBreakIce({ state, dispatch, onGameOver }: GameProps<DontBrea
   const canPlay = state.turn === 0 && state.loser === null;
 
   return (
-    <div className="dbi-game">
+    <div className="dbi-game fade-in">
       <div className={`dbi-status ${state.loser === 1 ? "win" : state.loser === 0 ? "loss" : ""}`}>
         {state.message}
       </div>

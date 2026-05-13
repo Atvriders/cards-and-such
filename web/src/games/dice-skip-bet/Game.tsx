@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import type { GameProps } from "../../platform/game-plugin/types.js";
 import type { DiceSkipBetState, DiceSkipBetAction, DiceSkipBetSettings } from "./state.js";
 import { isTerminal } from "./state.js";
+import { Die } from "../../engines/dice/Die.js";
 import "./Game.css";
-const FACES = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
 export function DiceSkipBet({ state, dispatch, onGameOver }: GameProps<DiceSkipBetState, DiceSkipBetSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
@@ -14,7 +14,7 @@ export function DiceSkipBet({ state, dispatch, onGameOver }: GameProps<DiceSkipB
     <div className="dg-wrap">
       <div className="dg-header"><span>Round {state.round}/{state.maxRounds}</span><span className="dg-score pulse">{state.coins} coins</span></div>
       <p className="dg-label">Pick a "skip" number. Hit it = lose 5× bet. Miss it = win bet.</p>
-      <div className="dg-dice">{state.die ? <div className={`dg-die${state.lastWin===false?" "+(state.skipNumber===state.die?"":""):""}`} style={{borderColor:state.lastWin===false?"#e74c3c":"#27ae60"}}>{FACES[state.die]}</div> : <div className="dg-die" style={{opacity:0.3}}>?</div>}</div>
+      <div className="dg-dice">{state.die ? <div className={`dg-die${state.lastWin===false?" "+(state.skipNumber===state.die?"":""):""}`} style={{borderColor:state.lastWin===false?"#e74c3c":"#27ae60"}}><Die value={state.die as 1 | 2 | 3 | 4 | 5 | 6} /></div> : <div className="dg-die" style={{opacity:0.3}}>?</div>}</div>
       {state.phase==="result" && <p className={`dg-msg${state.lastWin?"":" bad"}`}>{state.lastWin?`Rolled ${state.die} — not ${state.skipNumber}! +${state.bet} coins`:`Hit ${state.skipNumber}! Lost ${state.bet*5} coins`}</p>}
       {state.phase==="betting" && <>
         <div style={{display:"flex",gap:"16px",alignItems:"center"}}>

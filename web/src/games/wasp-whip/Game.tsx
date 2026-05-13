@@ -14,14 +14,14 @@ export function WaspWhipGame({ state, dispatch, onGameOver }: GameProps<WaspWhip
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="wsp-wrap"><div className="wsp-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="wsp-final">{state.score} pts</div></div></div>;
+    return <div className="wsp-wrap"><div className="wsp-done bounce-in"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="wsp-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="wsp-wrap">
+    <div className="wsp-wrap fade-in">
       <div className="wsp-header">
         <span className="wsp-info">Caught: {state.popped}</span>
         <span className="wsp-timer">{state.ticksRemaining}s</span>
-        <span className="wsp-score">{state.score} pts</span>
+        <span className="wsp-score pulse">{state.score} pts</span>
       </div>
       <div className="wsp-board" style={{ background: "linear-gradient(180deg,#fde047,#854d0e)" }}>
         {state.bugs.map(p => {

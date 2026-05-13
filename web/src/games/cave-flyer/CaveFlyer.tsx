@@ -59,7 +59,7 @@ export function CaveFlyer({
   const { segments, playerY } = state;
 
   return (
-    <div className="cave-flyer">
+    <div className="cave-flyer fade-in">
       <div className="cf-hud">
         <span>Score: {state.score}</span>
       </div>

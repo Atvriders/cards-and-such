@@ -18,7 +18,7 @@ export function Match3TriangleMiniGame({ state, dispatch, onGameOver }: GameProp
   if (state.phase === "done") {
     return (
       <div className="m3tri-wrap">
-        <div className="m3tri-done">
+        <div className="m3tri-done bounce-in">
           <h2>Time's Up!</h2>
           <div className="m3tri-stats">Matches: {state.matches}</div>
           <div className="m3tri-final">{state.score} pts</div>
@@ -27,11 +27,11 @@ export function Match3TriangleMiniGame({ state, dispatch, onGameOver }: GameProp
     );
   }
   return (
-    <div className="m3tri-wrap">
+    <div className="m3tri-wrap fade-in">
       <div className="m3tri-header">
         <span className="m3tri-info">Matches: {state.matches}</span>
         <span className="m3tri-timer">{state.ticksRemaining}s</span>
-        <span className="m3tri-score">{state.score} pts</span>
+        <span className="m3tri-score pulse">{state.score} pts</span>
       </div>
       <div className="m3tri-grid">
         {state.grid.map((row, r) => row.map((g, c) => {

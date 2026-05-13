@@ -132,7 +132,7 @@ export function PaddleBallJuggleGame({
   }, [terminal, onGameOver]);
 
   return (
-    <div className="paddle-game">
+    <div className="paddle-game fade-in">
       <div style={{ position: "relative" }}>
         <canvas
           ref={canvasRef}

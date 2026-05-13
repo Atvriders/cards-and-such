@@ -8,7 +8,7 @@ export function StockpileTraderGame({ state, dispatch, onGameOver }: GameProps<S
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   return (
-    <div className="bz-spt-wrap">
+    <div className="bz-spt-wrap fade-in">
       <h3 className="bz-spt-title">Stockpile Trader</h3>
       <div className="bz-spt-stats">
         <div>Turn <b>{state.turn}/{TOTAL_TURNS}</b></div>
@@ -31,7 +31,7 @@ export function StockpileTraderGame({ state, dispatch, onGameOver }: GameProps<S
         </div>
       )}
       {state.phase === "done" && (
-        <div className="bz-spt-done">
+        <div className="bz-spt-done bounce-in">
           <h3>Final Net Worth: ${score(state)}</h3>
         </div>
       )}

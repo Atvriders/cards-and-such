@@ -29,7 +29,7 @@ export function DoodleJumpArcadeGame({ state, dispatch, onGameOver }: GameProps<
   if (state.phase === "done") {
     return (
       <div className="ddljmp-wrap">
-        <div className="ddljmp-done">
+        <div className="ddljmp-done bounce-in">
           <h2>Crashed!</h2>
           <div className="ddljmp-stats">Survived {state.ticks} ticks</div>
           <div className="ddljmp-final">{state.score} pts</div>
@@ -38,10 +38,10 @@ export function DoodleJumpArcadeGame({ state, dispatch, onGameOver }: GameProps<
     );
   }
   return (
-    <div className="ddljmp-wrap">
+    <div className="ddljmp-wrap fade-in">
       <div className="ddljmp-header">
         <span className="ddljmp-info">Survived: {state.ticks}</span>
-        <span className="ddljmp-score">{state.score} pts</span>
+        <span className="ddljmp-score pulse">{state.score} pts</span>
       </div>
       <div className="ddljmp-track">
         {Array.from({ length: LANES }).map((_, lane) => (
@@ -59,7 +59,7 @@ export function DoodleJumpArcadeGame({ state, dispatch, onGameOver }: GameProps<
         ))}
       </div>
       <div className="ddljmp-controls">
-        <button data-testid="hint-target-doodle-jump-arcade-primary" className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
+        <button title="Move up" data-testid="hint-target-doodle-jump-arcade-primary" className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as DoodleJumpArcadeAction)}>↑ Up</button>
         <button className="ddljmp-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as DoodleJumpArcadeAction)}>↓ Down</button>
       </div>
       <div className="ddljmp-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

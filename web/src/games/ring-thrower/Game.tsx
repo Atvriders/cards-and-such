@@ -169,7 +169,7 @@ export function RingThrowerGame({
   }, [terminal, onGameOver]);
 
   return (
-    <div className="ring-game">
+    <div className="ring-game fade-in">
       <div style={{ position: "relative" }}>
         <canvas
           ref={canvasRef}

@@ -22,7 +22,7 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
   if (state.phase === "done") {
     return (
       <div className="windokuplusherb-wrap">
-        <div className="windokuplusherb-done">
+        <div className="windokuplusherb-done bounce-in">
           <h2>Done!</h2>
           <p>Puzzles solved: {state.totalSolved} / {state.puzzles.length}</p>
           <p className="windokuplusherb-final">{state.score} pts</p>
@@ -36,10 +36,10 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
   const digits = Array.from({ length: MAX_DIGIT }, (_, i) => i + 1);
 
   return (
-    <div className="windokuplusherb-wrap">
+    <div className="windokuplusherb-wrap fade-in">
       <div className="windokuplusherb-header">
         <span>Puzzle {state.idx + 1} / {state.puzzles.length}</span>
-        <span className="windokuplusherb-score">{state.score} pts</span>
+        <span className="windokuplusherb-score pulse">{state.score} pts</span>
       </div>
       <div className="windokuplusherb-mech">Standard Sudoku rules. Bonus: extra 3×3 windows constrained too.</div>
       <div className="windokuplusherb-grid">
@@ -54,7 +54,7 @@ export function WindokuPlusMiniGame({ state, dispatch, onGameOver }: GameProps<W
               const rightThick = (c + 1) % BOX_COLS === 0 && c + 1 < GRID_SIZE;
               const bottomThick = (r + 1) % BOX_ROWS === 0 && r + 1 < GRID_SIZE;
               return (
-                <button
+                <button title="Select cell"
                   key={c}
                   className={`windokuplusherb-cell${isGiven ? " given" : ""}${isSel ? " sel" : ""}${isErr ? " err" : ""}${rightThick ? " rt" : ""}${bottomThick ? " bt" : ""}`}
                   onClick={() => dispatch({ type: "select", index: idx } as WindokuPlusMiniAction)}

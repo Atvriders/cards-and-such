@@ -110,7 +110,7 @@ export function Quordle({
   const solvedCount = solved.filter(Boolean).length;
 
   return (
-    <div className="qrd-wrap">
+    <div className="qrd-wrap fade-in">
       <div className="qrd-header">
         <span>Guesses left: {guessesLeft} / 9</span>
         <span>Solved: {solvedCount} / 4</span>

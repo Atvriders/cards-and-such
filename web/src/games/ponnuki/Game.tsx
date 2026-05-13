@@ -9,17 +9,17 @@ export function PonnukiGame({ state, dispatch, onGameOver }: GameProps<PonnukiSt
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
     const msg = state.result === "P" ? "You won!" : state.result === "C" ? "CPU won!" : "Draw";
-    return <div className="po-wrap"><div className="po-done"><h2>{msg}</h2><div className="po-final">{state.score} pts</div></div></div>;
+    return <div className="po-wrap"><div className="po-done bounce-in"><h2>{msg}</h2><div className="po-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="po-wrap">
+    <div className="po-wrap fade-in">
       <div className="po-info">Place your piece on an empty square. Most pieces wins.</div>
-      <div className="po-score">Move {state.moves}</div>
+      <div className="po-score pulse">Move {state.moves}</div>
       <div className="po-board" style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)` }}>
         {Array.from({ length: SIZE * SIZE }).map((_, i) => {
           const v = state.board[i];
           const cls = v === "P" ? "p" : v === "C" ? "c" : "";
-          return <button key={i} className={`po-cell ${cls}`} disabled={v !== null} onClick={() => dispatch({ type:"place", idx:i } as PonnukiAction)}>{v ?? ""}</button>;
+          return <button title="Select cell" key={i} className={`po-cell ${cls}`} disabled={v !== null} onClick={() => dispatch({ type:"place", idx:i } as PonnukiAction)}>{v ?? ""}</button>;
         })}
       </div>
     </div>

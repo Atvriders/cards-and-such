@@ -14,14 +14,14 @@ export function CrabCatchGame({ state, dispatch, onGameOver }: GameProps<CrabCat
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="cc-wrap"><div className="cc-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="cc-final">{state.score} pts</div></div></div>;
+    return <div className="cc-wrap"><div className="cc-done bounce-in"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="cc-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cc-wrap">
+    <div className="cc-wrap fade-in">
       <div className="cc-header">
         <span className="cc-info">Caught: {state.popped}</span>
         <span className="cc-timer">{state.ticksRemaining}s</span>
-        <span className="cc-score">{state.score} pts</span>
+        <span className="cc-score pulse">{state.score} pts</span>
       </div>
       <div className="cc-board" style={{ background: "linear-gradient(180deg,#fed7aa,#7c2d12)" }}>
         {state.critters.map(p => {

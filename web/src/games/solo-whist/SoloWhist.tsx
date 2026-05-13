@@ -43,7 +43,7 @@ export function SoloWhist({
   );
 
   return (
-    <div className="solo-whist">
+    <div className="solo-whist fade-in">
       <div className="sw-header">
         <span>You: {score[0]} wins</span>
         <span>Bots: {score[1]} wins</span>

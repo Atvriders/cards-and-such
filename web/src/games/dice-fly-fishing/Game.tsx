@@ -10,7 +10,7 @@ export function DiceFlyFishingGame({ state, dispatch, onGameOver }: GameProps<Di
   if (state.phase === "done") {
     return (
       <div className="diflfi-wrap">
-        <div className="diflfi-done">
+        <div className="diflfi-done bounce-in">
           <h2>Cast</h2>
           <div className="diflfi-final">{Math.max(0, state.score)} pts</div>
           
@@ -22,10 +22,10 @@ export function DiceFlyFishingGame({ state, dispatch, onGameOver }: GameProps<Di
     );
   }
   return (
-    <div className="diflfi-wrap">
+    <div className="diflfi-wrap fade-in">
       <div className="diflfi-head">
         <span className="diflfi-round">Cast {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="diflfi-score">{state.score} pts</span>
+        <span className="diflfi-score pulse">{state.score} pts</span>
       </div>
       
       {state.dice && (

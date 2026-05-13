@@ -8,12 +8,12 @@ export function DiceArcheologyGame({ state, dispatch, onGameOver }: GameProps<Di
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dar-wrap"><div className="dar-done"><h2>Done!</h2><div className="dar-final">{state.score} pts</div></div></div>;
+    return <div className="dar-wrap"><div className="dar-done bounce-in"><h2>Done!</h2><div className="dar-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dar-wrap">
+    <div className="dar-wrap fade-in">
       <div className="dar-info">Round {state.round + 1} / {TOTAL_ROUNDS}</div>
-      <div className="dar-score">{state.score} pts</div>
+      <div className="dar-score pulse">{state.score} pts</div>
       {state.lastRoll > 0 && (
         <>
           <div className="dar-die">{state.lastRoll}</div>

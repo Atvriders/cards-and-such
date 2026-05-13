@@ -21,7 +21,7 @@ export function ZooKeeper({ state, dispatch, onGameOver }: GameProps<ZooState, R
   const avg = avgHappiness(state);
 
   return (
-    <div className="zoo-wrap">
+    <div className="zoo-wrap fade-in">
       <div className="zoo-header">
         <span className="zoo-title">🦁 Zoo Keeper</span>
         <span className="zoo-turn">Day {state.turn}/{TOTAL_TURNS}</span>
@@ -69,7 +69,7 @@ export function ZooKeeper({ state, dispatch, onGameOver }: GameProps<ZooState, R
       )}
 
       {state.phase === "done" && (
-        <div className="zoo-done">
+        <div className="zoo-done bounce-in">
           <div className="zoo-final">Final Avg Happiness: <strong>{avg}</strong></div>
           <div className="zoo-final-rev">Total Revenue: <strong>${state.totalRevenue}</strong></div>
           <div className="zoo-result">

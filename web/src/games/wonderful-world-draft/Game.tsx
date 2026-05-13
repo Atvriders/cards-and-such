@@ -9,7 +9,7 @@ export function WonderfulWorldDraftGame({ state, dispatch, onGameOver }: GamePro
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="iwwd-wrap">
+    <div className="iwwd-wrap fade-in">
       <h3 className="iwwd-title">It is a Wonderful World Draft</h3>
       <div className="iwwd-stats">
         <div className="iwwd-stat"><span>Round</span><b>{state.round}/9</b></div>
@@ -36,10 +36,10 @@ export function WonderfulWorldDraftGame({ state, dispatch, onGameOver }: GamePro
         </div>
       )}
       {state.phase === "done" && (
-        <div className="iwwd-done">
+        <div className="iwwd-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="iwwd-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="iwwd-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="iwwd-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="iwwd-tableaus">

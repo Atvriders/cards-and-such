@@ -5,12 +5,12 @@ import { isTerminal, TOTAL_ROUNDS } from "./state.js";
 import "./Game.css";
 export function SvoyiKoziriShedGame({ state, dispatch, onGameOver }: GameProps<SvoyiKoziriShedState, SvoyiKoziriShedSettings>): JSX.Element {
   const t = isTerminal(state); useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
-  if (state.phase === "done") return <div className="dm-wrap"><h3>Svoyi Koziri</h3><div className="dm-done"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="dm-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="dm-wrap"><h3>Svoyi Koziri</h3><div className="dm-done bounce-in"><h2>Done!</h2><div>W: {state.wins} L: {state.losses}</div><div className="dm-final">{state.score} pts</div></div></div>;
   return (
-    <div className="dm-wrap">
+    <div className="dm-wrap fade-in">
       <h3>Svoyi Koziri</h3>
       <div className="dm-info">Round {state.round} / {TOTAL_ROUNDS} — W{state.wins} L{state.losses}</div>
-      <div className="dm-score">{state.score} pts</div>
+      <div className="dm-score pulse">{state.score} pts</div>
       <div className="dm-info">You: {state.you} cards · CPU: {state.cpu} cards</div>
       {state.phase === "ready" && <button data-testid="hint-target-svoyi-koziri-shed-play" className="dm-btn" onClick={() => dispatch({ type: "play" } as SvoyiKoziriShedAction)}>Play Round</button>}
       {state.phase === "scored" && <>

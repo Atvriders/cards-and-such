@@ -28,7 +28,7 @@ export function ExponentDrillGame({ state, dispatch, onGameOver }: GameProps<Exp
   if (terminal) {
     return (
       <div className="ed-wrap">
-        <div className="ed-done">
+        <div className="ed-done bounce-in">
           <h2>Finished!</h2>
           <p>Score: <strong>{terminal.score}</strong> &middot; {state.correctCount}/{total} correct</p>
         </div>
@@ -37,7 +37,7 @@ export function ExponentDrillGame({ state, dispatch, onGameOver }: GameProps<Exp
   }
 
   return (
-    <div className="ed-wrap">
+    <div className="ed-wrap fade-in">
       <div className="ed-header">
         <span>Question <strong>{state.currentIndex + 1}</strong>/{total}</span>
         <span>Score: <strong>{state.score}</strong></span>

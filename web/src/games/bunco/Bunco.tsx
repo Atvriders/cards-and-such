@@ -16,7 +16,7 @@ export function Bunco({ state, dispatch, onGameOver }: GameProps<BuncoState, Bun
   const isBunco = state.lastRollScore === 21;
 
   return (
-    <div className="bunco">
+    <div className="bunco fade-in">
       <div className="bunco-info">
         <span>Round {state.round} / 6</span>
         <span className="bunco-target">Target: roll {state.round}s</span>
@@ -64,7 +64,7 @@ export function Bunco({ state, dispatch, onGameOver }: GameProps<BuncoState, Bun
               </tr>
             );
           })}
-          <tr className="total">
+          <tr className="total pulse">
             <td colSpan={2}>Total</td>
             <td>{state.totalScore}</td>
           </tr>

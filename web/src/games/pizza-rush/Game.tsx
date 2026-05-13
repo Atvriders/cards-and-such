@@ -33,7 +33,7 @@ export function PizzaRushGame({
   const toppings: Topping[] = ["sauce", "cheese", "pepperoni", "mushroom", "olive"];
 
   return (
-    <div className="pr-game">
+    <div className="pr-game fade-in">
       <div className="pr-title">Pizza Rush!</div>
       <div className="pr-stats">
         <span>Score: <b>{state.score}</b></span>

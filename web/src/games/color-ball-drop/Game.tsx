@@ -29,7 +29,7 @@ export function ColorBallDropGame({ state, dispatch, onGameOver }: GameProps<Col
   if (state.phase === "done") {
     return (
       <div className="clrbll-wrap">
-        <div className="clrbll-done">
+        <div className="clrbll-done bounce-in">
           <h2>Crashed!</h2>
           <div className="clrbll-stats">Survived {state.ticks} ticks</div>
           <div className="clrbll-final">{state.score} pts</div>
@@ -38,10 +38,10 @@ export function ColorBallDropGame({ state, dispatch, onGameOver }: GameProps<Col
     );
   }
   return (
-    <div className="clrbll-wrap">
+    <div className="clrbll-wrap fade-in">
       <div className="clrbll-header">
         <span className="clrbll-info">Survived: {state.ticks}</span>
-        <span className="clrbll-score">{state.score} pts</span>
+        <span className="clrbll-score pulse">{state.score} pts</span>
       </div>
       <div className="clrbll-track">
         {Array.from({ length: LANES }).map((_, lane) => (
@@ -59,7 +59,7 @@ export function ColorBallDropGame({ state, dispatch, onGameOver }: GameProps<Col
         ))}
       </div>
       <div className="clrbll-controls">
-        <button data-testid="hint-target-color-ball-drop-primary" className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ColorBallDropAction)}>↑ Up</button>
+        <button title="Move up" data-testid="hint-target-color-ball-drop-primary" className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: -1 } as ColorBallDropAction)}>↑ Up</button>
         <button className="clrbll-btn" onClick={() => dispatch({ type: "lane", dir: 1 } as ColorBallDropAction)}>↓ Down</button>
       </div>
       <div className="clrbll-hint">Use arrow keys / WASD to switch lanes — avoid the {OBSTACLE_ICON}</div>

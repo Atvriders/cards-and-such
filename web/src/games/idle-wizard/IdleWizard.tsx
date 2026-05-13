@@ -31,7 +31,7 @@ export function IdleWizard({
   const tCost = tomeCost(state.tomes);
 
   return (
-    <div className="iw-game">
+    <div className="iw-game fade-in">
       <div className="iw-title">Idle Wizard</div>
       <div className="iw-stats">
         <span className="iw-mana">✨ {Math.floor(state.mana)} mana</span>

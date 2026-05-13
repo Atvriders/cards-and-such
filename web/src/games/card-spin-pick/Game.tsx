@@ -9,7 +9,7 @@ export function CardSpinPick({ state, dispatch, onGameOver }: GameProps<CardSpin
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
 
   if (state.phase === "gameover") return (
-    <div className="csp-wrap"><div className="csp-done">
+    <div className="csp-wrap"><div className="csp-done bounce-in">
       <h2>Spin Done!</h2>
       <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#8e44ad" }}>{state.score} pts</p>
     </div></div>
@@ -17,10 +17,10 @@ export function CardSpinPick({ state, dispatch, onGameOver }: GameProps<CardSpin
 
   const isSpun = state.phase === "spun";
   return (
-    <div className="csp-wrap">
+    <div className="csp-wrap fade-in">
       <div className="csp-header">
         <span>Round {state.round} / {state.maxRounds}</span>
-        <span className="csp-score">{state.score} pts</span>
+        <span className="csp-score pulse">{state.score} pts</span>
       </div>
       <p className="csp-hint">{isSpun ? (state.spinResult === state.playerPick ? "Match! +100" : `Spinner chose ${state.spinResult! + 1} — +10`) : "Pick a card, then Spin!"}</p>
       <div className="csp-cards">

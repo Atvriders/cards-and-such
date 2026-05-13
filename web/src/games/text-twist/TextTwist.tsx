@@ -39,9 +39,9 @@ export function TextTwist({
   const { letters, currentInput, foundWords, score, timeLeft, message, targetWord } = state;
 
   return (
-    <div className="tt-wrap">
+    <div className="tt-wrap fade-in">
       <div className="tt-header">
-        <span className="tt-score">Score: {score}</span>
+        <span className="tt-score pulse">Score: {score}</span>
         <span className="tt-timer">{timeLeft}s</span>
       </div>
 

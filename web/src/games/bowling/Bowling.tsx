@@ -36,9 +36,9 @@ export function Bowling({
   const pinsUpArr = Array.from({ length: 10 }, (_, i) => i < state.pinsUp);
 
   return (
-    <div className="bowling-game">
+    <div className="bowling-game fade-in">
       <div className="bowling-title">Bowling</div>
-      <div className="bowling-total">Score: {state.totalScore}</div>
+      <div className="bowling-total pulse">Score: {state.totalScore}</div>
 
       {/* Scoreboard */}
       <div className="bowling-scoreboard">

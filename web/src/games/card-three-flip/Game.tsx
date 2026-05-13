@@ -7,10 +7,10 @@ import "./Game.css";
 export function CardThreeFlip({ state, dispatch, onGameOver }: GameProps<CardThreeFlipState, CardThreeFlipSettings>): JSX.Element {
   const terminal = isTerminal(state);
   useEffect(() => { if (terminal) onGameOver(terminal.score); }, [terminal, onGameOver]);
-  if (state.phase === "gameover") return <div className="ctf-wrap"><div className="ctf-done"><h2>Done!</h2><p>Total Points: {state.coins}</p></div></div>;
+  if (state.phase === "gameover") return <div className="ctf-wrap"><div className="ctf-done bounce-in"><h2>Done!</h2><p>Total Points: {state.coins}</p></div></div>;
   return (
-    <div className="ctf-wrap">
-      <div className="ctf-header"><span>Round {state.round} / {state.maxRounds}</span><span className="ctf-score">{state.coins} pts</span></div>
+    <div className="ctf-wrap fade-in">
+      <div className="ctf-header"><span>Round {state.round} / {state.maxRounds}</span><span className="ctf-score pulse">{state.coins} pts</span></div>
       <div className="ctf-cards">
         {state.phase === "revealed" ? state.flipped.map((c, i) => (
           <div key={i} className={`ctf-card ${Math.floor(c/13)===1||Math.floor(c/13)===2?"red":""}`}>{rankName(c)}{suitName(c)}</div>

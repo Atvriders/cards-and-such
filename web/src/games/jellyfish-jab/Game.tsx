@@ -14,14 +14,14 @@ export function JellyfishJabGame({ state, dispatch, onGameOver }: GameProps<Jell
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
   if (state.phase === "done") {
-    return <div className="jj-wrap"><div className="jj-done"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="jj-final">{state.score} pts</div></div></div>;
+    return <div className="jj-wrap"><div className="jj-done bounce-in"><h2>Time's Up!</h2><div>Caught: {state.popped} / Missed: {state.missed}</div><div className="jj-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="jj-wrap">
+    <div className="jj-wrap fade-in">
       <div className="jj-header">
         <span className="jj-info">Caught: {state.popped}</span>
         <span className="jj-timer">{state.ticksRemaining}s</span>
-        <span className="jj-score">{state.score} pts</span>
+        <span className="jj-score pulse">{state.score} pts</span>
       </div>
       <div className="jj-board" style={{ background: "linear-gradient(180deg,#bae6fd,#1e3a8a)" }}>
         {state.critters.map(p => {

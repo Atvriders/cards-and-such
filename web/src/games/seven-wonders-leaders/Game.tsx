@@ -9,7 +9,7 @@ export function SevenWondersLeadersGame({ state, dispatch, onGameOver }: GamePro
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   const finalScore = score(state);
   return (
-    <div className="swl-wrap">
+    <div className="swl-wrap fade-in">
       <h3 className="swl-title">Seven Wonders: Leaders</h3>
       <div className="swl-stats">
         <div className="swl-stat"><span>Round</span><b>{state.round}/8</b></div>
@@ -36,10 +36,10 @@ export function SevenWondersLeadersGame({ state, dispatch, onGameOver }: GamePro
         </div>
       )}
       {state.phase === "done" && (
-        <div className="swl-done">
+        <div className="swl-done bounce-in">
           <h3>{state.myScore > state.cpuScore ? "Victory!" : state.myScore === state.cpuScore ? "Draw" : "Defeat"}</h3>
           <div className="swl-final">You: {state.myScore} &middot; CPU: {state.cpuScore}</div>
-          <div className="swl-final-score">Final score: <b>{finalScore}</b></div>
+          <div className="swl-final-score pulse">Final score: <b>{finalScore}</b></div>
         </div>
       )}
       <div className="swl-tableaus">

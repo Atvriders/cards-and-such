@@ -10,9 +10,18 @@ const PH = 500;
 export function SkyJoust({
   state,
   dispatch,
+  onGameOver,
 }: GameProps<SkyJoustState, Record<never, never>>): JSX.Element {
   const stateRef = useRef(state);
   stateRef.current = state;
+  const endedRef = useRef(false);
+  useEffect(() => {
+    const t = isTerminal(state);
+    if (t && !endedRef.current) {
+      endedRef.current = true;
+      onGameOver(t.score);
+    }
+  }, [state, onGameOver]);
 
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);

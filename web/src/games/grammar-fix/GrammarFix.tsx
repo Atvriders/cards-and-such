@@ -18,11 +18,11 @@ export function GrammarFix({
   const entry = state.entries[state.current];
 
   return (
-    <div className="gf-wrap">
+    <div className="gf-wrap fade-in">
       <div className="gf-progress">
         Question {state.current + 1} of {state.entries.length}
       </div>
-      <div className="gf-score">Score: {state.score}</div>
+      <div className="gf-score pulse">Score: {state.score}</div>
 
       {!state.done && entry ? (
         <>
@@ -61,7 +61,7 @@ export function GrammarFix({
           )}
         </>
       ) : (
-        <div className="gf-done">
+        <div className="gf-done bounce-in">
           <h2>Quiz Complete!</h2>
           <div className="gf-final">
             Score: {state.score} / {state.entries.length * 10}

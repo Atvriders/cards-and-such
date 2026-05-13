@@ -8,7 +8,7 @@ export function ZodiacPatienceGame(
 ): JSX.Element {
   if (state.won || state.lost) onGameOver(state.score);
   return (
-    <div className="zodiac-patience-root">
+    <div className="zodiac-patience-root fade-in">
       <div className="zodiac-patience-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

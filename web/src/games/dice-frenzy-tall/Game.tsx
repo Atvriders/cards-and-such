@@ -8,16 +8,16 @@ export function DiceFrenzyTallGame({ state, dispatch, onGameOver }: GameProps<Di
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="dfrt-wrap dfrt-theme"><div className="dfrt-done"><h2>Done!</h2><div className="dfrt-final">{state.score} pts</div></div></div>;
+    return <div className="dfrt-wrap dfrt-theme"><div className="dfrt-done bounce-in"><h2>Done!</h2><div className="dfrt-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="dfrt-wrap dfrt-theme">
+    <div className="dfrt-wrap dfrt-theme fade-in">
       <div className="dfrt-info">Round {state.round} / {TOTAL_ROUNDS}</div>
-      <div className="dfrt-score">{state.score} pts</div>
+      <div className="dfrt-score pulse">{state.score} pts</div>
       <div className="dfrt-info">Need: ascending stack (each die ≥ previous)</div>
       <div className="dfrt-row">
         {state.dice.map((v, i) => (
-          <button
+          <button title="Toggle die"
             key={i}
             className={`dft-die ${state.selected[i] ? "selected" : ""}`}
             disabled={state.phase !== "rolling"}

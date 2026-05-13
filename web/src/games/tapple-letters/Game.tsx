@@ -13,7 +13,7 @@ export function TappleLettersGame({ state, dispatch, onGameOver }: GameProps<Tap
   if (state.phase === "done") {
     return (
       <div className="tpl-wrap">
-        <div className="tpl-done">
+        <div className="tpl-done bounce-in">
           <h2>Done!</h2>
           <p>Correct: {state.correctCount} / {state.rounds.length}</p>
           <p style={{ fontSize: "1.8rem", fontWeight: 900, color: "#27ae60" }}>{state.score} pts</p>
@@ -26,10 +26,10 @@ export function TappleLettersGame({ state, dispatch, onGameOver }: GameProps<Tap
   const isResult = state.phase === "result";
 
   return (
-    <div className="tpl-wrap">
+    <div className="tpl-wrap fade-in">
       <div className="tpl-header">
         <span className="tpl-progress">Round {state.currentIndex + 1} / {state.rounds.length}</span>
-        <span className="tpl-score">{state.score} pts</span>
+        <span className="tpl-score pulse">{state.score} pts</span>
       </div>
       <div className="tpl-prompt"><span className="tpl-label">Choose:</span> {r.prompt}</div>
       <div className="tpl-choices">

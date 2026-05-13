@@ -12,13 +12,13 @@ export function CogClickGame({ state, dispatch, onGameOver }: GameProps<CogClick
     tickRef.current = setInterval(() => dispatch({ type: "tick" } as CogClickAction), 750);
     return () => { if (tickRef.current) clearInterval(tickRef.current); };
   }, [state.phase, dispatch]);
-  if (state.phase === "done") return <div className="fc-wrap"><div className="fc-done"><h2>Time's Up!</h2><div>Hit: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
+  if (state.phase === "done") return <div className="fc-wrap"><div className="fc-done bounce-in"><h2>Time's Up!</h2><div>Hit: {state.popped} / Missed: {state.missed}</div><div className="fc-final">{state.score} pts</div></div></div>;
   return (
-    <div className="fc-wrap">
+    <div className="fc-wrap fade-in">
       <div className="fc-header">
         <span className="fc-info">Hit: {state.popped}</span>
         <span className="fc-timer">{state.ticksRemaining}s</span>
-        <span className="fc-score">{state.score} pts</span>
+        <span className="fc-score pulse">{state.score} pts</span>
       </div>
       <div className="fc-board">
         {state.targets.map(p => {

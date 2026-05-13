@@ -8,13 +8,13 @@ export function CardMixmatchGame({ state, dispatch, onGameOver }: GameProps<Card
   const t = isTerminal(state);
   useEffect(() => { if (t) onGameOver(t.score); }, [t, onGameOver]);
   if (state.phase === "done") {
-    return <div className="cm-wrap"><div className="cm-done"><h2>Done!</h2><div className="cm-final">{state.score} pts</div></div></div>;
+    return <div className="cm-wrap"><div className="cm-done bounce-in"><h2>Done!</h2><div className="cm-final">{state.score} pts</div></div></div>;
   }
   return (
-    <div className="cm-wrap">
+    <div className="cm-wrap fade-in">
       <div className="cm-header">
         <span className="cm-info">Round {state.round} / {TOTAL_ROUNDS}</span>
-        <span className="cm-score">{state.score} pts</span>
+        <span className="cm-score pulse">{state.score} pts</span>
       </div>
       <div className="cm-hand">
         {state.hand.map((c, i) => (

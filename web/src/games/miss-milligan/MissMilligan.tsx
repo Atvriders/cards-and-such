@@ -47,7 +47,7 @@ export function MissMilligan({
   const stockCount = stock ? stock.cards.length : 0;
 
   return (
-    <div className="miss-milligan">
+    <div className="miss-milligan fade-in">
       <div className="miss-milligan-info">
         <span>Moves: {state.movesMade}</span>
         <span>Score: {state.score}</span>

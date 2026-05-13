@@ -31,10 +31,10 @@ export function NineCardBragGame({ state, dispatch, onGameOver }: GameProps<Nine
   const placedIndices = new Set((playerArrangement ?? []).flatMap(g => g.cards.map(c => playerHand.indexOf(c))));
 
   return (
-    <div className="brag">
+    <div className="brag fade-in">
       <div className="brag-header">
         <h2>Nine-Card Brag</h2>
-        <div className="brag-score">You {playerWins} – Bot {botWins} (first to {roundsTarget})</div>
+        <div className="brag-score pulse">You {playerWins} – Bot {botWins} (first to {roundsTarget})</div>
       </div>
 
       {phase === "arrange" && (
