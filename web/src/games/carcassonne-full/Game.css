@@ -1,0 +1,249 @@
+.cf-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  color: var(--theme-text, #f5f5f5);
+  font-size: 14px;
+}
+
+.cf-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.cf-scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.cf-seat {
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.35);
+  min-width: 110px;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.cf-seat.cf-active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.cf-seat-name {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.cf-seat-score {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 2px 0;
+}
+
+.cf-seat-meeples {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.cf-bag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px dashed #888;
+  border-radius: 8px;
+  padding: 4px 10px;
+  min-width: 80px;
+}
+
+.cf-bag-label { font-size: 11px; opacity: 0.8; }
+.cf-bag-count { font-size: 20px; font-weight: 700; }
+
+.cf-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cf-current-label {
+  font-size: 13px;
+  opacity: 0.92;
+}
+
+.cf-rotate-row {
+  display: flex;
+  gap: 6px;
+}
+
+.cf-rotate-row button {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #888;
+  background: #2a2a30;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cf-rotate-row button:hover { background: #3a3a44; }
+
+.cf-meeple-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #555;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.cf-meeple-label { font-size: 13px; }
+
+.cf-meeple-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cf-meeple-buttons button {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #888;
+  background: #2a2a30;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cf-meeple-buttons button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cf-meeple-buttons button:hover:not(:disabled) {
+  background: #3a3a44;
+}
+
+.cf-board {
+  display: grid;
+  gap: 1px;
+  background: #5a4a30;
+  padding: 4px;
+  border-radius: 6px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.cf-cell {
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cf-cell.cf-legal {
+  outline: 2px dashed #f7d96b;
+  outline-offset: -3px;
+  cursor: pointer;
+}
+
+.cf-cell.cf-legal:hover {
+  background: rgba(247, 217, 107, 0.18);
+}
+
+.cf-tile {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.cf-tile.cf-ghost {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.cf-tile.cf-hl {
+  box-shadow: 0 0 0 2px #fff inset;
+}
+
+.cf-edge {
+  position: absolute;
+}
+
+.cf-cloister {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ece6c8;
+  border: 1px solid #6a4a20;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+}
+
+.cf-shield {
+  position: absolute;
+  width: 8px;
+  height: 10px;
+  background: #c93030;
+  border: 1px solid #4a0e0e;
+  left: 4px;
+  top: 4px;
+  border-radius: 2px 2px 4px 4px;
+}
+
+.cf-meeple {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.cf-log {
+  font-size: 12px;
+  opacity: 0.85;
+  text-align: center;
+  max-width: 540px;
+  min-height: 1.4em;
+  padding: 0 6px;
+}
+
+.cf-done {
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid #f7d96b;
+  border-radius: 8px;
+  padding: 12px 18px;
+  text-align: center;
+}
+
+.cf-done h3 { margin: 0 0 6px; }
+
+.cf-final-scores {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}

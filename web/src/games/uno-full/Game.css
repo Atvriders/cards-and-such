@@ -1,0 +1,262 @@
+.uf-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  min-height: 100%;
+  color: var(--theme-text, #f3f3f3);
+  font-family: var(--theme-font, system-ui, sans-serif);
+}
+
+.uf-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.uf-stat { display: inline-flex; align-items: center; gap: 6px; }
+.uf-color-chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.uf-scoreboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.uf-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  font-size: 13px;
+}
+.uf-score--active {
+  border-color: #f6c93f;
+  background: rgba(246, 201, 63, 0.15);
+}
+.uf-score-name { font-weight: 700; }
+.uf-score-num { font-size: 22px; font-weight: 800; line-height: 1; }
+.uf-score-cards { font-size: 11px; opacity: 0.85; }
+
+.uf-bots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.uf-bot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.uf-bot-cards {
+  display: flex;
+  gap: -10px;
+  margin-left: 14px;
+}
+.uf-bot-card {
+  margin-left: -16px;
+}
+.uf-bot-card:first-child { margin-left: 0; }
+.uf-bot-label { font-size: 12px; opacity: 0.85; }
+
+.uf-center {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.24);
+  border-radius: 12px;
+}
+.uf-discard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.uf-discard-label { font-size: 12px; opacity: 0.8; }
+
+.uf-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uf-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+  cursor: pointer;
+  font-size: 14px;
+}
+.uf-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.22); }
+.uf-btn:disabled { opacity: 0.42; cursor: not-allowed; }
+.uf-btn--primary { background: #2b7bd1; color: #fff; }
+.uf-btn--primary:hover:not(:disabled) { background: #3a8be0; }
+.uf-btn--uno {
+  background: #f6c93f;
+  color: #222;
+  letter-spacing: 0.06em;
+}
+.uf-btn--uno:hover:not(:disabled) { background: #ffd75c; }
+.uf-btn--ghost { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25); }
+
+.uf-hand {
+  background: rgba(0,0,0,0.18);
+  border-radius: 12px;
+  padding: 10px;
+}
+.uf-hand-label { font-size: 12px; opacity: 0.85; margin-bottom: 6px; }
+.uf-hand-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.uf-handslot {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.uf-handslot:hover:not(:disabled) { transform: translateY(-6px); }
+.uf-handslot--illegal { filter: brightness(0.6) saturate(0.4); cursor: not-allowed; }
+.uf-handslot:disabled { cursor: not-allowed; }
+
+.uf-card {
+  position: relative;
+  width: 70px;
+  height: 104px;
+  border-radius: 8px;
+  background: #444;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35), inset 0 0 0 3px rgba(255,255,255,0.85);
+  overflow: hidden;
+}
+.uf-card--R { background: #d63a3a; }
+.uf-card--Y { background: #e2b400; color: #222; }
+.uf-card--G { background: #2e9d4a; }
+.uf-card--B { background: #2b7bd1; }
+.uf-card--wild {
+  background: linear-gradient(135deg, #d63a3a 0% 25%, #e2b400 25% 50%, #2e9d4a 50% 75%, #2b7bd1 75% 100%);
+  color: #fff;
+}
+.uf-card--back {
+  background:
+    radial-gradient(circle at 50% 45%, #f1c43c 0 14px, transparent 16px),
+    repeating-linear-gradient(45deg, #1f1f1f, #1f1f1f 8px, #2a2a2a 8px, #2a2a2a 16px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35), inset 0 0 0 3px rgba(255,255,255,0.85);
+}
+.uf-card-corner {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 700;
+}
+.uf-card-corner--tl { top: 6px; left: 7px; }
+.uf-card-corner--br { bottom: 6px; right: 7px; }
+.uf-card-center {
+  font-size: 24px;
+  font-weight: 900;
+  background: rgba(255,255,255,0.9);
+  color: #222;
+  padding: 4px 10px;
+  border-radius: 999px;
+  transform: rotate(-20deg);
+}
+
+.uf-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  padding: 20px;
+}
+.uf-modal {
+  background: var(--theme-surface, #1f2330);
+  border-radius: 14px;
+  padding: 22px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.uf-modal h3 { margin: 0; }
+.uf-modal--win { box-shadow: 0 0 0 3px #f6c93f; }
+.uf-modal--loss { box-shadow: 0 0 0 3px #d63a3a; }
+.uf-color-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.uf-color-btn {
+  padding: 16px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.uf-color-btn:hover { filter: brightness(1.1); }
+
+.uf-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.uf-result-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.uf-rules {
+  text-align: left;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.uf-log {
+  font-size: 11px;
+  opacity: 0.7;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@media (max-width: 600px) {
+  .uf-scoreboard { grid-template-columns: repeat(2, 1fr); }
+  .uf-bots { grid-template-columns: 1fr; }
+  .uf-card { width: 60px; height: 90px; }
+  .uf-card-center { font-size: 20px; }
+}

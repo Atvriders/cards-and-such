@@ -4485,6 +4485,16 @@ import { sorryFullPlugin } from "./sorry-full/index.js";
 import { operationFullPlugin } from "./operation-full/index.js";
 import { chineseCheckersFullPlugin } from "./chinese-checkers-full/index.js";
 import { mouseTrapFullPlugin } from "./mouse-trap-full/index.js";
+import { chessFullClockPlugin } from "./chess-full-clock/index.js";
+import { strategoFullPlugin } from "./stratego-full/index.js";
+import { ticketToRideFullPlugin } from "./ticket-to-ride-full/index.js";
+import { carcassonneFullPlugin } from "./carcassonne-full/index.js";
+import { pandemicFullPlugin } from "./pandemic-full/index.js";
+import { unoFullPlugin } from "./uno-full/index.js";
+import { phase10FullPlugin } from "./phase-10-full/index.js";
+import { skipBoFullPlugin } from "./skip-bo-full/index.js";
+import { crokinoleFullPlugin } from "./crokinole-full/index.js";
+import { kingOfTokyoFullPlugin } from "./king-of-tokyo-full/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -8972,4 +8982,14 @@ export const GAMES: GamePlugin[] = [
   operationFullPlugin as unknown as GamePlugin,
   chineseCheckersFullPlugin as unknown as GamePlugin,
   mouseTrapFullPlugin as unknown as GamePlugin,
+  chessFullClockPlugin as unknown as GamePlugin,
+  strategoFullPlugin as unknown as GamePlugin,
+  ticketToRideFullPlugin as unknown as GamePlugin,
+  carcassonneFullPlugin as unknown as GamePlugin,
+  pandemicFullPlugin as unknown as GamePlugin,
+  unoFullPlugin as unknown as GamePlugin,
+  phase10FullPlugin as unknown as GamePlugin,
+  skipBoFullPlugin as unknown as GamePlugin,
+  crokinoleFullPlugin as unknown as GamePlugin,
+  kingOfTokyoFullPlugin as unknown as GamePlugin,
 ];
