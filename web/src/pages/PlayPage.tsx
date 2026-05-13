@@ -2237,7 +2237,7 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               <span className="play-hint-btn-label">Friend</span>
             </button>
           )}
-          {(plugin.howToPlay || tutorialSteps) && phase === "playing" && (
+          {(plugin.howToPlay || hasExplicitTutorial) && phase === "playing" && (
             <button
               className="play-iconbtn"
               onClick={() => {

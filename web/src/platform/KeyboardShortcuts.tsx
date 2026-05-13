@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useFocusTrap } from "./useFocusTrap.js";
 import { GAMES } from "../games/registry.js";
 import { shortcutsFor } from "./shortcuts.js";
@@ -91,6 +90,14 @@ const SECTIONS: ShortcutSection[] = [
 interface KeyboardShortcutsModalProps {
   open: boolean;
   onClose: () => void;
+  /**
+   * Optional game id to prepend a per-game shortcut section pulled from
+   * `shortcutsFor(id, category)`. The hook below auto-derives this from
+   * the current URL when called inside a Router. Tests / consumers
+   * outside a Router can pass undefined; the modal then renders only
+   * the global static SECTIONS.
+   */
+  gameId?: string;
 }
 
 /**
@@ -101,18 +108,17 @@ interface KeyboardShortcutsModalProps {
  * focus restoration (handled by `useFocusTrap`).
  */
 export function KeyboardShortcutsModal(
-  { open, onClose }: KeyboardShortcutsModalProps,
+  { open, onClose, gameId }: KeyboardShortcutsModalProps,
 ): JSX.Element | null {
   const dialogRef = useRef<HTMLDivElement | null>(null);
-  const location = useLocation();
 
-  // If we're inside a /play/<gameId> route, surface the per-game shortcut
-  // section pulled from the SHORTCUTS registry (with categorical fallback).
-  // Outside Play we render only the global static SECTIONS.
+  // If a gameId is supplied (the AppShell consumer derives it from the
+  // current /play/<id> route), surface the per-game shortcut section
+  // pulled from the SHORTCUTS registry (with categorical fallback). When
+  // gameId is undefined (tests, non-Play routes), render only the global
+  // static SECTIONS.
   const perGameSection = useMemo<ShortcutSection | null>(() => {
-    const match = location.pathname.match(/^\/play\/([a-z0-9][a-z0-9-]*)(\/|$)/);
-    if (!match) return null;
-    const gameId = match[1]!;
+    if (!gameId) return null;
     const plugin = GAMES.find((g) => g.id === gameId);
     const rows = shortcutsFor(gameId, plugin?.category);
     if (!rows || rows.length === 0) return null;
@@ -124,7 +130,7 @@ export function KeyboardShortcutsModal(
         description: r.description,
       })),
     };
-  }, [location.pathname]);
+  }, [gameId]);
 
   // Esc anywhere closes; we listen on window so focus can be on any descendant
   // (kbd-close button included) and not just within the modal.

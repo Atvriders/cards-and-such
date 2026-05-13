@@ -1140,7 +1140,13 @@ export default function AppShell(): JSX.Element {
 
       <ToastHost />
       <SparkleHost />
-      <KeyboardShortcutsModal open={shortcuts.open} onClose={shortcuts.close} />
+      {(() => {
+        const m = location.pathname.match(/^\/play\/([a-z0-9][a-z0-9-]*)(?:\/|$)/);
+        const gid = m ? m[1] : undefined;
+        return gid
+          ? <KeyboardShortcutsModal open={shortcuts.open} onClose={shortcuts.close} gameId={gid} />
+          : <KeyboardShortcutsModal open={shortcuts.open} onClose={shortcuts.close} />;
+      })()}
       <InstallPrompt />
       <UpdateBanner />
 
