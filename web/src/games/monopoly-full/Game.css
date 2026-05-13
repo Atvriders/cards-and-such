@@ -1,0 +1,574 @@
+/* Monopoly Full — class prefix `monopolyfull-`. Standalone, no global overrides. */
+
+.monopolyfull-wrap {
+  --felt: #1f7a4d;
+  --felt-dark: #155a37;
+  --board-bg: #fafaf3;
+  --board-line: #c9c4b0;
+  --ink: #1a1a1a;
+  --money: #f7d445;
+  --you: #2563eb;
+  --you-dark: #1d4ed8;
+  --cpu: #dc2626;
+  --cpu-dark: #991b1b;
+  --buy: #16a34a;
+  --skip: #6b7280;
+
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  background:
+    radial-gradient(1400px 700px at 50% 30%, var(--felt) 0%, var(--felt-dark) 70%, #0b3a22 100%);
+  color: #f7f7f5;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  box-shadow: 0 12px 44px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(255,255,255,0.04);
+}
+
+/* HUD */
+.monopolyfull-hud-top {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.monopolyfull-stat {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 8px 16px;
+  min-width: 110px;
+}
+.monopolyfull-stat-label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.72;
+}
+.monopolyfull-stat-value {
+  font-size: 1.10rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.monopolyfull-stat-sub {
+  font-size: 0.66rem;
+  opacity: 0.7;
+  margin-top: 2px;
+  font-family: "JetBrains Mono", monospace;
+}
+.monopolyfull-money {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--money);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+.monopolyfull-stat-you  { box-shadow: inset 0 0 0 1.5px rgba(37, 99, 235, 0.55); }
+.monopolyfull-stat-cpu  { box-shadow: inset 0 0 0 1.5px rgba(220, 38, 38, 0.55); }
+.monopolyfull-stat-card { box-shadow: inset 0 0 0 1.5px rgba(247, 212, 69, 0.55); }
+
+/* Board */
+.monopolyfull-board {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(9, 1fr) 1.3fr;
+  grid-template-rows:    1.3fr repeat(9, 1fr) 1.3fr;
+  gap: 3px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--board-bg);
+  border: 3px solid #0a0a0a;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.monopolyfull-sq {
+  position: relative;
+  background: var(--board-bg);
+  border: 1px solid var(--board-line);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  border-radius: 2px;
+}
+.monopolyfull-sq-body {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 2px;
+  text-align: center;
+  gap: 1px;
+  min-width: 0;
+}
+.monopolyfull-sq-name {
+  font-size: 0.50rem;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  word-break: break-word;
+}
+.monopolyfull-sq-sub {
+  font-size: 0.46rem;
+  font-family: "JetBrains Mono", monospace;
+  color: #444;
+  font-weight: 600;
+}
+
+.monopolyfull-stripe { position: absolute; border: 1px solid rgba(0,0,0,0.5); }
+.monopolyfull-stripe-top    { top: 0; left: 0; right: 0; height: 22%; border-bottom: 1px solid #000; }
+.monopolyfull-stripe-bottom { bottom: 0; left: 0; right: 0; height: 22%; border-top: 1px solid #000; }
+.monopolyfull-stripe-left   { top: 0; bottom: 0; left: 0; width: 22%; border-right: 1px solid #000; }
+.monopolyfull-stripe-right  { top: 0; bottom: 0; right: 0; width: 22%; border-left: 1px solid #000; }
+
+.monopolyfull-sq:has(.monopolyfull-stripe-top)    .monopolyfull-sq-body { padding-top: calc(22% + 4px); }
+.monopolyfull-sq:has(.monopolyfull-stripe-bottom) .monopolyfull-sq-body { padding-bottom: calc(22% + 4px); }
+.monopolyfull-sq:has(.monopolyfull-stripe-left)   .monopolyfull-sq-body { padding-left: calc(22% + 4px); }
+.monopolyfull-sq:has(.monopolyfull-stripe-right)  .monopolyfull-sq-body { padding-right: calc(22% + 4px); }
+
+/* Corners */
+.monopolyfull-corner {
+  background: linear-gradient(135deg, #fff 0%, #f0ede0 100%);
+  font-weight: 800;
+}
+.monopolyfull-corner-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+.monopolyfull-corner-sub {
+  font-size: 0.46rem;
+  margin-top: 3px;
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.monopolyfull-corner-br .monopolyfull-corner-label { color: #cc0000; }     /* GO */
+.monopolyfull-corner-bl { background: linear-gradient(135deg, #ffd6cc 0%, #ffeae0 100%); } /* JAIL */
+.monopolyfull-corner-tl { background: linear-gradient(135deg, #ffdc6e 0%, #fff1bf 100%); } /* FREE */
+.monopolyfull-corner-tr { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%); color: #fff; } /* GO TO JAIL */
+.monopolyfull-corner-tr .monopolyfull-corner-label { color: #fff; }
+
+/* Type-specific tints */
+.monopolyfull-sq-tax    { background: linear-gradient(180deg, #ffe7e1 0%, #ffd6c8 100%); }
+.monopolyfull-sq-chance { background: linear-gradient(180deg, #ffeec6 0%, #ffd97a 100%); }
+.monopolyfull-sq-chest  { background: linear-gradient(180deg, #cfe7ff 0%, #aacdff 100%); }
+.monopolyfull-chance-mark {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #b8860b;
+  line-height: 1;
+}
+.monopolyfull-rr-icon {
+  font-size: 0.85rem;
+  color: #111;
+  line-height: 1;
+}
+
+/* Tokens */
+.monopolyfull-tokens {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+  position: relative;
+  z-index: 3;
+}
+.monopolyfull-tok {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #fff;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.45);
+  animation: monopolyfull-pop 220ms ease-out;
+}
+.monopolyfull-tok-p { background: var(--you); }
+.monopolyfull-tok-c { background: var(--cpu); }
+
+@keyframes monopolyfull-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  70%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Deeds */
+.monopolyfull-deed {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 12px;
+  height: 12px;
+  font-size: 0.5rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  color: #fff;
+  z-index: 4;
+}
+.monopolyfull-deed-p { background: var(--you); }
+.monopolyfull-deed-c { background: var(--cpu); }
+.monopolyfull-mortgage-mark {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 12px;
+  height: 12px;
+  font-size: 0.5rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: #444;
+  color: #fff;
+  z-index: 4;
+}
+
+.monopolyfull-owned-p { box-shadow: inset 0 0 0 2px var(--you); }
+.monopolyfull-owned-c { box-shadow: inset 0 0 0 2px var(--cpu); }
+.monopolyfull-mortgaged { filter: grayscale(0.4) brightness(0.85); }
+.monopolyfull-selected { outline: 2px solid var(--money); outline-offset: -2px; }
+
+.monopolyfull-here-p { animation: monopolyfull-flash-p 800ms ease-out; }
+.monopolyfull-here-c { animation: monopolyfull-flash-c 800ms ease-out; }
+@keyframes monopolyfull-flash-p {
+  0%   { box-shadow: 0 0 0 0 rgba(37,99,235,0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+}
+@keyframes monopolyfull-flash-c {
+  0%   { box-shadow: 0 0 0 0 rgba(220,38,38,0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+}
+
+/* Houses & hotel chips */
+.monopolyfull-houses {
+  position: absolute;
+  display: flex;
+  gap: 1px;
+  z-index: 3;
+}
+.monopolyfull-houses-top    { top: 1px; left: 50%; transform: translateX(-50%); }
+.monopolyfull-houses-bottom { bottom: 1px; left: 50%; transform: translateX(-50%); }
+.monopolyfull-houses-left   { left: 1px; top: 50%; transform: translateY(-50%); flex-direction: column; }
+.monopolyfull-houses-right  { right: 1px; top: 50%; transform: translateY(-50%); flex-direction: column; }
+.monopolyfull-house {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #1fb25a;
+  border: 1px solid #0a5a2a;
+  border-radius: 1px;
+}
+.monopolyfull-hotel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: #fff;
+  background: #c0392b;
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid #5c1a14;
+}
+
+/* Center HUD */
+.monopolyfull-center {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 14px, transparent 14px 28px),
+    radial-gradient(closest-side, var(--felt) 0%, var(--felt-dark) 100%);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #fff;
+  border: 1.5px solid rgba(0,0,0,0.45);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.monopolyfull-title {
+  font-family: "Inter", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--money);
+  text-align: center;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.45), 0 0 18px rgba(247, 212, 69, 0.25);
+}
+.monopolyfull-title span {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+  margin-top: 2px;
+  color: rgba(255,255,255,0.85);
+  text-shadow: none;
+}
+
+.monopolyfull-dice-row {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center;
+}
+.monopolyfull-die {
+  width: 46px; height: 46px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows:    repeat(3, 1fr);
+  background: linear-gradient(180deg, #ffffff 0%, #ececec 100%);
+  border-radius: 7px;
+  padding: 6px; gap: 2px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(0,0,0,0.15);
+  animation: monopolyfull-roll 420ms ease-out;
+}
+.monopolyfull-pip { display: block; border-radius: 50%; background: transparent; }
+.monopolyfull-pip.on { background: radial-gradient(circle at 30% 30%, #4a4a4a 0%, #111 70%); }
+.monopolyfull-dice-sum { font-family: "JetBrains Mono", monospace; font-size: 1rem; color: #fff; }
+.monopolyfull-dice-sum strong { font-size: 1.2rem; color: var(--money); }
+.monopolyfull-doubles {
+  margin-left: 8px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: var(--money);
+  border: 1.5px solid var(--money);
+  border-radius: 4px;
+  padding: 1px 6px;
+  letter-spacing: 0.1em;
+}
+.monopolyfull-dice-placeholder {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
+}
+
+@keyframes monopolyfull-roll {
+  0%   { transform: rotate(-25deg) scale(0.7); opacity: 0.4; }
+  60%  { transform: rotate(8deg) scale(1.08); opacity: 1; }
+  100% { transform: rotate(0) scale(1); opacity: 1; }
+}
+
+.monopolyfull-log {
+  width: 100%;
+  background: rgba(0,0,0,0.30);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255,255,255,0.06);
+  max-height: 120px;
+  overflow: hidden;
+}
+.monopolyfull-log-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Message */
+.monopolyfull-message {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 1.4em;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+
+/* Actions */
+.monopolyfull-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.monopolyfull-btn {
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 0.02em;
+  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.25), 0 6px 14px rgba(0,0,0,0.2);
+}
+.monopolyfull-btn:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.07); }
+.monopolyfull-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.25); }
+.monopolyfull-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.monopolyfull-btn-primary { background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%); }
+.monopolyfull-btn-buy     { background: linear-gradient(180deg, #16a34a 0%, #15803d 100%); }
+.monopolyfull-btn-skip    { background: linear-gradient(180deg, #6b7280 0%, #4b5563 100%); }
+.monopolyfull-btn-cpu     { background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%); }
+
+/* Auction */
+.monopolyfull-auction {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(0,0,0,0.32);
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(247, 212, 69, 0.45);
+}
+.monopolyfull-auction-label { font-size: 0.85rem; color: #fff; }
+.monopolyfull-auction-label strong { color: var(--money); }
+.monopolyfull-bid-input {
+  width: 92px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+/* Done */
+.monopolyfull-done {
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+  border: 1.5px solid var(--money);
+  padding: 14px 22px;
+  border-radius: 12px;
+  color: #fff;
+}
+.monopolyfull-done-msg { font-size: 1.15rem; font-weight: 800; }
+.monopolyfull-done-score {
+  margin-top: 4px;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--money);
+}
+
+/* Manage panel */
+.monopolyfull-manage {
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.monopolyfull-manage-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+.monopolyfull-manage-empty {
+  font-style: italic;
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+.monopolyfull-manage-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.monopolyfull-manage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.30);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap;
+}
+.monopolyfull-manage-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.monopolyfull-manage-houses { font-size: 0.85rem; }
+.monopolyfull-manage-mort { color: #f7d445; font-size: 0.75rem; }
+.monopolyfull-manage-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.4);
+}
+.monopolyfull-manage-controls {
+  display: inline-flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.monopolyfull-mini-btn {
+  padding: 4px 8px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+.monopolyfull-mini-btn:hover:not(:disabled) { filter: brightness(1.15); transform: translateY(-1px); }
+.monopolyfull-mini-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Position summary */
+.monopolyfull-positions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  opacity: 0.92;
+}
+.monopolyfull-pos {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.monopolyfull-pos-p { box-shadow: inset 2px 0 0 var(--you); }
+.monopolyfull-pos-c { box-shadow: inset 2px 0 0 var(--cpu); }
+
+/* Compact for small screens */
+@media (max-width: 700px) {
+  .monopolyfull-sq-name { font-size: 0.42rem; }
+  .monopolyfull-sq-sub  { font-size: 0.42rem; }
+  .monopolyfull-corner-label { font-size: 0.6rem; }
+  .monopolyfull-die { width: 38px; height: 38px; padding: 4px; }
+  .monopolyfull-title { font-size: 1.1rem; }
+  .monopolyfull-tok { width: 12px; height: 12px; font-size: 0.5rem; }
+  .monopolyfull-house { width: 5px; height: 5px; }
+  .monopolyfull-hotel { width: 12px; height: 9px; font-size: 0.5rem; }
+}

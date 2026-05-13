@@ -1,0 +1,183 @@
+.bsf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+  color: #1d2c4a;
+}
+
+.bsf-status {
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 1.4em;
+  text-align: center;
+  max-width: 700px;
+}
+.bsf-status.win  { color: #237a2c; }
+.bsf-status.loss { color: #a72424; }
+
+.bsf-grids {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bsf-grid-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.bsf-grid-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #4a5b80;
+}
+.bsf-grid {
+  display: grid;
+  gap: 2px;
+  background: #102648;
+  border: 3px solid #102648;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.bsf-cell {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: default;
+  transition: background 0.12s, transform 0.12s;
+  border-radius: 3px;
+  background: #2e6093;
+  color: #fff;
+  user-select: none;
+}
+
+.bsf-cell.empty   { background: #2e6093; }
+.bsf-cell.ship    { background: #b3bccd; color: #1d2c4a; }
+.bsf-cell.hit     { background: #c63838; color: #fff; }
+.bsf-cell.miss    { background: #58a0d8; color: #ddeefb; }
+.bsf-cell.unknown { background: #2e6093; }
+.bsf-cell.sonar   { background: #f5c542; color: #1d2c4a; }
+
+.bsf-cell.clickable          { cursor: pointer; }
+.bsf-cell.clickable:hover    { background: #4a85c6; }
+.bsf-cell.queued             { background: #ffb84a; color: #1d2c4a; }
+.bsf-cell.queued:hover       { background: #ffa629; }
+.bsf-cell.last-shot          { box-shadow: 0 0 0 2px #ffe864 inset; }
+
+.bsf-cell.mode-sonar.clickable:hover   { background: #d8a30a; }
+.bsf-cell.mode-fighter.clickable:hover { background: #6abf6a; }
+
+.bsf-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bsf-ship-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.85rem;
+}
+.bsf-ship-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 180px;
+  justify-content: space-between;
+}
+.bsf-ship-item.current { font-weight: 800; color: #2060c0; }
+.bsf-ship-item.placed  { text-decoration: line-through; color: #aab2c0; }
+.bsf-ship-blocks       { font-family: monospace; letter-spacing: -1px; color: #4a5b80; }
+.bsf-ship-item.current .bsf-ship-blocks { color: #2060c0; }
+
+.bsf-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bsf-abilities { margin-top: -2px; }
+
+.bsf-btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.bsf-btn.primary {
+  background: #2060c0;
+  color: #fff;
+}
+.bsf-btn.primary:hover:not(:disabled) { background: #1748a0; }
+.bsf-btn.secondary {
+  background: #dee4ee;
+  color: #1d2c4a;
+}
+.bsf-btn.secondary:hover:not(:disabled) { background: #c7d0e0; }
+.bsf-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.bsf-info-row {
+  display: flex;
+  gap: 18px;
+  font-size: 0.85rem;
+  color: #4a5b80;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bsf-score-info { font-weight: 600; }
+
+.bsf-log {
+  font-size: 0.8rem;
+  background: #f3f6fc;
+  border: 1px solid #d5dceb;
+  padding: 6px 12px;
+  border-radius: 6px;
+  max-width: 700px;
+  color: #1d2c4a;
+}
+.bsf-log-line { line-height: 1.4; }
+
+.bsf-end-panel {
+  margin-top: 6px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  text-align: center;
+  border: 2px solid #d5dceb;
+}
+.bsf-end-panel.win  { border-color: #6cc070; }
+.bsf-end-panel.loss { border-color: #d68080; }
+.bsf-end-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.bsf-end-score {
+  font-size: 1rem;
+  color: #4a5b80;
+}
+
+@media (max-width: 700px) {
+  .bsf-cell { width: 24px; height: 24px; font-size: 0.8rem; }
+  .bsf-grids { gap: 12px; }
+}

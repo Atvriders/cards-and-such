@@ -4465,6 +4465,16 @@ import { setteBelloPlugin } from "./sette-bello/index.js";
 import { diceTowerStackPlugin } from "./dice-tower-stack/index.js";
 import { cardShuffleProPlugin } from "./card-shuffle-pro/index.js";
 import { clickTheDifferencePlugin } from "./click-the-difference/index.js";
+import { monopolyFullPlugin } from "./monopoly-full/index.js";
+import { catanFullPlugin } from "./catan-full/index.js";
+import { theGameOfLifeFullPlugin } from "./the-game-of-life-full/index.js";
+import { riskFullPlugin } from "./risk-full/index.js";
+import { scrabbleFullPlugin } from "./scrabble-full/index.js";
+import { clueFullPlugin } from "./clue-full/index.js";
+import { battleshipFullPlugin } from "./battleship-full/index.js";
+import { mancalaFullKalahPlugin } from "./mancala-full-kalah/index.js";
+import { checkersFullTournamentPlugin } from "./checkers-full-tournament/index.js";
+import { backgammonFullMatchPlugin } from "./backgammon-full-match/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -8932,4 +8942,14 @@ export const GAMES: GamePlugin[] = [
   diceTowerStackPlugin as unknown as GamePlugin,
   cardShuffleProPlugin as unknown as GamePlugin,
   clickTheDifferencePlugin as unknown as GamePlugin,
+  monopolyFullPlugin as unknown as GamePlugin,
+  catanFullPlugin as unknown as GamePlugin,
+  theGameOfLifeFullPlugin as unknown as GamePlugin,
+  riskFullPlugin as unknown as GamePlugin,
+  scrabbleFullPlugin as unknown as GamePlugin,
+  clueFullPlugin as unknown as GamePlugin,
+  battleshipFullPlugin as unknown as GamePlugin,
+  mancalaFullKalahPlugin as unknown as GamePlugin,
+  checkersFullTournamentPlugin as unknown as GamePlugin,
+  backgammonFullMatchPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,478 @@
+/* The Game of Life (Full) — scoped styles */
+
+.lifefull-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  color: var(--theme-text, #f3f4f6);
+}
+
+.lifefull-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lifefull-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.lifefull-turn-indicator {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.lifefull-you { color: #6ee7b7; }
+.lifefull-cpu { color: #fca5a5; }
+
+/* Player panels ----------------------------------------------------------- */
+.lifefull-players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.lifefull-player {
+  background: rgba(0, 0, 0, 0.30);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  padding: 10px;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.lifefull-player-active {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.25);
+}
+
+.lifefull-player-retired {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+}
+
+.lifefull-player-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.lifefull-player-name {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.lifefull-player-human .lifefull-player-name { color: #6ee7b7; }
+.lifefull-player-cpu .lifefull-player-name { color: #fca5a5; }
+
+.lifefull-player-badge {
+  background: #fbbf24;
+  color: #111827;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.lifefull-player-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 6px;
+}
+
+.lifefull-stat {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.lifefull-stat-label {
+  opacity: 0.65;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+.lifefull-stat-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.lifefull-stat-cash .lifefull-stat-value { color: #6ee7b7; }
+.lifefull-stat-debt .lifefull-stat-value { color: #fca5a5; }
+
+/* Board strip ------------------------------------------------------------ */
+.lifefull-board {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lifefull-cell {
+  position: relative;
+  min-height: 64px;
+  padding: 4px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.65rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.lifefull-cell-num {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  opacity: 0.45;
+  font-size: 0.6rem;
+}
+
+.lifefull-cell-kind {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  margin-top: 8px;
+}
+
+.lifefull-cell-label {
+  opacity: 0.85;
+  font-size: 0.62rem;
+  line-height: 1.1;
+}
+
+.lifefull-cell-tokens {
+  margin-top: auto;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lifefull-token {
+  font-size: 0.55rem;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.lifefull-token-human {
+  background: #6ee7b7;
+  color: #064e3b;
+}
+
+.lifefull-token-cpu {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+/* Square type colors */
+.lifefull-payday        { background: rgba(110, 231, 183, 0.15); }
+.lifefull-marry         { background: rgba(244, 114, 182, 0.15); }
+.lifefull-baby,
+.lifefull-twins         { background: rgba(252, 211, 77, 0.15); }
+.lifefull-buy-house,
+.lifefull-sell-house    { background: rgba(96, 165, 250, 0.15); }
+.lifefull-buy-insurance { background: rgba(167, 139, 250, 0.15); }
+.lifefull-spin-to-win   { background: rgba(251, 191, 36, 0.20); }
+.lifefull-lawsuit,
+.lifefull-expense       { background: rgba(248, 113, 113, 0.15); }
+.lifefull-lottery       { background: rgba(110, 231, 183, 0.18); }
+.lifefull-retire-choice { background: rgba(251, 146, 60, 0.20); }
+.lifefull-start         { background: rgba(255, 255, 255, 0.10); }
+
+/* Spinner ---------------------------------------------------------------- */
+.lifefull-action {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.30);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: center;
+}
+
+.lifefull-spinner {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lifefull-spinner-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 4px dashed #fbbf24;
+  opacity: 0.65;
+}
+
+.lifefull-spinner-rolling .lifefull-spinner-ring {
+  animation: lifefull-spin 0.6s linear infinite;
+}
+
+@keyframes lifefull-spin {
+  to { transform: rotate(360deg); }
+}
+
+.lifefull-spinner-num {
+  font-size: 1.7rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #fbbf24;
+  z-index: 1;
+}
+
+.lifefull-spinner-label {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Controls --------------------------------------------------------------- */
+.lifefull-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lifefull-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lifefull-choice-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.lifefull-choice-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lifefull-btn {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f3f4f6;
+  font-weight: 600;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  transition: background 150ms ease, transform 150ms ease, border-color 150ms ease;
+}
+
+.lifefull-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.lifefull-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lifefull-btn-primary {
+  background: #6366f1;
+  border-color: #4f46e5;
+}
+.lifefull-btn-primary:hover:not(:disabled) {
+  background: #818cf8;
+}
+
+.lifefull-btn-secondary {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.lifefull-btn-career {
+  background: rgba(110, 231, 183, 0.15);
+  border-color: rgba(110, 231, 183, 0.35);
+  min-width: 120px;
+}
+
+.lifefull-btn-big {
+  font-size: 1.05rem;
+  padding: 12px 24px;
+}
+
+.lifefull-msg {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.lifefull-cpu-think {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.lifefull-cpu-think-dot {
+  width: 8px;
+  height: 8px;
+  background: #fca5a5;
+  border-radius: 50%;
+  animation: lifefull-pulse-dot 1s ease-in-out infinite;
+}
+
+@keyframes lifefull-pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+}
+
+/* Log -------------------------------------------------------------------- */
+.lifefull-log {
+  background: rgba(0, 0, 0, 0.30);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.lifefull-log-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.lifefull-log-empty {
+  opacity: 0.55;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.lifefull-log-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lifefull-log-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  align-items: center;
+}
+
+.lifefull-log-human { border-left: 3px solid #6ee7b7; }
+.lifefull-log-cpu { border-left: 3px solid #fca5a5; }
+
+.lifefull-log-turn { opacity: 0.55; font-variant-numeric: tabular-nums; }
+.lifefull-log-who { font-weight: 700; }
+.lifefull-log-spin { opacity: 0.75; }
+.lifefull-log-label { flex: 1; min-width: 100px; }
+.lifefull-log-note { opacity: 0.65; font-style: italic; font-size: 0.72rem; width: 100%; }
+
+.lifefull-log-delta { font-weight: 700; font-variant-numeric: tabular-nums; }
+.lifefull-pos { color: #6ee7b7; }
+.lifefull-neg { color: #fca5a5; }
+
+/* Done panel ------------------------------------------------------------- */
+.lifefull-done {
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid #fbbf24;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+.lifefull-done-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fbbf24;
+  letter-spacing: 0.04em;
+}
+
+.lifefull-done-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.lifefull-scorecard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.lifefull-scorecard-label {
+  font-weight: 700;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+.lifefull-scorecard-line {
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.85;
+}
+
+.lifefull-scorecard-total {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 800;
+  color: #fbbf24;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lifefull-done-score {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fbbf24;
+}
+
+/* Responsive ------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .lifefull-board { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lifefull-players { grid-template-columns: 1fr; }
+  .lifefull-done-grid { grid-template-columns: 1fr; }
+  .lifefull-action { grid-template-columns: 1fr; }
+}
