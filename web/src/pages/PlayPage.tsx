@@ -2241,7 +2241,11 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
             <button
               className="play-iconbtn"
               onClick={() => {
-                if (tutorialSteps && tutorialSteps.length > 0) setTutorialOpen(true);
+                // Prefer the bespoke per-game tutorial when one exists.
+                // The categorical fallback added by tutorialFor(id, category)
+                // is too generic to surface from the Help button; defer to
+                // the HowToPlay modal in that case.
+                if (hasExplicitTutorial && tutorialSteps && tutorialSteps.length > 0) setTutorialOpen(true);
                 else setHelpOpen(true);
               }}
               title="How to play"

@@ -115,10 +115,16 @@ describe("PlayPage .play-page root style-attribute absence (W2105)", () => {
     // would surface here as a null root.
     expect(root).not.toBeNull();
 
-    // Pin "no style". `hasAttribute("style")` returns true for any string
-    // value (including ""), so this catches every shape of accidental style
-    // graft — empty, themed, or hard-coded.
-    expect(root!.hasAttribute("style")).toBe(false);
+    // PlayPage now applies a categorical theme fallback (see CATEGORY_THEMES
+    // in PlayPage.tsx) when the plugin itself declares no themeOverrides, so
+    // every game's `.play-page` root carries a `style` attribute with the
+    // category-default CSS custom properties. The previous contract ("no
+    // style attribute when themeOverrides is undefined") is no longer
+    // valid; the new contract is that the style holds the category felt /
+    // accent and not random unrelated declarations.
+    expect(root!.hasAttribute("style")).toBe(true);
+    const style = root!.getAttribute("style") ?? "";
+    expect(style).toMatch(/--theme-felt|--theme-accent|--theme-bg/);
   });
 });
 
