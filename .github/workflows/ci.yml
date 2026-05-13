@@ -6,8 +6,18 @@ on:
   pull_request:
     branches: ["**"]
 
+# Cancel any older in-progress runs on the same ref when a new commit lands.
+# Stops the 1,800-deep queue scenario from ever recurring and keeps mainline
+# CI focused on the latest tip.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  unit:
+  # Typecheck + shared/server tests + production build — single runner, fast
+  # path (~8 min). Decoupled from the web vitest sweep so the slow piece
+  # doesn't block these.
+  lint-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,12 +31,30 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=6144
       - run: npm -w @cards/shared run test
       - run: npm -w @cards/server run test
-      - run: npm -w @cards/web run test
       - run: npm run build
+
+  # Web vitest sharded 4 ways so the ~7,000-file suite runs in parallel.
+  # Wall-clock drops from ~2:30h to ~25-30 min. Costs 4× runner-minutes
+  # during the test phase, which is comfortably inside the free-tier
+  # budget at this commit cadence.
+  unit-web:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci --workspaces --include-workspace-root
+      - run: npm -w @cards/web run test -- --shard=${{ matrix.shard }}/4
 
   e2e:
     runs-on: ubuntu-latest
-    needs: unit
+    needs: [lint-build, unit-web]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
