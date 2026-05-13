@@ -1490,15 +1490,36 @@
   }
 }
 
-/* Hint button — pairs the bulb glyph with a compact label so the action
-   reads clearly even before users hover for the tooltip. */
+/* Hint button — pairs the bulb glyph with an inline label so the action
+   reads at a glance. Wider than the round icon buttons (the label needs
+   room to breathe) but stays a pill so it sits in the row coherently.
+   No native tooltip is set on this button (PlayPage.tsx drops the
+   redundant title="Hint" — the label is the affordance). */
 .play-hint-btn {
-  gap: 0.35rem;
+  width: auto;
+  gap: 0.4rem;
+  padding: 0 0.75rem 0 0.7rem;
+  color: #cbd5e1;
+}
+.play-hint-btn:hover:not(:disabled) {
+  /* Match the existing iconbtn hover but keep the label readable; the
+     indigo tint reads "primary action" without competing with other
+     buttons in the row. */
+  color: #f5f5fb;
+  border-color: rgba(129, 140, 248, 0.62);
+  background: rgba(129, 140, 248, 0.16);
+  box-shadow: 0 6px 16px -6px rgba(129, 140, 248, 0.5);
+}
+.play-hint-btn svg {
+  /* Nudge the bulb a hair brighter than the label so the icon doesn't
+     fade to background under the rest of the chrome. */
+  color: rgba(167, 175, 240, 0.95);
 }
 .play-hint-btn-label {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.015em;
+  font-variant-numeric: tabular-nums;
 }
 .play-hint-btn:disabled {
   opacity: 0.45;
@@ -2011,3 +2032,4 @@
 .game-mount {
   width: 100%;
 }
+

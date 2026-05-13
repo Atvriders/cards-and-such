@@ -2128,12 +2128,16 @@ function PlayGame({ plugin }: { plugin: (typeof GAMES)[number] }): JSX.Element {
               className="play-iconbtn play-hint-btn"
               onClick={showHint}
               disabled={!plugin.hint || (hintCooldownEnabled && hintCooldown > 0)}
+              // Drop the redundant title="Hint" — the inline label below
+              // already says "Hint", so a native tooltip with the same
+              // word just renders a floating duplicate. Surface the
+              // cooldown / unavailable cases via title so it ADDS info.
               title={
-                plugin.hint
-                  ? hintCooldownEnabled && hintCooldown > 0
-                    ? `Hint (ready in ${hintCooldown}s)`
-                    : "Hint"
-                  : "No hint available for this game"
+                !plugin.hint
+                  ? "No hint available for this game"
+                  : hintCooldownEnabled && hintCooldown > 0
+                    ? `Ready in ${hintCooldown}s`
+                    : undefined
               }
               aria-label={
                 hintCooldownEnabled && hintCooldown > 0
