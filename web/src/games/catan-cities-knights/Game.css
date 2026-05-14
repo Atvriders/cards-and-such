@@ -1,0 +1,395 @@
+/* Catan: Cities & Knights — scoped styles */
+
+.ck-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background: var(--theme-felt, linear-gradient(180deg, #0a1e2f 0%, #0a1620 100%));
+  color: #f4ead8;
+  font-family: var(--font-body, system-ui, sans-serif);
+  min-height: 100%;
+}
+
+.ck-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ck-phase-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ck-phase-label { font-weight: 600; }
+
+.ck-vps {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ck-vp-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 2px solid #444;
+  background: rgba(0, 0, 0, 0.25);
+  min-width: 76px;
+  line-height: 1.1;
+}
+.ck-vp-name { font-size: 11px; letter-spacing: 0.05em; font-weight: 700; }
+.ck-vp-num  { font-size: 14px; font-weight: 700; color: #f8e9a1; }
+.ck-vp-knights { font-size: 10px; opacity: 0.75; }
+
+.ck-message {
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #f8e9a1;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.ck-barbarian {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 4px 8px;
+  background: rgba(120, 30, 30, 0.18);
+  border: 1px solid rgba(200, 80, 80, 0.4);
+  border-radius: 4px;
+}
+.ck-barb-label { font-weight: 700; color: #ff7575; }
+.ck-barb-track { display: flex; gap: 3px; flex: 1; }
+.ck-barb-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 10px;
+  color: #ccc;
+}
+.ck-barb-dot-filled {
+  background: #b73838;
+  border-color: #ff6060;
+  color: #fff;
+}
+.ck-barb-dot-end {
+  border-color: #ff3030;
+  font-weight: 700;
+}
+.ck-barb-count { font-size: 11px; opacity: 0.8; }
+
+.ck-barb-outcome {
+  padding: 6px 10px;
+  background: rgba(180, 60, 40, 0.18);
+  border: 1px solid rgba(220, 100, 80, 0.4);
+  color: #ffd7c0;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.ck-board-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.ck-svg {
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  background: transparent;
+}
+
+.ck-hex-name {
+  font-size: 9px;
+  font-weight: 700;
+  fill: rgba(0, 0, 0, 0.65);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.ck-hex-commodity {
+  font-size: 8px;
+  font-weight: 700;
+  fill: #fff;
+  pointer-events: none;
+}
+.ck-hex-token-bg {
+  fill: #f7f2dc;
+  stroke: #2a2018;
+  stroke-width: 1;
+}
+.ck-hex-token {
+  font-size: 12px;
+  font-weight: 700;
+  fill: #2a2018;
+  pointer-events: none;
+}
+.ck-hex-token-hot { fill: #c4202a; }
+
+.ck-edge {
+  stroke-width: 4;
+  cursor: default;
+  transition: stroke-width 120ms;
+}
+.ck-edge-clickable {
+  cursor: pointer;
+  stroke: #f8e9a1 !important;
+  stroke-width: 5;
+  stroke-dasharray: 4 3;
+}
+.ck-edge-best {
+  stroke: #ffd44a !important;
+  stroke-width: 6;
+}
+
+.ck-vertex {
+  cursor: default;
+  transition: r 120ms;
+}
+.ck-vertex-clickable {
+  cursor: pointer;
+  stroke: #f8e9a1;
+  stroke-width: 2;
+}
+.ck-vertex-best {
+  stroke: #ffd44a;
+  stroke-width: 3;
+}
+.ck-vertex-selected {
+  stroke: #ffd44a;
+  stroke-width: 3;
+}
+
+.ck-knight-mark {
+  font-size: 9px;
+  font-weight: 700;
+  fill: #fff;
+  pointer-events: none;
+}
+.ck-knight-active { fill: #ffe879; }
+
+.ck-dice {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.ck-die {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: #fffaf0;
+  color: #2a2018;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ck-dice-sum { font-weight: 700; }
+
+.ck-resources {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+.ck-res-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+.ck-res-list, .ck-com-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.ck-res, .ck-com {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.ck-res-wood   { border-left: 3px solid #2f6b32; }
+.ck-res-brick  { border-left: 3px solid #a8442a; }
+.ck-res-sheep  { border-left: 3px solid #a8d28a; }
+.ck-res-wheat  { border-left: 3px solid #e3c248; }
+.ck-res-ore    { border-left: 3px solid #7a8090; }
+.ck-com-paper  { border-left: 3px solid #d6cfa0; background: rgba(214, 207, 160, 0.15); }
+.ck-com-cloth  { border-left: 3px solid #b18cb1; background: rgba(177, 140, 177, 0.15); }
+.ck-com-coin   { border-left: 3px solid #e0c047; background: rgba(224, 192, 71, 0.15); }
+.ck-res-count, .ck-com-count { font-weight: 700; }
+
+.ck-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.ck-cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.ck-card {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 11px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+.ck-card-science  { border-color: #6bbfff; }
+.ck-card-politics { border-color: #ff7575; }
+.ck-card-trade    { border-color: #ffd044; }
+
+.ck-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.ck-build-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-right: 4px;
+}
+.ck-build-hint {
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  color: #aaa;
+}
+.ck-build-hint.ok {
+  border-color: #6bd06b;
+  color: #d8ffd8;
+}
+
+.ck-progress-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.ck-trade-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  font-size: 11px;
+}
+.ck-trade-label { font-weight: 600; opacity: 0.85; }
+.ck-trade-sel {
+  background: #1c2530;
+  color: #f4ead8;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2px;
+  font-size: 11px;
+  border-radius: 3px;
+}
+.ck-trade-arrow { padding: 0 2px; opacity: 0.7; }
+
+.ck-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f4ead8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms;
+}
+.ck-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.15); }
+.ck-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.ck-btn-primary {
+  background: #2a8f44;
+  border-color: #56c170;
+  color: #fff;
+}
+.ck-btn-primary:hover:not(:disabled) { background: #3aa654; }
+
+.ck-btn-ghost {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ck-btn-science  { border-color: #6bbfff; }
+.ck-btn-politics { border-color: #ff7575; }
+.ck-btn-trade    { border-color: #ffd044; }
+
+.ck-cpu-thinking {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 12px;
+}
+
+.ck-done {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 220, 100, 0.5);
+}
+.ck-done-msg { font-size: 14px; font-weight: 700; color: #ffe879; }
+.ck-done-stats { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+.ck-done-score { font-size: 13px; margin-top: 4px; }
+
+.ck-log {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+.ck-log-title {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+.ck-log ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 96px;
+  overflow-y: auto;
+}
+.ck-log li {
+  padding: 1px 0;
+  opacity: 0.85;
+}
+.ck-log-newest { color: #f8e9a1; font-weight: 700; }

@@ -1,0 +1,319 @@
+.tm-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #1a1a2a;
+}
+
+.tm-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.tm-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2a3460;
+  letter-spacing: 0.02em;
+}
+
+.tm-meta {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.tm-scoring-tile {
+  font-size: 0.85rem;
+  background: #fff5d5;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #d6c98a;
+}
+
+/* ─── Faction select ─────────────────────────────────────────────────── */
+
+.tm-faction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  padding-top: 8px;
+}
+
+.tm-faction-card {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.tm-faction-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tm-faction-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.tm-faction-home {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.tm-faction-desc {
+  font-size: 0.8rem;
+  color: #333;
+  margin-top: 4px;
+}
+
+/* ─── Board ──────────────────────────────────────────────────────────── */
+
+.tm-board {
+  display: flex;
+  justify-content: center;
+}
+
+.tm-hex-grid {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  max-width: 720px;
+}
+
+.tm-hex {
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  padding: 0;
+  transition: outline 0.1s ease, transform 0.1s ease;
+}
+
+.tm-hex:disabled {
+  cursor: default;
+}
+
+.tm-hex-legal {
+  outline: 3px solid #fdd835;
+  outline-offset: -3px;
+}
+
+.tm-hex:not(:disabled):hover {
+  transform: scale(1.04);
+}
+
+.tm-hex-upgrade-tag {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 0.55rem;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 3px;
+  font-weight: 600;
+}
+
+/* Terrain colors */
+.tm-terrain-plains      { background: #c5d97b; color: #2c3a0c; text-shadow: none; }
+.tm-terrain-swamp       { background: #5a4a3c; }
+.tm-terrain-lakes       { background: #4290c8; }
+.tm-terrain-forest      { background: #2f7a3a; }
+.tm-terrain-mountains   { background: #7a7d85; }
+.tm-terrain-wasteland   { background: #c9601f; }
+.tm-terrain-desert      { background: #f0d27a; color: #4a370c; text-shadow: none; }
+
+/* Owner accents (border) */
+.tm-owner-0 { box-shadow: inset 0 0 0 3px #c62828; }
+.tm-owner-1 { box-shadow: inset 0 0 0 3px #1565c0; }
+.tm-owner-2 { box-shadow: inset 0 0 0 3px #2e7d32; }
+.tm-owner-3 { box-shadow: inset 0 0 0 3px #6a1b9a; }
+
+/* ─── Players ────────────────────────────────────────────────────────── */
+
+.tm-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.tm-player {
+  background: #fafbfc;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tm-player.tm-owner-0 { border-color: #c62828; }
+.tm-player.tm-owner-1 { border-color: #1565c0; }
+.tm-player.tm-owner-2 { border-color: #2e7d32; }
+.tm-player.tm-owner-3 { border-color: #6a1b9a; }
+
+.tm-player-active {
+  background: #fff8d0;
+  box-shadow: 0 0 0 2px #fdd835;
+}
+
+.tm-player-passed {
+  opacity: 0.6;
+}
+
+.tm-player-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.tm-player-faction {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.tm-player-vp {
+  font-size: 1rem;
+  color: #2a3460;
+}
+
+.tm-player-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tm-small {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.tm-cult-row {
+  display: flex;
+  gap: 6px;
+}
+
+.tm-passed-tag {
+  background: #888;
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.7rem;
+}
+
+/* ─── Controls ───────────────────────────────────────────────────────── */
+
+.tm-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+.tm-btn {
+  background: #fff;
+  color: #1a1a2a;
+  border: 1px solid #b5b8c5;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tm-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tm-btn:not(:disabled):hover {
+  background: #f0f3fa;
+}
+
+.tm-btn-primary {
+  background: #2a3460;
+  color: #fff;
+  border-color: #2a3460;
+}
+
+.tm-btn-primary:not(:disabled):hover {
+  background: #3a4680;
+}
+
+.tm-btn-warn {
+  background: #fce6c4;
+  border-color: #c98a3a;
+}
+
+.tm-event {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  background: #f4f4f8;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* ─── Final / win panel ──────────────────────────────────────────────── */
+
+.tm-final {
+  background: #fffbe6;
+  border: 2px solid #f5d167;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+
+.tm-final-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #5a3e0a;
+  margin-bottom: 8px;
+}
+
+.tm-final-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 6px 0;
+}
+
+.tm-final-list li {
+  font-size: 0.95rem;
+  padding: 2px 0;
+}
+
+.tm-final-you {
+  color: #c62828;
+  font-weight: 700;
+}
+
+.tm-final-meta {
+  font-size: 0.8rem;
+  color: #666;
+}

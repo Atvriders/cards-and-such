@@ -1,0 +1,185 @@
+/* Caverna (Full) — dwarven worker placement. Earthy, cavern-inspired palette. */
+
+.cav-wrap {
+  --cav-stone: #2a2520;
+  --cav-stone-mid: #3a3128;
+  --cav-stone-hi: #5a4c3c;
+  --cav-forest: #2b3d28;
+  --cav-amber: #d6a35c;
+  --cav-ruby: #c2453f;
+  --cav-cream: #ece1c8;
+  color: var(--cav-cream);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--cav-stone) 0%, var(--cav-forest) 100%);
+  border-radius: 12px;
+  font-family: Georgia, "Palatino Linotype", serif;
+  min-height: 100%;
+}
+
+.cav-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  border-bottom: 1px solid var(--cav-stone-hi);
+  padding-bottom: 6px;
+}
+
+.cav-title { font-size: 1.4em; font-weight: 700; letter-spacing: 0.04em; color: var(--cav-amber); }
+.cav-round { color: var(--cav-cream); opacity: 0.9; }
+.cav-score { color: var(--cav-amber); font-weight: 700; }
+
+.cav-message {
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.18);
+  border-left: 3px solid var(--cav-amber);
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.cav-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+.cav-player {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--cav-stone-hi);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cav-player.is-current {
+  border-color: var(--cav-amber);
+  box-shadow: 0 0 0 2px rgba(214, 163, 92, 0.3);
+}
+.cav-player.is-human .cav-player-name { color: var(--cav-amber); font-weight: 700; }
+.cav-player-head { display: flex; justify-content: space-between; font-size: 0.9em; }
+.cav-player-dwarves { opacity: 0.85; }
+.cav-player-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.8em;
+  opacity: 0.85;
+}
+.cav-player-tiles span { background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; }
+.cav-player-res {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.cav-res-empty { font-size: 0.8em; opacity: 0.5; font-style: italic; }
+
+.cav-res {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.07);
+  font-size: 0.8em;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.cav-res-wood   { background: rgba(140,82,45,0.35); }
+.cav-res-stone  { background: rgba(110,110,110,0.35); }
+.cav-res-ore    { background: rgba(170,150,80,0.35); }
+.cav-res-ruby   { background: rgba(194,69,63,0.45); }
+.cav-res-food   { background: rgba(220,180,90,0.35); }
+.cav-res-wheat  { background: rgba(220,200,130,0.35); }
+.cav-res-grain  { background: rgba(210,170,90,0.35); }
+.cav-res-sheep  { background: rgba(220,220,220,0.25); }
+.cav-res-donkey { background: rgba(150,130,100,0.35); }
+.cav-res-boar   { background: rgba(120,90,60,0.35); }
+.cav-res-cow    { background: rgba(180,140,90,0.35); }
+.cav-res-dog    { background: rgba(180,160,130,0.35); }
+.cav-res-g { font-weight: 700; }
+.cav-res-n { opacity: 0.9; }
+
+.cav-actions-h, .cav-log-h {
+  margin: 6px 0 4px;
+  color: var(--cav-amber);
+  font-size: 1em;
+  letter-spacing: 0.03em;
+}
+
+.cav-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 6px;
+}
+
+.cav-action {
+  text-align: left;
+  background: rgba(255,255,255,0.05);
+  color: var(--cav-cream);
+  border: 1px solid var(--cav-stone-hi);
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.05s;
+}
+.cav-action:hover:not(:disabled) {
+  background: rgba(214, 163, 92, 0.15);
+  border-color: var(--cav-amber);
+}
+.cav-action:active:not(:disabled) { transform: translateY(1px); }
+.cav-action:disabled { opacity: 0.5; cursor: not-allowed; }
+.cav-action.is-occupied {
+  background: rgba(194, 69, 63, 0.18);
+  border-color: rgba(194, 69, 63, 0.4);
+}
+.cav-action-label { font-weight: 600; font-size: 0.9em; }
+.cav-action-acc { display: flex; flex-wrap: wrap; gap: 4px; }
+.cav-action-occ { font-size: 0.75em; opacity: 0.8; font-style: italic; }
+
+.cav-cpu-step button {
+  background: var(--cav-amber);
+  color: var(--cav-stone);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cav-log {
+  background: rgba(0,0,0,0.2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  max-height: 130px;
+  overflow-y: auto;
+}
+.cav-log ul { list-style: none; padding: 0; margin: 0; }
+.cav-log li {
+  padding: 1px 0;
+  border-bottom: 1px dotted rgba(255,255,255,0.05);
+  opacity: 0.9;
+}
+.cav-log li:last-child { border-bottom: none; }
+
+.cav-done {
+  padding: 12px;
+  background: rgba(214, 163, 92, 0.15);
+  border: 2px solid var(--cav-amber);
+  border-radius: 10px;
+  text-align: center;
+}
+.cav-done h3 { margin: 0 0 8px; color: var(--cav-amber); }
+.cav-final { display: flex; flex-direction: column; gap: 4px; }
+.cav-final-row { display: flex; justify-content: space-between; padding: 0 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cav-action { transition: none; }
+}

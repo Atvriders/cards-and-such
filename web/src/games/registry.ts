@@ -4515,6 +4515,16 @@ import { bohnanzaFullPlugin } from "./bohnanza-full/index.js";
 import { pictionaryFullPlugin } from "./pictionary-full/index.js";
 import { parcheesiFullPlugin } from "./parcheesi-full/index.js";
 import { carromFullPlugin } from "./carrom-full/index.js";
+import { acquireFullPlugin } from "./acquire-full/index.js";
+import { sevenWondersFullPlugin } from "./7-wonders-full/index.js";
+import { trivialPursuitFullPlugin } from "./trivial-pursuit-full/index.js";
+import { pandemicSoloFullPlugin } from "./pandemic-solo-full/index.js";
+import { catanCitiesKnightsPlugin } from "./catan-cities-knights/index.js";
+import { powerGridFullPlugin } from "./power-grid-full/index.js";
+import { terraMysticaFullPlugin } from "./terra-mystica-full/index.js";
+import { puertoRicoFullPlugin } from "./puerto-rico-full/index.js";
+import { agricolaFullPlugin } from "./agricola-full/index.js";
+import { cavernaFullPlugin } from "./caverna-full/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -9032,4 +9042,14 @@ export const GAMES: GamePlugin[] = [
   pictionaryFullPlugin as unknown as GamePlugin,
   parcheesiFullPlugin as unknown as GamePlugin,
   carromFullPlugin as unknown as GamePlugin,
+  acquireFullPlugin as unknown as GamePlugin,
+  sevenWondersFullPlugin as unknown as GamePlugin,
+  trivialPursuitFullPlugin as unknown as GamePlugin,
+  pandemicSoloFullPlugin as unknown as GamePlugin,
+  catanCitiesKnightsPlugin as unknown as GamePlugin,
+  powerGridFullPlugin as unknown as GamePlugin,
+  terraMysticaFullPlugin as unknown as GamePlugin,
+  puertoRicoFullPlugin as unknown as GamePlugin,
+  agricolaFullPlugin as unknown as GamePlugin,
+  cavernaFullPlugin as unknown as GamePlugin,
 ];

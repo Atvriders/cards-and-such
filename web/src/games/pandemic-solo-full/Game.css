@@ -1,0 +1,299 @@
+.psf-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem;
+  color: #e6f0ff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.psf-top {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
+.psf-top-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.psf-top-label {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.psf-top-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.psf-cube-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.psf-cube-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.psf-cube-dot {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.psf-cured-tag {
+  font-size: 0.65rem;
+  background: rgba(34, 197, 94, 0.4);
+  border-radius: 4px;
+  padding: 0 0.3rem;
+  margin-left: 0.25rem;
+}
+
+.psf-status {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.9;
+  min-height: 1.2rem;
+}
+
+.psf-board-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #02060e;
+}
+
+.psf-board {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.psf-city {
+  cursor: pointer;
+  transition: transform 0.12s ease-out;
+}
+
+.psf-city:hover circle {
+  filter: brightness(1.2);
+}
+
+.psf-city-pickable circle {
+  filter: drop-shadow(0 0 6px #fff);
+}
+
+.psf-roles {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.psf-role {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.4);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.78rem;
+  min-width: 130px;
+}
+
+.psf-role:disabled {
+  cursor: default;
+}
+
+.psf-role-active {
+  border-color: #facc15;
+  background: rgba(250, 204, 21, 0.12);
+}
+
+.psf-role-name {
+  font-weight: 700;
+}
+
+.psf-role-city {
+  opacity: 0.85;
+}
+
+.psf-role-hand {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.psf-hand-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.4rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.psf-hand-label {
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.psf-hand-empty {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.psf-card {
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.psf-card-selected {
+  outline: 2px solid #facc15;
+}
+
+.psf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.psf-actions button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.psf-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.psf-actions button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.psf-cure-panel,
+.psf-share-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  border-radius: 8px;
+}
+
+.psf-cure-panel button,
+.psf-share-panel button {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.4);
+  color: inherit;
+  cursor: pointer;
+}
+
+.psf-color-row {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
+.psf-color-btn {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.psf-color-btn-active {
+  outline: 2px solid #fff;
+}
+
+.psf-treat-panel {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-content: center;
+  padding: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.psf-treat-label {
+  opacity: 0.85;
+}
+
+.psf-end {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+}
+
+.psf-end h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.6rem;
+}
+
+.psf-rules {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.psf-rules summary {
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .psf-top-value {
+    font-size: 1.1rem;
+  }
+  .psf-role {
+    min-width: 100px;
+    font-size: 0.7rem;
+  }
+}

@@ -1,0 +1,267 @@
+.puerto-rico-full {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  color: var(--theme-text, #f4f1ea);
+  font-family: var(--theme-font, system-ui, sans-serif);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.puerto-rico-full .pr-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+.puerto-rico-full .pr-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+.puerto-rico-full .pr-status {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+}
+
+.puerto-rico-full .pr-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+.puerto-rico-full .pr-player {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.puerto-rico-full .pr-player.governor {
+  outline: 2px solid #e8c66b;
+  outline-offset: -2px;
+}
+
+.puerto-rico-full .pr-player.picker {
+  background: rgba(232, 198, 107, 0.08);
+}
+
+.puerto-rico-full .pr-player-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.puerto-rico-full .pr-player-stats {
+  display: flex;
+  gap: 8px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.puerto-rico-full .pr-goods,
+.puerto-rico-full .pr-plant-row,
+.puerto-rico-full .pr-build-row,
+.puerto-rico-full .pr-trading-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-items: center;
+}
+
+.puerto-rico-full .pr-good {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #111;
+  padding: 0 4px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.puerto-rico-full .pr-tile {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #111;
+  opacity: 0.5;
+}
+
+.puerto-rico-full .pr-tile.staffed {
+  opacity: 1;
+  outline: 1.5px solid #fff;
+}
+
+.puerto-rico-full .pr-building {
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.puerto-rico-full .pr-section-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.puerto-rico-full .pr-board {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.puerto-rico-full .pr-ships,
+.puerto-rico-full .pr-trading,
+.puerto-rico-full .pr-supply {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.puerto-rico-full .pr-ship {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.puerto-rico-full .pr-empty {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.puerto-rico-full .pr-roles,
+.puerto-rico-full .pr-builder,
+.puerto-rico-full .pr-trader,
+.puerto-rico-full .pr-captain {
+  border: 1px solid rgba(232, 198, 107, 0.3);
+  border-radius: 6px;
+  padding: 10px;
+  background: rgba(232, 198, 107, 0.04);
+}
+
+.puerto-rico-full h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+}
+
+.puerto-rico-full .pr-role-row,
+.puerto-rico-full .pr-build-pool,
+.puerto-rico-full .pr-trade-row,
+.puerto-rico-full .pr-captain-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.puerto-rico-full button {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  color: inherit;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+.puerto-rico-full button:hover:not(:disabled) {
+  background: rgba(232, 198, 107, 0.15);
+  border-color: rgba(232, 198, 107, 0.5);
+}
+
+.puerto-rico-full button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.puerto-rico-full .pr-bonus {
+  color: #e8c66b;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.puerto-rico-full .pr-hint {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 6px 0 0 0;
+}
+
+.puerto-rico-full .pr-captain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 6px;
+}
+
+.puerto-rico-full .pr-captain-ship {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.puerto-rico-full .pr-ship-title {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  opacity: 0.85;
+}
+
+.puerto-rico-full .pr-gameover {
+  border: 2px solid #e8c66b;
+  border-radius: 6px;
+  padding: 12px;
+  background: rgba(232, 198, 107, 0.08);
+}
+
+.puerto-rico-full .pr-finals {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.puerto-rico-full .pr-finals li {
+  margin: 4px 0;
+}
+
+.puerto-rico-full .pr-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  opacity: 0.7;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 6px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puerto-rico-full .fade-in,
+  .puerto-rico-full .pulse,
+  .puerto-rico-full .bounce-in {
+    animation: none !important;
+  }
+}

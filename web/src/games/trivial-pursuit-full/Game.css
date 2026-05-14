@@ -1,0 +1,327 @@
+/* Trivial Pursuit (Full) — scoped styles. All classes prefixed with `tpf-`. */
+
+.tpf-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  color: var(--theme-text, #eee);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.tpf-header {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  max-width: 880px;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+}
+
+.tpf-turn {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.tpf-die {
+  font-size: 16px;
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  min-width: 80px;
+  text-align: center;
+}
+
+.tpf-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.tpf-board {
+  background: #0a0a14;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+  max-width: 100%;
+  height: auto;
+}
+
+.tpf-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+  max-width: 280px;
+}
+
+.tpf-players {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tpf-pcard {
+  background: rgba(0,0,0,0.3);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 8px;
+  transition: border-color 200ms;
+}
+
+.tpf-pcard-active {
+  border-color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+
+.tpf-pname {
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tpf-pall {
+  color: gold;
+  font-size: 16px;
+}
+
+.tpf-pwedges {
+  display: flex;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.tpf-wedge {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid;
+}
+
+.tpf-pcount {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.tpf-log {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 12px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.tpf-log-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.tpf-log-line {
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.tpf-log-line:last-child {
+  border-bottom: none;
+}
+
+.tpf-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 60px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.tpf-cpu-msg {
+  font-style: italic;
+  opacity: 0.7;
+  padding: 12px;
+}
+
+.tpf-btn {
+  background: #2a4d7a;
+  color: #fff;
+  border: 1px solid #4a6ea8;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 150ms, transform 100ms;
+}
+
+.tpf-btn:hover:not(:disabled) {
+  background: #3a5d8a;
+}
+
+.tpf-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.tpf-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tpf-btn-roll {
+  background: #5a8b3a;
+  border-color: #7aab5a;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tpf-btn-roll:hover {
+  background: #6a9b4a;
+}
+
+.tpf-btn-submit {
+  background: #8b3a5a;
+  border-color: #ab5a7a;
+  margin-top: 8px;
+}
+
+.tpf-btn-continue {
+  background: #5a3a8b;
+  border-color: #7a5aab;
+  margin-top: 8px;
+}
+
+.tpf-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tpf-path-label {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.tpf-qpanel {
+  background: rgba(0,0,0,0.45);
+  border-radius: 10px;
+  padding: 14px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.tpf-qcat {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tpf-qtext {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.tpf-qchoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.tpf-qchoice {
+  text-align: left;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.tpf-qchoice:hover:not(:disabled) {
+  background: rgba(255,255,255,0.14);
+}
+
+.tpf-qchoice-sel {
+  background: #2a6ea8 !important;
+  border-color: #6aaee8 !important;
+}
+
+.tpf-result {
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  padding: 14px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.tpf-correct {
+  color: #66cc66;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.tpf-wrong {
+  color: #cc6666;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.tpf-actual {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.tpf-status {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.tpf-meta {
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+.tpf-banner {
+  font-size: 28px;
+  font-weight: 800;
+  padding: 16px 28px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.tpf-win {
+  background: linear-gradient(135deg, #2a6e3a, #4ab85a);
+  color: #fff;
+}
+
+.tpf-loss {
+  background: linear-gradient(135deg, #6e2a2a, #b84a4a);
+  color: #fff;
+}
+
+.tpf-score {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .tpf-main { flex-direction: column; align-items: center; }
+  .tpf-side { width: 100%; max-width: 540px; }
+  .tpf-qchoices { grid-template-columns: 1fr; }
+}
