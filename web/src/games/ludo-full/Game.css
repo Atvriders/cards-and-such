@@ -1,0 +1,158 @@
+.ludo-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  font-family: system-ui, sans-serif;
+  max-width: 540px;
+  margin: 0 auto;
+  color: #222;
+}
+
+.lf-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-height: 1.5em;
+  text-align: center;
+}
+.lf-status.win { color: #1e7a2c; }
+.lf-status.loss { color: #b02a2a; }
+
+.lf-die-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lf-die {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #444;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #222;
+}
+
+.lf-roll-btn {
+  padding: 9px 22px;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.lf-roll-btn:hover:not(:disabled) { background: #962d22; }
+.lf-roll-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.lf-streak {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.lf-players {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.lf-player {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: #fafafa;
+  transition: box-shadow 200ms ease;
+}
+.lf-player.active { box-shadow: 0 0 0 3px rgba(255, 200, 80, 0.55); }
+
+.lf-player.color-red    { border-color: #c0392b; }
+.lf-player.color-blue   { border-color: #2060c0; }
+.lf-player.color-green  { border-color: #1e7a2c; }
+.lf-player.color-yellow { border-color: #c79a16; }
+
+.lf-player-label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+.color-red    .lf-player-label { color: #c0392b; }
+.color-blue   .lf-player-label { color: #2060c0; }
+.color-green  .lf-player-label { color: #1e7a2c; }
+.color-yellow .lf-player-label { color: #a3800a; }
+
+.lf-pawns { display: flex; flex-direction: column; gap: 4px; }
+
+.lf-pawn-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lf-token {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  border: 2px solid rgba(0,0,0,0.18);
+}
+.lf-token.color-red    { background: #c0392b; }
+.lf-token.color-blue   { background: #2060c0; }
+.lf-token.color-green  { background: #1e7a2c; }
+.lf-token.color-yellow { background: #d9b020; color: #3a2a00; }
+.lf-token.finished { opacity: 0.55; }
+
+.lf-pos {
+  font-size: 0.78rem;
+  color: #555;
+  min-width: 54px;
+}
+
+.lf-move-btn {
+  padding: 3px 9px;
+  background: #1e7a2c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.lf-move-btn:hover:not(:disabled) { background: #155920; }
+.lf-move-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.lf-done {
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #fff7e0;
+  color: #5a4400;
+  border: 1px solid #e5cd6c;
+}
+
+.lf-legend {
+  font-size: 0.75rem;
+  color: #777;
+  text-align: center;
+  max-width: 460px;
+  line-height: 1.35;
+}
+
+@media (max-width: 420px) {
+  .lf-players { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,178 @@
+.tf-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 14px;
+  font-family: system-ui, sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.tf-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-height: 1.5em;
+  color: #2a2a3a;
+  text-align: center;
+}
+.tf-status.win { color: #2a7d2e; }
+.tf-status.loss { color: #b02020; }
+
+.tf-die-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.tf-die {
+  width: 56px;
+  height: 56px;
+  border: 3px solid #e06000;
+  border-radius: 50%;
+  background: #fff8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #e06000;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tf-pop {
+  padding: 12px 24px;
+  background: #e06000;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 700;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.tf-pop:hover { background: #b94e00; }
+.tf-pop:active { transform: scale(0.96); }
+.tf-pop:focus-visible { outline: 3px solid #ffb070; outline-offset: 2px; }
+
+.tf-pass {
+  padding: 8px 14px;
+  background: #888;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.tf-pass:hover { background: #555; }
+
+.tf-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.tf-panel {
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #fafafa;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.tf-panel.active {
+  border-width: 3px;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+.tf-panel.color-blue { border-color: #2060c0; }
+.tf-panel.color-red { border-color: #c02020; }
+.tf-panel.color-green { border-color: #2a8a2a; }
+.tf-panel.color-orange { border-color: #c07000; }
+
+.tf-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.tf-panel-label { font-weight: 800; font-size: 0.95rem; }
+.color-blue .tf-panel-label { color: #2060c0; }
+.color-red .tf-panel-label { color: #c02020; }
+.color-green .tf-panel-label { color: #2a8a2a; }
+.color-orange .tf-panel-label { color: #c07000; }
+.tf-panel-meta { font-size: 0.72rem; color: #666; }
+
+.tf-pawns {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tf-pawn-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tf-peg {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+.tf-peg.color-blue { background: #2060c0; }
+.tf-peg.color-red { background: #c02020; }
+.tf-peg.color-green { background: #2a8a2a; }
+.tf-peg.color-orange { background: #c07000; }
+.tf-peg.is-yard { opacity: 0.85; outline: 2px dashed rgba(0, 0, 0, 0.15); outline-offset: 1px; }
+.tf-peg.is-finish { opacity: 0.55; box-shadow: 0 0 0 2px #2a7d2e inset; }
+
+.tf-peg-pos {
+  font-size: 0.78rem;
+  color: #555;
+  min-width: 78px;
+}
+
+.tf-move {
+  margin-left: auto;
+  padding: 4px 10px;
+  background: #2060c0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.tf-move:hover { background: #154a96; }
+.tf-move:focus-visible { outline: 3px solid #80a8e0; outline-offset: 2px; }
+
+.tf-end {
+  border: 2px solid #2a7d2e;
+  background: #f3fcf3;
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-align: center;
+  max-width: 380px;
+}
+.tf-end-title { font-weight: 800; font-size: 1.05rem; color: #2a7d2e; }
+.tf-end-sub { font-size: 0.9rem; color: #444; margin-top: 4px; }
+.tf-end-score { margin-top: 6px; font-size: 0.95rem; font-weight: 700; color: #2a2a3a; }
+
+.tf-legend {
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+  max-width: 540px;
+  line-height: 1.4;
+}

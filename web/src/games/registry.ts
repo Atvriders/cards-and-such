@@ -4505,6 +4505,16 @@ import { rummikubFullPlugin } from "./rummikub-full/index.js";
 import { dixitFullPlugin } from "./dixit-full/index.js";
 import { sequenceFullPlugin } from "./sequence-full/index.js";
 import { chutesAndLaddersLongPlugin } from "./chutes-and-ladders-long/index.js";
+import { quirkleFullPlugin } from "./quirkle-full/index.js";
+import { troubleFullPlugin } from "./trouble-full/index.js";
+import { ludoFullPlugin } from "./ludo-full/index.js";
+import { mahjongSolitaireFullPlugin } from "./mahjong-solitaire-full/index.js";
+import { aggravationFullPlugin } from "./aggravation-full/index.js";
+import { sushiGoPartyFullPlugin } from "./sushi-go-party-full/index.js";
+import { bohnanzaFullPlugin } from "./bohnanza-full/index.js";
+import { pictionaryFullPlugin } from "./pictionary-full/index.js";
+import { parcheesiFullPlugin } from "./parcheesi-full/index.js";
+import { carromFullPlugin } from "./carrom-full/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -9012,4 +9022,14 @@ export const GAMES: GamePlugin[] = [
   dixitFullPlugin as unknown as GamePlugin,
   sequenceFullPlugin as unknown as GamePlugin,
   chutesAndLaddersLongPlugin as unknown as GamePlugin,
+  quirkleFullPlugin as unknown as GamePlugin,
+  troubleFullPlugin as unknown as GamePlugin,
+  ludoFullPlugin as unknown as GamePlugin,
+  mahjongSolitaireFullPlugin as unknown as GamePlugin,
+  aggravationFullPlugin as unknown as GamePlugin,
+  sushiGoPartyFullPlugin as unknown as GamePlugin,
+  bohnanzaFullPlugin as unknown as GamePlugin,
+  pictionaryFullPlugin as unknown as GamePlugin,
+  parcheesiFullPlugin as unknown as GamePlugin,
+  carromFullPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,160 @@
+/* Mahjong Solitaire (Full Turtle) — scoped styles */
+
+.mj-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: var(--theme-text, #1f2937);
+}
+
+.mj-full-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.mj-full-stat {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-variant-numeric: tabular-nums;
+}
+
+.mj-full-btn {
+  appearance: none;
+  background: var(--theme-accent, #4f46e5);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: filter 120ms ease-out, transform 120ms ease-out;
+}
+
+.mj-full-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.mj-full-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mj-full-status {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.mj-full-status.won {
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  color: #276749;
+}
+
+.mj-full-status.lost {
+  background: #fff5f5;
+  border: 2px solid #fc8181;
+  color: #9b2c2c;
+}
+
+.mj-full-board {
+  position: relative;
+  margin: 4px auto;
+  max-width: 100%;
+  overflow: auto;
+  background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+  border-radius: 8px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+  padding: 0;
+}
+
+.mj-full-tile {
+  position: absolute;
+  width: 36px;
+  height: 46px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  border-radius: 5px;
+  border: 1px solid #6b5228;
+  border-top: 2px solid #e6d4a8;
+  border-left: 2px solid #e6d4a8;
+  background: #fdf6e3;
+  color: #1f2937;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow:
+    2px 2px 0 #8b7355,
+    3px 3px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+  font-family: inherit;
+}
+
+.mj-full-tile:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.mj-full-glyph {
+  pointer-events: none;
+}
+
+.mj-full-tile.free {
+  background: #fffef0;
+}
+
+.mj-full-tile.free:hover {
+  background: #fff4c2;
+  transform: translateY(-1px);
+  box-shadow:
+    2px 2px 0 #8b7355,
+    4px 4px 8px rgba(0, 0, 0, 0.45);
+}
+
+.mj-full-tile.selected {
+  background: #dbeafe;
+  border-color: #1e3a8a;
+  box-shadow:
+    0 0 0 3px #93c5fd,
+    2px 2px 0 #4338ca,
+    3px 3px 8px rgba(30, 64, 175, 0.45);
+  transform: translateY(-2px);
+}
+
+.mj-full-tile.blocked {
+  background: #c9bd9a;
+  color: #5a5040;
+  cursor: not-allowed;
+  filter: saturate(0.75);
+}
+
+/* Subtle category tinting on the glyph for at-a-glance suit recognition. */
+.mj-full-tile.cat-dots .mj-full-glyph { color: #1d4ed8; }
+.mj-full-tile.cat-bamboo .mj-full-glyph { color: #166534; }
+.mj-full-tile.cat-characters .mj-full-glyph { color: #991b1b; }
+.mj-full-tile.cat-wind .mj-full-glyph { color: #1e293b; }
+.mj-full-tile.cat-dragon .mj-full-glyph { color: #7c2d12; }
+.mj-full-tile.cat-flower .mj-full-glyph { color: #be185d; }
+.mj-full-tile.cat-season .mj-full-glyph { color: #b45309; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mj-full-tile,
+  .mj-full-btn {
+    transition: none;
+  }
+}

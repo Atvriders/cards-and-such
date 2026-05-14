@@ -1,0 +1,180 @@
+.parcheesi-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+
+.pf-status {
+  font-size: 1rem;
+  font-weight: 700;
+  min-height: 1.4em;
+  text-align: center;
+  background: #f4f4f8;
+  border-radius: 8px;
+  padding: 8px 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.pf-status.win { color: #fff; background: #2a7d2e; }
+.pf-status.loss { color: #fff; background: #a02525; }
+
+.pf-dice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pf-die {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #555;
+  border-radius: 9px;
+  background: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+}
+.pf-die.used {
+  opacity: 0.3;
+  background: #eee;
+  cursor: not-allowed;
+}
+.pf-die.selected {
+  border-color: #2060c0;
+  box-shadow: 0 0 0 3px rgba(32, 96, 192, 0.25);
+}
+.pf-die.bonus {
+  background: #fff8d8;
+  border-color: #d09600;
+  color: #6e4a00;
+}
+
+.pf-die:disabled { cursor: default; }
+
+.pf-roll-btn,
+.pf-pass-btn {
+  padding: 8px 16px;
+  background: #2060c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.pf-pass-btn { background: #6a6a6a; }
+.pf-roll-btn:hover { background: #1850a8; }
+.pf-pass-btn:hover { background: #555; }
+
+.pf-players {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+@media (max-width: 540px) {
+  .pf-players { grid-template-columns: 1fr; }
+}
+
+.pf-player {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 8px;
+  background: #fafafa;
+}
+.pf-player.active { box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08); }
+.pf-player.color-blue { border-color: #2060c0; }
+.pf-player.color-red { border-color: #c02020; }
+.pf-player.color-green { border-color: #206020; }
+.pf-player.color-orange { border-color: #c07000; }
+
+.pf-player-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.color-blue   .pf-player-label { color: #2060c0; }
+.color-red    .pf-player-label { color: #c02020; }
+.color-green  .pf-player-label { color: #206020; }
+.color-orange .pf-player-label { color: #c07000; }
+
+.pf-pawn-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pf-pawn-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pf-pawn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.pf-pawn.color-blue   { background: #2060c0; }
+.pf-pawn.color-red    { background: #c02020; }
+.pf-pawn.color-green  { background: #206020; }
+.pf-pawn.color-orange { background: #c07000; }
+.pf-pawn.finished { opacity: 0.45; }
+
+.pf-pawn-pos {
+  font-size: 0.78rem;
+  color: #555;
+  flex: 1;
+}
+
+.pf-move-btn {
+  padding: 3px 10px;
+  background: #2060c0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pf-move-btn:hover { background: #1850a8; }
+
+.pf-end {
+  margin-top: 6px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+.pf-end.win { background: #2a7d2e; color: #fff; }
+.pf-end.loss { background: #a02525; color: #fff; }
+.pf-end-title { font-size: 1.2rem; font-weight: 800; }
+.pf-end-score { font-size: 1rem; margin-top: 4px; }
+
+.pf-legend {
+  font-size: 0.72rem;
+  color: #777;
+  text-align: center;
+  max-width: 560px;
+  line-height: 1.4;
+}
