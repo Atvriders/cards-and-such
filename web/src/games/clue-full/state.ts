@@ -651,13 +651,14 @@ export function reducer(state: ClueFullState, action: ClueFullAction): ClueFullS
         };
       }
       // Wrong accusation: in real Clue the player is eliminated. We
-      // simplify and end the game (loss for the human; CPUs realistically
-      // won't accuse incorrectly given their tracker, but we guard).
+      // simplify and end the game: human wrong → loss; CPU wrong → the
+      // human survives by default and wins. (Previously this returned
+      // "lost" for both branches via an obvious typo `0 ? "lost" : "lost"`.)
       return {
         ...state,
-        phase: state.turn === 0 ? "lost" : "lost",
-        winnerSeat: null,
-        finalScore: 0,
+        phase: state.turn === 0 ? "lost" : "won",
+        winnerSeat: state.turn === 0 ? null : 0,
+        finalScore: state.turn === 0 ? 0 : Math.max(10, 100 - state.log.length * 3),
         log,
       };
     }

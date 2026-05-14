@@ -39,7 +39,7 @@ function dkFoundationStack(target: Pile, moving: Card[]): boolean {
 
 export const doubleKlondikeRuleset: Ruleset = {
   canStack: (target, moving) =>
-    klondikeTableauStack(target, moving) || dkFoundationStack(target, moving),
+    klondikeTableauStack(target, moving, { kingOnly: true }) || dkFoundationStack(target, moving),
   canPickUp: (pile, count) => {
     if (pile.kind === "waste" || pile.kind === "freecell") return count === 1;
     if (pile.kind === "foundation") return count === 1;

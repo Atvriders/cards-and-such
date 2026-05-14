@@ -29,12 +29,36 @@ describe("tableau moves — Klondike ruleset", () => {
     expect(canMove(piles, { fromPile: "t2", toPile: "t1", count: 1 }, klondikeRules)).toBe(false);
   });
 
-  it("empty tableau accepts any card", () => {
+  it("empty tableau accepts any card (default permissive — FreeCell-style)", () => {
     const piles: Pile[] = [
       { id: "t1", kind: "tableau", cards: [] },
       { id: "t2", kind: "tableau", cards: [card("♠", 13)], faceUpCount: 1 },
     ];
     expect(canMove(piles, { fromPile: "t2", toPile: "t1", count: 1 }, klondikeRules)).toBe(true);
+  });
+
+  it("kingOnly: empty tableau accepts a King", () => {
+    const kingOnlyRules: Ruleset = {
+      canStack: (t, m) => klondikeTableauStack(t, m, { kingOnly: true }) || foundationStack(t, m),
+      canPickUp: () => true,
+    };
+    const piles: Pile[] = [
+      { id: "t1", kind: "tableau", cards: [] },
+      { id: "t2", kind: "tableau", cards: [card("♠", 13)], faceUpCount: 1 },
+    ];
+    expect(canMove(piles, { fromPile: "t2", toPile: "t1", count: 1 }, kingOnlyRules)).toBe(true);
+  });
+
+  it("kingOnly: empty tableau rejects non-King (Klondike standard rule)", () => {
+    const kingOnlyRules: Ruleset = {
+      canStack: (t, m) => klondikeTableauStack(t, m, { kingOnly: true }) || foundationStack(t, m),
+      canPickUp: () => true,
+    };
+    const piles: Pile[] = [
+      { id: "t1", kind: "tableau", cards: [] },
+      { id: "t2", kind: "tableau", cards: [card("♣", 10)], faceUpCount: 1 },
+    ];
+    expect(canMove(piles, { fromPile: "t2", toPile: "t1", count: 1 }, kingOnlyRules)).toBe(false);
   });
 
   it("foundation requires Ace first, then ascending same suit", () => {

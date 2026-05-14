@@ -43,12 +43,20 @@ export function applyMove(piles: readonly Pile[], move: Move): Pile[] {
 import type { Card } from "../deck/index.js";
 import { isRed } from "../deck/index.js";
 
-/** Descending, alternating color, on tableau. Empty tableau accepts any card. */
-export const klondikeTableauStack = (target: Pile, moving: Card[]): boolean => {
+/**
+ * Descending, alternating color, on tableau.
+ * When `opts.kingOnly` is true (standard Klondike), empty tableau only accepts a King.
+ * Default is permissive (any card on empty) to keep existing FreeCell-family callers unchanged.
+ */
+export const klondikeTableauStack = (
+  target: Pile,
+  moving: Card[],
+  opts?: { kingOnly?: boolean },
+): boolean => {
   if (target.kind !== "tableau") return false;
   const bottom = moving[0];
   if (!bottom) return false;
-  if (target.cards.length === 0) return true;
+  if (target.cards.length === 0) return opts?.kingOnly ? bottom.rank === 13 : true;
   const top = target.cards[target.cards.length - 1]!;
   return isRed(top.suit) !== isRed(bottom.suit) && rankVal(top) === rankVal(bottom) + 1;
 };

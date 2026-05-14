@@ -243,6 +243,8 @@ export interface PlayerState {
   science: number;
   /** Military strength (built up via mil-bonus cards + strength buildings). */
   strength: number;
+  /** Cumulative +strength from `levyMilitary` purchases. Survives recompute. */
+  levyStrength: number;
   /** Culture (VP). */
   culture: number;
   /** Happiness rating (offsets workers used). */
@@ -312,6 +314,7 @@ function freshPlayer(seat: number): PlayerState {
     stone: STARTING_STONE,
     science: 0,
     strength: STARTING_STRENGTH,
+    levyStrength: 0,
     culture: STARTING_CULTURE,
     happiness: STARTING_HAPPINESS,
     tableau: [],
@@ -419,8 +422,9 @@ function startOfTurnTick(p: PlayerState): PlayerState {
     science,
     culture,
     happiness: happy,
-    // strength is rebuilt from base + bonus cards each tick (idempotent)
-    strength: STARTING_STRENGTH + p.tableau
+    // strength is rebuilt from base + bonus cards each tick, plus the
+    // persistent +1-per-levy bonus accumulated in levyStrength.
+    strength: STARTING_STRENGTH + p.levyStrength + p.tableau
       .filter((c) => c.kind === "mil-bonus" || (c.kind === "civ-building" && c.produces === "strength"))
       .reduce((s, c) => s + c.strengthBonus + (c.produces === "strength" ? c.productionAmount : 0), 0),
   };
@@ -589,15 +593,15 @@ export function reducer(state: ThroughTheAgesFullState, action: ThroughTheAgesFu
     if (!human || human.isCpu) return state;
     if (human.militaryTokens < 1) return state;
     if (human.workers < 1) return state;
+    // levyStrength persists across recomputes; strength is derived from
+    // baseline + tableau + levyStrength, so bumping the counter is enough.
     let updated: PlayerState = {
       ...human,
       militaryTokens: human.militaryTokens - 1,
       workers: human.workers - 1,
-      strength: human.strength + 1,
+      levyStrength: human.levyStrength + 1,
     };
     updated = recomputeStrength(updated);
-    // Bump strength by +1 directly (since recompute resets to base+cards)
-    updated.strength = updated.strength + 1;
     const players = state.players.slice();
     players[state.turn] = updated;
     return { ...state, players, log: logAppend(state.log, `${updated.name} levied a unit (+1 strength).`) };
@@ -650,7 +654,7 @@ export function reducer(state: ThroughTheAgesFullState, action: ThroughTheAgesFu
 
 /** Recompute strength from baseline + tableau (idempotent helper). */
 function recomputeStrength(p: PlayerState): PlayerState {
-  let str = STARTING_STRENGTH;
+  let str = STARTING_STRENGTH + p.levyStrength;
   for (const c of p.tableau) {
     str += c.strengthBonus;
     if (c.kind === "civ-building" && c.produces === "strength") str += c.productionAmount;

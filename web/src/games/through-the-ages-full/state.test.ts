@@ -200,6 +200,7 @@ describe("through-the-ages-full helpers", () => {
       stone: 0,
       science: 0,
       strength: STARTING_STRENGTH,
+      levyStrength: 0,
       culture: 0,
       happiness: 0,
       tableau: [],

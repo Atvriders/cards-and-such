@@ -1107,6 +1107,10 @@ function runAiTurn(state: MonopolyFullState): MonopolyFullState {
       } else if (isDouble) {
         s = { ...s, cInJail: false, cJailRolls: 0, log: pushLog(s.log, `CPU rolled doubles ${d1}+${d2} — out of jail!`) };
         s = advance(s, "c", sum);
+        // Per Monopoly rules, rolling doubles to leave jail moves you that
+        // many spaces but does NOT grant a second roll. End the turn now,
+        // overriding the "isDouble → keep rolling" fallthrough at line ~1131.
+        break;
       } else if (s.cCash > 200 || s.cJailRolls >= MAX_JAIL_ROLLS - 1) {
         s = { ...s, cCash: s.cCash - JAIL_FINE, cInJail: false, cJailRolls: 0, log: pushLog(s.log, `CPU paid $${JAIL_FINE} bail.`) };
         s = advance(s, "c", sum);

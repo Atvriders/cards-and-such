@@ -294,7 +294,14 @@ export function reducer(state: SequenceFullState, action: SequenceFullAction): S
 
   if (action.type === "cancel-remove") {
     if (state.phase !== "select-remove") return state;
-    return { ...state, phase: "playing", pendingRemoveCard: null };
+    // Restore the one-eyed Jack to the human's hand. `applyPlay` spliced
+    // it out of hands[0] when the player committed to remove-mode; without
+    // restoring it the card is permanently lost and the hand shrinks by one
+    // each cancel — eventually a soft-lock when no jacks remain.
+    const playerHand = state.hands[0].slice();
+    if (state.pendingRemoveCard) playerHand.push(state.pendingRemoveCard);
+    const hands: [Card[], Card[]] = [playerHand, state.hands[1].slice()];
+    return { ...state, phase: "playing", pendingRemoveCard: null, hands };
   }
 
   if (action.type === "discard-dead") {

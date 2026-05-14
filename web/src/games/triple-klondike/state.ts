@@ -38,7 +38,7 @@ function tkFoundationStack(target: Pile, moving: Card[]): boolean {
 
 export const tripleKlondikeRuleset: Ruleset = {
   canStack: (target, moving) =>
-    klondikeTableauStack(target, moving) || tkFoundationStack(target, moving),
+    klondikeTableauStack(target, moving, { kingOnly: true }) || tkFoundationStack(target, moving),
   canPickUp: (pile, count) => {
     if (pile.kind === "waste" || pile.kind === "freecell") return count === 1;
     if (pile.kind === "foundation") return count === 1;

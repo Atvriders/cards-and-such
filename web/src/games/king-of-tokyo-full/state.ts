@@ -281,9 +281,17 @@ function resolveDice(state: KingOfTokyoFullState): KingOfTokyoFullState {
 
   // Check terminal conditions BEFORE yield prompt
   // Death check
-  // Update tokyo if occupant died
+  // Update tokyo if occupant died — and if the attacker is outside, they
+  // immediately take Tokyo (and the entry VP), per the standard rule that
+  // "the attacker must enter Tokyo whenever it is empty and they dealt
+  // damage." Without this step the attacker silently misses the +1 VP.
   if (tokyo !== null && !newPlayers[tokyo]!.alive) {
     tokyo = null;
+    if (counts.claw > 0 && !inTokyo && newPlayers[state.current]!.alive) {
+      tokyo = state.current;
+      newPlayers[state.current]!.vp += TOKYO_ENTRY_VP;
+      log = pushLog({ ...state, log }, `${aname} takes empty Tokyo (+${TOKYO_ENTRY_VP} VP).`);
+    }
   }
 
   // Check winner: 20 VP or last standing

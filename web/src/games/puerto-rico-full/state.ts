@@ -628,10 +628,6 @@ export function reducer(state: PuertoRicoState, action: PuertoRicoAction): Puert
   if (action.type === "pick_role") {
     if (state.phase !== "select_role") return state;
     if (state.usedRoles.includes(action.role)) return state;
-    if (state.governor !== 0 && state.players[state.governor]?.isCpu) {
-      // CPUs only pick via cpu_pick_role; ignore manual pick when it's CPU's turn.
-      return state;
-    }
     const ns = clone(state);
     const picker = ns.governor;
     ns.rolePicker = picker;

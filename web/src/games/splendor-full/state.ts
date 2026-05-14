@@ -423,32 +423,30 @@ function endTurn(state: SplendorFullState): void {
   // Round increments when wrapping back to seat 0
   if (nextSeat === 0) state.round++;
 
-  // Game ends when nextSeat is back to the one AFTER the trigger seat —
-  // i.e. trigger seat had the last in-round move. We end when all players
-  // following the trigger seat (in seat order) have had one more turn.
-  if (state.triggerSeat !== null) {
-    // The round is complete when nextSeat would be triggerSeat+1 (mod 4)
-    // AFTER the trigger seat itself finished its turn. Simplest: end when
-    // nextSeat == 0 AND all seats > trigger have moved this round.
-    // We track this via: end as soon as we wrap and at least one player
-    // has hit prestige threshold.
-    if (nextSeat === 0) {
-      // End of round — find max prestige winner
-      let winnerSeat = 0;
-      let bestPres = -1;
-      let bestCardCount = Infinity; // fewer cards breaks ties
-      for (const p of state.players) {
-        if (p.prestige > bestPres || (p.prestige === bestPres && p.bought.length < bestCardCount)) {
-          bestPres = p.prestige;
-          bestCardCount = p.bought.length;
-          winnerSeat = p.seat;
-        }
+  // End of round: everyone has had one final turn after the trigger seat.
+  // The round completes when nextSeat would be triggerSeat again — at that
+  // point every seat strictly after triggerSeat (in turn order) has played
+  // one extra turn since the trigger.
+  if (state.triggerSeat !== null && nextSeat === state.triggerSeat) {
+    // Strict winner: highest prestige, fewer cards breaks ties; seat 0
+    // breaks remaining ties only by virtue of iteration order.
+    let winnerSeat = 0;
+    let bestPres = -1;
+    let bestCardCount = Infinity;
+    for (const p of state.players) {
+      if (
+        p.prestige > bestPres ||
+        (p.prestige === bestPres && p.bought.length < bestCardCount)
+      ) {
+        bestPres = p.prestige;
+        bestCardCount = p.bought.length;
+        winnerSeat = p.seat;
       }
-      state.winner = winnerSeat;
-      state.phase = "done";
-      state.log.push(`${getPlayer(state, winnerSeat).name} wins with ${bestPres} prestige!`);
-      return;
     }
+    state.winner = winnerSeat;
+    state.phase = "done";
+    state.log.push(`${getPlayer(state, winnerSeat).name} wins with ${bestPres} prestige!`);
+    return;
   }
 
   state.current = nextSeat;
@@ -459,16 +457,23 @@ function endTurn(state: SplendorFullState): void {
 // -----------------------------------------------------------------------------
 
 function applyTake3(state: SplendorFullState, colors: Color[]): boolean {
-  const uniq = Array.from(new Set(colors)).filter((c) => state.bank[c] > 0);
-  if (uniq.length === 0) return false;
-  if (uniq.length > 3) return false;
+  // Standard rule: take up to 3 different-colored tokens. Reject duplicates.
+  if (colors.length === 0 || colors.length > 3) return false;
+  if (new Set(colors).size !== colors.length) return false;
+  for (const c of colors) {
+    if (state.bank[c] <= 0) return false;
+  }
+  // Must take 3 if 3+ colors are available; can under-take only when fewer
+  // than 3 piles have any tokens left.
+  const availableColors = (COLORS as readonly Color[]).filter((c) => state.bank[c] > 0).length;
+  if (colors.length < Math.min(3, availableColors)) return false;
   const p = getPlayer(state, state.current);
-  for (const c of uniq) {
+  for (const c of colors) {
     state.bank[c]--;
     p.tokens[c]++;
   }
   autoDiscardDown(state, state.current);
-  state.log.push(`${p.name} takes ${uniq.join(", ")}.`);
+  state.log.push(`${p.name} takes ${colors.join(", ")}.`);
   return true;
 }
 

@@ -1328,7 +1328,18 @@ export function reducer(state: CarcassonneFullState, action: CarcassonneFullActi
     const pt = state.placed[tIdx];
     if (!pt) return state;
 
-    let nextState: CarcassonneFullState = { ...state, phase: "place" };
+    // Deep-copy the score and supply arrays up front. `awardPoints` /
+    // `returnMeeples` in `scoreAfterPlacement` mutate these in place,
+    // and the shallow `{ ...state }` spread shares the same arrays —
+    // any consumer holding a reference to the previous state (devtools,
+    // memoised selectors, StrictMode replay) would see retroactive
+    // changes to scores/supply.
+    let nextState: CarcassonneFullState = {
+      ...state,
+      phase: "place",
+      scores: state.scores.slice(),
+      supply: state.supply.slice(),
+    };
     if (action.side !== null) {
       const supply = state.supply[state.turn] ?? 0;
       if (supply <= 0) {
@@ -1351,9 +1362,8 @@ export function reducer(state: CarcassonneFullState, action: CarcassonneFullActi
           // Reject — but don't crash; just skip the meeple placement.
         } else {
           const meeples = state.meeples.concat([{ owner: state.turn, seg: sid }]);
-          const newSupply = state.supply.slice();
-          newSupply[state.turn] = supply - 1;
-          nextState = { ...nextState, meeples, supply: newSupply };
+          nextState.supply[state.turn] = supply - 1;
+          nextState = { ...nextState, meeples };
         }
       }
     }
@@ -1394,14 +1404,13 @@ export function reducer(state: CarcassonneFullState, action: CarcassonneFullActi
 
 export function isTerminal(state: CarcassonneFullState): { score: number } | null {
   if (state.phase !== "done") return null;
-  // Score for the leaderboard: human's points if human won, else 0.
+  // Score for the leaderboard: human's points if human won (outright or tied
+  // for first). A clean loss returns 0; ties at the top scale points by the
+  // tie-share so a 3-way tie still credits the human as a co-winner instead
+  // of returning 0 like the previous logic did.
   const human = state.scores[0] ?? 0;
-  const cpu1 = state.scores[1] ?? 0;
-  const cpu2 = state.scores[2] ?? 0;
-  if (human > cpu1 && human > cpu2) return { score: human };
-  if (human === Math.max(cpu1, cpu2) && human > Math.min(cpu1, cpu2)) {
-    // Tie at the top with one CPU: half points.
-    return { score: Math.floor(human / 2) };
-  }
-  return { score: 0 };
+  const max = Math.max(human, state.scores[1] ?? 0, state.scores[2] ?? 0);
+  if (human < max) return { score: 0 };
+  const winners = state.scores.filter((s) => s === max).length;
+  return { score: Math.floor(human / winners) };
 }

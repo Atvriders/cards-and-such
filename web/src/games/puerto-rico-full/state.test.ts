@@ -81,15 +81,28 @@ describe("puerto-rico-full role picking", () => {
     expect(s.governor).toBe(1);
   });
 
-  it("rejects picking the same role twice in a round (same state ref returned)", () => {
+  it("rejects re-picking a role already used this round (same state ref)", () => {
     let s = initialState(42, S);
     s = reducer(s, { type: "pick_role", role: "prospector" });
     s = reducer(s, { type: "resolve_step" });
-    // Now governor is 1 (CPU) — manual pick_role from human should no-op.
+    // Prospector has been used; trying to pick it again returns same ref.
     const before = s;
-    const after = reducer(s, { type: "pick_role", role: "settler" });
-    // Should fail because CPU is the governor; same reference returned.
+    const after = reducer(s, { type: "pick_role", role: "prospector" });
     expect(after).toBe(before);
+  });
+
+  it("CPU governor can pick a role (no manual-pick gate)", () => {
+    let s = initialState(42, S);
+    s = reducer(s, { type: "pick_role", role: "prospector" });
+    s = reducer(s, { type: "resolve_step" });
+    // Governor is now CPU 1; reducer must accept their pick (Game.tsx
+    // auto-dispatches it). Previously this was guarded → soft-lock.
+    expect(s.governor).toBe(1);
+    const after = reducer(s, { type: "pick_role", role: "settler" });
+    expect(after).not.toBe(s);
+    // usedRoles is set when the resolve phase completes; immediately after
+    // pick_role the activeRole reflects the choice.
+    expect(after.activeRole).toBe("settler");
   });
 
   it("CPU pick_role chooses a valid available role", () => {

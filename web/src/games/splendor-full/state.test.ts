@@ -109,18 +109,18 @@ describe("Splendor Full — reducer basic actions", () => {
 
   it("ignores invalid actions during a CPU turn", () => {
     const s0 = freshState();
-    // Take a token to advance to CPU seat 1
-    const s1 = reducer(s0, { type: "take3", colors: ["ruby"] } as Action);
+    // Take 3 distinct tokens to advance to CPU seat 1
+    const s1 = reducer(s0, { type: "take3", colors: ["ruby", "emerald", "sapphire"] } as Action);
     expect(s1.players[s1.current]!.isCPU).toBe(true);
     // Human-side action attempted while CPU has the turn returns same state
-    const s2 = reducer(s1, { type: "take3", colors: ["ruby"] } as Action);
+    const s2 = reducer(s1, { type: "take3", colors: ["ruby", "emerald", "sapphire"] } as Action);
     expect(s2).toBe(s1);
   });
 
   it("cpuStep advances CPU turn", () => {
     let s = freshState();
-    // Cycle past human and one CPU
-    s = reducer(s, { type: "take3", colors: ["ruby"] } as Action);
+    // Cycle past human (take 3 distinct now that the rule requires it)
+    s = reducer(s, { type: "take3", colors: ["ruby", "emerald", "sapphire"] } as Action);
     expect(s.players[s.current]!.isCPU).toBe(true);
     const before = s.current;
     s = reducer(s, { type: "cpuStep" } as Action);

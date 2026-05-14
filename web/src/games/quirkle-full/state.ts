@@ -76,6 +76,7 @@ export type QwirkleAction =
   | { type: "recallAll" }
   | { type: "submit" }
   | { type: "swap"; idxs: number[] }
+  | { type: "pass" }
   | { type: "cpuTurn" };
 
 // ============================================================================
@@ -692,6 +693,21 @@ export function reducer(state: QwirkleState, action: QwirkleAction): QwirkleStat
         currentPlayer: nextPlayer,
         lastMessage: `${current.name} swapped ${action.idxs.length} tile(s).`,
       };
+    }
+
+    case "pass": {
+      // Soft-lock escape hatch: when the bag is empty and the human cannot
+      // legally place or swap, allow them to pass their turn. Mirrors the
+      // CPU "just pass" fallback at the bottom of the CPU branch.
+      if (current.isCpu) return state;
+      const next: QwirkleState = {
+        ...state,
+        pending: [],
+        selectedHandIdx: null,
+        currentPlayer: (state.currentPlayer + 1) % state.players.length,
+        lastMessage: `${current.name} passed.`,
+      };
+      return checkEndGame(next);
     }
 
     case "cpuTurn": {

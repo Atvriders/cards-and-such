@@ -27,7 +27,7 @@ const FOUNDATION_IDS = ["f1", "f2", "f3", "f4"] as const;
 
 export const k3sRuleset: Ruleset = {
   canStack: (target, moving) =>
-    klondikeTableauStack(target, moving) || foundationStack(target, moving),
+    klondikeTableauStack(target, moving, { kingOnly: true }) || foundationStack(target, moving),
   canPickUp: (pile, count) => {
     if (pile.kind === "waste" || pile.kind === "freecell") return count === 1;
     if (pile.kind === "foundation") return count === 1;

@@ -388,7 +388,26 @@ function hasLegalMove(
     }
   }
 
-  // 7 split — handled by the numeric branch above (7-as-single also works).
+  // 7 split — when no single pawn can advance the full 7, the player may
+  // still split the move across two pawns as 1+6 / 2+5 / 3+4 / etc. The
+  // numeric branch above only checks single-pawn 7-advances; without this
+  // explicit split feasibility check the reducer/CPU would forfeit a legal
+  // turn whenever the only legal 7 was a split.
+  if (card === 7) {
+    for (let a = 1; a <= 6; a++) {
+      const b = 7 - a;
+      for (let p1 = 0; p1 < NUM_PAWNS; p1++) {
+        if (pawns[player]![p1] === YARD) continue;
+        const after1 = tryMove(pawns, player, p1, a);
+        if (!after1) continue;
+        for (let p2 = 0; p2 < NUM_PAWNS; p2++) {
+          if (p2 === p1) continue;
+          if (after1[player]![p2] === YARD) continue;
+          if (tryMove(after1, player, p2, b)) return true;
+        }
+      }
+    }
+  }
   return false;
 }
 

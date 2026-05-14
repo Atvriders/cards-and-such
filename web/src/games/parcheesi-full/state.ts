@@ -453,8 +453,11 @@ function rollFor(state: ParcheesiFullState): ParcheesiFullState {
   const d2 = rollDie(rng);
   const nextSeed = Math.floor(rng() * 2 ** 31);
   const isDoubles = d1 === d2;
-  let newStreak = state.doublesStreak;
-  if (isDoubles) newStreak += 1;
+  // Doubles streak is the count of *consecutive* doubles this turn-chain. A
+  // non-doubles roll resets the streak. Without this reset, postMoveTransition
+  // saw doublesStreak > 0 forever once the player rolled doubles once, looping
+  // the turn until the 3-doubles penalty (or a win) fired.
+  const newStreak = isDoubles ? state.doublesStreak + 1 : 0;
   // Three-doubles penalty.
   if (newStreak >= 3) {
     const np = clonePawns(state.pawns);

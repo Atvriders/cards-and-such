@@ -508,7 +508,12 @@ export function reducer(state: BohnanzaState, action: BohnanzaAction): BohnanzaS
       // Determine if planting needs a player choice
       const matchIdx = p.fields.findIndex((f) => f.bean === card);
       const emptyIdx = p.fields.findIndex((f) => f.bean === null);
-      const nextPhase: Phase = state.phase === "plantFirst" ? "plantSecondOptional" : "plantSecondOptional";
+      // First plant transitions to "plantSecondOptional"; the optional
+      // second plant transitions to "plantSecondOptional" still — but the
+      // caller MUST then call skipSecondPlant (or the reveal button) to
+      // advance, since this handler enforces only-2-plants-per-turn at the
+      // top of the case (no field-match/empty action available chain).
+      const nextPhase: Phase = "plantSecondOptional";
       const nextMsg = state.phase === "plantFirst"
         ? "Optionally plant the next card, or skip."
         : "Click Reveal to flip 2 trade cards.";
@@ -560,7 +565,10 @@ export function reducer(state: BohnanzaState, action: BohnanzaAction): BohnanzaS
       if (me.hand[0] === bean) {
         np[0] = { ...me, hand: me.hand.slice(1) };
       }
-      const nextPhase: Phase = state.phase === "plantFirst" ? "plantSecondOptional" : state.phase;
+      // Same end-of-plant transition rule as plantFirst: after the optional
+      // second plant resolves, advance to tradePhase so the player can no
+      // longer chain plants from this hand.
+      const nextPhase: Phase = state.phase === "plantFirst" ? "plantSecondOptional" : "tradePhase";
       const msg = state.phase === "plantSecondOptional"
         ? "Click Reveal to flip 2 trade cards."
         : "Optionally plant the next card, or skip.";

@@ -621,6 +621,11 @@ export function reducer(state: ScrabbleState, action: ScrabbleAction): ScrabbleS
 
       // Check end-of-game: rack out + bag empty
       if (newRack.length === 0 && refill.bag.length === 0) {
+        // `endGameAdjust` already transfers the opponent's leftover rack
+        // points to the rack-outer (and subtracts them from the opponent).
+        // The previous version added the same bonus a SECOND time here,
+        // doubling the rack-out reward and producing wrong final scores
+        // whenever the margin lived inside the bonus.
         const adjusted = endGameAdjust({
           ...state,
           board: newBoard,
@@ -632,10 +637,7 @@ export function reducer(state: ScrabbleState, action: ScrabbleAction): ScrabbleS
           lastMessage: `Played: ${result.words.join(", ")} (+${result.score}). Rack empty — game over!`,
           consecutivePasses: 0,
         }, "human");
-        // Double the bonus for going out with a full play: subtract opponent's
-        // rack and add it again (effectively double). Simplification per L tier.
-        const extraBonus = rackPoints(state.cpuRack);
-        return { ...adjusted, humanScore: adjusted.humanScore + extraBonus, winnerNote: "Human rack-out bonus" };
+        return { ...adjusted, winnerNote: "Human rack-out bonus" };
       }
       return {
         ...state,
@@ -680,6 +682,15 @@ export function reducer(state: ScrabbleState, action: ScrabbleAction): ScrabbleS
       // Put the returned tiles back at the start of the bag
       const newBag = [...toReturn, ...drawn.bag];
       const passes = state.consecutivePasses + 1;
+      // Exchanges count toward the 6-consecutive-scoreless-turn end-of-game
+      // rule the same way passes do; without this guard the game can loop
+      // indefinitely on alternating exchanges with no scoring play.
+      if (passes >= 6) {
+        return endGameAdjust(
+          { ...state, bag: newBag, humanRack: [...keep, ...drawn.drawn], pending: [], selectedRackIdx: null, lastMessage: `You exchanged ${action.idxs.length} tile(s). Game ended (6 consecutive scoreless turns).`, consecutivePasses: passes },
+          null,
+        );
+      }
       return {
         ...state,
         bag: newBag,
