@@ -1,0 +1,263 @@
+/* =====================================================================
+   Through the Ages (Full) — scoped styles. Prefix all classes with .tta-
+   ===================================================================== */
+
+.tta-shell {
+  --tta-civ-bld:   #5b8def;
+  --tta-civ-ldr:   #d97706;
+  --tta-civ-wnd:   #7c3aed;
+  --tta-mil-bns:   #c0392b;
+  --tta-mil-agg:   #991b1b;
+  gap: var(--sp-3, 12px);
+}
+
+.tta-header {
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tta-badge-phase {
+  text-transform: capitalize;
+}
+
+.tta-opps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .tta-opps { grid-template-columns: 1fr; }
+}
+
+.tta-opp {
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.tta-opp__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.tta-opp__name { font-weight: 600; }
+.tta-opp__culture { font-style: italic; opacity: 0.9; }
+
+.tta-opp__meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8rem;
+  opacity: 0.85;
+  flex-wrap: wrap;
+}
+
+.tta-tableau {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.tta-pip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 22px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  color: white;
+  padding: 0 6px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.tta-pip--civ-building   { background: var(--tta-civ-bld); }
+.tta-pip--civ-leader     { background: var(--tta-civ-ldr); }
+.tta-pip--civ-wonder     { background: var(--tta-civ-wnd); }
+.tta-pip--mil-bonus      { background: var(--tta-mil-bns); }
+.tta-pip--mil-aggression { background: var(--tta-mil-agg); }
+
+.tta-row {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tta-row h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.tta-row__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.tta-empty {
+  font-style: italic;
+  opacity: 0.75;
+  padding: 8px;
+}
+
+.tta-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tta-card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tta-card--civ-building   { border-left: 6px solid var(--tta-civ-bld); }
+.tta-card--civ-leader     { border-left: 6px solid var(--tta-civ-ldr); }
+.tta-card--civ-wonder     { border-left: 6px solid var(--tta-civ-wnd); }
+.tta-card--mil-bonus      { border-left: 6px solid var(--tta-mil-bns); }
+.tta-card--mil-aggression { border-left: 6px solid var(--tta-mil-agg); }
+
+.tta-card--unaffordable {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tta-card__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.75;
+}
+
+.tta-card__name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tta-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.8rem;
+  opacity: 0.92;
+}
+
+.tta-me {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tta-me__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.95rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.tta-me__resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.85rem;
+  opacity: 0.92;
+}
+
+.tta-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.tta-actbtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: inherit;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.tta-actbtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.tta-actbtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tta-log {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  font-family: var(--font-mono, monospace);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.tta-log__line { line-height: 1.4; opacity: 0.9; }
+
+.tta-final {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tta-final h3 { margin: 0; }
+.tta-final table { width: 100%; border-collapse: collapse; }
+.tta-final th, .tta-final td {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.tta-final__me {
+  background: rgba(255, 215, 0, 0.08);
+  font-weight: 600;
+}
+
+.tta-resolve-age { align-self: center; }

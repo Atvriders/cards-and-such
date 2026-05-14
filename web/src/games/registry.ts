@@ -4525,6 +4525,8 @@ import { terraMysticaFullPlugin } from "./terra-mystica-full/index.js";
 import { puertoRicoFullPlugin } from "./puerto-rico-full/index.js";
 import { agricolaFullPlugin } from "./agricola-full/index.js";
 import { cavernaFullPlugin } from "./caverna-full/index.js";
+import { throughTheAgesFullPlugin } from "./through-the-ages-full/index.js";
+import { brassBirminghamFullPlugin } from "./brass-birmingham-full/index.js";
 
 export const GAMES: GamePlugin[] = [
   texasHoldemPlugin as unknown as GamePlugin,
@@ -9052,4 +9054,6 @@ export const GAMES: GamePlugin[] = [
   puertoRicoFullPlugin as unknown as GamePlugin,
   agricolaFullPlugin as unknown as GamePlugin,
   cavernaFullPlugin as unknown as GamePlugin,
+  throughTheAgesFullPlugin as unknown as GamePlugin,
+  brassBirminghamFullPlugin as unknown as GamePlugin,
 ];

@@ -1,0 +1,195 @@
+/* Brass Birmingham (Full) — unique class prefix bz-bbf- */
+.bz-bbf-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #e2cba0;
+  background: linear-gradient(140deg, #2b2118, #181210);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.bz-bbf-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f0a040;
+  text-shadow: 0 1px 2px #000;
+  text-align: center;
+}
+.bz-bbf-era {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: #c9b07f;
+}
+.bz-bbf-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+.bz-bbf-player {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #5a3e21;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+.bz-bbf-player.bz-bbf-active {
+  border-color: #f0a040;
+  box-shadow: 0 0 0 2px #f0a04055;
+}
+.bz-bbf-pname {
+  font-weight: 700;
+  color: #f0a040;
+  margin-bottom: 4px;
+}
+.bz-bbf-prow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+}
+.bz-bbf-prow > span {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #4a3520;
+}
+.bz-bbf-prow b { color: #f0c060; }
+
+.bz-bbf-market {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #4a3520;
+}
+.bz-bbf-market b { color: #f0c060; }
+
+.bz-bbf-cpu, .bz-bbf-scoring {
+  background: rgba(240, 160, 64, 0.08);
+  border: 1px solid #f0a04055;
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.bz-bbf-cpu button, .bz-bbf-scoring button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f0a040;
+  color: #1a1208;
+  font-weight: 700;
+}
+.bz-bbf-cpu button:hover, .bz-bbf-scoring button:hover { filter: brightness(1.1); }
+
+.bz-bbf-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bz-bbf-actions-left {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  color: #f0c060;
+}
+.bz-bbf-section {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #4a3520;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+.bz-bbf-section-title {
+  font-weight: 700;
+  color: #f0a040;
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+}
+.bz-bbf-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.bz-bbf-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.72rem;
+  color: #c9b07f;
+}
+.bz-bbf-row select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #5a3e21;
+  background: #1a1208;
+  color: #e2cba0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+}
+.bz-bbf-row button {
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #c97a30;
+  color: #1a1208;
+  font-weight: 700;
+  font-size: 0.82rem;
+  transition: background 120ms, transform 80ms;
+}
+.bz-bbf-row button:hover { background: #f0a040; transform: translateY(-1px); }
+.bz-bbf-row button:disabled {
+  background: #5a3e21;
+  color: #8a7050;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.bz-bbf-log {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #4a3520;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  color: #c9b07f;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.bz-bbf-log > div {
+  padding: 2px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+.bz-bbf-log > div:last-child { border-bottom: 0; }
+
+.bz-bbf-done {
+  background: rgba(240, 160, 64, 0.12);
+  border: 2px solid #f0a040;
+  padding: 14px 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #f0c060;
+}
+.bz-bbf-done h3 {
+  margin: 0 0 6px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.04em;
+}
+.bz-bbf-done b { color: #fff; }
