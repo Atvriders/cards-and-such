@@ -232,7 +232,7 @@ export function SplendorFullGame({
               {COLOR_GLYPH[c]}: {perm[c]}
             </span>
           ))}
-          <span className="spf-perm spf-prestige" title="Your prestige points">
+          <span className="spf-perm spf-prestige pulse" title="Your prestige points">
             PP: {you.prestige}
           </span>
         </div>
