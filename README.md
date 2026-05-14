@@ -173,3 +173,4 @@ with unit tests. See `CONTRIBUTING.md` for the short version.
 
 MIT — see `LICENSE` if present, otherwise this project is offered under the
 standard MIT terms.
+<!-- regenerated 2026-05-14T19:29:34Z -->
