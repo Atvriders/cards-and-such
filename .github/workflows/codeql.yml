@@ -11,6 +11,8 @@ on:
 jobs:
   analyze:
     name: Analyze
+    # CodeQL talks to github.com's CodeQL service — skip on Gitea / forks.
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     timeout-minutes: 360
     permissions:
