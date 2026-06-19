@@ -13,7 +13,7 @@
   "dependencies": {
     "@cards/shared": "*",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.5",
     "react-router-dom": "^6.23.0",
     "zustand": "^4.5.2"
   },
